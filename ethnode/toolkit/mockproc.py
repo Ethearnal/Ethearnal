@@ -1,14 +1,18 @@
 #!/usr/bin/env python
 import sys
 from time import sleep
+from datetime import datetime
 
 
 def main(name: str, time_interval: float):
     cnt = 0
     while True:
         cnt += 1
-        print('%s: %06d' % (name, cnt))
+        sys.stdout.write(datetime.now().isoformat())
+        sys.stdout.flush()
         sleep(time_interval)
+        sys.stdout.write('\r')
+        sys.stdout.flush()
 
 
 if __name__ == '__main__':

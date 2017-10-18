@@ -5,7 +5,10 @@ future==0.16.0
 macholib==1.8
 pefile==2017.9.3
 portend==2.2
+pyasn1==0.3.7
+pycparser==2.18
 PyInstaller==3.3
 pytz==2017.2
+rsa==3.4.2
 six==1.11.0
 tempora==1.9
