@@ -1,0 +1,11 @@
+altgraph==0.14
+cheroot==5.8.3
+CherryPy==11.0.0
+future==0.16.0
+macholib==1.8
+pefile==2017.9.3
+portend==2.2
+PyInstaller==3.3
+pytz==2017.2
+six==1.11.0
+tempora==1.9
