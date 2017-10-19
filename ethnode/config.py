@@ -1,5 +1,6 @@
 # web service data dir
 data_dir = 'ethearnal_profile'
+data_dir_static_files = '%s/files' % data_dir
 # local public html
 http_webdir = 'webdoc'
 http_socket_host = '127.0.0.1'

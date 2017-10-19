@@ -1,7 +1,7 @@
 # author hardc0de
 import sys, os
 import argparse
-from websrv import httpsrv
+import httpsrv
 from multiprocessing import Process
 from toolkit import mockproc
 from toolkit import crypto
