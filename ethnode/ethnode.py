@@ -33,8 +33,9 @@ def main():
         mkdir(args.data_dir)
 
     p1 = Process(target=httpsrv.main, kwargs=kwargs(socket_host=socket_host,
-                                                  socket_port=int(socket_port),
-                                                  http_webdir=config.http_webdir),
+                                                    socket_port=int(socket_port),
+                                                    http_webdir=config.http_webdir,
+                                                    profile_dir=args.data_dir),
                  )
     p2 = Process(target=mockproc.main, args=('p2', 1))
     p3 = Process(target=crypto.test_rsa_generic)
