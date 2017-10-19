@@ -22,6 +22,17 @@ parser.add_argument('-d', '--data_dir',
                     required=False,
                     type=str)
 
+parser.add_argument('-u', '--upnp',
+                    default=config.data_dir,
+                    help='UPnP map multiple tcp/udp ports <proto>:<ext>:int eg. udp:4567:4567 tcp:4567:4567',
+                    required=False,
+                    type=str)
+
+
+def parse_upnp(arg):
+    #todo
+    pass
+
 
 def main():
     args = parser.parse_args()
