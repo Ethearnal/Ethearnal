@@ -9,7 +9,9 @@ class EthearnalSite(object):
     # todo make entry point redirect to ui
 
 
-def main(webdoc: str = 'webdoc', socket_host='127.0.0.1'):
+def main(http_webdir: str='webdoc',
+         socket_host: str='127.0.0.1',
+         socket_port: int=4567):
     conf = {
         '/': {
             'tools.sessions.on': True,
@@ -17,11 +19,12 @@ def main(webdoc: str = 'webdoc', socket_host='127.0.0.1'):
         },
         '/ui': {
             'tools.staticdir.on': True,
-            'tools.staticdir.dir': webdoc,
+            'tools.staticdir.dir': http_webdir,
             'tools.staticdir.index': 'index.html',
         }
     }
     cherrypy.server.socket_host = socket_host
+    cherrypy.server.socket_port = socket_port
     cherrypy.quickstart(EthearnalSite(), '/', conf)
 
 

@@ -1,8 +1,9 @@
 # please add your ide stuff here
-
 .idea
 .vscode
 
+# default data dirs
+*_profile/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
