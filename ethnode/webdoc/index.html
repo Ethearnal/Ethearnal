@@ -27,6 +27,10 @@
   i = l.bind(l.include,l);
   i('GET','topnav.html',null,'topnav',true);
   i('GET','about.html',null,'main-content',true);
+  var on_click= function (html_to) {
+            i('GET',html_to, null,'main-content',true);
+        };
+
 
 </script>
 </body>

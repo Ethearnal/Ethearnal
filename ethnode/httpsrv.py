@@ -56,6 +56,8 @@ def main(http_webdir: str=config.http_webdir,
     }
     cherrypy.server.socket_host = socket_host
     cherrypy.server.socket_port = socket_port
+    # Cache-Control:public, max-age=31536000
+    cherrypy.response.headers['Cache-Control'] = 'public, max-age=5'
 
     cherrypy.tree.mount(EthearnalSite(), '/', site_conf)
     cherrypy.tree.mount(EthearnalApiProfile(profile_dir_abs), '/api/v1/profile', EthearnalApiProfile.CONF)
