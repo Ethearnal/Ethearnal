@@ -87,7 +87,7 @@ body {
 
 div.header{
     width: 100%;
-    height: 66px;
+    height: 76px;
     background-color: white;
     /* box-shadow: 2px 2px 4px #bbbbbb; */
     border-style: solid;
@@ -108,9 +108,9 @@ div.outer-content {
 div.inner-content {
 
     display: table;
-    width: 79%;
-    /*max-width: 80%;
-    min-width: 80%;*/
+    /*width: 79%;*/
+    max-width: 80%;
+    min-width: 400px;
     margin: 0 auto;
     border-style: solid;
     border-color: #dfdfdf;

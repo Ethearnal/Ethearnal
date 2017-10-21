@@ -1,11 +1,27 @@
 
+/* */
 
 div.outer-content-topnav {
 
     width: 100%;
     text-align: center;
+    height: 39px;
+
+    opacity: 0.9;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+
 }
 
+div.inner-content-topnav {
+
+    margin-top 10px;
+    display: table;
+    min-width: 400px;
+    margin: 0 auto;
+    /*float: right;*/
+    /*background-color: pink;*/
+
+}
 
 div.top_nav_menu_group {
 
@@ -14,16 +30,7 @@ div.top_nav_menu_group {
 
 }
 
-
-div.inner-content-topnav {
-
-    display: table;
-
-    min-width: 400px;
-    margin: 0 auto;
-
-    padding: 1px;
-}
+/* links  */
 
 
 a.round-button {
@@ -56,6 +63,10 @@ a.topnav {
 
 a.topnav:hover {
     color: green;
+    /* background-color: green;
+    color: white; */
+    border-bottom-color: green;
+    border-bottom-style: solid;
 }
 
 
