@@ -1,8 +1,5 @@
 /* author hardc0d3 */
 
-body{
-font-family: 'Khand', sans-serif;
-}
 
 /* general div */
 
@@ -29,7 +26,13 @@ div.border_right_1px {
     border-color: gray;
 }
 
+.font_khand {
+    font-family: 'Khand', sans-serif;
+}
 
+.font_light{
+ font-weight: border;
+}
 
 
 div.debug {
@@ -105,11 +108,16 @@ div.outer-content {
 
 }
 
+div.color_gray{
+color: #606060;
+}
+
+
 div.inner-content {
 
     display: table;
     /*width: 79%;*/
-    max-width: 80%;
+    max-width: 1000px;
     min-width: 400px;
     margin: 0 auto;
     border-style: solid;
@@ -120,6 +128,9 @@ div.inner-content {
     background-color: #ffffff;
     padding: 10px;
 
+    font-family: 'Open Sans', sans-serif;
+    font-weight: light;
+    text-align: justify;
     /*max-width: 1024px; */
 }
 
