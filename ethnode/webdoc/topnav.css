@@ -1,0 +1,87 @@
+
+
+div.outer-content-topnav {
+
+    width: 100%;
+    text-align: center;
+}
+
+
+div.top_nav_menu_group {
+
+    float: left;
+    padding-left: 10px;
+
+}
+
+
+div.inner-content-topnav {
+
+    display: table;
+
+    min-width: 400px;
+    margin: 0 auto;
+
+    padding: 1px;
+}
+
+
+a.round-button {
+    border-style: solid;
+    border-radius: 6px;
+    border-width: 1px;
+}
+
+a.round-button:hover {
+    border-style: solid;
+    border-radius: 6px;
+    border-width: 1px;
+    background-color: green;
+    color: white;
+}
+
+a.topnav {
+
+    font-family: 'Khand', sans-serif;
+    font-size: 18px;
+
+    color: gray;
+    height: 27px;
+
+    border-color: green;
+    text-decoration: none;
+    padding: 5px;
+
+}
+
+a.topnav:hover {
+    color: green;
+}
+
+
+
+a.topnav-button {
+
+    font-family: 'Khand', sans-serif;
+    font-size: 18px;
+
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+
+    color: gray;
+    /*height: 24px;*/
+
+    border-color: green;
+    text-decoration: none;
+    padding-left: 4px;
+    padding-right: 4px;
+
+}
+
+a.topnav-button:hover {
+    color: white;
+    background-color: green;
+}
+
+

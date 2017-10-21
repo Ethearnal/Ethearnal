@@ -1,10 +1,31 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Ethearnal p2p</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="logo.css">
+    <link rel="stylesheet" type="text/css" href="topnav.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
+
+    <script src="layoutjs/layout.js"></script>
 </head>
 <body>
-<h2>Ethearnal p2p</h2>
+<div class="header" id="topnav">
+</div>
+<div class="outer-content">
+    <div class="inner-content box_shadow font">
+        Content
+    </div>
+</div>
+<script>
+  l = new Layoutjs();
+  i = l.bind(l.include,l);
+  i('GET','topnav.html',null,'topnav',true);
+
+</script>
 </body>
 </html>

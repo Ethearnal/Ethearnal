@@ -1,0 +1,174 @@
+/* author hardc0d3 */
+
+body{
+font-family: 'Khand', sans-serif;
+}
+
+/* general div */
+
+div.min_width_400px{
+    min-width: 400px;
+}
+
+
+div.margin_left_10px {
+   margin-left: 10px;
+}
+
+div.border_left_1px {
+
+    border-left-style: solid;
+    border-left-size: 1px;
+    border-color: gray;
+}
+
+div.border_right_1px {
+
+    border-right-style: solid;
+    border-right-size: 1px;
+    border-color: gray;
+}
+
+
+
+
+div.debug {
+    border-style: solid;
+    border-size: 1px;
+    border-color: black;
+}
+div.red {
+    background-color: red;
+}
+
+div.green {
+    background-color: green;
+}
+
+div.float_left {
+float: left;
+}
+
+div.float_right {
+    float: right;
+}
+
+div.w99 {
+    width: 99%;
+}
+
+div.w100 {
+    width: 100%;
+}
+
+div.red_color {
+    background-color: red;
+}
+
+div.h6px {
+    height: 6px;
+}
+
+div.box_shadow {
+    /* box-shadow: 1px 1px 2px #979797; */
+}
+
+body {
+    margin: 0px;
+    padding: 0bx;
+    background-color: #EEEEEE;
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+   /* opacity: 0.5;
+    filter: alpha(opacity=50); *//* For IE8 and earlier */
+}
+
+div.header{
+    width: 100%;
+    height: 66px;
+    background-color: white;
+    /* box-shadow: 2px 2px 4px #bbbbbb; */
+    border-style: solid;
+    border-color: #dfdfdf;
+    border-width: 1px;
+    background-image: url("imgs/mesh.jpg");
+    background-position: 10px;
+}
+
+div.outer-content {
+
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+
+}
+
+div.inner-content {
+
+    display: table;
+    width: 79%;
+    /*max-width: 80%;
+    min-width: 80%;*/
+    margin: 0 auto;
+    border-style: solid;
+    border-color: #dfdfdf;
+    border-width: 1px;
+    /* border-radius: 3px; */
+    /* box-shadow: 1px 1px 6px #979797; */
+    background-color: #ffffff;
+    padding: 10px;
+
+    /*max-width: 1024px; */
+}
+
+
+
+div.listing-item-box {
+    background-color: white;
+    width: 100%;
+    /* height: 150px; */
+    float: left;
+
+}
+div.listing-item-separtor {
+    background-color: #dfdfdf;
+    width: 100%;
+    float: left;
+    height: 1px;
+}
+
+
+
+/* item listing */
+
+div.item-item {
+    /* height: 190px; */
+    padding: 10px;
+    width: 98%;
+    float: left;
+
+}
+div.item-image-hold {
+    /* background-color: rgb(117, 117, 117); */
+    min-width: 110px;
+    height: 100px;
+
+}
+div.item-image {
+    border-radius: 100px;
+    width: 100px;
+    height: 100px;
+}
+
+div.item-content {
+    /* background-color: mediumseagreen; */
+    /* height: 140px; */
+    width: 82%;
+}
+
+
+p.align_left{
+    text-align: left;
+}
