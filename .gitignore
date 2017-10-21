@@ -5,6 +5,9 @@
 # default data dirs
 *_profile/
 
+# playground sandbox
+*.play.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
