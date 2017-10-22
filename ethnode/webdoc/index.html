@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Ethearnal p2p</title>
+
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="logo.css">
     <link rel="stylesheet" type="text/css" href="topnav.css">
@@ -15,6 +16,9 @@
 
 
     <script src="layoutjs/layout.js"></script>
+    <script src="visjs/vis.js"></script>
+    <link rel="stylesheet" type="text/css" href="visjs/vis-network.min.css">
+
 </head>
 <body>
 <div class="header" id="topnav">
@@ -28,10 +32,14 @@
   l = new Layoutjs();
   i = l.bind(l.include,l);
   i('GET','topnav.html',null,'topnav',true);
-  i('GET','about.html',null,'main-content',true);
-  var on_click= function (html_to) {
-            i('GET',html_to, null,'main-content',true);
-        };
+  i('GET','peers.html','peers.js','main-content',true);
+  var on_click = function (html_to) {
+    i('GET',html_to, null,'main-content',true);
+  };
+
+  var on_click_js =  function (html_to, js_to ) {
+    i('GET',html_to, js_to, 'main-content',true);
+  };
 
 
 </script>
