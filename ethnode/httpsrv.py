@@ -2,22 +2,24 @@ import cherrypy
 import os
 import config
 from toolkit.tools import mkdir
+from profile import EthearnalProfileView
 
 
-class EthearnalApiProfile(object):
-    exposed = True
-    CONF = {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
-
-    def __init__(self, profile_dir_abs):
-        self.profile_dir_abs = profile_dir_abs
-
-    def GET(self):
-        file_name = '%s/profile.json' % self.profile_dir_abs
-        if os.path.isfile(file_name):
-            with open(file_name, 'r') as fp:
-                return fp.read()
-        else:
-            return '{}'
+# class EthearnalApiProfile(object):
+#     exposed = True
+#     CONF = {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
+#
+#     def __init__(self, profile_dir_abs):
+#         self.profile_dir_abs = profile_dir_abs
+#         self.profile = EthearnalProfileController(profile_dir_abs)
+#
+#     def GET(self):
+#         fname = self.profile.profile_json_file_name
+#         if os.path.isfile(fname):
+#             with open(fname, 'r') as fp:
+#                 return fp.read()
+#         else:
+#             return '{}'
 
 
 class EthearnalSite(object):
@@ -56,11 +58,14 @@ def main(http_webdir: str=config.http_webdir,
     }
     cherrypy.server.socket_host = socket_host
     cherrypy.server.socket_port = socket_port
-    # Cache-Control:public, max-age=31536000
+    # Cache-Control:public, max-age=5 # in seconds
     cherrypy.response.headers['Cache-Control'] = 'public, max-age=5'
 
     cherrypy.tree.mount(EthearnalSite(), '/', site_conf)
-    cherrypy.tree.mount(EthearnalApiProfile(profile_dir_abs), '/api/v1/profile', EthearnalApiProfile.CONF)
+    cherrypy.tree.mount(EthearnalProfileView(profile_dir_abs),
+                        '/api/v1/profile',
+                        {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
+                        )
 
     cherrypy.engine.start()
     cherrypy.engine.block()
