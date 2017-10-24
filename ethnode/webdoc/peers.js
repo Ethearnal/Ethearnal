@@ -1,3 +1,5 @@
+console.log('PEERS APP');
+
 var nodes = null;
 var edges = null;
 var network = null;
@@ -59,4 +61,3 @@ var draw  =  function() {
  /* boot vis js */
  /* draw(); */
  draw();
-console.log('THIS IS A TEST')

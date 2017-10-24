@@ -1,0 +1,5 @@
+{"last": "js injection test", 
+    "skills": ["hacking","code","<i>python</i>",
+        "sanitized","<a class=\"skill_box\" href=\"javscript:console.log('INJECT');\">Inject</a>"], 
+        "first": "hardc0de", "title": "js injection test"
+}

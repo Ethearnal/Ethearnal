@@ -18,6 +18,7 @@
 
     <script src="layoutjs/layout.js"></script>
     <script src="visjs/vis.js"></script>
+    <script type="text/javascript" src="purifyjs/purify.js"></script>
     <link rel="stylesheet" type="text/css" href="visjs/vis-network.min.css">
 
 </head>
@@ -29,24 +30,55 @@
     </div>
 </div>
 <script>
-  l = new Layoutjs();
+  /* init layout s*/
+  l = new Layoutjs(DOMPurify.sanitize);
+
   i = l.bind(l.include,l);
-  i('GET','topnav.html',null,'topnav',true);
-  i('GET','me.html','me.js','main-content',true);
-  var on_click = function (html_to) {
-    i('GET',html_to, null,'main-content',true);
+
+  /* data object */
+    var ethdata = {
+    'my':{
+      'skills':[]}
+  };
+  /* api functions*/
+  var ethapi = {
+      'render_skills_html':function(skills_array){
+      s ='';
+      for (var i = 0; i < skills_array.length; i++){
+        /* sanitize tags yes */
+        s+='<a class="skill_box" href="#">'+DOMPurify.sanitize(skills_array[i])+'</a>';
+      }
+      return s;
+    }
   };
 
-  var on_click_js =  function (html_to, js_to ) {
-    i('GET',html_to, js_to, 'main-content',true);
+  /*events*/
+
+  var ethevt = {
+    'on_profile_data':function(profile_data){
+    ethdata.my = profile_data;
+    /**/
+    html = ethapi.render_skills_html( ethdata.my.skills);
+    l.html_content('skill_component', html);
+    /**/
+    },
+    'topnav':{
+      'on_click':function (html_to, js_to ){
+        l.include('GET',html_to, 'main-content');
+      },
+      'on_click_js':function (html_to, js_to ) {
+        l.include_eval('GET',html_to, js_to, 'main-content', false);
+      }
+    } 
   };
 
-  /* global ethapp object */
-  var ethapp = {'my':{}};
 
-  console.log(ethapp);
+  /* top navigation ajax router */
+  l.include_eval('GET','topnav.html','topnav.js','topnav',false);
 
-
+  /* initial page here */
+  l.include_eval('GET','me.html','me.js','main-content', false);
+  
 
 </script>
 </body>
