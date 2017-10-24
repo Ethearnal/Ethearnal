@@ -15,6 +15,12 @@ import cherrypy
 def none_cls():
     return None
 
+def blank_st_cls():
+    return ''
+
+def empty_ls_cls():
+    return list()
+
 
 class EthearnalProfileModel(object):
     SPEC_PREFIX = 'spe'
@@ -23,16 +29,16 @@ class EthearnalProfileModel(object):
     none_cls = none_cls
 
     FIELDS_SPEC = {
-        'first': ('text', 'UTF-8', none_cls),
-        'last': ('text', 'UTF-8', none_cls),
-        'title': ('text', 'UTF-8', none_cls),
-        'skills': ('list', 'text', list_cls),
+        'first': ('text', 'UTF-8', blank_st_cls),
+        'last': ('text', 'UTF-8', blank_st_cls),
+        'title': ('text', 'UTF-8', blank_st_cls),
+        'skills': ('list', 'text', empty_ls_cls),
     }
 
-    first = None
-    last = None
-    title = None
-    skills = None
+    first = ''
+    last = ''
+    title = ''
+    skills = []
 
     @classmethod
     def get_class(cls):
@@ -105,6 +111,14 @@ class EthearnalProfileController(object):
         else:
             self.model.from_json_file(self.profile_json_file_name)
 
+        # create empty profile html if not found
+        if not os.path.isfile(self.profile_html_file_name):
+            # todo
+            pass
+        else:
+            # todo
+            pass
+
         # create generated avatar if not found
         if not os.path.isfile(self.profile_image_file_name):
             self.generate_random_avatar(filename=self.profile_image_file_name)
@@ -163,6 +177,9 @@ class EthearnalProfileView(object):
         return self.profile.data
 
     def html(self):
+        if not os.path.isfile(self.profile.profile_html_file_name):
+            return "" # todo 404
+
         bts = None
         with open(self.profile.profile_html_file_name, 'rb') as fp:
             fs = io.BytesIO(fp.read())
