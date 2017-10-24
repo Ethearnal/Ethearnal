@@ -109,7 +109,8 @@ a.topnav-button-orange {
 
     color: gray;
     /*height: 24px;*/
-    border-color #FFB266;
+
+    border-color: #FFB266;
 
     border-color: green;
     text-decoration: none;

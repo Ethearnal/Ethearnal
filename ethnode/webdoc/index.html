@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="logo.css">
     <link rel="stylesheet" type="text/css" href="topnav.css">
+    <link rel="stylesheet" type="text/css" href="profile.css">
 
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
@@ -24,15 +25,14 @@
 <div class="header" id="topnav">
 </div>
 <div class="outer-content">
-    <div id="main-content" class="inner-content box_shadow font font_light color_gray">
-        Content
+    <div id="main-content" class="inner-content box_shadow font font_light color_gray"></div> 
     </div>
 </div>
 <script>
   l = new Layoutjs();
   i = l.bind(l.include,l);
   i('GET','topnav.html',null,'topnav',true);
-  i('GET','peers.html','peers.js','main-content',true);
+  i('GET','me.html','me.js','main-content',true);
   var on_click = function (html_to) {
     i('GET',html_to, null,'main-content',true);
   };
