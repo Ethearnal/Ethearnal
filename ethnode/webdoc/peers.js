@@ -8,15 +8,14 @@ var draw  =  function() {
       // create people.
       // value corresponds with the age of the person
       nodes = [
-        {id: 1,  value: 26,  label: 'Enco' },
+        {id: 1,  value: 25,  label: 'Ramy' },
         {id: 2,  value: 31, label: 'Riya'},
         {id: 3,  value: 25, label: 'Stan'},
         {id: 5,  value: 25, label: 'Vlad' },
-        {id: 6,  value: 25, label: 'Doby'},
-        {id: 7,  value: 30,  label: 'Linu'},
+        {id: 7,  value: 25, label: 'Doby'},
+        {id: 6,  value: 25,  label: 'Romn'},
         {id: 8,  value: 35,  label: 'Vity'},
-        {id: 9,  value: 37, label: 'Sato'},
-        {id: 4, value: 18, label: ''},
+
       ];
 
       // create connections between people
@@ -26,14 +25,14 @@ var draw  =  function() {
         {from: 1, to: 5, value: 3, title: '3 emails per week'},
         {from: 2, to: 5, value: 3, title: '3 emails per week'},
         {from: 2, to: 5, value: 5, title: '5 emails per week'},
-        {from: 2, to: 4,value: 1, title: '1 emails per week'},
+        {from: 7, to: 1, value: 5, title: '5 emails per week'},
         {from: 5, to: 7, value: 2, title: '2 emails per week'},
-        {from: 4, to: 5, value: 5, title: '1 emails per week'},
-        {from: 4, to: 7,value: 5, title: '2 emails per week'},
+        {from: 8, to: 6, value: 5, title: '5 emails per week'},
         {from: 6, to: 3,value: 2, title: '2 emails per week'},
-        {from: 6, to: 4,value: 2, title: '2 emails per week'},
+        {from: 8, to: 5,value: 2, title: '2 emails per week'},
+        {from: 8, to: 6,value: 2, title: '2 emails per week'},
         {from: 2, to: 3, value: 6, title: '6 emails per week'},
-        {from: 3, to: 9, value: 4, title: '4 emails per week'},
+
         {from: 5, to: 3, value: 1, title: '1 emails per week'},
         {from: 2, to: 7, value: 4, title: '4 emails per week'}
       ];
