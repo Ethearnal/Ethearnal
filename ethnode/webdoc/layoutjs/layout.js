@@ -80,6 +80,22 @@ Layoutjs_ajaxjs = function(method,urijs,async){
 };
 
 
+// Layoutjs.prototype.load_html = function(method,urixml,target, on_html_load){
+    
+//     var req = new XMLHttpRequest();
+//      req.onreadystatechange = function(){ 
+//        if (req.readyState != 4){
+//           return false;
+//        }
+//        if (req.status === 200 ){
+//                 html = Layoutjs_sanitize(req.responseText);
+//                 on_html_load(html);       
+//       }
+//     /* always async*/
+//     req.open(method,urixml,true);
+//     req.send();
+// };
+
 
 Layoutjs.prototype.include = function(method,urixml,target){
     
@@ -89,7 +105,9 @@ Layoutjs.prototype.include = function(method,urixml,target){
           return false;
        }
        if (req.status === 200 ){
-                document.getElementById(target).innerHTML = Layoutjs_sanitize(req.responseText);
+                html = Layoutjs_sanitize(req.responseText);
+                document.getElementById(target).innerHTML = html;
+                return html;
           }
       }
     /* always async*/
@@ -124,14 +142,14 @@ Layoutjs.prototype.include_eval = function(method,urixml,urijs,target,sanitize_x
 Layoutjs.prototype.text_content =  function(id,text){
     var e = document.getElementById(id);
     if ('textContent' in e) { 
-        e.textContent = Layoutjs.sanitizer(text);
+        e.textContent = Layoutjs_sanitize(text);
     }
     else { //ie7,8 
-        e.innerText = Layoutjs.sanitizer(text);
+        e.innerText = Layoutjs_sanitize(text);
     }
 };
 
-Layoutjs.prototype.html_content =  function(id,html){
+Layoutjs.prototype.html_content =  function(id, html){
     document.getElementById(id).innerHTML=Layoutjs_sanitize(html);
 };
 

@@ -38,7 +38,15 @@
   /* data object */
     var ethdata = {
     'my':{
-      'skills':[]}
+      'guid':'GUID',
+      'skills':[],
+      'first':'',
+      'last':'',
+      'nick':'',
+      'title':'',
+      'first_last_nick':'',
+      'resume':'',
+    }
   };
   /* api functions*/
   var ethapi = {
@@ -57,9 +65,14 @@
   var ethevt = {
     'on_profile_data':function(profile_data){
     ethdata.my = profile_data;
+    ethdata.my.first_last_nick = ethdata.my.first + " " + ethdata.my.last + " ( " + ethdata.my.title + " ) ";
+   
     /**/
-    html = ethapi.render_skills_html( ethdata.my.skills);
-    l.html_content('skill_component', html);
+  
+    l.html_content('ethdata.my.first_last_nick', ethdata.my.first_last_nick);
+    l.html_content('ethdata.my.render_skills_html', ethapi.render_skills_html( ethdata.my.skills));
+    
+
     /**/
     },
     'topnav':{

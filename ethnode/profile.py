@@ -83,6 +83,7 @@ class EthearnalProfileController(object):
     '''
     PERSONAL_DIRECTORY_NAME = 'personal'
     PROFILE_JSON_FILE_NAME = 'profile.json'
+    PROFILE_HTML_FILE_NAME = 'profile.html'
     PROFILE_IMAGE_FILE_NAME = 'profile_img.png'
 
     def __init__(self, data_dir=config.data_dir, personal_dir=None):
@@ -94,6 +95,7 @@ class EthearnalProfileController(object):
             tools.mkdir(self.personal_dir)
 
         self.profile_json_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_JSON_FILE_NAME)
+        self.profile_html_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_HTML_FILE_NAME)
         self.profile_image_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_IMAGE_FILE_NAME)
         self.model = EthearnalProfileModel()
 
@@ -140,6 +142,8 @@ class EthearnalProfileView(object):
         self.query_dispatch = {
             'avatar': self.avatar,
             'data': self.data,
+            'html': self.html,
+            'guid': self.guid,
         }
 
     def GET(self, q):
@@ -157,3 +161,18 @@ class EthearnalProfileView(object):
 
     def data(self):
         return self.profile.data
+
+    def html(self):
+        bts = None
+        with open(self.profile.profile_html_file_name, 'rb') as fp:
+            fs = io.BytesIO(fp.read())
+            fs.seek(0)
+        return cherrypy.lib.file_generator(fs)
+
+    def guid(self):
+        import hashlib
+        return hashlib.sha256(self.profile.data.encode('utf-8')).hexdigest()
+        
+
+
+
