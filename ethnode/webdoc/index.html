@@ -26,9 +26,13 @@
 <div class="header" id="topnav">
 </div>
 <div class="outer-content">
-    <div id="main-content" class="inner-content box_shadow font font_light color_gray"></div> 
+    <div class="inner-content box_shadow font font_light color_gray">
+        <div id="main-content"  class="box_shadow_b" style="min-height:400px; width: 666px; padding: 10px;">
+
+        </div>
     </div>
 </div>
+
 <script>
   /* init layout s*/
   l = new Layoutjs(DOMPurify.sanitize);
@@ -90,9 +94,7 @@
   l.include_eval('GET','topnav.html','topnav.js','topnav',false);
 
   /* initial page here */
-  l.include_eval('GET','me.html','me.js','main-content', false);
-  
-
+  l.include_eval('GET','post_job.html',null,'main-content', false);
 </script>
 </body>
 </html>
