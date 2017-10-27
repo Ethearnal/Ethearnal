@@ -150,7 +150,11 @@ Layoutjs.prototype.text_content =  function(id,text){
 };
 
 Layoutjs.prototype.html_content =  function(id, html){
-    document.getElementById(id).innerHTML=Layoutjs_sanitize(html);
+    try {
+        document.getElementById(id).innerHTML=Layoutjs_sanitize(html);
+    } catch(err) {
+        console.log('ERR in when load:  ' + html + ' into: '+ id, ' err:'+ err);
+    }
 };
 
 
