@@ -140,12 +140,16 @@ Layoutjs.prototype.include_eval = function(method,urixml,urijs,target,sanitize_x
 
 
 Layoutjs.prototype.text_content =  function(id,text){
-    var e = document.getElementById(id);
-    if ('textContent' in e) { 
-        e.textContent = Layoutjs_sanitize(text);
-    }
-    else { //ie7,8 
-        e.innerText = Layoutjs_sanitize(text);
+    try {
+        var e = document.getElementById(id);
+        if ('textContent' in e) {
+            e.textContent = Layoutjs_sanitize(text);
+        }
+        else { //ie7,8
+            e.innerText = Layoutjs_sanitize(text);
+        }
+    } catch(err) {
+        console.log('ERR in when load text:  ' + html + ' into: '+ id, ' err:'+ err);
     }
 };
 
@@ -153,45 +157,6 @@ Layoutjs.prototype.html_content =  function(id, html){
     try {
         document.getElementById(id).innerHTML=Layoutjs_sanitize(html);
     } catch(err) {
-        console.log('ERR in when load:  ' + html + ' into: '+ id, ' err:'+ err);
+        console.log('ERR in when load html:  ' + html + ' into: '+ id, ' err:'+ err);
     }
 };
-
-
-
-// Layoutjs.prototype.text = function(method,urixml,urijs,target){
-//      if(window.XMLHttpRequest){
-//          req = new XMLHttpRequest();
-//       }
-//     else{
-//         return null;
-//      }
-//     req.onreadystatechange = function(){
-//        if (req.readyState === 4) {
-//        //TODO: implement more different statuses and handling 
-//        if (req.status === 200 ){
-//                  e = document.getElementById(target);
-//                  if ('textContent' in e) { 
-//                      e.textContent = req.responseText;
-//                  }
-//                  else { //ie7,8 
-//                      e.innerText = Layoutjs_sanitize(req.responseText);
-//                  }
-//                  if( urijs != null){
-//                      /* always async*/
-//                      Layoutjs_ajaxjs(method, urijs, true);
-//                  }
-//                  req = null;
-//         } else {
-//               //;
-//               }
-//      } else
-//      { /*not ready todo*/;
-//      }
-//     }
-//     /* always async*/
-//     req.open(method,urixml,true);
-//     req.send();
-// };
- 
-

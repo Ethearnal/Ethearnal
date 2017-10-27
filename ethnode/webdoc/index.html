@@ -46,7 +46,7 @@
       'skills':[],
       'first':'',
       'last':'',
-      'nick':'',
+      'nick':'tr1n1ty',
       'title':'',
       'first_last_nick':'',
       'resume':'',
@@ -69,15 +69,18 @@
   var ethevt = {
     'on_profile_data':function(profile_data){
     ethdata.my = profile_data;
-    ethdata.my.first_last_nick = ethdata.my.first + " " + ethdata.my.last + " ( " + ethdata.my.title + " ) ";
+
    
     /**/
-  
-    l.html_content('ethdata.my.first_last_nick', ethdata.my.first_last_nick);
+
     l.html_content('ethdata.my.render_skills_html', ethapi.render_skills_html( ethdata.my.skills));
-    
+    l.text_content('ethdata.my.first', ethdata.my.first);
+    l.text_content('ethdata.my.last', ethdata.my.last);
+    l.text_content('ethdata.my.nick', ethdata.my.nick);
+    l.text_content('ethdata.my.title', ethdata.my.title);
 
     /**/
+
     },
     'topnav':{
       'on_click':function (html_to, js_to ){
@@ -94,7 +97,9 @@
   l.include_eval('GET','topnav.html','topnav.js','topnav',false);
 
   /* initial page here */
-  l.include_eval('GET','post_job.html',null,'main-content', false);
+  l.include_eval('GET','me.html','me.js','main-content', false);
+
+
 </script>
 </body>
 </html>

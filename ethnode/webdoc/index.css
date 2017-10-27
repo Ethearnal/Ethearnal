@@ -234,6 +234,7 @@ p.align_left{
 
 
 textarea {
+
     resize: none;
     border: solid;
     overflow:auto;
