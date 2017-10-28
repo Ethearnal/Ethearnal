@@ -1,86 +1,36 @@
 from randomavatar.randomavatar import Avatar
 import os
-import sys
-import json
 import random
 import string
 import config
 from toolkit import tools
+from toolkit import basemodel
 import io
-
-
 import cherrypy
 
 
-def none_cls():
-    return None
-
-def blank_st_cls():
-    return ''
-
-def empty_ls_cls():
-    return list()
-
-
-class EthearnalProfileModel(object):
+class EthearnalProfileModel(basemodel.BaseModel):
     SPEC_PREFIX = 'spe'
     dict_cls = dict
     list_cls = list
-    none_cls = none_cls
+    none_cls = basemodel.none_cls
 
     FIELDS_SPEC = {
-        'first': ('text', 'UTF-8', blank_st_cls),
-        'last': ('text', 'UTF-8', blank_st_cls),
-        'title': ('text', 'UTF-8', blank_st_cls),
-        'skills': ('list', 'text', empty_ls_cls),
+        'first': ('text', 'UTF-8', basemodel.blank_st_cls),
+        'last': ('text', 'UTF-8', basemodel.blank_st_cls),
+        'title': ('text', 'UTF-8', basemodel.blank_st_cls),
+        'nick': ('text', 'UTF-8', basemodel.blank_st_cls),
+        'skills': ('list', 'text', basemodel.empty_ls_cls),
     }
 
     first = ''
     last = ''
     title = ''
+    nick = ''
     skills = []
 
-    @classmethod
-    def get_class(cls):
-        return cls
-
-    def to_dict(self):
-        # todo key and val codecs
-        cls = self.get_class()
-        d = self.dict_cls()
-        for k in cls.FIELDS_SPEC:
-            mtype, codec, default_class = cls.FIELDS_SPEC[k]
-            # print(k, '=', mtype, codec, default_class)
-            v = getattr(self, k, default_class())
-            d[k] = v
-        return d
-
-    def from_dict(self, d):
-        # todo key and val codecs
-        cls = self.get_class()
-        for k in cls.FIELDS_SPEC:
-            mtype, codec, default_class = cls.FIELDS_SPEC[k]
-            if k in d:
-                setattr(self, k, d[k])
-        return self
-
-    def to_json(self):
-        return json.dumps(self.to_dict(), ensure_ascii=False)
-
-    def from_json_st(self, st):
-        d = json.loads(st, ensure_ascii=False)
-        return self.from_dict(d)
-
-    def from_json_file(self, json_file):
-        with open(json_file) as fs:
-            d = json.load(fs)
-        if not d:
-            raise ValueError('Deserialize of %s failed!' % json_file)
-        return self.from_dict(d)
-
-    def to_json_file(self, json_file):
-        with open(json_file, 'w') as fs:
-            json.dump(self.to_dict(), fs, ensure_ascii=False)
+    def __init__(self):
+        super(EthearnalProfileModel, self).__init__()
 
 
 class EthearnalProfileController(object):
@@ -178,7 +128,7 @@ class EthearnalProfileView(object):
 
     def html(self):
         if not os.path.isfile(self.profile.profile_html_file_name):
-            return "" # todo 404
+            return ""  # todo 404
 
         bts = None
         with open(self.profile.profile_html_file_name, 'rb') as fp:
@@ -189,6 +139,44 @@ class EthearnalProfileView(object):
     def guid(self):
         import hashlib
         return hashlib.sha256(self.profile.data.encode('utf-8')).hexdigest()
+
+
+class EhtearnalJobPostModel(basemodel.BaseModel):
+    SPEC_PREFIX = 'spe'
+    dict_cls = dict
+    list_cls = list
+    none_cls = basemodel.none_cls
+
+    FIELDS_SPEC = {
+        'title': ('text', 'UTF-8', basemodel.blank_st_cls),
+        'description': ('text', 'UTF-8', basemodel.blank_st_cls),
+    }
+
+    title = ''
+    description = ''
+
+    def __init__(self, title=None, description=None):
+        super(EhtearnalJobPostModel, self).__init__()
+        if not title or not description:
+            raise ValueError('Title and/or description are requred to post a job')
+
+
+
+class EthearnalJobPostController(object):
+    '''
+    Store json post into a directory with json files
+    '''
+
+
+class EthearnalJobView(object):
+    exposed = True;
+
+    def __init__(self):
+        pass
+
+    def POST(self, title=None, description=None):
+        print('+ ++ +++ ++ +,', title, description)
+        return 'ok'
         
 
 

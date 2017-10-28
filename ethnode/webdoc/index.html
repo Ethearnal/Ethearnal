@@ -89,7 +89,15 @@
       'on_click_js':function (html_to, js_to ) {
         l.include_eval('GET',html_to, js_to, 'main-content', false);
       }
-    } 
+    },
+
+    /* post job */
+    'post_job':{
+      'on_click_post': function(arg) {
+         console.log(arg);
+      }
+    }
+
   };
 
 
@@ -98,6 +106,9 @@
 
   /* initial page here */
   l.include_eval('GET','me.html','me.js','main-content', false);
+  l.include_eval('GET','post_job.html','post_job.js','main-content', false);
+
+
 
 
 </script>

@@ -3,6 +3,7 @@ import os
 import config
 from toolkit.tools import mkdir
 from profile import EthearnalProfileView
+from profile import EthearnalJobView
 
 
 # class EthearnalApiProfile(object):
@@ -62,11 +63,22 @@ def main(http_webdir: str=config.http_webdir,
     cherrypy.response.headers['Cache-Control'] = 'public, max-age=5'
 
     cherrypy.tree.mount(EthearnalSite(), '/', site_conf)
+    #
     cherrypy.tree.mount(EthearnalProfileView(profile_dir_abs),
                         '/api/v1/profile',
                         {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
                         )
-
+    #
+    cherrypy.tree.mount(EthearnalJobView(),
+                        '/api/v1/job', {'/': {
+                            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+                            'tools.sessions.on': True,
+                            'tools.response_headers.on': True,
+                            'tools.response_headers.headers': [('Content-Type', 'text/plain')],
+                            }
+                         }
+                        )
+    #
     cherrypy.engine.start()
     cherrypy.engine.block()
 
