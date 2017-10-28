@@ -9,3 +9,8 @@ var on_click = function (html_to) {
     l.include_eval('GET',html_to, js_to, 'main-content', false);
   };
 
+
+l.include_eval('GET','me.html','me.js','main-content', false);
+  /* initial page here */
+  // l.include_eval('GET','me.html','me.js','main-content', false);
+ //  l.include_eval('GET','post_job.html','post_job.js','main-content', false);
