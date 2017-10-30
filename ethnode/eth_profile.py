@@ -8,7 +8,7 @@ import cherrypy
 
 from toolkit import tools
 from toolkit import basemodel
-from toolkit.store import CrudJsonStore
+from toolkit.store import CrudJsonListStore
 
 from randomavatar.randomavatar import Avatar
 
@@ -177,28 +177,90 @@ class EthearnalJobPostController(object):
 
     def __init__(self, eth_profile: EthearnalProfileController):
         self.profile = eth_profile
-        self.crud = CrudJsonStore(self.profile.job_post_json_store_fn)
+        self.crud = CrudJsonListStore(self.profile.job_post_json_store_fn)
 
 
 class EthearnalJobView(object):
     exposed = True
-    # todo fix content type json
 
     def __init__(self, ctl: EthearnalJobPostController):
         self.ctl = ctl
+        self.query_dispatch = {
+            'get_list': self.get_list,
+            'get_item': self.get_item
+        }
 
     def POST(self, title=None, description=None):
         o = EthearnalJobPostModel(title, description)
-        status = self.ctl.crud.create(o.to_dict(), o.title)
-        if status == 201:
-            self.ctl.crud.dump()
-        cherrypy.response.status = status
+        self.ctl.crud.create(o.to_dict())
+        self.ctl.crud.commit()
+        self.ctl.crud.commit()
+        cherrypy.response.status = 201
         return ''
 
-    def GET(self):
+    def get_list(self):
         js = self.ctl.crud.load()
-        cherrypy.response.headers['Content-Type'] = 'application/json'
         return js
+
+    def get_item(self, idx):
+        cherrypy.response.status = 404
+        try:
+            idx = int(idx)
+        except ValueError:
+            return ''
+        try:
+            d = self.ctl.crud.read(idx)
+            if d:
+                o = EthearnalJobPostModel(**d)
+                o.from_dict(d)
+                cherrypy.response.status = 200
+                return o.to_json().encode(encoding='utf-8')
+        except IndexError:
+            pass
+        return ''
+
+    def GET(self, idx=None):
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+        if idx:
+            return self.get_item(idx)
+        return self.get_list()
+
+    def DELETE(self, idx=None):
+        cherrypy.response.status = 404
+        if idx:
+            try:
+                idx = int(idx)
+                self.ctl.crud.delete(idx)
+                self.ctl.crud.commit()
+                cherrypy.response.status = 200
+                return b''
+            except Exception as e:
+                # todo logging
+                pass
+        return b''
+
+    def patch(self, idx, title=None, description=None):
+        cherrypy.response.status = 404
+        try:
+            idx = int(idx)
+        except ValueError:
+            return ''
+        try:
+            o = EthearnalJobPostModel(title, description)
+            self.ctl.crud.update(idx, o.to_dict())
+            self.ctl.crud.commit()
+            self.ctl.crud.commit()
+            cherrypy.response.status = 201
+            return b''
+        except IndexError:
+            return b''
+
+    def PATCH(self, idx, title=None, description=None):
+        return self.patch(idx, title, description)
+
+    def PUT(self, idx, title=None, description=None):
+        return self.patch(idx, title, description)
+
 
         
 
