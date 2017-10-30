@@ -15,11 +15,23 @@ class CrudJsonStore(object):
             self._l = lst
         self.fname = fname
 
-    def dump(self, fname):
-        pass
+    def commit(self):
+        self.dump()
 
-    def load(self, fname):
-        pass
+    def dump(self):
+        d = dict()
+        d['dict'] = self._d
+        d['list'] = self._l
+        js = json.dumps(d, ensure_ascii=False)
+        with open(self.fname, 'w') as fp:
+            fp.write(js)
+
+    def load(self):
+        with open(self.fname, 'r') as fp:
+            js = fp.read()
+            d = json.loads(js)
+            self._d = d['dict']
+            self._l = d['list']
 
     def create(self, o, key):
         self._l.append(o)
