@@ -2,12 +2,16 @@ import os
 import random
 import string
 import config
+import io
+import json
+import cherrypy
+
 from toolkit import tools
 from toolkit import basemodel
-import io
-import cherrypy
-from randomavatar.randomavatar import Avatar
 from toolkit.store import CrudJsonStore
+
+from randomavatar.randomavatar import Avatar
+
 
 class EthearnalProfileModel(basemodel.BaseModel):
     SPEC_PREFIX = 'spe'
@@ -41,6 +45,7 @@ class EthearnalProfileController(object):
     PROFILE_JSON_FILE_NAME = 'profile.json'
     PROFILE_HTML_FILE_NAME = 'profile.html'
     PROFILE_IMAGE_FILE_NAME = 'profile_img.png'
+    JOB_POSTS_JSON_FILE_NAME = 'job_posts.json'
 
     def __init__(self, data_dir=config.data_dir, personal_dir=None):
         self.data_dir = os.path.abspath(data_dir)
@@ -53,6 +58,8 @@ class EthearnalProfileController(object):
         self.profile_json_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_JSON_FILE_NAME)
         self.profile_html_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_HTML_FILE_NAME)
         self.profile_image_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_IMAGE_FILE_NAME)
+        self.job_post_json_store_fn = '%s/%s' % (self.personal_dir, self.JOB_POSTS_JSON_FILE_NAME)
+
         self.model = EthearnalProfileModel()
 
         # create empty profile if not found
@@ -100,9 +107,8 @@ class EthearnalProfileController(object):
 class EthearnalProfileView(object):
     exposed = True
 
-    def __init__(self, profile_dir_abs):
-        self.profile_dir_abs = profile_dir_abs
-        self.profile = EthearnalProfileController(profile_dir_abs)
+    def __init__(self, eth_profile):
+        self.profile = eth_profile
         self.query_dispatch = {
             'avatar': self.avatar,
             'data': self.data,
@@ -168,26 +174,32 @@ class EthearnalJobPostModel(basemodel.BaseModel):
 
 
 class EthearnalJobPostController(object):
-    '''
-    Store json post into a directory with json files
-    '''
-    def __init__(self):
-        # todo change this later in separate data store class
-        self.crud = CrudJsonStore('test')
 
-    def create(self, item):
-        pass
+    def __init__(self, eth_profile: EthearnalProfileController):
+        self.profile = eth_profile
+        self.crud = CrudJsonStore(self.profile.job_post_json_store_fn)
 
 
 class EthearnalJobView(object):
-    exposed = True;
+    exposed = True
+    # todo fix content type json
 
-    def __init__(self):
-        pass
+    def __init__(self, ctl: EthearnalJobPostController):
+        self.ctl = ctl
 
     def POST(self, title=None, description=None):
-        print('+ ++ +++ ++ +,', title, description)
-        return 'ok'
+        o = EthearnalJobPostModel(title, description)
+        status = self.ctl.crud.create(o.to_dict(), o.title)
+        if status == 201:
+            self.ctl.crud.dump()
+        cherrypy.response.status = status
+        return ''
+
+    def GET(self):
+        js = self.ctl.crud.load()
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+        return js
+
         
 
 

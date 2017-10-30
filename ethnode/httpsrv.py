@@ -2,25 +2,8 @@ import cherrypy
 import os
 import config
 from toolkit.tools import mkdir
-from eth_profile import EthearnalProfileView
-from eth_profile import EthearnalJobView
-
-
-# class EthearnalApiProfile(object):
-#     exposed = True
-#     CONF = {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
-#
-#     def __init__(self, profile_dir_abs):
-#         self.profile_dir_abs = profile_dir_abs
-#         self.profile = EthearnalProfileController(profile_dir_abs)
-#
-#     def GET(self):
-#         fname = self.profile.profile_json_file_name
-#         if os.path.isfile(fname):
-#             with open(fname, 'r') as fp:
-#                 return fp.read()
-#         else:
-#             return '{}'
+from eth_profile import EthearnalProfileView, EthearnalProfileController
+from eth_profile import EthearnalJobView, EthearnalJobPostController
 
 
 class EthearnalSite(object):
@@ -41,6 +24,9 @@ def main(http_webdir: str=config.http_webdir,
         print('Creating dir for static files')
         mkdir(files_dir)
     profile_dir_abs = os.path.abspath(profile_dir)
+    e_profile = EthearnalProfileController(profile_dir_abs)
+
+
     site_conf = {
         '/': {
             'tools.sessions.on': True,
@@ -64,12 +50,12 @@ def main(http_webdir: str=config.http_webdir,
 
     cherrypy.tree.mount(EthearnalSite(), '/', site_conf)
     #
-    cherrypy.tree.mount(EthearnalProfileView(profile_dir_abs),
+    cherrypy.tree.mount(EthearnalProfileView(e_profile),
                         '/api/v1/profile',
                         {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
                         )
     #
-    cherrypy.tree.mount(EthearnalJobView(),
+    cherrypy.tree.mount(EthearnalJobView(EthearnalJobPostController(e_profile)),
                         '/api/v1/job', {'/': {
                             'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
                             'tools.sessions.on': True,
