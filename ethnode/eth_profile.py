@@ -1,4 +1,3 @@
-from randomavatar.randomavatar import Avatar
 import os
 import random
 import string
@@ -7,7 +6,8 @@ from toolkit import tools
 from toolkit import basemodel
 import io
 import cherrypy
-
+from randomavatar.randomavatar import Avatar
+from toolkit.store import CrudJsonStore
 
 class EthearnalProfileModel(basemodel.BaseModel):
     SPEC_PREFIX = 'spe'
@@ -141,7 +141,7 @@ class EthearnalProfileView(object):
         return hashlib.sha256(self.profile.data.encode('utf-8')).hexdigest()
 
 
-class EhtearnalJobPostModel(basemodel.BaseModel):
+class EthearnalJobPostModel(basemodel.BaseModel):
     SPEC_PREFIX = 'spe'
     dict_cls = dict
     list_cls = list
@@ -156,16 +156,27 @@ class EhtearnalJobPostModel(basemodel.BaseModel):
     description = ''
 
     def __init__(self, title=None, description=None):
-        super(EhtearnalJobPostModel, self).__init__()
+        super(EthearnalJobPostModel, self).__init__()
         if not title or not description:
-            raise ValueError('Title and/or description are requred to post a job')
+            raise ValueError('Title and/or description are required to post a job')
+        self.title = title
+        self.description = description
 
+    def __hash__(self):
+        st = '%s%s' % (self.title, self.description)
+        return hash(st)
 
 
 class EthearnalJobPostController(object):
     '''
     Store json post into a directory with json files
     '''
+    def __init__(self):
+        # todo change this later in separate data store class
+        self.crud = CrudJsonStore('test')
+
+    def create(self, item):
+        pass
 
 
 class EthearnalJobView(object):

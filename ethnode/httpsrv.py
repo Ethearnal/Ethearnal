@@ -2,8 +2,8 @@ import cherrypy
 import os
 import config
 from toolkit.tools import mkdir
-from profile import EthearnalProfileView
-from profile import EthearnalJobView
+from eth_profile import EthearnalProfileView
+from eth_profile import EthearnalJobView
 
 
 # class EthearnalApiProfile(object):

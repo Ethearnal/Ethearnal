@@ -63,3 +63,4 @@ class BaseModel(object):
     def to_json_file(self, json_file):
         with open(json_file, 'w') as fs:
             json.dump(self.to_dict(), fs, ensure_ascii=False)
+
