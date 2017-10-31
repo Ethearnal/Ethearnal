@@ -1,5 +1,6 @@
 import os
-import miniupnpc
+# temporaly disable until find solution for windows
+# import miniupnpc
 
 
 def kwargs(**kwa):

@@ -1,5 +1,6 @@
 # author hardc0de
-import sys, os
+import sys
+import os
 import argparse
 import httpsrv
 from multiprocessing import Process
