@@ -4,6 +4,7 @@ import config
 from toolkit.tools import mkdir
 from eth_profile import EthearnalProfileView, EthearnalProfileController
 from eth_profile import EthearnalJobView, EthearnalJobPostController
+from eth_profile import EthearnalUploadFileView
 
 
 class EthearnalSite(object):
@@ -17,15 +18,15 @@ def main(http_webdir: str=config.http_webdir,
          socket_host: str=config.http_socket_host,
          socket_port: int=config.http_socket_port,
          profile_dir: str=config.data_dir,
-         files_dir_name='files'):
-    files_dir = '%s/%s' % (profile_dir, files_dir_name)
+         files_dir_name=config.static_files):
+
+    files_dir = os.path.abspath('%s/%s' % (profile_dir, files_dir_name))
 
     if not os.path.isdir(files_dir):
         print('Creating dir for static files')
         mkdir(files_dir)
     profile_dir_abs = os.path.abspath(profile_dir)
-    e_profile = EthearnalProfileController(profile_dir_abs)
-
+    e_profile = EthearnalProfileController(profile_dir_abs, files_dir=files_dir)
 
     site_conf = {
         '/': {
@@ -64,8 +65,21 @@ def main(http_webdir: str=config.http_webdir,
                             }
                          }
                         )
+
+    cherrypy.tree.mount(EthearnalUploadFileView(e_profile),
+                        '/api/v1/upload', {'/': {
+                            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+                            'tools.sessions.on': True,
+                            'tools.response_headers.on': True,
+                            'tools.response_headers.headers': [('Content-Type', 'text/plain')],
+                            }
+                         }
+                        )
+
     #
     cherrypy.engine.start()
+    print('PROFILE DIR:', e_profile.data_dir)
+    print('STATIC FILES DIR:', e_profile.files_dir)
     cherrypy.engine.block()
 
 
