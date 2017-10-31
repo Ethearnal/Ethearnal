@@ -289,3 +289,10 @@ class EthearnalUploadFileView(object):
         cherrypy.response.status = 201
         return b''
 
+    def GET(self):
+        upload_path = os.path.normpath(self.profile.files_dir)
+        files = [f for f in os.listdir(upload_path)]
+        print(os.listdir(upload_path))
+        return json.dumps(files, ensure_ascii=False).encode('utf-8')
+
+
