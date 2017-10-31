@@ -41,19 +41,25 @@ class EthearnalProfileController(object):
     '''
     Carry about profile stuff
     '''
+
     PERSONAL_DIRECTORY_NAME = 'personal'
     PROFILE_JSON_FILE_NAME = 'profile.json'
     PROFILE_HTML_FILE_NAME = 'profile.html'
     PROFILE_IMAGE_FILE_NAME = 'profile_img.png'
     JOB_POSTS_JSON_FILE_NAME = 'job_posts.json'
 
-    def __init__(self, data_dir=config.data_dir, personal_dir=None):
+    def __init__(self, data_dir=config.data_dir, personal_dir=None, files_dir=None):
         self.data_dir = os.path.abspath(data_dir)
         if personal_dir:
             self.personal_dir = os.path.abspath(personal_dir)
         else:
             self.personal_dir = os.path.abspath('%s/%s' % (self.data_dir, self.PERSONAL_DIRECTORY_NAME))
             tools.mkdir(self.personal_dir)
+
+        if files_dir:
+            self.files_dir = os.path.abspath(files_dir)
+        else:
+            self.files_dir = os.path.abspath('%s/%s' % (self.data_dir, config.static_files))
 
         self.profile_json_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_JSON_FILE_NAME)
         self.profile_html_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_HTML_FILE_NAME)
@@ -262,7 +268,31 @@ class EthearnalJobView(object):
         return self.patch(idx, title, description)
 
 
-        
+class EthearnalUploadFileView(object):
+    exposed = True
 
+    def __init__(self, e_profile: EthearnalProfileController):
+        self.profile = e_profile
+
+    def POST(self, ufile):
+        upload_path = os.path.normpath(self.profile.files_dir)
+        upload_file = os.path.join(upload_path, ufile.filename)
+        size = 0
+        with open(upload_file, 'wb') as out:
+            while True:
+                data = ufile.file.read(8192)
+                if not data:
+                    break
+                out.write(data)
+                # print(data)
+                size += len(data)
+        cherrypy.response.status = 201
+        return b''
+
+    def GET(self):
+        upload_path = os.path.normpath(self.profile.files_dir)
+        files = [f for f in os.listdir(upload_path)]
+        print(os.listdir(upload_path))
+        return json.dumps(files, ensure_ascii=False).encode('utf-8')
 
 

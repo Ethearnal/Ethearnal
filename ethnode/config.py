@@ -1,7 +1,8 @@
 # web service data dir
 
 data_dir = 'ethearnal_profile'
-data_dir_static_files = '%s/files' % data_dir
+static_files = 'files'
+# data_dir_static_files = '%s/files' % data_dir
 
 # local public html
 
