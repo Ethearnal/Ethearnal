@@ -1,10 +1,35 @@
 import cherrypy
 import os
+import sys
+import traceback
 import config
+import argparse
 from toolkit.tools import mkdir
 from eth_profile import EthearnalProfileView, EthearnalProfileController
 from eth_profile import EthearnalJobView, EthearnalJobPostController
 from eth_profile import EthearnalUploadFileView
+
+
+parser = argparse.ArgumentParser(description='Ethearnal p2p node')
+
+parser.add_argument('-l', '--http_host_port',
+                    default=config.http_host_port,
+                    help='E,g 127.0.0.1:8080',
+                    required=False,
+                    type=str)
+
+parser.add_argument('-d', '--data_dir',
+                    default=config.data_dir,
+                    help='Point local profile data directory',
+                    required=False,
+                    type=str)
+
+parser.add_argument('-w', '--http_webdir',
+                    default=config.http_webdir,
+                    help='Point ui html static dir',
+                    required=False,
+                    type=str)
+
 
 
 class EthearnalSite(object):
@@ -20,6 +45,7 @@ def main(http_webdir: str=config.http_webdir,
          profile_dir: str=config.data_dir,
          files_dir_name=config.static_files):
 
+    http_webdir = os.path.abspath(http_webdir)
     files_dir = os.path.abspath('%s/%s' % (profile_dir, files_dir_name))
 
     if not os.path.isdir(files_dir):
@@ -78,11 +104,31 @@ def main(http_webdir: str=config.http_webdir,
 
     #
     cherrypy.engine.start()
-    print('PROFILE DIR:', e_profile.data_dir)
+
     print('STATIC FILES DIR:', e_profile.files_dir)
+    print('WEBUI DIR:', http_webdir)
+    print('PROFILE DIR:', e_profile.data_dir)
     cherrypy.engine.block()
 
 
 if __name__ == '__main__':
-    main()
+    args = parser.parse_args()
+    socket_host, socket_port = args.http_host_port.split(':')
+    profile_dir = args.data_dir
+    http_webdir = args.http_webdir
+    socket_port = int(socket_port)
+
+    if os.path.isdir(args.data_dir):
+        print('Using existing profile directory: %s' % profile_dir)
+    else:
+        mkdir(profile_dir)
+
+    try:
+        main(http_webdir=http_webdir,
+             socket_host=socket_host,
+             socket_port=socket_port,
+             profile_dir=profile_dir)
+    except Exception as e:
+        traceback.print_exc(file=sys.stdout)
+
 
