@@ -22,29 +22,37 @@ class Peer(object):
     def __repr__(self):
         return repr(self.astriple())
 
-    def _sendmessage_dht(self, message, sock=None, peer_id=None, peer_info=None, lock=None):
+    def _sendmessage_dht(self, message, codec, sock=None, peer_id=None, peer_info=None, lock=None):
         message["peer_id"] = peer_id  # more like sender_id
         message["peer_info"] = peer_info
-        encoded = json.dumps(message)
+        # encoded = json.dumps(message)
         # SEND_MESSAGE
+        bts = codec.encode(message)
         if sock:
             if lock:
                 with lock:
-                    sock.sendto(encoded.encode('ascii'), (self.host, self.port))
+                    sock.sendto(bts, (self.host, self.port))
             else:
-                sock.sendto(encoded.encode('ascii'), (self.host, self.port))
+                sock.sendto(bts, (self.host, self.port))
+
+    # handle send of all udp msg here
 
     def _sendmessage(self, message, sock=None, peer_id=None, peer_info=None, lock=None):
         print('+ ++ ++ SEND MESSAGE')
-        encoded_msg = dict()
-        for k in message:
-            try:
-                encoded_msg[kadmini_codec.encode(k)]=message[k]
-            except KeyError:
-                print('FAILED TO ENCODE', k)
-        print(encoded_msg)
+        # proto_tranlate = dict()
+        # for k in message:
+        #     try:
+        #         proto_tranlate[kadmini_codec.encode(k)]=message[k]
+        #     except KeyError:
+        #         print('FAILED TO ENCODE', k)
+
+        # #old way but ascii
+        # msg_st = json.dumps(message, ensure_ascii=True)
+        # msg_st_bts = msg_st.encode(encoding='ascii')
+
         self._sendmessage_dht(
             message,
+            kadmini_codec,
             sock=sock,
             peer_id=peer_id,
             peer_info=peer_info,

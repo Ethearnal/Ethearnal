@@ -7,9 +7,10 @@ import time
 from .bucketset import BucketSet
 from .hashing import hash_function, random_id
 from .peer import Peer
-from .storage import Shelve
+# from .storage import Shelve
 from .shortlist import Shortlist
 from . import hashing
+from toolkit import kadmini_codec
 
 # todo hm mh
 k = 20
@@ -19,11 +20,11 @@ iteration_sleep = 1
 
 
 class DHTRequestHandler(socketserver.BaseRequestHandler):
-    def handle_dht(self):
+    def handle_dht(self, message, message_type):
         # todo make it in dict or something, some general protocol handler
         try:
-            message = json.loads(self.request[0].decode('utf-8').strip())
-            message_type = message["message_type"]
+            # message = json.loads(self.request[0].decode('utf-8').strip())
+            # message_type = message["message_type"]
 
             # handle message receive
 
@@ -98,11 +99,16 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         key = message["id"]
         self.server.dht.data[key] = message["value"]
 
+# handle receive of all udp msg here
+
 
 class EthDHTRequestHandle(DHTRequestHandler):
     def handle(self):
-        print('+ + ++  HANDLE UDP MSG')
-        self.handle_dht()
+        message = kadmini_codec.decode(self.request[0])
+        message_type = message["message_type"]
+        # todo impl logging
+        print('+ + ++  HANDLE UDP MSG', message)
+        self.handle_dht(message, message_type)
 
 class DHTServer(socketserver.ThreadingMixIn, socketserver.UDPServer):
     def __init__(self, host_address, handler_cls):
