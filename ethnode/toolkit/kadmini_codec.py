@@ -34,8 +34,9 @@ def remap_keys_decode(d: dict):
 
 def encode(d: dict):
     remap_d = remap_keys_encode(d)
-    js = json.dumps(remap_d, ensure_ascii=True)
+    js = json.dumps(remap_d, ensure_ascii=True, separators=(',', ':'))
     bts = js.encode(encoding='ascii')
+    print('ENCODED SZ', len(bts))
     return bts
 
 
