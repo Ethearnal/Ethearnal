@@ -11,6 +11,7 @@ from eth_profile import EthearnalJobView, EthearnalJobPostController
 from eth_profile import EthearnalUploadFileView
 
 
+ertpro = None
 parser = argparse.ArgumentParser(description='Ethearnal p2p node')
 
 parser.add_argument('-l', '--http_host_port',
@@ -81,6 +82,7 @@ def main(http_webdir: str=config.http_webdir,
          interactive: bool=config.interactive,
          dht = None,
          files_dir_name=config.static_files):
+    global ertpro
 
     http_webdir = os.path.abspath(http_webdir)
     files_dir = os.path.abspath('%s/%s' % (profile_dir, files_dir_name))
@@ -90,6 +92,7 @@ def main(http_webdir: str=config.http_webdir,
         mkdir(files_dir)
     profile_dir_abs = os.path.abspath(profile_dir)
     e_profile = EthearnalProfileController(profile_dir_abs, files_dir=files_dir)
+    ertpro = e_profile
 
     site_conf = {
         '/': {
@@ -139,8 +142,6 @@ def main(http_webdir: str=config.http_webdir,
                          }
                         )
 
-    #
-
     cherrypy.engine.start()
 
     print('STATIC FILES DIR:', e_profile.files_dir)
@@ -186,11 +187,12 @@ if __name__ == '__main__':
         dht = main_dht(udp_host, udp_port, seed_host, seed_port)
 
         main(http_webdir=http_webdir,
-             socket_host=socket_host,
-             socket_port=socket_port,
-             profile_dir=profile_dir,
-             interactive=args.ipython,
-             dht=dht)
+                       socket_host=socket_host,
+                       socket_port=socket_port,
+                       profile_dir=profile_dir,
+                       interactive=args.ipython,
+                       dht=dht)
+
     except Exception as e:
         print('MAIN ERROR')
         cherrypy.engine.stop()

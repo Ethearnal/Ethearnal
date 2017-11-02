@@ -150,14 +150,37 @@ class EthearnalProfileController(object):
         return b64, der
 
     @property
-    def rsa_guid(self):
+    def rsa_pub_b64_der(self):
         with open(self.rsa_pub_fn, 'rb') as fp:
             cherrypy.response.headers['Content-Type'] = 'text/html; charset=ascii'
             bts = fp.read()
-            b64, der = self.rsa_b64_der(bts)
-            sha = hashlib.sha256(der)
-            hexd = sha.hexdigest()
-        return hexd
+        b64, der = self.rsa_b64_der(bts)
+        return b64, der
+
+    @property
+    def rsa_pub_base64(self):
+        return self.rsa_pub_b64_der[0]
+
+    @property
+    def rsa_pub_der(self):
+        return self.rsa_pub_b64_der[1]
+
+
+    @property
+    def rsa_guid_hex_bin(self):
+        b64, der = self.rsa_pub_b64_der
+        sha = hashlib.sha256(der)
+        hexd = sha.hexdigest()
+        bts = sha.digest()
+        return hexd, bts
+
+    @property
+    def rsa_guid_hex(self):
+        return self.rsa_guid_hex_bin[0]
+
+    @property
+    def rsa_guid_bin(self):
+        return self.rsa_guid_hex_bin[1]
 
 
 class EthearnalProfileView(object):
@@ -165,11 +188,14 @@ class EthearnalProfileView(object):
 
     def __init__(self, eth_profile):
         self.profile = eth_profile
+        # todo content types
+        # cherrypy.response.headers['Content-Type'] = 'text/html; charset=ascii'
         self.query_dispatch = {
             'avatar': self.avatar,
             'data': self.data,
             'html': self.html,
-            'guid': lambda: self.profile.rsa_guid,
+            'guid': lambda: self.profile.rsa_guid_hex,
+            'guid_bin': lambda: self.profile.rsa_guid_bin,
             'pubkey': lambda: self.profile.rsa_public_pem,
         }
 

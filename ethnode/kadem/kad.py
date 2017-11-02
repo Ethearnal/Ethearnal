@@ -125,7 +125,6 @@ class DHT(object):
         self.bootstrap(seeds)
 
 
-
     @property
     def identity(self):
         return self.peer.id
