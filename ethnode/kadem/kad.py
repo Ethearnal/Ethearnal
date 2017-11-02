@@ -1,4 +1,5 @@
 import json
+import bson
 import random
 import socket
 import socketserver
@@ -25,18 +26,80 @@ id_bits = kadmini_codec.id_bits
 
 iteration_sleep = 1
 
-
+# all the things have to be bson encoded
 
 class DHTFacade(object):
     def __init__(self, dht):
         self.dht = dht
 
+    def generic_encode(self, item):
+        if isinstance(item, dict) or isinstance(item, list):
+            key_bson = bson.dumps(item)
+            return key_bson
+        elif isinstance(item, int):
+            key_bson = bson.dumps({'_int_': kadmini_codec.guid_int_to_bts(item)})
+            return key_bson
+        elif isinstance(item, str):
+            key_bson = bson.dumps({'_str_': item.encode('utf-8')})
+            return key_bson
+
+    def generic_decode(self, bts):
+        d = bson.loads(bts)
+        print(d)
+        if '_int_' in d:
+            return kadmini_codec.guid_bts_to_int(d['_int_'])
+        elif '_str_' in d:
+            return str(d['_str_'], encoding='utf-8')
+        else:
+            return d
+
+    def encode_push(self, key, value):
+        coded_key = self.generic_encode(key)
+        coded_valu = self.generic_encode(value)
+        hashed_key = self.dht.hash_function(coded_key)
+        return hashed_key, coded_valu
+
+    def decode_pull(self, key):
+        code_key = self.generic_encode(key)
+        hashed_key = self.dht.hash_function(code_key)
+        return hashed_key
+
     @property
     def peers(self):
         return self.dht.peers()
 
-    def localdata(self):
+    @property
+    def data(self):
         return self.dht.data
+
+    def push_local(self, key, value):
+        k, v = self.encode_push(key, value)
+        self.dht.data.__setitem__(k, v)
+        return k, v
+
+    def pull_local(self, key):
+        k = self.decode_pull(key)
+        coded_v = self.dht.data.get(k)
+        if coded_v:
+            return self.generic_decode(coded_v)
+
+    def push(self, key, value, nearest_nodes=None):
+        hk, ev = self.push_local(key, value)
+        if not nearest_nodes:
+            nearest_nodes = self.dht.iterative_find_nodes(k)
+        for node in nearest_nodes:
+            node.store(hk, ev, socket=self.dht.server.socket, peer_id=self.dht.peer.id)
+
+    def pull(self, key, nodes=None):
+        hk = self.decode_pull(key)
+        coded_res = self.dht.iterative_find_value(hk)
+        if coded_res:
+            result = self.generic_decode(coded_res)
+            self.push_local(key, result)
+            return result
+        else:
+            return self.pull_local(key)
+
 
 
 class DHTRequestHandler(socketserver.BaseRequestHandler):
@@ -281,7 +344,16 @@ class DHT(object):
         for node in nearest_nodes:
             node.store(hashed_key, value, socket=self.server.socket, peer_id=self.peer.id)
 
-    # Operator []=
+    def get_nearest_nodes_for_key(self, hashed_key):
+        nearest_nodes = self.iterative_find_nodes(hashed_key)
+        return nearest_nodes
+
+    def push_to_nodes(self, hashed_key, value, nodes=None):
+        if not nodes:
+            nodes = self.get_nearest_nodes_for_key(hashed_key)
+        for node in nodes:
+            node.store(hashed_key, value, socket=self.server.socket, peer_id=self.peer.id)
+
     def __setitem__(self, key, value):
         hashed_key = self.hash_function(key)
         self.set_hashed(hashed_key, value)
