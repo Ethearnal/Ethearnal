@@ -1,7 +1,7 @@
 import hashlib
 import json
-
 from .hashing import hash_function
+from toolkit import kadmini_codec
 
 
 class Peer(object):
@@ -22,11 +22,11 @@ class Peer(object):
     def __repr__(self):
         return repr(self.astriple())
 
-    def _sendmessage(self, message, sock=None, peer_id=None, peer_info=None, lock=None):
+    def _sendmessage_dht(self, message, sock=None, peer_id=None, peer_info=None, lock=None):
         message["peer_id"] = peer_id  # more like sender_id
         message["peer_info"] = peer_info
         encoded = json.dumps(message)
-        print('DEBUG: Peer._sendmessage', encoded)
+        # SEND_MESSAGE
         if sock:
             if lock:
                 with lock:
@@ -34,8 +34,23 @@ class Peer(object):
             else:
                 sock.sendto(encoded.encode('ascii'), (self.host, self.port))
 
+    def _sendmessage(self, message, sock=None, peer_id=None, peer_info=None, lock=None):
+        print('+ ++ ++ SEND MESSAGE')
+        encoded_msg = dict()
+        for k in message:
+            try:
+                encoded_msg[kadmini_codec.encode(k)]=message[k]
+            except KeyError:
+                print('FAILED TO ENCODE', k)
+        print(encoded_msg)
+        self._sendmessage_dht(
+            message,
+            sock=sock,
+            peer_id=peer_id,
+            peer_info=peer_info,
+            lock=lock)
+
     def ping(self, socket=None, peer_id=None, peer_info=None, lock=None):
-        print('send ping')
         message = {
             "message_type": "ping"
         }

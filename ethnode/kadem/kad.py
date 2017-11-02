@@ -19,12 +19,12 @@ iteration_sleep = 1
 
 
 class DHTRequestHandler(socketserver.BaseRequestHandler):
-    def handle(self):
+    def handle_dht(self):
         # todo make it in dict or something, some general protocol handler
         try:
             message = json.loads(self.request[0].decode('utf-8').strip())
             message_type = message["message_type"]
-            print('DEBUG: message handle ', self.request[0])
+
             # handle message receive
 
             if message_type == "ping":
@@ -52,7 +52,6 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         self.server.dht.buckets.insert(new_peer)
 
     def handle_ping(self, message):
-        print('handle_ping')
         client_host, client_port = self.client_address
         id = message["peer_id"]
         info = message["peer_info"]
@@ -100,6 +99,11 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         self.server.dht.data[key] = message["value"]
 
 
+class EthDHTRequestHandle(DHTRequestHandler):
+    def handle(self):
+        print('+ + ++  HANDLE UDP MSG')
+        self.handle_dht()
+
 class DHTServer(socketserver.ThreadingMixIn, socketserver.UDPServer):
     def __init__(self, host_address, handler_cls):
         socketserver.UDPServer.__init__(self, host_address, handler_cls)
@@ -107,7 +111,8 @@ class DHTServer(socketserver.ThreadingMixIn, socketserver.UDPServer):
 
 
 class DHT(object):
-    def __init__(self, host, port, id=None, seeds=[], storage={}, info={}, requesthandler=DHTRequestHandler):
+    def __init__(self, host, port, id=None, seeds=[], storage={}, info={},
+                 requesthandler=EthDHTRequestHandle):
         if not id:
             id = random_id()
         self.storage = storage
@@ -230,3 +235,6 @@ class DHT(object):
 
     def tick(self):
         pass
+
+
+
