@@ -55,6 +55,7 @@ class EthearnalProfileController(object):
     RSA_FORMAT = 'PEM'
 
     def __init__(self, data_dir=config.data_dir, personal_dir=None, files_dir=None):
+
         self.data_dir = os.path.abspath(data_dir)
         if personal_dir:
             self.personal_dir = os.path.abspath(personal_dir)
