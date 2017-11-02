@@ -30,13 +30,8 @@ class Peer(object):
 
     def _sendmessage_dht(self, message, codec, sock=None, peer_id=None, peer_info=None, lock=None):
         message["peer_id"] = peer_id  # more like sender_id
-        # message["peer_info"] = peer_info
-        # print('+ + + + PEER INFO + ++ +', peer_info)
-
-        # SEND_MESSAGE
-        # print_d( 'SEND', message)
-
         bts = codec.encode(message)
+        print('SEND', message['message_type'], len(bts))
 
         if sock:
             if lock:
