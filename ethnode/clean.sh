@@ -2,4 +2,4 @@
 
 rm -rf ./dist/
 rm -rf ./build/
-rm ethnode.spec
+rm ert.spec

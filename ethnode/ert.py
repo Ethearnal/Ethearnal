@@ -4,7 +4,8 @@ import sys
 import traceback
 import config
 import argparse
-from toolkit.tools import mkdir
+from kadem.kad import DHT
+from toolkit.tools import mkdir, on_hook
 from eth_profile import EthearnalProfileView, EthearnalProfileController
 from eth_profile import EthearnalJobView, EthearnalJobPostController
 from eth_profile import EthearnalUploadFileView
@@ -30,6 +31,25 @@ parser.add_argument('-w', '--http_webdir',
                     required=False,
                     type=str)
 
+parser.add_argument('-u', '--udp_host_port',
+                    default=config.udp_host_port,
+                    help='E,g 127.0.0.1:3000',
+                    required=False,
+                    type=str)
+
+
+parser.add_argument('-s', '--udp_seed_host_port',
+                    default=None,
+                    help='E,g 127.0.0.1:3000',
+                    required=False,
+                    type=str)
+
+
+parser.add_argument('-i', '--ipython',
+                    help='embed ipython shell',
+                    required=False,
+                    action='store_true'
+                    )
 
 
 class EthearnalSite(object):
@@ -39,10 +59,27 @@ class EthearnalSite(object):
     # todo make entry point redirect to ui
 
 
+def main_dht(host, port, seed_host=None, seed_port=None):
+    if seed_host and seed_port and (host, port) != (seed_host, seed_port):
+        print('BOOTSTRAP TO SEED', seed_host,seed_port)
+        dht = DHT(host=host, port=port, seeds=[(seed_host, seed_port)])
+    else:
+        dht = DHT(host=host, port=port)
+    return dht
+
+
+def tear_down_udp(dht):
+    print('UDP stopping...')
+    if dht:
+        dht.server.shutdown()
+
+
 def main(http_webdir: str=config.http_webdir,
          socket_host: str=config.http_socket_host,
          socket_port: int=config.http_socket_port,
          profile_dir: str=config.data_dir,
+         interactive: bool=config.interactive,
+         dht = None,
          files_dir_name=config.static_files):
 
     http_webdir = os.path.abspath(http_webdir)
@@ -103,12 +140,25 @@ def main(http_webdir: str=config.http_webdir,
                         )
 
     #
+
     cherrypy.engine.start()
 
     print('STATIC FILES DIR:', e_profile.files_dir)
     print('WEBUI DIR:', http_webdir)
     print('PROFILE DIR:', e_profile.data_dir)
-    cherrypy.engine.block()
+
+    cherrypy.engine.exit = on_hook(target=tear_down_udp,
+                                   target_args=(dht,),
+                                   target_kwargs={})(cherrypy.engine.exit)
+
+    if not args.ipython:
+        cherrypy.engine.block()
+    else:
+        try:
+            from IPython import embed
+            embed()
+        except:
+            pass
 
 
 if __name__ == '__main__':
@@ -117,18 +167,33 @@ if __name__ == '__main__':
     profile_dir = args.data_dir
     http_webdir = args.http_webdir
     socket_port = int(socket_port)
+    udp_host, udp_port = args.udp_host_port.split(':')
+    udp_port = int(udp_port)
+    seed_host = None
+    seed_port = None
+    if args.udp_seed_host_port:
+        seed_host, seed_port = args.udp_seed_host_port.split(':')
+        seed_port = int(seed_port)
 
     if os.path.isdir(args.data_dir):
         print('Using existing profile directory: %s' % profile_dir)
     else:
         mkdir(profile_dir)
 
+    dht = None
+
     try:
+        dht = main_dht(udp_host, udp_port, seed_host, seed_port)
+
         main(http_webdir=http_webdir,
              socket_host=socket_host,
              socket_port=socket_port,
-             profile_dir=profile_dir)
+             profile_dir=profile_dir,
+             interactive=args.ipython,
+             dht=dht)
     except Exception as e:
+        print('MAIN ERROR')
+        cherrypy.engine.stop()
         traceback.print_exc(file=sys.stdout)
 
 

@@ -124,6 +124,8 @@ class DHT(object):
         self.server_thread.start()
         self.bootstrap(seeds)
 
+
+
     @property
     def identity(self):
         return self.peer.id
