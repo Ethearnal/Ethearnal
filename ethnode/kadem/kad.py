@@ -33,6 +33,7 @@ class DHTFacade(object):
         self.dht = dht
 
     def generic_encode(self, item):
+        print('ITEM', type(item))
         if isinstance(item, dict) or isinstance(item, list):
             key_bson = bson.dumps(item)
             return key_bson
@@ -42,6 +43,11 @@ class DHTFacade(object):
         elif isinstance(item, str):
             key_bson = bson.dumps({'_str_': item.encode('utf-8')})
             return key_bson
+        elif isinstance(item, bytes):
+            print('is here')
+            key_bson = bson.dumps({'_bts_': item})
+            return  key_bson
+
 
     def generic_decode(self, bts):
         d = bson.loads(bts)
@@ -50,6 +56,9 @@ class DHTFacade(object):
             return kadmini_codec.guid_bts_to_int(d['_int_'])
         elif '_str_' in d:
             return str(d['_str_'], encoding='utf-8')
+        elif '_bts_' in d:
+            print('BYTES', d['_bts_'])
+            return d['_bts_']
         else:
             return d
 

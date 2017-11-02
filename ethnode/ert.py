@@ -196,7 +196,7 @@ if __name__ == '__main__':
             http_webdir=http_webdir,
             files_dir_name=config.static_files
         )
-
+        ert = ert_profile_ctl
         hex_guid, bin_guid = ert_profile_ctl.rsa_guid_hex_bin
         int_guid = kadmini_codec.guid_bts_to_int(bin_guid)
         bts_2 = kadmini_codec.guid_int_to_bts(int_guid)

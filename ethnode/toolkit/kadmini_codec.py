@@ -51,7 +51,10 @@ def guid_int_to_hex(guidint: int):
 
 def hash_function(bin_data):
     print('SHA256 HASHING')
-    return int(hashlib.sha256(bin_data).hexdigest(), 16)
+    sha = hashlib.sha256(bin_data)
+    dige = sha.digest()
+    i = guid_bts_to_int(dige)
+    return i
 
 
 def remap_keys_encode(d: dict):
