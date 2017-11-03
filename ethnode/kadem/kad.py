@@ -35,39 +35,30 @@ class DHTFacade(object):
         self.dht = dht
         self.ert = ert
 
-    def generic_encode(self, item):
-        if isinstance(item, dict) or isinstance(item, list):
-            key_bson = bson.dumps(item)
-            return key_bson
-        elif isinstance(item, int):
-            key_bson = bson.dumps({'_int_': kadmini_codec.guid_int_to_bts(item)})
-            return key_bson
-        elif isinstance(item, str):
-            key_bson = bson.dumps({'_str_': item.encode('utf-8')})
-            return key_bson
-        elif isinstance(item, bytes):
-            key_bson = bson.dumps({'_bts_': item})
-            return key_bson
+    @staticmethod
+    def generic_encode(self, item, guid=None):
+        if isinstance(item, dict):
+            if guid:
+                item['guid'] = guid
+            bson_enc = bson.dumps(item)
+            return bson_enc
+        else:
+            raise ValueError('only dicts to bson are accepted')
 
+    @staticmethod
     def generic_decode(self, bts):
         d = bson.loads(bts)
-        print(d)
-        if '_int_' in d:
-            return kadmini_codec.guid_bts_to_int(d['_int_'])
-        elif '_str_' in d:
-            return str(d['_str_'], encoding='utf-8')
-        elif '_bts_' in d:
-            print('BYTES', d['_bts_'])
-            return d['_bts_']
-        else:
-            return d
+        return d
 
-    # important key is pushed {key:binary_guid}
+    # important key is always dict encoded to bson with 'guid'
+
     def encode_push(self, key, value):
-        coded_key = self.generic_encode({key: self.ert.rsa_guid_bin})
+        coded_key_guid_bson = self.generic_encode(key, guid=self.ert.rsa_guid_bin)
         coded_valu = self.generic_encode(value)
-        hashed_key = self.dht.hash_function(coded_key)
+        hashed_key = self.dht.hash_function(coded_key_guid_bson)
         return hashed_key, coded_valu
+
+    # when pulling include 'guid':binary_guid in key dict
 
     def decode_pull(self, key):
         code_key = self.generic_encode(key)
