@@ -205,7 +205,7 @@ if __name__ == '__main__':
         assert hex2_guid == hex_guid
 
         dht = main_dht(udp_host, udp_port, guid=int_guid, seed_host=seed_host, seed_port=seed_port)
-        d = DHTFacade(dht)
+        d = DHTFacade(dht, ert_profile_ctl)
         if dht.server_thread.is_alive():
             print('UDP server thread is alive')
         else:

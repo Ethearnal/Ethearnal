@@ -5,16 +5,31 @@ from toolkit import kadmini_codec
 from toolkit.kadmini_codec import hash_function
 
 
-def print_d(msg,d):
+def print_d(msg, d):
     print(msg)
-    for k,v in d.items():
-        print('  ',k,' ->', v)
+    for k, v in d.items():
+        print('  ', k, ' ->', v)
+
+
+class PeerC(object):
+    def __new__(cls, *args, **kwargs):
+        host = kwargs.pop('host')
+        port = kwargs.pop('port')
+        node_id = kwargs.pop('id')
+        socket = kwargs.pop('socket')
+        from_id = kwargs.pop('from_id')
+        info = None
+        return Peer(host, port, node_id, info, socket=socket, from_id=from_id)
+
 
 class Peer(object):
     ''' DHT Peer Information'''
 
-    def __init__(self, host, port, node_id, info):
+    def __init__(self, host, port, node_id, info,
+                 socket=None, from_id=None):
         self.host, self.port, self.id, self.info = host, port, node_id, info
+        self.socket = socket
+        self.from_id = from_id
 
     def astriple(self):
         return self.host, self.port, self.id, self.info
@@ -31,8 +46,8 @@ class Peer(object):
     def _sendmessage_dht(self, message, codec, sock=None, peer_id=None, peer_info=None, lock=None):
         message["peer_id"] = peer_id  # more like sender_id
         bts = codec.encode(message)
-        print('SEND', message['message_type'], len(bts))
-
+        # todo, originally server socket is used for sending
+        # todo refactor this soon
         if sock:
             if lock:
                 with lock:
@@ -42,6 +57,10 @@ class Peer(object):
 
     # handle send of all udp msg here
     def _sendmessage(self, message, sock=None, peer_id=None, peer_info=None, lock=None):
+
+        if not sock:
+            sock = self.socket
+
         if isinstance(peer_id, int):
             peer_id = kadmini_codec.guid_int_to_bts(peer_id)
         self._sendmessage_dht(
@@ -49,8 +68,17 @@ class Peer(object):
             kadmini_codec,
             sock=sock,
             peer_id=peer_id,
-            # peer_info=peer_info, # disable originally unused
+            peer_info=peer_info,  # disable originally unused
             lock=lock)
+
+    def push_pubkey(self, sender_id=None, pubkey_der=None):
+        if not sender_id:
+            sender_id = self.from_id
+        message = {
+            "message_type": "pubkey",
+            "pubkey_der": pubkey_der,
+        }
+        self._sendmessage(message, self.socket, peer_id=sender_id, peer_info=None, lock=None)
 
     def ping(self, socket=None, peer_id=None, peer_info=None, lock=None):
         message = {

@@ -21,6 +21,7 @@ decode_map = (
     'pong',
     # extend
     'pubkey',
+    'pubkey_der',
 )
 
 # todo impl detailed testing for all conversions
