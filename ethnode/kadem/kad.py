@@ -36,7 +36,7 @@ class DHTFacade(object):
         self.ert = ert
 
     @staticmethod
-    def generic_encode(self, item, guid=None):
+    def generic_encode(item, guid=None):
         if isinstance(item, dict):
             if guid:
                 item['guid'] = guid
@@ -46,7 +46,7 @@ class DHTFacade(object):
             raise ValueError('only dicts to bson are accepted')
 
     @staticmethod
-    def generic_decode(self, bts):
+    def generic_decode(bts):
         d = bson.loads(bts)
         return d
 
