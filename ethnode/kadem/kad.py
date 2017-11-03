@@ -25,7 +25,7 @@ alpha = 3
 
 id_bits = kadmini_codec.id_bits
 
-iteration_sleep = 1
+iteration_sleep = 0.1
 
 # all the things have to be bson encoded
 
@@ -62,8 +62,9 @@ class DHTFacade(object):
         else:
             return d
 
+    # important key is pushed {key:binary_guid}
     def encode_push(self, key, value):
-        coded_key = self.generic_encode(key)
+        coded_key = self.generic_encode({key: self.ert.rsa_guid_bin})
         coded_valu = self.generic_encode(value)
         hashed_key = self.dht.hash_function(coded_key)
         return hashed_key, coded_valu
@@ -72,6 +73,9 @@ class DHTFacade(object):
         code_key = self.generic_encode(key)
         hashed_key = self.dht.hash_function(code_key)
         return hashed_key
+
+    def boot_to(self, host, port):
+        self.dht.bootstrap([(host, port), ])
 
     @property
     def peers(self):
@@ -95,7 +99,7 @@ class DHTFacade(object):
     def push(self, key, value, nearest_nodes=None):
         hk, ev = self.push_local(key, value)
         if not nearest_nodes:
-            nearest_nodes = self.dht.iterative_find_nodes(k)
+            nearest_nodes = self.dht.iterative_find_nodes(hk)
         for node in nearest_nodes:
             node.store(hk, ev, socket=self.dht.server.socket, peer_id=self.dht.peer.id)
 
@@ -104,7 +108,7 @@ class DHTFacade(object):
         coded_res = self.dht.iterative_find_value(hk)
         if coded_res:
             result = self.generic_decode(coded_res)
-            self.push_local(key, result)
+            # self.push_local(key, result)
             return result
         else:
             return self.pull_local(key)
@@ -164,7 +168,7 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
             print('INTEGRITY OF KEY OK')
         else:
             print('INTEGRITY FAILED')
-        
+
     def handle_ping(self, message):
         print('RCV PING', )
         client_host, client_port = self.client_address
@@ -373,12 +377,12 @@ class DHT(object):
             return r
         raise KeyError
 
-    def set_hashed(self, hashed_key, value):
+    def set_hashed_DEPRECATED(self, hashed_key, value):
         # if not nearest_nodes:
         self.data[hashed_key] = value
         nearest_nodes = self.iterative_find_nodes(hashed_key)
         for node in nearest_nodes:
-            node.store(hashed_key, value, socket=self.server.socket, peer_id=self.peer.id)
+            node.store_(hashed_key, value, socket=self.server.socket, peer_id=self.peer.id)
 
     def __setitem__(self, key, value):
         hashed_key = self.hash_function(key)
