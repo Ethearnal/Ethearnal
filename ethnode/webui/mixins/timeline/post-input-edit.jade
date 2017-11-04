@@ -1,0 +1,50 @@
+.input-header
+    i.write.icon
+    span Edit a Post
+
+.post.post-input
+    textarea.form-control(placeholder="What awesomeness have you accomplished lately?", rows="3")
+
+    .appearing-content
+        .ui.fluid.search.selection.dropdown.company-selection.post-input-dropdowns
+            input(type="hidden", name="company")
+            i.dropdown.icon
+            i.remove.icon
+            .default.text Company
+
+            .menu
+                .header: i.building.icon: span Available companies
+
+                .item(data-value="pkfrontend")
+                    img.ui.avatar.image(src="images/paypal.jpg", alt="Profile")
+                    span Paulius Kasiuba's Front End Development
+
+                .item(data-value="sharadvenkatfreelance")
+                    img.ui.avatar.image(src="images/paypal.jpg", alt="Profile")
+                    span Sharad Venkat's Freelancing company
+
+        .upload-photo.add-photos-video-btn: a: i.material-icons camera_alt
+
+        .ui.search.scrolling.dropdown.item.post-input-dropdowns
+            input(type="hidden", name="year", value="selected")
+            .default.text Year
+            i.dropdown.icon
+
+            .menu
+                // TO AMIT: change the "2017" to a year variable that user selected.
+                .item(data-value="selected") 2017
+                - for(var x = 2016; x > 1900; x--)
+                    .item(data-value=x)= x
+
+        .file-upload
+        input.file-upload-input(type="file")
+
+        .alert.alert-dismissible.status-alert(role="alert", data-hide="alert")
+            .alert-header Can't Read Files
+            .alert-body Your photo couldn't be uploaded. Photos should be saved as JPG, PNG, GIF, BMP or TIFF files.
+            .alert-footer: button.btn.btn-close(type="button") Close
+
+.buttons
+    button.btn.btn-cancel(type="button", data-dismiss="modal") Delete
+    button.btn.btn-cancel(type="button", data-dismiss="modal") Cancel
+    button.btn.btn-post(type="button") Post

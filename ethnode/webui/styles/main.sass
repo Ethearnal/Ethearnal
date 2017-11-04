@@ -1,0 +1,108 @@
+@import "header"
+@import "dropdowns"
+@import "profile-information"
+@import "profile-documentation-tabs"
+@import "panel-heading"
+@import "panel-body"
+@import "accomplishment-modal"
+@import "modals"
+@import "background-image"
+@import "timeline-post"
+@import "timeline-add-photos"
+
+// Responsiveness
+@import "responsive/screen-medium"
+@import "responsive/screen-small"
+@import "responsive/screen-mobile"
+
+
+*
+    font-family: 'Roboto', sans-serif
+    -webkit-overflow-scrolling: touch
+
+body
+    background-color: #f2f2f2
+    -webkit-overflow-scrolling: touch
+    overflow-y: scroll
+
+body header.main-header
+    position: fixed
+    width: 100%
+    background-color: white
+    margin-top: -59px
+    z-index: 20
+    box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
+
+.modal-content
+    margin-bottom: 25px
+    margin-top: 25px
+
+.modal
+    top: 0 !important
+
+.panel-collapse
+    padding-right: 0
+    padding-left: 0
+    background-color: #e7ecef
+
+.tab-content .tab-pane
+    .panel-group
+        .panel:last-child
+            .panel-heading .col-lg-12
+                border-bottom: none
+
+.educations .education .education-description .dropdown.more img
+    margin-right: 25px
+
+.bullet-points, .dropdown.more
+    cursor: pointer
+
+#jobs
+    .job, .education
+        display: none
+
+#accordion
+    padding-right: 0
+    padding-left: 0
+
+.tab-content
+    padding-right: 0
+    padding-left: 0
+
+    .tab-pane
+        padding-right: 0
+        padding-left: 0
+
+.shoutoutIcon
+    display: none
+
+.owl-wrapper
+    margin-top: 0 !important
+
+.panel-group .panel+.panel
+    margin: 0
+
+p.no-accomplishments
+    margin-bottom: 0
+    padding-bottom: 25px
+    text-align: center
+
+.collapsing
+    transition: height 1s
+
+.modal
+    top: 70px
+
+.navbar-toggle
+    margin-top: 15px
+
+.btn-flat
+    color: white
+    background-color: #8BC34A
+    border-radius: 5px
+
+    &:hover
+        color: #f5f5f5
+
+.btn-flat.dtp-btn-ok
+    margin-left: 5px

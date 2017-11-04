@@ -1,0 +1,40 @@
+// Profile header, including profile image, current work, city, state and two buttons.
+.profile-upper
+
+    .profile-image(data-toggle="modal", data-target="#avatarModal")
+        img(src="images/profilepicture.png", alt="Sharad Venkat")
+        .text-on-image: p Change
+
+    h2 Sharad Venkat
+
+    h5.profile-information-position Founder at <strong>Aspire</strong>
+
+    p Oakland, CA
+
+    button.light-blue-background.hidden Connect
+    button.orange-background Accept
+    button.white-background Leave a Note
+
+// Profile description including a description about you. (dark-gray section)
+.profile-description
+    p I like to bring ideas to life. <br />Risk-taker 'til the day I die. <br />Never stop writing the story of your life.
+
+// Profile top skills and tools
+.profile-bottom
+    p.skills-text Consolidated Skills and Tools
+    i.material-icons keyboard_arrow_down
+
+    .skills
+        p program management <span class="experience">3y</span>
+        p.tool excel <span class="experience">5y</span>
+        p.hidden.more program management <span class="experience">3y</span>
+        p.hidden.more.tool excel <span class="experience">5y</span>
+
+// Profile footer, including social media links.
+.profile-footer
+    ul.list-inline
+        li: a(href=""): i.icon-facebook
+        li: a(href=""): i.icon-twitter
+        li: a(href=""): i.icon-r-s-s
+        li: a(href=""): i.icon-instagram
+        li: a(href=""): i.icon-google
