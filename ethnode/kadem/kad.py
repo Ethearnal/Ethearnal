@@ -16,6 +16,7 @@ from .shortlist import Shortlist
 from toolkit import kadmini_codec
 from eth_profile import EthearnalProfileController
 
+cdx = kadmini_codec
 
 k = 20
 
@@ -34,36 +35,7 @@ class DHTFacade(object):
     def __init__(self, dht, ert: EthearnalProfileController):
         self.dht = dht
         self.ert = ert
-
-    @staticmethod
-    def generic_encode(item, guid=None):
-        if isinstance(item, dict):
-            if guid:
-                item['guid'] = guid
-            bson_enc = bson.dumps(item)
-            return bson_enc
-        else:
-            raise ValueError('only dicts to bson are accepted')
-
-    @staticmethod
-    def generic_decode(bts):
-        d = bson.loads(bts)
-        return d
-
-    # important key is always dict encoded to bson with 'guid'
-
-    def encode_push(self, key, value):
-        coded_key_guid_bson = self.generic_encode(key, guid=self.ert.rsa_guid_bin)
-        coded_valu = self.generic_encode(value)
-        hashed_key = self.dht.hash_function(coded_key_guid_bson)
-        return hashed_key, coded_valu
-
-    # when pulling include 'guid':binary_guid in key dict
-
-    def decode_pull(self, key):
-        code_key = self.generic_encode(key)
-        hashed_key = self.dht.hash_function(code_key)
-        return hashed_key
+        self.cdx = cdx
 
     def boot_to(self, host, port):
         self.dht.bootstrap([(host, port), ])
@@ -76,33 +48,42 @@ class DHTFacade(object):
     def data(self):
         return self.dht.data
 
-    def push_local(self, key, value):
-        k, v = self.encode_push(key, value)
-        self.dht.data.__setitem__(k, v)
-        return k, v
+    def push_local(self, key, value, guid=None, revision=cdx.DEFAULT_REVISON):
+        if not guid:
+            guid = self.bin_guid
+        hk = cdx.encode_key_hash(key, guid, revision)
+        ev = cdx.encode_val_bson(value, revision)
+        self.dht.data.__setitem__(hk, ev)
 
-    def pull_local(self, key):
-        k = self.decode_pull(key)
-        coded_v = self.dht.data.get(k)
+    @property
+    def bin_guid(self):
+        return cdx.guid_int_to_bts(self.dht.peer.id)
+
+    def pull_local(self, key, guid=None, revision=cdx.DEFAULT_REVISON):
+        if not guid:
+            guid = self.bin_guid
+        hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
+        coded_v = self.dht.data.get(hk)
         if coded_v:
-            return self.generic_decode(coded_v)
+            return cdx.decode_bson_val(coded_v)
 
-    def push(self, key, value, nearest_nodes=None):
-        hk, ev = self.push_local(key, value)
+    def push(self, key, value, revision=cdx.DEFAULT_REVISON, nearest_nodes=None):
+        hk = cdx.encode_key_hash(key, guid=self.bin_guid, revision=revision)
+        ev = cdx.encode_val_bson(value, revision)
         if not nearest_nodes:
             nearest_nodes = self.dht.iterative_find_nodes(hk)
         for node in nearest_nodes:
             node.store(hk, ev, socket=self.dht.server.socket, peer_id=self.dht.peer.id)
 
-    def pull(self, key, nodes=None):
-        hk = self.decode_pull(key)
+    def pull(self, key, guid, revision=cdx.DEFAULT_REVISON):
+        hk = cdx.encode_key_hash(key, guid, revision)
         coded_res = self.dht.iterative_find_value(hk)
         if coded_res:
-            result = self.generic_decode(coded_res)
-            # self.push_local(key, result)
+            result = cdx.decode_bson_val(coded_res)
             return result
-        else:
-            return self.pull_local(key)
+
+    def get_guid_bin(self, idx):
+        return cdx.guid_int_to_bts(self.peers[idx]['id'])
 
     def pubkey_to_peers(self, peers=None):
         if not peers:
@@ -117,6 +98,7 @@ class DHTFacade(object):
 class DHTRequestHandler(socketserver.BaseRequestHandler):
     def handle_dht(self, message, message_type):
         # todo make it in dict or something, some general protocol handler
+        # that way is lame
         try:
 
             # handle message receive
