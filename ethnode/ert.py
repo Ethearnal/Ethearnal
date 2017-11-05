@@ -53,6 +53,12 @@ parser.add_argument('-i', '--interactive_shell',
                     action='store_true'
                     )
 
+parser.add_argument('-b', '--dht_only',
+                    help='only udb dht',
+                    required=False,
+                    action='store_true'
+                    )
+
 
 class EthearnalSite(object):
     @cherrypy.expose
@@ -179,6 +185,7 @@ if __name__ == '__main__':
     udp_port = int(udp_port)
     seed_host = None
     seed_port = None
+
     if args.udp_seed_host_port:
         seed_host, seed_port = args.udp_seed_host_port.split(':')
         seed_port = int(seed_port)
@@ -211,15 +218,19 @@ if __name__ == '__main__':
         else:
             print('UDP server thread id dead')
 
-        # dht.server.socketserver
-        main_http(http_webdir=http_webdir,
-                  socket_host=socket_host,
-                  socket_port=socket_port,
-                  ert_profile_ctl=ert_profile_ctl,
-                  ert_profile_view=ert_profile_view,
-                  dht=dht,
-                  interactive=args.interactive_shell
-                  )
+        if not args.dht_only:
+            main_http(http_webdir=http_webdir,
+                      socket_host=socket_host,
+                      socket_port=socket_port,
+                      ert_profile_ctl=ert_profile_ctl,
+                      ert_profile_view=ert_profile_view,
+                      dht=dht,
+                      interactive=args.interactive_shell
+                      )
+        else:
+            from IPython import embed
+            embed()
+
     except Exception as e:
         print('MAIN ERROR')
         cherrypy.engine.stop()

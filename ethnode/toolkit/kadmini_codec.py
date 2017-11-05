@@ -2,7 +2,7 @@ import json
 import hashlib
 import binascii
 import bson
-
+import rsa
 
 
 
@@ -41,6 +41,12 @@ decode_map = {chr(97 + k[0]): k[1] for k in enumerate(decode_map)}
 
 id_bits = 256
 id_bytes_len = 32
+
+
+def sign_message(prv_der, bin_message):
+    privkey = prv_der
+    bin_signature = rsa.sign(bin_message, privkey, 'SHA-256')
+    return bin_signature
 
 
 def encode_key_hash(item_key, guid=b'1', revision=1):

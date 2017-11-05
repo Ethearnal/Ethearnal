@@ -159,13 +159,23 @@ class EthearnalProfileController(object):
         return b64, der
 
     @property
+    def rsa_prv_b64_der(self):
+        with open(self.rsa_prv_fn, 'rb') as fp:
+            bts = fp.read()
+        b64, der = self.rsa_b64_der(bts)
+        return b64, der
+
+    @property
+    def rsa_prv_der(self):
+        return self.rsa_prv_b64_der[1]
+
+    @property
     def rsa_pub_base64(self):
         return self.rsa_pub_b64_der[0]
 
     @property
     def rsa_pub_der(self):
         return self.rsa_pub_b64_der[1]
-
 
     @property
     def rsa_guid_hex_bin(self):
