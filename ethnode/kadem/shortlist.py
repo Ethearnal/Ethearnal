@@ -2,6 +2,7 @@ import threading
 
 from .peer import Peer
 
+
 class Shortlist(object):
     def __init__(self, k, key):
         self.k = k

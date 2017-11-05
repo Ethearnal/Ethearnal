@@ -5,6 +5,9 @@ import config
 import io
 import json
 import cherrypy
+import rsa
+import hashlib
+import base64
 
 from toolkit import tools
 from toolkit import basemodel
@@ -47,8 +50,12 @@ class EthearnalProfileController(object):
     PROFILE_HTML_FILE_NAME = 'profile.html'
     PROFILE_IMAGE_FILE_NAME = 'profile_img.png'
     JOB_POSTS_JSON_FILE_NAME = 'job_posts.json'
+    RSA_PRV = 'rsa_id.prv'
+    RSA_PUB = 'rsa_id.pub'
+    RSA_FORMAT = 'PEM'
 
     def __init__(self, data_dir=config.data_dir, personal_dir=None, files_dir=None):
+
         self.data_dir = os.path.abspath(data_dir)
         if personal_dir:
             self.personal_dir = os.path.abspath(personal_dir)
@@ -65,6 +72,8 @@ class EthearnalProfileController(object):
         self.profile_html_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_HTML_FILE_NAME)
         self.profile_image_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_IMAGE_FILE_NAME)
         self.job_post_json_store_fn = '%s/%s' % (self.personal_dir, self.JOB_POSTS_JSON_FILE_NAME)
+        self.rsa_prv_fn = '%s/%s' % (self.personal_dir, self.RSA_PRV)
+        self.rsa_pub_fn = '%s/%s' % (self.personal_dir, self.RSA_PUB)
 
         self.model = EthearnalProfileModel()
 
@@ -85,6 +94,10 @@ class EthearnalProfileController(object):
         # create generated avatar if not found
         if not os.path.isfile(self.profile_image_file_name):
             self.generate_random_avatar(filename=self.profile_image_file_name)
+
+        # create rsa keys if not present
+        # todo win/ux chmod 400 secure keys
+        self.rsa_keys()
 
     def get_profile_image_bytes(self):
         bts = None
@@ -109,17 +122,82 @@ class EthearnalProfileController(object):
     def data(self):
         return self.model.from_json_file(self.profile_json_file_name).to_json()
 
+    def rsa_keys(self, key_sz=1024):
+        have_prv = os.path.isfile(self.rsa_prv_fn)
+        have_pub = os.path.isfile(self.rsa_pub_fn)
+
+        if not have_prv and not have_pub:
+            pubkey, prvkey = rsa.newkeys(key_sz)
+            with open(self.rsa_prv_fn, 'wb') as fp_prv:
+                fp_prv.write(prvkey.save_pkcs1(format=self.RSA_FORMAT))
+                with open(self.rsa_pub_fn, 'wb') as fp_pub:
+                    fp_pub.write(pubkey.save_pkcs1(format=self.RSA_FORMAT))
+            print('RSA KEYS GENERATED')
+
+    @property
+    def rsa_public_pem(self):
+        with open(self.rsa_pub_fn, 'rb') as fp:
+            bts = fp.read()
+            b64, der = self.rsa_b64_der(bts)
+        return b64
+
+    @staticmethod
+    def rsa_b64_der(bts):
+        cherrypy.response.headers['Content-Type'] = 'text/html; charset=ascii'
+        st = str(bts, encoding='ascii')
+        ln = st.splitlines()
+        b64 = '\n'.join(ln[1:-1])
+        der = base64.b64decode(b64)
+        return b64, der
+
+    @property
+    def rsa_pub_b64_der(self):
+        with open(self.rsa_pub_fn, 'rb') as fp:
+            cherrypy.response.headers['Content-Type'] = 'text/html; charset=ascii'
+            bts = fp.read()
+        b64, der = self.rsa_b64_der(bts)
+        return b64, der
+
+    @property
+    def rsa_pub_base64(self):
+        return self.rsa_pub_b64_der[0]
+
+    @property
+    def rsa_pub_der(self):
+        return self.rsa_pub_b64_der[1]
+
+
+    @property
+    def rsa_guid_hex_bin(self):
+        b64, der = self.rsa_pub_b64_der
+        sha = hashlib.sha256(der)
+        hexd = sha.hexdigest()
+        bts = sha.digest()
+        return hexd, bts
+
+    @property
+    def rsa_guid_hex(self):
+        return self.rsa_guid_hex_bin[0]
+
+    @property
+    def rsa_guid_bin(self):
+        return self.rsa_guid_hex_bin[1]
+
 
 class EthearnalProfileView(object):
     exposed = True
 
     def __init__(self, eth_profile):
         self.profile = eth_profile
+        # todo content types
+        # cherrypy.response.headers['Content-Type'] = 'text/html; charset=ascii'
         self.query_dispatch = {
             'avatar': self.avatar,
             'data': self.data,
             'html': self.html,
-            'guid': self.guid,
+            'guid': lambda: self.profile.rsa_guid_hex,
+            'guid_bin': lambda: self.profile.rsa_guid_bin,
+            'pubkey': lambda: self.profile.rsa_public_pem,
         }
 
     def GET(self, q):
@@ -147,10 +225,6 @@ class EthearnalProfileView(object):
             fs = io.BytesIO(fp.read())
             fs.seek(0)
         return cherrypy.lib.file_generator(fs)
-
-    def guid(self):
-        import hashlib
-        return hashlib.sha256(self.profile.data.encode('utf-8')).hexdigest()
 
 
 class EthearnalJobPostModel(basemodel.BaseModel):
