@@ -1,0 +1,18 @@
+{
+    "name": [
+        { "first": "Dobri", "last": "Stoilov" }
+    ],
+    "job": [
+        { "company": "Ethearnal", "position": "Back-End Developer" }
+    ],
+    "location": [
+        { "country": "Bulgaria", "city": "Sofia" }
+    ],
+    "description": "I love to code and make impossible things possible.",
+    "skills": [
+        { "name": "css", "experience": "5y" },
+        { "name": "html", "experience": "5y" },
+        { "name": "python", "experience": "3y" }
+    ],
+    "reputation": 50
+}

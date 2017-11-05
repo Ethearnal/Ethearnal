@@ -509,3 +509,64 @@ $( document ).ready(function() {
         // FUNCTION of {JOBS} SEE MORE FINISH --
     });
 });
+
+$(function () {
+
+    $.ajax({
+        type: 'GET',
+        url: 'profile.json',
+        dataType: 'text',
+        success: function(data) {
+            var profile = JSON.parse(data);
+
+            $firstname = null; $lastname = null; $position = null; $company = null; $city = null; $country = null;
+
+            // Appends profile's FULL NAME.
+            var name = profile.name;
+            $.each(name, function(i, names) {
+                $firstname = names.first;
+                $lastname = names.last;
+            });
+
+            // Appends profile's JOB (position & company)
+            var job = profile.job;
+            $.each(job, function(i, jobs) {
+                $position = jobs.position;
+                $company = jobs.company;
+            });
+
+            // Appends profile's LOCATION (city & country)
+            var location = profile.location;
+            $.each(location, function(i, locations) {
+                $city = locations.city;
+                $country = locations.country;
+            });
+
+
+            // Variables for texts. Just to make it easy to read & understand.
+            var $h2 = $('<h2>' + $firstname + ' ' + $lastname + '</h2>');
+            var $h5 = $('<h5 class="profile-information-position">' + $position + ' at <strong>' + $company + '</strong></h5>');
+            var $p = $('<p>' + $city + ', ' + $country + '</p>');
+
+            // This variable combines everything together.
+            var textProfile = $h2.get(0).outerHTML + $h5.get(0).outerHTML + $p.get(0).outerHTML;
+
+
+
+            // And this inserts all the text to the .profile-upper div
+            $(textProfile).insertAfter(".profile-upper .profile-image");
+
+            // Adding profile description .profile-description
+            $('.profile-description').append('<p>' + profile.description + '</p>');
+
+            // Adding profile reputation .navbar-collapse #alert-navbar
+            $('li.asset#alert-navbar a .round-number span').text(profile.reputation);
+
+            // Appends each SKILL.
+            var skill = profile.skills;
+            $.each(skill, function(i, skills) {
+                $('.profile-bottom .skills').append("<p>" + skills.name + "<span> " + skills.experience + "</span></p>")
+            });
+        }
+    })
+})

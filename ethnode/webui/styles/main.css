@@ -166,8 +166,6 @@ header .container nav #navigation ul li.asset a i {
 
 header .container nav #navigation ul li.asset a .round-number {
   background-color: #ffb230;
-  height: 17px;
-  width: 17px;
   text-align: center;
   display: table;
   border-radius: 100%;
@@ -181,6 +179,7 @@ header .container nav #navigation ul li.asset a .round-number {
 header .container nav #navigation ul li.asset a .round-number span {
   color: white;
   font-size: 10px;
+  padding: 0 5px;
   line-height: 17px;
   font-weight: 500;
   display: table-cell;
