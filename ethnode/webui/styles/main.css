@@ -1,0 +1,3733 @@
+header .container nav {
+  border: none;
+  background-color: white;
+  margin-bottom: 0;
+}
+
+header .container nav .navbar-header .button button.navbar-toggle {
+  position: relative;
+  width: 60px;
+  -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+  left: 20px;
+  top: 8px;
+}
+
+header .container nav .navbar-header .button button.navbar-toggle span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  background-color: #abb4bb;
+  border-radius: 9px;
+  opacity: 1;
+  width: 25px;
+  left: 0;
+  top: 0;
+  -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+header .container nav .navbar-header .button button.navbar-toggle span:nth-child(1) {
+  top: 0;
+}
+
+header .container nav .navbar-header .button button.navbar-toggle span:nth-child(2), header .container nav .navbar-header .button button.navbar-toggle span:nth-child(3) {
+  top: 7px;
+}
+
+header .container nav .navbar-header .button button.navbar-toggle span:nth-child(4) {
+  top: 14px;
+}
+
+header .container nav .navbar-header .button button:not(.collapsed) span:nth-child(1), header .container nav .navbar-header .button button:not(.collapsed) span:nth-child(4) {
+  top: 7px;
+  width: 0%;
+  left: 50%;
+}
+
+header .container nav .navbar-header .button button:not(.collapsed) span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+header .container nav .navbar-header .button button:not(.collapsed) span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+header .container nav .navbar-header .form-group.visible-xs {
+  margin-top: -5px;
+  width: calc(75% - 45px);
+  float: left;
+}
+
+header .container nav .navbar-header .form-group.visible-xs a {
+  margin-top: 5px;
+}
+
+header .container nav .navbar-header .form-group.visible-xs a i {
+  color: #86939e;
+  font-size: 16px;
+  top: 29px;
+  position: relative;
+}
+
+header .container nav .navbar-header .form-group.visible-xs input {
+  color: #86939e;
+  font-size: 16px;
+  border: none;
+  outline: none !important;
+  border-radius: 0;
+  box-shadow: none;
+  padding-left: 0;
+  border-bottom: 1px solid #f0f4f7;
+  margin-left: 45px;
+}
+
+header .container nav .navbar-header a {
+  padding: 18px;
+}
+
+header .container nav #navigation form.navbar-left {
+  border-left: 1px solid #e1e8ee;
+  height: 23px;
+  margin: 18px 0;
+}
+
+header .container nav #navigation form.navbar-left .form-group {
+  margin-top: -5px;
+}
+
+header .container nav #navigation form.navbar-left .form-group a {
+  margin-top: 5px;
+}
+
+header .container nav #navigation form.navbar-left .form-group a i {
+  color: #86939e;
+  font-size: 20px;
+  top: 5px;
+  position: relative;
+}
+
+header .container nav #navigation form.navbar-left .form-group input {
+  color: #86939e;
+  font-size: 16px;
+  border: none;
+  outline: none !important;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+header .container nav #navigation ul.navbar-right {
+  margin: 18px 0;
+}
+
+header .container nav #navigation ul li.profile {
+  border-left: 2px solid #e1e8ee;
+  height: 23px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+header .container nav #navigation ul li.profile img.profile-picture {
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
+  margin-left: 16px;
+  margin-top: -5px;
+  margin-right: 8px;
+}
+
+header .container nav #navigation ul li.profile span {
+  margin-top: -5px;
+}
+
+header .container nav #navigation ul li.asset {
+  margin-top: -5px;
+}
+
+header .container nav #navigation ul li.asset a {
+  padding: 0;
+}
+
+header .container nav #navigation ul li.asset a i {
+  margin-right: 18px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #afb4bb;
+}
+
+header .container nav #navigation ul li.asset a .round-number {
+  background-color: #ffb230;
+  text-align: center;
+  display: table;
+  border-radius: 100%;
+  margin-top: -23px;
+  margin-left: 13px;
+  z-index: 1000;
+  position: relative;
+  cursor: pointer;
+}
+
+header .container nav #navigation ul li.asset a .round-number span {
+  color: white;
+  font-size: 10px;
+  padding: 0 5px;
+  line-height: 17px;
+  font-weight: 500;
+  display: table-cell;
+}
+
+header .container nav #navigation ul li span {
+  font-size: 16px;
+  color: #5e6977;
+}
+
+header .container nav #navigation ul li i {
+  color: #5e6977;
+  position: relative;
+  top: 8px;
+  left: 5px;
+}
+
+header .container nav #navigation ul li.settings-mobile, header .container nav #navigation ul li.logout-mobile {
+  margin-top: -10px;
+}
+
+header .container nav #navigation ul ul.dropdown-menu {
+  margin-top: 0px;
+  border-radius: 0;
+  min-width: 128px;
+  border: 1px solid #e1e8ee;
+  padding: 0;
+}
+
+header .container nav #navigation ul ul.dropdown-menu li {
+  font-weight: 500;
+  padding-left: 5px;
+}
+
+header .container nav #navigation ul ul.dropdown-menu li a {
+  font-size: 16px;
+  color: #86939e;
+  line-height: 40px;
+}
+
+header .container nav #navigation ul ul.dropdown-menu li a i {
+  font-size: 22px;
+  position: relative;
+  color: #86939e;
+  float: left;
+  left: -5px;
+  line-height: 25px;
+}
+
+header .container nav #navigation ul ul.dropdown-menu li:hover, header .container nav #navigation ul ul.dropdown-menu li:focus, header .container nav #navigation ul ul.dropdown-menu li:active {
+  background-color: #edf3fa;
+  cursor: pointer;
+}
+
+header .container nav #navigation ul ul.dropdown-menu li:hover a, header .container nav #navigation ul ul.dropdown-menu li:hover i, header .container nav #navigation ul ul.dropdown-menu li:focus a, header .container nav #navigation ul ul.dropdown-menu li:focus i, header .container nav #navigation ul ul.dropdown-menu li:active a, header .container nav #navigation ul ul.dropdown-menu li:active i {
+  color: #127fff;
+}
+
+.dropdown-menu .divider {
+  margin: 0;
+}
+
+.ui.active {
+  box-shadow: none;
+  border: none;
+}
+
+.ui {
+  border: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  display: block;
+  width: 100%;
+  float: right;
+  font-size: 18px;
+  font-weight: 300;
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+  color: #86939e;
+  margin-top: 5px;
+  box-shadow: none;
+  border: 1px solid transparent !important;
+  border-bottom: 2px solid #e4e8eb !important;
+}
+
+.ui.active {
+  border-color: #96C8DA !important;
+}
+
+.ui.active .text {
+  margin-left: 15px;
+}
+
+.ui input.search {
+  padding: inherit;
+  margin-top: 0;
+  padding-left: 0 !important;
+  margin-left: 15px;
+  line-height: 30px !important;
+}
+
+.ui .text {
+  margin-top: 0px !important;
+  line-height: 40px;
+  color: rgba(191, 191, 191, 0.87);
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  position: relative;
+  top: 6px;
+}
+
+.ui .text:not(.default) {
+  padding: 8px 0px;
+  padding-top: 0;
+  margin-bottom: 8px;
+  margin-left: 15px;
+}
+
+.ui .default.text {
+  margin-top: 25px;
+}
+
+.ui i.dropdown.icon {
+  margin-top: 0;
+  margin-right: -20px;
+}
+
+.ui .menu {
+  position: relative;
+}
+
+.ui .menu::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: white;
+}
+
+.ui .menu::-webkit-scrollbar {
+  width: 7px;
+  background-color: #F5F5F5;
+}
+
+.ui .menu::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #e5e5e5;
+}
+
+.ui .menu .ui input {
+  font-size: 14px;
+}
+
+.ui .menu .header {
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: none;
+  color: #606672;
+}
+
+.ui .menu .header i:before {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.ui .menu .header span {
+  font-weight: 300;
+}
+
+.ui .menu .item span {
+  font-weight: 300;
+}
+
+.ui.fluid.search.selection.dropdown {
+  padding: 0 !important;
+}
+
+section.documentation {
+  background-color: #f2f2f2;
+}
+
+section.documentation .container .profile-information-before-fixed,
+section.documentation .container .profile-information-after-fixed,
+section.documentation .container .profile-information {
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding-right: 0;
+  padding-left: 0;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper,
+section.documentation .container .profile-information-after-fixed .profile-upper,
+section.documentation .container .profile-information .profile-upper {
+  text-align: center;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper .profile-image,
+section.documentation .container .profile-information-after-fixed .profile-upper .profile-image,
+section.documentation .container .profile-information .profile-upper .profile-image {
+  border-radius: 100%;
+  border: 5px solid #ebebeb;
+  margin: 0 auto;
+  display: block;
+  position: absolute;
+  top: -134px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 184px;
+  height: 184px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper .profile-image img,
+section.documentation .container .profile-information-after-fixed .profile-upper .profile-image img,
+section.documentation .container .profile-information .profile-upper .profile-image img {
+  width: 174px;
+  height: 174px;
+  border-radius: 100%;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper .profile-image .text-on-image,
+section.documentation .container .profile-information-after-fixed .profile-upper .profile-image .text-on-image,
+section.documentation .container .profile-information .profile-upper .profile-image .text-on-image {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  opacity: 0.5;
+  background-color: black;
+  border-radius: 100%;
+  width: 174px;
+  height: 174px;
+  border: 5px solid black;
+  cursor: pointer;
+  display: none;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper .profile-image .text-on-image p,
+section.documentation .container .profile-information-after-fixed .profile-upper .profile-image .text-on-image p,
+section.documentation .container .profile-information .profile-upper .profile-image .text-on-image p {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 164px;
+  opacity: 1;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper h2,
+section.documentation .container .profile-information-after-fixed .profile-upper h2,
+section.documentation .container .profile-information .profile-upper h2 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 0.67;
+  color: #5e6977;
+  margin-top: 70px;
+  margin-bottom: 17px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper h5.profile-information-position,
+section.documentation .container .profile-information-after-fixed .profile-upper h5.profile-information-position,
+section.documentation .container .profile-information .profile-upper h5.profile-information-position {
+  font-size: 18px;
+  line-height: 1.29;
+  color: #5e6977;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper p,
+section.documentation .container .profile-information-after-fixed .profile-upper p,
+section.documentation .container .profile-information .profile-upper p {
+  font-size: 14px;
+  line-height: 1.64;
+  color: #86939e;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper button,
+section.documentation .container .profile-information-after-fixed .profile-upper button,
+section.documentation .container .profile-information .profile-upper button {
+  width: 126.3px;
+  height: 42px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper button.light-blue-background,
+section.documentation .container .profile-information-after-fixed .profile-upper button.light-blue-background,
+section.documentation .container .profile-information .profile-upper button.light-blue-background {
+  background-color: #127fff;
+  color: white;
+  border: solid 1px #127fff;
+  margin-right: 5px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper button.light-blue-background:hover, section.documentation .container .profile-information-before-fixed .profile-upper button.light-blue-background:focus, section.documentation .container .profile-information-before-fixed .profile-upper button.light-blue-background:active,
+section.documentation .container .profile-information-after-fixed .profile-upper button.light-blue-background:hover,
+section.documentation .container .profile-information-after-fixed .profile-upper button.light-blue-background:focus,
+section.documentation .container .profile-information-after-fixed .profile-upper button.light-blue-background:active,
+section.documentation .container .profile-information .profile-upper button.light-blue-background:hover,
+section.documentation .container .profile-information .profile-upper button.light-blue-background:focus,
+section.documentation .container .profile-information .profile-upper button.light-blue-background:active {
+  background-color: #0f75ed;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper button.orange-background,
+section.documentation .container .profile-information-after-fixed .profile-upper button.orange-background,
+section.documentation .container .profile-information .profile-upper button.orange-background {
+  background-color: #ffb230;
+  color: white;
+  border: 1px solid #efa01e;
+  margin-right: 5px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper button.orange-background:hover, section.documentation .container .profile-information-before-fixed .profile-upper button.orange-background:focus, section.documentation .container .profile-information-before-fixed .profile-upper button.orange-background:active,
+section.documentation .container .profile-information-after-fixed .profile-upper button.orange-background:hover,
+section.documentation .container .profile-information-after-fixed .profile-upper button.orange-background:focus,
+section.documentation .container .profile-information-after-fixed .profile-upper button.orange-background:active,
+section.documentation .container .profile-information .profile-upper button.orange-background:hover,
+section.documentation .container .profile-information .profile-upper button.orange-background:focus,
+section.documentation .container .profile-information .profile-upper button.orange-background:active {
+  background-color: #d8921d;
+  border-color: #d8921d;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper button.white-background,
+section.documentation .container .profile-information-after-fixed .profile-upper button.white-background,
+section.documentation .container .profile-information .profile-upper button.white-background {
+  background-color: white;
+  border: solid 1px #9eadc0;
+  color: #65727e;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-upper button.white-background:hover, section.documentation .container .profile-information-before-fixed .profile-upper button.white-background:focus, section.documentation .container .profile-information-before-fixed .profile-upper button.white-background:active,
+section.documentation .container .profile-information-after-fixed .profile-upper button.white-background:hover,
+section.documentation .container .profile-information-after-fixed .profile-upper button.white-background:focus,
+section.documentation .container .profile-information-after-fixed .profile-upper button.white-background:active,
+section.documentation .container .profile-information .profile-upper button.white-background:hover,
+section.documentation .container .profile-information .profile-upper button.white-background:focus,
+section.documentation .container .profile-information .profile-upper button.white-background:active {
+  background-color: #9eadc0;
+  color: white;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-description,
+section.documentation .container .profile-information-after-fixed .profile-description,
+section.documentation .container .profile-information .profile-description {
+  background-color: #edf3fa;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-description p,
+section.documentation .container .profile-information-after-fixed .profile-description p,
+section.documentation .container .profile-information .profile-description p {
+  font-size: 16px;
+  line-height: 1.44;
+  color: #86939e;
+  text-align: center;
+  padding: 40px 38px 25px 35px;
+  margin-top: -17px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-bottom p.skills-text,
+section.documentation .container .profile-information-after-fixed .profile-bottom p.skills-text,
+section.documentation .container .profile-information .profile-bottom p.skills-text {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #5e6977;
+  letter-spacing: 1px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 26px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-bottom i,
+section.documentation .container .profile-information-after-fixed .profile-bottom i,
+section.documentation .container .profile-information .profile-bottom i {
+  float: right;
+  top: -35px;
+  position: relative;
+  right: 23px;
+  cursor: pointer;
+  color: #afb4bb;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-bottom i:hover,
+section.documentation .container .profile-information-after-fixed .profile-bottom i:hover,
+section.documentation .container .profile-information .profile-bottom i:hover {
+  color: #9ea2a9;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-bottom .skills,
+section.documentation .container .profile-information-after-fixed .profile-bottom .skills,
+section.documentation .container .profile-information .profile-bottom .skills {
+  margin-top: 18px;
+  padding: 0 35px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-bottom .skills p,
+section.documentation .container .profile-information-after-fixed .profile-bottom .skills p,
+section.documentation .container .profile-information .profile-bottom .skills p {
+  line-height: 32px;
+  border-radius: 4px;
+  border: solid 1px #e1e8ee;
+  padding: 3px 10px;
+  color: #86939e;
+  margin-right: 5px;
+  display: inline;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-bottom .skills p:hover, section.documentation .container .profile-information-before-fixed .profile-bottom .skills p:focus, section.documentation .container .profile-information-before-fixed .profile-bottom .skills p:active,
+section.documentation .container .profile-information-after-fixed .profile-bottom .skills p:hover,
+section.documentation .container .profile-information-after-fixed .profile-bottom .skills p:focus,
+section.documentation .container .profile-information-after-fixed .profile-bottom .skills p:active,
+section.documentation .container .profile-information .profile-bottom .skills p:hover,
+section.documentation .container .profile-information .profile-bottom .skills p:focus,
+section.documentation .container .profile-information .profile-bottom .skills p:active {
+  background-color: #e1e8ee;
+  cursor: pointer;
+  color: #99a9b6;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-bottom .skills p span.experience,
+section.documentation .container .profile-information-after-fixed .profile-bottom .skills p span.experience,
+section.documentation .container .profile-information .profile-bottom .skills p span.experience {
+  border: none;
+  border-radius: 0;
+  color: #5e6977;
+  padding: 0 0 0 8px;
+  margin-right: 0;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-bottom .skills p.tool,
+section.documentation .container .profile-information-after-fixed .profile-bottom .skills p.tool,
+section.documentation .container .profile-information .profile-bottom .skills p.tool {
+  background-color: #f2f6f9;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-bottom .tools,
+section.documentation .container .profile-information-after-fixed .profile-bottom .tools,
+section.documentation .container .profile-information .profile-bottom .tools {
+  margin-top: 5px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-footer,
+section.documentation .container .profile-information-after-fixed .profile-footer,
+section.documentation .container .profile-information .profile-footer {
+  margin-top: 30px;
+  border-top: 1px solid #ebf0f5;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-footer ul,
+section.documentation .container .profile-information-after-fixed .profile-footer ul,
+section.documentation .container .profile-information .profile-footer ul {
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-footer ul li,
+section.documentation .container .profile-information-after-fixed .profile-footer ul li,
+section.documentation .container .profile-information .profile-footer ul li {
+  margin-right: 25px;
+  padding: 0;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-footer ul li a i,
+section.documentation .container .profile-information-after-fixed .profile-footer ul li a i,
+section.documentation .container .profile-information .profile-footer ul li a i {
+  color: #afb4bb;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-footer ul li a i:hover,
+section.documentation .container .profile-information-after-fixed .profile-footer ul li a i:hover,
+section.documentation .container .profile-information .profile-footer ul li a i:hover {
+  color: #9ea2a9;
+}
+
+section.documentation .container .profile-information-before-fixed .profile-footer ul li:first-child,
+section.documentation .container .profile-information-after-fixed .profile-footer ul li:first-child,
+section.documentation .container .profile-information .profile-footer ul li:first-child {
+  margin-left: 25px;
+}
+
+section.documentation .container .profile-information-after-fixed {
+  position: fixed;
+  left: 0;
+  top: 260px;
+  z-index: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+section.documentation .container .profile-information-after-fixed .container {
+  background-color: white;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+  padding: 0;
+}
+
+section.documentation .container .profile-information-after-fixed .container-fluid {
+  width: 1170px;
+}
+
+.profile-documentation-full {
+  background: none;
+  margin-top: -60px;
+  margin-bottom: 30px;
+}
+
+.profile-documentation-full .profile-documentation {
+  position: relative;
+  margin-left: 15px;
+  background-color: white;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+  padding-right: 0;
+  padding-left: 0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.profile-documentation-full .profile-documentation ul.nav li:hover, .profile-documentation-full .profile-documentation ul.nav li:focus, .profile-documentation-full .profile-documentation ul.nav li:active {
+  border-bottom: 2px solid #127fff;
+}
+
+.profile-documentation-full .profile-documentation ul.nav li a {
+  color: #4a4a4a;
+  line-height: 1;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  padding: 20px 30px 20px 30px;
+}
+
+.profile-documentation-full .profile-documentation ul.nav li a:hover, .profile-documentation-full .profile-documentation ul.nav li a:focus, .profile-documentation-full .profile-documentation ul.nav li a:active {
+  background-color: white;
+  border: none;
+  color: #127fff;
+}
+
+.profile-documentation-full .profile-documentation ul.nav li.active {
+  border-bottom: 2px solid #127fff;
+}
+
+.profile-documentation-full .profile-documentation ul.nav li.active a {
+  color: #127fff;
+}
+
+.profile-documentation-full .profile-documentation .plusIcon, .profile-documentation-full .profile-documentation .shoutoutIcon {
+  position: absolute;
+  width: 52px;
+  height: 50px;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffb230;
+  border-radius: 100%;
+  right: 28px;
+  top: 32px;
+  z-index: 11;
+  text-align: center;
+}
+
+.profile-documentation-full .profile-documentation .plusIcon:hover, .profile-documentation-full .profile-documentation .plusIcon:focus, .profile-documentation-full .profile-documentation .plusIcon:active, .profile-documentation-full .profile-documentation .shoutoutIcon:hover, .profile-documentation-full .profile-documentation .shoutoutIcon:focus, .profile-documentation-full .profile-documentation .shoutoutIcon:active {
+  background-color: #d8921d;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.profile-documentation-full .profile-documentation .plusIcon i, .profile-documentation-full .profile-documentation .shoutoutIcon i {
+  line-height: 50px;
+  font-size: 24px;
+  color: white;
+}
+
+.profile-documentation-full .profile-documentation .shoutoutIcon {
+  background-color: #127fff;
+  text-align: center;
+}
+
+.profile-documentation-full .profile-documentation .shoutoutIcon i {
+  line-height: 50px;
+  font-size: 18px;
+  color: white;
+  margin-left: 5px;
+}
+
+.profile-documentation-full .profile-documentation .shoutoutIcon:hover, .profile-documentation-full .profile-documentation .shoutoutIcon:focus, .profile-documentation-full .profile-documentation .shoutoutIcon:active {
+  background-color: #1174e7;
+}
+
+.profile-documentation-full .profile-documentation ul.dropdown-menu {
+  left: auto;
+  min-width: 270px;
+  border-radius: 0;
+  border: 1px solid #e1e8ee;
+  padding: 0;
+  top: 15px;
+  right: 15px;
+  z-index: 3000;
+}
+
+.profile-documentation-full .profile-documentation ul.dropdown-menu li a {
+  font-size: 16px;
+  font-weight: 500;
+  color: #86939e;
+  line-height: 45px;
+  padding: 0 25px;
+}
+
+.profile-documentation-full .profile-documentation ul.dropdown-menu li a:hover, .profile-documentation-full .profile-documentation ul.dropdown-menu li a:focus, .profile-documentation-full .profile-documentation ul.dropdown-menu li a:active {
+  color: #127fff;
+  background-color: #edf3fa;
+}
+
+.educations .education .education-description .dropdown.more img {
+  margin-right: 25px;
+}
+
+.panel-group {
+  margin: 0;
+}
+
+.panel-group .panel {
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.panel-group .panel .panel-heading {
+  padding: 0;
+  background-color: white;
+}
+
+.see-less {
+  display: none;
+}
+
+.see-more, .see-less {
+  background-image: linear-gradient(to bottom, rgba(237, 243, 250, 0), #edf3fa);
+  cursor: pointer;
+}
+
+.see-more:hover, .see-more:active, .see-more:focus, .see-less:hover, .see-less:active, .see-less:focus {
+  background-image: linear-gradient(to bottom, rgba(237, 243, 250, 0), #e8eef5);
+}
+
+.see-more p, .see-less p {
+  font-size: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #86939e;
+  line-height: 40px;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+.job, .story, .education {
+  cursor: pointer;
+}
+
+.job, .story, .shoutout, .education {
+  padding-top: 24px;
+  padding-left: 0;
+  padding-right: 0;
+  border-bottom: 1px solid #e1e8ee;
+}
+
+.job .main-information, .story .main-information, .shoutout .main-information, .education .main-information {
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 25px;
+}
+
+.job .main-information .image img, .job .main-information .image .dont-have-logo, .story .main-information .image img, .story .main-information .image .dont-have-logo, .shoutout .main-information .image img, .shoutout .main-information .image .dont-have-logo, .education .main-information .image img, .education .main-information .image .dont-have-logo {
+  height: 60px;
+  width: 60px;
+  margin-left: 20px;
+  margin-right: 17px;
+  float: left;
+  border-radius: 3px;
+}
+
+.job .main-information .image .dont-have-logo, .story .main-information .image .dont-have-logo, .shoutout .main-information .image .dont-have-logo, .education .main-information .image .dont-have-logo {
+  color: #0065cc;
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 60px;
+  border: 1px solid #0065cc;
+  display: none;
+}
+
+.job .main-information img.story-image, .story .main-information img.story-image, .shoutout .main-information img.story-image, .education .main-information img.story-image {
+  margin-left: 25px;
+}
+
+.job .main-information img.shoutout-image, .story .main-information img.shoutout-image, .shoutout .main-information img.shoutout-image, .education .main-information img.shoutout-image {
+  border-radius: 100%;
+}
+
+.job .main-information .position-information, .story .main-information .position-information, .shoutout .main-information .position-information, .education .main-information .position-information {
+  margin-left: 100px;
+  word-wrap: break-word;
+}
+
+.job .main-information .position-information h4, .story .main-information .position-information h4, .shoutout .main-information .position-information h4, .education .main-information .position-information h4 {
+  font-size: 18px;
+  line-height: 1.09;
+  font-weight: 500;
+  color: #43484d;
+  margin-top: 0;
+  margin-bottom: 7px;
+}
+
+.job .main-information .position-information h5, .story .main-information .position-information h5, .shoutout .main-information .position-information h5, .education .main-information .position-information h5 {
+  font-size: 14px;
+  line-height: 1;
+  color: #86939e;
+  margin-top: 0;
+  margin-bottom: 9px;
+  font-weight: 400;
+}
+
+.job .main-information .position-information h5.shoutout-position, .story .main-information .position-information h5.shoutout-position, .shoutout .main-information .position-information h5.shoutout-position, .education .main-information .position-information h5.shoutout-position {
+  font-size: 12px;
+  line-height: 1.17;
+  color: #86939e;
+  margin-top: 0;
+  margin-bottom: 7px;
+}
+
+.job .main-information .position-information p, .story .main-information .position-information p, .shoutout .main-information .position-information p, .education .main-information .position-information p {
+  font-size: 12px;
+  line-height: 1.17;
+  color: #86939e;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.job .main-information .position-information p.shoutout-information-related, .story .main-information .position-information p.shoutout-information-related, .shoutout .main-information .position-information p.shoutout-information-related, .education .main-information .position-information p.shoutout-information-related {
+  font-weight: 500;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.job .main-information .position-information p.shoutout-business, .story .main-information .position-information p.shoutout-business, .shoutout .main-information .position-information p.shoutout-business, .education .main-information .position-information p.shoutout-business {
+  white-space: nowrap;
+}
+
+.job .main-information .position-information p.shoutout-business span, .story .main-information .position-information p.shoutout-business span, .shoutout .main-information .position-information p.shoutout-business span, .education .main-information .position-information p.shoutout-business span {
+  position: relative;
+  top: -5px;
+  left: 5px;
+  font-size: 12px;
+}
+
+.job .job-description, .job .story-description, .job .shoutout-description, .job .education-description, .story .job-description, .story .story-description, .story .shoutout-description, .story .education-description, .shoutout .job-description, .shoutout .story-description, .shoutout .shoutout-description, .shoutout .education-description, .education .job-description, .education .story-description, .education .shoutout-description, .education .education-description {
+  padding-right: 0;
+  padding-left: 0;
+  margin-bottom: 25px;
+}
+
+.job .job-description .dropdown.more, .job .story-description .dropdown.more, .job .shoutout-description .dropdown.more, .job .education-description .dropdown.more, .story .job-description .dropdown.more, .story .story-description .dropdown.more, .story .shoutout-description .dropdown.more, .story .education-description .dropdown.more, .shoutout .job-description .dropdown.more, .shoutout .story-description .dropdown.more, .shoutout .shoutout-description .dropdown.more, .shoutout .education-description .dropdown.more, .education .job-description .dropdown.more, .education .story-description .dropdown.more, .education .shoutout-description .dropdown.more, .education .education-description .dropdown.more {
+  cursor: pointer;
+}
+
+.job .job-description .dropdown.more i, .job .story-description .dropdown.more i, .job .shoutout-description .dropdown.more i, .job .education-description .dropdown.more i, .story .job-description .dropdown.more i, .story .story-description .dropdown.more i, .story .shoutout-description .dropdown.more i, .story .education-description .dropdown.more i, .shoutout .job-description .dropdown.more i, .shoutout .story-description .dropdown.more i, .shoutout .shoutout-description .dropdown.more i, .shoutout .education-description .dropdown.more i, .education .job-description .dropdown.more i, .education .story-description .dropdown.more i, .education .shoutout-description .dropdown.more i, .education .education-description .dropdown.more i {
+  float: right;
+  margin-right: 25px;
+  font-size: 28px;
+  color: #bdc6cf;
+  display: none;
+}
+
+.job .job-description .dropdown.more i:hover, .job .story-description .dropdown.more i:hover, .job .shoutout-description .dropdown.more i:hover, .job .education-description .dropdown.more i:hover, .story .job-description .dropdown.more i:hover, .story .story-description .dropdown.more i:hover, .story .shoutout-description .dropdown.more i:hover, .story .education-description .dropdown.more i:hover, .shoutout .job-description .dropdown.more i:hover, .shoutout .story-description .dropdown.more i:hover, .shoutout .shoutout-description .dropdown.more i:hover, .shoutout .education-description .dropdown.more i:hover, .education .job-description .dropdown.more i:hover, .education .story-description .dropdown.more i:hover, .education .shoutout-description .dropdown.more i:hover, .education .education-description .dropdown.more i:hover {
+  color: #b2bcc6;
+}
+
+.job .job-description .dropdown.more ul, .job .story-description .dropdown.more ul, .job .shoutout-description .dropdown.more ul, .job .education-description .dropdown.more ul, .story .job-description .dropdown.more ul, .story .story-description .dropdown.more ul, .story .shoutout-description .dropdown.more ul, .story .education-description .dropdown.more ul, .shoutout .job-description .dropdown.more ul, .shoutout .story-description .dropdown.more ul, .shoutout .shoutout-description .dropdown.more ul, .shoutout .education-description .dropdown.more ul, .education .job-description .dropdown.more ul, .education .story-description .dropdown.more ul, .education .shoutout-description .dropdown.more ul, .education .education-description .dropdown.more ul {
+  right: 15px;
+  top: -15px;
+  left: auto;
+  min-width: 270px;
+  border-radius: 0;
+  border: 1px solid #e1e8ee;
+  padding: 0;
+  z-index: 3000;
+}
+
+.job .job-description .dropdown.more ul li a, .job .story-description .dropdown.more ul li a, .job .shoutout-description .dropdown.more ul li a, .job .education-description .dropdown.more ul li a, .story .job-description .dropdown.more ul li a, .story .story-description .dropdown.more ul li a, .story .shoutout-description .dropdown.more ul li a, .story .education-description .dropdown.more ul li a, .shoutout .job-description .dropdown.more ul li a, .shoutout .story-description .dropdown.more ul li a, .shoutout .shoutout-description .dropdown.more ul li a, .shoutout .education-description .dropdown.more ul li a, .education .job-description .dropdown.more ul li a, .education .story-description .dropdown.more ul li a, .education .shoutout-description .dropdown.more ul li a, .education .education-description .dropdown.more ul li a {
+  font-size: 16px;
+  font-weight: 500;
+  color: #86939e;
+  line-height: 45px;
+  padding: 0 25px;
+}
+
+.job .job-description .dropdown.more ul li a:hover, .job .job-description .dropdown.more ul li a:focus, .job .job-description .dropdown.more ul li a:active, .job .story-description .dropdown.more ul li a:hover, .job .story-description .dropdown.more ul li a:focus, .job .story-description .dropdown.more ul li a:active, .job .shoutout-description .dropdown.more ul li a:hover, .job .shoutout-description .dropdown.more ul li a:focus, .job .shoutout-description .dropdown.more ul li a:active, .job .education-description .dropdown.more ul li a:hover, .job .education-description .dropdown.more ul li a:focus, .job .education-description .dropdown.more ul li a:active, .story .job-description .dropdown.more ul li a:hover, .story .job-description .dropdown.more ul li a:focus, .story .job-description .dropdown.more ul li a:active, .story .story-description .dropdown.more ul li a:hover, .story .story-description .dropdown.more ul li a:focus, .story .story-description .dropdown.more ul li a:active, .story .shoutout-description .dropdown.more ul li a:hover, .story .shoutout-description .dropdown.more ul li a:focus, .story .shoutout-description .dropdown.more ul li a:active, .story .education-description .dropdown.more ul li a:hover, .story .education-description .dropdown.more ul li a:focus, .story .education-description .dropdown.more ul li a:active, .shoutout .job-description .dropdown.more ul li a:hover, .shoutout .job-description .dropdown.more ul li a:focus, .shoutout .job-description .dropdown.more ul li a:active, .shoutout .story-description .dropdown.more ul li a:hover, .shoutout .story-description .dropdown.more ul li a:focus, .shoutout .story-description .dropdown.more ul li a:active, .shoutout .shoutout-description .dropdown.more ul li a:hover, .shoutout .shoutout-description .dropdown.more ul li a:focus, .shoutout .shoutout-description .dropdown.more ul li a:active, .shoutout .education-description .dropdown.more ul li a:hover, .shoutout .education-description .dropdown.more ul li a:focus, .shoutout .education-description .dropdown.more ul li a:active, .education .job-description .dropdown.more ul li a:hover, .education .job-description .dropdown.more ul li a:focus, .education .job-description .dropdown.more ul li a:active, .education .story-description .dropdown.more ul li a:hover, .education .story-description .dropdown.more ul li a:focus, .education .story-description .dropdown.more ul li a:active, .education .shoutout-description .dropdown.more ul li a:hover, .education .shoutout-description .dropdown.more ul li a:focus, .education .shoutout-description .dropdown.more ul li a:active, .education .education-description .dropdown.more ul li a:hover, .education .education-description .dropdown.more ul li a:focus, .education .education-description .dropdown.more ul li a:active {
+  color: #127fff;
+  background-color: #edf3fa;
+}
+
+.job .job-description h4, .job .story-description h4, .job .shoutout-description h4, .job .education-description h4, .story .job-description h4, .story .story-description h4, .story .shoutout-description h4, .story .education-description h4, .shoutout .job-description h4, .shoutout .story-description h4, .shoutout .shoutout-description h4, .shoutout .education-description h4, .education .job-description h4, .education .story-description h4, .education .shoutout-description h4, .education .education-description h4 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.23;
+  color: #43484d;
+  margin-top: 0;
+  margin-right: 105px;
+}
+
+.job .job-description p.story-paragraph, .job .story-description p.story-paragraph, .job .shoutout-description p.story-paragraph, .job .education-description p.story-paragraph, .story .job-description p.story-paragraph, .story .story-description p.story-paragraph, .story .shoutout-description p.story-paragraph, .story .education-description p.story-paragraph, .shoutout .job-description p.story-paragraph, .shoutout .story-description p.story-paragraph, .shoutout .shoutout-description p.story-paragraph, .shoutout .education-description p.story-paragraph, .education .job-description p.story-paragraph, .education .story-description p.story-paragraph, .education .shoutout-description p.story-paragraph, .education .education-description p.story-paragraph {
+  margin: 0;
+  margin-right: 85px;
+  margin-bottom: 15px;
+}
+
+.job .job-description p.education-paragraph, .job .story-description p.education-paragraph, .job .shoutout-description p.education-paragraph, .job .education-description p.education-paragraph, .story .job-description p.education-paragraph, .story .story-description p.education-paragraph, .story .shoutout-description p.education-paragraph, .story .education-description p.education-paragraph, .shoutout .job-description p.education-paragraph, .shoutout .story-description p.education-paragraph, .shoutout .shoutout-description p.education-paragraph, .shoutout .education-description p.education-paragraph, .education .job-description p.education-paragraph, .education .story-description p.education-paragraph, .education .shoutout-description p.education-paragraph, .education .education-description p.education-paragraph {
+  margin-right: 40px;
+  margin-bottom: 0;
+  min-height: 100px;
+}
+
+.job .job-description p, .job .story-description p, .job .shoutout-description p, .job .education-description p, .story .job-description p, .story .story-description p, .story .shoutout-description p, .story .education-description p, .shoutout .job-description p, .shoutout .story-description p, .shoutout .shoutout-description p, .shoutout .education-description p, .education .job-description p, .education .story-description p, .education .shoutout-description p, .education .education-description p {
+  font-size: 14px;
+  color: #86939e;
+  line-height: 1.71;
+  margin-left: 17px;
+  margin-right: 45px;
+  margin-bottom: 15px;
+}
+
+.job .job-description p.shoutout-paragraph, .job .story-description p.shoutout-paragraph, .job .shoutout-description p.shoutout-paragraph, .job .education-description p.shoutout-paragraph, .story .job-description p.shoutout-paragraph, .story .story-description p.shoutout-paragraph, .story .shoutout-description p.shoutout-paragraph, .story .education-description p.shoutout-paragraph, .shoutout .job-description p.shoutout-paragraph, .shoutout .story-description p.shoutout-paragraph, .shoutout .shoutout-description p.shoutout-paragraph, .shoutout .education-description p.shoutout-paragraph, .education .job-description p.shoutout-paragraph, .education .story-description p.shoutout-paragraph, .education .shoutout-description p.shoutout-paragraph, .education .education-description p.shoutout-paragraph {
+  font-size: 16px;
+  color: #43484d;
+  line-height: 1.6;
+  margin-right: 60px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+}
+
+.job .job-description p.shoutout-paragraph.date, .job .story-description p.shoutout-paragraph.date, .job .shoutout-description p.shoutout-paragraph.date, .job .education-description p.shoutout-paragraph.date, .story .job-description p.shoutout-paragraph.date, .story .story-description p.shoutout-paragraph.date, .story .shoutout-description p.shoutout-paragraph.date, .story .education-description p.shoutout-paragraph.date, .shoutout .job-description p.shoutout-paragraph.date, .shoutout .story-description p.shoutout-paragraph.date, .shoutout .shoutout-description p.shoutout-paragraph.date, .shoutout .education-description p.shoutout-paragraph.date, .education .job-description p.shoutout-paragraph.date, .education .story-description p.shoutout-paragraph.date, .education .shoutout-description p.shoutout-paragraph.date, .education .education-description p.shoutout-paragraph.date {
+  margin-bottom: 0;
+  margin-top: -20px;
+  font-weight: 400;
+  float: right;
+  margin-right: 40px;
+  color: #86939e;
+}
+
+.job .job-description span, .job .story-description span, .job .shoutout-description span, .job .education-description span, .story .job-description span, .story .story-description span, .story .shoutout-description span, .story .education-description span, .shoutout .job-description span, .shoutout .story-description span, .shoutout .shoutout-description span, .shoutout .education-description span, .education .job-description span, .education .story-description span, .education .shoutout-description span, .education .education-description span {
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 7px 14px;
+  margin-left: 17px;
+}
+
+.job .job-description span.accomplishment, .job .story-description span.accomplishment, .job .shoutout-description span.accomplishment, .job .education-description span.accomplishment, .story .job-description span.accomplishment, .story .story-description span.accomplishment, .story .shoutout-description span.accomplishment, .story .education-description span.accomplishment, .shoutout .job-description span.accomplishment, .shoutout .story-description span.accomplishment, .shoutout .shoutout-description span.accomplishment, .shoutout .education-description span.accomplishment, .education .job-description span.accomplishment, .education .story-description span.accomplishment, .education .shoutout-description span.accomplishment, .education .education-description span.accomplishment {
+  background-color: rgba(254, 178, 48, 0.13);
+  color: #d1a252;
+  float: right;
+  margin-right: 30px;
+}
+
+.job .job-description .more img, .story .job-description .more img, .shoutout .job-description .more img, .education .job-description .more img {
+  margin-right: 30px;
+}
+
+.panel-body {
+  position: relative;
+  padding: 0;
+  overflow-x: hidden;
+  border-top: none;
+  background: linear-gradient(90deg, #b7b9c2 1px, #e7ecef 1px);
+  background-position: 100% 0;
+  background-repeat: repeat-y;
+  background-size: 97.3%;
+}
+
+.panel-body::-webkit-scrollbar {
+  display: none;
+}
+
+.panel-body .accomplishment, .panel-body .shout-out {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 41px;
+  margin-right: 20px;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.panel-body .accomplishment footer.comments, .panel-body .shout-out footer.comments {
+  background-color: rgba(225, 232, 238, 0.5);
+  border-top: 1px solid #e1e8ee;
+  box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.1);
+}
+
+.panel-body .accomplishment footer.comments button, .panel-body .shout-out footer.comments button {
+  width: 100px;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #86939e;
+  padding: 0;
+  border: none;
+  margin-left: 25px;
+  background-color: transparent;
+  margin-top: 15px;
+}
+
+.panel-body .accomplishment footer.comments button span, .panel-body .shout-out footer.comments button span {
+  margin-left: 10px;
+}
+
+.panel-body .accomplishment footer.comments .comment, .panel-body .shout-out footer.comments .comment {
+  margin-left: 25px;
+  margin-top: 30px;
+}
+
+.panel-body .accomplishment footer.comments .comment img, .panel-body .shout-out footer.comments .comment img {
+  width: 45px;
+  height: 45px;
+  float: left;
+  border-radius: 100%;
+  margin-top: -5px;
+}
+
+.panel-body .accomplishment footer.comments .comment span, .panel-body .shout-out footer.comments .comment span {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #5e6977;
+  margin-left: 15px;
+}
+
+.panel-body .accomplishment footer.comments .comment span.date, .panel-body .shout-out footer.comments .comment span.date {
+  color: #86939e;
+  font-weight: 400;
+}
+
+.panel-body .accomplishment footer.comments .comment p, .panel-body .shout-out footer.comments .comment p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #86939e;
+  margin-left: 60px;
+  margin-top: 5px;
+}
+
+.panel-body .accomplishment footer.comments .write-comment, .panel-body .shout-out footer.comments .write-comment {
+  margin-top: 35px;
+}
+
+.panel-body .accomplishment footer.comments .write-comment .input-group, .panel-body .shout-out footer.comments .write-comment .input-group {
+  margin-left: 25px;
+  margin-right: 25px;
+  padding-bottom: 20px;
+  width: 93%;
+}
+
+.panel-body .accomplishment footer.comments .write-comment .input-group input, .panel-body .shout-out footer.comments .write-comment .input-group input {
+  border-radius: 6px;
+  border: 2px solid #e1e8ee;
+  background-color: white;
+  border-right: none;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  box-shadow: none;
+  color: #86939e;
+  height: 42px;
+}
+
+.panel-body .accomplishment footer.comments .write-comment .input-group input::-webkit-input-placeholder, .panel-body .shout-out footer.comments .write-comment .input-group input::-webkit-input-placeholder {
+  font-size: 14px;
+  line-height: 1;
+  color: #86939e;
+}
+
+.panel-body .accomplishment footer.comments .write-comment .input-group span, .panel-body .shout-out footer.comments .write-comment .input-group span {
+  border-radius: 6px;
+  border: 2px solid #e1e8ee;
+  background-color: white;
+  border-left: none;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.panel-body .accomplishment footer.comments .write-comment .input-group span img, .panel-body .shout-out footer.comments .write-comment .input-group span img {
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.panel-body .accomplishment header, .panel-body .shout-out header {
+  padding-top: 35px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.panel-body .accomplishment header i, .panel-body .shout-out header i {
+  color: #bdc6cf;
+}
+
+.panel-body .accomplishment header i:hover, .panel-body .shout-out header i:hover {
+  color: #b2bcc6;
+}
+
+.panel-body .accomplishment header .bullet-points, .panel-body .shout-out header .bullet-points {
+  position: relative;
+}
+
+.panel-body .accomplishment header .bullet-points i, .panel-body .shout-out header .bullet-points i {
+  float: right;
+  font-size: 22px;
+  color: #bdc6cf;
+}
+
+.panel-body .accomplishment header .bullet-points i:hover, .panel-body .shout-out header .bullet-points i:hover {
+  color: #b2bcc6;
+}
+
+.panel-body .accomplishment header .bullet-points ul.dropdown-menu, .panel-body .shout-out header .bullet-points ul.dropdown-menu {
+  left: auto;
+  min-width: 270px;
+  border-radius: 0;
+  border: 1px solid #e1e8ee;
+  padding: 0;
+  right: -15px;
+  top: -15px;
+}
+
+.panel-body .accomplishment header .bullet-points ul.dropdown-menu li a, .panel-body .shout-out header .bullet-points ul.dropdown-menu li a {
+  font-size: 16px;
+  font-weight: 500;
+  color: #86939e;
+  line-height: 45px;
+  padding: 0 25px;
+}
+
+.panel-body .accomplishment header .bullet-points ul.dropdown-menu li a:hover, .panel-body .accomplishment header .bullet-points ul.dropdown-menu li a:focus, .panel-body .accomplishment header .bullet-points ul.dropdown-menu li a:active, .panel-body .shout-out header .bullet-points ul.dropdown-menu li a:hover, .panel-body .shout-out header .bullet-points ul.dropdown-menu li a:focus, .panel-body .shout-out header .bullet-points ul.dropdown-menu li a:active {
+  color: #127fff;
+  background-color: #edf3fa;
+}
+
+.panel-body .accomplishment header .bullet-point, .panel-body .shout-out header .bullet-point {
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccd3da;
+  border-radius: 100%;
+  position: absolute;
+  left: 13px;
+}
+
+.panel-body .accomplishment header img.more, .panel-body .shout-out header img.more {
+  float: right;
+  margin-top: -20px;
+}
+
+.panel-body .accomplishment header img.date, .panel-body .shout-out header img.date {
+  margin-top: -5px;
+}
+
+.panel-body .accomplishment header span.shoutout-span, .panel-body .shout-out header span.shoutout-span {
+  font-size: 14px;
+  line-height: 1;
+  color: white;
+}
+
+.panel-body .accomplishment header span.accomplishment-span, .panel-body .shout-out header span.accomplishment-span {
+  font-size: 14px;
+  color: #86939e;
+  line-height: 1;
+  margin-left: 5px;
+}
+
+.panel-body .accomplishment header span.completion-date, .panel-body .shout-out header span.completion-date {
+  text-decoration: underline;
+  margin-left: 1px;
+}
+
+.panel-body .accomplishment header span.date, .panel-body .shout-out header span.date {
+  opacity: 0.5;
+}
+
+.panel-body .accomplishment header h2, .panel-body .shout-out header h2 {
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1.31;
+  color: #43484d;
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+.panel-body .accomplishment .sharing ul, .panel-body .shout-out .sharing ul {
+  margin-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 20px;
+}
+
+.panel-body .accomplishment .sharing ul li span, .panel-body .shout-out .sharing ul li span {
+  font-size: 14px;
+  line-height: 1;
+  color: #86939e;
+  margin-left: 10px;
+}
+
+.panel-body .accomplishment .sharing ul li span.shoutout-footer-span, .panel-body .shout-out .sharing ul li span.shoutout-footer-span {
+  color: white;
+}
+
+.panel-body .accomplishment .sharing ul li i, .panel-body .shout-out .sharing ul li i {
+  font-size: 14px;
+  color: #bdc6cf;
+}
+
+.panel-body .accomplishment .sharing ul li i:hover, .panel-body .shout-out .sharing ul li i:hover {
+  color: #b2bcc6;
+}
+
+.panel-body .accomplishment-full .sharing {
+  margin-right: 25px !important;
+  margin-left: 25px !important;
+}
+
+.panel-body .accomplishment-full .description {
+  text-align: center;
+}
+
+.panel-body .accomplishment-full .description ul li p {
+  text-align: center;
+}
+
+.panel-body .accomplishment-full .description h2 {
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1.31;
+  color: #43484d;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.panel-body .accomplishment-full .description p {
+  text-align: left;
+}
+
+.panel-body .accomplishment-full .description .accomplishment-skills, .panel-body .accomplishment-full .description .accomplishment-tools {
+  padding-right: 0;
+  padding-left: 0;
+  width: 50%;
+  float: left;
+}
+
+.panel-body .accomplishment-full .description .accomplishment-skills h5, .panel-body .accomplishment-full .description .accomplishment-tools h5 {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #5e6977;
+  letter-spacing: 1px;
+  font-weight: 500;
+  text-align: left;
+  margin-top: 26px;
+}
+
+.panel-body .accomplishment-full .description .accomplishment-skills .skills, .panel-body .accomplishment-full .description .accomplishment-tools .skills {
+  text-align: left;
+  margin-top: 18px;
+  padding-bottom: 20px;
+}
+
+.panel-body .accomplishment-full .description .accomplishment-skills .skills p, .panel-body .accomplishment-full .description .accomplishment-tools .skills p {
+  margin-top: 5px;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+.panel-body .accomplishment-full .description .accomplishment-skills .skills p span, .panel-body .accomplishment-full .description .accomplishment-tools .skills p span {
+  line-height: 32px;
+  border-radius: 4px;
+  border: solid 1px #e1e8ee;
+  padding: 0 10px;
+  color: #86939e;
+  display: inline-block;
+}
+
+.panel-body .accomplishment-full .description .accomplishment-skills .skills p span:hover, .panel-body .accomplishment-full .description .accomplishment-skills .skills p span:active, .panel-body .accomplishment-full .description .accomplishment-skills .skills p span:focus, .panel-body .accomplishment-full .description .accomplishment-tools .skills p span:hover, .panel-body .accomplishment-full .description .accomplishment-tools .skills p span:active, .panel-body .accomplishment-full .description .accomplishment-tools .skills p span:focus {
+  background-color: #e1e8ee;
+  cursor: pointer;
+  color: #99a9b6;
+}
+
+.panel-body .accomplishment-full .description .accomplishment-skills .skills p span.experience, .panel-body .accomplishment-full .description .accomplishment-tools .skills p span.experience {
+  border: none;
+  border-radius: 0;
+  color: #5e6977;
+  text-align: right;
+  padding: 0 0 0 8px;
+  margin-right: 0;
+}
+
+.panel-body .accomplishment-full .description .accomplishment-tools {
+  padding-left: 15px;
+  padding-right: 0;
+}
+
+.panel-body .accomplishment-full .description .team-members {
+  clear: both;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.panel-body .accomplishment-full .description .team-members h2 {
+  text-transform: uppercase;
+  font-size: 18px;
+  color: #5e6977;
+  letter-spacing: 1px;
+  font-weight: 500;
+  text-align: left;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.panel-body .accomplishment-full .description .team-members .ui {
+  padding: 6px 10px;
+  padding-right: 26px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid #dadada;
+  box-shadow: 0px 0px 3px #eaeaea;
+  position: relative;
+  transition: all 0.3s ease 0s;
+  top: 0;
+  display: inline-block;
+  margin-top: 5px;
+  float: left;
+}
+
+.panel-body .accomplishment-full .description .team-members .ui:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0px 0px 10px #eaeaea;
+  top: -5px;
+}
+
+.panel-body .accomplishment-full .description .team-members .ui img {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  float: left;
+  margin-top: 0;
+}
+
+.panel-body .accomplishment-full .description .team-members .ui span {
+  line-height: 35px;
+  color: #86939e;
+  position: relative;
+  left: 10px;
+}
+
+.panel-body .accomplishment-full .sharing {
+  margin-top: 35px;
+}
+
+.panel-body .accomplishment-full .sharing ul {
+  margin-left: 0;
+}
+
+.panel-body .accomplishment-full .sharing ul li {
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.panel-body .accomplishment {
+  background-color: white;
+}
+
+.panel-body .accomplishment ul.images {
+  margin-top: 50px;
+}
+
+.panel-body .accomplishment ul.images li {
+  margin-right: 10px;
+}
+
+.panel-body .accomplishment ul.images li img {
+  width: 76px;
+  height: 76px;
+  border-radius: 100%;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.panel-body .accomplishment ul.images li p {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #43484d;
+  margin-top: 10px;
+}
+
+.panel-body .accomplishment .description {
+  margin: 0 30px 10px 30px;
+}
+
+.panel-body .accomplishment .description p {
+  margin-top: 0;
+  color: #86939e;
+  line-height: 1.5;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.panel-body .accomplishment .sharing {
+  border-top: 1px solid #ebf0f5;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.panel-body .shout-out {
+  background-color: #5babce;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.panel-body .shout-out .sharing ul li span {
+  color: white;
+}
+
+.panel-body .shout-out .sharing ul li i {
+  color: white;
+}
+
+.panel-body .shout-out header .bullet-points i {
+  float: right;
+  font-size: 22px;
+  color: white;
+}
+
+.panel-body .shout-out header .bullet-points i:hover {
+  color: #f1f1f1;
+}
+
+.panel-body .shout-out .qoute {
+  text-align: center;
+}
+
+.panel-body .shout-out .qoute img.qoute-picture {
+  display: block;
+  margin: 0 auto;
+}
+
+.panel-body .shout-out .qoute h2 {
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1.31;
+  color: white;
+  text-align: center;
+  margin: 25px 25px 30px 25px;
+}
+
+.panel-body .shout-out .qoute .line {
+  height: 1px;
+  background-color: #e1e8ee;
+  width: 46px;
+  margin: 0 auto 30px auto;
+}
+
+.panel-body .shout-out .qoute .author-information {
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 80px;
+  border-bottom: 1px solid #ebf0f5;
+}
+
+.panel-body .shout-out .qoute .author-information img {
+  height: 40px;
+  width: 40px;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 100%;
+  display: inline-block;
+  margin-top: -20px;
+}
+
+.panel-body .shout-out .qoute .author-information .author-details {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.panel-body .shout-out .qoute .author-information .author-details h5 {
+  margin-top: 0;
+  line-height: 1;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: white;
+  text-align: left;
+}
+
+.panel-body .shout-out .qoute .author-information .author-details p {
+  font-size: 14px;
+  color: white;
+  line-height: 1;
+  margin-top: 0;
+  text-align: left;
+}
+
+.panel-body .accomplishment.image .description {
+  margin: 30px 0 0 0;
+}
+
+.panel-body .accomplishment .description img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.panel-body .accomplishment-full .description img.main-image {
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+.modal#accomplishmentModal .modal-lg,
+.new-test-modal .modal-lg {
+  width: 900px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content,
+.new-test-modal .modal-lg .modal-content {
+  padding: 0;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header button.close span,
+.new-test-modal .modal-lg .modal-content .modal-header button.close span {
+  font-size: 36px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group,
+.new-test-modal .modal-lg .modal-content .modal-header .form-group {
+  margin-top: 25px;
+  margin-bottom: -35px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group img,
+.new-test-modal .modal-lg .modal-content .modal-header .form-group img {
+  position: absolute;
+  z-index: 100;
+  left: 55px;
+  top: 10px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group [type=file],
+.new-test-modal .modal-lg .modal-content .modal-header .form-group [type=file] {
+  position: absolute;
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group input.input-file,
+.new-test-modal .modal-lg .modal-content .modal-header .form-group input.input-file {
+  border: 1px solid #CCC;
+  border-radius: 3px;
+  text-align: left;
+  padding: 10px;
+  width: 180px;
+  margin: 0;
+  left: 0;
+  position: relative;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group [type=file] + label,
+.new-test-modal .modal-lg .modal-content .modal-header .form-group [type=file] + label {
+  border: 1px solid #CCC;
+  border-radius: 3px;
+  text-align: left;
+  padding: 10px 20px;
+  width: 180px;
+  margin: 0;
+  left: 2em;
+  top: -3.5em;
+  font-weight: 400;
+  position: relative;
+  text-align: right;
+  background: #f5f6fa;
+  color: #91969c;
+  border: none;
+  cursor: pointer;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group [type=file] + label:hover, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group [type=file] + label:focus, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group [type=file] + label:active,
+.new-test-modal .modal-lg .modal-content .modal-header .form-group [type=file] + label:hover,
+.new-test-modal .modal-lg .modal-content .modal-header .form-group [type=file] + label:focus,
+.new-test-modal .modal-lg .modal-content .modal-header .form-group [type=file] + label:active {
+  background: #dfe0e4;
+  color: #8b8f94;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header,
+.new-test-modal .modal-lg .modal-content .modal-header {
+  padding: 25px;
+  border: none;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group,
+.new-test-modal .modal-lg .modal-content .modal-header .form-group {
+  margin-left: 10px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header img.file-input-first-image,
+.new-test-modal .modal-lg .modal-content .modal-header img.file-input-first-image {
+  top: 5px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .col-lg-2, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .col-lg-10,
+.new-test-modal .modal-lg .modal-content .modal-header .col-lg-2,
+.new-test-modal .modal-lg .modal-content .modal-header .col-lg-10 {
+  padding: 0;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-image img,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-image img {
+  height: 40px;
+  width: 40px;
+  float: left;
+  border-radius: 100%;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs {
+  margin-left: -80px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs textarea, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs input,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs textarea,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs input {
+  border: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  display: block;
+  width: 100%;
+  float: right;
+  resize: none;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar-track, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar-track,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar-track,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: white;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar {
+  width: 7px;
+  background-color: #F5F5F5;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar-thumb, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar-thumb,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar-thumb,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #e5e5e5;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs input.title,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs input.title {
+  color: #43484d;
+  font-size: 26px;
+  line-height: 1.31;
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs textarea.description,
+.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs textarea.description {
+  color: #5c656c;
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body,
+.new-test-modal .modal-lg .modal-content .modal-body {
+  padding: 0 25px;
+  border-bottom: none;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body h3.publish-modal-heading,
+.new-test-modal .modal-lg .modal-content .modal-body h3.publish-modal-heading {
+  color: #65a9fc;
+  font-size: 30px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 0;
+  margin-bottom: 100px;
+  display: none;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body h4.publish-modal-description,
+.new-test-modal .modal-lg .modal-content .modal-body h4.publish-modal-description {
+  color: #606467;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 0;
+  padding: 0 200px;
+  display: none;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector:first-child,
+.new-test-modal .modal-lg .modal-content .modal-body .selector:first-child {
+  border-top: 1px solid #efefef;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-image,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-image {
+  padding: 0;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-image .form-group,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-image .form-group {
+  margin-top: 15px;
+  margin-left: -40px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-image .form-group img,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-image .form-group img {
+  left: 65px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector,
+.new-test-modal .modal-lg .modal-content .modal-body .selector {
+  border-bottom: 1px solid #efefef;
+  padding: 20px 0;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector p,
+.new-test-modal .modal-lg .modal-content .modal-body .selector p {
+  color: #5e6977;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 0 50px;
+  text-align: center;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector .icon-image,
+.new-test-modal .modal-lg .modal-content .modal-body .selector .icon-image {
+  float: left;
+  background-color: #f5f6fa;
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
+  position: relative;
+  margin-right: 15px;
+  margin-top: -5px;
+  text-align: center;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector .icon-image i,
+.new-test-modal .modal-lg .modal-content .modal-body .selector .icon-image i {
+  line-height: 36px;
+  font-size: 14px;
+  color: #86939e;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector input,
+.new-test-modal .modal-lg .modal-content .modal-body .selector input {
+  border: none;
+  outline: none !important;
+  font-size: 14px;
+  font-weight: 400;
+  width: 265px;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector input::-webkit-input-placeholder,
+.new-test-modal .modal-lg .modal-content .modal-body .selector input::-webkit-input-placeholder {
+  color: #5e6977;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 1;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector input::-moz-placeholder,
+.new-test-modal .modal-lg .modal-content .modal-body .selector input::-moz-placeholder {
+  color: #5e6977;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 1;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector input:-ms-input-placeholder,
+.new-test-modal .modal-lg .modal-content .modal-body .selector input:-ms-input-placeholder {
+  color: #5e6977;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 1;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector input::placeholder,
+.new-test-modal .modal-lg .modal-content .modal-body .selector input::placeholder {
+  color: #5e6977;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 1;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector:last-child,
+.new-test-modal .modal-lg .modal-content .modal-body .selector:last-child {
+  border-bottom: none;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something {
+  padding: 10px 0;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something .icon-image,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something .icon-image {
+  margin-top: 3px;
+  margin-right: 10px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something .icon-image i,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something .icon-image i {
+  font-size: 16px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something .ui.dropdown,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something .ui.dropdown {
+  margin-top: 5px !important;
+  width: 94%;
+  float: right;
+  border: none;
+  box-shadow: none;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something .ui.dropdown .text,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something .ui.dropdown .text {
+  color: #5e6977;
+  line-height: 1;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something .ui.label,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something .ui.label {
+  border: solid 1px #e1e8ee;
+  background-color: white;
+  color: #86939e;
+  box-shadow: none;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members {
+  z-index: 99999;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .text,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .text {
+  color: #5e6977;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar-track,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: white;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar {
+  width: 7px;
+  background-color: #F5F5F5;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar-thumb,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #e5e5e5;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .ui input,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .ui input {
+  font-size: 14px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header {
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: none;
+  color: #5e6977;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header i:before,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header i:before {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header span,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header span {
+  font-weight: 300;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .item span,
+.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .item span {
+  font-weight: 300;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer,
+.new-test-modal .modal-lg .modal-content .modal-footer {
+  border: none;
+  background-color: #f0f4f7;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button,
+.new-test-modal .modal-lg .modal-content .modal-footer button {
+  font-size: 16px;
+  border-radius: 8px;
+  width: 150px;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.save-draft,
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.close-modal,
+.new-test-modal .modal-lg .modal-content .modal-footer button.save-draft,
+.new-test-modal .modal-lg .modal-content .modal-footer button.close-modal {
+  border: 2px solid #e2e7eb;
+  color: #8b949d;
+  background-color: transparent;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.save-draft:hover, .modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.save-draft:active, .modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.close-modal:active,
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
+.new-test-modal .modal-lg .modal-content .modal-footer button.save-draft:hover,
+.new-test-modal .modal-lg .modal-content .modal-footer button.save-draft:active,
+.new-test-modal .modal-lg .modal-content .modal-footer button.save-draft:focus,
+.new-test-modal .modal-lg .modal-content .modal-footer button.close-modal:hover,
+.new-test-modal .modal-lg .modal-content .modal-footer button.close-modal:active,
+.new-test-modal .modal-lg .modal-content .modal-footer button.close-modal:focus {
+  background-color: #eaeef1;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.publish,
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.new-post,
+.new-test-modal .modal-lg .modal-content .modal-footer button.publish,
+.new-test-modal .modal-lg .modal-content .modal-footer button.new-post {
+  background-color: #76c84a;
+  color: #f7fff1;
+  border: 2px solid #76c84a;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.publish:hover, .modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.publish:focus, .modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.publish:active,
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.new-post:hover,
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.new-post:focus,
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.new-post:active,
+.new-test-modal .modal-lg .modal-content .modal-footer button.publish:hover,
+.new-test-modal .modal-lg .modal-content .modal-footer button.publish:focus,
+.new-test-modal .modal-lg .modal-content .modal-footer button.publish:active,
+.new-test-modal .modal-lg .modal-content .modal-footer button.new-post:hover,
+.new-test-modal .modal-lg .modal-content .modal-footer button.new-post:focus,
+.new-test-modal .modal-lg .modal-content .modal-footer button.new-post:active {
+  background-color: #6fba46;
+  border: 2px solid #6fba46;
+}
+
+.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.close-modal,
+.new-test-modal .modal-lg .modal-content .modal-footer button.close-modal {
+  display: none;
+}
+
+.modal#storyModal .modal-lg,
+.modal#jobModal .modal-lg,
+.modal#educationModal .modal-lg,
+.modal#shoutoutModal .modal-lg,
+.modal#avatarModal .modal-lg,
+.modal#inviteModal .modal-lg {
+  width: 750px;
+}
+
+.modal#storyModal .modal-lg .modal-content,
+.modal#jobModal .modal-lg .modal-content,
+.modal#educationModal .modal-lg .modal-content,
+.modal#shoutoutModal .modal-lg .modal-content,
+.modal#avatarModal .modal-lg .modal-content,
+.modal#inviteModal .modal-lg .modal-content {
+  padding: 0;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-header,
+.modal#jobModal .modal-lg .modal-content .modal-header,
+.modal#educationModal .modal-lg .modal-content .modal-header,
+.modal#shoutoutModal .modal-lg .modal-content .modal-header,
+.modal#avatarModal .modal-lg .modal-content .modal-header,
+.modal#inviteModal .modal-lg .modal-content .modal-header {
+  padding: 0;
+  border-bottom: 1px solid #e6e7e9;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-header h3,
+.modal#jobModal .modal-lg .modal-content .modal-header h3,
+.modal#educationModal .modal-lg .modal-content .modal-header h3,
+.modal#shoutoutModal .modal-lg .modal-content .modal-header h3,
+.modal#avatarModal .modal-lg .modal-content .modal-header h3,
+.modal#inviteModal .modal-lg .modal-content .modal-header h3 {
+  font-size: 18px;
+  color: #8a8d92;
+  margin: 20px 0 20px 20px;
+  font-weight: 400;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-header h3.avatar-h3,
+.modal#jobModal .modal-lg .modal-content .modal-header h3.avatar-h3,
+.modal#educationModal .modal-lg .modal-content .modal-header h3.avatar-h3,
+.modal#shoutoutModal .modal-lg .modal-content .modal-header h3.avatar-h3,
+.modal#avatarModal .modal-lg .modal-content .modal-header h3.avatar-h3,
+.modal#inviteModal .modal-lg .modal-content .modal-header h3.avatar-h3 {
+  float: left;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-header .avatar-message,
+.modal#jobModal .modal-lg .modal-content .modal-header .avatar-message,
+.modal#educationModal .modal-lg .modal-content .modal-header .avatar-message,
+.modal#shoutoutModal .modal-lg .modal-content .modal-header .avatar-message,
+.modal#avatarModal .modal-lg .modal-content .modal-header .avatar-message,
+.modal#inviteModal .modal-lg .modal-content .modal-header .avatar-message {
+  float: left;
+  margin-left: 15px;
+  margin-top: 11px;
+  display: inline-block;
+  padding: 10px;
+  padding-right: 30px;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-header .avatar-message i,
+.modal#jobModal .modal-lg .modal-content .modal-header .avatar-message i,
+.modal#educationModal .modal-lg .modal-content .modal-header .avatar-message i,
+.modal#shoutoutModal .modal-lg .modal-content .modal-header .avatar-message i,
+.modal#avatarModal .modal-lg .modal-content .modal-header .avatar-message i,
+.modal#inviteModal .modal-lg .modal-content .modal-header .avatar-message i {
+  color: #2185D0;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-header button.close,
+.modal#jobModal .modal-lg .modal-content .modal-header button.close,
+.modal#educationModal .modal-lg .modal-content .modal-header button.close,
+.modal#shoutoutModal .modal-lg .modal-content .modal-header button.close,
+.modal#avatarModal .modal-lg .modal-content .modal-header button.close,
+.modal#inviteModal .modal-lg .modal-content .modal-header button.close {
+  margin-top: 10px;
+  margin-right: 25px;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-header button.close span,
+.modal#jobModal .modal-lg .modal-content .modal-header button.close span,
+.modal#educationModal .modal-lg .modal-content .modal-header button.close span,
+.modal#shoutoutModal .modal-lg .modal-content .modal-header button.close span,
+.modal#avatarModal .modal-lg .modal-content .modal-header button.close span,
+.modal#inviteModal .modal-lg .modal-content .modal-header button.close span {
+  font-size: 40px;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body,
+.modal#jobModal .modal-lg .modal-content .modal-body,
+.modal#educationModal .modal-lg .modal-content .modal-body,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body,
+.modal#avatarModal .modal-lg .modal-content .modal-body,
+.modal#inviteModal .modal-lg .modal-content .modal-body {
+  padding-top: 20px;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body h3.publish-modal-heading,
+.modal#jobModal .modal-lg .modal-content .modal-body h3.publish-modal-heading,
+.modal#educationModal .modal-lg .modal-content .modal-body h3.publish-modal-heading,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body h3.publish-modal-heading,
+.modal#avatarModal .modal-lg .modal-content .modal-body h3.publish-modal-heading,
+.modal#inviteModal .modal-lg .modal-content .modal-body h3.publish-modal-heading {
+  color: #65a9fc;
+  font-size: 30px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 0;
+  margin-bottom: 100px;
+  display: none;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body h4.publish-modal-description,
+.modal#jobModal .modal-lg .modal-content .modal-body h4.publish-modal-description,
+.modal#educationModal .modal-lg .modal-content .modal-body h4.publish-modal-description,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body h4.publish-modal-description,
+.modal#avatarModal .modal-lg .modal-content .modal-body h4.publish-modal-description,
+.modal#inviteModal .modal-lg .modal-content .modal-body h4.publish-modal-description {
+  color: #606467;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 0;
+  padding: 0 200px;
+  display: none;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body .form-group,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group {
+  position: relative;
+  padding-left: 20px;
+  padding-right: 15px;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body .form-group [type=file],
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group [type=file],
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group [type=file],
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group [type=file],
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group [type=file],
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group [type=file] {
+  position: absolute;
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body .form-group [type=file] + label,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group [type=file] + label,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group [type=file] + label,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group [type=file] + label,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group [type=file] + label,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group [type=file] + label {
+  border: 1px solid #CCC;
+  border-radius: 3px;
+  text-align: left;
+  padding: 155px 0 0 0;
+  width: 170px;
+  height: 155px;
+  font-weight: 300;
+  position: relative;
+  text-align: center;
+  background: #f5f6fa;
+  color: #91969c;
+  border: none;
+  cursor: pointer;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:hover, .modal#storyModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:focus, .modal#storyModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:active,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:hover,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:focus,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:active,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:hover,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:focus,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:active,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:hover,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:focus,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:active,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:hover,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:focus,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:active,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:hover,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:focus,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group [type=file] + label:active {
+  background: #dfe0e4;
+  color: #8b8f94;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body .form-group img.file-input-first-image,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group img.file-input-first-image,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group img.file-input-first-image,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group img.file-input-first-image,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group img.file-input-first-image,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group img.file-input-first-image {
+  position: absolute;
+  z-index: 100;
+  top: -15px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  pointer-events: none;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body .form-group input#input-image-avatar + label,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group input#input-image-avatar + label,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group input#input-image-avatar + label,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group input#input-image-avatar + label,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group input#input-image-avatar + label,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group input#input-image-avatar + label {
+  width: 200px;
+  height: 200px;
+  padding: 200px 0 0 0;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body .form-group img#input-image-story,
+.modal#storyModal .modal-lg .modal-content .modal-body .form-group img#input-image-job,
+.modal#storyModal .modal-lg .modal-content .modal-body .form-group img#input-image-education,
+.modal#storyModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group img#input-image-story,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group img#input-image-job,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group img#input-image-education,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group img#input-image-story,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group img#input-image-job,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group img#input-image-education,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group img#input-image-story,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group img#input-image-job,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group img#input-image-education,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group img#input-image-story,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group img#input-image-job,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group img#input-image-education,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group img#input-image-story,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group img#input-image-job,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group img#input-image-education,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar {
+  position: absolute;
+  width: 152px;
+  height: 155px;
+  top: 0;
+  left: 20px;
+  z-index: 100;
+  display: none;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar,
+.modal#jobModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar,
+.modal#educationModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar,
+.modal#avatarModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar,
+.modal#inviteModal .modal-lg .modal-content .modal-body .form-group img#input-image-avatar {
+  width: 200px;
+  height: 200px;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-body .modal-inputs,
+.modal#jobModal .modal-lg .modal-content .modal-body .modal-inputs,
+.modal#educationModal .modal-lg .modal-content .modal-body .modal-inputs,
+.modal#shoutoutModal .modal-lg .modal-content .modal-body .modal-inputs,
+.modal#avatarModal .modal-lg .modal-content .modal-body .modal-inputs,
+.modal#inviteModal .modal-lg .modal-content .modal-body .modal-inputs {
+  padding-right: 25px;
+  padding-left: 15px;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-footer,
+.modal#jobModal .modal-lg .modal-content .modal-footer,
+.modal#educationModal .modal-lg .modal-content .modal-footer,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer,
+.modal#avatarModal .modal-lg .modal-content .modal-footer,
+.modal#inviteModal .modal-lg .modal-content .modal-footer {
+  border: none;
+  background-color: #f0f4f7;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-footer button,
+.modal#jobModal .modal-lg .modal-content .modal-footer button,
+.modal#educationModal .modal-lg .modal-content .modal-footer button,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button {
+  font-size: 16px;
+  border-radius: 8px;
+  width: 150px;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-footer button.save-draft,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.close-modal,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.close-avatar-modal,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.save-draft,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.close-modal,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.close-avatar-modal,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.save-draft,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.close-modal,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.close-avatar-modal,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.save-draft,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-modal,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-avatar-modal,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.save-draft,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-modal,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-avatar-modal,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.save-draft,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-modal,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-avatar-modal {
+  border: 2px solid #e2e7eb;
+  color: #8b949d;
+  background-color: transparent;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-footer button.save-draft:hover, .modal#storyModal .modal-lg .modal-content .modal-footer button.save-draft:active, .modal#storyModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.close-modal:active,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.save-draft:hover,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.save-draft:active,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.close-modal:active,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.save-draft:hover,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.save-draft:active,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.close-modal:active,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.save-draft:hover,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.save-draft:active,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-modal:active,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.save-draft:hover,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.save-draft:active,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-modal:active,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.save-draft:hover,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.save-draft:active,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-modal:active,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus {
+  background-color: #eaeef1;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-footer button.publish,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.new-post,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.publish,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.new-post,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.publish,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.new-post,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.publish,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.new-post,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.publish,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.new-post,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.publish,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.new-post {
+  background-color: #76c84a;
+  color: #f7fff1;
+  border: 2px solid #76c84a;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-footer button.publish:hover, .modal#storyModal .modal-lg .modal-content .modal-footer button.publish:focus, .modal#storyModal .modal-lg .modal-content .modal-footer button.publish:active,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.new-post:hover,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.new-post:focus,
+.modal#storyModal .modal-lg .modal-content .modal-footer button.new-post:active,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.publish:hover,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.publish:focus,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.publish:active,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.new-post:hover,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.new-post:focus,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.new-post:active,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.publish:hover,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.publish:focus,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.publish:active,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.new-post:hover,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.new-post:focus,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.new-post:active,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.publish:hover,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.publish:focus,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.publish:active,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.new-post:hover,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.new-post:focus,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.new-post:active,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.publish:hover,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.publish:focus,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.publish:active,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.new-post:hover,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.new-post:focus,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.new-post:active,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.publish:hover,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.publish:focus,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.publish:active,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.new-post:hover,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.new-post:focus,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.new-post:active {
+  background-color: #6fba46;
+  border: 2px solid #6fba46;
+}
+
+.modal#storyModal .modal-lg .modal-content .modal-footer button.close-modal,
+.modal#jobModal .modal-lg .modal-content .modal-footer button.close-modal,
+.modal#educationModal .modal-lg .modal-content .modal-footer button.close-modal,
+.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-modal,
+.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-modal,
+.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-modal {
+  display: none;
+}
+
+.modal#inviteModal .modal-dialog .modal-content .modal-footer button.close-modal {
+  display: initial;
+}
+
+.modal-inputs input.title,
+.modal-inputs input.state,
+.modal-inputs input.city,
+.modal-inputs input.company,
+.modal-inputs textarea.description,
+.modal-inputs textarea.title,
+.modal-inputs input, .post input.title,
+.post input.state,
+.post input.city,
+.post input.company,
+.post textarea.description,
+.post textarea.title,
+.post input {
+  border: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  display: block;
+  width: 100%;
+  float: right;
+  font-size: 16px;
+  font-weight: 400;
+  border-bottom: 2px solid #e4e8eb;
+  color: #86939e;
+  margin-top: 25px;
+  resize: none;
+  line-height: 1.44;
+  font-family: 'Roboto', sans-serif;
+}
+
+.modal-inputs input:first-child, .post input:first-child {
+  margin-top: 0;
+}
+
+.modal-inputs p.symbols, .post p.symbols {
+  color: #a4a5a7;
+  float: right;
+  font-size: 12px;
+}
+
+section.background-image {
+  min-height: 400px;
+  margin-top: 59px;
+  position: relative;
+}
+
+section.background-image .owl-carousel .item img {
+  width: 100%;
+  height: 400px;
+}
+
+section.background-image .button-next, section.background-image .button-prev, .post .image .button-next, .post .image .button-prev {
+  position: absolute;
+  z-index: 100;
+  display: none;
+}
+
+section.background-image .button-next i, section.background-image .button-prev i, .post .image .button-next i, .post .image .button-prev i {
+  font-size: 80px;
+  color: #f2f2f2;
+  opacity: 0.5;
+  position: relative;
+  line-height: 400px;
+  cursor: pointer;
+}
+
+section.background-image .button-next i:hover, section.background-image .button-prev i:hover, .post .image .button-next i:hover, .post .image .button-prev i:hover {
+  opacity: 0.8;
+}
+
+section.background-image .button-next, .post .image .button-next {
+  right: 0;
+}
+
+section.background-image .button-prev, .post .image .button-prev {
+  left: 0;
+}
+
+.post .image .button-prev i, .post .image .button-next i {
+  line-height: 125px;
+  font-size: 55px;
+}
+
+.post .image .button-prev {
+  left: 15px;
+}
+
+.post .image .button-next {
+  right: -10px;
+}
+
+.post .image .owl-carousel .item img {
+  width: 100%;
+  height: 125px !important;
+}
+
+.modal-body .post .image .button-prev i, .modal-body .post .image .button-next i {
+  font-size: 75px;
+  line-height: 340px;
+}
+
+.modal-body .post .image .button-prev {
+  left: 0;
+}
+
+.modal-body .post .image .button-next {
+  right: 0;
+}
+
+.modal-body .post .image .owl-carousel .item img {
+  width: 100%;
+  height: 340px !important;
+}
+
+#timeline {
+  background-color: #f2f2f2;
+}
+
+#timeline ul {
+  padding: 0;
+  overflow: auto;
+  float: left;
+  list-style-type: none;
+}
+
+#timeline ul li.swipeout {
+  overflow: hidden;
+}
+
+.modal.timeline .modal-dialog .modal-content {
+  padding: 0;
+}
+
+.timeline-post {
+  max-height: 320px;
+}
+
+.timeline-post .post p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  max-height: 320px;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
+}
+
+.input-timeline {
+  max-height: inherit;
+}
+
+.timeline-post, .modal.timeline .modal-dialog .modal-content .modal-body {
+  padding: 0;
+  border-bottom: 1px solid #e1e8ee;
+  cursor: pointer;
+  margin-top: 10px;
+  padding-top: 24px;
+  background-color: white;
+}
+
+.timeline-post .input-header, .modal.timeline .modal-dialog .modal-content .modal-body .input-header {
+  background-color: #f0f4f7;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  cursor: auto;
+  margin-top: -24px;
+}
+
+.timeline-post .input-header i, .timeline-post .input-header span, .modal.timeline .modal-dialog .modal-content .modal-body .input-header i, .modal.timeline .modal-dialog .modal-content .modal-body .input-header span {
+  font-size: 14px;
+  line-height: 40px;
+  color: #5e6977;
+  margin: 0;
+  font-weight: 400;
+}
+
+.timeline-post .input-header span, .modal.timeline .modal-dialog .modal-content .modal-body .input-header span {
+  margin-left: 10px;
+}
+
+.timeline-post .picture, .modal.timeline .modal-dialog .modal-content .modal-body .picture {
+  float: left;
+}
+
+.timeline-post .picture img, .modal.timeline .modal-dialog .modal-content .modal-body .picture img {
+  height: 60px;
+  width: 60px;
+  margin-left: 20px;
+  border-radius: 100%;
+  margin-right: 15px;
+}
+
+.timeline-post .post.post-input, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input {
+  margin-bottom: 30px;
+  padding-right: 25px;
+  margin-top: 15px;
+  margin-left: 95px;
+}
+
+.timeline-post .post.post-input textarea, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input textarea {
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15);
+  background-color: transparent;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.44;
+  color: #86939e;
+  margin-bottom: 15px;
+}
+
+.timeline-post .post.post-input .appearing-content, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content {
+  display: none;
+  position: relative;
+}
+
+.timeline-post .post.post-input .appearing-content .upload-photo, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .upload-photo {
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-left: none;
+  border-right: none;
+  height: 40px;
+  cursor: pointer;
+  float: left;
+  position: relative;
+}
+
+.timeline-post .post.post-input .appearing-content .upload-photo a, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .upload-photo a {
+  padding: 0 15px;
+  color: #B3B7BD;
+}
+
+.timeline-post .post.post-input .appearing-content .upload-photo a i, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .upload-photo a i {
+  line-height: 40px;
+}
+
+.timeline-post .post.post-input .appearing-content .ui, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui {
+  margin-top: 0 !important;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown {
+  padding: .78571429em 1em .7em 1em;
+  border: 1px solid rgba(34, 36, 38, 0.15) !important;
+  border-radius: 0;
+  height: 40px;
+  float: left;
+  position: relative;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 100px;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown input.search, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown input.search {
+  padding: 5px 0 !important;
+  margin-left: 15px;
+  padding-top: 3px !important;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown .text:not(.default), .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown .text:not(.default) {
+  left: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  top: -.78571429em;
+  margin-right: 27px;
+  padding: 0;
+  margin-bottom: 0;
+  margin: 0;
+  display: inline;
+  margin-right: 10px;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown .text, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown .text {
+  position: relative;
+  top: -15px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown i.dropdown.icon, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown i.dropdown.icon {
+  display: inline;
+  position: relative;
+  top: -15px;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown {
+  min-width: 17em;
+  max-width: 17em;
+  background-color: transparent;
+  border: none;
+  height: 40px;
+  border: 1px solid rgba(34, 36, 38, 0.15) !important;
+  border-radius: 0;
+  position: relative;
+  float: left;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown input.search, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown input.search {
+  padding: 5px 0 !important;
+  margin-left: 20px;
+  padding-top: 3px !important;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown i.remove.icon, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown i.remove.icon {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: 30;
+  display: none;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text {
+  margin-left: 15px;
+  top: -1px;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default), .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) {
+  left: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  top: -2px;
+  margin-right: 27px;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) img, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) img {
+  margin-right: 0 !important;
+  padding: 0 !important;
+  margin-right: 10px !important;
+  margin-bottom: 0;
+  width: auto;
+  max-height: 2em;
+  margin-top: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) span, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) span {
+  position: relative;
+  top: 2px;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .header i span, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .header i span {
+  margin-left: 10px;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .item, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .item {
+  padding: 10px !important;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .item img, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .item img {
+  margin-right: 0 !important;
+  padding: 0 !important;
+  margin-right: 10px !important;
+  margin-bottom: 5px;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .input, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .input {
+  margin: 0px;
+}
+
+.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .input input, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .input input {
+  padding: .5em 15px !important;
+  padding-right: 10% !important;
+}
+
+.timeline-post .post h5, .modal.timeline .modal-dialog .modal-content .modal-body .post h5 {
+  font-size: 14px;
+  line-height: 1;
+  color: #5e6977;
+  margin: 0;
+}
+
+.timeline-post .post h5.name, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.name {
+  margin-top: 5px;
+}
+
+.timeline-post .post h5.date, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.date {
+  font-weight: 400;
+  margin-top: 5px;
+  color: #86939e;
+}
+
+.timeline-post .post h5.year-happend, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.year-happend {
+  text-align: right;
+  position: absolute;
+  top: 29px;
+  right: 20px;
+  font-weight: 400;
+  color: #86939e;
+}
+
+.timeline-post .post h5.company, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.company {
+  text-align: right;
+  position: absolute;
+  top: 52px;
+  right: 20px;
+  font-weight: 400;
+  color: #86939e;
+}
+
+.timeline-post .post p, .modal.timeline .modal-dialog .modal-content .modal-body .post p {
+  font-size: 14px;
+  color: #86939e;
+  line-height: 1.71;
+  margin-left: 95px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding-right: 15px;
+}
+
+.timeline-post .post .image, .modal.timeline .modal-dialog .modal-content .modal-body .post .image {
+  width: 50%;
+  height: 50%;
+  float: right;
+  padding-left: 25px;
+  margin-top: 20px;
+  margin-right: 15px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.timeline-post .post .image img, .modal.timeline .modal-dialog .modal-content .modal-body .post .image img {
+  width: 100%;
+  min-height: 50px;
+  max-height: 200px;
+}
+
+.timeline-post .buttons, .modal.timeline .modal-dialog .modal-content .modal-body .buttons {
+  background-color: #f0f4f7;
+  text-align: right;
+  padding: 10px 25px;
+  display: none;
+  clear: both;
+}
+
+.timeline-post .buttons button, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button {
+  font-size: 16px;
+  border-radius: 8px;
+  width: 150px;
+}
+
+.timeline-post .buttons button.btn-cancel, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel {
+  border: 2px solid #e2e7eb;
+  color: #8b949d;
+  margin-right: 15px;
+  background-color: transparent;
+}
+
+.timeline-post .buttons button.btn-cancel:hover, .timeline-post .buttons button.btn-cancel:active, .timeline-post .buttons button.btn-cancel:focus, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel:hover, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel:active, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel:focus {
+  background-color: #eaeef1;
+}
+
+.timeline-post .buttons button.btn-post, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post {
+  background-color: #76c84a;
+  color: #f7fff1;
+  border: 2px solid #76c84a;
+}
+
+.timeline-post .buttons button.btn-post:hover, .timeline-post .buttons button.btn-post:focus, .timeline-post .buttons button.btn-post:active, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post:hover, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post:focus, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post:active {
+  background-color: #6fba46;
+  border: 2px solid #6fba46;
+}
+
+.modal.timeline .modal-dialog .modal-content {
+  border-radius: 0;
+}
+
+.modal.timeline .modal-dialog .modal-content .modal-body {
+  border: none;
+  cursor: auto;
+}
+
+.modal.timeline .modal-dialog .modal-content .modal-body i.icon-more {
+  position: absolute;
+  right: 30px;
+  font-size: 22px;
+  color: #bdc6cf;
+  -webkit-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  top: 0;
+  cursor: pointer;
+}
+
+.modal.timeline .modal-dialog .modal-content .modal-body .visible-xs i {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  font-size: 22px;
+  color: #bdc6cf;
+  cursor: pointer;
+}
+
+.modal.timeline .modal-dialog .modal-content .modal-body .post .image {
+  width: 100%;
+  height: 100%;
+  float: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 20px;
+  padding-top: 20px;
+  position: relative;
+}
+
+.modal.timeline .modal-dialog .modal-content .modal-body .post .image .items .item img {
+  width: 100%;
+  height: 100%;
+  min-height: auto;
+  max-height: inherit;
+}
+
+.modal.timeline .modal-dialog .modal-content .modal-body .post p {
+  margin: 0;
+  padding: 0 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.modal#timelineModalEdit .modal-dialog .modal-content .modal-body {
+  padding: 0;
+}
+
+.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .post {
+  margin-left: 15px;
+  padding-right: 15px;
+}
+
+.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .post .appearing-content {
+  display: inherit;
+}
+
+.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .post .appearing-content .ui .menu .item img {
+  width: inherit;
+  height: inherit;
+  width: auto;
+  max-height: 2em;
+}
+
+.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .buttons {
+  display: inherit;
+}
+
+.file-upload .photo-element {
+  float: left;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  background-color: #f6f7f8;
+  margin-left: 5px;
+  margin-top: 5px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.0980392);
+}
+
+.file-upload .photo-element span.glyphicon-headphones,
+.file-upload .photo-element span.glyphicon-film,
+.file-upload .photo-element span.glyphicon-file {
+  font-size: 24px;
+  line-height: 100px;
+}
+
+.file-upload .photo-element a.remove {
+  color: #dcdcdc;
+  -webkit-text-fill-color: #fff;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #c7c8c8;
+  top: 5px;
+  right: 5px;
+  position: absolute;
+  z-index: 1;
+}
+
+.file-upload .photo-element a:hover.remove {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #c7c8c8;
+}
+
+.file-upload .photo-element a.remove .glyphicon {
+  top: 0;
+}
+
+.file-upload .photo-element img {
+  position: absolute;
+  background-color: #fff;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.file-upload .photo-element img.portrait {
+  width: 100%;
+  height: auto;
+}
+
+.file-upload {
+  background-color: transparent !important;
+  border: none !important;
+  overflow: hidden;
+  display: none;
+  margin-top: 15px;
+  margin-left: -5px;
+  clear: both;
+}
+
+.file-upload-input {
+  display: none !important;
+}
+
+.file-upload .progress {
+  width: 90px;
+  height: 10px;
+  margin: 5px;
+  background-color: #fff;
+  border: 1px solid #3a5795;
+  border-radius: 0;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+
+.file-upload .progress-bar {
+  background-color: #6d84b4;
+}
+
+.file-upload .progress.active .progress-bar {
+  transition: none !important;
+}
+
+.status-alert {
+  padding: 10px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  border-radius: 8px;
+  z-index: 999;
+  display: none;
+}
+
+.status-alert .alert-header {
+  float: left;
+  width: 100%;
+  height: auto;
+  color: #5e6977;
+  font-weight: 400;
+  padding: 5px 10px;
+  background-color: #f0f4f7;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+}
+
+.status-alert .alert-body {
+  float: left;
+  width: 100%;
+  height: auto;
+  color: #86939e;
+  line-height: 1.44;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-top: none;
+}
+
+.status-alert .alert-footer {
+  float: left;
+  width: 100%;
+  height: auto;
+  padding: 8px 10px 8px 10px;
+  background: #f0f4f7;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-top: none;
+}
+
+.status-alert .alert-footer button.btn-close {
+  border: 2px solid #e2e7eb;
+  color: #8b949d;
+  background-color: transparent;
+  font-size: 16px;
+  border-radius: 8px;
+  float: right;
+  padding: 2px 20px;
+}
+
+.status-alert .alert-footer button.btn-close:hover, .status-alert .alert-footer button.btn-close:active, .status-alert .alert-footer button.btn-close:focus {
+  background-color: #eaeef1;
+}
+
+@media screen and (max-width: 1199px) and (min-width: 992px) {
+  section.documentation .container .profile-information-after-fixed .container-fluid {
+    width: 970px;
+  }
+  section.documentation .container .profile-bottom i {
+    top: -33px !important;
+    right: 15px !important;
+  }
+  section.documentation .container .profile-bottom .skills p {
+    line-height: 24px !important;
+    padding: 0 !important;
+    text-align: center !important;
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+  }
+  section.documentation .container .profile-bottom .skills p:not(.hidden) {
+    display: block !important;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation ul.nav li a {
+    padding: 20px 20px !important;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div .dropdown i {
+    margin-right: 20px !important;
+    display: initial !important;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div p {
+    margin-right: 15px !important;
+    margin-left: 0 !important;
+    text-align: left;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div p.shoutout-paragraph {
+    margin-right: 30px !important;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div span {
+    margin-left: 5px;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div span.accomplishment {
+    margin-left: 0;
+  }
+  .comments-all {
+    margin-right: 20px !important;
+  }
+  .container .navbar {
+    min-height: 59px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  section.documentation .container .profile-bottom .skills {
+    text-align: center;
+  }
+  section.documentation .container .profile-documentation-full {
+    padding-right: 0;
+    padding-left: 0;
+    margin-top: 45px;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation {
+    margin-left: 0;
+    box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.1);
+  }
+  section.background-image {
+    height: 300px !important;
+    min-height: 300px !important;
+  }
+  section.background-image .button-prev i, section.background-image .button-next i {
+    line-height: 300px !important;
+  }
+  section.background-image .owl-carousel .item img {
+    max-height: 300px !important;
+    height: 300px !important;
+  }
+  .modal-lg {
+    width: 720px !important;
+  }
+  .modal-lg .modal-content .modal-body .form-group img:last-child {
+    width: 170px !important;
+  }
+  .modal-lg .modal-content .modal-body .selector.select-something .ui.dropdown {
+    margin-top: -30px !important;
+  }
+  .dropdown.more i {
+    margin-right: 25px !important;
+    font-size: 32px;
+    display: initial !important;
+  }
+  p.education-paragraph {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .file-upload .photo-element a.remove {
+    display: block !important;
+  }
+  header.main-header .container {
+    padding: 0;
+  }
+  header.main-header .container .navbar-default .navbar-toggle {
+    border: none;
+    background-color: white;
+  }
+  header.main-header .container .navbar {
+    min-height: 59px;
+  }
+  #navigation form.navbar-left {
+    display: none;
+  }
+  #navigation ul.nav li a {
+    text-align: right;
+  }
+  #navigation ul.nav li a img.profile-picture {
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    float: right;
+    margin-left: 10px;
+    margin-top: -10px;
+  }
+  #navigation ul.nav li a .round-number {
+    background-color: #ffb230;
+    height: 17px;
+    width: 17px;
+    text-align: center;
+    display: table;
+    border-radius: 100%;
+    margin-left: 10px;
+    z-index: 1000;
+    position: relative;
+    cursor: pointer;
+    float: right;
+  }
+  #navigation ul.nav li a .round-number span {
+    color: white;
+    font-size: 10px;
+    line-height: 17px;
+    font-weight: 500;
+    display: table-cell;
+  }
+  #navigation ul.nav li a:first-child {
+    margin-top: 10px;
+  }
+  section.documentation .container {
+    padding: 0 10px;
+  }
+  section.documentation .container .profile-upper button.white-background {
+    white-space: nowrap;
+  }
+  section.documentation .container .profile-documentation-full {
+    padding-right: 0;
+    padding-left: 0;
+    margin-top: 45px;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation {
+    margin-left: 0;
+    box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.1);
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .plusIcon, section.documentation .container .profile-documentation-full .profile-documentation .shoutoutIcon {
+    top: -25px;
+    right: 15px;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation ul.nav li {
+    display: block;
+    float: none;
+    text-align: center;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div {
+    text-align: center;
+    margin-bottom: 5px;
+    position: static;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div .dropdown {
+    position: static;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div .dropdown i {
+    position: absolute;
+    top: 25px;
+    right: -15px;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div p.education-paragraph {
+    margin-bottom: 10px;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div h4.publish-modal-description {
+    padding: 0;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div h3.publish-modal-heading {
+    font-size: 25px;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div p {
+    text-align: justify !important;
+    margin-bottom: 15px;
+    position: static;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div p.shoutout-paragraph {
+    margin-right: 30px !important;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div span {
+    margin-left: 5px;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div span.accomplishment {
+    margin-left: 0;
+  }
+  section.documentation .container .profile-documentation-full .profile-documentation .life-experience > div .position-information {
+    text-align: left;
+  }
+  section.background-image {
+    height: 250px !important;
+    min-height: 250px !important;
+  }
+  section.background-image .button-prev i, section.background-image .button-next i {
+    line-height: 250px !important;
+  }
+  section.background-image .owl-carousel .item img {
+    max-height: 250px !important;
+    height: 250px !important;
+  }
+  .modal {
+    padding-right: 20px;
+  }
+  .modal .modal-lg {
+    width: 100% !important;
+  }
+  .modal .modal-lg .modal-content .modal-footer button {
+    width: 125px !important;
+  }
+  .modal .modal-lg .modal-content .modal-body {
+    padding: 0 10px;
+  }
+  .modal .modal-lg .modal-content .modal-body .form-group label {
+    width: 100% !important;
+  }
+  .modal .modal-lg .modal-content .modal-body .form-group img:last-child {
+    width: 100% !important;
+  }
+  .modal .modal-lg .modal-content .modal-body .modal-inputs {
+    margin-bottom: 20px;
+  }
+  .modal .modal-lg .modal-content .modal-body .modal-inputs .ui.col-lg-12.active {
+    padding: 0;
+  }
+  .modal .modal-lg .modal-content .modal-body .ui.search.dropdown .menu {
+    max-height: 15rem;
+  }
+  .timeline-post .post.post-input .appearing-content {
+    width: 130%;
+    margin-left: -55px;
+  }
+  .timeline-post .buttons, .modal.timeline .buttons {
+    padding: 10px 15px;
+  }
+  .timeline-post .buttons button, .modal.timeline .buttons button {
+    width: 120px;
+  }
+  .timeline-post .picture img, .modal.timeline .picture img {
+    height: 40px;
+    width: 40px;
+    margin-left: 10px;
+  }
+  .timeline-post .post h5.company, .modal.timeline .post h5.company {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 105px;
+    right: 15px;
+  }
+  .timeline-post .post h5.year-happend, .modal.timeline .post h5.year-happend {
+    right: 15px;
+  }
+  .timeline-post .post .image, .modal.timeline .post .image {
+    margin-right: 10px;
+  }
+  .timeline-post .post .image .owl-carousel .item img, .modal.timeline .post .image .owl-carousel .item img {
+    height: 150px !important;
+  }
+  .timeline-post .post p, .modal.timeline .post p {
+    margin-left: 0px;
+    padding: 0 15px !important;
+  }
+  .timeline-post .post.post-input, .modal.timeline .post.post-input {
+    margin-left: 65px;
+    padding-right: 15px;
+  }
+  .timeline-post .post.post-input textarea, .modal.timeline .post.post-input textarea {
+    height: 4em !important;
+  }
+  .timeline-post .post.post-input .appearing-content .ui, .modal.timeline .post.post-input .appearing-content .ui {
+    min-width: inherit !important;
+  }
+  .timeline-post .post.post-input .appearing-content .ui.selection.dropdown, .modal.timeline .post.post-input .appearing-content .ui.selection.dropdown {
+    min-width: 9.690em;
+    width: 52%;
+  }
+  .timeline-post .post.post-input .appearing-content .upload-photo, .modal.timeline .post.post-input .appearing-content .upload-photo {
+    min-width: 50px;
+    max-width: 50px;
+    text-align: center;
+  }
+  .timeline-post .post.post-input .appearing-content .upload-photo a, .modal.timeline .post.post-input .appearing-content .upload-photo a {
+    padding: 0;
+  }
+  .timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown, .modal.timeline .post.post-input .appearing-content .ui.scrolling.dropdown {
+    max-width: 80.5px;
+    min-width: 80.5px;
+    padding-left: 10px;
+  }
+  .timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown input.search, .modal.timeline .post.post-input .appearing-content .ui.scrolling.dropdown input.search {
+    height: 40px;
+  }
+  .timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown .text, .modal.timeline .post.post-input .appearing-content .ui.scrolling.dropdown .text {
+    margin-left: 5px;
+    top: -11px !important;
+    line-height: 40px;
+  }
+  .timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown i.dropdown, .modal.timeline .post.post-input .appearing-content .ui.scrolling.dropdown i.dropdown {
+    float: right;
+    position: absolute !important;
+    top: 0 !important;
+    line-height: 40px !important;
+  }
+  img.file-input-first-image {
+    display: none;
+  }
+  .dropdown.more i {
+    font-size: 32px !important;
+    margin-right: 25px !important;
+    display: initial !important;
+  }
+  .ui.blue.message {
+    margin-right: 15px;
+    margin-bottom: 15px;
+  }
+  .profile-bottom .skills {
+    text-align: center;
+  }
+  .modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs {
+    margin-left: 0 !important;
+  }
+  .modal.timeline .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown .text {
+    margin-left: 0;
+  }
+  .modal.timeline .modal-body .buttons {
+    padding: 10px 15px !important;
+    white-space: nowrap !important;
+  }
+  .modal.timeline .modal-body .buttons button {
+    float: left;
+    display: inline-block;
+    width: 125px !important;
+    margin-right: 0 !important;
+    margin-bottom: 10px;
+  }
+  .modal.timeline .modal-body .buttons button:nth-child(2) {
+    float: right;
+  }
+  .modal.timeline .modal-body .buttons button:last-child {
+    float: none;
+    display: block;
+    margin: 0 auto;
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .appearing-content .ui.scrolling {
+    width: 28.5% !important;
+  }
+  .appearing-content .ui.scrolling i.dropdown {
+    right: 5px;
+  }
+  .profile-bottom i {
+    top: -33px !important;
+  }
+  .profile-bottom .skills p {
+    line-height: 24px !important;
+    padding: 0 !important;
+    text-align: center !important;
+    margin-right: 0 !important;
+    margin-bottom: 10px !important;
+  }
+  .profile-bottom .skills p:not(.hidden) {
+    display: block !important;
+  }
+}
+
+@media screen and (min-width: 400px) and (max-width: 500px) {
+  .appearing-content .ui.scrolling {
+    width: 23% !important;
+    max-width: 85px !important;
+  }
+  .appearing-content .ui.scrolling i.dropdown {
+    right: 10px;
+  }
+}
+
+@media screen and (min-width: 350px) and (max-width: 400px) {
+  .appearing-content .ui.scrolling {
+    width: 26.5% !important;
+  }
+  .appearing-content .ui.scrolling i.dropdown {
+    right: 10px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 350px) {
+  .appearing-content .ui.scrolling {
+    width: 28.5% !important;
+  }
+  .appearing-content .ui.scrolling i.dropdown {
+    right: 5px;
+  }
+  .profile-bottom i {
+    right: 7px !important;
+  }
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  background-color: #f2f2f2;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+}
+
+body header.main-header {
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  margin-top: -59px;
+  z-index: 20;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.modal {
+  top: 0 !important;
+}
+
+.panel-collapse {
+  padding-right: 0;
+  padding-left: 0;
+  background-color: #e7ecef;
+}
+
+.tab-content .tab-pane .panel-group .panel:last-child .panel-heading .col-lg-12 {
+  border-bottom: none;
+}
+
+.educations .education .education-description .dropdown.more img {
+  margin-right: 25px;
+}
+
+.bullet-points, .dropdown.more {
+  cursor: pointer;
+}
+
+#jobs .job, #jobs .education {
+  display: none;
+}
+
+#accordion {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.tab-content {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.tab-content .tab-pane {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.shoutoutIcon {
+  display: none;
+}
+
+.owl-wrapper {
+  margin-top: 0 !important;
+}
+
+.panel-group .panel + .panel {
+  margin: 0;
+}
+
+p.no-accomplishments {
+  margin-bottom: 0;
+  padding-bottom: 25px;
+  text-align: center;
+}
+
+.collapsing {
+  transition: height 1s;
+}
+
+.modal {
+  top: 70px;
+}
+
+.navbar-toggle {
+  margin-top: 15px;
+}
+
+.btn-flat {
+  color: white;
+  background-color: #8BC34A;
+  border-radius: 5px;
+}
+
+.btn-flat:hover {
+  color: #f5f5f5;
+}
+
+.btn-flat.dtp-btn-ok {
+  margin-left: 5px;
+}

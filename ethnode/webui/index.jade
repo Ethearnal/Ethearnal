@@ -1,0 +1,307 @@
+doctype html
+html(lang='en-US')
+    head
+        meta(charset='UTF-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='description', content='')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+
+        title Aspire
+
+        // START of LINKS
+
+        // Normalize.css
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css")
+
+        // BootstrapCSS 3.3.7
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+
+        // Semantic UI CSS
+        link(rel="stylesheet", href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.css")
+
+        // Perfect Scrollbar jQuery CSS
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.12/css/perfect-scrollbar.min.css")
+
+        // Owl Carousel CSS
+        //- link(rel="stylesheet", href="https://cdn.rawgit.com/OwlFonk/OwlCarousel/master/owl-carousel/owl.carousel.css")
+        link(rel="stylesheet", href="https://bbcdn.githack.com/shahzadns/owlfonk-owlcarousel/raw/31413692812896e19db89baee9be30b9d36d1e64/owl-carousel/owl.carousel.css")
+
+        // Cropper jQuery CSS
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css")
+
+        // Bootstrap Material Date and Time Picker
+        link(rel="stylesheet", href="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/css/bootstrap-material-datetimepicker.css")
+
+        // Icons
+        link(rel="stylesheet", href="styles/icons.css")
+
+        // START of FONTS
+
+        // Google Material Icons
+        link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+
+        // Roboto
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i")
+
+        // END of FONTS
+
+        // Main CSS file
+        link(rel="stylesheet", href="styles/main.css")
+
+        // END of LINKS
+
+    body
+
+        include mixins/modals/shoutout-modal
+        include mixins/modals/education-modal
+        include mixins/modals/job-modal
+        include mixins/modals/story-modal
+        include mixins/modals/accomplishment-modal
+        include mixins/modals/avatar-ui-modal
+        include mixins/modals/modal-invite
+        include mixins/modals/timeline-modal
+        include mixins/modals/timeline-modal-edit
+
+        // Header includes "Aspire" logo, search option, messages, alerts icons and profile image and it's name.
+        // There's 2 collapse divs, one for mobile screens and another one for everything higher than mobile screens.
+        header.main-header
+
+            .container
+                nav.navbar.navbar-default
+
+                    // Navigation header - logo.
+                    .navbar-header
+
+                        .form-group.visible-xs
+                            a(href=""): i.icon-search
+                            input.form-control(text="text", placeholder="Search Ethearnal")
+
+                        .button
+                            button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target="#navigation", aria-expanded="false")
+                                span
+                                span
+                                span
+                                span
+
+
+                        a.navbar-brand(href='').hidden-xs Ethearnal BETA
+
+                    // Navbar items ONLY for larger than mobile screens.
+                    .collapse.navbar-collapse#navigation
+
+                        form.navbar-form.navbar-left
+                            .form-group
+                                a(href=""): i.icon-search
+                                input.form-control(text="text", placeholder="Search Ethearnal")
+
+                        ul.nav.navbar-nav.navbar-right.hidden-xs
+                            li.asset#comment-navbar
+                                a(href="")
+                                    i.icon-comment
+                                    .round-number
+                                        span 1
+
+                            li.asset#alert-navbar
+                                a(href="")
+                                    i.material-icons polymer
+                                    .round-number
+                                        span 3
+
+                            li.profile(data-toggle="dropdown")
+                                img.profile-picture(src="images/dobri.png", alt="Dobri")
+                                span Dobri
+
+                            ul.dropdown-menu(aria-labelledby="dLabel")
+                                li.settings
+                                    a(href="") Settings
+                                        i.material-icons settings
+
+                                li.logout
+                                    a(href="") Logout
+                                        i.material-icons power_settings_new
+
+                        ul.nav.navbar-nav.visible-xs
+                            li
+                                a(href="") Dobri
+                                    img.profile-picture(src="images/dobri.png", alt="Dobri")
+                            li
+                                a(href='#') Messages
+                                    .round-number
+                                        span 1
+                            li
+                                a(href='#') Alerts
+                                    .round-number
+                                        span 1
+
+                            li.settings-mobile
+                                a(href='#') Settings
+                                    i.material-icons settings
+
+                            li.logout-mobile
+                                a(href='#') Logout
+                                    i.material-icons power_settings_new
+
+
+        // Background image section, including a button with lock and unlock icons.
+        section.background-image
+            .button-prev: i.material-icons keyboard_arrow_left
+            .button-next: i.material-icons keyboard_arrow_right
+            .items
+                .item: img(src="images/background-road-different.png", alt="Building")
+                .item: img(src="images/background-buildings.png", alt="Building")
+                .item: img(src="images/background-downtown.png", alt="Building")
+
+        // This section is for your whole profile, including left and right sides, profile information and etc.
+        section.documentation
+
+            .container
+
+                .profile-information-fixed.col-lg-4.col-md-4.col-sm-12.col-xs-12.hidden
+
+                // Profile information including profile image, current work, current city and state, skills and etc.
+                .profile-information-before-fixed.col-lg-4.col-md-4.col-sm-12.col-xs-12
+
+                    include mixins/profile-card
+
+
+
+                // Profile information including profile image, current work, current city and state, skills and etc.
+                .profile-information-after-fixed.col-lg-12.col-md-12.col-sm-12.col-xs-12.hidden
+
+                    .container-fluid
+
+                        .container.col-lg-4.col-md-4.col-sm-12.col-xs-12
+
+                            include mixins/profile-card
+
+
+                // Profile documentation including jobs and education, stories, shout-outs and questions with answers
+                .col-lg-8.col-md-8.col-sm-12.col-xs-12.profile-documentation-full
+
+                    .profile-documentation.col-lg-12.col-md-12.col-sm-12.col-xs-12
+
+                        ul.nav.nav-tabs(role="tablist")
+                            li.timeline-li(role="presentation"): a(href="#timeline", aria-controls="jobs", role="tab", data-toggle="tab") Timeline
+                            li.active.jobs-li(role="presentation"): a(href="#jobs", aria-controls="jobs", role="tab", data-toggle="tab") Jobs & Education
+
+                        .plusIcon.dropdown-toggle(data-toggle="dropdown")
+                            i.material-icons add
+
+                        ul.dropdown-menu(aria-labelledby="dLabel")
+                            li.add-job: a(href="", data-toggle="modal", data-target="#jobModal") Add Job
+                            li.add-education: a(href="", data-toggle="modal", data-target="#educationModal") Add Education
+                            li.add-story: a(href="", data-toggle="modal", data-target="#storyModal") Add Story
+                            li.divider
+                            li.invite-someone: a(href="", data-toggle="modal", data-target="#inviteModal") Invite someone to Aspire
+
+                        .shoutoutIcon(data-toggle="modal", data-target="#shoutoutModal")
+                            i.announcement.icon
+
+
+                        // All the information about above listed tabs.
+                        .tab-content.col-lg-12.col-md-12.col-sm-12.col-xs-12
+
+                            // Timeline TAB
+                            .tab-pane.fade#timeline.list-block.col-lg-12.col-md-12.col-sm-12.col-xs-12(role="tabpanel")
+
+                                .timeline-post.input-timeline.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                    include mixins/timeline/post-input
+
+                                ul
+                                    li.swipeout
+                                        .timeline-post.swipeout-content.item-content.col-lg-12.col-md-12.col-sm-12.col-xs-12(data-toggle="modal", data-target="#timelineModal")
+                                            include mixins/timeline/default-post
+
+                                        .swipeout-actions-left
+                                        .swipeout-actions-right
+
+                                    li.swipeout
+                                        .timeline-post.swipeout-content.item-content.col-lg-12.col-md-12.col-sm-12.col-xs-12(data-toggle="modal", data-target="#timelineModal")
+                                            include mixins/timeline/default-post
+
+                                        .swipeout-actions-left
+                                        .swipeout-actions-right
+
+
+
+                            // Jobs & Education TAB
+                            .tab-pane.fade.in.active#jobs.col-lg-12.col-md-12.col-sm-12.col-xs-12(role="tabpanel")
+
+                                // JOBS
+                                .jobs-container
+                                    .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        include mixins/jobs/default-job
+
+                                    .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        include mixins/jobs/job-aspire
+
+                                    .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        include mixins/jobs/job-kaiser
+
+                                    .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        include mixins/jobs/jobs-main-information
+
+                                    .jobs-see.see-more.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        p + See more jobs
+
+                                    .jobs-see.see-less.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        p - See less jobs
+
+
+                                // EDUCATION
+                                .education-container
+                                    .education.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        include mixins/educations/education-policy
+
+                                    .education.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        include mixins/educations/education-electrical
+
+                                    .education.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        include mixins/educations/education-main-information
+
+                                    .education.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        include mixins/educations/education-main-information
+
+                                    .educations-see.see-more.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        p + See more education
+
+                                    .educations-see.see-less.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                        p - See less education
+
+
+        // jQuery 3.1.1
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+
+        // jQuery UI 1.21.1
+        script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js")
+
+        // jQuery UI Monthpicker
+        script(src="https://cdn.rawgit.com/lucianocosta/jquery.mtz.monthpicker/master/jquery.mtz.monthpicker.js")
+
+        // BootstrapJS 3.3.7
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
+
+        // Semantic UI JS
+        script(src="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.js")
+
+        // Perfect Scrollbar jQuery JS
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.12/js/perfect-scrollbar.jquery.min.js")
+
+        // Owl Carousel JS
+        //- script(src="https://cdn.rawgit.com/OwlFonk/OwlCarousel/master/owl-carousel/owl.carousel.min.js")
+        script(src="https://bbcdn.githack.com/shahzadns/owlfonk-owlcarousel/raw/31413692812896e19db89baee9be30b9d36d1e64/owl-carousel/owl.carousel.min.js")
+
+        // Cropper jQuery JS
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.js")
+
+        // Moment.JS
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js")
+
+        // Bootstrap Date Time Picker
+        script(src="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/js/bootstrap-material-datetimepicker.js")
+
+        // Framework7.JS
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.0/js/framework7.min.js")
+
+        // Main JS file
+        script(src="js/main.js")

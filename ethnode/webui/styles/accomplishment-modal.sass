@@ -1,0 +1,307 @@
+.modal#accomplishmentModal,
+.new-test-modal
+
+    .modal-lg
+        width: 900px
+
+        .modal-content
+            padding: 0
+
+            .modal-header
+                button.close span
+                    font-size: 36px
+
+                .form-group
+                    margin-top: 25px
+                    margin-bottom: -35px
+
+                    img
+                        position: absolute
+                        z-index: 100
+                        left: 55px
+                        top: 10px
+
+                    [type=file]
+                        position: absolute
+                        filter: alpha(opacity = 0)
+                        opacity: 0
+
+                    input.input-file
+                        border: 1px solid #CCC
+                        border-radius: 3px
+                        text-align: left
+                        padding: 10px
+                        width: 180px
+                        margin: 0
+                        left: 0
+                        position: relative
+
+                    [type=file] + label
+                        border: 1px solid #CCC
+                        border-radius: 3px
+                        text-align: left
+                        padding: 10px 20px
+                        width: 180px
+                        margin: 0
+                        left: 2em
+                        top: -3.5em
+                        font-weight: 400
+                        position: relative
+                        text-align: right
+                        background: #f5f6fa
+                        color: #91969c
+                        border: none
+                        cursor: pointer
+
+                        &:hover,
+                        &:focus,
+                        &:active
+                            background: #dfe0e4
+                            color: #8b8f94
+
+            .modal-header
+                padding: 25px
+                border: none
+
+                .form-group
+                    margin-left: 10px
+
+                img.file-input-first-image
+                    top: 5px
+
+                .col-lg-2, .col-lg-10
+                    padding: 0
+
+                .modal-image
+                    img
+                        height: 40px
+                        width: 40px
+                        float: left
+                        border-radius: 100%
+
+                .modal-inputs
+                    margin-left: -80px
+
+                    textarea, input
+                        border: none
+                        appearance: none
+                        outline: none
+                        display: block
+                        width: 100%
+                        float: right
+                        resize: none
+
+                        &::-webkit-scrollbar-track
+                            border-radius: 10px
+                            background-color: white
+
+                        &::-webkit-scrollbar
+                            width: 7px
+                            background-color: #F5F5F5
+
+                        &::-webkit-scrollbar-thumb
+                            border-radius: 10px
+                            background-color: #e5e5e5
+
+                    input.title
+                        color: #43484d
+                        font-size: 26px
+                        line-height: 1.31
+                        font-weight: 300
+                        font-family: 'Roboto', sans-serif
+
+                    textarea.description
+                        color: #5c656c
+                        font-size: 16px
+                        font-weight: 400
+                        margin-top: 10px
+                        line-height: 1.4
+
+            .modal-body
+                padding: 0 25px
+                border-bottom: none
+
+                h3.publish-modal-heading
+                    color: #65a9fc
+                    font-size: 30px
+                    font-weight: 400
+                    text-align: center
+                    margin-bottom: 0
+                    margin-bottom: 100px
+                    display: none
+
+                h4.publish-modal-description
+                    color: #606467
+                    font-size: 18px
+                    font-weight: 400
+                    text-align: center
+                    margin-top: 30px
+                    margin-bottom: 0
+                    padding: 0 200px
+                    display: none
+
+                .selector:first-child
+                    border-top: 1px solid #efefef
+
+                .selector.add-image
+                    padding: 0
+
+                    .form-group
+                        margin-top: 15px
+                        margin-left: -40px
+
+                        img
+                            left: 65px
+
+                .selector
+                    border-bottom: 1px solid #efefef
+                    padding: 20px 0
+
+                    p
+                        color: #5e6977
+                        font-size: 16px
+                        font-weight: 300
+                        padding: 0 50px
+                        text-align: center
+
+                    .icon-image
+                        float: left
+                        background-color: #f5f6fa
+                        width: 36px
+                        height: 36px
+                        border-radius: 100%
+                        position: relative
+                        margin-right: 15px
+                        margin-top: -5px
+                        text-align: center
+
+                        i
+                            line-height: 36px
+                            font-size: 14px
+                            color: #86939e
+
+                    input
+                        border: none
+                        outline: none !important
+                        font-size: 14px
+                        font-weight: 400
+                        width: 265px
+                        line-height: 1
+                        margin-top: 4px
+
+                        &::placeholder
+                            color: #5e6977
+                            font-family: 'Roboto', sans-serif
+                            font-weight: 400
+                            line-height: 1
+                            opacity: 1
+
+                .selector:last-child
+                    border-bottom: none
+
+                .selector.select-something
+                    padding: 10px 0
+
+                    .icon-image
+                        margin-top: 3px
+                        margin-right: 10px
+
+                        i
+                            font-size: 16px
+
+                    .ui.dropdown
+                        margin-top: 5px !important
+                        width: 94%
+                        float: right
+                        border: none
+                        box-shadow: none
+
+                        .text
+                            color: #5e6977
+                            line-height: 1
+                            font-family: 'Roboto', sans-serif
+                            font-weight: 400
+                            font-size: 14px
+
+                    .ui.label
+                        border: solid 1px #e1e8ee
+                        background-color: white
+                        color: #86939e
+                        box-shadow: none
+
+                .selector.add-team-members
+                    z-index: 99999
+
+                    .ui .text
+                        color: #5e6977
+
+                    .ui .menu
+
+                        &::-webkit-scrollbar-track
+                            border-radius: 10px
+                            background-color: white
+
+                        &::-webkit-scrollbar
+                            width: 7px
+                            background-color: #F5F5F5
+
+                        &::-webkit-scrollbar-thumb
+                            border-radius: 10px
+                            background-color: #e5e5e5
+
+                        .ui input
+                            font-size: 14px
+
+                        .header
+                            font-size: 16px
+                            font-weight: 400
+                            text-transform: none
+                            color: #5e6977
+
+                            i:before
+                                margin-right: 10px
+                                font-size: 14px
+
+                            span
+                                font-weight: 300
+
+                        .item span
+                            font-weight: 300
+
+
+            .modal-footer
+                border: none
+                background-color: #f0f4f7
+                border-bottom-left-radius: 6px
+                border-bottom-right-radius: 6px
+
+                button
+                    font-size: 16px
+                    border-radius: 8px
+                    width: 150px
+
+                button.save-draft,
+                button.close-modal
+                    border: 2px solid #e2e7eb
+                    color: #8b949d
+                    background-color: transparent
+
+                    &:hover,
+                    &:active,
+                    &:focus
+                        background-color: #eaeef1
+
+                button.publish,
+                button.new-post
+                    background-color: #76c84a
+                    color: #f7fff1
+                    border: 2px solid #76c84a
+
+                    &:hover,
+                    &:focus,
+                    &:active
+                        background-color: #6fba46
+                        border: 2px solid #6fba46
+
+                button.close-modal
+                    display: none

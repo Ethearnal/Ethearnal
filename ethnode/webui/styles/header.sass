@@ -1,0 +1,212 @@
+header .container nav
+    border: none
+    background-color: white
+    margin-bottom: 0
+
+    .navbar-header
+
+        .button
+            button.navbar-toggle
+                position: relative
+                width: 60px
+                transform: rotate(0deg)
+                transition: 0.5s ease-in-out
+                cursor: pointer
+                left: 20px
+                top: 8px
+
+                span
+                    display: block
+                    position: absolute
+                    height: 2px
+                    background-color: #abb4bb
+                    border-radius: 9px
+                    opacity: 1
+                    width: 25px
+                    left: 0
+                    top: 0
+                    transform: rotate(0deg)
+                    transition: 0.25s ease-in-out
+
+                span:nth-child(1)
+                    top: 0
+
+                span:nth-child(2), span:nth-child(3)
+                    top: 7px
+
+                span:nth-child(4)
+                    top: 14px
+
+
+            button:not(.collapsed)
+
+                span:nth-child(1), span:nth-child(4)
+                    top: 7px
+                    width: 0%
+                    left: 50%
+
+                span:nth-child(2)
+                    transform: rotate(45deg)
+
+                span:nth-child(3)
+                    transform: rotate(-45deg)
+
+
+        .form-group.visible-xs
+            margin-top: -5px
+            width: calc(75% - 45px)
+            float: left
+
+            a
+                margin-top: 5px
+
+                i
+                    color: #86939e
+                    font-size: 16px
+                    top: 29px
+                    position: relative
+
+            input
+                color: #86939e
+                font-size: 16px
+                border: none
+                outline: none !important
+                border-radius: 0
+                box-shadow: none
+                padding-left: 0
+                border-bottom: 1px solid #f0f4f7
+                margin-left: 45px
+
+    .navbar-header a
+        padding: 18px
+
+    #navigation form.navbar-left
+        border-left: 1px solid #e1e8ee
+        height: 23px
+        margin: 18px 0
+
+        .form-group
+            margin-top: -5px
+
+            a
+                margin-top: 5px
+
+                i
+                    color: #86939e
+                    font-size: 20px
+                    top: 5px
+                    position: relative
+
+            input
+                color: #86939e
+                font-size: 16px
+                border: none
+                outline: none !important
+                border-radius: 0
+                box-shadow: none
+
+
+    #navigation
+
+        ul.navbar-right
+            margin: 18px 0
+
+        ul
+
+            li.profile
+                border-left: 2px solid #e1e8ee
+                height: 23px
+                cursor: pointer
+                margin-left: 10px
+
+                img.profile-picture
+                    width: 36px
+                    height: 36px
+                    border-radius: 100%
+                    margin-left: 16px
+                    margin-top: -5px
+                    margin-right: 8px
+
+                span
+                    margin-top: -5px
+
+            li.asset
+                margin-top: -5px
+
+                a
+                    padding: 0
+
+                    i
+                        margin-right: 18px
+                        cursor: pointer
+                        font-size: 20px
+                        color: #afb4bb
+
+
+                    .round-number
+                        background-color: #ffb230
+                        // height: 17px
+                        // width: 100%
+                        text-align: center
+                        display: table
+                        border-radius: 100%
+                        margin-top: -23px
+                        margin-left: 13px
+                        z-index: 1000
+                        position: relative
+                        cursor: pointer
+
+                        span
+                            color: white
+                            font-size: 10px
+                            padding: 0 5px
+                            line-height: 17px
+                            font-weight: 500
+                            display: table-cell
+
+            li
+
+                span
+                    font-size: 16px
+                    color: #5e6977
+
+                i
+                    color: #5e6977
+                    position: relative
+                    top: 8px
+                    left: 5px
+
+            li.settings-mobile, li.logout-mobile
+                margin-top: -10px
+
+
+            ul.dropdown-menu
+                margin-top: 0px
+                border-radius: 0
+                min-width: 128px
+                border: 1px solid #e1e8ee
+                padding: 0
+
+                li
+                    font-weight: 500
+                    padding-left: 5px
+
+                    a
+                        font-size: 16px
+                        color: #86939e
+                        line-height: 40px
+
+                        i
+                            font-size: 22px
+                            position: relative
+                            color: #86939e
+                            float: left
+                            left: -5px
+                            line-height: 25px
+
+                    &:hover, &:focus, &:active
+                        background-color: #edf3fa
+                        cursor: pointer
+
+                        a, i
+                            color: #127fff

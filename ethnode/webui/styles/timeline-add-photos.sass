@@ -1,0 +1,136 @@
+.file-upload .photo-element
+    float: left
+    width: 100px
+    height: 100px
+    position: relative
+    overflow: hidden
+    background-color: #f6f7f8
+    margin-left: 5px
+    margin-top: 5px
+    text-align: center
+    border: 1px solid rgba(0, 0, 0, 0.0980392)
+
+    span.glyphicon-headphones,
+    span.glyphicon-film,
+    span.glyphicon-file
+        font-size: 24px
+        line-height: 100px
+
+    a
+        &.remove
+            color: #dcdcdc
+            -webkit-text-fill-color: #fff
+            -webkit-text-stroke-width: 1px
+            -webkit-text-stroke-color: #c7c8c8
+            top: 5px
+            right: 5px
+            position: absolute
+            z-index: 1
+
+        &:hover.remove
+            color: #fff
+            -webkit-text-fill-color: #fff
+            -webkit-text-stroke-width: 1px
+            -webkit-text-stroke-color: #c7c8c8
+
+        &.remove .glyphicon
+            top: 0
+
+    img
+        position: absolute
+        background-color: #fff
+        left: 50%
+        top: 50%
+        height: 100%
+        width: auto
+        -webkit-transform: translate(-50%, -50%)
+        -ms-transform: translate(-50%, -50%)
+        transform: translate(-50%, -50%)
+
+        &.portrait
+            width: 100%
+            height: auto
+
+
+.file-upload
+    background-color: transparent !important
+    border: none !important
+    overflow: hidden
+    display: none
+    margin-top: 15px
+    margin-left: -5px
+    clear: both
+
+.file-upload-input
+    display: none !important
+
+.file-upload
+    .progress
+        width: 90px
+        height: 10px
+        margin: 5px
+        background-color: #fff
+        border: 1px solid #3a5795
+        border-radius: 0
+        position: absolute
+        bottom: 0
+        z-index: 1
+
+    .progress-bar
+        background-color: #6d84b4
+
+    .progress.active .progress-bar
+        -webkit-transition: none !important
+        transition: none !important
+
+
+.status-alert
+    padding: 10px
+    top: 0
+    left: 0
+    position: absolute
+    border-radius: 8px
+    z-index: 999
+    display: none
+
+    .alert-header
+        float: left
+        width: 100%
+        height: auto
+        color: #5e6977
+        font-weight: 400
+        padding: 5px 10px
+        background-color: #f0f4f7
+        border: 1px solid rgba(34, 36, 38, 0.15)
+
+    .alert-body
+        float: left
+        width: 100%
+        height: auto
+        color: #86939e
+        line-height: 1.44
+        padding: 10px
+        background-color: #fff
+        border: 1px solid rgba(34, 36, 38, 0.15)
+        border-top: none
+
+    .alert-footer
+        float: left
+        width: 100%
+        height: auto
+        padding: 8px 10px 8px 10px
+        background: #f0f4f7
+        border: 1px solid rgba(34, 36, 38, 0.15)
+        border-top: none
+
+        button.btn-close
+            border: 2px solid #e2e7eb
+            color: #8b949d
+            background-color: transparent
+            font-size: 16px
+            border-radius: 8px
+            float: right
+            padding: 2px 20px
+
+            &:hover, &:active, &:focus
+                background-color: #eaeef1

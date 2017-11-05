@@ -1,0 +1,99 @@
+.dropdown-menu .divider
+    margin: 0
+
+
+.ui.active
+    box-shadow: none
+    border: none
+
+.ui
+    border: none
+    appearance: none
+    outline: none
+    display: block
+    width: 100%
+    float: right
+    font-size: 18px
+    font-weight: 300
+    padding-left: 0
+    padding-bottom: 0
+    padding-top: 0
+    color: #86939e
+    margin-top: 5px
+    box-shadow: none
+    border: 1px solid transparent !important
+    border-bottom: 2px solid #e4e8eb !important
+
+    &.active
+        border-color: #96C8DA !important
+
+        .text
+            margin-left: 15px
+
+    input.search
+        padding: inherit
+        margin-top: 0
+        padding-left: 0 !important
+        margin-left: 15px
+        line-height: 30px !important
+
+    .text
+        margin-top: 0px !important
+        line-height: 40px
+        color: rgba(191,191,191,.87)
+        // color: #86939e
+        font-family: 'Roboto', sans-serif
+        font-size: 16px
+        font-weight: normal
+        position: relative
+        top: 6px
+
+    .text:not(.default)
+        padding: 8px 0px
+        padding-top: 0
+        margin-bottom: 8px
+        margin-left: 15px
+
+    .default.text
+        margin-top: 25px
+
+    i.dropdown.icon
+        margin-top: 0
+        margin-right: -20px
+
+    .menu
+        position: relative
+
+        &::-webkit-scrollbar-track
+            border-radius: 10px
+            background-color: white
+
+        &::-webkit-scrollbar
+            width: 7px
+            background-color: #F5F5F5
+
+        &::-webkit-scrollbar-thumb
+            border-radius: 10px
+            background-color: #e5e5e5
+
+        .ui input
+            font-size: 14px
+
+        .header
+            font-size: 16px
+            font-weight: 400
+            text-transform: none
+            color: #606672
+
+            i:before
+                margin-right: 10px
+                font-size: 14px
+
+            span
+                font-weight: 300
+
+        .item span
+            font-weight: 300
+
+.ui.fluid.search.selection.dropdown
+    padding: 0 !important

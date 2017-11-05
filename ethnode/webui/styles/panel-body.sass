@@ -1,0 +1,485 @@
+.panel-body
+    // height: 992px
+    position: relative
+    padding: 0
+    overflow-x: hidden
+    border-top: none
+    background: linear-gradient(90deg, #b7b9c2 1px, #e7ecef 1px)
+    background-position: 100% 0
+    background-repeat: repeat-y
+    background-size: 97.3%
+
+    &::-webkit-scrollbar
+        display: none
+
+    .accomplishment, .shout-out
+        margin-top: 30px
+        margin-bottom: 30px
+        margin-left: 41px
+        margin-right: 20px
+        box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
+        border-radius: 6px
+
+        footer.comments
+            background-color: rgba(225, 232, 238, 0.5)
+            border-top: 1px solid #e1e8ee
+            box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.1)
+
+            button
+                width: 100px
+                line-height: 20px
+                font-size: 14px
+                font-weight: 500
+                color: #86939e
+                padding: 0
+                border: none
+                margin-left: 25px
+                background-color: transparent
+                margin-top: 15px
+
+                span
+                    margin-left: 10px
+
+            .comment
+                margin-left: 25px
+                margin-top: 30px
+
+                img
+                    width: 45px
+                    height: 45px
+                    float: left
+                    border-radius: 100%
+                    margin-top: -5px
+
+                span
+                    font-size: 14px
+                    font-weight: 500
+                    line-height: 1
+                    color: #5e6977
+                    margin-left: 15px
+
+                span.date
+                    color: #86939e
+                    font-weight: 400
+
+                p
+                    font-size: 14px
+                    line-height: 1.5
+                    color: #86939e
+                    margin-left: 60px
+                    margin-top: 5px
+
+            .write-comment
+                margin-top: 35px
+
+                .input-group
+                    margin-left: 25px
+                    margin-right: 25px
+                    padding-bottom: 20px
+                    width: 93%
+
+                    input
+                        border-radius: 6px
+                        border: 2px solid #e1e8ee
+                        background-color: white
+                        border-right: none
+                        border-bottom-right-radius: 0
+                        border-top-right-radius: 0
+                        box-shadow: none
+                        color: #86939e
+                        height: 42px
+
+                        &::-webkit-input-placeholder
+                            font-size: 14px
+                            line-height: 1
+                            color: #86939e
+
+                    span
+                        border-radius: 6px
+                        border: 2px solid #e1e8ee
+                        background-color: white
+                        border-left: none
+                        border-bottom-left-radius: 0
+                        border-top-left-radius: 0
+
+                        img
+                            margin-right: 15px
+                            cursor: pointer
+
+        header
+            padding-top: 35px
+            margin-left: 30px
+            margin-right: 30px
+
+            i
+                color: #bdc6cf
+
+                &:hover
+                    color: #b2bcc6
+
+            .bullet-points
+                position: relative
+
+                i
+                    float: right
+                    font-size: 22px
+                    color: #bdc6cf
+
+                    &:hover
+                        color: #b2bcc6
+
+                ul.dropdown-menu
+                    left: auto
+                    min-width: 270px
+                    border-radius: 0
+                    border: 1px solid #e1e8ee
+                    padding: 0
+                    right: -15px
+                    top: -15px
+
+                    li
+                        a
+                            font-size: 16px
+                            font-weight: 500
+                            color: #86939e
+                            line-height: 45px
+                            padding: 0 25px
+
+                            &:hover,
+                            &:focus,
+                            &:active
+                                color: #127fff
+                                background-color: #edf3fa
+
+            .bullet-point
+                width: 15px
+                height: 15px
+                background-color: white
+                box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
+                border: 1px solid #ccd3da
+                border-radius: 100%
+                position: absolute
+                left: 13px
+
+            img.more
+                float: right
+                margin-top: -20px
+
+            img.date
+                margin-top: -5px
+
+            span.shoutout-span
+                font-size: 14px
+                line-height: 1
+                color: white
+
+            span.accomplishment-span
+                font-size: 14px
+                color: #86939e
+                line-height: 1
+                margin-left: 5px
+
+            span.completion-date
+                text-decoration: underline
+                margin-left: 1px
+
+            span.date
+                opacity: 0.5
+
+            h2
+                font-size: 26px
+                font-weight: 300
+                line-height: 1.31
+                color: #43484d
+                margin-top: 25px
+                margin-bottom: 20px
+
+        .sharing ul
+            margin-top: 20px
+            padding-bottom: 20px
+            margin-left: 20px
+
+            li
+                span
+                    font-size: 14px
+                    line-height: 1
+                    color: #86939e
+                    margin-left: 10px
+
+                span.shoutout-footer-span
+                    color: white
+
+                i
+                    font-size: 14px
+                    color: #bdc6cf
+
+                    &:hover
+                        color: #b2bcc6
+
+    .accomplishment-full
+
+        .sharing
+            margin-right: 25px !important
+            margin-left: 25px !important
+
+        .description
+            text-align: center
+
+            ul li p
+                text-align: center
+
+            h2
+                font-size: 26px
+                font-weight: 300
+                line-height: 1.31
+                color: #43484d
+                margin-top: 25px
+                margin-bottom: 20px
+                text-align: left
+
+            p
+                text-align: left
+
+            .accomplishment-skills, .accomplishment-tools
+                padding-right: 0
+                padding-left: 0
+                width: 50%
+                float: left
+
+                h5
+                    text-transform: uppercase
+                    font-size: 12px
+                    color: #5e6977
+                    letter-spacing: 1px
+                    font-weight: 500
+                    text-align: left
+                    margin-top: 26px
+
+                .skills
+                    text-align: left
+                    margin-top: 18px
+                    padding-bottom: 20px
+
+                    p
+                        margin-top: 5px
+                        margin-right: 0
+                        margin-left: 0
+                        margin-bottom: 0
+                        display: inline-block
+
+                        span
+                            line-height: 32px
+                            border-radius: 4px
+                            border: solid 1px #e1e8ee
+                            padding: 0 10px
+                            color: #86939e
+                            display: inline-block
+
+                            &:hover,
+                            &:active,
+                            &:focus
+                                background-color: #e1e8ee
+                                cursor: pointer
+                                color: #99a9b6
+
+                        span.experience
+                            border: none
+                            border-radius: 0
+                            color: #5e6977
+                            text-align: right
+                            padding: 0 0 0 8px
+                            margin-right: 0
+
+            .accomplishment-tools
+                padding-left: 15px
+                padding-right: 0
+
+            .team-members
+                clear: both
+                overflow: auto
+                overflow-x: hidden
+
+                h2
+                    text-transform: uppercase
+                    font-size: 18px
+                    color: #5e6977
+                    letter-spacing: 1px
+                    font-weight: 500
+                    text-align: left
+                    margin-top: 50px
+                    text-align: center
+
+                .ui
+                    padding: 6px 10px
+                    padding-right: 26px
+                    border-radius: 5px
+                    background-color: transparent
+                    border: 1px solid #dadada
+                    box-shadow: 0px 0px 3px #eaeaea
+                    position: relative
+                    transition: all 0.3s ease 0s
+                    top: 0
+                    display: inline-block
+                    margin-top: 5px
+                    float: left
+
+                    &:hover
+                        background-color: #f5f5f5
+                        box-shadow: 0px 0px 10px #eaeaea
+                        top: -5px
+
+
+                    img
+                        width: 35px
+                        height: 35px
+                        border-radius: 100%
+                        float: left
+                        margin-top: 0
+
+                    span
+                        line-height: 35px
+                        color: #86939e
+                        position: relative
+                        left: 10px
+
+
+        .sharing
+            margin-top: 35px
+
+            ul
+                margin-left: 0
+
+                li
+                    margin-top: 5px
+                    margin-right: 10px
+
+
+    .accomplishment
+        background-color: white
+
+        ul.images
+            margin-top: 50px
+
+            li
+                margin-right: 10px
+
+                img
+                    width: 76px
+                    height: 76px
+                    border-radius: 100%
+                    box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
+
+                p
+                    font-size: 14px
+                    font-weight: 500
+                    line-height: 1
+                    color: #43484d
+                    margin-top: 10px
+
+        .description
+            margin: 0 30px 10px 30px
+
+            p
+                margin-top: 0
+                color: #86939e
+                line-height: 1.5
+                font-size: 16px
+                margin-bottom: 25px
+
+        .sharing
+            border-top: 1px solid #ebf0f5
+            margin-left: 5px
+            margin-right: 5px
+
+
+    .shout-out
+        background-color: #5babce
+        box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
+        border-radius: 6px
+
+        .sharing ul li
+            span
+                color: white
+
+            i
+                color: white
+
+
+        header .bullet-points
+
+            i
+                float: right
+                font-size: 22px
+                color: white
+
+                &:hover
+                    color: #f1f1f1
+
+        .qoute
+            text-align: center
+
+            img.qoute-picture
+                display: block
+                margin: 0 auto
+
+            h2
+                font-size: 26px
+                font-weight: 300
+                line-height: 1.31
+                color: white
+                text-align: center
+                margin: 25px 25px 30px 25px
+
+            .line
+                height: 1px
+                background-color: #e1e8ee
+                width: 46px
+                margin: 0 auto 30px auto
+
+            .author-information
+                margin-left: auto
+                margin-right: auto
+                padding-bottom: 80px
+                border-bottom: 1px solid #ebf0f5
+
+                img
+                    height: 40px
+                    width: 40px
+                    box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
+                    border-radius: 100%
+                    display: inline-block
+                    margin-top: -20px
+
+                .author-details
+                    display: inline-block
+                    margin-left: 15px
+
+                    h5
+                        margin-top: 0
+                        line-height: 1
+                        font-size: 14px
+                        font-weight: 500
+                        margin-bottom: 5px
+                        color: white
+                        text-align: left
+
+                    p
+                        font-size: 14px
+                        color: white
+                        line-height: 1
+                        margin-top: 0
+                        text-align: left
+
+
+    .accomplishment.image .description
+        margin: 30px 0 0 0
+
+    .accomplishment .description
+        img
+            max-width: 100%
+            max-height: 100%
+
+    .accomplishment-full .description
+        img.main-image
+            margin-top: 5px
+            margin-bottom: 25px

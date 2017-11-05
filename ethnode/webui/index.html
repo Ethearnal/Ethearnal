@@ -1,10 +1,1306 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <title>Ethearnal 0.0.1 new ui</title>
-</head>
-<body>
-Make awesome html UI here.
-</body>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aspire</title>
+    <!-- START of LINKS-->
+    <!-- Normalize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
+    <!-- BootstrapCSS 3.3.7-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Semantic UI CSS-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.css">
+    <!-- Perfect Scrollbar jQuery CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.12/css/perfect-scrollbar.min.css">
+    <!-- Owl Carousel CSS-->
+    <link rel="stylesheet" href="https://bbcdn.githack.com/shahzadns/owlfonk-owlcarousel/raw/31413692812896e19db89baee9be30b9d36d1e64/owl-carousel/owl.carousel.css">
+    <!-- Cropper jQuery CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css">
+    <!-- Bootstrap Material Date and Time Picker-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/css/bootstrap-material-datetimepicker.css">
+    <!-- Icons-->
+    <link rel="stylesheet" href="styles/icons.css">
+    <!-- START of FONTS-->
+    <!-- Google Material Icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Roboto-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i">
+    <!-- END of FONTS-->
+    <!-- Main CSS file-->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- END of LINKS-->
+  </head>
+  <body>
+    <div id="shoutoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            <h3>Add new shout-out</h3>
+          </div>
+          <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4 class="publish-modal-description">Woohoo, congratulations!</h4>
+            <h3 class="publish-modal-heading">Your shout-out has been published!</h3>
+            <div class="modal-inputs col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <input text="text" placeholder="Shout-out Topic" class="title">
+              <div class="ui fluid search selection dropdown col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <input type="hidden" name="user"><i class="dropdown icon"></i>
+                <div class="default text">Related to a particular job?</div>
+                <div class="menu">
+                  <div class="ui icon search input">
+                    <div class="search icon"></div>
+                    <input type="text" placeholder="Search company or add your own..." class="search-input">
+                  </div>
+                  <div class="divider"></div>
+                  <div class="header"><i class="building icon"><span>Available companies</span></i></div>
+                  <div data-value="pkfrontend" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Paulius Kasiuba's Front End Development</span></div>
+                  <div data-value="sharadvenkatfreelance" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Sharad Venkat's Freelancing company</span></div>
+                </div>
+              </div>
+              <textarea rows="3" placeholder="Shout-out Text" class="description"></textarea>
+              <p class="symbols"><span class="symbols-zero">0</span> / 400</p>
+            </div>
+          </div>
+          <div class="modal-footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" class="btn btn-default close-modal">Close</button>
+            <button type="button" class="btn btn-default save-draft">Save as Draft</button>
+            <button type="button" class="btn btn-default publish">Publish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="educationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            <h3>Add new education</h3>
+          </div>
+          <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4 class="publish-modal-description">Woohoo, congratulations!</h4>
+            <h3 class="publish-modal-heading">Your <span class="modal-name"></span> has been published!</h3>
+            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-8">
+              <input id="input-image-education" type="file" placeholder="Add image or video" class="input-file">
+              <label for="input-image-education">Add image or video</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image"><img id="input-image-education" src="#" alt="Preview">
+            </div>
+            <div class="modal-inputs col-lg-9 col-md-9 col-sm-8 col-xs-12">
+              <input text="text" placeholder="Field of Study" class="title title-symbols">
+              <p style="margin-bottom: 0;" class="symbols"><span class="symbols-zero">0</span> / 50</p>
+              <div class="ui fluid search selection dropdown institution-select">
+                <input type="hidden" name="education"><i class="dropdown icon"></i>
+                <div class="default text">School / University</div>
+                <div class="menu">
+                  <div class="header"><i class="university icon"><span>Available educational institutions</span></i></div>
+                  <div data-value="pkfrontend" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Paulius Kasiuba's Front End Development</span></div>
+                  <div data-value="sharadvenkatfreelance" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Sharad Venkat's Freelancing company</span></div>
+                </div>
+              </div>
+              <input id="date-start1" type="text" placeholder="Date Started">
+              <input id="date-end1" type="text" placeholder="Date Ended (leave blank if ongoing)">
+              <textarea rows="3" placeholder="Short Description" class="description"></textarea>
+              <p class="symbols"><span class="symbols-zero">0</span> / 200</p>
+            </div>
+          </div>
+          <div class="modal-footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" class="btn btn-default close-modal">Close</button>
+            <button type="button" class="btn btn-default save-draft">Save as Draft</button>
+            <button type="button" class="btn btn-default publish">Publish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="jobModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade active">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            <h3>Add new job</h3>
+          </div>
+          <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4 class="publish-modal-description">Woohoo, congratulations!</h4>
+            <h3 class="publish-modal-heading">Your <span class="modal-name"></span> has been published!</h3>
+            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-8">
+              <input id="input-image-job" type="file" placeholder="Add image or video" class="input-file">
+              <label for="input-image-job">Add image or video</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image"><img id="input-image-job" src="#" alt="Preview">
+            </div>
+            <div class="modal-inputs col-lg-9 col-md-9 col-sm-8 col-xs-12">
+              <input type="text" placeholder="Job Title" class="title title-symbols">
+              <p style="margin-bottom: 0;" class="symbols"><span class="symbols-zero">0</span> / 50</p>
+              <div class="ui fluid search selection dropdown institution-select">
+                <input type="hidden" name="job"><i class="dropdown icon"></i>
+                <div class="default text">Company</div>
+                <div class="menu">
+                  <div class="header"><i class="building icon"><span>Available companies</span></i></div>
+                  <div data-value="pkfrontend" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Paulius Kasiuba's Front End Development</span></div>
+                  <div data-value="sharadvenkatfreelance" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Sharad Venkat's Freelancing company</span></div>
+                </div>
+              </div>
+              <input id="date-start2" type="text" placeholder="Date Started">
+              <input id="date-end2" type="text" placeholder="Date Ended (leave blank if ongoing)">
+              <textarea rows="3" placeholder="Short Description" class="description"></textarea>
+              <p class="symbols"><span class="symbols-zero">0</span> / 200</p>
+            </div>
+          </div>
+          <div class="modal-footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" class="btn btn-default close-modal">Close</button>
+            <button type="button" class="btn btn-default save-draft">Save as Draft</button>
+            <button type="button" class="btn btn-default publish">Publish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="storyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            <h3>Add new story</h3>
+          </div>
+          <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4 class="publish-modal-description">Woohoo, congratulations!</h4>
+            <h3 class="publish-modal-heading">Your <span class="modal-name"></span> has been published!</h3>
+            <div class="form-group col-lg-3 col-md-3 col-sm-4 col-xs-8">
+              <input id="input-image-story" type="file" placeholder="Add image or video" class="input-file">
+              <label for="input-image-story">Add image or video</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image"><img id="input-image-story" src="#" alt="Preview">
+            </div>
+            <div class="modal-inputs col-lg-9 col-md-9 col-sm-8 col-xs-12">
+              <input text="text" placeholder="Story Title" class="title title-symbols">
+              <p style="margin-bottom: 0;" class="symbols"><span class="symbols-zero">0</span> / 50</p>
+              <textarea rows="3" placeholder="Short Description" class="description"></textarea>
+              <p class="symbols"><span class="symbols-zero">0</span> / 200</p>
+            </div>
+          </div>
+          <div class="modal-footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" class="btn btn-default close-modal">Close</button>
+            <button type="button" class="btn btn-default save-draft">Save as Draft</button>
+            <button type="button" class="btn btn-default publish">Publish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="accomplishmentModal" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-image col-lg-2 col-md-2 col-sm-3 col-xs-12"><img src="images/profilepicture.png" alt="Username"></div>
+            <div class="modal-inputs col-lg-10 col-md-10 col-sm-9 col-xs-12">
+              <input placeholder="Enter a title" class="title">
+              <textarea rows="10" placeholder="Start writing something about your career" class="description"></textarea>
+            </div>
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"><img src="images/file-images-add.png" alt="Add a file" class="file-input-first-image">
+              <input id="file-input" type="file" placeholder="Add image or video" class="input-file">
+              <label for="file-input">Add image or video</label>
+            </div>
+          </div>
+          <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4 class="publish-modal-description">Woohoo, congratulations!</h4>
+            <h3 class="publish-modal-heading">Your <span class="modal-name"></span> has been published!</h3>
+            <div class="selector select-something col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="icon-image"><i class="material-icons">label_outline</i></div>
+              <select name="skills" multiple="" class="ui fluid dropdown normal search skills-select">
+                <option value="">Add skills tags (limit: 5)...</option>
+                <option value="angular">Angular</option>
+                <option value="userexperience">User Experience</option>
+              </select>
+            </div>
+            <div class="selector select-something col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="icon-image"><i class="material-icons">label_outline</i></div>
+              <select name="tools" multiple="" class="ui fluid dropdown search tools-select">
+                <option value="">Add tools tags (limit: 5)...</option>
+                <option value="angular">Angular</option>
+                <option value="userexperience">User Experience</option>
+              </select>
+            </div>
+            <div class="selector add-duration-from col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="icon-image"><i class="icon-calendar-2"></i></div>
+              <input id="date-start0" type="text" placeholder="Date Started">
+            </div>
+            <div class="selector add-duration-to col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="icon-image"><i class="icon-calendar-2"></i></div>
+              <input id="date-end0" type="text" placeholder="Date Ended (leave blank if ongoing)">
+            </div>
+            <div class="selector add-team-members col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div id="accomplishment-ui" class="ui fluid search multiple selection dropdown">
+                <input type="hidden" name="country"><i class="dropdown icon"></i>
+                <div class="default text">Add team members...</div>
+                <div class="menu">
+                  <div class="ui icon search input">
+                    <div class="search icon"></div>
+                    <input type="text" placeholder="Search connects...">
+                  </div>
+                  <div class="divider"></div>
+                  <div class="header"><i class="users icon"><span>Your connections</span></i></div>
+                  <div data-value="pauliuskasiuba123" class="item"><img src="images/profilepicture.jpg" alt="Profile" class="ui avatar image"><span>Paulius Kasiuba</span></div>
+                  <div data-value="sharadvenkat145" class="item"><img src="images/profilepicture.jpg" alt="Profile" class="ui avatar image"><span>Sharad Venkat</span></div>
+                  <div data-value="personone123" class="item"><img src="images/profilepicture.jpg" alt="Profile" class="ui avatar image"><span>Person One</span></div>
+                  <div data-value="persontwo145" class="item"><img src="images/profilepicture.jpg" alt="Profile" class="ui avatar image"><span>Person Two</span></div>
+                  <div data-value="davidguetta123" class="item"><img src="images/profilepicture.jpg" alt="Profile" class="ui avatar image"><span>David Guetta</span></div>
+                  <div data-value="sharadvenkat111" class="item"><img src="images/profilepicture.jpg" alt="Profile" class="ui avatar image"><span>Sharad Venkat</span></div>
+                  <div data-value="personone777" class="item"><img src="images/profilepicture.jpg" alt="Profile" class="ui avatar image"><span>Person One</span></div>
+                  <div data-value="persontwo777" class="item"><img src="images/profilepicture.jpg" alt="Profile" class="ui avatar image"><span>Person Two</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="selector plain-reminder-text col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <p>If you can’t find a team member, you’re probably not connected to them or they’re not on Aspire yet.  To connect with someone just go to their profile and click connect.  To invite someone press the big + button on your profile and select ‘Invite someone to Aspire’</p>
+            </div>
+          </div>
+          <div class="modal-footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" class="btn btn-default close-modal">Close</button>
+            <button type="button" class="btn btn-default save-draft">Save as Draft</button>
+            <button type="button" class="btn btn-default publish">Publish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="avatarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="avatar-h3">Edit your profile</h3>
+            <div class="ui blue message avatar-message hidden-xs"><i class="close icon"></i>You can click and drag on the picture to select the part you want to be cropped!</div>
+            <div class="ui blue message avatar-message visible-xs"><i class="close icon"></i>You can zoom in and zoom out of the picture to make sure it's centered perfectly!</div>
+          </div>
+          <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4 class="publish-modal-description">Woohoo, congratulations.</h4>
+            <h3 class="publish-modal-heading">Your profile has been updated!</h3>
+            <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <input id="input-image-avatar" type="file" placeholder="Add profile photo" class="input-file">
+              <label for="input-image-avatar">Add profile photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image"><img id="input-image-avatar" src="#" alt="Preview" style="max-width: 100%" class="img-responsive">
+            </div>
+            <div class="modal-inputs col-lg-8 col-md-8 col-sm-8 col-xs-12">
+              <input text="text" placeholder="Name" class="title">
+              <input text="text" placeholder="Title" class="company">
+              <input text="text" placeholder="State" class="state">
+              <input text="text" placeholder="City" class="city">
+              <!-- Country-->
+              <div class="ui fluid search selection dropdown">
+                <input type="hidden" name="country"><i class="dropdown icon"></i>
+                <div class="default text">Select Country</div>
+                <div class="menu">
+                  <div class="header"><i class="map outline icon"><span>Available countries</span></i></div>
+                  <div data-value="us" class="item"><i class="us flag"></i>United States</div>
+                  <div data-value="af" class="item"><i class="af flag"></i>Afghanistan</div>
+                  <div data-value="ax" class="item"><i class="ax flag"></i>Aland Islands</div>
+                  <div data-value="al" class="item"><i class="al flag"></i>Albania</div>
+                  <div data-value="dz" class="item"><i class="dz flag"></i>Algeria</div>
+                  <div data-value="as" class="item"><i class="as flag"></i>American Samoa</div>
+                  <div data-value="ad" class="item"><i class="ad flag"></i>Andorra</div>
+                  <div data-value="ao" class="item"><i class="ao flag"></i>Angola</div>
+                  <div data-value="ai" class="item"><i class="ai flag"></i>Anguilla</div>
+                  <div data-value="ag" class="item"><i class="ag flag"></i>Antigua</div>
+                  <div data-value="ar" class="item"><i class="ar flag"></i>Argentina</div>
+                  <div data-value="am" class="item"><i class="am flag"></i>Armenia</div>
+                  <div data-value="aw" class="item"><i class="aw flag"></i>Aruba</div>
+                  <div data-value="au" class="item"><i class="au flag"></i>Australia</div>
+                  <div data-value="at" class="item"><i class="at flag"></i>Austria</div>
+                  <div data-value="az" class="item"><i class="az flag"></i>Azerbaijan</div>
+                  <div data-value="bs" class="item"><i class="bs flag"></i>Bahamas</div>
+                  <div data-value="bh" class="item"><i class="bh flag"></i>Bahrain</div>
+                  <div data-value="bd" class="item"><i class="bd flag"></i>Bangladesh</div>
+                  <div data-value="bb" class="item"><i class="bb flag"></i>Barbados</div>
+                  <div data-value="by" class="item"><i class="by flag"></i>Belarus</div>
+                  <div data-value="be" class="item"><i class="be flag"></i>Belgium</div>
+                  <div data-value="bz" class="item"><i class="bz flag"></i>Belize</div>
+                  <div data-value="bj" class="item"><i class="bj flag"></i>Benin</div>
+                  <div data-value="bm" class="item"><i class="bm flag"></i>Bermuda</div>
+                  <div data-value="bt" class="item"><i class="bt flag"></i>Bhutan</div>
+                  <div data-value="bo" class="item"><i class="bo flag"></i>Bolivia</div>
+                  <div data-value="ba" class="item"><i class="ba flag"></i>Bosnia</div>
+                  <div data-value="bw" class="item"><i class="bw flag"></i>Botswana</div>
+                  <div data-value="bv" class="item"><i class="bv flag"></i>Bouvet Island</div>
+                  <div data-value="br" class="item"><i class="br flag"></i>Brazil</div>
+                  <div data-value="vg" class="item"><i class="vg flag"></i>British Virgin Islands</div>
+                  <div data-value="bn" class="item"><i class="bn flag"></i>Brunei</div>
+                  <div data-value="bg" class="item"><i class="bg flag"></i>Bulgaria</div>
+                  <div data-value="bf" class="item"><i class="bf flag"></i>Burkina Faso</div>
+                  <div data-value="ar" class="item"><i class="ar flag"></i>Burma</div>
+                  <div data-value="bi" class="item"><i class="bi flag"></i>Burundi</div>
+                  <div data-value="tc" class="item"><i class="tc flag"></i>Caicos Islands</div>
+                  <div data-value="kh" class="item"><i class="kh flag"></i>Cambodia</div>
+                  <div data-value="cm" class="item"><i class="cm flag"></i>Cameroon</div>
+                  <div data-value="ca" class="item"><i class="ca flag"></i>Canada</div>
+                  <div data-value="cv" class="item"><i class="cv flag"></i>Cape Verde</div>
+                  <div data-value="ky" class="item"><i class="ky flag"></i>Cayman Islands</div>
+                  <div data-value="cf" class="item"><i class="cf flag"></i>Central African Republic</div>
+                  <div data-value="td" class="item"><i class="td flag"></i>Chad</div>
+                  <div data-value="cl" class="item"><i class="cl flag"></i>Chile</div>
+                  <div data-value="cn" class="item"><i class="cn flag"></i>China</div>
+                  <div data-value="cx" class="item"><i class="cx flag"></i>Christmas Island</div>
+                  <div data-value="cc" class="item"><i class="cc flag"></i>Cocos Islands</div>
+                  <div data-value="co" class="item"><i class="co flag"></i>Colombia</div>
+                  <div data-value="km" class="item"><i class="km flag"></i>Comoros</div>
+                  <div data-value="cg" class="item"><i class="cg flag"></i>Congo Brazzaville</div>
+                  <div data-value="cd" class="item"><i class="cd flag"></i>Congo</div>
+                  <div data-value="ck" class="item"><i class="ck flag"></i>Cook Islands</div>
+                  <div data-value="cr" class="item"><i class="cr flag"></i>Costa Rica</div>
+                  <div data-value="ci" class="item"><i class="ci flag"></i>Cote Divoire</div>
+                  <div data-value="hr" class="item"><i class="hr flag"></i>Croatia</div>
+                  <div data-value="cu" class="item"><i class="cu flag"></i>Cuba</div>
+                  <div data-value="cy" class="item"><i class="cy flag"></i>Cyprus</div>
+                  <div data-value="cz" class="item"><i class="cz flag"></i>Czech Republic</div>
+                  <div data-value="dk" class="item"><i class="dk flag"></i>Denmark</div>
+                  <div data-value="dj" class="item"><i class="dj flag"></i>Djibouti</div>
+                  <div data-value="dm" class="item"><i class="dm flag"></i>Dominica</div>
+                  <div data-value="do" class="item"><i class="do flag"></i>Dominican Republic</div>
+                  <div data-value="ec" class="item"><i class="ec flag"></i>Ecuador</div>
+                  <div data-value="eg" class="item"><i class="eg flag"></i>Egypt</div>
+                  <div data-value="sv" class="item"><i class="sv flag"></i>El Salvador</div>
+                  <div data-value="gb" class="item"><i class="gb flag"></i>England</div>
+                  <div data-value="gq" class="item"><i class="gq flag"></i>Equatorial Guinea</div>
+                  <div data-value="er" class="item"><i class="er flag"></i>Eritrea</div>
+                  <div data-value="ee" class="item"><i class="ee flag"></i>Estonia</div>
+                  <div data-value="et" class="item"><i class="et flag"></i>Ethiopia</div>
+                  <div data-value="eu" class="item"><i class="eu flag"></i>European Union</div>
+                  <div data-value="fk" class="item"><i class="fk flag"></i>Falkland Islands</div>
+                  <div data-value="fo" class="item"><i class="fo flag"></i>Faroe Islands</div>
+                  <div data-value="fj" class="item"><i class="fj flag"></i>Fiji</div>
+                  <div data-value="fi" class="item"><i class="fi flag"></i>Finland</div>
+                  <div data-value="fr" class="item"><i class="fr flag"></i>France</div>
+                  <div data-value="gf" class="item"><i class="gf flag"></i>French Guiana</div>
+                  <div data-value="pf" class="item"><i class="pf flag"></i>French Polynesia</div>
+                  <div data-value="tf" class="item"><i class="tf flag"></i>French Territories</div>
+                  <div data-value="ga" class="item"><i class="ga flag"></i>Gabon</div>
+                  <div data-value="gm" class="item"><i class="gm flag"></i>Gambia</div>
+                  <div data-value="ge" class="item"><i class="ge flag"></i>Georgia</div>
+                  <div data-value="de" class="item"><i class="de flag"></i>Germany</div>
+                  <div data-value="gh" class="item"><i class="gh flag"></i>Ghana</div>
+                  <div data-value="gi" class="item"><i class="gi flag"></i>Gibraltar</div>
+                  <div data-value="gr" class="item"><i class="gr flag"></i>Greece</div>
+                  <div data-value="gl" class="item"><i class="gl flag"></i>Greenland</div>
+                  <div data-value="gd" class="item"><i class="gd flag"></i>Grenada</div>
+                  <div data-value="gp" class="item"><i class="gp flag"></i>Guadeloupe</div>
+                  <div data-value="gu" class="item"><i class="gu flag"></i>Guam</div>
+                  <div data-value="gt" class="item"><i class="gt flag"></i>Guatemala</div>
+                  <div data-value="gw" class="item"><i class="gw flag"></i>Guinea-Bissau</div>
+                  <div data-value="gn" class="item"><i class="gn flag"></i>Guinea</div>
+                  <div data-value="gy" class="item"><i class="gy flag"></i>Guyana</div>
+                  <div data-value="ht" class="item"><i class="ht flag"></i>Haiti</div>
+                  <div data-value="hm" class="item"><i class="hm flag"></i>Heard Island</div>
+                  <div data-value="hn" class="item"><i class="hn flag"></i>Honduras</div>
+                  <div data-value="hk" class="item"><i class="hk flag"></i>Hong Kong</div>
+                  <div data-value="hu" class="item"><i class="hu flag"></i>Hungary</div>
+                  <div data-value="is" class="item"><i class="is flag"></i>Iceland</div>
+                  <div data-value="in" class="item"><i class="in flag"></i>India</div>
+                  <div data-value="io" class="item"><i class="io flag"></i>Indian Ocean Territory</div>
+                  <div data-value="id" class="item"><i class="id flag"></i>Indonesia</div>
+                  <div data-value="ir" class="item"><i class="ir flag"></i>Iran</div>
+                  <div data-value="iq" class="item"><i class="iq flag"></i>Iraq</div>
+                  <div data-value="ie" class="item"><i class="ie flag"></i>Ireland</div>
+                  <div data-value="il" class="item"><i class="il flag"></i>Israel</div>
+                  <div data-value="it" class="item"><i class="it flag"></i>Italy</div>
+                  <div data-value="jm" class="item"><i class="jm flag"></i>Jamaica</div>
+                  <div data-value="jp" class="item"><i class="jp flag"></i>Japan</div>
+                  <div data-value="jo" class="item"><i class="jo flag"></i>Jordan</div>
+                  <div data-value="kz" class="item"><i class="kz flag"></i>Kazakhstan</div>
+                  <div data-value="ke" class="item"><i class="ke flag"></i>Kenya</div>
+                  <div data-value="ki" class="item"><i class="ki flag"></i>Kiribati</div>
+                  <div data-value="kw" class="item"><i class="kw flag"></i>Kuwait</div>
+                  <div data-value="kg" class="item"><i class="kg flag"></i>Kyrgyzstan</div>
+                  <div data-value="la" class="item"><i class="la flag"></i>Laos</div>
+                  <div data-value="lv" class="item"><i class="lv flag"></i>Latvia</div>
+                  <div data-value="lb" class="item"><i class="lb flag"></i>Lebanon</div>
+                  <div data-value="ls" class="item"><i class="ls flag"></i>Lesotho</div>
+                  <div data-value="lr" class="item"><i class="lr flag"></i>Liberia</div>
+                  <div data-value="ly" class="item"><i class="ly flag"></i>Libya</div>
+                  <div data-value="li" class="item"><i class="li flag"></i>Liechtenstein</div>
+                  <div data-value="lt" class="item"><i class="lt flag"></i>Lithuania</div>
+                  <div data-value="lu" class="item"><i class="lu flag"></i>Luxembourg</div>
+                  <div data-value="mo" class="item"><i class="mo flag"></i>Macau</div>
+                  <div data-value="mk" class="item"><i class="mk flag"></i>Macedonia</div>
+                  <div data-value="mg" class="item"><i class="mg flag"></i>Madagascar</div>
+                  <div data-value="mw" class="item"><i class="mw flag"></i>Malawi</div>
+                  <div data-value="my" class="item"><i class="my flag"></i>Malaysia</div>
+                  <div data-value="mv" class="item"><i class="mv flag"></i>Maldives</div>
+                  <div data-value="ml" class="item"><i class="ml flag"></i>Mali</div>
+                  <div data-value="mt" class="item"><i class="mt flag"></i>Malta</div>
+                  <div data-value="mh" class="item"><i class="mh flag"></i>Marshall Islands</div>
+                  <div data-value="mq" class="item"><i class="mq flag"></i>Martinique</div>
+                  <div data-value="mr" class="item"><i class="mr flag"></i>Mauritania</div>
+                  <div data-value="mu" class="item"><i class="mu flag"></i>Mauritius</div>
+                  <div data-value="yt" class="item"><i class="yt flag"></i>Mayotte</div>
+                  <div data-value="mx" class="item"><i class="mx flag"></i>Mexico</div>
+                  <div data-value="fm" class="item"><i class="fm flag"></i>Micronesia</div>
+                  <div data-value="md" class="item"><i class="md flag"></i>Moldova</div>
+                  <div data-value="mc" class="item"><i class="mc flag"></i>Monaco</div>
+                  <div data-value="mn" class="item"><i class="mn flag"></i>Mongolia</div>
+                  <div data-value="me" class="item"><i class="me flag"></i>Montenegro</div>
+                  <div data-value="ms" class="item"><i class="ms flag"></i>Montserrat</div>
+                  <div data-value="ma" class="item"><i class="ma flag"></i>Morocco</div>
+                  <div data-value="mz" class="item"><i class="mz flag"></i>Mozambique</div>
+                  <div data-value="na" class="item"><i class="na flag"></i>Namibia</div>
+                  <div data-value="nr" class="item"><i class="nr flag"></i>Nauru</div>
+                  <div data-value="np" class="item"><i class="np flag"></i>Nepal</div>
+                  <div data-value="an" class="item"><i class="an flag"></i>Netherlands Antilles</div>
+                  <div data-value="nl" class="item"><i class="nl flag"></i>Netherlands</div>
+                  <div data-value="nc" class="item"><i class="nc flag"></i>New Caledonia</div>
+                  <div data-value="pg" class="item"><i class="pg flag"></i>New Guinea</div>
+                  <div data-value="nz" class="item"><i class="nz flag"></i>New Zealand</div>
+                  <div data-value="ni" class="item"><i class="ni flag"></i>Nicaragua</div>
+                  <div data-value="ne" class="item"><i class="ne flag"></i>Niger</div>
+                  <div data-value="ng" class="item"><i class="ng flag"></i>Nigeria</div>
+                  <div data-value="nu" class="item"><i class="nu flag"></i>Niue</div>
+                  <div data-value="nf" class="item"><i class="nf flag"></i>Norfolk Island</div>
+                  <div data-value="kp" class="item"><i class="kp flag"></i>North Korea</div>
+                  <div data-value="mp" class="item"><i class="mp flag"></i>Northern Mariana Islands</div>
+                  <div data-value="no" class="item"><i class="no flag"></i>Norway</div>
+                  <div data-value="om" class="item"><i class="om flag"></i>Oman</div>
+                  <div data-value="pk" class="item"><i class="pk flag"></i>Pakistan</div>
+                  <div data-value="pw" class="item"><i class="pw flag"></i>Palau</div>
+                  <div data-value="ps" class="item"><i class="ps flag"></i>Palestine</div>
+                  <div data-value="pa" class="item"><i class="pa flag"></i>Panama</div>
+                  <div data-value="py" class="item"><i class="py flag"></i>Paraguay</div>
+                  <div data-value="pe" class="item"><i class="pe flag"></i>Peru</div>
+                  <div data-value="ph" class="item"><i class="ph flag"></i>Philippines</div>
+                  <div data-value="pn" class="item"><i class="pn flag"></i>Pitcairn Islands</div>
+                  <div data-value="pl" class="item"><i class="pl flag"></i>Poland</div>
+                  <div data-value="pt" class="item"><i class="pt flag"></i>Portugal</div>
+                  <div data-value="pr" class="item"><i class="pr flag"></i>Puerto Rico</div>
+                  <div data-value="qa" class="item"><i class="qa flag"></i>Qatar</div>
+                  <div data-value="re" class="item"><i class="re flag"></i>Reunion</div>
+                  <div data-value="ro" class="item"><i class="ro flag"></i>Romania</div>
+                  <div data-value="ru" class="item"><i class="ru flag"></i>Russia</div>
+                  <div data-value="rw" class="item"><i class="rw flag"></i>Rwanda</div>
+                  <div data-value="sh" class="item"><i class="sh flag"></i>Saint Helena</div>
+                  <div data-value="kn" class="item"><i class="kn flag"></i>Saint Kitts and Nevis</div>
+                  <div data-value="lc" class="item"><i class="lc flag"></i>Saint Lucia</div>
+                  <div data-value="pm" class="item"><i class="pm flag"></i>Saint Pierre</div>
+                  <div data-value="vc" class="item"><i class="vc flag"></i>Saint Vincent</div>
+                  <div data-value="ws" class="item"><i class="ws flag"></i>Samoa</div>
+                  <div data-value="sm" class="item"><i class="sm flag"></i>San Marino</div>
+                  <div data-value="gs" class="item"><i class="gs flag"></i>Sandwich Islands</div>
+                  <div data-value="st" class="item"><i class="st flag"></i>Sao Tome</div>
+                  <div data-value="sa" class="item"><i class="sa flag"></i>Saudi Arabia</div>
+                  <div data-value="sn" class="item"><i class="sn flag"></i>Senegal</div>
+                  <div data-value="cs" class="item"><i class="cs flag"></i>Serbia</div>
+                  <div data-value="rs" class="item"><i class="rs flag"></i>Serbia</div>
+                  <div data-value="sc" class="item"><i class="sc flag"></i>Seychelles</div>
+                  <div data-value="sl" class="item"><i class="sl flag"></i>Sierra Leone</div>
+                  <div data-value="sg" class="item"><i class="sg flag"></i>Singapore</div>
+                  <div data-value="sk" class="item"><i class="sk flag"></i>Slovakia</div>
+                  <div data-value="si" class="item"><i class="si flag"></i>Slovenia</div>
+                  <div data-value="sb" class="item"><i class="sb flag"></i>Solomon Islands</div>
+                  <div data-value="so" class="item"><i class="so flag"></i>Somalia</div>
+                  <div data-value="za" class="item"><i class="za flag"></i>South Africa</div>
+                  <div data-value="kr" class="item"><i class="kr flag"></i>South Korea</div>
+                  <div data-value="es" class="item"><i class="es flag"></i>Spain</div>
+                  <div data-value="lk" class="item"><i class="lk flag"></i>Sri Lanka</div>
+                  <div data-value="sd" class="item"><i class="sd flag"></i>Sudan</div>
+                  <div data-value="sr" class="item"><i class="sr flag"></i>Suriname</div>
+                  <div data-value="sj" class="item"><i class="sj flag"></i>Svalbard</div>
+                  <div data-value="sz" class="item"><i class="sz flag"></i>Swaziland</div>
+                  <div data-value="se" class="item"><i class="se flag"></i>Sweden</div>
+                  <div data-value="ch" class="item"><i class="ch flag"></i>Switzerland</div>
+                  <div data-value="sy" class="item"><i class="sy flag"></i>Syria</div>
+                  <div data-value="tw" class="item"><i class="tw flag"></i>Taiwan</div>
+                  <div data-value="tj" class="item"><i class="tj flag"></i>Tajikistan</div>
+                  <div data-value="tz" class="item"><i class="tz flag"></i>Tanzania</div>
+                  <div data-value="th" class="item"><i class="th flag"></i>Thailand</div>
+                  <div data-value="tl" class="item"><i class="tl flag"></i>Timorleste</div>
+                  <div data-value="tg" class="item"><i class="tg flag"></i>Togo</div>
+                  <div data-value="tk" class="item"><i class="tk flag"></i>Tokelau</div>
+                  <div data-value="to" class="item"><i class="to flag"></i>Tonga</div>
+                  <div data-value="tt" class="item"><i class="tt flag"></i>Trinidad</div>
+                  <div data-value="tn" class="item"><i class="tn flag"></i>Tunisia</div>
+                  <div data-value="tr" class="item"><i class="tr flag"></i>Turkey</div>
+                  <div data-value="tm" class="item"><i class="tm flag"></i>Turkmenistan</div>
+                  <div data-value="tv" class="item"><i class="tv flag"></i>Tuvalu</div>
+                  <div data-value="ug" class="item"><i class="ug flag"></i>Uganda</div>
+                  <div data-value="ua" class="item"><i class="ua flag"></i>Ukraine</div>
+                  <div data-value="ae" class="item"><i class="ae flag"></i>United Arab Emirates</div>
+                  <div data-value="uy" class="item"><i class="uy flag"></i>Uruguay</div>
+                  <div data-value="um" class="item"><i class="um flag"></i>Us Minor Islands</div>
+                  <div data-value="vi" class="item"><i class="vi flag"></i>Us Virgin Islands</div>
+                  <div data-value="uz" class="item"><i class="uz flag"></i>Uzbekistan</div>
+                  <div data-value="vu" class="item"><i class="vu flag"></i>Vanuatu</div>
+                  <div data-value="va" class="item"><i class="va flag"></i>Vatican City</div>
+                  <div data-value="ve" class="item"><i class="ve flag"></i>Venezuela</div>
+                  <div data-value="vn" class="item"><i class="vn flag"></i>Vietnam</div>
+                  <div data-value="wf" class="item"><i class="wf flag"></i>Wallis and Futuna</div>
+                  <div data-value="eh" class="item"><i class="eh flag"></i>Western Sahara</div>
+                  <div data-value="ye" class="item"><i class="ye flag"></i>Yemen</div>
+                  <div data-value="zm" class="item"><i class="zm flag"></i>Zambia</div>
+                  <div data-value="zw" class="item"><i class="zw flag"></i>Zimbabwe</div>
+                </div>
+              </div>
+              <textarea rows="3" placeholder="Summary" class="description"></textarea>
+              <p class="symbols"><span class="symbols-zero">0</span> / 100</p>
+            </div>
+          </div>
+          <div class="modal-footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" class="btn btn-default close-modal">Close</button>
+            <button type="button" data-dismiss="modal" class="btn btn-default close-avatar-modal">Close</button>
+            <button type="button" class="btn btn-default publish">Publish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="inviteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="modal-header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            <h3>Invite someone to Aspire</h3>
+          </div>
+          <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4 class="publish-modal-description">Woohoo, congratulations!</h4>
+            <h3 class="publish-modal-heading">Your friend has been invited!</h3>
+            <div class="modal-inputs col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <input text="text" placeholder="Name" class="title">
+              <input text="text" placeholder="Email" class="title">
+            </div>
+          </div>
+          <div class="modal-footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <button type="button" data-dismiss="modal" class="btn btn-default close-modal">Close</button>
+            <button type="button" class="btn btn-default publish">Send!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="timelineModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade timeline">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12"><i data-toggle="modal" data-target="#timelineModalEdit" data-dismiss="modal" class="icon-more"></i>
+            <div data-dismiss="modal" class="visible-xs"><i class="material-icons">close</i></div>
+            <div class="picture"><img src="images/profilepicture.png" alt="Profile"></div>
+            <div class="post">
+              <h5 class="name">Sharad Venkat</h5>
+              <h5 class="date">1 second ago</h5>
+              <h5 class="year-happend">2014</h5>
+              <h5 class="company">Freelancing Freelancing Freelancing Co.</h5>
+              <div class="image">
+                <div class="button-prev"><i class="material-icons">keyboard_arrow_left</i></div>
+                <div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div>
+                <div class="items">
+                  <div class="item"><img src="http://puu.sh/uyh0h/248cb32eca.png" alt="Building"></div>
+                  <div class="item"><img src="http://puu.sh/uyh1c/2b0d7529eb.png" alt="Building"></div>
+                  <div class="item"><img src="http://puu.sh/uyh1r/b8a98339c7.png" alt="Building"></div>
+                </div>
+              </div>
+              <p class="timeline-text">Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="timelineModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade timeline">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="input-header"><i class="write icon"></i><span>Edit a Post</span></div>
+            <div class="post post-input">
+              <textarea placeholder="What awesomeness have you accomplished lately?" rows="3" class="form-control"></textarea>
+              <div class="appearing-content">
+                <div class="ui fluid search selection dropdown company-selection post-input-dropdowns">
+                  <input type="hidden" name="company"><i class="dropdown icon"></i><i class="remove icon"></i>
+                  <div class="default text">Company</div>
+                  <div class="menu">
+                    <div class="header"><i class="building icon"><span>Available companies</span></i></div>
+                    <div data-value="pkfrontend" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Paulius Kasiuba's Front End Development</span></div>
+                    <div data-value="sharadvenkatfreelance" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Sharad Venkat's Freelancing company</span></div>
+                  </div>
+                </div>
+                <div class="upload-photo add-photos-video-btn"><a><i class="material-icons">camera_alt</i></a></div>
+                <div class="ui search scrolling dropdown item post-input-dropdowns">
+                  <input type="hidden" name="year" value="selected">
+                  <div class="default text">Year</div><i class="dropdown icon"></i>
+                  <div class="menu">
+                    <!-- TO AMIT: change the "2017" to a year variable that user selected.-->
+                    <div data-value="selected" class="item">2017</div>
+                    <div data-value='2016' class="item">2016</div>
+                    <div data-value='2015' class="item">2015</div>
+                    <div data-value='2014' class="item">2014</div>
+                    <div data-value='2013' class="item">2013</div>
+                    <div data-value='2012' class="item">2012</div>
+                    <div data-value='2011' class="item">2011</div>
+                    <div data-value='2010' class="item">2010</div>
+                    <div data-value='2009' class="item">2009</div>
+                    <div data-value='2008' class="item">2008</div>
+                    <div data-value='2007' class="item">2007</div>
+                    <div data-value='2006' class="item">2006</div>
+                    <div data-value='2005' class="item">2005</div>
+                    <div data-value='2004' class="item">2004</div>
+                    <div data-value='2003' class="item">2003</div>
+                    <div data-value='2002' class="item">2002</div>
+                    <div data-value='2001' class="item">2001</div>
+                    <div data-value='2000' class="item">2000</div>
+                    <div data-value='1999' class="item">1999</div>
+                    <div data-value='1998' class="item">1998</div>
+                    <div data-value='1997' class="item">1997</div>
+                    <div data-value='1996' class="item">1996</div>
+                    <div data-value='1995' class="item">1995</div>
+                    <div data-value='1994' class="item">1994</div>
+                    <div data-value='1993' class="item">1993</div>
+                    <div data-value='1992' class="item">1992</div>
+                    <div data-value='1991' class="item">1991</div>
+                    <div data-value='1990' class="item">1990</div>
+                    <div data-value='1989' class="item">1989</div>
+                    <div data-value='1988' class="item">1988</div>
+                    <div data-value='1987' class="item">1987</div>
+                    <div data-value='1986' class="item">1986</div>
+                    <div data-value='1985' class="item">1985</div>
+                    <div data-value='1984' class="item">1984</div>
+                    <div data-value='1983' class="item">1983</div>
+                    <div data-value='1982' class="item">1982</div>
+                    <div data-value='1981' class="item">1981</div>
+                    <div data-value='1980' class="item">1980</div>
+                    <div data-value='1979' class="item">1979</div>
+                    <div data-value='1978' class="item">1978</div>
+                    <div data-value='1977' class="item">1977</div>
+                    <div data-value='1976' class="item">1976</div>
+                    <div data-value='1975' class="item">1975</div>
+                    <div data-value='1974' class="item">1974</div>
+                    <div data-value='1973' class="item">1973</div>
+                    <div data-value='1972' class="item">1972</div>
+                    <div data-value='1971' class="item">1971</div>
+                    <div data-value='1970' class="item">1970</div>
+                    <div data-value='1969' class="item">1969</div>
+                    <div data-value='1968' class="item">1968</div>
+                    <div data-value='1967' class="item">1967</div>
+                    <div data-value='1966' class="item">1966</div>
+                    <div data-value='1965' class="item">1965</div>
+                    <div data-value='1964' class="item">1964</div>
+                    <div data-value='1963' class="item">1963</div>
+                    <div data-value='1962' class="item">1962</div>
+                    <div data-value='1961' class="item">1961</div>
+                    <div data-value='1960' class="item">1960</div>
+                    <div data-value='1959' class="item">1959</div>
+                    <div data-value='1958' class="item">1958</div>
+                    <div data-value='1957' class="item">1957</div>
+                    <div data-value='1956' class="item">1956</div>
+                    <div data-value='1955' class="item">1955</div>
+                    <div data-value='1954' class="item">1954</div>
+                    <div data-value='1953' class="item">1953</div>
+                    <div data-value='1952' class="item">1952</div>
+                    <div data-value='1951' class="item">1951</div>
+                    <div data-value='1950' class="item">1950</div>
+                    <div data-value='1949' class="item">1949</div>
+                    <div data-value='1948' class="item">1948</div>
+                    <div data-value='1947' class="item">1947</div>
+                    <div data-value='1946' class="item">1946</div>
+                    <div data-value='1945' class="item">1945</div>
+                    <div data-value='1944' class="item">1944</div>
+                    <div data-value='1943' class="item">1943</div>
+                    <div data-value='1942' class="item">1942</div>
+                    <div data-value='1941' class="item">1941</div>
+                    <div data-value='1940' class="item">1940</div>
+                    <div data-value='1939' class="item">1939</div>
+                    <div data-value='1938' class="item">1938</div>
+                    <div data-value='1937' class="item">1937</div>
+                    <div data-value='1936' class="item">1936</div>
+                    <div data-value='1935' class="item">1935</div>
+                    <div data-value='1934' class="item">1934</div>
+                    <div data-value='1933' class="item">1933</div>
+                    <div data-value='1932' class="item">1932</div>
+                    <div data-value='1931' class="item">1931</div>
+                    <div data-value='1930' class="item">1930</div>
+                    <div data-value='1929' class="item">1929</div>
+                    <div data-value='1928' class="item">1928</div>
+                    <div data-value='1927' class="item">1927</div>
+                    <div data-value='1926' class="item">1926</div>
+                    <div data-value='1925' class="item">1925</div>
+                    <div data-value='1924' class="item">1924</div>
+                    <div data-value='1923' class="item">1923</div>
+                    <div data-value='1922' class="item">1922</div>
+                    <div data-value='1921' class="item">1921</div>
+                    <div data-value='1920' class="item">1920</div>
+                    <div data-value='1919' class="item">1919</div>
+                    <div data-value='1918' class="item">1918</div>
+                    <div data-value='1917' class="item">1917</div>
+                    <div data-value='1916' class="item">1916</div>
+                    <div data-value='1915' class="item">1915</div>
+                    <div data-value='1914' class="item">1914</div>
+                    <div data-value='1913' class="item">1913</div>
+                    <div data-value='1912' class="item">1912</div>
+                    <div data-value='1911' class="item">1911</div>
+                    <div data-value='1910' class="item">1910</div>
+                    <div data-value='1909' class="item">1909</div>
+                    <div data-value='1908' class="item">1908</div>
+                    <div data-value='1907' class="item">1907</div>
+                    <div data-value='1906' class="item">1906</div>
+                    <div data-value='1905' class="item">1905</div>
+                    <div data-value='1904' class="item">1904</div>
+                    <div data-value='1903' class="item">1903</div>
+                    <div data-value='1902' class="item">1902</div>
+                    <div data-value='1901' class="item">1901</div>
+                  </div>
+                </div>
+                <div class="file-upload"></div>
+                <input type="file" class="file-upload-input">
+                <div role="alert" data-hide="alert" class="alert alert-dismissible status-alert">
+                  <div class="alert-header">Can't Read Files</div>
+                  <div class="alert-body">Your photo couldn't be uploaded. Photos should be saved as JPG, PNG, GIF, BMP or TIFF files.</div>
+                  <div class="alert-footer">
+                    <button type="button" class="btn btn-close">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="buttons">
+              <button type="button" data-dismiss="modal" class="btn btn-cancel">Delete</button>
+              <button type="button" data-dismiss="modal" class="btn btn-cancel">Cancel</button>
+              <button type="button" class="btn btn-post">Post</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header includes "Aspire" logo, search option, messages, alerts icons and profile image and it's name.-->
+    <!-- There's 2 collapse divs, one for mobile screens and another one for everything higher than mobile screens.-->
+    <header class="main-header">
+      <div class="container">
+        <nav class="navbar navbar-default">
+          <!-- Navigation header - logo.-->
+          <div class="navbar-header">
+            <div class="form-group visible-xs"><a href=""><i class="icon-search"></i></a>
+              <input text="text" placeholder="Search Ethearnal" class="form-control">
+            </div>
+            <div class="button">
+              <button type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" class="navbar-toggle collapsed"><span></span><span></span><span></span><span></span></button>
+            </div><a href="" class="navbar-brand hidden-xs">Ethearnal BETA</a>
+          </div>
+          <!-- Navbar items ONLY for larger than mobile screens.-->
+          <div id="navigation" class="collapse navbar-collapse">
+            <form class="navbar-form navbar-left">
+              <div class="form-group"><a href=""><i class="icon-search"></i></a>
+                <input text="text" placeholder="Search Ethearnal" class="form-control">
+              </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+              <li id="comment-navbar" class="asset"><a href=""><i class="icon-comment"></i>
+                  <div class="round-number"><span>1</span></div></a></li>
+              <li id="alert-navbar" class="asset"><a href=""><i class="material-icons">polymer</i>
+                  <div class="round-number"><span>3</span></div></a></li>
+              <li data-toggle="dropdown" class="profile"><img src="images/dobri.png" alt="Dobri" class="profile-picture"><span>Dobri</span></li>
+              <ul aria-labelledby="dLabel" class="dropdown-menu">
+                <li class="settings"><a href="">Settings<i class="material-icons">settings</i></a></li>
+                <li class="logout"><a href="">Logout<i class="material-icons">power_settings_new</i></a></li>
+              </ul>
+            </ul>
+            <ul class="nav navbar-nav visible-xs">
+              <li><a href="">Dobri<img src="images/dobri.png" alt="Dobri" class="profile-picture"></a></li>
+              <li><a href="#">Messages
+                  <div class="round-number"><span>1</span></div></a></li>
+              <li><a href="#">Alerts
+                  <div class="round-number"><span>1</span></div></a></li>
+              <li class="settings-mobile"><a href="#">Settings<i class="material-icons">settings</i></a></li>
+              <li class="logout-mobile"><a href="#">Logout<i class="material-icons">power_settings_new</i></a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- Background image section, including a button with lock and unlock icons.-->
+    <section class="background-image">
+      <div class="button-prev"><i class="material-icons">keyboard_arrow_left</i></div>
+      <div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div>
+      <div class="items">
+        <div class="item"><img src="images/background-road-different.png" alt="Building"></div>
+        <div class="item"><img src="images/background-buildings.png" alt="Building"></div>
+        <div class="item"><img src="images/background-downtown.png" alt="Building"></div>
+      </div>
+    </section>
+    <!-- This section is for your whole profile, including left and right sides, profile information and etc.-->
+    <section class="documentation">
+      <div class="container">
+        <div class="profile-information-fixed col-lg-4 col-md-4 col-sm-12 col-xs-12 hidden"></div>
+        <!-- Profile information including profile image, current work, current city and state, skills and etc.-->
+        <div class="profile-information-before-fixed col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <!-- Profile header, including profile image, current work, city, state and two buttons.-->
+          <div class="profile-upper">
+            <div data-toggle="modal" data-target="#avatarModal" class="profile-image"><img src="images/dobri.png" alt="Dobri Stoilov">
+              <div class="text-on-image">
+                <p>Change</p>
+              </div>
+            </div>
+            <!-- Now... JSON data goes here. :(-->
+            <button class="light-blue-background hidden">Connect</button>
+            <button class="orange-background">Accept</button>
+            <button class="white-background">Leave a Note</button>
+          </div>
+          <!-- Profile description including a description about you. (dark-gray section)-->
+          <div class="profile-description">
+            <!-- JSON data goes here.-->
+          </div>
+          <!-- Profile top skills and tools-->
+          <div class="profile-bottom">
+            <p class="skills-text">Consolidated Skills and Tools</p><i class="material-icons">keyboard_arrow_down</i>
+            <div class="skills">
+              <!-- JSON data goes here.-->
+            </div>
+          </div>
+          <!-- Profile footer, including social media links.-->
+          <div class="profile-footer">
+            <ul class="list-inline">
+              <li><a href=""><i class="icon-facebook"></i></a></li>
+              <li><a href=""><i class="icon-twitter"></i></a></li>
+              <li><a href=""><i class="icon-r-s-s"></i></a></li>
+              <li><a href=""><i class="icon-instagram"></i></a></li>
+              <li><a href=""><i class="icon-google"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- Profile information including profile image, current work, current city and state, skills and etc.-->
+        <div class="profile-information-after-fixed col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden">
+          <div class="container-fluid">
+            <div class="container col-lg-4 col-md-4 col-sm-12 col-xs-12">
+              <!-- Profile header, including profile image, current work, city, state and two buttons.-->
+              <div class="profile-upper">
+                <div data-toggle="modal" data-target="#avatarModal" class="profile-image"><img src="images/dobri.png" alt="Dobri Stoilov">
+                  <div class="text-on-image">
+                    <p>Change</p>
+                  </div>
+                </div>
+                <!-- Now... JSON data goes here. :(-->
+                <button class="light-blue-background hidden">Connect</button>
+                <button class="orange-background">Accept</button>
+                <button class="white-background">Leave a Note</button>
+              </div>
+              <!-- Profile description including a description about you. (dark-gray section)-->
+              <div class="profile-description">
+                <!-- JSON data goes here.-->
+              </div>
+              <!-- Profile top skills and tools-->
+              <div class="profile-bottom">
+                <p class="skills-text">Consolidated Skills and Tools</p><i class="material-icons">keyboard_arrow_down</i>
+                <div class="skills">
+                  <!-- JSON data goes here.-->
+                </div>
+              </div>
+              <!-- Profile footer, including social media links.-->
+              <div class="profile-footer">
+                <ul class="list-inline">
+                  <li><a href=""><i class="icon-facebook"></i></a></li>
+                  <li><a href=""><i class="icon-twitter"></i></a></li>
+                  <li><a href=""><i class="icon-r-s-s"></i></a></li>
+                  <li><a href=""><i class="icon-instagram"></i></a></li>
+                  <li><a href=""><i class="icon-google"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Profile documentation including jobs and education, stories, shout-outs and questions with answers-->
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-documentation-full">
+          <div class="profile-documentation col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <ul role="tablist" class="nav nav-tabs">
+              <li role="presentation" class="timeline-li"><a href="#timeline" aria-controls="jobs" role="tab" data-toggle="tab">Timeline</a></li>
+              <li role="presentation" class="active jobs-li"><a href="#jobs" aria-controls="jobs" role="tab" data-toggle="tab">Jobs & Education</a></li>
+            </ul>
+            <div data-toggle="dropdown" class="plusIcon dropdown-toggle"><i class="material-icons">add</i></div>
+            <ul aria-labelledby="dLabel" class="dropdown-menu">
+              <li class="add-job"><a href="" data-toggle="modal" data-target="#jobModal">Add Job</a></li>
+              <li class="add-education"><a href="" data-toggle="modal" data-target="#educationModal">Add Education</a></li>
+              <li class="add-story"><a href="" data-toggle="modal" data-target="#storyModal">Add Story</a></li>
+              <li class="divider"></li>
+              <li class="invite-someone"><a href="" data-toggle="modal" data-target="#inviteModal">Invite someone to Aspire</a></li>
+            </ul>
+            <div data-toggle="modal" data-target="#shoutoutModal" class="shoutoutIcon"><i class="announcement icon"></i></div>
+            <!-- All the information about above listed tabs.-->
+            <div class="tab-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <!-- Timeline TAB-->
+              <div id="timeline" role="tabpanel" class="tab-pane fade list-block col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="timeline-post input-timeline col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="input-header"><i class="write icon"></i><span>Create a Post</span></div>
+                  <div class="picture"><img src="images/profilepicture.png" alt="Profile"></div>
+                  <div class="post post-input">
+                    <textarea placeholder="What awesomeness have you accomplished lately?" rows="1" class="form-control"></textarea>
+                    <div class="appearing-content">
+                      <div class="ui fluid search selection dropdown company-selection post-input-dropdowns">
+                        <input type="hidden" name="job"><i class="dropdown icon"></i><i class="remove icon"></i>
+                        <div class="default text">Company</div>
+                        <div class="menu">
+                          <div class="header"><i class="building icon"><span>Available companies</span></i></div>
+                          <div data-value="pkfrontend" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Paulius Kasiuba's Front End Development</span></div>
+                          <div data-value="sharadvenkatfreelance" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Sharad Venkat's Freelancing company</span></div>
+                        </div>
+                      </div>
+                      <div class="upload-photo add-photos-video-btn"><a><i class="material-icons">camera_alt</i></a></div>
+                      <div class="ui search scrolling dropdown item post-input-dropdowns">
+                        <input type="hidden" name="year" value="default">
+                        <div class="default text">Year</div><i class="dropdown icon"></i>
+                        <div class="menu">
+                          <div data-value="default" class="item">2017</div>
+                          <div data-value='2016' class="item">2016</div>
+                          <div data-value='2015' class="item">2015</div>
+                          <div data-value='2014' class="item">2014</div>
+                          <div data-value='2013' class="item">2013</div>
+                          <div data-value='2012' class="item">2012</div>
+                          <div data-value='2011' class="item">2011</div>
+                          <div data-value='2010' class="item">2010</div>
+                          <div data-value='2009' class="item">2009</div>
+                          <div data-value='2008' class="item">2008</div>
+                          <div data-value='2007' class="item">2007</div>
+                          <div data-value='2006' class="item">2006</div>
+                          <div data-value='2005' class="item">2005</div>
+                          <div data-value='2004' class="item">2004</div>
+                          <div data-value='2003' class="item">2003</div>
+                          <div data-value='2002' class="item">2002</div>
+                          <div data-value='2001' class="item">2001</div>
+                          <div data-value='2000' class="item">2000</div>
+                          <div data-value='1999' class="item">1999</div>
+                          <div data-value='1998' class="item">1998</div>
+                          <div data-value='1997' class="item">1997</div>
+                          <div data-value='1996' class="item">1996</div>
+                          <div data-value='1995' class="item">1995</div>
+                          <div data-value='1994' class="item">1994</div>
+                          <div data-value='1993' class="item">1993</div>
+                          <div data-value='1992' class="item">1992</div>
+                          <div data-value='1991' class="item">1991</div>
+                          <div data-value='1990' class="item">1990</div>
+                          <div data-value='1989' class="item">1989</div>
+                          <div data-value='1988' class="item">1988</div>
+                          <div data-value='1987' class="item">1987</div>
+                          <div data-value='1986' class="item">1986</div>
+                          <div data-value='1985' class="item">1985</div>
+                          <div data-value='1984' class="item">1984</div>
+                          <div data-value='1983' class="item">1983</div>
+                          <div data-value='1982' class="item">1982</div>
+                          <div data-value='1981' class="item">1981</div>
+                          <div data-value='1980' class="item">1980</div>
+                          <div data-value='1979' class="item">1979</div>
+                          <div data-value='1978' class="item">1978</div>
+                          <div data-value='1977' class="item">1977</div>
+                          <div data-value='1976' class="item">1976</div>
+                          <div data-value='1975' class="item">1975</div>
+                          <div data-value='1974' class="item">1974</div>
+                          <div data-value='1973' class="item">1973</div>
+                          <div data-value='1972' class="item">1972</div>
+                          <div data-value='1971' class="item">1971</div>
+                          <div data-value='1970' class="item">1970</div>
+                          <div data-value='1969' class="item">1969</div>
+                          <div data-value='1968' class="item">1968</div>
+                          <div data-value='1967' class="item">1967</div>
+                          <div data-value='1966' class="item">1966</div>
+                          <div data-value='1965' class="item">1965</div>
+                          <div data-value='1964' class="item">1964</div>
+                          <div data-value='1963' class="item">1963</div>
+                          <div data-value='1962' class="item">1962</div>
+                          <div data-value='1961' class="item">1961</div>
+                          <div data-value='1960' class="item">1960</div>
+                          <div data-value='1959' class="item">1959</div>
+                          <div data-value='1958' class="item">1958</div>
+                          <div data-value='1957' class="item">1957</div>
+                          <div data-value='1956' class="item">1956</div>
+                          <div data-value='1955' class="item">1955</div>
+                          <div data-value='1954' class="item">1954</div>
+                          <div data-value='1953' class="item">1953</div>
+                          <div data-value='1952' class="item">1952</div>
+                          <div data-value='1951' class="item">1951</div>
+                          <div data-value='1950' class="item">1950</div>
+                          <div data-value='1949' class="item">1949</div>
+                          <div data-value='1948' class="item">1948</div>
+                          <div data-value='1947' class="item">1947</div>
+                          <div data-value='1946' class="item">1946</div>
+                          <div data-value='1945' class="item">1945</div>
+                          <div data-value='1944' class="item">1944</div>
+                          <div data-value='1943' class="item">1943</div>
+                          <div data-value='1942' class="item">1942</div>
+                          <div data-value='1941' class="item">1941</div>
+                          <div data-value='1940' class="item">1940</div>
+                          <div data-value='1939' class="item">1939</div>
+                          <div data-value='1938' class="item">1938</div>
+                          <div data-value='1937' class="item">1937</div>
+                          <div data-value='1936' class="item">1936</div>
+                          <div data-value='1935' class="item">1935</div>
+                          <div data-value='1934' class="item">1934</div>
+                          <div data-value='1933' class="item">1933</div>
+                          <div data-value='1932' class="item">1932</div>
+                          <div data-value='1931' class="item">1931</div>
+                          <div data-value='1930' class="item">1930</div>
+                          <div data-value='1929' class="item">1929</div>
+                          <div data-value='1928' class="item">1928</div>
+                          <div data-value='1927' class="item">1927</div>
+                          <div data-value='1926' class="item">1926</div>
+                          <div data-value='1925' class="item">1925</div>
+                          <div data-value='1924' class="item">1924</div>
+                          <div data-value='1923' class="item">1923</div>
+                          <div data-value='1922' class="item">1922</div>
+                          <div data-value='1921' class="item">1921</div>
+                          <div data-value='1920' class="item">1920</div>
+                          <div data-value='1919' class="item">1919</div>
+                          <div data-value='1918' class="item">1918</div>
+                          <div data-value='1917' class="item">1917</div>
+                          <div data-value='1916' class="item">1916</div>
+                          <div data-value='1915' class="item">1915</div>
+                          <div data-value='1914' class="item">1914</div>
+                          <div data-value='1913' class="item">1913</div>
+                          <div data-value='1912' class="item">1912</div>
+                          <div data-value='1911' class="item">1911</div>
+                          <div data-value='1910' class="item">1910</div>
+                          <div data-value='1909' class="item">1909</div>
+                          <div data-value='1908' class="item">1908</div>
+                          <div data-value='1907' class="item">1907</div>
+                          <div data-value='1906' class="item">1906</div>
+                          <div data-value='1905' class="item">1905</div>
+                          <div data-value='1904' class="item">1904</div>
+                          <div data-value='1903' class="item">1903</div>
+                          <div data-value='1902' class="item">1902</div>
+                          <div data-value='1901' class="item">1901</div>
+                        </div>
+                      </div>
+                      <div class="file-upload"></div>
+                      <input type="file" class="file-upload-input">
+                      <div role="alert" data-hide="alert" class="alert alert-dismissible status-alert">
+                        <div class="alert-header">Can't Read Files</div>
+                        <div class="alert-body">Your photo couldn't be uploaded. Photos should be saved as JPG, PNG, GIF, BMP or TIFF files.</div>
+                        <div class="alert-footer">
+                          <button type="button" class="btn btn-close">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="buttons">
+                    <button type="button" class="btn btn-cancel">Cancel</button>
+                    <button type="button" class="btn btn-post">Post</button>
+                  </div>
+                </div>
+                <ul>
+                  <li class="swipeout">
+                    <div data-toggle="modal" data-target="#timelineModal" class="timeline-post swipeout-content item-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="picture"><img src="images/profilepicture.png" alt="Profile"></div>
+                      <div class="post">
+                        <h5 class="name">Sharad Venkat</h5>
+                        <h5 class="date">1 second ago</h5>
+                        <h5 class="year-happend">2014</h5>
+                        <h5 class="company">Freelancing Freelancing Freelancing Co.</h5>
+                        <div class="image"><img src="images/background-road-different.png" alt="Building"></div>
+                        <p class="timeline-text">Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1.</p>
+                      </div>
+                    </div>
+                    <div class="swipeout-actions-left"></div>
+                    <div class="swipeout-actions-right"></div>
+                  </li>
+                  <li class="swipeout">
+                    <div data-toggle="modal" data-target="#timelineModal" class="timeline-post swipeout-content item-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="picture"><img src="images/profilepicture.png" alt="Profile"></div>
+                      <div class="post">
+                        <h5 class="name">Sharad Venkat</h5>
+                        <h5 class="date">1 second ago</h5>
+                        <h5 class="year-happend">2014</h5>
+                        <h5 class="company">Freelancing Freelancing Freelancing Co.</h5>
+                        <div class="image"><img src="images/background-road-different.png" alt="Building"></div>
+                        <p class="timeline-text">Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1.</p>
+                      </div>
+                    </div>
+                    <div class="swipeout-actions-left"></div>
+                    <div class="swipeout-actions-right"></div>
+                  </li>
+                </ul>
+              </div>
+              <!-- Jobs & Education TAB-->
+              <div id="jobs" role="tabpanel" class="tab-pane fade in active col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <!-- JOBS-->
+                <div class="jobs-container">
+                  <div class="job life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
+                      <div class="image"><img src="images/panda-logo.png" alt="Panda">
+                        <div class="dont-have-logo">PA</div>
+                      </div>
+                      <div class="position-information">
+                        <h4>Charles Schwab Corp.</h4>
+                        <h5>Data Migration Architect</h5>
+                        <p>5/2015 - Present (1y 5m)</p>
+                      </div>
+                    </div>
+                    <div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
+                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
+                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+                          <li><a href="#">Delete</a></li>
+                        </ul>
+                      </div>
+                      <p>I worked on a major data migration project</p>
+                    </div>
+                  </div>
+                  <div class="job life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
+                      <div class="image"><img src="images/aspire-logo.png" alt="Aspire">
+                        <div class="dont-have-logo">AS</div>
+                      </div>
+                      <div class="position-information">
+                        <h4>Aspire</h4>
+                        <h5>Founder</h5>
+                        <p>6/2016 - Present (5m)</p>
+                      </div>
+                    </div>
+                    <div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
+                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
+                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
+                          <li><a href="">Edit</a></li>
+                        </ul>
+                      </div>
+                      <p>Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1.</p>
+                    </div>
+                  </div>
+                  <div class="job life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
+                      <div class="image"><img src="images/kaiser.png" alt="Aspire">
+                        <div class="dont-have-logo">AS</div>
+                      </div>
+                      <div class="position-information">
+                        <h4>Kaiser Permanente</h4>
+                        <h5>Program Manager</h5>
+                        <p>11/2011 - 3/2015 (3y 4m)</p>
+                      </div>
+                    </div>
+                    <div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
+                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
+                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
+                          <li><a href="">Edit</a></li>
+                        </ul>
+                      </div>
+                      <p>1. Designed and built an integrated sw platform central to a high-stakes restructuring of KP-IT’s infrastructure delivery model. <br /> 2. Ran other programs & worked extensively with IBM contractors.</p>
+                    </div>
+                  </div>
+                  <div class="job life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
+                      <div class="image"><img src="images/paypal.jpg" alt="Aspire">
+                        <div class="dont-have-logo">AS</div>
+                      </div>
+                      <div class="position-information">
+                        <h4>Aspire</h4>
+                        <h5>CEO & Founder</h5>
+                        <p>2016 - Present (2y 1m)</p>
+                      </div>
+                    </div>
+                    <div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
+                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
+                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
+                          <li><a href="">Edit</a></li>
+                        </ul>
+                      </div>
+                      <p>Conceived and built a next generation professional showcare for people who want a better way to show off their skills and character. Conceived and built a next generation professional showcare for people who want a better way to show off their skills and character. Conceived and built a next generation professional showcare for people who want a better way to show off their skills and character. Conceived and built a next generation professional showcare for people who want a better way to show off their skills and character. Conceived and built a next generation professional showcare for people who want a better way to show off their skills and character. Conceived and built a next generation professional showcare for people who want a better.</p>
+                    </div>
+                  </div>
+                  <div class="jobs-see see-more col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p>+ See more jobs</p>
+                  </div>
+                  <div class="jobs-see see-less col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p>- See less jobs</p>
+                  </div>
+                </div>
+                <!-- EDUCATION-->
+                <div class="education-container">
+                  <div class="education life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
+                      <div class="image"><img src="images/university.jpg" alt="Aspire"></div>
+                      <div class="position-information">
+                        <h4>Public Policy</h4>
+                        <h5>Harvard University</h5>
+                        <p>8/2007 - 5/2009 (1y 9m)</p>
+                      </div>
+                    </div>
+                    <div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
+                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
+                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
+                          <li><a href="">Edit</a></li>
+                        </ul>
+                      </div>
+                      <p class="education-paragraph">Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1.</p>
+                    </div>
+                  </div>
+                  <div class="education life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
+                      <div class="image"><img src="images/university1.jpg" alt="Aspire"></div>
+                      <div class="position-information">
+                        <h4>Bachelor in Electrical Engineering</h4>
+                        <h5>UW Madison</h5>
+                        <p>9/1997 - 12/2001 (4y 3m)</p>
+                      </div>
+                    </div>
+                    <div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
+                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
+                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
+                          <li><a href="">Edit</a></li>
+                        </ul>
+                      </div>
+                      <p style="min-height: 85px" class="education-paragraph"></p>
+                    </div>
+                  </div>
+                  <div class="education life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
+                      <div class="image"><img src="images/education.jpg" alt="Aspire"></div>
+                      <div class="position-information">
+                        <h4>Public Policy</h4>
+                        <h5>Harvard University</h5>
+                        <p>2009 - 2013</p>
+                      </div>
+                    </div>
+                    <div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
+                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
+                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
+                          <li><a href="">Edit</a></li>
+                        </ul>
+                      </div>
+                      <p class="education-paragraph">Conceived and built a next generation professional showcase for people who want a better way to show off their skills and character. Aspire raises the bar to create value for people every step of the way.</p>
+                    </div>
+                  </div>
+                  <div class="education life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
+                      <div class="image"><img src="images/education.jpg" alt="Aspire"></div>
+                      <div class="position-information">
+                        <h4>Public Policy</h4>
+                        <h5>Harvard University</h5>
+                        <p>2009 - 2013</p>
+                      </div>
+                    </div>
+                    <div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
+                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
+                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
+                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
+                          <li><a href="">Edit</a></li>
+                        </ul>
+                      </div>
+                      <p class="education-paragraph">Conceived and built a next generation professional showcase for people who want a better way to show off their skills and character. Aspire raises the bar to create value for people every step of the way.</p>
+                    </div>
+                  </div>
+                  <div class="educations-see see-more col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p>+ See more education</p>
+                  </div>
+                  <div class="educations-see see-less col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p>- See less education</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- jQuery 3.1.1-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- jQuery UI 1.21.1-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- jQuery UI Monthpicker-->
+    <script src="https://cdn.rawgit.com/lucianocosta/jquery.mtz.monthpicker/master/jquery.mtz.monthpicker.js"></script>
+    <!-- BootstrapJS 3.3.7-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Semantic UI JS-->
+    <script src="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.js"></script>
+    <!-- Perfect Scrollbar jQuery JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.12/js/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Owl Carousel JS-->
+    <script src="https://bbcdn.githack.com/shahzadns/owlfonk-owlcarousel/raw/31413692812896e19db89baee9be30b9d36d1e64/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Cropper jQuery JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.js"></script>
+    <!-- Moment.JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <!-- Bootstrap Date Time Picker-->
+    <script src="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Framework7.JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.0/js/framework7.min.js"></script>
+    <!-- Main JS file-->
+    <script src="js/main.js"></script>
+  </body>
 </html>
