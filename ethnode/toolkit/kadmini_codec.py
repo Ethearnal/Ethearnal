@@ -3,6 +3,13 @@ import hashlib
 import binascii
 import bson
 
+
+
+
+DEFAULT_REVISON = 1
+
+revision_function = hex
+
 # original protocol
 decode_map = (
     'message_type',
@@ -34,6 +41,25 @@ decode_map = {chr(97 + k[0]): k[1] for k in enumerate(decode_map)}
 
 id_bits = 256
 id_bytes_len = 32
+
+
+def encode_key_hash(item_key, guid=b'1', revision=1):
+    proto_dict = {'e': [revision, guid, item_key]}
+    bson_enc = bson.dumps(proto_dict)
+    hashed_key = hash_function(bson_enc)
+    return hashed_key
+
+
+def encode_val_bson(item_val, revision=1):
+    proto_dict = {'e': [revision, item_val]}
+    bson_enc = bson.dumps(proto_dict)
+    return bson_enc
+
+
+def decode_bson_val(bts):
+    d = bson.loads(bts)
+    revision, item_val = d['e']
+    return revision, item_val
 
 
 def guid_bts_to_int(guid_bts: bytes):
@@ -86,11 +112,10 @@ def decode_js_ascii(bts: bytes):
 # bsn encoding
 
 
-
-def print_d(msg,d):
+def print_d(msg, d):
     print(msg)
-    for k,v in d.items():
-        print('  ',k,' ->', v)
+    for k, v in d.items():
+        print('  ', k, ' ->', v)
 
 
 def encode_bson(d: dict):
