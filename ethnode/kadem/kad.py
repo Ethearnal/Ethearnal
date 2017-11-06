@@ -89,6 +89,11 @@ class DHTFacade(object):
         value = {'ert:pubkey': self.ert.rsa_pub_der}
         self.push(key, value, local_only=local_only)
 
+    def push_host(self, local_only=False):
+        key = {'ert': 'udp_ip4_port'}
+        value = {'ert:udp_ip4_port': {'h': self.dht.peer.host, 'p': self.dht.peer.port}}
+        self.push(key, value, local_only=local_only)
+
     def pull_pubkey(self, guid=None):
         key = {'ert': 'pubkey'}
         if not guid:
