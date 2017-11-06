@@ -70,7 +70,7 @@ class EthearnalSite(object):
     # todo make entry point redirect to ui
 
 
-def main_dht(host: str, port: int, store: store_handler.DHTStoreHandlerMem,
+def main_dht(host: str, port: int, store: store_handler.DHTStoreHandlerOne,
              guid: int =None, seed_host=None, seed_port=None):
     if seed_host and seed_port and (host, port) != (seed_host, seed_port):
         print('BOOTSTRAP TO SEED', seed_host, seed_port)
@@ -216,7 +216,7 @@ if __name__ == '__main__':
 
         assert hex2_guid == hex_guid
         #
-        storage_handle = store_handler.DHTStoreHandlerMem()
+        storage_handle = store_handler.DHTStoreHandlerOne()
         # storage_handle = dict()
 
         dht = main_dht(udp_host, udp_port,

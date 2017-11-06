@@ -3,7 +3,7 @@ from toolkit import kadmini_codec as cdx
 # status wip
 
 
-class DHTStoreHandlerMem(object):
+class DHTStoreHandlerOne(object):
     def __init__(self):
         # dht store for all the things
         self.store = dict()
@@ -19,6 +19,7 @@ class DHTStoreHandlerMem(object):
         # sig_val = (signature, val)
         owner_signature_value = (guid_owner, signature, val)
         revision, data = cdx.decode_bson_val(val)
+
         if 'ert:pubkey' in data:
             pubkey_der = data['ert:pubkey']
             # print('PUBKEY DER', pubkey_der)
@@ -55,6 +56,9 @@ class DHTStoreHandlerMem(object):
                     val_ok = cdx.verify_message(val, signature, pubkey_der)
                     if val_ok:
                         print('VAL SIG OK STORE IN DHT')
+                        if 'ert:udp:ip4:port' in data:
+                            self.ert_ip4_udp_port(data['ert:udp:ip4:port'])
+
                         return self.store.__setitem__(key, owner_signature_value)
                     else:
                         print('VAL SIG FAILED')
