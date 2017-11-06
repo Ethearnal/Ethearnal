@@ -230,7 +230,6 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         print('RCV FIND KEY', key)
 
         if find_value and (key in self.server.dht.data):
-            #sig, value = self.server.dht.storage.pull(key)
             bv = self.server.dht.storage.pull(key)
             print('FOUND VAL')
             peer.found_value(id, bv, msg_rpc_id_int, socket=response_socket,
