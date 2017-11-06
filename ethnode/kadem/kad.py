@@ -119,27 +119,10 @@ class DHTFacade(object):
                 else:
                     print('REMOTE PUBKEY NOT OK')
 
-
-    # def pull_pubkey_in_peers(self):
-    #     for peer in self.peers:
-    #         guid = cdx.guid_int_to_bts(peer['id'])
-    #         val = self.pull_remote({'ert': 'pubkey'}, guid)
-    #         owner_guid, sig, bson_coded_value = val
-    #         rev, data = cdx.decode_bson_val(bson_coded_value)
-    #         der_pub_key = data['ert:pubkey']
-    #         if guid == owner_guid:
-    #             guid_ok = cdx.verify_guid(owner_guid, der_pub_key)
-    #             if guid_ok:
-    #                 print('GUID OK')
-    #                 self.push_pubkey(der_pub_key, local_only=True)
-    #             else:
-    #                 print('GUID NOT OK')
-    #         else:
-    #             print('RCV GUID != owner GUID')
-
-
-
-
+    def pull_pubkey_in_peers(self):
+        for peer in self.peers:
+            guid = cdx.guid_int_to_bts(peer['id'])
+            self.pull_pubkey(guid)
 
     def pull_local(self, key,
                    guid=None,
