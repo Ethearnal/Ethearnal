@@ -1,6 +1,6 @@
 import os
 import json
-
+from toolkit import kadmini_codec as cdx
 
 class CrudJsonListStore(object):
 
@@ -48,5 +48,4 @@ class CrudJsonListStore(object):
 
     def read_list(self):
         return self._ls
-
 

@@ -5,8 +5,11 @@ import traceback
 import config
 import argparse
 from kadem.kad import DHT, DHTFacade
+
 from toolkit.tools import mkdir, on_hook
 from toolkit import kadmini_codec
+from toolkit import store_handler
+
 from eth_profile import EthearnalProfileView, EthearnalProfileController
 from eth_profile import EthearnalJobView, EthearnalJobPostController
 from eth_profile import EthearnalUploadFileView
@@ -67,12 +70,14 @@ class EthearnalSite(object):
     # todo make entry point redirect to ui
 
 
-def main_dht(host: str, port: int, guid: int =None, seed_host=None, seed_port=None):
+def main_dht(host: str, port: int, store: store_handler.DHTStoreHandlerMem,
+             guid: int =None, seed_host=None, seed_port=None):
     if seed_host and seed_port and (host, port) != (seed_host, seed_port):
         print('BOOTSTRAP TO SEED', seed_host, seed_port)
-        dht = DHT(host=host, port=port, guid=guid,  seeds=[(seed_host, seed_port)])
+        dht = DHT(host=host, port=port, guid=guid,  seeds=[(seed_host, seed_port)],
+                  storage=store)
     else:
-        dht = DHT(host=host, port=port, guid=guid)
+        dht = DHT(host=host, port=port, guid=guid, storage=store)
     return dht
 
 
@@ -210,8 +215,15 @@ if __name__ == '__main__':
         hex2_guid = kadmini_codec.guid_int_to_hex(int_guid)
 
         assert hex2_guid == hex_guid
+        #
+        storage_handle = store_handler.DHTStoreHandlerMem()
+        # storage_handle = dict()
 
-        dht = main_dht(udp_host, udp_port, guid=int_guid, seed_host=seed_host, seed_port=seed_port)
+        dht = main_dht(udp_host, udp_port,
+                       store=storage_handle,
+                       guid=int_guid,
+                       seed_host=seed_host,
+                       seed_port=seed_port)
         d = DHTFacade(dht, ert_profile_ctl)
         if dht.server_thread.is_alive():
             print('UDP server thread is alive')

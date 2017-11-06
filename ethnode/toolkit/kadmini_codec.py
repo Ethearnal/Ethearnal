@@ -27,8 +27,9 @@ decode_map = (
     'ping',
     'pong',
     # extend
-    'pubkey',
-    'pubkey_der',
+    'signature',
+    # 'pubkey',
+    # 'pubkey_der',
 )
 
 # todo impl detailed testing for all conversions
@@ -43,10 +44,17 @@ id_bits = 256
 id_bytes_len = 32
 
 
-def sign_message(prv_der, bin_message):
-    privkey = prv_der
-    bin_signature = rsa.sign(bin_message, privkey, 'SHA-256')
-    return bin_signature
+def sign_message(bin_message, prv_der):
+    prv = rsa.PrivateKey.load_pkcs1(prv_der, 'DER')
+    sig = rsa.sign(bin_message, prv, 'SHA-256')
+    return sig
+
+
+def verify_message(bin_message, signature, pub_der):
+    pub = rsa.PublicKey.load_pkcs1(pub_der, 'DER')
+    verified = rsa.verify(bin_message, signature, pub)
+    return verified
+    return verified
 
 
 def encode_key_hash(item_key, guid=b'1', revision=1):
@@ -80,6 +88,10 @@ def guid_int_to_bts(gudint: int):
 def guid_int_to_hex(guidint: int):
     bts = guid_int_to_bts(guidint)
     return binascii.hexlify(bts).decode(encoding='ascii')
+
+
+def pub_der_guid_bts(pub_der: bytes):
+    return hashlib.sha256(pub_der).digest()
 
 
 def hash_function(bin_data):

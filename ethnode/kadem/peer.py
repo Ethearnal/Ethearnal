@@ -4,6 +4,7 @@ import json
 from toolkit import kadmini_codec
 from toolkit.kadmini_codec import hash_function
 
+cdx = kadmini_codec
 
 def print_d(msg, d):
     print(msg)
@@ -43,11 +44,14 @@ class Peer(object):
     def __repr__(self):
         return repr(self.astriple())
 
-    def _sendmessage_dht(self, message, codec, sock=None, peer_id=None, peer_info=None, lock=None):
+    def _sendmessage_dht(self, message, codec,
+                         sock=None, peer_id=None, peer_info=None, lock=None):
         message["peer_id"] = peer_id  # more like sender_id
         bts = codec.encode(message)
+
         # todo, originally server socket is used for sending
-        # todo refactor this soon
+        # todo refactor this asap
+
         if sock:
             if lock:
                 with lock:
@@ -56,20 +60,23 @@ class Peer(object):
                 sock.sendto(bts, (self.host, self.port))
 
     # handle send of all udp msg here
-    def _sendmessage(self, message, sock=None, peer_id=None, peer_info=None, lock=None):
+    def _sendmessage(self, message,
+                     sock=None, peer_id=None, peer_info=None, lock=None):
 
         if not sock:
             sock = self.socket
 
         if isinstance(peer_id, int):
-            peer_id = kadmini_codec.guid_int_to_bts(peer_id)
+            peer_id = cdx.guid_int_to_bts(peer_id)
+
         self._sendmessage_dht(
             message,
             kadmini_codec,
             sock=sock,
             peer_id=peer_id,
             peer_info=peer_info,  # disable originally unused
-            lock=lock)
+            lock=lock,
+        )
 
     def push_pubkey(self, sender_id=None, pubkey_der=None):
         if not sender_id:
@@ -92,13 +99,19 @@ class Peer(object):
         }
         self._sendmessage(message, socket, peer_id=peer_id, peer_info=peer_info, lock=lock)
 
-    def store(self, key, value, socket=None, peer_id=None, peer_info=None, lock=None):
+    def store(self, key, value, socket=None,
+              peer_id=None,
+              peer_info=None,
+              lock=None,
+              signature=None):
         key_bts = kadmini_codec.guid_int_to_bts(key)
         message = {
             "message_type": "store",
             "id": key_bts,
             "value": value
         }
+        if signature:
+            message['signature'] = signature
         self._sendmessage(message, socket, peer_id=peer_id, peer_info=peer_info, lock=lock)
 
     def find_node(self, id, rpc_id, socket=None, peer_id=None, peer_info=None, lock=None):
@@ -139,7 +152,8 @@ class Peer(object):
         }
         self._sendmessage(message, socket, peer_id=peer_id, peer_info=peer_info, lock=lock)
 
-    def found_value(self, id, value, rpc_id, socket=None, peer_id=None, peer_info=None, lock=None):
+    def found_value(self, id, value, rpc_id,
+                    socket=None, peer_id=None, peer_info=None, lock=None):
         id_bts = kadmini_codec.guid_int_to_bts(id)
         rpc_id_bts = kadmini_codec.guid_int_to_bts(rpc_id)
         message = {

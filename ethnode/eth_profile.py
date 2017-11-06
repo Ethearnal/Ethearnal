@@ -12,6 +12,7 @@ import base64
 from toolkit import tools
 from toolkit import basemodel
 from toolkit.store import CrudJsonListStore
+from toolkit import kadmini_codec as cdx
 
 from randomavatar.randomavatar import Avatar
 
@@ -55,6 +56,10 @@ class EthearnalProfileController(object):
     RSA_FORMAT = 'PEM'
 
     def __init__(self, data_dir=config.data_dir, personal_dir=None, files_dir=None):
+
+        self.cdx = cdx
+
+        #
 
         self.data_dir = os.path.abspath(data_dir)
         if personal_dir:
@@ -158,6 +163,13 @@ class EthearnalProfileController(object):
         b64, der = self.rsa_b64_der(bts)
         return b64, der
 
+    def rsa_prv_obj(self):
+        with open(self.rsa_prv_fn, 'rb') as fp:
+            pem_bts = fp.read()
+        rsa.PrivateKey.load_pkcs1()
+
+
+
     @property
     def rsa_prv_b64_der(self):
         with open(self.rsa_prv_fn, 'rb') as fp:
@@ -192,6 +204,14 @@ class EthearnalProfileController(object):
     @property
     def rsa_guid_bin(self):
         return self.rsa_guid_hex_bin[1]
+
+    def rsa_sign(self, bin_msg):
+        return cdx.sign_message(bin_message=bin_msg, prv_der=self.rsa_prv_der)
+
+    def rsa_verify(self, bin_msg, sig, pub_der=None):
+        if not pub_der:
+            pub_der = self.rsa_pub_der
+        return cdx.verify_message(bin_msg, sig, pub_der)
 
 
 class EthearnalProfileView(object):
