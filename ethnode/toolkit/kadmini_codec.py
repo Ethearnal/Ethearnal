@@ -50,10 +50,16 @@ def sign_message(bin_message, prv_der):
     return sig
 
 
+def verify_guid(bin_guid, bin_pubkey):
+    if bin_guid == hashlib.sha256(bin_pubkey).digest():
+        return True
+    else:
+        return False
+
+
 def verify_message(bin_message, signature, pub_der):
     pub = rsa.PublicKey.load_pkcs1(pub_der, 'DER')
     verified = rsa.verify(bin_message, signature, pub)
-    return verified
     return verified
 
 

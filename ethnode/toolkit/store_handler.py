@@ -72,7 +72,7 @@ class DHTStoreHandlerOne(object):
 
     def pull(self, hk):
         print('STORE HANDLER PULL', hk)
-        return self.store.__getitem__(hk)
+        return self.store.get(hk)
 
     def __contains__(self, hk):
         print('STORE HANDLE contains', hk)

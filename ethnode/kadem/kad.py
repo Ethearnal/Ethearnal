@@ -1,6 +1,7 @@
 # import json
 import bson
 import random
+import hashlib
 # import socket
 import socketserver
 import threading
@@ -36,6 +37,7 @@ class DHTFacade(object):
         self.dht = dht
         self.ert = ert
         self.cdx = cdx
+        self.push_pubkey(local_only=True)
 
     def boot_to(self, host, port):
         self.dht.bootstrap([(host, port), ])
@@ -52,16 +54,19 @@ class DHTFacade(object):
     def bin_guid(self):
         return cdx.guid_int_to_bts(self.dht.peer.id)
 
-    def push(self, key, value, guid=None, revision=cdx.DEFAULT_REVISON, nearest_nodes=None):
-        hk = cdx.encode_key_hash(key, guid=self.bin_guid, revision=revision)
+    def push(self, key, value,
+             revision=cdx.DEFAULT_REVISON,
+             nearest_nodes=None, local_only=False):
+        guid = self.bin_guid
+        hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
         ev = cdx.encode_val_bson(value, revision)
         sg = self.ert.rsa_sign(ev)
         print('PUSH HK', hk)
 
-        if not guid:
-            guid = self.bin_guid
-
         self.dht.storage.push(hk, ev, sg, guid)
+
+        if local_only:
+            return
 
         if not nearest_nodes:
             nearest_nodes = self.dht.iterative_find_nodes(hk)
@@ -79,10 +84,62 @@ class DHTFacade(object):
         value = {'h_p': host_port}
         self.push(key, value)
 
-    def push_pubkey(self):
+    def push_pubkey(self, local_only=False):
         key = {'ert': 'pubkey'}
         value = {'ert:pubkey': self.ert.rsa_pub_der}
-        self.push(key, value)
+        self.push(key, value, local_only=local_only)
+
+    def pull_pubkey(self, guid=None):
+        key = {'ert': 'pubkey'}
+        if not guid:
+            guid = self.bin_guid
+        val = self.pull_local(key, guid=guid)
+        if val:
+            print('LOCAL VAL PUBKEY')
+        else:
+            remote_val = self.pull_remote(key, guid=guid)
+            if remote_val:
+                print('REMOTE VAL PUBKEY')
+                own, sig, val = remote_val
+                rev, data = cdx.decode_bson_val(val)
+                der = data['ert:pubkey']
+                is_ok = cdx.verify_guid(guid, der)
+                is_hash_ok = False
+                if hashlib.sha256(der).digest() == guid:
+                    is_hash_ok = True
+
+                if is_ok and own == guid and is_hash_ok:
+                    print('REMOTE PUBKEY OK')
+                    print('STORE PUB KEY')
+                    # store only reference
+                    hk = cdx.encode_key_hash(key, guid=guid, revision=rev)
+                    self.data.pubkeys[own] = hk
+                    print('STORE IN DHT')
+                    return self.data.store.__setitem__(hk, remote_val)
+                else:
+                    print('REMOTE PUBKEY NOT OK')
+
+
+    # def pull_pubkey_in_peers(self):
+    #     for peer in self.peers:
+    #         guid = cdx.guid_int_to_bts(peer['id'])
+    #         val = self.pull_remote({'ert': 'pubkey'}, guid)
+    #         owner_guid, sig, bson_coded_value = val
+    #         rev, data = cdx.decode_bson_val(bson_coded_value)
+    #         der_pub_key = data['ert:pubkey']
+    #         if guid == owner_guid:
+    #             guid_ok = cdx.verify_guid(owner_guid, der_pub_key)
+    #             if guid_ok:
+    #                 print('GUID OK')
+    #                 self.push_pubkey(der_pub_key, local_only=True)
+    #             else:
+    #                 print('GUID NOT OK')
+    #         else:
+    #             print('RCV GUID != owner GUID')
+
+
+
+
 
     def pull_local(self, key,
                    guid=None,
