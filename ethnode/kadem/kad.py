@@ -215,7 +215,11 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
 
         id = kadmini_codec.guid_bts_to_int(message["peer_id"])
 
-        msg_rpc_id_int = kadmini_codec.guid_bts_to_int(message["rpc_id"])
+        if id == key:
+            print('KEY IS PEER')
+
+        msg_rpc_id_int = kadmini_codec.guid_bts_to_int\
+            (message["rpc_id"])
 
         info = None
 
