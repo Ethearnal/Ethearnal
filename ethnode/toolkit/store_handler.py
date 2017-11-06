@@ -56,8 +56,8 @@ class DHTStoreHandlerOne(object):
                     val_ok = cdx.verify_message(val, signature, pubkey_der)
                     if val_ok:
                         print('VAL SIG OK STORE IN DHT')
-                        if 'ert:udp:ip4:port' in data:
-                            self.ert_ip4_udp_port(data['ert:udp:ip4:port'])
+
+                        # event handler here
 
                         return self.store.__setitem__(key, owner_signature_value)
                     else:
