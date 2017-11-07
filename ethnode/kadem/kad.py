@@ -19,6 +19,7 @@ from eth_profile import EthearnalProfileController
 
 cdx = kadmini_codec
 
+# k = 20
 k = 20
 
 alpha = 3
@@ -27,7 +28,7 @@ alpha = 3
 
 id_bits = kadmini_codec.id_bits
 
-iteration_sleep = 0.1
+iteration_sleep = 2
 
 # all the things have to be bson encoded
 
@@ -55,7 +56,7 @@ class DHTFacade(object):
         return cdx.guid_int_to_bts(self.dht.peer.id)
 
     def push(self, key, value,
-             revision=cdx.DEFAULT_REVISON,
+             revision=cdx.DEFAULT_REVISION,
              nearest_nodes=None, local_only=False):
         guid = self.bin_guid
         hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
@@ -131,14 +132,14 @@ class DHTFacade(object):
 
     def pull_local(self, key,
                    guid=None,
-                   revision=cdx.DEFAULT_REVISON,
+                   revision=cdx.DEFAULT_REVISION,
                    ):
         if not guid:
             guid = self.bin_guid
         hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
         return self.dht.data.pull(hk)
 
-    def pull_remote(self, key, guid=None, revision=cdx.DEFAULT_REVISON):
+    def pull_remote(self, key, guid=None, revision=cdx.DEFAULT_REVISION):
         if not guid:
             guid = self.bin_guid
         hk = cdx.encode_key_hash(key, guid, revision)
@@ -211,6 +212,7 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
 
     def handle_find(self, message, find_value=False):
         print('RCV FIND: ', find_value)
+        print('RCV FMSG', message)
         key = kadmini_codec.guid_bts_to_int(message["id"])
 
         id = kadmini_codec.guid_bts_to_int(message["peer_id"])
@@ -218,8 +220,7 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         if id == key:
             print('KEY IS PEER')
 
-        msg_rpc_id_int = kadmini_codec.guid_bts_to_int\
-            (message["rpc_id"])
+        msg_rpc_id_int = kadmini_codec.guid_bts_to_int(message["rpc_id"])
 
         info = None
 
@@ -246,7 +247,7 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
                              lock=self.server.send_lock)
 
     def handle_found_nodes(self, message):
-        print('RCV FOUND NODES')
+        print('RCV FOUND NODES', message)
         msg_rpc_id_int = kadmini_codec.guid_bts_to_int(message["rpc_id"])
         rpc_id = msg_rpc_id_int
 
@@ -255,9 +256,12 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         # nearest_nodes = [Peer(*peer) for peer in message["nearest_nodes"]]
         decoded_nearest_nodes = list()
         for item in message['nearest_nodes']:
-            ip4, port, id_bts = item
+            ip4, port, id_bts, peer_info = item
             print('NEAR NODE', item)
-            decoded_nearest_nodes.append((ip4, port, kadmini_codec.guid_bts_to_int(id_bts)))
+            decoded_nearest_nodes.append(Peer(ip4,
+                                              port,
+                                              cdx.guid_bts_to_int(id_bts),
+                                              peer_info))
         shortlist.update(decoded_nearest_nodes)
 
     def handle_found_value(self, message):

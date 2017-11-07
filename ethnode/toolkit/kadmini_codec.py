@@ -5,8 +5,7 @@ import bson
 import rsa
 
 
-
-DEFAULT_REVISON = 1
+DEFAULT_REVISION = 1
 
 revision_function = hex
 
@@ -122,12 +121,10 @@ def encode_js_ascii(d: dict):
     remap_d = remap_keys_encode(d)
     js = json.dumps(remap_d, ensure_ascii=True, separators=(',', ':'))
     bts = js.encode(encoding='ascii')
-    # print('ENCODED SZ', len(bts))
     return bts
 
 
 def decode_js_ascii(bts: bytes):
-    # print('try JS  to decode, + +++ d', bts)
     st = bts.decode(encoding='ascii')
     d = json.loads(st, encoding='ascii')
     remap_d = remap_keys_decode(d)
@@ -143,11 +140,8 @@ def print_d(msg, d):
 
 
 def encode_bson(d: dict):
-    # print_d('encode ORIG', d)
     remap_d = remap_keys_encode(d)
-    # print_d('encode SHORT', remap_d)
     bts = bson.dumps(remap_d)
-    # print('ENCODE BTS',bts)
     return bts
 
 
