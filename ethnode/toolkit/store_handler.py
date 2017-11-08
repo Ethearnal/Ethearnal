@@ -94,5 +94,8 @@ class DHTStoreHandlerOne(object):
             else:
                 print('HK PUBKEY NOT FOUND, STORE INTEGRITY ERR')
         else:
+
+            # event handler here
+            
             print('PUBKEY NOT FOUND, TRIGGER PULL HERE')
 

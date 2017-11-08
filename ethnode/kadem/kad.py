@@ -220,7 +220,7 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         if id == key:
             print('KEY IS PEER')
 
-        msg_rpc_id_int = kadmini_codec.guid_bts_to_int(message["rpc_id"])
+        msg_rpc_id_int = cdx.guid_bts_to_int(message["rpc_id"])
 
         info = None
 
@@ -242,21 +242,22 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
             if not nearest_nodes:
                 nearest_nodes.append(self.server.dht.peer)
             nearest_nodes = [nearest_peer.astriple() for nearest_peer in nearest_nodes]
+
             peer.found_nodes(id, nearest_nodes, msg_rpc_id_int, socket=response_socket,
                              peer_id=self.server.dht.peer.id, peer_info=self.server.dht.peer.info,
                              lock=self.server.send_lock)
 
     def handle_found_nodes(self, message):
         print('RCV FOUND NODES', message)
-        msg_rpc_id_int = kadmini_codec.guid_bts_to_int(message["rpc_id"])
+        msg_rpc_id_int = cdx.guid_bts_to_int(message["rpc_id"])
         rpc_id = msg_rpc_id_int
-
+        peer_info = None  # just for compatibility with original kad
         shortlist = self.server.dht.rpc_ids[rpc_id]
         del self.server.dht.rpc_ids[rpc_id]
         # nearest_nodes = [Peer(*peer) for peer in message["nearest_nodes"]]
         decoded_nearest_nodes = list()
         for item in message['nearest_nodes']:
-            ip4, port, id_bts, peer_info = item
+            ip4, port, id_bts = item
             print('NEAR NODE', item)
             decoded_nearest_nodes.append(Peer(ip4,
                                               port,

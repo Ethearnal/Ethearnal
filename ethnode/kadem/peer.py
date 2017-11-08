@@ -6,6 +6,7 @@ from toolkit.kadmini_codec import hash_function
 
 cdx = kadmini_codec
 
+
 def print_d(msg, d):
     print(msg)
     for k, v in d.items():
@@ -36,6 +37,7 @@ class Peer(object):
         return self.host, self.port, self.id, self.info
 
     def asquad(self):
+        # quad ?
         return self.host, self.port, self.id, self.info
 
     def address(self):
@@ -124,23 +126,26 @@ class Peer(object):
         }
         self._sendmessage(message, socket, peer_id=peer_id, peer_info=peer_info, lock=lock)
 
-    def found_nodes(self, id, nearest_nodes, rpc_id, socket=None, peer_id=None, peer_info=None, lock=None):
+    def found_nodes(self, id_int, nearest_nodes, rpc_id, socket=None, peer_id=None, peer_info=None, lock=None):
         # ip4, port, id, info
-        id_bts = kadmini_codec.guid_int_to_bts(id)
-        rpc_id_bts = kadmini_codec.guid_int_to_bts(rpc_id)
-        new_near_nodes = list()
+        id_bts = cdx.guid_int_to_bts(id_int)
+        rpc_id_bts = cdx.guid_int_to_bts(rpc_id)
         for node in nearest_nodes:
-            ip4, port, id, info = node
-            id_bts = kadmini_codec.guid_int_to_bts(id)
-            new_near_nodes.append((ip4, port, id_bts, info))
+            host, port, int_id, peer_info = node
+            print(node, type(node))
+            self.find_node(id_int, rpc_id)
 
-        message = {
-            "message_type": "found_nodes",
-            "id": id_bts,
-            "nearest_nodes": new_near_nodes,
-            "rpc_id": rpc_id_bts
-        }
-        self._sendmessage(message, socket, peer_id=peer_id, peer_info=peer_info, lock=lock)
+        for node in nearest_nodes:
+            ip4, port, id_int_nd, info = node
+            id_bts_nd = cdx.guid_int_to_bts(id_int_nd)
+            new_near_nodes = [(ip4, port, id_bts_nd), ]
+            message = {
+                "message_type": "found_nodes",
+                "id": id_bts,
+                "nearest_nodes": new_near_nodes,
+                "rpc_id": rpc_id_bts
+            }
+            self._sendmessage(message, socket, peer_id=peer_id, peer_info=peer_info, lock=lock)
 
     def find_value(self, id, rpc_id, socket=None, peer_id=None, peer_info=None, lock=None):
         print('SEND FIND_VALUE')
