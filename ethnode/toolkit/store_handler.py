@@ -1,24 +1,27 @@
 from toolkit import kadmini_codec as cdx
-from toolkit.store_sqlite import ErtDHTSQLite
+from toolkit.store_sqlite import ErtDHTSQLite, ErtREFSQLite
 # storage router/ mux/ demux
 # status wip
-
 
 # protocol one
 # <name_space>:<key>
 # ert:pubkey - to handle pubkey exchange
 
+
 class DHTStoreHandlerOne(object):
-    def __init__(self, sqlite_file=None):
+    def __init__(self, dht_sqlite_file=None, pubkeys_sqlite_file=None):
         # dht store for all the things
-        if not sqlite_file:
+        if not dht_sqlite_file:
             self.store = dict()
         else:
-            self.store = ErtDHTSQLite(sqlite_file)
+            self.store = ErtDHTSQLite(dht_sqlite_file)
         # hk:( owner_guid, sig, bson_coded_value )
         # bson_coded_value -> rev, data dict
         # refs
-        self.pubkeys = dict()
+        if not pubkeys_sqlite_file:
+            self.pubkeys = dict()
+        else:
+            self.pubkeys = ErtREFSQLite(pubkeys_sqlite_file)
 
     # local push
     def push(self, key, val, signature, guid_owner):

@@ -12,7 +12,7 @@ import base64
 from toolkit import tools
 from toolkit import basemodel
 from toolkit.store import CrudJsonListStore
-from toolkit.store_sqlite import ErtDHTSQLite
+from toolkit.store_sqlite import ErtDHTSQLite, ErtREFSQLite
 from toolkit import kadmini_codec as cdx
 
 from randomavatar.randomavatar import Avatar
@@ -53,6 +53,7 @@ class EthearnalProfileController(object):
     PROFILE_IMAGE_FILE_NAME = 'profile_img.png'
     JOB_POSTS_JSON_FILE_NAME = 'job_posts.json'
     PROFILE_DHT_SQLITE = 'dht.db'
+    PROFILE_DHT_REF_PUBKEYS = 'pubkeys.db'
 
     RSA_PRV = 'rsa_id.prv'
     RSA_PUB = 'rsa_id.pub'
@@ -83,10 +84,12 @@ class EthearnalProfileController(object):
         self.rsa_prv_fn = '%s/%s' % (self.personal_dir, self.RSA_PRV)
         self.rsa_pub_fn = '%s/%s' % (self.personal_dir, self.RSA_PUB)
         self.dht_fb_fn = '%s/%s' % (self.personal_dir, self.PROFILE_DHT_SQLITE)
+        self.dht_ref_pubkeys_fn = '%s/%s' % (self.personal_dir, self.PROFILE_DHT_REF_PUBKEYS)
 
         self.model = EthearnalProfileModel()
 
         self.dht_store = ErtDHTSQLite(self.dht_fb_fn)
+        self.dht_pubkeys = ErtREFSQLite(self.dht_ref_pubkeys_fn)
 
         # create empty profile if not found
         if not os.path.isfile(self.profile_json_file_name):
