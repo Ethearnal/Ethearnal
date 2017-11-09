@@ -167,7 +167,7 @@ class DHTFacade(object):
 class DHTRequestHandler(socketserver.BaseRequestHandler):
     def handle_dht(self, message, message_type):
         # todo make it in dict or something, some general protocol handler
-        # that way is lame
+        # that way is lame, .... whole thing have to refactored in brand new kademlia
         try:
 
             # handle message receive
@@ -212,27 +212,22 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
 
     def handle_find(self, message, find_value=False):
         print('RCV FIND: ', find_value)
-        print('RCV FMSG', message)
         key = kadmini_codec.guid_bts_to_int(message["id"])
-
         id = kadmini_codec.guid_bts_to_int(message["peer_id"])
 
         if id == key:
             print('KEY IS PEER')
 
         msg_rpc_id_int = cdx.guid_bts_to_int(message["rpc_id"])
-
         info = None
-
         client_host, client_port = self.client_address
         peer = Peer(client_host, client_port, id, info)
         response_socket = self.request[1]
-
         print('RCV FIND KEY', key)
 
         if find_value and (key in self.server.dht.data):
             bv = self.server.dht.storage.pull(key)
-            print('FOUND VAL')
+            print('RCV FIND VALUE')
             peer.found_value(id, bv, msg_rpc_id_int, socket=response_socket,
                              peer_id=self.server.dht.peer.id,
                              peer_info=self.server.dht.peer.info,
@@ -248,7 +243,7 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
                              lock=self.server.send_lock)
 
     def handle_found_nodes(self, message):
-        print('RCV FOUND NODES', message)
+        print('RCV FOUND NODES')
         msg_rpc_id_int = cdx.guid_bts_to_int(message["rpc_id"])
         rpc_id = msg_rpc_id_int
         peer_info = None  # just for compatibility with original kad
@@ -258,7 +253,7 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         decoded_nearest_nodes = list()
         for item in message['nearest_nodes']:
             ip4, port, id_bts = item
-            print('NEAR NODE', item)
+            # print('NEAR NODE', item)
             decoded_nearest_nodes.append(Peer(ip4,
                                               port,
                                               cdx.guid_bts_to_int(id_bts),
@@ -311,7 +306,7 @@ class DHT(object):
                  guid=None, seeds=[],
                  storage=None,
                  info={},  # rm this
-                 requesthandler=EthDHTRequestHandle):
+                 request_handler=EthDHTRequestHandle):
         if not guid:
             raise ValueError('GUID must SET from PUBLIC KEY!')
 
@@ -323,7 +318,7 @@ class DHT(object):
         self.buckets = BucketSet(k, id_bits, self.peer.id)
         self.rpc_ids = {}  # should probably have a lock for this
         self.rpc_ids = {}  # omg
-        self.server = DHTServer(self.peer.address(), requesthandler)
+        self.server = DHTServer(self.peer.address(), request_handler)
         self.server.dht = self
         self.server_thread = threading.Thread(target=self.server.serve_forever)
         self.server_thread.daemon = True
@@ -384,52 +379,6 @@ class DHT(object):
             for bnode in self.buckets.to_list():
                 self.iterative_find_nodes(self.peer.id, boot_peer=Peer(bnode[0], bnode[1], bnode[2], bnode[3]))
 
-    # Get a value in a sync way, calling an handler
-    def get_sync_DEP(self, key, handler):
-        try:
-            d = self[key]
-        except:
-            d = None
-
-        handler(d)
-
-    # Get a value in async way
-    def getDEPRECATED(self, key, handler):
-        # print ('dht.get',key)
-        t = threading.Thread(target=self.get_sync, args=(key, handler))
-        t.start()
-
-    # Iterator
-    def __iter__DEPRECATED(self):
-        return self.data.__iter__()
-
-    # Operator []
-    def __getitem__DEPRECATED(self, key):
-        # todo heavy refactor here
-        if isinstance(key, int):
-            hashed_key = key
-        else:
-            hashed_key = self.hash_function(key)
-
-        if hashed_key in self.data:
-            return self.data[hashed_key]
-        result = self.iterative_find_value(hashed_key)
-        if result:
-            self.data[hashed_key] = result
-            r = self.data[hashed_key]
-            return r
-        raise KeyError
-
-    def set_hashed_DEPRECATED(self, hashed_key, value):
-        # if not nearest_nodes:
-        self.data[hashed_key] = value
-        nearest_nodes = self.iterative_find_nodes(hashed_key)
-        for node in nearest_nodes:
-            node.store_(hashed_key, value, socket=self.server.socket, peer_id=self.peer.id)
-
-    def __setitem__DEPRECATED(self, key, value):
-        hashed_key = self.hash_function(key)
-        self.set_hashed(hashed_key, value)
 
 
 

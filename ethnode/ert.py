@@ -216,9 +216,9 @@ if __name__ == '__main__':
 
         assert hex2_guid == hex_guid
         #
-        storage_handle = store_handler.DHTStoreHandlerOne()
-        # storage_handle = dict()
-
+        storage_handle = store_handler.DHTStoreHandlerOne(
+            sqlite_file=ert.dht_fb_fn
+        )
         dht = main_dht(udp_host, udp_port,
                        store=storage_handle,
                        guid=int_guid,

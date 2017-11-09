@@ -1,4 +1,5 @@
 from toolkit import kadmini_codec as cdx
+from toolkit.store_sqlite import ErtDHTSQLite
 # storage router/ mux/ demux
 # status wip
 
@@ -8,9 +9,12 @@ from toolkit import kadmini_codec as cdx
 # ert:pubkey - to handle pubkey exchange
 
 class DHTStoreHandlerOne(object):
-    def __init__(self):
+    def __init__(self, sqlite_file=None):
         # dht store for all the things
-        self.store = dict()
+        if not sqlite_file:
+            self.store = dict()
+        else:
+            self.store = ErtDHTSQLite(sqlite_file)
         # hk:( owner_guid, sig, bson_coded_value )
         # bson_coded_value -> rev, data dict
         # refs
