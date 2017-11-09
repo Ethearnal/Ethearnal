@@ -52,58 +52,10 @@ header .container nav
                     transform: rotate(-45deg)
 
 
-        .form-group.visible-xs
-            margin-top: -5px
-            width: calc(75% - 45px)
-            float: left
-
-            a
-                margin-top: 5px
-
-                i
-                    color: #86939e
-                    font-size: 16px
-                    top: 29px
-                    position: relative
-
-            input
-                color: #86939e
-                font-size: 16px
-                border: none
-                outline: none !important
-                border-radius: 0
-                box-shadow: none
-                padding-left: 0
-                border-bottom: 1px solid #f0f4f7
-                margin-left: 45px
-
     .navbar-header a
         padding: 18px
-
-    #navigation form.navbar-left
-        border-left: 1px solid #e1e8ee
-        height: 23px
-        margin: 18px 0
-
-        .form-group
-            margin-top: -5px
-
-            a
-                margin-top: 5px
-
-                i
-                    color: #86939e
-                    font-size: 20px
-                    top: 5px
-                    position: relative
-
-            input
-                color: #86939e
-                font-size: 16px
-                border: none
-                outline: none !important
-                border-radius: 0
-                box-shadow: none
+        position: relative
+        top: 3px
 
 
     #navigation
@@ -133,10 +85,22 @@ header .container nav
             li.asset
                 margin-top: -5px
 
+                ul.dropdown-menu
+                    min-width: 155px
+                    padding: 0
+                    top: 35px
+
+                    li
+                        padding: 0 10px
+
+                        a i
+                            line-height: 37px
+
                 a
                     padding: 0
+                    background-color: transparent !important
 
-                    i
+                    i:not(.icon)
                         margin-right: 18px
                         cursor: pointer
                         font-size: 20px
@@ -170,7 +134,7 @@ header .container nav
                     font-size: 16px
                     color: #5e6977
 
-                i
+                i:not(.icon)
                     color: #5e6977
                     position: relative
                     top: 8px
@@ -181,20 +145,21 @@ header .container nav
 
 
             ul.dropdown-menu
-                margin-top: 0px
+                margin-top: -5px
                 border-radius: 0
-                min-width: 128px
+                min-width: 115px
                 border: 1px solid #e1e8ee
                 padding: 0
 
                 li
                     font-weight: 500
-                    padding-left: 5px
+                    padding: 0 15px
 
                     a
                         font-size: 16px
                         color: #86939e
                         line-height: 40px
+                        padding: 0
 
                         i
                             font-size: 22px

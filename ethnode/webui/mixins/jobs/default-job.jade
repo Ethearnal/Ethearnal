@@ -10,10 +10,10 @@
         p 5/2015 - Present (1y 5m)
 
 .job-description.col-lg-8.col-md-7.col-sm-8.col-xs-12
-    .dropdown.more
-        i.icon-more.dropdown-toggle(data-toggle="dropdown")
-
-        ul.dropdown-menu(role="menu", aria-labelledby="dLabel")
-            li: a(href="#") Delete
+    button#demo-menu-lower-right.mdl-button.mdl-js-button.mdl-button--icon.dropdown-button: i.material-icons more_vert
+    ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="demo-menu-lower-right")
+        li.mdl-menu__item.open-modal(open-modal="#add-job") Create Job
+        li.mdl-menu__item(disabled) Edit Job
+        li.mdl-menu__item(disabled) Delete
 
     p I worked on a major data migration project
