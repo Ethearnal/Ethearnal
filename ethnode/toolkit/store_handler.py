@@ -3,6 +3,10 @@ from toolkit import kadmini_codec as cdx
 # status wip
 
 
+# protocol one
+# <name_space>:<key>
+# ert:pubkey - to handle pubkey exchange
+
 class DHTStoreHandlerOne(object):
     def __init__(self):
         # dht store for all the things
