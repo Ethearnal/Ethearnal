@@ -12,6 +12,8 @@ import base64
 from toolkit import tools
 from toolkit import basemodel
 from toolkit.store import CrudJsonListStore
+from toolkit.store_sqlite import ErtDHTSQLite, ErtREFSQLite
+from toolkit import kadmini_codec as cdx
 
 from randomavatar.randomavatar import Avatar
 
@@ -50,11 +52,18 @@ class EthearnalProfileController(object):
     PROFILE_HTML_FILE_NAME = 'profile.html'
     PROFILE_IMAGE_FILE_NAME = 'profile_img.png'
     JOB_POSTS_JSON_FILE_NAME = 'job_posts.json'
+    PROFILE_DHT_SQLITE = 'dht.db'
+    PROFILE_DHT_REF_PUBKEYS = 'pubkeys.db'
+
     RSA_PRV = 'rsa_id.prv'
     RSA_PUB = 'rsa_id.pub'
     RSA_FORMAT = 'PEM'
 
     def __init__(self, data_dir=config.data_dir, personal_dir=None, files_dir=None):
+
+        self.cdx = cdx
+
+        #
 
         self.data_dir = os.path.abspath(data_dir)
         if personal_dir:
@@ -74,8 +83,13 @@ class EthearnalProfileController(object):
         self.job_post_json_store_fn = '%s/%s' % (self.personal_dir, self.JOB_POSTS_JSON_FILE_NAME)
         self.rsa_prv_fn = '%s/%s' % (self.personal_dir, self.RSA_PRV)
         self.rsa_pub_fn = '%s/%s' % (self.personal_dir, self.RSA_PUB)
+        self.dht_fb_fn = '%s/%s' % (self.personal_dir, self.PROFILE_DHT_SQLITE)
+        self.dht_ref_pubkeys_fn = '%s/%s' % (self.personal_dir, self.PROFILE_DHT_REF_PUBKEYS)
 
         self.model = EthearnalProfileModel()
+
+        self.dht_store = ErtDHTSQLite(self.dht_fb_fn)
+        self.dht_pubkeys = ErtREFSQLite(self.dht_ref_pubkeys_fn)
 
         # create empty profile if not found
         if not os.path.isfile(self.profile_json_file_name):
@@ -158,6 +172,24 @@ class EthearnalProfileController(object):
         b64, der = self.rsa_b64_der(bts)
         return b64, der
 
+    def rsa_prv_obj(self):
+        with open(self.rsa_prv_fn, 'rb') as fp:
+            pem_bts = fp.read()
+        rsa.PrivateKey.load_pkcs1()
+
+
+
+    @property
+    def rsa_prv_b64_der(self):
+        with open(self.rsa_prv_fn, 'rb') as fp:
+            bts = fp.read()
+        b64, der = self.rsa_b64_der(bts)
+        return b64, der
+
+    @property
+    def rsa_prv_der(self):
+        return self.rsa_prv_b64_der[1]
+
     @property
     def rsa_pub_base64(self):
         return self.rsa_pub_b64_der[0]
@@ -165,7 +197,6 @@ class EthearnalProfileController(object):
     @property
     def rsa_pub_der(self):
         return self.rsa_pub_b64_der[1]
-
 
     @property
     def rsa_guid_hex_bin(self):
@@ -182,6 +213,14 @@ class EthearnalProfileController(object):
     @property
     def rsa_guid_bin(self):
         return self.rsa_guid_hex_bin[1]
+
+    def rsa_sign(self, bin_msg):
+        return cdx.sign_message(bin_message=bin_msg, prv_der=self.rsa_prv_der)
+
+    def rsa_verify(self, bin_msg, sig, pub_der=None):
+        if not pub_der:
+            pub_der = self.rsa_pub_der
+        return cdx.verify_message(bin_msg, sig, pub_der)
 
 
 class EthearnalProfileView(object):

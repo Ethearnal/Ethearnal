@@ -15,7 +15,7 @@ iudp="-u 0.0.0.0:300${k}"
 seed="-s 0.0.0.0:300${s}"
 data="-d p${k}_profile"
 
-cmd="ert.py -i ${data} ${ihtp} ${iudp} ${seed}"
+cmd="ert.py -b -i ${data} ${ihtp} ${iudp} ${seed}"
 
 echo ${cmd}
 python $cmd

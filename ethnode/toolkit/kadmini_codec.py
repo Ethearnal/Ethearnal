@@ -2,11 +2,10 @@ import json
 import hashlib
 import binascii
 import bson
+import rsa
 
 
-
-
-DEFAULT_REVISON = 1
+DEFAULT_REVISION = 1
 
 revision_function = hex
 
@@ -27,8 +26,9 @@ decode_map = (
     'ping',
     'pong',
     # extend
-    'pubkey',
-    'pubkey_der',
+    'signature',
+    # 'pubkey',
+    # 'pubkey_der',
 )
 
 # todo impl detailed testing for all conversions
@@ -41,6 +41,25 @@ decode_map = {chr(97 + k[0]): k[1] for k in enumerate(decode_map)}
 
 id_bits = 256
 id_bytes_len = 32
+
+
+def sign_message(bin_message, prv_der):
+    prv = rsa.PrivateKey.load_pkcs1(prv_der, 'DER')
+    sig = rsa.sign(bin_message, prv, 'SHA-256')
+    return sig
+
+
+def verify_guid(bin_guid, bin_pubkey):
+    if bin_guid == hashlib.sha256(bin_pubkey).digest():
+        return True
+    else:
+        return False
+
+
+def verify_message(bin_message, signature, pub_der):
+    pub = rsa.PublicKey.load_pkcs1(pub_der, 'DER')
+    verified = rsa.verify(bin_message, signature, pub)
+    return verified
 
 
 def encode_key_hash(item_key, guid=b'1', revision=1):
@@ -76,6 +95,10 @@ def guid_int_to_hex(guidint: int):
     return binascii.hexlify(bts).decode(encoding='ascii')
 
 
+def pub_der_guid_bts(pub_der: bytes):
+    return hashlib.sha256(pub_der).digest()
+
+
 def hash_function(bin_data):
     print('SHA256 HASHING')
     sha = hashlib.sha256(bin_data)
@@ -98,12 +121,10 @@ def encode_js_ascii(d: dict):
     remap_d = remap_keys_encode(d)
     js = json.dumps(remap_d, ensure_ascii=True, separators=(',', ':'))
     bts = js.encode(encoding='ascii')
-    # print('ENCODED SZ', len(bts))
     return bts
 
 
 def decode_js_ascii(bts: bytes):
-    # print('try JS  to decode, + +++ d', bts)
     st = bts.decode(encoding='ascii')
     d = json.loads(st, encoding='ascii')
     remap_d = remap_keys_decode(d)
@@ -119,11 +140,8 @@ def print_d(msg, d):
 
 
 def encode_bson(d: dict):
-    # print_d('encode ORIG', d)
     remap_d = remap_keys_encode(d)
-    # print_d('encode SHORT', remap_d)
     bts = bson.dumps(remap_d)
-    # print('ENCODE BTS',bts)
     return bts
 
 

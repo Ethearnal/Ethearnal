@@ -19,6 +19,8 @@ def test_rsa_generic():
     print('Verify')
     rsa.verify(message, signature, pubkey)
     print('RSA asymmetric key functions ok')
+    test_rsa_generic.pubkey = pubkey
+    test_rsa_generic.signature = signature
 
 
 if __name__ == '__main__':

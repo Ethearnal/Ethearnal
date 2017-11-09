@@ -5,8 +5,11 @@ import traceback
 import config
 import argparse
 from kadem.kad import DHT, DHTFacade
+
 from toolkit.tools import mkdir, on_hook
 from toolkit import kadmini_codec
+from toolkit import store_handler
+
 from eth_profile import EthearnalProfileView, EthearnalProfileController
 from eth_profile import EthearnalJobView, EthearnalJobPostController
 from eth_profile import EthearnalUploadFileView
@@ -53,6 +56,12 @@ parser.add_argument('-i', '--interactive_shell',
                     action='store_true'
                     )
 
+parser.add_argument('-b', '--dht_only',
+                    help='only udb dht',
+                    required=False,
+                    action='store_true'
+                    )
+
 
 class EthearnalSite(object):
     @cherrypy.expose
@@ -61,12 +70,14 @@ class EthearnalSite(object):
     # todo make entry point redirect to ui
 
 
-def main_dht(host: str, port: int, guid: int =None, seed_host=None, seed_port=None):
+def main_dht(host: str, port: int, store: store_handler.DHTStoreHandlerOne,
+             guid: int =None, seed_host=None, seed_port=None):
     if seed_host and seed_port and (host, port) != (seed_host, seed_port):
         print('BOOTSTRAP TO SEED', seed_host, seed_port)
-        dht = DHT(host=host, port=port, guid=guid,  seeds=[(seed_host, seed_port)])
+        dht = DHT(host=host, port=port, guid=guid,  seeds=[(seed_host, seed_port)],
+                  storage=store)
     else:
-        dht = DHT(host=host, port=port, guid=guid)
+        dht = DHT(host=host, port=port, guid=guid, storage=store)
     return dht
 
 
@@ -179,6 +190,7 @@ if __name__ == '__main__':
     udp_port = int(udp_port)
     seed_host = None
     seed_port = None
+
     if args.udp_seed_host_port:
         seed_host, seed_port = args.udp_seed_host_port.split(':')
         seed_port = int(seed_port)
@@ -203,23 +215,35 @@ if __name__ == '__main__':
         hex2_guid = kadmini_codec.guid_int_to_hex(int_guid)
 
         assert hex2_guid == hex_guid
-
-        dht = main_dht(udp_host, udp_port, guid=int_guid, seed_host=seed_host, seed_port=seed_port)
+        #
+        storage_handle = store_handler.DHTStoreHandlerOne(
+            dht_sqlite_file=ert.dht_fb_fn,
+            pubkeys_sqlite_file=ert.dht_ref_pubkeys_fn,
+        )
+        dht = main_dht(udp_host, udp_port,
+                       store=storage_handle,
+                       guid=int_guid,
+                       seed_host=seed_host,
+                       seed_port=seed_port)
         d = DHTFacade(dht, ert_profile_ctl)
         if dht.server_thread.is_alive():
             print('UDP server thread is alive')
         else:
             print('UDP server thread id dead')
 
-        # dht.server.socketserver
-        main_http(http_webdir=http_webdir,
-                  socket_host=socket_host,
-                  socket_port=socket_port,
-                  ert_profile_ctl=ert_profile_ctl,
-                  ert_profile_view=ert_profile_view,
-                  dht=dht,
-                  interactive=args.interactive_shell
-                  )
+        if not args.dht_only:
+            main_http(http_webdir=http_webdir,
+                      socket_host=socket_host,
+                      socket_port=socket_port,
+                      ert_profile_ctl=ert_profile_ctl,
+                      ert_profile_view=ert_profile_view,
+                      dht=dht,
+                      interactive=args.interactive_shell
+                      )
+        else:
+            from IPython import embed
+            embed()
+
     except Exception as e:
         print('MAIN ERROR')
         cherrypy.engine.stop()
