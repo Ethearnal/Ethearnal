@@ -10,10 +10,17 @@
 @import "timeline-post"
 @import "timeline-add-photos"
 
+// IMPORTING NEW STYLES
+@import "newstyles/modals"
+
+// IMPORTING NEW STYLES
+@import "newstyles/modals-content"
+
 // Responsiveness
 @import "responsive/screen-medium"
 @import "responsive/screen-small"
 @import "responsive/screen-mobile"
+
 
 
 *
@@ -106,3 +113,132 @@ p.no-accomplishments
 
 .btn-flat.dtp-btn-ok
     margin-left: 5px
+
+
+
+// Search bar editions.
+.navbar-header
+    .mdl-textfield--floating-label.is-focused .mdl-textfield__expandable-holder .mdl-textfield__label,
+    .mdl-textfield--floating-label.is-dirty .mdl-textfield__expandable-holder .mdl-textfield__label,
+    .mdl-textfield--floating-label.has-placeholder .mdl-textfield__expandable-holder .mdl-textfield__label
+        top: -16px
+
+
+.mdl-textfield.is-dirty .mdl-textfield__label,
+.mdl-textfield.is-focused .mdl-textfield__label,
+.mdl-textfield.has-placeholder .mdl-textfield__label
+    margin-bottom: 0 !important
+
+.mdl-textfield.is-dirty .mdl-textfield__label,
+.mdl-textfield.is-focused .mdl-textfield__label,
+    color: rgba(0,0,0,.46) !important
+
+
+.mdl-textfield__label:after
+  background-color: #ffb230 !important
+
+
+// Job and education description changes
+.job-description, .education-description
+
+    p
+        margin-right: 55px !important
+
+    button.dropdown-button
+        float: right
+        margin-right: 10px
+        width: 40px
+        height: 40px
+
+        i
+            color: #c1c1c1
+            font-size: 30px
+            line-height: 30px
+            width: 30px
+            transform: translate(-15px, -15px)
+
+
+
+
+
+
+
+
+
+
+.tick-animation-ctn
+  text-align: center
+  margin-top: 5em
+
+@-webkit-keyframes checkmark
+  0%
+    stroke-dashoffset: 100px
+
+  100%
+    stroke-dashoffset: 200px
+
+
+@-ms-keyframes checkmark
+  0%
+    stroke-dashoffset: 100px
+
+  100%
+    stroke-dashoffset: 200px
+
+
+@keyframes checkmark
+  0%
+    stroke-dashoffset: 100px
+
+  100%
+    stroke-dashoffset: 0px
+
+
+@-webkit-keyframes checkmark-circle
+  0%
+    stroke-dashoffset: 480px
+
+  100%
+    stroke-dashoffset: 960px
+
+
+@-ms-keyframes checkmark-circle
+  0%
+    stroke-dashoffset: 240px
+
+  100%
+    stroke-dashoffset: 480px
+
+
+@keyframes checkmark-circle
+  0%
+    stroke-dashoffset: 480px
+
+  100%
+    stroke-dashoffset: 960px
+
+
+@keyframes colored-circle
+  0%
+    opacity: 0
+
+  100%
+    opacity: 100
+
+.inlinesvg .svg svg
+  display: inline
+
+.icon--order-success svg
+  polyline
+    -webkit-animation: checkmark 0.25s ease-in-out 0.7s backwards
+    animation: checkmark 0.25s ease-in-out 0.7s backwards
+  circle
+    -webkit-animation: checkmark-circle 0.6s ease-in-out backwards
+    animation: checkmark-circle 0.6s ease-in-out backwards
+    &#colored
+      -webkit-animation: colored-circle 0.6s ease-in-out 0.7s backwards
+      animation: colored-circle 0.6s ease-in-out 0.7s backwards
+
+
+
+

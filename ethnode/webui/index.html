@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aspire</title>
     <!-- START of LINKS-->
     <!-- Normalize.css-->
@@ -26,14 +26,74 @@
     <!-- START of FONTS-->
     <!-- Google Material Icons-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Material Design Bootstrap-->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <!-- Roboto-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i">
+    <!-- Montserrat-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800,900">
     <!-- END of FONTS-->
     <!-- Main CSS file-->
     <link rel="stylesheet" href="styles/main.css">
     <!-- END of LINKS-->
   </head>
   <body>
+    <div id="add-job" class="modal-box flex floating">
+      <div class="modal-box-content">
+        <div class="inner-modal">
+          <div class="content">
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored close-modal-button"><i class="material-icons">close</i></button>
+            <div class="modal-header">
+              <h3>Add new job</h3>
+            </div>
+            <div class="success-message">
+              <h1 class="success-message__title">Congratulations, Dobri!</h1>
+              <div class="success-message__content">
+                <p>Your job was created. Close the modal to see it.</p>
+              </div>
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                <button class="mdl-button mdl-js-button create-new">Create a new job</button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <input id="input-image-job" type="file" placeholder="Add image or video" class="input-file">
+                <label for="input-image-job">Add Company's Logo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image"><img id="input-image-job" src="#" alt="Preview">
+              </div>
+              <div class="modal-inputs">
+                <form id="form-add-job" action="POST">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <input id="company-name" name="company" type="text" class="mdl-textfield__input">
+                    <label for="company-name" class="mdl-textfield__label">Company name</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <input id="position" type="text" name="position" class="mdl-textfield__input">
+                    <label for="position" class="mdl-textfield__label">Position</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield whole-line">
+                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                    <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <input id="date-from" type="text" name="startDate" class="mdl-textfield__input">
+                    <label for="date-from" class="mdl-textfield__label">Start Date</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <input id="date-to" type="text" name="endDate" class="mdl-textfield__input">
+                    <label for="date-from" class="mdl-textfield__label">End Date (leave blank if ongoing)</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button style="color: #5CAB7D" class="mdl-button mdl-js-button publish-button">Publish</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="shoutoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
       <div role="document" class="modal-dialog modal-lg">
         <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -757,33 +817,46 @@
         <nav class="navbar navbar-default">
           <!-- Navigation header - logo.-->
           <div class="navbar-header">
-            <div class="form-group visible-xs"><a href=""><i class="icon-search"></i></a>
-              <input text="text" placeholder="Search Ethearnal" class="form-control">
-            </div>
             <div class="button">
               <button type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" class="navbar-toggle collapsed"><span></span><span></span><span></span><span></span></button>
             </div><a href="" class="navbar-brand hidden-xs">Ethearnal BETA</a>
+            <form action="#" style="float: left; max-height: 62px;">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label">
+                <label for="search-header" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">search</i></label>
+                <div class="mdl-textfield__expandable-holder">
+                  <input id="search-header" type="text" class="mdl-textfield__input">
+                  <label for="search-header" class="mdl-textfield__label">Enter search text below</label>
+                </div>
+              </div>
+            </form>
           </div>
           <!-- Navbar items ONLY for larger than mobile screens.-->
           <div id="navigation" class="collapse navbar-collapse">
-            <form class="navbar-form navbar-left">
-              <div class="form-group"><a href=""><i class="icon-search"></i></a>
-                <input text="text" placeholder="Search Ethearnal" class="form-control">
-              </div>
-            </form>
             <ul class="nav navbar-nav navbar-right hidden-xs">
               <li id="comment-navbar" class="asset"><a href=""><i class="icon-comment"></i>
                   <div class="round-number"><span>1</span></div></a></li>
-              <li id="alert-navbar" class="asset"><a href=""><i class="material-icons">polymer</i>
-                  <div class="round-number"><span>3</span></div></a></li>
-              <li data-toggle="dropdown" class="profile"><img src="images/dobri.png" alt="Dobri" class="profile-picture"><span>Dobri</span></li>
-              <ul aria-labelledby="dLabel" class="dropdown-menu">
+              <li id="alert-navbar" class="asset"><a id="reputation-dropdown" data-toggle="dropdown"><i class="material-icons">polymer</i>
+                  <div class="round-number"><span></span></div></a>
+                <!-- Reputation dropdown-->
+                <ul data-labelledby="reputation-dropdown" class="dropdown-menu">
+                  <li class="buy-rep"><a href=""><i class="bitcoin icon"></i> Buy reputation</a></li>
+                  <li class="sell-rep"><a href=""><i class="dollar icon"></i> Sell reputation</a></li>
+                </ul>
+              </li>
+              <li id="settings-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="profile"><img src="" alt="" class="profile-picture">
+                <!-- JSON DATA GOES HERE--><span></span>
+              </li>
+              <!-- Settings dropdown-->
+              <ul data-labelledby="settings-dropdown" class="dropdown-menu">
+                <li class="view-profile"><a href="">View Profile<i class="material-icons">account_box</i></a></li>
                 <li class="settings"><a href="">Settings<i class="material-icons">settings</i></a></li>
                 <li class="logout"><a href="">Logout<i class="material-icons">power_settings_new</i></a></li>
               </ul>
             </ul>
             <ul class="nav navbar-nav visible-xs">
-              <li><a href="">Dobri<img src="images/dobri.png" alt="Dobri" class="profile-picture"></a></li>
+              <li>
+                <!-- JSON DATA GOES HERE--><a href=""><img src="images/dobri.png" alt="Dobri" class="profile-picture"></a>
+              </li>
               <li><a href="#">Messages
                   <div class="round-number"><span>1</span></div></a></li>
               <li><a href="#">Alerts
@@ -813,14 +886,14 @@
         <div class="profile-information-before-fixed col-lg-4 col-md-4 col-sm-12 col-xs-12">
           <!-- Profile header, including profile image, current work, city, state and two buttons.-->
           <div class="profile-upper">
-            <div data-toggle="modal" data-target="#avatarModal" class="profile-image"><img src="images/dobri.png" alt="Dobri Stoilov">
+            <div data-toggle="modal" data-target="#avatarModal" class="profile-image"><img src="" alt="">
               <div class="text-on-image">
                 <p>Change</p>
               </div>
             </div>
             <!-- Now... JSON data goes here. :(-->
             <button class="light-blue-background hidden">Connect</button>
-            <button class="orange-background">Accept</button>
+            <button class="orange-background">Hire ($50/hr)</button>
             <button class="white-background">Leave a Note</button>
           </div>
           <!-- Profile description including a description about you. (dark-gray section)-->
@@ -846,19 +919,19 @@
           </div>
         </div>
         <!-- Profile information including profile image, current work, current city and state, skills and etc.-->
-        <div class="profile-information-after-fixed col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden">
+        <div class="profile-information-after-fixed col-xs-12 hidden">
           <div class="container-fluid">
             <div class="container col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <!-- Profile header, including profile image, current work, city, state and two buttons.-->
               <div class="profile-upper">
-                <div data-toggle="modal" data-target="#avatarModal" class="profile-image"><img src="images/dobri.png" alt="Dobri Stoilov">
+                <div data-toggle="modal" data-target="#avatarModal" class="profile-image"><img src="" alt="">
                   <div class="text-on-image">
                     <p>Change</p>
                   </div>
                 </div>
                 <!-- Now... JSON data goes here. :(-->
                 <button class="light-blue-background hidden">Connect</button>
-                <button class="orange-background">Accept</button>
+                <button class="orange-background">Hire ($50/hr)</button>
                 <button class="white-background">Leave a Note</button>
               </div>
               <!-- Profile description including a description about you. (dark-gray section)-->
@@ -887,9 +960,9 @@
         </div>
         <!-- Profile documentation including jobs and education, stories, shout-outs and questions with answers-->
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-documentation-full">
-          <div class="profile-documentation col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="profile-documentation col-xs-12">
             <ul role="tablist" class="nav nav-tabs">
-              <li role="presentation" class="timeline-li"><a href="#timeline" aria-controls="jobs" role="tab" data-toggle="tab">Timeline</a></li>
+              <li role="presentation" class="timeline-li"><a href="#timeline" aria-controls="jobs" role="tab" data-toggle="tab">Search Work</a></li>
               <li role="presentation" class="active jobs-li"><a href="#jobs" aria-controls="jobs" role="tab" data-toggle="tab">Jobs & Education</a></li>
             </ul>
             <div data-toggle="dropdown" class="plusIcon dropdown-toggle"><i class="material-icons">add</i></div>
@@ -902,10 +975,10 @@
             </ul>
             <div data-toggle="modal" data-target="#shoutoutModal" class="shoutoutIcon"><i class="announcement icon"></i></div>
             <!-- All the information about above listed tabs.-->
-            <div class="tab-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="tab-content col-xs-12">
               <!-- Timeline TAB-->
-              <div id="timeline" role="tabpanel" class="tab-pane fade list-block col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="timeline-post input-timeline col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div id="timeline" role="tabpanel" class="tab-pane fade list-block col-xs-12">
+                <div class="timeline-post input-timeline col-xs-12">
                   <div class="input-header"><i class="write icon"></i><span>Create a Post</span></div>
                   <div class="picture"><img src="images/profilepicture.png" alt="Profile"></div>
                   <div class="post post-input">
@@ -1062,7 +1135,7 @@
                 </div>
                 <ul>
                   <li class="swipeout">
-                    <div data-toggle="modal" data-target="#timelineModal" class="timeline-post swipeout-content item-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div data-toggle="modal" data-target="#timelineModal" class="timeline-post swipeout-content item-content col-xs-12">
                       <div class="picture"><img src="images/profilepicture.png" alt="Profile"></div>
                       <div class="post">
                         <h5 class="name">Sharad Venkat</h5>
@@ -1077,7 +1150,7 @@
                     <div class="swipeout-actions-right"></div>
                   </li>
                   <li class="swipeout">
-                    <div data-toggle="modal" data-target="#timelineModal" class="timeline-post swipeout-content item-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div data-toggle="modal" data-target="#timelineModal" class="timeline-post swipeout-content item-content col-xs-12">
                       <div class="picture"><img src="images/profilepicture.png" alt="Profile"></div>
                       <div class="post">
                         <h5 class="name">Sharad Venkat</h5>
@@ -1094,7 +1167,7 @@
                 </ul>
               </div>
               <!-- Jobs & Education TAB-->
-              <div id="jobs" role="tabpanel" class="tab-pane fade in active col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div id="jobs" role="tabpanel" class="tab-pane fade in active col-xs-12">
                 <!-- JOBS-->
                 <div class="jobs-container">
                   <div class="job life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -1109,166 +1182,28 @@
                       </div>
                     </div>
                     <div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
-                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
-                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
-                          <li><a href="#">Delete</a></li>
-                        </ul>
-                      </div>
+                      <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>
+                      <ul for="demo-menu-lower-right" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
+                        <li open-modal="#add-job" class="mdl-menu__item open-modal">Create Job</li>
+                        <li disabled class="mdl-menu__item">Edit Job</li>
+                        <li disabled class="mdl-menu__item">Delete</li>
+                      </ul>
                       <p>I worked on a major data migration project</p>
                     </div>
                   </div>
-                  <div class="job life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
-                      <div class="image"><img src="images/aspire-logo.png" alt="Aspire">
-                        <div class="dont-have-logo">AS</div>
-                      </div>
-                      <div class="position-information">
-                        <h4>Aspire</h4>
-                        <h5>Founder</h5>
-                        <p>6/2016 - Present (5m)</p>
-                      </div>
-                    </div>
-                    <div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
-                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
-                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
-                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
-                          <li><a href="">Edit</a></li>
-                        </ul>
-                      </div>
-                      <p>Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1.</p>
-                    </div>
-                  </div>
-                  <div class="job life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
-                      <div class="image"><img src="images/kaiser.png" alt="Aspire">
-                        <div class="dont-have-logo">AS</div>
-                      </div>
-                      <div class="position-information">
-                        <h4>Kaiser Permanente</h4>
-                        <h5>Program Manager</h5>
-                        <p>11/2011 - 3/2015 (3y 4m)</p>
-                      </div>
-                    </div>
-                    <div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
-                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
-                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
-                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
-                          <li><a href="">Edit</a></li>
-                        </ul>
-                      </div>
-                      <p>1. Designed and built an integrated sw platform central to a high-stakes restructuring of KP-IT’s infrastructure delivery model. <br /> 2. Ran other programs & worked extensively with IBM contractors.</p>
-                    </div>
-                  </div>
-                  <div class="job life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
-                      <div class="image"><img src="images/paypal.jpg" alt="Aspire">
-                        <div class="dont-have-logo">AS</div>
-                      </div>
-                      <div class="position-information">
-                        <h4>Aspire</h4>
-                        <h5>CEO & Founder</h5>
-                        <p>2016 - Present (2y 1m)</p>
-                      </div>
-                    </div>
-                    <div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
-                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
-                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
-                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
-                          <li><a href="">Edit</a></li>
-                        </ul>
-                      </div>
-                      <p>Conceived and built a next generation professional showcare for people who want a better way to show off their skills and character. Conceived and built a next generation professional showcare for people who want a better way to show off their skills and character. Conceived and built a next generation professional showcare for people who want a better way to show off their skills and character. Conceived and built a next generation professional showcare for people who want a better way to show off their skills and character. Conceived and built a next generation professional showcare for people who want a better way to show off their skills and character. Conceived and built a next generation professional showcare for people who want a better.</p>
-                    </div>
-                  </div>
-                  <div class="jobs-see see-more col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="jobs-see see-more col-xs-12">
                     <p>+ See more jobs</p>
                   </div>
-                  <div class="jobs-see see-less col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="jobs-see see-less col-xs-12">
                     <p>- See less jobs</p>
                   </div>
                 </div>
                 <!-- EDUCATION-->
                 <div class="education-container">
-                  <div class="education life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
-                      <div class="image"><img src="images/university.jpg" alt="Aspire"></div>
-                      <div class="position-information">
-                        <h4>Public Policy</h4>
-                        <h5>Harvard University</h5>
-                        <p>8/2007 - 5/2009 (1y 9m)</p>
-                      </div>
-                    </div>
-                    <div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
-                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
-                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
-                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
-                          <li><a href="">Edit</a></li>
-                        </ul>
-                      </div>
-                      <p class="education-paragraph">Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1.</p>
-                    </div>
-                  </div>
-                  <div class="education life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
-                      <div class="image"><img src="images/university1.jpg" alt="Aspire"></div>
-                      <div class="position-information">
-                        <h4>Bachelor in Electrical Engineering</h4>
-                        <h5>UW Madison</h5>
-                        <p>9/1997 - 12/2001 (4y 3m)</p>
-                      </div>
-                    </div>
-                    <div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
-                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
-                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
-                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
-                          <li><a href="">Edit</a></li>
-                        </ul>
-                      </div>
-                      <p style="min-height: 85px" class="education-paragraph"></p>
-                    </div>
-                  </div>
-                  <div class="education life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
-                      <div class="image"><img src="images/education.jpg" alt="Aspire"></div>
-                      <div class="position-information">
-                        <h4>Public Policy</h4>
-                        <h5>Harvard University</h5>
-                        <p>2009 - 2013</p>
-                      </div>
-                    </div>
-                    <div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
-                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
-                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
-                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
-                          <li><a href="">Edit</a></li>
-                        </ul>
-                      </div>
-                      <p class="education-paragraph">Conceived and built a next generation professional showcase for people who want a better way to show off their skills and character. Aspire raises the bar to create value for people every step of the way.</p>
-                    </div>
-                  </div>
-                  <div class="education life-experience col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">
-                      <div class="image"><img src="images/education.jpg" alt="Aspire"></div>
-                      <div class="position-information">
-                        <h4>Public Policy</h4>
-                        <h5>Harvard University</h5>
-                        <p>2009 - 2013</p>
-                      </div>
-                    </div>
-                    <div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
-                      <div class="dropdown more"><i data-toggle="dropdown" class="icon-more dropdown-toggle"></i>
-                        <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu">
-                          <li><a href="#" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li>
-                          <li><a href="">Edit</a></li>
-                        </ul>
-                      </div>
-                      <p class="education-paragraph">Conceived and built a next generation professional showcase for people who want a better way to show off their skills and character. Aspire raises the bar to create value for people every step of the way.</p>
-                    </div>
-                  </div>
-                  <div class="educations-see see-more col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="educations-see see-more col-xs-12">
                     <p>+ See more education</p>
                   </div>
-                  <div class="educations-see see-less col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="educations-see see-less col-xs-12">
                     <p>- See less education</p>
                   </div>
                 </div>
@@ -1300,6 +1235,12 @@
     <script src="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/js/bootstrap-material-datetimepicker.js"></script>
     <!-- Framework7.JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.0/js/framework7.min.js"></script>
+    <!-- Moment JS-->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.19.1/moment.min.js"></script>
+    <!-- Material Design Bootstrap-->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Jquery Easing-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <!-- Main JS file-->
     <script src="js/main.js"></script>
   </body>

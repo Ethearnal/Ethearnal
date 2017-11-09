@@ -4,7 +4,7 @@ html(lang='en-US')
         meta(charset='UTF-8')
         meta(http-equiv='X-UA-Compatible', content='IE=edge')
         meta(name='description', content='')
-        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
         title Aspire
 
@@ -40,8 +40,14 @@ html(lang='en-US')
         // Google Material Icons
         link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
 
+        // Material Design Bootstrap
+        link(rel="stylesheet", href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css")
+
         // Roboto
         link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i")
+
+        // Montserrat
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800,900")
 
         // END of FONTS
 
@@ -51,6 +57,61 @@ html(lang='en-US')
         // END of LINKS
 
     body
+
+        #add-job.modal-box.flex.floating
+
+            .modal-box-content: .inner-modal: .content
+                button.mdl-button.mdl-js-button.mdl-button--fab.mdl-button--mini-fab.mdl-button--colored.close-modal-button: i.material-icons close
+
+
+                .modal-header: h3 Add new job
+
+                .success-message
+                    h1.success-message__title Congratulations, Dobri!
+                    .success-message__content: p Your job was created. Close the modal to see it.
+
+                    .buttons
+                        button.mdl-button.mdl-js-button.close-button.congrats-close Close the modal to see it
+                        span OR
+                        button.mdl-button.mdl-js-button.create-new Create a new job
+
+
+                .modal-body
+
+                    .form-group
+                        input.input-file#input-image-job(type="file", placeholder="Add image or video")
+                        label(for="input-image-job") Add Company's Logo
+                        img.file-input-first-image(src="images/image-video-image-file.png", alt="Add a file")
+                        img#input-image-job(src="#", alt="Preview")
+
+                    .modal-inputs
+
+                        form#form-add-job(action="POST")
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                                input#company-name.mdl-textfield__input(name="company", type="text")
+                                label.mdl-textfield__label(for="company-name") Company name
+
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                                input#position.mdl-textfield__input(type="text", name="position")
+                                label.mdl-textfield__label(for="position") Position
+
+                            .mdl-textfield.mdl-js-textfield.whole-line
+                                textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
+                                label.mdl-textfield__label(for="description") Description (what have you done or currently do?)
+
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                                input#date-from.mdl-textfield__input(type="text", name="startDate")
+                                label.mdl-textfield__label(for="date-from") Start Date
+
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                                input#date-to.mdl-textfield__input(type="text", name="endDate")
+                                label.mdl-textfield__label(for="date-from") End Date (leave blank if ongoing)
+
+                .modal-footer
+                    button.mdl-button.mdl-js-button.close-button Close
+                    button.mdl-button.mdl-js-button.publish-button(style="color: #5CAB7D") Publish
+
+
 
         include mixins/modals/shoutout-modal
         include mixins/modals/education-modal
@@ -62,6 +123,7 @@ html(lang='en-US')
         include mixins/modals/timeline-modal
         include mixins/modals/timeline-modal-edit
 
+
         // Header includes "Aspire" logo, search option, messages, alerts icons and profile image and it's name.
         // There's 2 collapse divs, one for mobile screens and another one for everything higher than mobile screens.
         header.main-header
@@ -71,10 +133,6 @@ html(lang='en-US')
 
                     // Navigation header - logo.
                     .navbar-header
-
-                        .form-group.visible-xs
-                            a(href=""): i.icon-search
-                            input.form-control(text="text", placeholder="Search Ethearnal")
 
                         .button
                             button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target="#navigation", aria-expanded="false")
@@ -86,60 +144,75 @@ html(lang='en-US')
 
                         a.navbar-brand(href='').hidden-xs Ethearnal BETA
 
+                        form(action="#" style="float: left; max-height: 62px;")
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable.mdl-textfield--floating-label
+                                label.mdl-button.mdl-js-button.mdl-button--icon(for="search-header"): i.material-icons search
+                                .mdl-textfield__expandable-holder
+                                    input#search-header.mdl-textfield__input(type="text")
+                                    label.mdl-textfield__label(for="search-header") Enter search text below
+
                     // Navbar items ONLY for larger than mobile screens.
                     .collapse.navbar-collapse#navigation
 
-                        form.navbar-form.navbar-left
-                            .form-group
-                                a(href=""): i.icon-search
-                                input.form-control(text="text", placeholder="Search Ethearnal")
-
                         ul.nav.navbar-nav.navbar-right.hidden-xs
-                            li.asset#comment-navbar
-                                a(href="")
-                                    i.icon-comment
-                                    .round-number
-                                        span 1
+                            li.asset#comment-navbar: a(href="")
+                                i.icon-comment
+                                .round-number: span 1
+
 
                             li.asset#alert-navbar
-                                a(href="")
+
+                                a#reputation-dropdown(data-toggle="dropdown")
                                     i.material-icons polymer
-                                    .round-number
-                                        span 3
+                                    .round-number: span
 
-                            li.profile(data-toggle="dropdown")
-                                img.profile-picture(src="images/dobri.png", alt="Dobri")
-                                span Dobri
+                                // Reputation dropdown
+                                ul.dropdown-menu(data-labelledby="reputation-dropdown")
+                                    li.buy-rep: a(href="") <i class="bitcoin icon"></i> Buy reputation
 
-                            ul.dropdown-menu(aria-labelledby="dLabel")
-                                li.settings
-                                    a(href="") Settings
-                                        i.material-icons settings
+                                    li.sell-rep: a(href="") <i class="dollar icon"></i> Sell reputation
 
-                                li.logout
-                                    a(href="") Logout
-                                        i.material-icons power_settings_new
+
+
+                            li.profile#settings-dropdown(data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+
+                                img.profile-picture(src="", alt="")
+
+                                // JSON DATA GOES HERE
+                                span
+
+
+                            // Settings dropdown
+                            ul.dropdown-menu(data-labelledby="settings-dropdown")
+                                li.view-profile: a(href="") View Profile
+                                    i.material-icons account_box
+
+                                li.settings: a(href="") Settings
+                                    i.material-icons settings
+
+                                li.logout: a(href="") Logout
+                                    i.material-icons power_settings_new
+
+
+
 
                         ul.nav.navbar-nav.visible-xs
                             li
-                                a(href="") Dobri
+                                // JSON DATA GOES HERE
+                                a(href="")
                                     img.profile-picture(src="images/dobri.png", alt="Dobri")
-                            li
-                                a(href='#') Messages
-                                    .round-number
-                                        span 1
-                            li
-                                a(href='#') Alerts
-                                    .round-number
-                                        span 1
 
-                            li.settings-mobile
-                                a(href='#') Settings
-                                    i.material-icons settings
+                            li: a(href='#') Messages
+                                .round-number: span 1
 
-                            li.logout-mobile
-                                a(href='#') Logout
-                                    i.material-icons power_settings_new
+                            li: a(href='#') Alerts
+                                .round-number: span 1
+
+                            li.settings-mobile: a(href='#') Settings
+                                i.material-icons settings
+
+                            li.logout-mobile: a(href='#') Logout
+                                i.material-icons power_settings_new
 
 
         // Background image section, including a button with lock and unlock icons.
@@ -166,7 +239,7 @@ html(lang='en-US')
 
 
                 // Profile information including profile image, current work, current city and state, skills and etc.
-                .profile-information-after-fixed.col-lg-12.col-md-12.col-sm-12.col-xs-12.hidden
+                .profile-information-after-fixed.col-xs-12.hidden
 
                     .container-fluid
 
@@ -178,10 +251,10 @@ html(lang='en-US')
                 // Profile documentation including jobs and education, stories, shout-outs and questions with answers
                 .col-lg-8.col-md-8.col-sm-12.col-xs-12.profile-documentation-full
 
-                    .profile-documentation.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                    .profile-documentation.col-xs-12
 
                         ul.nav.nav-tabs(role="tablist")
-                            li.timeline-li(role="presentation"): a(href="#timeline", aria-controls="jobs", role="tab", data-toggle="tab") Timeline
+                            li.timeline-li(role="presentation"): a(href="#timeline", aria-controls="jobs", role="tab", data-toggle="tab") Search Work
                             li.active.jobs-li(role="presentation"): a(href="#jobs", aria-controls="jobs", role="tab", data-toggle="tab") Jobs & Education
 
                         .plusIcon.dropdown-toggle(data-toggle="dropdown")
@@ -199,24 +272,24 @@ html(lang='en-US')
 
 
                         // All the information about above listed tabs.
-                        .tab-content.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                        .tab-content.col-xs-12
 
                             // Timeline TAB
-                            .tab-pane.fade#timeline.list-block.col-lg-12.col-md-12.col-sm-12.col-xs-12(role="tabpanel")
+                            .tab-pane.fade#timeline.list-block.col-xs-12(role="tabpanel")
 
-                                .timeline-post.input-timeline.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                .timeline-post.input-timeline.col-xs-12
                                     include mixins/timeline/post-input
 
                                 ul
                                     li.swipeout
-                                        .timeline-post.swipeout-content.item-content.col-lg-12.col-md-12.col-sm-12.col-xs-12(data-toggle="modal", data-target="#timelineModal")
+                                        .timeline-post.swipeout-content.item-content.col-xs-12(data-toggle="modal", data-target="#timelineModal")
                                             include mixins/timeline/default-post
 
                                         .swipeout-actions-left
                                         .swipeout-actions-right
 
                                     li.swipeout
-                                        .timeline-post.swipeout-content.item-content.col-lg-12.col-md-12.col-sm-12.col-xs-12(data-toggle="modal", data-target="#timelineModal")
+                                        .timeline-post.swipeout-content.item-content.col-xs-12(data-toggle="modal", data-target="#timelineModal")
                                             include mixins/timeline/default-post
 
                                         .swipeout-actions-left
@@ -225,47 +298,26 @@ html(lang='en-US')
 
 
                             // Jobs & Education TAB
-                            .tab-pane.fade.in.active#jobs.col-lg-12.col-md-12.col-sm-12.col-xs-12(role="tabpanel")
+                            .tab-pane.fade.in.active#jobs.col-xs-12(role="tabpanel")
 
                                 // JOBS
                                 .jobs-container
                                     .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
                                         include mixins/jobs/default-job
 
-                                    .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                                        include mixins/jobs/job-aspire
-
-                                    .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                                        include mixins/jobs/job-kaiser
-
-                                    .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                                        include mixins/jobs/jobs-main-information
-
-                                    .jobs-see.see-more.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                    .jobs-see.see-more.col-xs-12
                                         p + See more jobs
 
-                                    .jobs-see.see-less.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                    .jobs-see.see-less.col-xs-12
                                         p - See less jobs
 
 
                                 // EDUCATION
                                 .education-container
-                                    .education.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                                        include mixins/educations/education-policy
-
-                                    .education.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                                        include mixins/educations/education-electrical
-
-                                    .education.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                                        include mixins/educations/education-main-information
-
-                                    .education.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                                        include mixins/educations/education-main-information
-
-                                    .educations-see.see-more.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                    .educations-see.see-more.col-xs-12
                                         p + See more education
 
-                                    .educations-see.see-less.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                    .educations-see.see-less.col-xs-12
                                         p - See less education
 
 
@@ -302,6 +354,15 @@ html(lang='en-US')
 
         // Framework7.JS
         script(src="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.0/js/framework7.min.js")
+
+        // Moment JS
+        script(src="https://cdn.jsdelivr.net/npm/moment@2.19.1/moment.min.js")
+
+        // Material Design Bootstrap
+        script(defer src="https://code.getmdl.io/1.3.0/material.min.js")
+
+        // Jquery Easing
+        script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js")
 
         // Main JS file
         script(src="js/main.js")
