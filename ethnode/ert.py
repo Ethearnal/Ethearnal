@@ -124,7 +124,7 @@ def main_http(http_webdir: str = config.http_webdir,
         },
         '/ui/files': {
             'tools.staticdir.on': True,
-            'tools.staticdir.root': ert_profile_ctl.files_dir,
+            'tools.staticdir.root': ert_profile_ctl.data_dir,
             'tools.staticdir.dir': files_dir_name,
         }
     }

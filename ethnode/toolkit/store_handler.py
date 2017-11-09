@@ -55,9 +55,18 @@ class DHTStoreHandlerOne(object):
                 return
         else:
             print('STORE RCV')
+            print('guid_owner', guid_owner)
             if guid_owner in self.pubkeys:
                 print('HAVE PUBKEY', guid_owner)
-                hk = self.pubkeys[guid_owner]
+                hk_from_store = self.pubkeys[guid_owner]
+                hk = hk_from_store
+                if isinstance(hk_from_store, bytes):
+                    hk = cdx.guid_bts_to_int(hk_from_store)
+                elif isinstance(hk_from_store, int):
+                    hk = hk_from_store
+                else:
+                    raise ValueError('HKEY REF PUBKEY ERROR')
+
                 pk_owner, pk_signature, pk_value = self.pull(hk)
                 # pk_value =
                 pk_rev, pubkey_data = cdx.decode_bson_val(pk_value)
