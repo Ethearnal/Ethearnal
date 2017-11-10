@@ -204,16 +204,6 @@ $( document ).ready(function() {
         });
     });
 
-    // Require function
-    function require(script) {
-        $.ajax({
-          dataType: "jsonp",
-          url: script ,
-          }).done(function ( data ) {
-          // do my stuff
-        });
-    }
-
     // Checks if input.file has changed, if so, checks his ID and stores it into a global variable, then uses that variable to add an ID near the img. You need to create input and image with the same ID and you will have live load image when you will upload it. I know, I'm genius.
     function readURL(input) {
 
@@ -407,9 +397,6 @@ $( document ).ready(function() {
         $(this).parent().fadeOut();
     })
 
-    // Include modals animation JS file.
-    require("js/modals-animation.js");
-
     // When you click on the item in Modal dropdown selector, it would set margin-top to 25 pixels to make it look good.
     $( ".item" ).click(function() {
         $(this).parent().parent().not("#accomplishment-ui").not(".post-input-dropdowns").animate({ "margin-top": "25px"}, "fast");
@@ -468,48 +455,100 @@ $( document ).ready(function() {
     $( ".profile-image" ).hover(function() {
         $(this).find(".text-on-image").stop(true, true).fadeToggle(150);
     });
-
-    // -- FUNCTION of {JOBS} SEE MORE START
-    $(function () {
-
-        // Show jobs and education divs on the page when it's loaded.
-        $("#jobs .job:lt("+$showJobs+")").show();
-        $("#jobs .education:lt("+$showJobs+")").show();
-
-        // When you click on .see-less button, it will disappear 3 tabs out of the tablist every time, until reaching the minimum limit of 3 tabs that needs to show all the time.
-        $(".see-less").click(function() {
-
-            // Checks if the X is smaller than 3, if true, it would stop disappearing tabs.
-            $showJobs = ($showJobs - $appearOnClick <= 0 ) ? $appearOnClick : $showJobs - $appearOnClick;
-            $(this).parent().find(".life-experience").not(":lt("+$showJobs+")").stop(true, true).slideUp();
-
-            // Hides .see-less and adds .see-more button.
-            if( $showJobs <= 2 ) {
-
-                $(this).parent().find(".see-more").stop(true, true).show();
-                $(this).stop(true, true).hide();
-            }
-        });
-
-        // When you click on .see-more button, it will appear 3 tabs in the tablist every time, until reaching the maximum limit, which is defined by how many tabs is created, so if you have experience in 10 jobs, it will appear 3 tabs until reaching the limit of 10.
-        $(".see-more").click(function() {
-
-            // Defines the size limit of the tabs and checks if it's bigger, then it would not show anymore tabs and process a function below. If it's smaller, it would add 3 additional tabs.
-            $sizePanels = $(this).parent().find(".life-experience").length;
-            $showJobs = ($showJobs <= $sizePanels) ? $showJobs+$appearOnClick : $sizePanels;
-            $(this).parent().find(".life-experience:lt("+$showJobs+")").stop(true, true).slideDown();
-
-            // Checks if X is bigger or equal to the size of tabs, if it's true, it would hide the .see-more button and appear .see-less button.
-            if( $showJobs >= $sizePanels ) {
-
-                $(this).parent().find(".see-less").stop(true, true).show();
-                $(this).stop(true, true).hide();
-            }
-        });
-        // FUNCTION of {JOBS} SEE MORE FINISH --
-    });
 });
 
+
+// Require function
+function require(script) {
+    $.ajax({
+      dataType: "jsonp",
+      url: script ,
+      }).done(function ( data ) {
+      // do my stuff
+    });
+}
+
+function closeModal(modalID) {
+    $modalBox = $('#' + modalID);
+    $modalBox.find('.modal-box-content .inner-modal .content').css({ transitionDelay: '0s' });
+
+    $modalBox.find('.modal-box-content .inner-modal .content').animate({ opacity: 0 }, 400, "easeOutCubic", function() {
+        $modalBox.find('.modal-box-content .inner-modal').animate({ width: 0, height: 0 }, 400, "easeOutSine", function() {
+            $modalBox.css({ display: 'none' });
+        });
+    });
+}
+
+// Include all functions
+require('js/functions.js');
+
+// Include modals animation JS file.
+require("js/modals-animation.js");
+
+
+
+// TODO:
+// Add dropdown to education and job.+++
+// Change all dropdowns to the Material Design dropdowns.
+// Change dropdown color to yellow or orange.
+// Change modals, make them like Material design modals.
+// Add ability to add education or job.
+// Add ability to change education or job information.
+
+
+
+$('li.open-modal').click(function(e) {
+    e.preventDefault();
+    $modalClass = $(this).attr('open-modal');
+
+    $('' + $modalClass + '').css({ display: 'flex' });
+    $('' + $modalClass + '').find('.modal-box-content .inner-modal').animate({ width: '200vw', height: '200vw' }, 400, "easeInSine");
+    $('' + $modalClass + '').find('.modal-box-content .inner-modal .content').css({ opacity: 1, transitionDelay: '.5s' });
+});
+
+
+$('button.close-modal-button').click(function() {
+    $modalID = $(this).closest('.modal-box').attr('id');
+    closeModal($modalID);
+});
+
+
+function positionInformation(varTime, h4Text, h5Text) {
+
+    // Gets time.
+    $.each(varTime, function(i, times) {
+
+        // Counts time difference and returns a string (3y 1m)
+        $dateDifference = getTimeDifference(times.from, times.to);
+
+        // Creates a text for date differences.
+        $dateDifferenceText = times.from + ' - ' + times.to + ' ' + $dateDifference;
+    });
+
+    return '<div class="position-information"><h4>' + h4Text + '</h4><h5>' + h5Text + '</h5><p>' + $dateDifferenceText + '</p></div>';
+}
+
+
+// POSTING DATA
+// $(function () {
+
+//     $.ajax({
+//          type: "POST",
+//          url: 'post-job.json',
+//          data: $("#form-add-job").serialize(),
+//          success: function() {
+//               console.log('success');
+//          }
+//     });
+
+
+// })
+
+
+
+
+
+// GETTING DATA FROM profile.json
 $(function () {
 
     $.ajax({
@@ -519,7 +558,8 @@ $(function () {
         success: function(data) {
             var profile = JSON.parse(data);
 
-            $firstname = null; $lastname = null; $position = null; $company = null; $city = null; $country = null;
+            $firstname = null; $lastname = null; $position = null; $company = null; $city = null; $country = null; $positionInfo = null; $i = 0;
+
 
             // Appends profile's FULL NAME.
             var name = profile.name;
@@ -542,6 +582,73 @@ $(function () {
                 $country = locations.country;
             });
 
+            // Appends a Job Experience on your profile page.
+            var workExperience = profile.workExperience;
+            var iExperience = 0;
+            $.each(workExperience, function(i, experience) {
+
+                $timeFrom = null; $timeTo = null; $dateDifference = null;
+
+                $positionInfo = positionInformation(experience.time, experience.company, experience.position);
+
+                // Creates two letters, so if there's no Image it'd put first two letters as logo.
+                var twoLetters = experience.company.substring(0, 3);
+
+                // Creating whole 'default-job.jade' file. Two divs with many divs inside. This will show the job experience.
+                var imageDiv = '<div class="image"><img src="' + experience.image + '" alt="' + experience.company + '"><div class="dont-have-logo">' + twoLetters + '</div></div>';
+
+                var dropdownMore = '<div class="dropdown more"><i class="icon-more dropdown-toggle" data-toggle="dropdown"></i><ul class="dropdown-menu" role="menu"><li><a href="">Delete</a></li></ul></div>';
+
+                var dropdownButton = '<button id="dropdown' + iExperience + '" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>'
+
+                var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="dropdown' + iExperience + '"><li class="mdl-menu__item">Edit</li><li class="mdl-menu__item">Delete</li></ul>'
+
+                var jobDescriptionDiv = '<div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">' + dropdownButton + dropdownUL + '<p>' + experience.description + '</p></div>';
+
+                var mainInformationDiv = '<div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">' + imageDiv + $positionInfo + '</div>';
+
+                $job = $('<div class="job life-experience col-xs-12">' + mainInformationDiv + jobDescriptionDiv + '</div>');
+                var jobDiv = $job.get(0).outerHTML;
+
+
+                // Creates Job Div.
+                $(jobDiv).insertBefore('.jobs-container .see-more');
+
+                // Adds +1 everytime it loads a new job. It's used only for dropdowns.
+                iExperience++;
+            });
+
+
+            // Appends a Education on your profile page.
+            var educations = profile.education;
+            $.each(educations, function(i, education) {
+
+                $timeFrom = null; $timeTo = null; $dateDifference = null;
+
+                $positionInfo = positionInformation(education.time, education.course, education.institution);
+
+                // Creates two letters, so if there's no Image it'd put first two letters as logo.
+                var twoLetters = education.institution.substring(0, 3);
+
+                // Creating whole 'default-job.jade' file. Two divs with many divs inside. This will show the job experience.
+                var imageDiv = '<div class="image"><img src="' + education.image + '" alt="' + education.institution + '"><div class="dont-have-logo">' + twoLetters + '</div></div>';
+
+                var dropdownMore = '<div class="dropdown more"><i class="icon-more dropdown-toggle" data-toggle="dropdown"></i><ul class="dropdown-menu" role="menu"><li><a href="" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li><li><a href="">Edit</a></li></ul></div>';
+
+                var educationDescriptionDiv = '<div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">' + dropdownMore + '<p>' + education.description + '</p></div>';
+
+                var mainInformationDiv = '<div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">' + imageDiv + $positionInfo + '</div>';
+
+                $education = $('<div class="education life-experience col-xs-12">' + mainInformationDiv + educationDescriptionDiv + '</div>');
+                var educationDiv = $education.get(0).outerHTML;
+
+
+                // Creates Job Div.
+                $(educationDiv).insertBefore('.education-container .see-more');
+            });
+
+            seeButtons();
+
 
             // Variables for texts. Just to make it easy to read & understand.
             var $h2 = $('<h2>' + $firstname + ' ' + $lastname + '</h2>');
@@ -561,6 +668,16 @@ $(function () {
 
             // Adding profile reputation .navbar-collapse #alert-navbar
             $('li.asset#alert-navbar a .round-number span').text(profile.reputation);
+
+            // Adding name to the header right side.
+            $('ul.navbar-nav.visible-xs li a').text($firstname);
+            $('li.profile span').text($firstname);
+
+            // Adding profile pictures to the page.
+            $('.profile-image img').attr('src', profile.profilePicture);
+            $('.profile-image img').attr('alt', $firstname + ' ' + $lastname);
+            $('li.profile img.profile-picture').attr('src', profile.profilePicture);
+            $('li.profile img.profile-picture').attr('alt', $firstname + ' ' + $lastname);
 
             // Appends each SKILL.
             var skill = profile.skills;
