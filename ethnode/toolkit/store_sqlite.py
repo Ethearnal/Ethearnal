@@ -74,8 +74,8 @@ class ErtDHTSQLite(object):
         print('UPDATE th_id:', self.th_id)
         hkey = self.handle_hkey_type(hkey)
         self.check_hkey_sz(hkey)
-        self.cursor.execute(DHT_GET_ITEM_BY_HKEY, (hkey,))
-        t = self.cursor.fetchone()
+        c = self.cursor.execute(DHT_GET_ITEM_BY_HKEY, (hkey,))
+        t = c.fetchone()
         if t:
             return t
 
@@ -129,7 +129,7 @@ hkey blob
 '''
 
 REF_INSERT_ITEM = 'INSERT INTO ertref VALUES (?,?);'
-REF_GET_BY_BKEY = 'SELECT hkey FROM ertref WHERE bkey=?;'
+REF_GET_BY_BKEY = 'SELECT * FROM ertref WHERE bkey=?;'
 REF_UPDATE_ITEM = 'UPDATE ertref SET hkey=? WHERE bkey=?;'
 
 
@@ -200,10 +200,10 @@ class ErtREFSQLite(object):
 
     def get_hkey(self, bkey):
         print('REF SELECT th_id:', self.th_id)
-        self.cursor.execute(REF_GET_BY_BKEY, (bkey,))
-        t = self.cursor.fetchone()
+        c = self.cursor.execute(REF_GET_BY_BKEY, (bkey,))
+        t = c.fetchone()
         if t:
-            return t[0]
+            return t[1]
 
     def __setitem__(self, bkey, hkey):
         #
