@@ -94,6 +94,62 @@
         </div>
       </div>
     </div>
+    <div id="edit-job" class="modal-box flex floating">
+      <div class="modal-box-content">
+        <div class="inner-modal">
+          <div class="content">
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored close-modal-button"><i class="material-icons">close</i></button>
+            <div class="modal-header">
+              <h3>Edit job</h3>
+            </div>
+            <div class="success-message">
+              <h1 class="success-message__title">Congratulations, Dobri!</h1>
+              <div class="success-message__content">
+                <p>Your job was updated. Close the modal to see it.</p>
+              </div>
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                <button class="mdl-button mdl-js-button create-new">Edit job again</button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <input id="input-image-job" type="file" placeholder="Add image or video" class="input-file">
+                <label for="input-image-job">Add Company's Logo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image"><img id="input-image-job" src="#" alt="Preview">
+              </div>
+              <div class="modal-inputs">
+                <form id="form-update-job" action="UPDATE">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <input id="company-name" name="company" type="text" class="mdl-textfield__input">
+                    <label for="company-name" class="mdl-textfield__label">Company name</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <input id="position" type="text" name="position" class="mdl-textfield__input">
+                    <label for="position" class="mdl-textfield__label">Position</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield whole-line">
+                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                    <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <input id="date-from1" type="text" name="startDate" class="mdl-textfield__input">
+                    <label for="date-from" class="mdl-textfield__label">Start Date</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <input id="date-to1" type="text" name="endDate" class="mdl-textfield__input">
+                    <label for="date-from" class="mdl-textfield__label">End Date (leave blank if ongoing)</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button style="color: #5CAB7D" class="mdl-button mdl-js-button publish-button">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="shoutoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
       <div role="document" class="modal-dialog modal-lg">
         <div class="modal-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -1176,19 +1232,19 @@
                         <div class="dont-have-logo">PA</div>
                       </div>
                       <div class="position-information">
-                        <h4>Charles Schwab Corp.</h4>
-                        <h5>Data Migration Architect</h5>
-                        <p>5/2015 - Present (1y 5m)</p>
+                        <h4 class="company-name">Charles Schwab Corp.</h4>
+                        <h5 class="position-name">Data Migration Architect</h5>
+                        <p class="date-name">5/2015 - Present (1y 5m)</p>
                       </div>
                     </div>
                     <div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">
                       <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>
                       <ul for="demo-menu-lower-right" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
                         <li open-modal="#add-job" class="mdl-menu__item open-modal">Create Job</li>
-                        <li disabled class="mdl-menu__item">Edit Job</li>
+                        <li open-modal="#edit-job" class="mdl-menu__item open-modal">Edit Job</li>
                         <li disabled class="mdl-menu__item">Delete</li>
                       </ul>
-                      <p>I worked on a major data migration project</p>
+                      <p class="description-name">I worked on a major data migration project</p>
                     </div>
                   </div>
                   <div class="jobs-see see-more col-xs-12">

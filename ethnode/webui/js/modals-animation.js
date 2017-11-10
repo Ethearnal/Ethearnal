@@ -120,16 +120,53 @@ $("textarea.description").keyup(function(){
 // MATERIAL DESIGN DATE PICKER
 $(function() {
     $datePickers = 3;
-
-    $('#date-to').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
-    $('#date-from').bootstrapMaterialDatePicker({ weekStart: 0, time: false }).on('change', function(e, date) {
-        $('#date-to').bootstrapMaterialDatePicker('setMinDate', date)
-    })
 });
 
+function wordInString(s, word){
+  return new RegExp( '\\b' + word + '\\b', 'i').test(s);
+}
+
+$('li.open-modal[open-modal="#edit-job"]').click(function() {
+    $content = $('#edit-job').find('.modal-box-content .content');
+    $modalBody = $content.find('.modal-body');
+    $form = $modalBody.find('.modal-inputs form');
+    $job = $(this).closest('.job');
+    $date = $job.find('p.date-name').text();
+    $dateSplit = $date.split('-');
+    $dateFrom = $dateSplit[0];
+    $dateTo = $dateSplit[1];
+
+    // Inputs
+    $inputCompany = $form.find('input#company-name');
+    $inputPosition = $form.find('input#position');
+    $inputDescription = $form.find('textarea#description');
+    $inputDateFrom = $form.find('input#date-from1');
+    $inputDateTo = $form.find('input#date-to1');
+
+    var company = $job.find('h4.company-name').text();
+    var position = $job.find('h5.position-name').text();
+    var description = $job.find('p.description-name').text();
+    var startDate = $dateFrom;
+    var endDate = $dateTo;
 
 
+    // Changing values, adding classes.
+    $inputCompany.val(company).parent().addClass('is-dirty');
+    $inputPosition.val(position).parent().addClass('is-dirty');
+    $inputDescription.val(description).parent().addClass('is-dirty');
+    $inputDateFrom.parent().addClass('is-dirty');
 
+    // Bootstrap Material Design Date Picker adding options.
+    $inputDateFrom.bootstrapMaterialDatePicker({ weekStart: 0, currentDate: startDate, format: "MM/YYYY", time: false,  });
+
+    // Checks if the end date = "Present", then adds end date to input or not.
+    if(!wordInString($date, 'Present')) {
+        var splitDate = $dateTo.split('(');
+        $inputDateTo.bootstrapMaterialDatePicker({ format: "MM/YYYY", weekStart: 0, time: false, currentDate: endDate }).parent().addClass('is-dirty');
+    } else {
+        $inputDateTo.bootstrapMaterialDatePicker({ format: "MM/YYYY", weekStart: 0, time: false })
+    }
+});
 
 
 
@@ -209,8 +246,6 @@ $('.modal-box button').click(function() {
 
     // BUTTON.CREATE-NEW
     } else if($(this).parent().is(".buttons")) {
-        // closeModal($modalID);
-
         $content.find('.success-message').fadeOut(300);
 
         setTimeout(function() {
