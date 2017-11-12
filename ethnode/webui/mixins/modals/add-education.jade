@@ -1,41 +1,41 @@
-#add-job.modal-box.flex.floating
+#add-education.modal-box.flex.floating
 
     .modal-box-content: .inner-modal: .content
 
-        .modal-header: h3 Add job
+        .modal-header: h3 Add education
 
         .success-message
             h1.title Congratulations!
-            .success-content: p Your job was added.
+            .success-content: p Your education was added.
 
             .buttons
                 button.mdl-button.mdl-js-button.close-button.congrats-close Close the modal to see it
                 span OR
-                button.mdl-button.mdl-js-button.create-new add new job
+                button.mdl-button.mdl-js-button.create-new Add new education
 
 
         .modal-body
 
             .form-group
                 input.input-file#input-image-job(type="file", placeholder="Add image or video")
-                label(for="input-image-job") Add Company's Logo
+                label(for="input-image-job") Add Educational Institution Logo
                 img.file-input-first-image(src="images/image-video-image-file.png", alt="Add a file")
                 img#input-image-job(src="#", alt="Preview")
 
             .modal-inputs
 
-                form#form-add-job(action="POST")
+                form#form-update-job(action="POST")
                     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
-                        input#company-name.mdl-textfield__input(name="company", type="text")
-                        label.mdl-textfield__label(for="company-name") Company name
+                        input#education-name.mdl-textfield__input(name="education-name", type="text")
+                        label.mdl-textfield__label(for="education-name") Educational Institution name
 
                     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
-                        input#position-name.mdl-textfield__input(type="text", name="position")
-                        label.mdl-textfield__label(for="position") Position
+                        input#study-field.mdl-textfield__input(type="text", name="study-field")
+                        label.mdl-textfield__label(for="study-field") Field of Study
 
                     .mdl-textfield.mdl-js-textfield.whole-line
                         textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
-                        label.mdl-textfield__label(for="description") Description (what have you done or currently do?)
+                        label.mdl-textfield__label(for="description") Description (what did you study or still studying?)
 
                     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
                         input.date-started.mdl-textfield__input(type="text", name="startDate")

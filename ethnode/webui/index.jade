@@ -61,6 +61,9 @@ html(lang='en-US')
         include mixins/modals/add-job
         include mixins/modals/edit-job
 
+        include mixins/modals/add-education
+        include mixins/modals/edit-education
+
 
 
 
@@ -180,23 +183,10 @@ html(lang='en-US')
 
             .container
 
-                .profile-information-fixed.col-lg-4.col-md-4.col-sm-12.col-xs-12.hidden
-
                 // Profile information including profile image, current work, current city and state, skills and etc.
                 .profile-information-before-fixed.col-lg-4.col-md-4.col-sm-12.col-xs-12
 
                     include mixins/profile-card
-
-
-
-                // Profile information including profile image, current work, current city and state, skills and etc.
-                .profile-information-after-fixed.col-xs-12.hidden
-
-                    .container-fluid
-
-                        .container.col-lg-4.col-md-4.col-sm-12.col-xs-12
-
-                            include mixins/profile-card
 
 
                 // Profile documentation including jobs and education, stories, shout-outs and questions with answers
@@ -207,19 +197,12 @@ html(lang='en-US')
                         ul.nav.nav-tabs(role="tablist")
                             li.timeline-li(role="presentation"): a(href="#timeline", aria-controls="jobs", role="tab", data-toggle="tab") Search Work
                             li.active.jobs-li(role="presentation"): a(href="#jobs", aria-controls="jobs", role="tab", data-toggle="tab") Jobs & Education
-
-                        .plusIcon.dropdown-toggle(data-toggle="dropdown")
-                            i.material-icons add
-
-                        ul.dropdown-menu(aria-labelledby="dLabel")
-                            li.add-job: a(href="", data-toggle="modal", data-target="#jobModal") Add Job
-                            li.add-education: a(href="", data-toggle="modal", data-target="#educationModal") Add Education
-                            li.add-story: a(href="", data-toggle="modal", data-target="#storyModal") Add Story
-                            li.divider
-                            li.invite-someone: a(href="", data-toggle="modal", data-target="#inviteModal") Invite someone to Aspire
-
-                        .shoutoutIcon(data-toggle="modal", data-target="#shoutoutModal")
-                            i.announcement.icon
+                            li.dropdownButton
+                                button#addThings.mdl-button.mdl-js-button.mdl-button--icon: i.material-icons add
+                                ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="addThings")
+                                    li.mdl-menu__item.open-modal(open-modal="#add-job") Add Work Experience
+                                    li.mdl-menu__item.open-modal(open-modal="#add-education") Add Education
+                                    li.mdl-menu__item(disabled) Add Gig
 
 
                         // All the information about above listed tabs.
@@ -253,8 +236,8 @@ html(lang='en-US')
 
                                 // JOBS
                                 .jobs-container
-                                    .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                                        include mixins/jobs/default-job
+                                    //- .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                    //-     include mixins/jobs/default-job
 
                                     .jobs-see.see-more.col-xs-12
                                         p + See more jobs
