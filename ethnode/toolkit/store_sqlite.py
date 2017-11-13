@@ -1,28 +1,23 @@
+import os
 import sqlite3
-from toolkit.kadmini_codec import guid_int_to_bts
 import threading
-
-DHT_TABLE_CREATE = '''
-CREATE TABLE IF NOT EXISTS ertdht
-(
-hkey blob PRIMARY KEY,
-guid blob,
-sign blob,
-bval blob
-);
-'''
-
-DHT_GET_ITEM_BY_HKEY = 'SELECT guid,sign,bval FROM ertdht WHERE hkey=?;'
-DHT_INSERT_ITEM = 'INSERT INTO ertdht VALUES (?,?,?,?);'
-DHT_UPDATE_ITEM = 'UPDATE ertdht SET guid=?, sign=?, bval=? WHERE hkey=?;'
+from toolkit.kadmini_codec import guid_int_to_bts
 
 
-class ErtDHTSQLite(object):
+class BaseSQLite(object):
     th_conn = dict()
+
+    def __init__(self, db_name):
+        self.db_name = db_name
+
+    @classmethod
+    def dbid(cls, db_name):
+        th_id = '%s:%s:%s:%s' % (db_name, os.getpid(), str(cls), str(threading.current_thread()))
+        return th_id
 
     @classmethod
     def get_connection(cls, db_name):
-        th_id = threading.current_thread()
+        th_id = cls.dbid(db_name)
         if th_id in cls.th_conn:
             conn = cls.th_conn[th_id]
             if conn:
@@ -33,10 +28,6 @@ class ErtDHTSQLite(object):
         else:
             cls.th_conn[th_id] = sqlite3.connect(db_name)
             return cls.th_conn[th_id]
-
-    def __init__(self, db_path_name):
-        self.db_name = db_path_name
-        self.init_db()
 
     @property
     def connection(self):
@@ -67,11 +58,33 @@ class ErtDHTSQLite(object):
         else:
             raise ValueError('ErtDHTSQLite: hkey should binary or int')
 
+
+DHT_TABLE_CREATE = '''
+CREATE TABLE IF NOT EXISTS ertdht
+(
+hkey blob PRIMARY KEY,
+guid blob,
+sign blob,
+bval blob
+);
+'''
+
+DHT_GET_ITEM_BY_HKEY = 'SELECT guid,sign,bval FROM ertdht WHERE hkey=?;'
+DHT_INSERT_ITEM = 'INSERT INTO ertdht VALUES (?,?,?,?);'
+DHT_UPDATE_ITEM = 'UPDATE ertdht SET guid=?, sign=?, bval=? WHERE hkey=?;'
+
+
+class ErtDHTSQLite(BaseSQLite):
+
+    def __init__(self, db_name):
+        super(ErtDHTSQLite, self).__init__(db_name)
+        self.init_db()
+
     def init_db(self):
         self.cursor.execute(DHT_TABLE_CREATE)
 
     def get_guid_sign_val(self, hkey):
-        print('UPDATE th_id:', self.th_id)
+        print('DHT UPDATE th_id:', self.dbid(self.db_name))
         hkey = self.handle_hkey_type(hkey)
         self.check_hkey_sz(hkey)
         c = self.cursor.execute(DHT_GET_ITEM_BY_HKEY, (hkey,))
@@ -80,13 +93,13 @@ class ErtDHTSQLite(object):
             return t
 
     def insert_item(self, hkey, guid, sign, bval):
-        print('INSERT th_id:', self.th_id)
+        print('DHT INSERT th_id:', self.dbid(self.db_name))
         hkey = self.handle_hkey_type(hkey)
         self.check_hkey_sz(hkey)
         self.cursor.execute(DHT_INSERT_ITEM, (hkey, guid, sign, bval))
 
     def update_item(self, hkey, guid, sign, bval):
-        print('UPDATE th_id:', self.th_id)
+        print('DHT UPDATE th_id:', self.dbid(self.db_name))
         hkey = self.handle_hkey_type(hkey)
         self.check_hkey_sz(hkey)
         self.cursor.execute(DHT_UPDATE_ITEM, (guid, sign, bval, hkey))
@@ -133,73 +146,28 @@ REF_GET_BY_BKEY = 'SELECT * FROM ertref WHERE bkey=?;'
 REF_UPDATE_ITEM = 'UPDATE ertref SET hkey=? WHERE bkey=?;'
 
 
-class ErtREFSQLite(object):
-    th_conn = dict()
-
-    @classmethod
-    def get_connection(cls, db_name):
-        th_id = threading.current_thread()
-        if th_id in cls.th_conn:
-            conn = cls.th_conn[th_id]
-            if conn:
-                return conn
-            else:
-                cls.th_conn[th_id] = sqlite3.connect(db_name)
-                return cls.th_conn[th_id]
-        else:
-            cls.th_conn[th_id] = sqlite3.connect(db_name)
-            return cls.th_conn[th_id]
-
-    def __init__(self, db_path_name):
-        self.db_name = db_path_name
+class ErtREFSQLite(BaseSQLite):
+    def __init__(self, db_name):
+        super(ErtREFSQLite, self).__init__(db_name)
         self.init_db()
-
-    @property
-    def connection(self):
-        conn = self.get_connection(self.db_name)
-        return conn
-
-    @property
-    def cursor(self):
-        conn = self.get_connection(self.db_name)
-        return conn.cursor()
-
-    @property
-    def th_id(self):
-        return threading.current_thread()
-
-    @staticmethod
-    def check_hkey_sz(hkey_bts):
-        if len(hkey_bts) != 32:
-            raise ValueError('ErtDHTSQlite: hkey should be exact 32 bytes')
-
-    @staticmethod
-    def handle_hkey_type(hkey):
-        if isinstance(hkey, int):
-            hkey = guid_int_to_bts(hkey)
-            return hkey
-        elif isinstance(hkey, bytes):
-            return hkey
-        else:
-            raise ValueError('ErtDHTSQLite: hkey should binary or int')
 
     def init_db(self):
         self.cursor.execute(REF_TABLE_CREATE)
 
     def insert_item(self, bkey, hkey):
-        print('REF INSERT th_id:', self.th_id)
+        print('PUBKEY REF INSERT dbid:', self.dbid(self.db_name))
         hkey = self.handle_hkey_type(hkey)
         self.check_hkey_sz(hkey)
         self.cursor.execute(REF_INSERT_ITEM, (bkey, hkey))
 
     def update_item(self, bkey, hkey):
-        print('REF UPDATE th_id:', self.th_id)
+        print('PUBKEY REF UPDATE dbid:', self.dbid(self.db_name))
         hkey = self.handle_hkey_type(hkey)
         self.check_hkey_sz(hkey)
         self.cursor.execute(REF_UPDATE_ITEM, (hkey, bkey))
 
     def get_hkey(self, bkey):
-        print('REF SELECT th_id:', self.th_id)
+        print('PUBKEY REF SELECT dbid:', self.dbid(self.db_name))
         c = self.cursor.execute(REF_GET_BY_BKEY, (bkey,))
         t = c.fetchone()
         if t:
