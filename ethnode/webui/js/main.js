@@ -397,6 +397,30 @@ function require(script) {
 
 
 
+// $.getJSON( "/profile.json", function( data ) {
+//     // now data is JSON converted to an object / array for you to use.
+//     // alert( data[1]. ) // Tim Robbins, Morgan Freeman, Bob Gunton
+
+//     // var newMovie = {cast:'Jack Nicholson', director:...} // a new movie object
+
+//     // $data = [
+//     //     {
+//     //         company: 'NewCompany',
+//     //         position: 'NewPosition',
+//     //         description: 'NewDescription',
+//     //         time: [
+//     //             { from: '11/2017', to: '12/2017' }
+//     //         ]
+//     //     }
+//     // ];
+
+
+
+
+//     // add a new movie to the set
+//     data.push({ reputation: 100, description: 'testing' });
+// });
+
 
 // GETTING DATA FROM profile.json
 $(function () {
@@ -438,9 +462,7 @@ $(function () {
             $.each(workExperience, function(i, experience) {
 
                 $dropdownID = 'job' + iExperience;
-
                 $timeFrom = null; $timeTo = null; $dateDifference = null;
-
                 $positionInfo = positionInformation(experience.time, experience.company, experience.position, 'work');
 
                 // Creates two letters, so if there's no Image it'd put first two letters as logo.

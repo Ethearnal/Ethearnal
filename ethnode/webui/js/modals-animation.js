@@ -70,12 +70,20 @@ $(function() {
 });
 
 
+// Global variables for modals
+$currentlyOpenModalID = null;
+$currentlyClosestLEdiv = null;
+
+
 $('body').delegate('li.open-modal', 'click', function(e) {
     e.preventDefault();
     $modalID = $(this).attr('open-modal');
     $content = $($modalID).find('.modal-box-content .content');
     $form = $content.find('form');
     $lifeExperienceDiv = $(this).closest('.life-experience');
+
+    $currentlyOpenModalID = $modalID;
+    $currentlyClosestLEdiv = $lifeExperienceDiv;
 
     // Dates inputs
     $inputDateFrom = $form.find('input.date-started');
@@ -89,7 +97,7 @@ $('body').delegate('li.open-modal', 'click', function(e) {
 
     // Functions for particular modals.
     if($modalID == "#edit-job" || $modalID == "#edit-education") loadInputsText($form, $lifeExperienceDiv);
-    if($modalID == "#add-job") datePickerInit($inputDateFrom, $inputDateTo);
+    if($modalID == "#add-job" || $modalID == "#add-education") datePickerInit($inputDateFrom, $inputDateTo);
 });
 
 
@@ -116,17 +124,146 @@ $('.modal-box button').click(function() {
 
         if(!validateForm($form)) return; // Return if form isn't filled.
 
-        // Collects data and turns it into a JSON.
-        $data = collectJobData($form);
-        console.log($data);
+        if($modalID == 'add-job' || $modalID == 'edit-job') {
+            $data = collectJobData($form);
+        } else if($modalID == 'add-education' || $modalID == 'edit-education') {
+            $data = collectEducationData($form);
+        }
 
         // Fading out the initial modal and fading in success message.
         $modalContent.fadeOut(300);
 
         setTimeout(function() {
-            if($modalID == 'add-job') clearForm($form);
+            // if($modalID == 'add-job') clearForm($form);
             appearSuccessMessage($content);
+            clearForm($form);
+
+            var iExperience = 0;
+            var iEducation = 0;
+            if($modalID == 'add-job') {
+
+                // Creating whole 'default-job.jade' file. Two divs with many divs inside. This will show the job experience.
+                $dropdownID = 'newjob' + iExperience;
+                $timeFrom = null; $timeTo = null; $dateDifference = null; var imageDiv = null;
+                $positionInfo = positionInformation($data.time, $data.company, $data.position, 'work');
+
+                // Creates two letters, so if there's no Image it'd put first two letters as logo.
+                var twoLetters = $data.company.substring(0, 2).toUpperCase();
+
+                if( $data.image == null ) {
+                    imageDiv = '<div class="image"><div class="dont-have-logo" style="display: block">' + twoLetters + '</div></div>';
+                } else {
+                    imageDiv = '<div class="image"><img src="' + $data.image + '" alt="' + $data.company + '"></div>';
+                }
+
+                var dropdownButton = '<button id="dropdown' + $dropdownID + '" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>';
+
+                var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="dropdown' + $dropdownID + '"><li class="mdl-menu__item open-modal" open-modal="#edit-job">Edit</li><li class="mdl-menu__item" disabled>Delete</li></ul>';
+
+                var jobDescriptionDiv = '<div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">' + dropdownButton + dropdownUL + '<p class="description">' + $data.description + '</p></div>';
+
+                var mainInformationDiv = '<div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">' + imageDiv + $positionInfo + '</div>';
+
+                $job = $('<div class="job life-experience col-xs-12">' + mainInformationDiv + jobDescriptionDiv + '</div>');
+                var jobDiv = $job.get(0).outerHTML;
+
+
+                // Creates Job Div.
+                $(jobDiv).insertBefore('.jobs-container .see-more');
+
+                // Upgrades DOM so you can edit it aswell.
+                componentHandler.upgradeDom();
+
+                // Adds +1 everytime it loads a new job. It's used only for dropdowns.
+                iExperience++;
+
+
+            } else if($modalID == 'add-education') {
+
+                $dropdownID = 'newedu' + iEducation;
+                $timeFrom = null; $timeTo = null; $dateDifference = null;
+                $positionInfo = positionInformation($data.time, $data.institution, $data.course, 'education');
+
+                // Creates two letters, so if there's no Image it'd put first two letters as logo.
+                var twoLetters = $data.institution.substring(0, 3);
+
+                if( $data.image == null ) {
+                    imageDiv = '<div class="image"><div class="dont-have-logo" style="display: block">' + twoLetters + '</div></div>';
+                } else {
+                    imageDiv = '<div class="image"><img src="' + $data.image + '" alt="' + $data.institution + '"></div>';
+                }
+
+                var dropdownButton = '<button id="dropdown' + $dropdownID + '" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>';
+
+                var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="dropdown' + $dropdownID + '"><li class="mdl-menu__item open-modal" open-modal="#edit-education">Edit</li><li class="mdl-menu__item" disabled>Delete</li></ul>';
+
+                var educationDescriptionDiv = '<div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">' + dropdownButton + dropdownUL + '<p class="education-paragraph description">' + $data.description + '</p></div>';
+
+                var mainInformationDiv = '<div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">' + imageDiv + $positionInfo + '</div>';
+
+                $education = $('<div class="education life-experience col-xs-12">' + mainInformationDiv + educationDescriptionDiv + '</div>');
+                var educationDiv = $education.get(0).outerHTML;
+
+
+                // Creates Job Div.
+                $(educationDiv).insertBefore('.education-container .see-more');
+
+                // Upgrades DOM so you can edit it aswell.
+                componentHandler.upgradeDom();
+
+                // Adds +1 everytime it loads a new job. It's used only for dropdowns.
+                iEducation++;
+
+
+            } else if ( $modalID == 'edit-education' ) {
+
+                $modalID = $currentlyOpenModalID;
+                $lifeExperienceDiv = $currentlyClosestLEdiv;
+
+                // Gets time.
+                $.each($data.time, function(i, times) {
+
+                    // Counts time difference and returns a string (3y 1m)
+                    $dateDifference = getTimeDifference(times.from, times.to);
+
+                    if($dateDifference == null) $dateDifference = '(1m)';
+
+                    // Creates a text for date differences.
+                    $dateDifferenceText = times.from + ' - ' + times.to + ' ' + $dateDifference;
+                });
+
+                $lifeExperienceDiv.find('.study-field').text($data.course);
+                $lifeExperienceDiv.find('.education-name').text($data.institution);
+                $lifeExperienceDiv.find('.date-name').text($dateDifferenceText);
+                $lifeExperienceDiv.find('.description').text($data.description);
+
+
+            } else if ( $modalID == 'edit-job' ) {
+
+                $modalID = $currentlyOpenModalID;
+                $lifeExperienceDiv = $currentlyClosestLEdiv;
+
+                // Gets time.
+                $.each($data.time, function(i, times) {
+
+                    // Counts time difference and returns a string (3y 1m)
+                    $dateDifference = getTimeDifference(times.from, times.to);
+
+                    if($dateDifference == null) $dateDifference = '(1m)';
+
+                    // Creates a text for date differences.
+                    $dateDifferenceText = times.from + ' - ' + times.to + ' ' + $dateDifference;
+                });
+
+                $lifeExperienceDiv.find('.company-name').text($data.company);
+                $lifeExperienceDiv.find('.position-name').text($data.position);
+                $lifeExperienceDiv.find('.date-name').text($dateDifferenceText);
+                $lifeExperienceDiv.find('.description').text($data.description);
+            }
+
         }, 300);
+
+
 
     // BUTTON.CREATE-NEW
     } else if($(this).parent().is(".buttons")) {

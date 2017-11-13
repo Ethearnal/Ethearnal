@@ -88,6 +88,8 @@ function positionInformation(varTime, h4Text, h5Text, type) {
         // Counts time difference and returns a string (3y 1m)
         $dateDifference = getTimeDifference(times.from, times.to);
 
+        if($dateDifference == null) $dateDifference = '(1m)';
+
         // Creates a text for date differences.
         $dateDifferenceText = times.from + ' - ' + times.to + ' ' + $dateDifference;
     });
@@ -226,9 +228,6 @@ function loadInputsText(form, div) {
     })
 }
 
-
-
-
 // Collects 'CREATE JOB / EDIT JOB' data.
 function collectJobData(form) {
     $form = form; $endDateVal = null;
@@ -239,11 +238,54 @@ function collectJobData(form) {
     }
 
     $data = {
+        // image: $imgSource,
         company: $form.find('input#company-name').val(),
         position: $form.find('input#position-name').val(),
         description: $form.find('textarea#description').val(),
-        startDate: $form.find('input.date-started').val(),
-        endDate: $endDateVal
+        time: [
+            { from: $form.find('input.date-started').val(), to: $endDateVal }
+        ]
+    }
+
+    // $imgSource = $form.find('input#input-image-job').get(0).files[0];
+    // var formData = new FormData();
+
+    // console.log($imgSource);
+
+    // $.ajax({
+    //     type: 'POST',
+    //     url: 'profile.json',
+    //     dataType: 'json',
+    //     data: JSON.stringify($data),
+    //     contentType: false,
+    //     processData: false,
+    //     cache: false,
+    //     complete: function(data) {
+    //         console.log('success');
+    //     }
+    // });
+
+    return $data;
+}
+
+
+// Collects 'CREATE EDUCATION / EDIT EDUCATION' data.
+function collectEducationData(form) {
+    $form = form; $endDateVal = null;
+    if($form.find('input.date-ended').val() == '') {
+        $endDateVal = 'Present';
+    } else {
+        $endDateVal = $form.find('input.date-ended').val();
+    }
+
+    $data = {
+        // image: $imgSource,
+        institution: $form.find('input#education-name').val(),
+        course: $form.find('input#study-field').val(),
+        description: $form.find('textarea#description').val(),
+        time: [
+            { from: $form.find('input.date-started').val(), to: $endDateVal }
+        ]
     }
     return $data;
 }

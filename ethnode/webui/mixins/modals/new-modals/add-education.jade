@@ -1,17 +1,17 @@
-#edit-education.modal-box.flex.floating
+#add-education.modal-box.flex.floating
 
     .modal-box-content: .inner-modal: .content
 
-        .modal-header: h3 Edit education
+        .modal-header: h3 Add education
 
         .success-message
             h1.title Congratulations!
-            .success-content: p Your education was updated.
+            .success-content: p Your education was added.
 
             .buttons
                 button.mdl-button.mdl-js-button.close-button.congrats-close Close the modal to see it
                 span OR
-                button.mdl-button.mdl-js-button.create-new Edit education again
+                button.mdl-button.mdl-js-button.create-new Add new education
 
 
         .modal-body
@@ -24,7 +24,7 @@
 
             .modal-inputs
 
-                form#form-update-job(action="POST")
+                form#form-update-education(action="POST")
                     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
                         input#education-name.mdl-textfield__input(name="education-name", type="text")
                         label.mdl-textfield__label(for="education-name") Educational Institution name
@@ -47,5 +47,5 @@
 
         .modal-footer
             button.mdl-button.mdl-js-button.close-button Close
-            button#update.mdl-button.mdl-js-button.finish-button(style="color: #5CAB7D") Update
-            .mdl-tooltip(data-mdl-for="update") This text will be changed anyway.
+            button#publish1.mdl-button.mdl-js-button.finish-button(style="color: #5CAB7D") Publish
+            .mdl-tooltip(data-mdl-for="publish1") This text will be changed anyway.
