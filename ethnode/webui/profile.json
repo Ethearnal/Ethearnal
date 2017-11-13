@@ -23,7 +23,7 @@
             "position": "Back-End Developer",
             "description": "I have worked on PayPal and loved it! Elon Mush was my boss until he sold the company and I left along with him.",
             "time": [
-                { "from": "6/2010", "to": "8/2013" }
+                { "from": "06/2010", "to": "08/2013" }
             ]
         },
         {
@@ -32,7 +32,7 @@
             "position": "Back-End Developer",
             "description": "Paysera is really cool payment processing company, I did fell in love with how helpful their team members were.",
             "time": [
-                { "from": "9/2013", "to": "Present" }
+                { "from": "09/2013", "to": "Present" }
             ]
         }
     ],
@@ -43,7 +43,7 @@
             "course": "Public Policy",
             "description": "Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1.",
             "time": [
-                { "from": "8/2012", "to": "10/2014" }
+                { "from": "08/2012", "to": "10/2014" }
             ]
         },
         {
@@ -52,7 +52,7 @@
             "course": "Accounting and Finance",
             "description": "",
             "time": [
-                { "from": "9/2005", "to": "6/2009" }
+                { "from": "09/2005", "to": "06/2009" }
             ]
         }
     ]

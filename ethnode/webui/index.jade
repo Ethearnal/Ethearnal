@@ -58,58 +58,12 @@ html(lang='en-US')
 
     body
 
-        #add-job.modal-box.flex.floating
+        include mixins/modals/add-job
+        include mixins/modals/edit-job
 
-            .modal-box-content: .inner-modal: .content
-                button.mdl-button.mdl-js-button.mdl-button--fab.mdl-button--mini-fab.mdl-button--colored.close-modal-button: i.material-icons close
+        include mixins/modals/add-education
+        include mixins/modals/edit-education
 
-
-                .modal-header: h3 Add new job
-
-                .success-message
-                    h1.success-message__title Congratulations, Dobri!
-                    .success-message__content: p Your job was created. Close the modal to see it.
-
-                    .buttons
-                        button.mdl-button.mdl-js-button.close-button.congrats-close Close the modal to see it
-                        span OR
-                        button.mdl-button.mdl-js-button.create-new Create a new job
-
-
-                .modal-body
-
-                    .form-group
-                        input.input-file#input-image-job(type="file", placeholder="Add image or video")
-                        label(for="input-image-job") Add Company's Logo
-                        img.file-input-first-image(src="images/image-video-image-file.png", alt="Add a file")
-                        img#input-image-job(src="#", alt="Preview")
-
-                    .modal-inputs
-
-                        form#form-add-job(action="POST")
-                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
-                                input#company-name.mdl-textfield__input(name="company", type="text")
-                                label.mdl-textfield__label(for="company-name") Company name
-
-                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
-                                input#position.mdl-textfield__input(type="text", name="position")
-                                label.mdl-textfield__label(for="position") Position
-
-                            .mdl-textfield.mdl-js-textfield.whole-line
-                                textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
-                                label.mdl-textfield__label(for="description") Description (what have you done or currently do?)
-
-                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
-                                input#date-from.mdl-textfield__input(type="text", name="startDate")
-                                label.mdl-textfield__label(for="date-from") Start Date
-
-                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
-                                input#date-to.mdl-textfield__input(type="text", name="endDate")
-                                label.mdl-textfield__label(for="date-from") End Date (leave blank if ongoing)
-
-                .modal-footer
-                    button.mdl-button.mdl-js-button.close-button Close
-                    button.mdl-button.mdl-js-button.publish-button(style="color: #5CAB7D") Publish
 
 
 
@@ -229,23 +183,10 @@ html(lang='en-US')
 
             .container
 
-                .profile-information-fixed.col-lg-4.col-md-4.col-sm-12.col-xs-12.hidden
-
                 // Profile information including profile image, current work, current city and state, skills and etc.
                 .profile-information-before-fixed.col-lg-4.col-md-4.col-sm-12.col-xs-12
 
                     include mixins/profile-card
-
-
-
-                // Profile information including profile image, current work, current city and state, skills and etc.
-                .profile-information-after-fixed.col-xs-12.hidden
-
-                    .container-fluid
-
-                        .container.col-lg-4.col-md-4.col-sm-12.col-xs-12
-
-                            include mixins/profile-card
 
 
                 // Profile documentation including jobs and education, stories, shout-outs and questions with answers
@@ -256,19 +197,12 @@ html(lang='en-US')
                         ul.nav.nav-tabs(role="tablist")
                             li.timeline-li(role="presentation"): a(href="#timeline", aria-controls="jobs", role="tab", data-toggle="tab") Search Work
                             li.active.jobs-li(role="presentation"): a(href="#jobs", aria-controls="jobs", role="tab", data-toggle="tab") Jobs & Education
-
-                        .plusIcon.dropdown-toggle(data-toggle="dropdown")
-                            i.material-icons add
-
-                        ul.dropdown-menu(aria-labelledby="dLabel")
-                            li.add-job: a(href="", data-toggle="modal", data-target="#jobModal") Add Job
-                            li.add-education: a(href="", data-toggle="modal", data-target="#educationModal") Add Education
-                            li.add-story: a(href="", data-toggle="modal", data-target="#storyModal") Add Story
-                            li.divider
-                            li.invite-someone: a(href="", data-toggle="modal", data-target="#inviteModal") Invite someone to Aspire
-
-                        .shoutoutIcon(data-toggle="modal", data-target="#shoutoutModal")
-                            i.announcement.icon
+                            li.dropdownButton
+                                button#addThings.mdl-button.mdl-js-button.mdl-button--icon: i.material-icons add
+                                ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="addThings")
+                                    li.mdl-menu__item.open-modal(open-modal="#add-job") Add Work Experience
+                                    li.mdl-menu__item.open-modal(open-modal="#add-education") Add Education
+                                    li.mdl-menu__item(disabled) Add Gig
 
 
                         // All the information about above listed tabs.
@@ -302,8 +236,8 @@ html(lang='en-US')
 
                                 // JOBS
                                 .jobs-container
-                                    .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                                        include mixins/jobs/default-job
+                                    //- .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                                    //-     include mixins/jobs/default-job
 
                                     .jobs-see.see-more.col-xs-12
                                         p + See more jobs

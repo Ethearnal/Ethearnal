@@ -6,6 +6,9 @@ from toolkit.store_sqlite import ErtDHTSQLite, ErtREFSQLite
 # protocol one
 # <name_space>:<key>
 # ert:pubkey - to handle pubkey exchange
+# push qry:?whatever_query_string handle in queries
+# 1) push qry first
+# 2) pull qry resp then
 
 
 class DHTStoreHandlerOne(object):
@@ -22,6 +25,9 @@ class DHTStoreHandlerOne(object):
             self.pubkeys = dict()
         else:
             self.pubkeys = ErtREFSQLite(pubkeys_sqlite_file)
+
+        # self.query_store, no permanent query store
+        # eg ?guids, select quids cursor, and emulate it via kv
 
     # local push
     def push(self, key, val, signature, guid_owner):

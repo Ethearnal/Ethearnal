@@ -204,7 +204,7 @@ $( document ).ready(function() {
         });
     });
 
-    // Checks if input.file has changed, if so, checks his ID and stores it into a global variable, then uses that variable to add an ID near the img. You need to create input and image with the same ID and you will have live load image when you will upload it. I know, I'm genius.
+    // Checks if input.file has changed, if so, checks his ID and stores it into a global variable, then uses that variable to add an ID near the img. You need to create input and image with the same ID and you will have live load image when you will upload it.
     function readURL(input) {
 
         if (input.files && input.files[0]) {
@@ -220,6 +220,71 @@ $( document ).ready(function() {
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $("input.input-file").change(function(){
+        readURL(this);
+        $inputID = $(this).attr("id");
+    });
+
+    // When you upload a file in an accomplishment modal, it would chance the text.
+    $("input[type=file]").on("change", function(){
+
+        // Name of file and placeholder
+        var file = this.files[0].name;
+        var dflt = $(this).attr("placeholder");
+        $labelID = $(this).attr("id");
+        $imgClass = $(this).parent().find('.file-input-first-image').attr('class');
+
+        if($(this).val()!=""){
+            $("label[for=" + $labelID + "]").text(' ' + file + ' ').addClass('active');
+            $('img.' + $imgClass).addClass('active');
+        } else {
+            $(this).next().text(dflt);
+        }
+    });
+
+
+
+    // Panel heading would have hover effect.
+    $('.panel-heading, .timeline-post').hover(
+        function() {
+            $(this).stop(true, true).animate({ backgroundColor: '#f7f7f7' }, 300);
+        }, function() {
+            $(this).stop(true, true).animate({ backgroundColor: 'white' }, 300);
+        }
+    )
+
+    // Owl Graphic Hero UI buttons and hover effect.
+    $(".button-prev").click(function () {
+        $(this).parent().find('.items').trigger('owl.prev');
+    });
+    $(".button-next").click(function () {
+        $(this).parent().find('.items').trigger('owl.next');
+    });
+    $( "section.background-image, .post .image" ).hover(function() {
+        $(this).find(".button-prev, .button-next").stop(true).fadeIn(300);
+    });
+    $( "section.background-image, .post .image" ).mouseleave(function() {
+        $(this).find(".button-prev, .button-next").stop(true).fadeOut(300);
+    });
+
+    // When you click on Top skills and tools down icon, the skills will slide up or slide down.
+    $( ".profile-bottom i" ).click(function() {
+        $( ".profile-bottom .skills p.more" ).toggleClass('hidden');
+        $(this).toggleClass('open');
+
+        if( $(this).hasClass('open') ) {
+            $(this).css( { transition: "transform 0.3s", transform: "rotate(180deg)" } )
+        } else {
+            $(this).css( { transition: "transform 0.3s", transform: "rotate(0deg)" } )
+        }
+    });
+
+    // When you hover on a profile image, the half-black background would appear with the text of "Change".
+    $( ".profile-image" ).hover(function() {
+        $(this).find(".text-on-image").stop(true, true).fadeToggle(150);
+    });
+
 
 
     // Semantic UI, Perfect Scrollbar plugins initializations and many others functions related to dropdowns.
@@ -298,163 +363,6 @@ $( document ).ready(function() {
             $(this).parent().prev().find('textarea.form-control').attr('rows', 1);
         });
     });
-
-    // Removing auto zoom function for mobile phones when font size is lower than 16px
-    $("input[type=text], textarea").on({ 'touchstart' : function() {
-        zoomDisable();
-    }});
-    $("input[type=text], textarea").on({ 'touchend' : function() {
-        setTimeout(zoomEnable, 500);
-    }});
-
-    function zoomDisable() {
-        $('head meta[name=viewport]').remove();
-        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />');
-    }
-
-    function zoomEnable() {
-        $('head meta[name=viewport]').remove();
-        $('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1" />');
-    }
-
-
-    // MATERIAL DESIGN DATE PICKER
-    $(function() {
-        $datePickers = 3;
-
-        $('#date-end0').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
-        $('#date-start0').bootstrapMaterialDatePicker({ weekStart: 0, time: false }).on('change', function(e, date) {
-            $('#date-end0').bootstrapMaterialDatePicker('setMinDate', date)
-        })
-
-        $('#date-end1').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
-        $('#date-start1').bootstrapMaterialDatePicker({ weekStart: 0, time: false }).on('change', function(e, date) {
-            $('#date-end1').bootstrapMaterialDatePicker('setMinDate', date)
-        })
-
-        $('#date-end2').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
-        $('#date-start2').bootstrapMaterialDatePicker({ weekStart: 0, time: false }).on('change', function(e, date) {
-            $('#date-end2').bootstrapMaterialDatePicker('setMinDate', date)
-        })
-    });
-
-    var $profileFixTop = $('.profile-information-before-fixed').offset().top - 260;
-
-    // Make the profile documentation fixed as page scrolls.
-    $(window).scroll(function() {
-
-        if( $(window).width() >= 1200 ) {
-            var currentScroll = $(window).scrollTop();
-
-            if (currentScroll >= $profileFixTop) {
-                $('.profile-information-fixed').removeClass('hidden');
-                $('.profile-information-before-fixed').addClass('hidden');
-                $('.profile-information-after-fixed').removeClass('hidden');
-            }
-
-            if (currentScroll < $profileFixTop ) {
-                $('.profile-information-fixed').addClass('hidden');
-                $('.profile-information-before-fixed').removeClass('hidden');
-                $('.profile-information-after-fixed').addClass('hidden');
-            }
-        }
-    });
-
-    // Panel heading would have hover effect.
-    $('.panel-heading, .timeline-post').hover(
-        function() {
-            $(this).stop(true, true).animate({ backgroundColor: '#f7f7f7' }, 300);
-        }, function() {
-            $(this).stop(true, true).animate({ backgroundColor: 'white' }, 300);
-        }
-    )
-
-    // Change the color of the assets in the header on hover
-    $("ul.nav.navbar-right li.asset i").hover(function() {
-        if( $(this).parent().attr("id") == "comment-navbar" ) {
-            $(this).toggleClass("icon-comment-filled").toggleClass("icon-filled");
-        }
-        if( $(this).parent().attr("id") == "alert-navbar" ) {
-            $(this).toggleClass("icon-bell-filled").toggleClass("icon-bell");
-        }
-    })
-
-    // Owl Graphic Hero UI buttons and hover effect.
-    $(".button-prev").click(function () {
-        $(this).parent().find('.items').trigger('owl.prev');
-    });
-    $(".button-next").click(function () {
-        $(this).parent().find('.items').trigger('owl.next');
-    });
-    $( "section.background-image, .post .image" ).hover(function() {
-        $(this).find(".button-prev, .button-next").stop(true).fadeIn(300);
-    });
-    $( "section.background-image, .post .image" ).mouseleave(function() {
-        $(this).find(".button-prev, .button-next").stop(true).fadeOut(300);
-    });
-
-    $(".avatar-message i").click(function() {
-        $(this).parent().fadeOut();
-    })
-
-    // When you click on the item in Modal dropdown selector, it would set margin-top to 25 pixels to make it look good.
-    $( ".item" ).click(function() {
-        $(this).parent().parent().not("#accomplishment-ui").not(".post-input-dropdowns").animate({ "margin-top": "25px"}, "fast");
-    });
-
-    $("input.input-file").change(function(){
-        readURL(this);
-        $inputID = $(this).attr("id");
-    });
-
-    // If you click on navigation tabs, it checks if its a shout-out tab, if so, appears blue shoutout button and disappears yellow plus button.
-    $(".profile-documentation ul.nav li").click(function() {
-        if( $(this).hasClass("jobs-li") ) {
-            $(".plusIcon").stop(true, true).fadeIn(300);
-            // $(".shoutoutIcon").stop(true, true).fadeIn(300);
-        } else {
-            $(".plusIcon").stop(true, true).fadeOut(300);
-            // $(".shoutoutIcon").stop(true, true).fadeOut(300);
-        }
-    });
-
-    // When you upload a file in an accomplishment modal, it would chance the text.
-    $("input[type=file]").on("change", function(){
-
-        // Name of file and placeholder
-        var file = this.files[0].name;
-        var dflt = $(this).attr("placeholder");
-
-        if($(this).val()!=""){
-            $("label[for=" + $(this).attr("id") + "]").text(' ' + file + ' ');
-        } else {
-            $(this).next().text(dflt);
-        }
-    });
-
-    // When you click on Top skills and tools down icon, the skills will slide up or slide down.
-    $( ".profile-bottom i" ).click(function() {
-        $( ".profile-bottom .skills p.more" ).toggleClass('hidden');
-        $(this).toggleClass('open');
-
-        if( $(this).hasClass('open') ) {
-            $(this).css( { transition: "transform 0.3s", transform: "rotate(180deg)" } )
-        } else {
-            $(this).css( { transition: "transform 0.3s", transform: "rotate(0deg)" } )
-        }
-    });
-
-    // When you hover on a tab, the bullet points would fade in.
-    $( ".job, .story, .shoutout, .education" ).hover(function() {
-        if( $(window).width() > 992 ) {
-            $(this).find(".dropdown.more i").stop(true).fadeToggle("fast");
-        }
-    });
-
-    // When you hover on a profile image, the half-black background would appear with the text of "Change".
-    $( ".profile-image" ).hover(function() {
-        $(this).find(".text-on-image").stop(true, true).fadeToggle(150);
-    });
 });
 
 
@@ -468,82 +376,24 @@ function require(script) {
     });
 }
 
-function closeModal(modalID) {
-    $modalBox = $('#' + modalID);
-    $modalBox.find('.modal-box-content .inner-modal .content').css({ transitionDelay: '0s' });
 
-    $modalBox.find('.modal-box-content .inner-modal .content').animate({ opacity: 0 }, 400, "easeOutCubic", function() {
-        $modalBox.find('.modal-box-content .inner-modal').animate({ width: 0, height: 0 }, 400, "easeOutSine", function() {
-            $modalBox.css({ display: 'none' });
-        });
-    });
-}
 
-// Include all functions
-require('js/functions.js');
-
-// Include modals animation JS file.
-require("js/modals-animation.js");
 
 
 
 // TODO:
-// Add dropdown to education and job.+++
-// Change all dropdowns to the Material Design dropdowns.
-// Change dropdown color to yellow or orange.
-// Change modals, make them like Material design modals.
 // Add ability to add education or job.
 // Add ability to change education or job information.
 
 
 
-$('li.open-modal').click(function(e) {
-    e.preventDefault();
-    $modalClass = $(this).attr('open-modal');
 
-    $('' + $modalClass + '').css({ display: 'flex' });
-    $('' + $modalClass + '').find('.modal-box-content .inner-modal').animate({ width: '200vw', height: '200vw' }, 400, "easeInSine");
-    $('' + $modalClass + '').find('.modal-box-content .inner-modal .content').css({ opacity: 1, transitionDelay: '.5s' });
-});
+// COLORS
+// Blue #1 = #92A8D1
+// Blue #2 = #89ABE3
 
-
-$('button.close-modal-button').click(function() {
-    $modalID = $(this).closest('.modal-box').attr('id');
-    closeModal($modalID);
-});
-
-
-function positionInformation(varTime, h4Text, h5Text) {
-
-    // Gets time.
-    $.each(varTime, function(i, times) {
-
-        // Counts time difference and returns a string (3y 1m)
-        $dateDifference = getTimeDifference(times.from, times.to);
-
-        // Creates a text for date differences.
-        $dateDifferenceText = times.from + ' - ' + times.to + ' ' + $dateDifference;
-    });
-
-    return '<div class="position-information"><h4>' + h4Text + '</h4><h5>' + h5Text + '</h5><p>' + $dateDifferenceText + '</p></div>';
-}
-
-
-// POSTING DATA
-// $(function () {
-
-//     $.ajax({
-//          type: "POST",
-//          url: 'post-job.json',
-//          data: $("#form-add-job").serialize(),
-//          success: function() {
-//               console.log('success');
-//          }
-//     });
-
-
-// })
-
+// Rose #1 = #F7CAC9
+// Rose #2 = #F2DDDE
 
 
 
@@ -587,9 +437,11 @@ $(function () {
             var iExperience = 0;
             $.each(workExperience, function(i, experience) {
 
+                $dropdownID = 'job' + iExperience;
+
                 $timeFrom = null; $timeTo = null; $dateDifference = null;
 
-                $positionInfo = positionInformation(experience.time, experience.company, experience.position);
+                $positionInfo = positionInformation(experience.time, experience.company, experience.position, 'work');
 
                 // Creates two letters, so if there's no Image it'd put first two letters as logo.
                 var twoLetters = experience.company.substring(0, 3);
@@ -597,13 +449,11 @@ $(function () {
                 // Creating whole 'default-job.jade' file. Two divs with many divs inside. This will show the job experience.
                 var imageDiv = '<div class="image"><img src="' + experience.image + '" alt="' + experience.company + '"><div class="dont-have-logo">' + twoLetters + '</div></div>';
 
-                var dropdownMore = '<div class="dropdown more"><i class="icon-more dropdown-toggle" data-toggle="dropdown"></i><ul class="dropdown-menu" role="menu"><li><a href="">Delete</a></li></ul></div>';
+                var dropdownButton = '<button id="dropdown' + $dropdownID + '" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>';
 
-                var dropdownButton = '<button id="dropdown' + iExperience + '" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>'
+                var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="dropdown' + $dropdownID + '"><li class="mdl-menu__item open-modal" open-modal="#edit-job">Edit</li><li class="mdl-menu__item" disabled>Delete</li></ul>';
 
-                var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="dropdown' + iExperience + '"><li class="mdl-menu__item">Edit</li><li class="mdl-menu__item">Delete</li></ul>'
-
-                var jobDescriptionDiv = '<div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">' + dropdownButton + dropdownUL + '<p>' + experience.description + '</p></div>';
+                var jobDescriptionDiv = '<div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">' + dropdownButton + dropdownUL + '<p class="description">' + experience.description + '</p></div>';
 
                 var mainInformationDiv = '<div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">' + imageDiv + $positionInfo + '</div>';
 
@@ -621,11 +471,14 @@ $(function () {
 
             // Appends a Education on your profile page.
             var educations = profile.education;
+            var iEducation = 0;
             $.each(educations, function(i, education) {
+
+                $dropdownID = 'edu' + iEducation;
 
                 $timeFrom = null; $timeTo = null; $dateDifference = null;
 
-                $positionInfo = positionInformation(education.time, education.course, education.institution);
+                $positionInfo = positionInformation(education.time, education.course, education.institution, 'education');
 
                 // Creates two letters, so if there's no Image it'd put first two letters as logo.
                 var twoLetters = education.institution.substring(0, 3);
@@ -633,9 +486,11 @@ $(function () {
                 // Creating whole 'default-job.jade' file. Two divs with many divs inside. This will show the job experience.
                 var imageDiv = '<div class="image"><img src="' + education.image + '" alt="' + education.institution + '"><div class="dont-have-logo">' + twoLetters + '</div></div>';
 
-                var dropdownMore = '<div class="dropdown more"><i class="icon-more dropdown-toggle" data-toggle="dropdown"></i><ul class="dropdown-menu" role="menu"><li><a href="" data-toggle="modal" data-target="#accomplishmentModal">Add Accomplishment</a></li><li><a href="">Edit</a></li></ul></div>';
+                var dropdownButton = '<button id="dropdown' + $dropdownID + '" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>';
 
-                var educationDescriptionDiv = '<div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">' + dropdownMore + '<p>' + education.description + '</p></div>';
+                var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="dropdown' + $dropdownID + '"><li class="mdl-menu__item open-modal" open-modal="#edit-education">Edit</li><li class="mdl-menu__item" disabled>Delete</li></ul>';
+
+                var educationDescriptionDiv = '<div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">' + dropdownButton + dropdownUL + '<p class="education-paragraph description">' + education.description + '</p></div>';
 
                 var mainInformationDiv = '<div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">' + imageDiv + $positionInfo + '</div>';
 
@@ -645,6 +500,9 @@ $(function () {
 
                 // Creates Job Div.
                 $(educationDiv).insertBefore('.education-container .see-more');
+
+                // Adds +1 everytime it loads a new job. It's used only for dropdowns.
+                iEducation++;
             });
 
             seeButtons();
@@ -687,3 +545,11 @@ $(function () {
         }
     })
 })
+
+
+
+// Include all functions
+require('js/functions.js');
+
+// Include modals animation JS file.
+require("js/modals-animation.js");
