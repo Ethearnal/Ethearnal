@@ -95,6 +95,14 @@ def guid_int_to_hex(guidint: int):
     return binascii.hexlify(bts).decode(encoding='ascii')
 
 
+def guid_bin_to_hex(binguid: bytes):
+    return binascii.hexlify(binguid)
+
+
+def guid_hex_to_bin(hexguid: str):
+    return binascii.unhexlify(hexguid)
+
+
 def pub_der_guid_bts(pub_der: bytes):
     return hashlib.sha256(pub_der).digest()
 

@@ -10,9 +10,9 @@ from toolkit.tools import mkdir, on_hook
 from toolkit import kadmini_codec
 from toolkit import store_handler
 
-from eth_profile import EthearnalProfileView, EthearnalProfileController
-from eth_profile import EthearnalJobView, EthearnalJobPostController
-from eth_profile import EthearnalUploadFileView
+from ert_profile import EthearnalProfileView, EthearnalProfileController
+from ert_profile import EthearnalJobView, EthearnalJobPostController
+from ert_profile import EthearnalUploadFileView
 
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
