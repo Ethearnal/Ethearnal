@@ -408,4 +408,3 @@ class EthearnalUploadFileView(object):
         print(os.listdir(upload_path))
         return json.dumps(files, ensure_ascii=False).encode('utf-8')
 
-

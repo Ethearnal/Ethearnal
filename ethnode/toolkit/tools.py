@@ -26,7 +26,15 @@ def mkdir(newdir):
     _mkdir(newdir)
 
 
+def mkd(newdir):
+    abspath = os.path.abspath(newdir)
+    _mkdir(abspath)
+    return abspath
+
+
 def upnp_map_port(local_port, nat_router_port, proto):
+    # todo failed to install on windows
+    import miniupnpc
     protos = ('TCP', 'UDP')
     if proto not in protos:
         raise ValueError('Protocol should be one %s or %s' % protos)
