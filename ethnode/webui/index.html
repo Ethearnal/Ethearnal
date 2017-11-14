@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aspire</title>
+    <title>Ethearnal</title>
     <!-- START of LINKS-->
     <!-- Normalize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
@@ -57,7 +57,7 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <input id="input-image-job" type="file" placeholder="Add image or video" class="input-file">
+                <input id="input-image-job" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
                 <label for="input-image-job">Add Company's Logo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image"><img id="input-image-job" src="#" alt="Preview">
               </div>
               <div class="modal-inputs">
@@ -173,7 +173,7 @@
                 <label for="input-image-job">Add Educational Institution Logo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image"><img id="input-image-job" src="#" alt="Preview">
               </div>
               <div class="modal-inputs">
-                <form id="form-update-job" action="POST">
+                <form id="form-update-education" action="POST">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
                     <input id="education-name" name="education-name" type="text" class="mdl-textfield__input">
                     <label for="education-name" class="mdl-textfield__label">Educational Institution name</label>
@@ -199,8 +199,8 @@
             </div>
             <div class="modal-footer">
               <button class="mdl-button mdl-js-button close-button">Close</button>
-              <button id="publish" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
-              <div data-mdl-for="publish" class="mdl-tooltip">This text will be changed anyway.</div>
+              <button id="publish1" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
+              <div data-mdl-for="publish1" class="mdl-tooltip">This text will be changed anyway.</div>
             </div>
           </div>
         </div>
@@ -229,7 +229,7 @@
                 <label for="input-image-job">Add Educational Institution Logo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image"><img id="input-image-job" src="#" alt="Preview">
               </div>
               <div class="modal-inputs">
-                <form id="form-update-job" action="POST">
+                <form id="form-update-education" action="POST">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
                     <input id="education-name" name="education-name" type="text" class="mdl-textfield__input">
                     <label for="education-name" class="mdl-textfield__label">Educational Institution name</label>
@@ -255,8 +255,8 @@
             </div>
             <div class="modal-footer">
               <button class="mdl-button mdl-js-button close-button">Close</button>
-              <button id="update" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
-              <div data-mdl-for="update" class="mdl-tooltip">This text will be changed anyway.</div>
+              <button id="update1" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+              <div data-mdl-for="update1" class="mdl-tooltip">This text will be changed anyway.</div>
             </div>
           </div>
         </div>
@@ -1050,28 +1050,34 @@
     <section class="documentation">
       <div class="container">
         <!-- Profile information including profile image, current work, current city and state, skills and etc.-->
-        <div class="profile-information-before-fixed col-lg-4 col-md-4 col-sm-12 col-xs-12">
-          <!-- Profile header, including profile image, current work, city, state and two buttons.-->
-          <div class="profile-upper">
-            <div data-toggle="modal" data-target="#avatarModal" class="profile-image"><img src="" alt="">
-              <div class="text-on-image">
-                <p>Change</p>
+        <div class="profile-information-container col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="profile-information up">
+            <!-- Profile header, including profile image, current work, city, state and two buttons.-->
+            <div class="profile-upper">
+              <div data-toggle="modal" data-target="#avatarModal" class="profile-image"><img src="" alt="">
+                <div class="text-on-image">
+                  <p>Change</p>
+                </div>
               </div>
+              <!-- Now... JSON data goes here. :(-->
+              <button class="hire">Hire ($50/hr)</button>
+              <button class="leave-msg">Send Message</button>
             </div>
-            <!-- Now... JSON data goes here. :(-->
-            <button class="light-blue-background hidden">Connect</button>
-            <button class="orange-background">Hire ($50/hr)</button>
-            <button class="white-background">Leave a Note</button>
           </div>
-          <!-- Profile description including a description about you. (dark-gray section)-->
-          <div class="profile-description">
-            <!-- JSON data goes here.-->
-          </div>
-          <!-- Profile top skills and tools-->
-          <div class="profile-bottom">
-            <p class="skills-text">Consolidated Skills and Tools</p><i class="material-icons">keyboard_arrow_down</i>
-            <div class="skills">
+          <div class="profile-information middle">
+            <!-- Profile description including a description about you. (dark-gray section)-->
+            <div class="profile-description">
               <!-- JSON data goes here.-->
+            </div>
+          </div>
+          <div class="profile-information down">
+            <!-- Profile top skills and tools-->
+            <div class="profile-bottom">
+              <p class="skills-text">Skills & Languages
+              </p>
+              <div class="skills">
+                <!-- JSON data goes here.-->
+              </div>
             </div>
           </div>
           <!-- Profile footer, including social media links.-->
@@ -1089,7 +1095,6 @@
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-documentation-full">
           <div class="profile-documentation col-xs-12">
             <ul role="tablist" class="nav nav-tabs">
-              <li role="presentation" class="timeline-li"><a href="#timeline" aria-controls="jobs" role="tab" data-toggle="tab">Search Work</a></li>
               <li role="presentation" class="active jobs-li"><a href="#jobs" aria-controls="jobs" role="tab" data-toggle="tab">Jobs & Education</a></li>
               <li class="dropdownButton">
                 <button id="addThings" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">add</i></button>
@@ -1102,196 +1107,8 @@
             </ul>
             <!-- All the information about above listed tabs.-->
             <div class="tab-content col-xs-12">
-              <!-- Timeline TAB-->
-              <div id="timeline" role="tabpanel" class="tab-pane fade list-block col-xs-12">
-                <div class="timeline-post input-timeline col-xs-12">
-                  <div class="input-header"><i class="write icon"></i><span>Create a Post</span></div>
-                  <div class="picture"><img src="images/profilepicture.png" alt="Profile"></div>
-                  <div class="post post-input">
-                    <textarea placeholder="What awesomeness have you accomplished lately?" rows="1" class="form-control"></textarea>
-                    <div class="appearing-content">
-                      <div class="ui fluid search selection dropdown company-selection post-input-dropdowns">
-                        <input type="hidden" name="job"><i class="dropdown icon"></i><i class="remove icon"></i>
-                        <div class="default text">Company</div>
-                        <div class="menu">
-                          <div class="header"><i class="building icon"><span>Available companies</span></i></div>
-                          <div data-value="pkfrontend" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Paulius Kasiuba's Front End Development</span></div>
-                          <div data-value="sharadvenkatfreelance" class="item"><img src="images/paypal.jpg" alt="Profile" class="ui avatar image"><span>Sharad Venkat's Freelancing company</span></div>
-                        </div>
-                      </div>
-                      <div class="upload-photo add-photos-video-btn"><a><i class="material-icons">camera_alt</i></a></div>
-                      <div class="ui search scrolling dropdown item post-input-dropdowns">
-                        <input type="hidden" name="year" value="default">
-                        <div class="default text">Year</div><i class="dropdown icon"></i>
-                        <div class="menu">
-                          <div data-value="default" class="item">2017</div>
-                          <div data-value='2016' class="item">2016</div>
-                          <div data-value='2015' class="item">2015</div>
-                          <div data-value='2014' class="item">2014</div>
-                          <div data-value='2013' class="item">2013</div>
-                          <div data-value='2012' class="item">2012</div>
-                          <div data-value='2011' class="item">2011</div>
-                          <div data-value='2010' class="item">2010</div>
-                          <div data-value='2009' class="item">2009</div>
-                          <div data-value='2008' class="item">2008</div>
-                          <div data-value='2007' class="item">2007</div>
-                          <div data-value='2006' class="item">2006</div>
-                          <div data-value='2005' class="item">2005</div>
-                          <div data-value='2004' class="item">2004</div>
-                          <div data-value='2003' class="item">2003</div>
-                          <div data-value='2002' class="item">2002</div>
-                          <div data-value='2001' class="item">2001</div>
-                          <div data-value='2000' class="item">2000</div>
-                          <div data-value='1999' class="item">1999</div>
-                          <div data-value='1998' class="item">1998</div>
-                          <div data-value='1997' class="item">1997</div>
-                          <div data-value='1996' class="item">1996</div>
-                          <div data-value='1995' class="item">1995</div>
-                          <div data-value='1994' class="item">1994</div>
-                          <div data-value='1993' class="item">1993</div>
-                          <div data-value='1992' class="item">1992</div>
-                          <div data-value='1991' class="item">1991</div>
-                          <div data-value='1990' class="item">1990</div>
-                          <div data-value='1989' class="item">1989</div>
-                          <div data-value='1988' class="item">1988</div>
-                          <div data-value='1987' class="item">1987</div>
-                          <div data-value='1986' class="item">1986</div>
-                          <div data-value='1985' class="item">1985</div>
-                          <div data-value='1984' class="item">1984</div>
-                          <div data-value='1983' class="item">1983</div>
-                          <div data-value='1982' class="item">1982</div>
-                          <div data-value='1981' class="item">1981</div>
-                          <div data-value='1980' class="item">1980</div>
-                          <div data-value='1979' class="item">1979</div>
-                          <div data-value='1978' class="item">1978</div>
-                          <div data-value='1977' class="item">1977</div>
-                          <div data-value='1976' class="item">1976</div>
-                          <div data-value='1975' class="item">1975</div>
-                          <div data-value='1974' class="item">1974</div>
-                          <div data-value='1973' class="item">1973</div>
-                          <div data-value='1972' class="item">1972</div>
-                          <div data-value='1971' class="item">1971</div>
-                          <div data-value='1970' class="item">1970</div>
-                          <div data-value='1969' class="item">1969</div>
-                          <div data-value='1968' class="item">1968</div>
-                          <div data-value='1967' class="item">1967</div>
-                          <div data-value='1966' class="item">1966</div>
-                          <div data-value='1965' class="item">1965</div>
-                          <div data-value='1964' class="item">1964</div>
-                          <div data-value='1963' class="item">1963</div>
-                          <div data-value='1962' class="item">1962</div>
-                          <div data-value='1961' class="item">1961</div>
-                          <div data-value='1960' class="item">1960</div>
-                          <div data-value='1959' class="item">1959</div>
-                          <div data-value='1958' class="item">1958</div>
-                          <div data-value='1957' class="item">1957</div>
-                          <div data-value='1956' class="item">1956</div>
-                          <div data-value='1955' class="item">1955</div>
-                          <div data-value='1954' class="item">1954</div>
-                          <div data-value='1953' class="item">1953</div>
-                          <div data-value='1952' class="item">1952</div>
-                          <div data-value='1951' class="item">1951</div>
-                          <div data-value='1950' class="item">1950</div>
-                          <div data-value='1949' class="item">1949</div>
-                          <div data-value='1948' class="item">1948</div>
-                          <div data-value='1947' class="item">1947</div>
-                          <div data-value='1946' class="item">1946</div>
-                          <div data-value='1945' class="item">1945</div>
-                          <div data-value='1944' class="item">1944</div>
-                          <div data-value='1943' class="item">1943</div>
-                          <div data-value='1942' class="item">1942</div>
-                          <div data-value='1941' class="item">1941</div>
-                          <div data-value='1940' class="item">1940</div>
-                          <div data-value='1939' class="item">1939</div>
-                          <div data-value='1938' class="item">1938</div>
-                          <div data-value='1937' class="item">1937</div>
-                          <div data-value='1936' class="item">1936</div>
-                          <div data-value='1935' class="item">1935</div>
-                          <div data-value='1934' class="item">1934</div>
-                          <div data-value='1933' class="item">1933</div>
-                          <div data-value='1932' class="item">1932</div>
-                          <div data-value='1931' class="item">1931</div>
-                          <div data-value='1930' class="item">1930</div>
-                          <div data-value='1929' class="item">1929</div>
-                          <div data-value='1928' class="item">1928</div>
-                          <div data-value='1927' class="item">1927</div>
-                          <div data-value='1926' class="item">1926</div>
-                          <div data-value='1925' class="item">1925</div>
-                          <div data-value='1924' class="item">1924</div>
-                          <div data-value='1923' class="item">1923</div>
-                          <div data-value='1922' class="item">1922</div>
-                          <div data-value='1921' class="item">1921</div>
-                          <div data-value='1920' class="item">1920</div>
-                          <div data-value='1919' class="item">1919</div>
-                          <div data-value='1918' class="item">1918</div>
-                          <div data-value='1917' class="item">1917</div>
-                          <div data-value='1916' class="item">1916</div>
-                          <div data-value='1915' class="item">1915</div>
-                          <div data-value='1914' class="item">1914</div>
-                          <div data-value='1913' class="item">1913</div>
-                          <div data-value='1912' class="item">1912</div>
-                          <div data-value='1911' class="item">1911</div>
-                          <div data-value='1910' class="item">1910</div>
-                          <div data-value='1909' class="item">1909</div>
-                          <div data-value='1908' class="item">1908</div>
-                          <div data-value='1907' class="item">1907</div>
-                          <div data-value='1906' class="item">1906</div>
-                          <div data-value='1905' class="item">1905</div>
-                          <div data-value='1904' class="item">1904</div>
-                          <div data-value='1903' class="item">1903</div>
-                          <div data-value='1902' class="item">1902</div>
-                          <div data-value='1901' class="item">1901</div>
-                        </div>
-                      </div>
-                      <div class="file-upload"></div>
-                      <input type="file" class="file-upload-input">
-                      <div role="alert" data-hide="alert" class="alert alert-dismissible status-alert">
-                        <div class="alert-header">Can't Read Files</div>
-                        <div class="alert-body">Your photo couldn't be uploaded. Photos should be saved as JPG, PNG, GIF, BMP or TIFF files.</div>
-                        <div class="alert-footer">
-                          <button type="button" class="btn btn-close">Close</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="buttons">
-                    <button type="button" class="btn btn-cancel">Cancel</button>
-                    <button type="button" class="btn btn-post">Post</button>
-                  </div>
-                </div>
-                <ul>
-                  <li class="swipeout">
-                    <div data-toggle="modal" data-target="#timelineModal" class="timeline-post swipeout-content item-content col-xs-12">
-                      <div class="picture"><img src="images/profilepicture.png" alt="Profile"></div>
-                      <div class="post">
-                        <h5 class="name">Sharad Venkat</h5>
-                        <h5 class="date">1 second ago</h5>
-                        <h5 class="year-happend">2014</h5>
-                        <h5 class="company">Freelancing Freelancing Freelancing Co.</h5>
-                        <div class="image"><img src="images/background-road-different.png" alt="Building"></div>
-                        <p class="timeline-text">Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1.</p>
-                      </div>
-                    </div>
-                    <div class="swipeout-actions-left"></div>
-                    <div class="swipeout-actions-right"></div>
-                  </li>
-                  <li class="swipeout">
-                    <div data-toggle="modal" data-target="#timelineModal" class="timeline-post swipeout-content item-content col-xs-12">
-                      <div class="picture"><img src="images/profilepicture.png" alt="Profile"></div>
-                      <div class="post">
-                        <h5 class="name">Sharad Venkat</h5>
-                        <h5 class="date">1 second ago</h5>
-                        <h5 class="year-happend">2014</h5>
-                        <h5 class="company">Freelancing Freelancing Freelancing Co.</h5>
-                        <div class="image"><img src="images/background-road-different.png" alt="Building"></div>
-                        <p class="timeline-text">Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1. Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1.</p>
-                      </div>
-                    </div>
-                    <div class="swipeout-actions-left"></div>
-                    <div class="swipeout-actions-right"></div>
-                  </li>
-                </ul>
-              </div>
+              
+              
               <!-- Jobs & Education TAB-->
               <div id="jobs" role="tabpanel" class="tab-pane fade in active col-xs-12">
                 <!-- JOBS-->

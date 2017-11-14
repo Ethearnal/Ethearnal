@@ -3,197 +3,190 @@ section.documentation
 
     .container
 
-        .profile-information-before-fixed,
-        .profile-information-after-fixed,
-        .profile-information
-            box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
-            background-color: white
-            padding-right: 0
-            padding-left: 0
-            border-bottom-right-radius: 6px
-            border-bottom-left-radius: 6px
+        .profile-information-container
+            padding: 0
 
-            .profile-upper
-                text-align: center
+            .profile-information
+                background-color: white
+                box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
 
-                .profile-image
-                    border-radius: 100%
-                    border: 5px solid #ebebeb
-                    margin: 0 auto
-                    display: block
-                    position: absolute
-                    top: -134px
-                    left: 0
-                    right: 0
-                    bottom: 0
-                    width: 184px
-                    height: 184px
+                &.up
+                    margin-top: -23px
+                    padding-bottom: 35px
 
-                    img
-                        width: 174px
-                        height: 174px
-                        border-radius: 100%
+                    &:last-child
+                        border-bottom-right-radius: 6px
+                        border-bottom-left-radius: 6px
 
-                    .text-on-image
-                        position: absolute
-                        left: 0
-                        right: 0
-                        bottom: 0
-                        top: 0
-                        opacity: 0.5
-                        background-color: rgba(0, 0, 0, 1)
-                        border-radius: 100%
-                        width: 174px
-                        height: 174px
-                        border: 5px solid rgba(0, 0, 0, 1)
-                        cursor: pointer
-                        display: none
+                    .profile-upper
+                        text-align: center
+
+                        .profile-image
+                            border-radius: 100%
+                            border: 5px solid #ebebeb
+                            margin: 0 auto
+                            display: block
+                            position: absolute
+                            top: -134px
+                            left: 0
+                            right: 0
+                            bottom: 0
+                            width: 184px
+                            height: 184px
+
+                            img
+                                width: 174px
+                                height: 174px
+                                border-radius: 100%
+
+                            .text-on-image
+                                position: absolute
+                                left: 0
+                                right: 0
+                                bottom: 0
+                                top: 0
+                                opacity: 0.5
+                                background-color: rgba(0, 0, 0, 1)
+                                border-radius: 100%
+                                width: 174px
+                                height: 174px
+                                border: 5px solid rgba(0, 0, 0, 1)
+                                cursor: pointer
+                                display: none
+
+                                p
+                                    color: white
+                                    font-size: 16px
+                                    font-weight: 500
+                                    line-height: 164px
+                                    opacity: 1
+
+                        h2
+                            font-size: 32px
+                            font-weight: 500
+                            line-height: 0.67
+                            color: #5e6977
+                            padding-top: 70px
+                            margin-bottom: 17px
+
+                        h5.profile-information-position
+                            font-size: 18px
+                            line-height: 1.29
+                            color: #5e6977
+                            margin-top: 0
+                            margin-bottom: 10px
 
                         p
-                            color: white
+                            font-size: 14px
+                            line-height: 1.64
+                            color: #86939e
+                            margin-top: 0
+                            margin-bottom: 20px
+
+                        button
+                            // width: 126.3px
+                            padding: 0 15px
+                            height: 42px
+                            border-radius: 3px
                             font-size: 16px
                             font-weight: 500
-                            line-height: 164px
-                            opacity: 1
+                            margin-top: 0
+                            white-space: nowrap
+                            transition: all 0.15s ease-in
 
-                h2
-                    font-size: 32px
-                    font-weight: 500
-                    line-height: 0.67
-                    color: #5e6977
-                    margin-top: 70px
-                    margin-bottom: 17px
+                            &.hire
+                                background-color: #92A8D1
+                                color: white
+                                border: solid 1px #798eb5
+                                margin-right: 15px
 
-                h5.profile-information-position
-                    font-size: 18px
-                    line-height: 1.29
-                    color: #5e6977
-                    margin-top: 0
-                    margin-bottom: 10px
+                                &:hover, &:focus, &:active
+                                    background-color: #6883b5
+                                    border-color: #798eb5
 
-                p
-                    font-size: 14px
-                    line-height: 1.64
-                    color: #86939e
-                    margin-top: 0
-                    margin-bottom: 20px
+                            &.leave-msg
+                                background-color: white
+                                color: #43484d
+                                border: solid 1px #d0d6e0
 
-                button
-                    width: 126.3px
-                    height: 42px
-                    border-radius: 3px
-                    font-size: 16px
-                    font-weight: 500
-                    margin-top: 0
-                    white-space: nowrap
+                                &:hover, &:focus, &:active
+                                    background-color: #ebedf1
 
-                button.light-blue-background
-                    background-color: #127fff
-                    color: white
-                    border: solid 1px #127fff
-                    margin-right: 5px
+                &.middle
+                    margin-top: 35px
 
-                    &:hover,
-                    &:focus,
-                    &:active
-                        background-color: #0f75ed
+                    .profile-description
+                        background-color: #92A8D1
 
-                button.orange-background
-                    background-color: #ffb230
-                    color: white
-                    border: 1px solid #efa01e
-                    margin-right: 5px
+                        p
+                            font-size: 16px
+                            line-height: 1.44
+                            color: white
+                            text-align: center
+                            padding: 40px 38px 25px 35px
+                            margin-top: -17px
 
-                    &:hover,
-                    &:focus,
-                    &:active
-                        background-color: #d8921d
-                        border-color: #d8921d
+                &.down
+                    margin-top: 17px
+                    background-color: transparent
 
-                button.white-background
-                    background-color: white
-                    border: solid 1px #9eadc0
-                    color: #65727e
+                    .profile-bottom
+                        background-color: white
+                        padding-bottom: 30px
 
-                    &:hover,
-                    &:focus,
-                    &:active
-                        background-color: #9eadc0
-                        color: white
-
-            .profile-description
-                background-color: #edf3fa
-
-                p
-                    font-size: 16px
-                    line-height: 1.44
-                    color: #86939e
-                    text-align: center
-                    padding: 40px 38px 25px 35px
-                    margin-top: -17px
-
-            .profile-bottom
-
-                p.skills-text
-                    text-transform: uppercase
-                    font-size: 12px
-                    color: #5e6977
-                    letter-spacing: 1px
-                    font-weight: 500
-                    text-align: center
-                    margin-top: 26px
-
-                i
-                    float: right
-                    top: -35px
-                    position: relative
-                    right: 23px
-                    cursor: pointer
-                    color: #afb4bb
-
-                    &:hover
-                        color: #9ea2a9
-
-                .skills
-                    margin-top: 18px
-                    padding: 0 35px
-
-                    p
-                        line-height: 32px
-                        border-radius: 4px
-                        border: solid 1px #e1e8ee
-                        padding: 3px 10px
-                        color: #86939e
-                        margin-right: 5px
-                        display: inline
-
-                        &:hover,
-                        &:focus,
-                        &:active
-                            background-color: #e1e8ee
-                            cursor: pointer
-                            color: #99a9b6
-
-                        span.experience
-                            border: none
-                            border-radius: 0
+                        p.skills-text
+                            text-transform: uppercase
+                            font-size: 12px
                             color: #5e6977
-                            padding: 0 0 0 8px
-                            margin-right: 0
+                            letter-spacing: 1px
+                            font-weight: 500
+                            text-align: center
+                            padding-top: 20px
 
-                    p.tool
-                        background-color: #f2f6f9
+                            i
 
-                .tools
-                    margin-top: 5px
+                                position: relative
+                                top: 8px
+                                margin-left: 10px
+                                cursor: pointer
+                                color: #afb4bb
+
+                                &:hover
+                                    color: #9ea2a9
+
+                        .skills
+                            margin-top: 18px
+                            padding: 0 35px
+
+                            p
+                                line-height: 32px
+                                border-radius: 4px
+                                border: solid 1px #e1e8ee
+                                padding: 3px 10px
+                                color: #86939e
+                                margin-right: 5px
+                                display: inline
+
+                                &:hover,
+                                &:focus,
+                                &:active
+                                    background-color: #e1e8ee
+                                    cursor: pointer
+                                    color: #99a9b6
+
+                                span.experience
+                                    border: none
+                                    border-radius: 0
+                                    color: #5e6977
+                                    padding: 0 0 0 8px
+                                    margin-right: 0
 
             .profile-footer
-                margin-top: 30px
                 border-top: 1px solid #ebf0f5
 
                 ul
                     text-align: center
-                    margin-top: 25px
+                    margin-top: 20px
                     margin-bottom: 25px
 
                     li
@@ -208,16 +201,3 @@ section.documentation
 
                     li:first-child
                         margin-left: 25px
-
-        .profile-information-after-fixed
-            position: fixed
-            left: 0
-            top: 260px
-            z-index: 0
-            background-color: transparent
-            box-shadow: none
-
-            .container
-                background-color: white
-                box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
-                padding: 0

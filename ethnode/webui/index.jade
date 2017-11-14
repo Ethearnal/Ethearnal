@@ -6,7 +6,7 @@ html(lang='en-US')
         meta(name='description', content='')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
-        title Aspire
+        title Ethearnal
 
         // START of LINKS
 
@@ -58,11 +58,11 @@ html(lang='en-US')
 
     body
 
-        include mixins/modals/add-job
-        include mixins/modals/edit-job
+        include mixins/modals/new-modals/add-job
+        include mixins/modals/new-modals/edit-job
 
-        include mixins/modals/add-education
-        include mixins/modals/edit-education
+        include mixins/modals/new-modals/add-education
+        include mixins/modals/new-modals/edit-education
 
 
 
@@ -184,9 +184,49 @@ html(lang='en-US')
             .container
 
                 // Profile information including profile image, current work, current city and state, skills and etc.
-                .profile-information-before-fixed.col-lg-4.col-md-4.col-sm-12.col-xs-12
+                .profile-information-container.col-lg-4.col-md-4.col-sm-12.col-xs-12
 
-                    include mixins/profile-card
+                    .profile-information.up
+
+                        // Profile header, including profile image, current work, city, state and two buttons.
+                        .profile-upper
+
+                            .profile-image(data-toggle="modal", data-target="#avatarModal")
+                                img(src="", alt="")
+                                .text-on-image: p Change
+
+                            //- h2 Dobri Stoilov
+                            //- h5.profile-information-position Founder at <strong>Ethearnal</strong>
+                            //- p Sofia, Bulgaria
+                            // Now... JSON data goes here. :(
+
+                            button.hire Hire ($50/hr)
+                            button.leave-msg Send Message
+
+                    .profile-information.middle
+
+                        // Profile description including a description about you. (dark-gray section)
+                        .profile-description
+                            // JSON data goes here.
+
+                    .profile-information.down
+
+                        // Profile top skills and tools
+                        .profile-bottom
+                            p.skills-text Skills & Languages
+                                //- i.material-icons keyboard_arrow_down
+
+                            .skills
+                                // JSON data goes here.
+
+                    // Profile footer, including social media links.
+                    .profile-footer
+                        ul.list-inline
+                            li: a(href=""): i.icon-facebook
+                            li: a(href=""): i.icon-twitter
+                            li: a(href=""): i.icon-r-s-s
+                            li: a(href=""): i.icon-instagram
+                            li: a(href=""): i.icon-google
 
 
                 // Profile documentation including jobs and education, stories, shout-outs and questions with answers
@@ -195,7 +235,7 @@ html(lang='en-US')
                     .profile-documentation.col-xs-12
 
                         ul.nav.nav-tabs(role="tablist")
-                            li.timeline-li(role="presentation"): a(href="#timeline", aria-controls="jobs", role="tab", data-toggle="tab") Search Work
+                            //- li.timeline-li(role="presentation"): a(href="#timeline", aria-controls="jobs", role="tab", data-toggle="tab") Search Work
                             li.active.jobs-li(role="presentation"): a(href="#jobs", aria-controls="jobs", role="tab", data-toggle="tab") Jobs & Education
                             li.dropdownButton
                                 button#addThings.mdl-button.mdl-js-button.mdl-button--icon: i.material-icons add
@@ -208,26 +248,26 @@ html(lang='en-US')
                         // All the information about above listed tabs.
                         .tab-content.col-xs-12
 
-                            // Timeline TAB
-                            .tab-pane.fade#timeline.list-block.col-xs-12(role="tabpanel")
+                            //- // Timeline TAB
+                            //- .tab-pane.fade#timeline.list-block.col-xs-12(role="tabpanel")
 
-                                .timeline-post.input-timeline.col-xs-12
-                                    include mixins/timeline/post-input
+                            //-     .timeline-post.input-timeline.col-xs-12
+                            //-         include mixins/timeline/post-input
 
-                                ul
-                                    li.swipeout
-                                        .timeline-post.swipeout-content.item-content.col-xs-12(data-toggle="modal", data-target="#timelineModal")
-                                            include mixins/timeline/default-post
+                            //-     ul
+                            //-         li.swipeout
+                            //-             .timeline-post.swipeout-content.item-content.col-xs-12(data-toggle="modal", data-target="#timelineModal")
+                            //-                 include mixins/timeline/default-post
 
-                                        .swipeout-actions-left
-                                        .swipeout-actions-right
+                            //-             .swipeout-actions-left
+                            //-             .swipeout-actions-right
 
-                                    li.swipeout
-                                        .timeline-post.swipeout-content.item-content.col-xs-12(data-toggle="modal", data-target="#timelineModal")
-                                            include mixins/timeline/default-post
+                            //-         li.swipeout
+                            //-             .timeline-post.swipeout-content.item-content.col-xs-12(data-toggle="modal", data-target="#timelineModal")
+                            //-                 include mixins/timeline/default-post
 
-                                        .swipeout-actions-left
-                                        .swipeout-actions-right
+                            //-             .swipeout-actions-left
+                            //-             .swipeout-actions-right
 
 
 

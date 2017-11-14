@@ -70,12 +70,22 @@ $(function() {
 });
 
 
+// Global variables for modals
+$currentlyOpenModalID = null;
+$currentlyClosestLEdiv = null;
+
+
 $('body').delegate('li.open-modal', 'click', function(e) {
     e.preventDefault();
+    $lifeExperienceDiv = $(this).closest('.life-experience');
     $modalID = $(this).attr('open-modal');
+
+    // Other variables
     $content = $($modalID).find('.modal-box-content .content');
     $form = $content.find('form');
-    $lifeExperienceDiv = $(this).closest('.life-experience');
+
+    $currentlyOpenModalID = $modalID;
+    $currentlyClosestLEdiv = $lifeExperienceDiv;
 
     // Dates inputs
     $inputDateFrom = $form.find('input.date-started');
@@ -89,9 +99,15 @@ $('body').delegate('li.open-modal', 'click', function(e) {
 
     // Functions for particular modals.
     if($modalID == "#edit-job" || $modalID == "#edit-education") loadInputsText($form, $lifeExperienceDiv);
-    if($modalID == "#add-job") datePickerInit($inputDateFrom, $inputDateTo);
+    if($modalID == "#add-job" || $modalID == "#add-education") datePickerInit($inputDateFrom, $inputDateTo);
 });
 
+
+$('body').delegate('li.delete', 'click', function(e) {
+    e.preventDefault();
+    $lifeExperienceDiv = $(this).closest('.life-experience');
+    $lifeExperienceDiv.fadeOut(300);
+});
 
 
 
@@ -116,17 +132,56 @@ $('.modal-box button').click(function() {
 
         if(!validateForm($form)) return; // Return if form isn't filled.
 
-        // Collects data and turns it into a JSON.
-        $data = collectJobData($form);
-        console.log($data);
+        if($modalID == 'add-job' || $modalID == 'edit-job') {
+            $data = collectJobData($form);
+        } else if($modalID == 'add-education' || $modalID == 'edit-education') {
+            $data = collectEducationData($form);
+        }
 
         // Fading out the initial modal and fading in success message.
         $modalContent.fadeOut(300);
 
         setTimeout(function() {
-            if($modalID == 'add-job') clearForm($form);
             appearSuccessMessage($content);
+            clearForm($form);
+
+            var iExperience = 0;
+            var iEducation = 0;
+            if($modalID == 'add-job') {
+                createLE($data, 'job', true);
+
+            } else if($modalID == 'add-education') {
+                createLE($data, 'education', true);
+
+            } else if ( $modalID == 'edit-education' ) {
+
+                $modalID = $currentlyOpenModalID;
+                $lifeExperienceDiv = $currentlyClosestLEdiv;
+
+                $dateDifferenceText = getTimeFirst($data.time);
+
+                $lifeExperienceDiv.find('.study-field').text($data.course);
+                $lifeExperienceDiv.find('.education-name').text($data.institution);
+                $lifeExperienceDiv.find('.date-name').text($dateDifferenceText);
+                $lifeExperienceDiv.find('.description').text($data.description);
+
+
+            } else if ( $modalID == 'edit-job' ) {
+
+                $modalID = $currentlyOpenModalID;
+                $lifeExperienceDiv = $currentlyClosestLEdiv;
+
+                $dateDifferenceText = getTimeFirst($data.time);
+
+                $lifeExperienceDiv.find('.company-name').text($data.company);
+                $lifeExperienceDiv.find('.position-name').text($data.position);
+                $lifeExperienceDiv.find('.date-name').text($dateDifferenceText);
+                $lifeExperienceDiv.find('.description').text($data.description);
+            }
+
         }, 300);
+
+
 
     // BUTTON.CREATE-NEW
     } else if($(this).parent().is(".buttons")) {
@@ -156,73 +211,6 @@ $('.finish-button').hover(function() {
         $(this).next().text('Ya need to fill the form!').css({ display: 'initial' });
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-// $('li.open-modal[open-modal="#edit-job"]').click(function() {
-//     $modalID = $(this).attr('open-modal');
-//     $content = $($modalID).find('.modal-box-content .content');
-//     $form = $content.find('form');
-//     $job = $(this).closest('.life-experience');
-//     $date = $job.find('p.date-name').text();
-//     $dateSplit = $date.split('-');
-//     $dateSplitPresent = $dateSplit[1].split('(');
-//     $dateFrom = $dateSplit[0];
-//     $dateTo = $dateSplitPresent[0];
-
-//     // Removing SVG.
-//     $content.find('.success-message svg').remove();
-
-//     // Going thru each INPUT field, and adding value to them.
-//     var findings = $form.find('input, textarea');
-//     $.each(findings, function(i, field) {
-//         $id = $(field).attr('id');
-//         $inputDateFrom = $content.find('.date-started');
-//         $inputDateTo = $content.find('.date-ended');
-//         $text = $job.find('.' + $id).text();
-//         $form.find('input#' + $id + ':not(.date-ended), textarea#' + $id).val($text).parent().addClass('is-dirty');
-
-//         if( $(field).hasClass('date-started') || $(field).hasClass('date-ended') ) {
-
-//             if(!wordInString($date, 'Present')) {
-//                 $inputDateTo.bootstrapMaterialDatePicker({format: "MM/YYYY", weekStart: 0, time: false, currentDate: $dateTo }).parent().addClass('is-dirty');
-//             } else {
-//                 $inputDateTo.bootstrapMaterialDatePicker({weekStart: 0, time: false, format: "MM/YYYY"}).on('change', function(e, date) {
-//                     $inputDateTo.parent().addClass('is-dirty');
-//                 });
-//             }
-
-//             $inputDateFrom.bootstrapMaterialDatePicker({weekStart: 0, currentDate: $dateFrom, time: false, format: "MM/YYYY"}).on('change', function(e, date) {
-//                 $inputDateTo.bootstrapMaterialDatePicker('setMinDate', date);
-//             });
-//         }
-//     })
-// });
-
-// $('li.open-modal[open-modal="#add-job"]').click(function() {
-//     $modalID = $(this).attr('open-modal');
-//     $content = $($modalID).find('.modal-box-content .content');
-//     $modalBody = $content.find('.modal-body');
-//     $form = $modalBody.find('.modal-inputs form');
-
-//     $content.find('.success-message svg').remove();
-
-//     $inputDateFrom = $form.find('input.date-started');
-//     $inputDateTo = $form.find('input.date-ended');
-
-//     datePickerInit($inputDateFrom, $inputDateTo);
-// });
-
-
-
 
 
 

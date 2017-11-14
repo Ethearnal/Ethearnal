@@ -321,26 +321,30 @@ section.documentation {
   background-color: #f2f2f2;
 }
 
-section.documentation .container .profile-information-before-fixed,
-section.documentation .container .profile-information-after-fixed,
-section.documentation .container .profile-information {
-  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+section.documentation .container .profile-information-container {
+  padding: 0;
+}
+
+section.documentation .container .profile-information-container .profile-information {
   background-color: white;
-  padding-right: 0;
-  padding-left: 0;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+section.documentation .container .profile-information-container .profile-information.up {
+  margin-top: -23px;
+  padding-bottom: 35px;
+}
+
+section.documentation .container .profile-information-container .profile-information.up:last-child {
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper,
-section.documentation .container .profile-information-after-fixed .profile-upper,
-section.documentation .container .profile-information .profile-upper {
+section.documentation .container .profile-information-container .profile-information.up .profile-upper {
   text-align: center;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper .profile-image,
-section.documentation .container .profile-information-after-fixed .profile-upper .profile-image,
-section.documentation .container .profile-information .profile-upper .profile-image {
+section.documentation .container .profile-information-container .profile-information.up .profile-upper .profile-image {
   border-radius: 100%;
   border: 5px solid #ebebeb;
   margin: 0 auto;
@@ -354,17 +358,13 @@ section.documentation .container .profile-information .profile-upper .profile-im
   height: 184px;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper .profile-image img,
-section.documentation .container .profile-information-after-fixed .profile-upper .profile-image img,
-section.documentation .container .profile-information .profile-upper .profile-image img {
+section.documentation .container .profile-information-container .profile-information.up .profile-upper .profile-image img {
   width: 174px;
   height: 174px;
   border-radius: 100%;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper .profile-image .text-on-image,
-section.documentation .container .profile-information-after-fixed .profile-upper .profile-image .text-on-image,
-section.documentation .container .profile-information .profile-upper .profile-image .text-on-image {
+section.documentation .container .profile-information-container .profile-information.up .profile-upper .profile-image .text-on-image {
   position: absolute;
   left: 0;
   right: 0;
@@ -380,9 +380,7 @@ section.documentation .container .profile-information .profile-upper .profile-im
   display: none;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper .profile-image .text-on-image p,
-section.documentation .container .profile-information-after-fixed .profile-upper .profile-image .text-on-image p,
-section.documentation .container .profile-information .profile-upper .profile-image .text-on-image p {
+section.documentation .container .profile-information-container .profile-information.up .profile-upper .profile-image .text-on-image p {
   color: white;
   font-size: 16px;
   font-weight: 500;
@@ -390,20 +388,16 @@ section.documentation .container .profile-information .profile-upper .profile-im
   opacity: 1;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper h2,
-section.documentation .container .profile-information-after-fixed .profile-upper h2,
-section.documentation .container .profile-information .profile-upper h2 {
+section.documentation .container .profile-information-container .profile-information.up .profile-upper h2 {
   font-size: 32px;
   font-weight: 500;
   line-height: 0.67;
   color: #5e6977;
-  margin-top: 70px;
+  padding-top: 70px;
   margin-bottom: 17px;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper h5.profile-information-position,
-section.documentation .container .profile-information-after-fixed .profile-upper h5.profile-information-position,
-section.documentation .container .profile-information .profile-upper h5.profile-information-position {
+section.documentation .container .profile-information-container .profile-information.up .profile-upper h5.profile-information-position {
   font-size: 18px;
   line-height: 1.29;
   color: #5e6977;
@@ -411,9 +405,7 @@ section.documentation .container .profile-information .profile-upper h5.profile-
   margin-bottom: 10px;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper p,
-section.documentation .container .profile-information-after-fixed .profile-upper p,
-section.documentation .container .profile-information .profile-upper p {
+section.documentation .container .profile-information-container .profile-information.up .profile-upper p {
   font-size: 14px;
   line-height: 1.64;
   color: #86939e;
@@ -421,132 +413,94 @@ section.documentation .container .profile-information .profile-upper p {
   margin-bottom: 20px;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper button,
-section.documentation .container .profile-information-after-fixed .profile-upper button,
-section.documentation .container .profile-information .profile-upper button {
-  width: 126.3px;
+section.documentation .container .profile-information-container .profile-information.up .profile-upper button {
+  padding: 0 15px;
   height: 42px;
   border-radius: 3px;
   font-size: 16px;
   font-weight: 500;
   margin-top: 0;
   white-space: nowrap;
+  transition: all 0.15s ease-in;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper button.light-blue-background,
-section.documentation .container .profile-information-after-fixed .profile-upper button.light-blue-background,
-section.documentation .container .profile-information .profile-upper button.light-blue-background {
-  background-color: #127fff;
+section.documentation .container .profile-information-container .profile-information.up .profile-upper button.hire {
+  background-color: #92A8D1;
   color: white;
-  border: solid 1px #127fff;
-  margin-right: 5px;
+  border: solid 1px #798eb5;
+  margin-right: 15px;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper button.light-blue-background:hover, section.documentation .container .profile-information-before-fixed .profile-upper button.light-blue-background:focus, section.documentation .container .profile-information-before-fixed .profile-upper button.light-blue-background:active,
-section.documentation .container .profile-information-after-fixed .profile-upper button.light-blue-background:hover,
-section.documentation .container .profile-information-after-fixed .profile-upper button.light-blue-background:focus,
-section.documentation .container .profile-information-after-fixed .profile-upper button.light-blue-background:active,
-section.documentation .container .profile-information .profile-upper button.light-blue-background:hover,
-section.documentation .container .profile-information .profile-upper button.light-blue-background:focus,
-section.documentation .container .profile-information .profile-upper button.light-blue-background:active {
-  background-color: #0f75ed;
+section.documentation .container .profile-information-container .profile-information.up .profile-upper button.hire:hover, section.documentation .container .profile-information-container .profile-information.up .profile-upper button.hire:focus, section.documentation .container .profile-information-container .profile-information.up .profile-upper button.hire:active {
+  background-color: #6883b5;
+  border-color: #798eb5;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper button.orange-background,
-section.documentation .container .profile-information-after-fixed .profile-upper button.orange-background,
-section.documentation .container .profile-information .profile-upper button.orange-background {
-  background-color: #ffb230;
-  color: white;
-  border: 1px solid #efa01e;
-  margin-right: 5px;
-}
-
-section.documentation .container .profile-information-before-fixed .profile-upper button.orange-background:hover, section.documentation .container .profile-information-before-fixed .profile-upper button.orange-background:focus, section.documentation .container .profile-information-before-fixed .profile-upper button.orange-background:active,
-section.documentation .container .profile-information-after-fixed .profile-upper button.orange-background:hover,
-section.documentation .container .profile-information-after-fixed .profile-upper button.orange-background:focus,
-section.documentation .container .profile-information-after-fixed .profile-upper button.orange-background:active,
-section.documentation .container .profile-information .profile-upper button.orange-background:hover,
-section.documentation .container .profile-information .profile-upper button.orange-background:focus,
-section.documentation .container .profile-information .profile-upper button.orange-background:active {
-  background-color: #d8921d;
-  border-color: #d8921d;
-}
-
-section.documentation .container .profile-information-before-fixed .profile-upper button.white-background,
-section.documentation .container .profile-information-after-fixed .profile-upper button.white-background,
-section.documentation .container .profile-information .profile-upper button.white-background {
+section.documentation .container .profile-information-container .profile-information.up .profile-upper button.leave-msg {
   background-color: white;
-  border: solid 1px #9eadc0;
-  color: #65727e;
+  color: #43484d;
+  border: solid 1px #d0d6e0;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-upper button.white-background:hover, section.documentation .container .profile-information-before-fixed .profile-upper button.white-background:focus, section.documentation .container .profile-information-before-fixed .profile-upper button.white-background:active,
-section.documentation .container .profile-information-after-fixed .profile-upper button.white-background:hover,
-section.documentation .container .profile-information-after-fixed .profile-upper button.white-background:focus,
-section.documentation .container .profile-information-after-fixed .profile-upper button.white-background:active,
-section.documentation .container .profile-information .profile-upper button.white-background:hover,
-section.documentation .container .profile-information .profile-upper button.white-background:focus,
-section.documentation .container .profile-information .profile-upper button.white-background:active {
-  background-color: #9eadc0;
-  color: white;
+section.documentation .container .profile-information-container .profile-information.up .profile-upper button.leave-msg:hover, section.documentation .container .profile-information-container .profile-information.up .profile-upper button.leave-msg:focus, section.documentation .container .profile-information-container .profile-information.up .profile-upper button.leave-msg:active {
+  background-color: #ebedf1;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-description,
-section.documentation .container .profile-information-after-fixed .profile-description,
-section.documentation .container .profile-information .profile-description {
-  background-color: #edf3fa;
+section.documentation .container .profile-information-container .profile-information.middle {
+  margin-top: 35px;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-description p,
-section.documentation .container .profile-information-after-fixed .profile-description p,
-section.documentation .container .profile-information .profile-description p {
+section.documentation .container .profile-information-container .profile-information.middle .profile-description {
+  background-color: #92A8D1;
+}
+
+section.documentation .container .profile-information-container .profile-information.middle .profile-description p {
   font-size: 16px;
   line-height: 1.44;
-  color: #86939e;
+  color: white;
   text-align: center;
   padding: 40px 38px 25px 35px;
   margin-top: -17px;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-bottom p.skills-text,
-section.documentation .container .profile-information-after-fixed .profile-bottom p.skills-text,
-section.documentation .container .profile-information .profile-bottom p.skills-text {
+section.documentation .container .profile-information-container .profile-information.down {
+  margin-top: 17px;
+  background-color: transparent;
+}
+
+section.documentation .container .profile-information-container .profile-information.down .profile-bottom {
+  background-color: white;
+  padding-bottom: 30px;
+}
+
+section.documentation .container .profile-information-container .profile-information.down .profile-bottom p.skills-text {
   text-transform: uppercase;
   font-size: 12px;
   color: #5e6977;
   letter-spacing: 1px;
   font-weight: 500;
   text-align: center;
-  margin-top: 26px;
+  padding-top: 20px;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-bottom i,
-section.documentation .container .profile-information-after-fixed .profile-bottom i,
-section.documentation .container .profile-information .profile-bottom i {
-  float: right;
-  top: -35px;
+section.documentation .container .profile-information-container .profile-information.down .profile-bottom p.skills-text i {
   position: relative;
-  right: 23px;
+  top: 8px;
+  margin-left: 10px;
   cursor: pointer;
   color: #afb4bb;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-bottom i:hover,
-section.documentation .container .profile-information-after-fixed .profile-bottom i:hover,
-section.documentation .container .profile-information .profile-bottom i:hover {
+section.documentation .container .profile-information-container .profile-information.down .profile-bottom p.skills-text i:hover {
   color: #9ea2a9;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-bottom .skills,
-section.documentation .container .profile-information-after-fixed .profile-bottom .skills,
-section.documentation .container .profile-information .profile-bottom .skills {
+section.documentation .container .profile-information-container .profile-information.down .profile-bottom .skills {
   margin-top: 18px;
   padding: 0 35px;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-bottom .skills p,
-section.documentation .container .profile-information-after-fixed .profile-bottom .skills p,
-section.documentation .container .profile-information .profile-bottom .skills p {
+section.documentation .container .profile-information-container .profile-information.down .profile-bottom .skills p {
   line-height: 32px;
   border-radius: 4px;
   border: solid 1px #e1e8ee;
@@ -556,21 +510,13 @@ section.documentation .container .profile-information .profile-bottom .skills p 
   display: inline;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-bottom .skills p:hover, section.documentation .container .profile-information-before-fixed .profile-bottom .skills p:focus, section.documentation .container .profile-information-before-fixed .profile-bottom .skills p:active,
-section.documentation .container .profile-information-after-fixed .profile-bottom .skills p:hover,
-section.documentation .container .profile-information-after-fixed .profile-bottom .skills p:focus,
-section.documentation .container .profile-information-after-fixed .profile-bottom .skills p:active,
-section.documentation .container .profile-information .profile-bottom .skills p:hover,
-section.documentation .container .profile-information .profile-bottom .skills p:focus,
-section.documentation .container .profile-information .profile-bottom .skills p:active {
+section.documentation .container .profile-information-container .profile-information.down .profile-bottom .skills p:hover, section.documentation .container .profile-information-container .profile-information.down .profile-bottom .skills p:focus, section.documentation .container .profile-information-container .profile-information.down .profile-bottom .skills p:active {
   background-color: #e1e8ee;
   cursor: pointer;
   color: #99a9b6;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-bottom .skills p span.experience,
-section.documentation .container .profile-information-after-fixed .profile-bottom .skills p span.experience,
-section.documentation .container .profile-information .profile-bottom .skills p span.experience {
+section.documentation .container .profile-information-container .profile-information.down .profile-bottom .skills p span.experience {
   border: none;
   border-radius: 0;
   color: #5e6977;
@@ -578,71 +524,31 @@ section.documentation .container .profile-information .profile-bottom .skills p 
   margin-right: 0;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-bottom .skills p.tool,
-section.documentation .container .profile-information-after-fixed .profile-bottom .skills p.tool,
-section.documentation .container .profile-information .profile-bottom .skills p.tool {
-  background-color: #f2f6f9;
-}
-
-section.documentation .container .profile-information-before-fixed .profile-bottom .tools,
-section.documentation .container .profile-information-after-fixed .profile-bottom .tools,
-section.documentation .container .profile-information .profile-bottom .tools {
-  margin-top: 5px;
-}
-
-section.documentation .container .profile-information-before-fixed .profile-footer,
-section.documentation .container .profile-information-after-fixed .profile-footer,
-section.documentation .container .profile-information .profile-footer {
-  margin-top: 30px;
+section.documentation .container .profile-information-container .profile-footer {
   border-top: 1px solid #ebf0f5;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-footer ul,
-section.documentation .container .profile-information-after-fixed .profile-footer ul,
-section.documentation .container .profile-information .profile-footer ul {
+section.documentation .container .profile-information-container .profile-footer ul {
   text-align: center;
-  margin-top: 25px;
+  margin-top: 20px;
   margin-bottom: 25px;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-footer ul li,
-section.documentation .container .profile-information-after-fixed .profile-footer ul li,
-section.documentation .container .profile-information .profile-footer ul li {
+section.documentation .container .profile-information-container .profile-footer ul li {
   margin-right: 25px;
   padding: 0;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-footer ul li a i,
-section.documentation .container .profile-information-after-fixed .profile-footer ul li a i,
-section.documentation .container .profile-information .profile-footer ul li a i {
+section.documentation .container .profile-information-container .profile-footer ul li a i {
   color: #afb4bb;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-footer ul li a i:hover,
-section.documentation .container .profile-information-after-fixed .profile-footer ul li a i:hover,
-section.documentation .container .profile-information .profile-footer ul li a i:hover {
+section.documentation .container .profile-information-container .profile-footer ul li a i:hover {
   color: #9ea2a9;
 }
 
-section.documentation .container .profile-information-before-fixed .profile-footer ul li:first-child,
-section.documentation .container .profile-information-after-fixed .profile-footer ul li:first-child,
-section.documentation .container .profile-information .profile-footer ul li:first-child {
+section.documentation .container .profile-information-container .profile-footer ul li:first-child {
   margin-left: 25px;
-}
-
-section.documentation .container .profile-information-after-fixed {
-  position: fixed;
-  left: 0;
-  top: 260px;
-  z-index: 0;
-  background-color: transparent;
-  box-shadow: none;
-}
-
-section.documentation .container .profile-information-after-fixed .container {
-  background-color: white;
-  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
-  padding: 0;
 }
 
 section.documentation .container .profile-information-after-fixed .container-fluid {
@@ -858,17 +764,17 @@ section.documentation .container .profile-information-after-fixed .container-flu
   font-size: 12px;
 }
 
-.job .job-description, .job .story-description, .job .shoutout-description, .job .education-description, .story .job-description, .story .story-description, .story .shoutout-description, .story .education-description, .shoutout .job-description, .shoutout .story-description, .shoutout .shoutout-description, .shoutout .education-description, .education .job-description, .education .story-description, .education .shoutout-description, .education .education-description {
+.job .job-description, .job .story-description, .job .shoutout-description, .job .education-description, .job .main-description, .story .job-description, .story .story-description, .story .shoutout-description, .story .education-description, .story .main-description, .shoutout .job-description, .shoutout .story-description, .shoutout .shoutout-description, .shoutout .education-description, .shoutout .main-description, .education .job-description, .education .story-description, .education .shoutout-description, .education .education-description, .education .main-description {
   padding-right: 0;
   padding-left: 0;
   margin-bottom: 25px;
 }
 
-.job .job-description .dropdown.more, .job .story-description .dropdown.more, .job .shoutout-description .dropdown.more, .job .education-description .dropdown.more, .story .job-description .dropdown.more, .story .story-description .dropdown.more, .story .shoutout-description .dropdown.more, .story .education-description .dropdown.more, .shoutout .job-description .dropdown.more, .shoutout .story-description .dropdown.more, .shoutout .shoutout-description .dropdown.more, .shoutout .education-description .dropdown.more, .education .job-description .dropdown.more, .education .story-description .dropdown.more, .education .shoutout-description .dropdown.more, .education .education-description .dropdown.more {
+.job .job-description .dropdown.more, .job .story-description .dropdown.more, .job .shoutout-description .dropdown.more, .job .education-description .dropdown.more, .job .main-description .dropdown.more, .story .job-description .dropdown.more, .story .story-description .dropdown.more, .story .shoutout-description .dropdown.more, .story .education-description .dropdown.more, .story .main-description .dropdown.more, .shoutout .job-description .dropdown.more, .shoutout .story-description .dropdown.more, .shoutout .shoutout-description .dropdown.more, .shoutout .education-description .dropdown.more, .shoutout .main-description .dropdown.more, .education .job-description .dropdown.more, .education .story-description .dropdown.more, .education .shoutout-description .dropdown.more, .education .education-description .dropdown.more, .education .main-description .dropdown.more {
   cursor: pointer;
 }
 
-.job .job-description .dropdown.more i, .job .story-description .dropdown.more i, .job .shoutout-description .dropdown.more i, .job .education-description .dropdown.more i, .story .job-description .dropdown.more i, .story .story-description .dropdown.more i, .story .shoutout-description .dropdown.more i, .story .education-description .dropdown.more i, .shoutout .job-description .dropdown.more i, .shoutout .story-description .dropdown.more i, .shoutout .shoutout-description .dropdown.more i, .shoutout .education-description .dropdown.more i, .education .job-description .dropdown.more i, .education .story-description .dropdown.more i, .education .shoutout-description .dropdown.more i, .education .education-description .dropdown.more i {
+.job .job-description .dropdown.more i, .job .story-description .dropdown.more i, .job .shoutout-description .dropdown.more i, .job .education-description .dropdown.more i, .job .main-description .dropdown.more i, .story .job-description .dropdown.more i, .story .story-description .dropdown.more i, .story .shoutout-description .dropdown.more i, .story .education-description .dropdown.more i, .story .main-description .dropdown.more i, .shoutout .job-description .dropdown.more i, .shoutout .story-description .dropdown.more i, .shoutout .shoutout-description .dropdown.more i, .shoutout .education-description .dropdown.more i, .shoutout .main-description .dropdown.more i, .education .job-description .dropdown.more i, .education .story-description .dropdown.more i, .education .shoutout-description .dropdown.more i, .education .education-description .dropdown.more i, .education .main-description .dropdown.more i {
   float: right;
   margin-right: 25px;
   font-size: 28px;
@@ -876,11 +782,11 @@ section.documentation .container .profile-information-after-fixed .container-flu
   display: none;
 }
 
-.job .job-description .dropdown.more i:hover, .job .story-description .dropdown.more i:hover, .job .shoutout-description .dropdown.more i:hover, .job .education-description .dropdown.more i:hover, .story .job-description .dropdown.more i:hover, .story .story-description .dropdown.more i:hover, .story .shoutout-description .dropdown.more i:hover, .story .education-description .dropdown.more i:hover, .shoutout .job-description .dropdown.more i:hover, .shoutout .story-description .dropdown.more i:hover, .shoutout .shoutout-description .dropdown.more i:hover, .shoutout .education-description .dropdown.more i:hover, .education .job-description .dropdown.more i:hover, .education .story-description .dropdown.more i:hover, .education .shoutout-description .dropdown.more i:hover, .education .education-description .dropdown.more i:hover {
+.job .job-description .dropdown.more i:hover, .job .story-description .dropdown.more i:hover, .job .shoutout-description .dropdown.more i:hover, .job .education-description .dropdown.more i:hover, .job .main-description .dropdown.more i:hover, .story .job-description .dropdown.more i:hover, .story .story-description .dropdown.more i:hover, .story .shoutout-description .dropdown.more i:hover, .story .education-description .dropdown.more i:hover, .story .main-description .dropdown.more i:hover, .shoutout .job-description .dropdown.more i:hover, .shoutout .story-description .dropdown.more i:hover, .shoutout .shoutout-description .dropdown.more i:hover, .shoutout .education-description .dropdown.more i:hover, .shoutout .main-description .dropdown.more i:hover, .education .job-description .dropdown.more i:hover, .education .story-description .dropdown.more i:hover, .education .shoutout-description .dropdown.more i:hover, .education .education-description .dropdown.more i:hover, .education .main-description .dropdown.more i:hover {
   color: #b2bcc6;
 }
 
-.job .job-description .dropdown.more ul, .job .story-description .dropdown.more ul, .job .shoutout-description .dropdown.more ul, .job .education-description .dropdown.more ul, .story .job-description .dropdown.more ul, .story .story-description .dropdown.more ul, .story .shoutout-description .dropdown.more ul, .story .education-description .dropdown.more ul, .shoutout .job-description .dropdown.more ul, .shoutout .story-description .dropdown.more ul, .shoutout .shoutout-description .dropdown.more ul, .shoutout .education-description .dropdown.more ul, .education .job-description .dropdown.more ul, .education .story-description .dropdown.more ul, .education .shoutout-description .dropdown.more ul, .education .education-description .dropdown.more ul {
+.job .job-description .dropdown.more ul, .job .story-description .dropdown.more ul, .job .shoutout-description .dropdown.more ul, .job .education-description .dropdown.more ul, .job .main-description .dropdown.more ul, .story .job-description .dropdown.more ul, .story .story-description .dropdown.more ul, .story .shoutout-description .dropdown.more ul, .story .education-description .dropdown.more ul, .story .main-description .dropdown.more ul, .shoutout .job-description .dropdown.more ul, .shoutout .story-description .dropdown.more ul, .shoutout .shoutout-description .dropdown.more ul, .shoutout .education-description .dropdown.more ul, .shoutout .main-description .dropdown.more ul, .education .job-description .dropdown.more ul, .education .story-description .dropdown.more ul, .education .shoutout-description .dropdown.more ul, .education .education-description .dropdown.more ul, .education .main-description .dropdown.more ul {
   right: 15px;
   top: -15px;
   left: auto;
@@ -891,7 +797,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   z-index: 3000;
 }
 
-.job .job-description .dropdown.more ul li a, .job .story-description .dropdown.more ul li a, .job .shoutout-description .dropdown.more ul li a, .job .education-description .dropdown.more ul li a, .story .job-description .dropdown.more ul li a, .story .story-description .dropdown.more ul li a, .story .shoutout-description .dropdown.more ul li a, .story .education-description .dropdown.more ul li a, .shoutout .job-description .dropdown.more ul li a, .shoutout .story-description .dropdown.more ul li a, .shoutout .shoutout-description .dropdown.more ul li a, .shoutout .education-description .dropdown.more ul li a, .education .job-description .dropdown.more ul li a, .education .story-description .dropdown.more ul li a, .education .shoutout-description .dropdown.more ul li a, .education .education-description .dropdown.more ul li a {
+.job .job-description .dropdown.more ul li a, .job .story-description .dropdown.more ul li a, .job .shoutout-description .dropdown.more ul li a, .job .education-description .dropdown.more ul li a, .job .main-description .dropdown.more ul li a, .story .job-description .dropdown.more ul li a, .story .story-description .dropdown.more ul li a, .story .shoutout-description .dropdown.more ul li a, .story .education-description .dropdown.more ul li a, .story .main-description .dropdown.more ul li a, .shoutout .job-description .dropdown.more ul li a, .shoutout .story-description .dropdown.more ul li a, .shoutout .shoutout-description .dropdown.more ul li a, .shoutout .education-description .dropdown.more ul li a, .shoutout .main-description .dropdown.more ul li a, .education .job-description .dropdown.more ul li a, .education .story-description .dropdown.more ul li a, .education .shoutout-description .dropdown.more ul li a, .education .education-description .dropdown.more ul li a, .education .main-description .dropdown.more ul li a {
   font-size: 16px;
   font-weight: 500;
   color: #86939e;
@@ -899,12 +805,12 @@ section.documentation .container .profile-information-after-fixed .container-flu
   padding: 0 25px;
 }
 
-.job .job-description .dropdown.more ul li a:hover, .job .job-description .dropdown.more ul li a:focus, .job .job-description .dropdown.more ul li a:active, .job .story-description .dropdown.more ul li a:hover, .job .story-description .dropdown.more ul li a:focus, .job .story-description .dropdown.more ul li a:active, .job .shoutout-description .dropdown.more ul li a:hover, .job .shoutout-description .dropdown.more ul li a:focus, .job .shoutout-description .dropdown.more ul li a:active, .job .education-description .dropdown.more ul li a:hover, .job .education-description .dropdown.more ul li a:focus, .job .education-description .dropdown.more ul li a:active, .story .job-description .dropdown.more ul li a:hover, .story .job-description .dropdown.more ul li a:focus, .story .job-description .dropdown.more ul li a:active, .story .story-description .dropdown.more ul li a:hover, .story .story-description .dropdown.more ul li a:focus, .story .story-description .dropdown.more ul li a:active, .story .shoutout-description .dropdown.more ul li a:hover, .story .shoutout-description .dropdown.more ul li a:focus, .story .shoutout-description .dropdown.more ul li a:active, .story .education-description .dropdown.more ul li a:hover, .story .education-description .dropdown.more ul li a:focus, .story .education-description .dropdown.more ul li a:active, .shoutout .job-description .dropdown.more ul li a:hover, .shoutout .job-description .dropdown.more ul li a:focus, .shoutout .job-description .dropdown.more ul li a:active, .shoutout .story-description .dropdown.more ul li a:hover, .shoutout .story-description .dropdown.more ul li a:focus, .shoutout .story-description .dropdown.more ul li a:active, .shoutout .shoutout-description .dropdown.more ul li a:hover, .shoutout .shoutout-description .dropdown.more ul li a:focus, .shoutout .shoutout-description .dropdown.more ul li a:active, .shoutout .education-description .dropdown.more ul li a:hover, .shoutout .education-description .dropdown.more ul li a:focus, .shoutout .education-description .dropdown.more ul li a:active, .education .job-description .dropdown.more ul li a:hover, .education .job-description .dropdown.more ul li a:focus, .education .job-description .dropdown.more ul li a:active, .education .story-description .dropdown.more ul li a:hover, .education .story-description .dropdown.more ul li a:focus, .education .story-description .dropdown.more ul li a:active, .education .shoutout-description .dropdown.more ul li a:hover, .education .shoutout-description .dropdown.more ul li a:focus, .education .shoutout-description .dropdown.more ul li a:active, .education .education-description .dropdown.more ul li a:hover, .education .education-description .dropdown.more ul li a:focus, .education .education-description .dropdown.more ul li a:active {
+.job .job-description .dropdown.more ul li a:hover, .job .job-description .dropdown.more ul li a:focus, .job .job-description .dropdown.more ul li a:active, .job .story-description .dropdown.more ul li a:hover, .job .story-description .dropdown.more ul li a:focus, .job .story-description .dropdown.more ul li a:active, .job .shoutout-description .dropdown.more ul li a:hover, .job .shoutout-description .dropdown.more ul li a:focus, .job .shoutout-description .dropdown.more ul li a:active, .job .education-description .dropdown.more ul li a:hover, .job .education-description .dropdown.more ul li a:focus, .job .education-description .dropdown.more ul li a:active, .job .main-description .dropdown.more ul li a:hover, .job .main-description .dropdown.more ul li a:focus, .job .main-description .dropdown.more ul li a:active, .story .job-description .dropdown.more ul li a:hover, .story .job-description .dropdown.more ul li a:focus, .story .job-description .dropdown.more ul li a:active, .story .story-description .dropdown.more ul li a:hover, .story .story-description .dropdown.more ul li a:focus, .story .story-description .dropdown.more ul li a:active, .story .shoutout-description .dropdown.more ul li a:hover, .story .shoutout-description .dropdown.more ul li a:focus, .story .shoutout-description .dropdown.more ul li a:active, .story .education-description .dropdown.more ul li a:hover, .story .education-description .dropdown.more ul li a:focus, .story .education-description .dropdown.more ul li a:active, .story .main-description .dropdown.more ul li a:hover, .story .main-description .dropdown.more ul li a:focus, .story .main-description .dropdown.more ul li a:active, .shoutout .job-description .dropdown.more ul li a:hover, .shoutout .job-description .dropdown.more ul li a:focus, .shoutout .job-description .dropdown.more ul li a:active, .shoutout .story-description .dropdown.more ul li a:hover, .shoutout .story-description .dropdown.more ul li a:focus, .shoutout .story-description .dropdown.more ul li a:active, .shoutout .shoutout-description .dropdown.more ul li a:hover, .shoutout .shoutout-description .dropdown.more ul li a:focus, .shoutout .shoutout-description .dropdown.more ul li a:active, .shoutout .education-description .dropdown.more ul li a:hover, .shoutout .education-description .dropdown.more ul li a:focus, .shoutout .education-description .dropdown.more ul li a:active, .shoutout .main-description .dropdown.more ul li a:hover, .shoutout .main-description .dropdown.more ul li a:focus, .shoutout .main-description .dropdown.more ul li a:active, .education .job-description .dropdown.more ul li a:hover, .education .job-description .dropdown.more ul li a:focus, .education .job-description .dropdown.more ul li a:active, .education .story-description .dropdown.more ul li a:hover, .education .story-description .dropdown.more ul li a:focus, .education .story-description .dropdown.more ul li a:active, .education .shoutout-description .dropdown.more ul li a:hover, .education .shoutout-description .dropdown.more ul li a:focus, .education .shoutout-description .dropdown.more ul li a:active, .education .education-description .dropdown.more ul li a:hover, .education .education-description .dropdown.more ul li a:focus, .education .education-description .dropdown.more ul li a:active, .education .main-description .dropdown.more ul li a:hover, .education .main-description .dropdown.more ul li a:focus, .education .main-description .dropdown.more ul li a:active {
   color: #127fff;
   background-color: #edf3fa;
 }
 
-.job .job-description h4, .job .story-description h4, .job .shoutout-description h4, .job .education-description h4, .story .job-description h4, .story .story-description h4, .story .shoutout-description h4, .story .education-description h4, .shoutout .job-description h4, .shoutout .story-description h4, .shoutout .shoutout-description h4, .shoutout .education-description h4, .education .job-description h4, .education .story-description h4, .education .shoutout-description h4, .education .education-description h4 {
+.job .job-description h4, .job .story-description h4, .job .shoutout-description h4, .job .education-description h4, .job .main-description h4, .story .job-description h4, .story .story-description h4, .story .shoutout-description h4, .story .education-description h4, .story .main-description h4, .shoutout .job-description h4, .shoutout .story-description h4, .shoutout .shoutout-description h4, .shoutout .education-description h4, .shoutout .main-description h4, .education .job-description h4, .education .story-description h4, .education .shoutout-description h4, .education .education-description h4, .education .main-description h4 {
   font-size: 16px;
   font-weight: 500;
   line-height: 1.23;
@@ -913,19 +819,19 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-right: 105px;
 }
 
-.job .job-description p.story-paragraph, .job .story-description p.story-paragraph, .job .shoutout-description p.story-paragraph, .job .education-description p.story-paragraph, .story .job-description p.story-paragraph, .story .story-description p.story-paragraph, .story .shoutout-description p.story-paragraph, .story .education-description p.story-paragraph, .shoutout .job-description p.story-paragraph, .shoutout .story-description p.story-paragraph, .shoutout .shoutout-description p.story-paragraph, .shoutout .education-description p.story-paragraph, .education .job-description p.story-paragraph, .education .story-description p.story-paragraph, .education .shoutout-description p.story-paragraph, .education .education-description p.story-paragraph {
+.job .job-description p.story-paragraph, .job .story-description p.story-paragraph, .job .shoutout-description p.story-paragraph, .job .education-description p.story-paragraph, .job .main-description p.story-paragraph, .story .job-description p.story-paragraph, .story .story-description p.story-paragraph, .story .shoutout-description p.story-paragraph, .story .education-description p.story-paragraph, .story .main-description p.story-paragraph, .shoutout .job-description p.story-paragraph, .shoutout .story-description p.story-paragraph, .shoutout .shoutout-description p.story-paragraph, .shoutout .education-description p.story-paragraph, .shoutout .main-description p.story-paragraph, .education .job-description p.story-paragraph, .education .story-description p.story-paragraph, .education .shoutout-description p.story-paragraph, .education .education-description p.story-paragraph, .education .main-description p.story-paragraph {
   margin: 0;
   margin-right: 85px;
   margin-bottom: 15px;
 }
 
-.job .job-description p.education-paragraph, .job .story-description p.education-paragraph, .job .shoutout-description p.education-paragraph, .job .education-description p.education-paragraph, .story .job-description p.education-paragraph, .story .story-description p.education-paragraph, .story .shoutout-description p.education-paragraph, .story .education-description p.education-paragraph, .shoutout .job-description p.education-paragraph, .shoutout .story-description p.education-paragraph, .shoutout .shoutout-description p.education-paragraph, .shoutout .education-description p.education-paragraph, .education .job-description p.education-paragraph, .education .story-description p.education-paragraph, .education .shoutout-description p.education-paragraph, .education .education-description p.education-paragraph {
+.job .job-description p.education-paragraph, .job .story-description p.education-paragraph, .job .shoutout-description p.education-paragraph, .job .education-description p.education-paragraph, .job .main-description p.education-paragraph, .story .job-description p.education-paragraph, .story .story-description p.education-paragraph, .story .shoutout-description p.education-paragraph, .story .education-description p.education-paragraph, .story .main-description p.education-paragraph, .shoutout .job-description p.education-paragraph, .shoutout .story-description p.education-paragraph, .shoutout .shoutout-description p.education-paragraph, .shoutout .education-description p.education-paragraph, .shoutout .main-description p.education-paragraph, .education .job-description p.education-paragraph, .education .story-description p.education-paragraph, .education .shoutout-description p.education-paragraph, .education .education-description p.education-paragraph, .education .main-description p.education-paragraph {
   margin-right: 40px;
   margin-bottom: 0;
   min-height: 100px;
 }
 
-.job .job-description p, .job .story-description p, .job .shoutout-description p, .job .education-description p, .story .job-description p, .story .story-description p, .story .shoutout-description p, .story .education-description p, .shoutout .job-description p, .shoutout .story-description p, .shoutout .shoutout-description p, .shoutout .education-description p, .education .job-description p, .education .story-description p, .education .shoutout-description p, .education .education-description p {
+.job .job-description p, .job .story-description p, .job .shoutout-description p, .job .education-description p, .job .main-description p, .story .job-description p, .story .story-description p, .story .shoutout-description p, .story .education-description p, .story .main-description p, .shoutout .job-description p, .shoutout .story-description p, .shoutout .shoutout-description p, .shoutout .education-description p, .shoutout .main-description p, .education .job-description p, .education .story-description p, .education .shoutout-description p, .education .education-description p, .education .main-description p {
   font-size: 14px;
   color: #86939e;
   line-height: 1.71;
@@ -934,7 +840,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-bottom: 15px;
 }
 
-.job .job-description p.shoutout-paragraph, .job .story-description p.shoutout-paragraph, .job .shoutout-description p.shoutout-paragraph, .job .education-description p.shoutout-paragraph, .story .job-description p.shoutout-paragraph, .story .story-description p.shoutout-paragraph, .story .shoutout-description p.shoutout-paragraph, .story .education-description p.shoutout-paragraph, .shoutout .job-description p.shoutout-paragraph, .shoutout .story-description p.shoutout-paragraph, .shoutout .shoutout-description p.shoutout-paragraph, .shoutout .education-description p.shoutout-paragraph, .education .job-description p.shoutout-paragraph, .education .story-description p.shoutout-paragraph, .education .shoutout-description p.shoutout-paragraph, .education .education-description p.shoutout-paragraph {
+.job .job-description p.shoutout-paragraph, .job .story-description p.shoutout-paragraph, .job .shoutout-description p.shoutout-paragraph, .job .education-description p.shoutout-paragraph, .job .main-description p.shoutout-paragraph, .story .job-description p.shoutout-paragraph, .story .story-description p.shoutout-paragraph, .story .shoutout-description p.shoutout-paragraph, .story .education-description p.shoutout-paragraph, .story .main-description p.shoutout-paragraph, .shoutout .job-description p.shoutout-paragraph, .shoutout .story-description p.shoutout-paragraph, .shoutout .shoutout-description p.shoutout-paragraph, .shoutout .education-description p.shoutout-paragraph, .shoutout .main-description p.shoutout-paragraph, .education .job-description p.shoutout-paragraph, .education .story-description p.shoutout-paragraph, .education .shoutout-description p.shoutout-paragraph, .education .education-description p.shoutout-paragraph, .education .main-description p.shoutout-paragraph {
   font-size: 16px;
   color: #43484d;
   line-height: 1.6;
@@ -943,7 +849,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-left: 20px;
 }
 
-.job .job-description p.shoutout-paragraph.date, .job .story-description p.shoutout-paragraph.date, .job .shoutout-description p.shoutout-paragraph.date, .job .education-description p.shoutout-paragraph.date, .story .job-description p.shoutout-paragraph.date, .story .story-description p.shoutout-paragraph.date, .story .shoutout-description p.shoutout-paragraph.date, .story .education-description p.shoutout-paragraph.date, .shoutout .job-description p.shoutout-paragraph.date, .shoutout .story-description p.shoutout-paragraph.date, .shoutout .shoutout-description p.shoutout-paragraph.date, .shoutout .education-description p.shoutout-paragraph.date, .education .job-description p.shoutout-paragraph.date, .education .story-description p.shoutout-paragraph.date, .education .shoutout-description p.shoutout-paragraph.date, .education .education-description p.shoutout-paragraph.date {
+.job .job-description p.shoutout-paragraph.date, .job .story-description p.shoutout-paragraph.date, .job .shoutout-description p.shoutout-paragraph.date, .job .education-description p.shoutout-paragraph.date, .job .main-description p.shoutout-paragraph.date, .story .job-description p.shoutout-paragraph.date, .story .story-description p.shoutout-paragraph.date, .story .shoutout-description p.shoutout-paragraph.date, .story .education-description p.shoutout-paragraph.date, .story .main-description p.shoutout-paragraph.date, .shoutout .job-description p.shoutout-paragraph.date, .shoutout .story-description p.shoutout-paragraph.date, .shoutout .shoutout-description p.shoutout-paragraph.date, .shoutout .education-description p.shoutout-paragraph.date, .shoutout .main-description p.shoutout-paragraph.date, .education .job-description p.shoutout-paragraph.date, .education .story-description p.shoutout-paragraph.date, .education .shoutout-description p.shoutout-paragraph.date, .education .education-description p.shoutout-paragraph.date, .education .main-description p.shoutout-paragraph.date {
   margin-bottom: 0;
   margin-top: -20px;
   font-weight: 400;
@@ -952,7 +858,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   color: #86939e;
 }
 
-.job .job-description span, .job .story-description span, .job .shoutout-description span, .job .education-description span, .story .job-description span, .story .story-description span, .story .shoutout-description span, .story .education-description span, .shoutout .job-description span, .shoutout .story-description span, .shoutout .shoutout-description span, .shoutout .education-description span, .education .job-description span, .education .story-description span, .education .shoutout-description span, .education .education-description span {
+.job .job-description span, .job .story-description span, .job .shoutout-description span, .job .education-description span, .job .main-description span, .story .job-description span, .story .story-description span, .story .shoutout-description span, .story .education-description span, .story .main-description span, .shoutout .job-description span, .shoutout .story-description span, .shoutout .shoutout-description span, .shoutout .education-description span, .shoutout .main-description span, .education .job-description span, .education .story-description span, .education .shoutout-description span, .education .education-description span, .education .main-description span {
   border-radius: 3px;
   font-weight: 500;
   font-size: 12px;
@@ -960,7 +866,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-left: 17px;
 }
 
-.job .job-description span.accomplishment, .job .story-description span.accomplishment, .job .shoutout-description span.accomplishment, .job .education-description span.accomplishment, .story .job-description span.accomplishment, .story .story-description span.accomplishment, .story .shoutout-description span.accomplishment, .story .education-description span.accomplishment, .shoutout .job-description span.accomplishment, .shoutout .story-description span.accomplishment, .shoutout .shoutout-description span.accomplishment, .shoutout .education-description span.accomplishment, .education .job-description span.accomplishment, .education .story-description span.accomplishment, .education .shoutout-description span.accomplishment, .education .education-description span.accomplishment {
+.job .job-description span.accomplishment, .job .story-description span.accomplishment, .job .shoutout-description span.accomplishment, .job .education-description span.accomplishment, .job .main-description span.accomplishment, .story .job-description span.accomplishment, .story .story-description span.accomplishment, .story .shoutout-description span.accomplishment, .story .education-description span.accomplishment, .story .main-description span.accomplishment, .shoutout .job-description span.accomplishment, .shoutout .story-description span.accomplishment, .shoutout .shoutout-description span.accomplishment, .shoutout .education-description span.accomplishment, .shoutout .main-description span.accomplishment, .education .job-description span.accomplishment, .education .story-description span.accomplishment, .education .shoutout-description span.accomplishment, .education .education-description span.accomplishment, .education .main-description span.accomplishment {
   background-color: rgba(254, 178, 48, 0.13);
   color: #d1a252;
   float: right;
@@ -3689,18 +3595,18 @@ p.no-accomplishments {
   background-color: #ffb230 !important;
 }
 
-.job-description p, .education-description p {
+.life-experience .job-description p, .life-experience .education-description p, .life-experience .main-description p {
   margin-right: 55px !important;
 }
 
-.job-description button.dropdown-button, .education-description button.dropdown-button {
+.life-experience .job-description button.dropdown-button, .life-experience .education-description button.dropdown-button, .life-experience .main-description button.dropdown-button {
   float: right;
   margin-right: 10px;
   width: 40px;
   height: 40px;
 }
 
-.job-description button.dropdown-button i, .education-description button.dropdown-button i {
+.life-experience .job-description button.dropdown-button i, .life-experience .education-description button.dropdown-button i, .life-experience .main-description button.dropdown-button i {
   color: #c1c1c1;
   font-size: 30px;
   line-height: 30px;

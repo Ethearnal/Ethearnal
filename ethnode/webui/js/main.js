@@ -381,11 +381,6 @@ function require(script) {
 
 
 
-// TODO:
-// Add ability to add education or job.
-// Add ability to change education or job information.
-
-
 
 
 // COLORS
@@ -394,8 +389,6 @@ function require(script) {
 
 // Rose #1 = #F7CAC9
 // Rose #2 = #F2DDDE
-
-
 
 
 // GETTING DATA FROM profile.json
@@ -434,75 +427,17 @@ $(function () {
 
             // Appends a Job Experience on your profile page.
             var workExperience = profile.workExperience;
-            var iExperience = 0;
+            // var iExperience = 0;
             $.each(workExperience, function(i, experience) {
-
-                $dropdownID = 'job' + iExperience;
-
-                $timeFrom = null; $timeTo = null; $dateDifference = null;
-
-                $positionInfo = positionInformation(experience.time, experience.company, experience.position, 'work');
-
-                // Creates two letters, so if there's no Image it'd put first two letters as logo.
-                var twoLetters = experience.company.substring(0, 3);
-
-                // Creating whole 'default-job.jade' file. Two divs with many divs inside. This will show the job experience.
-                var imageDiv = '<div class="image"><img src="' + experience.image + '" alt="' + experience.company + '"><div class="dont-have-logo">' + twoLetters + '</div></div>';
-
-                var dropdownButton = '<button id="dropdown' + $dropdownID + '" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>';
-
-                var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="dropdown' + $dropdownID + '"><li class="mdl-menu__item open-modal" open-modal="#edit-job">Edit</li><li class="mdl-menu__item" disabled>Delete</li></ul>';
-
-                var jobDescriptionDiv = '<div class="job-description col-lg-8 col-md-7 col-sm-8 col-xs-12">' + dropdownButton + dropdownUL + '<p class="description">' + experience.description + '</p></div>';
-
-                var mainInformationDiv = '<div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">' + imageDiv + $positionInfo + '</div>';
-
-                $job = $('<div class="job life-experience col-xs-12">' + mainInformationDiv + jobDescriptionDiv + '</div>');
-                var jobDiv = $job.get(0).outerHTML;
-
-
-                // Creates Job Div.
-                $(jobDiv).insertBefore('.jobs-container .see-more');
-
-                // Adds +1 everytime it loads a new job. It's used only for dropdowns.
-                iExperience++;
+                createLE(experience, 'job', false);
             });
 
 
             // Appends a Education on your profile page.
             var educations = profile.education;
-            var iEducation = 0;
+            // var iEducation = 0;
             $.each(educations, function(i, education) {
-
-                $dropdownID = 'edu' + iEducation;
-
-                $timeFrom = null; $timeTo = null; $dateDifference = null;
-
-                $positionInfo = positionInformation(education.time, education.course, education.institution, 'education');
-
-                // Creates two letters, so if there's no Image it'd put first two letters as logo.
-                var twoLetters = education.institution.substring(0, 3);
-
-                // Creating whole 'default-job.jade' file. Two divs with many divs inside. This will show the job experience.
-                var imageDiv = '<div class="image"><img src="' + education.image + '" alt="' + education.institution + '"><div class="dont-have-logo">' + twoLetters + '</div></div>';
-
-                var dropdownButton = '<button id="dropdown' + $dropdownID + '" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>';
-
-                var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="dropdown' + $dropdownID + '"><li class="mdl-menu__item open-modal" open-modal="#edit-education">Edit</li><li class="mdl-menu__item" disabled>Delete</li></ul>';
-
-                var educationDescriptionDiv = '<div class="education-description col-lg-8 col-md-7 col-sm-8 col-xs-12">' + dropdownButton + dropdownUL + '<p class="education-paragraph description">' + education.description + '</p></div>';
-
-                var mainInformationDiv = '<div class="main-information col-lg-4 col-md-5 col-sm-4 col-xs-12">' + imageDiv + $positionInfo + '</div>';
-
-                $education = $('<div class="education life-experience col-xs-12">' + mainInformationDiv + educationDescriptionDiv + '</div>');
-                var educationDiv = $education.get(0).outerHTML;
-
-
-                // Creates Job Div.
-                $(educationDiv).insertBefore('.education-container .see-more');
-
-                // Adds +1 everytime it loads a new job. It's used only for dropdowns.
-                iEducation++;
+                createLE(education, 'education', false);
             });
 
             seeButtons();
@@ -553,3 +488,26 @@ require('js/functions.js');
 
 // Include modals animation JS file.
 require("js/modals-animation.js");
+
+
+// FUNCTIONS
+
+// MODALS
+
+// Create Life Experience div based on input values.
+require("js/functions/modals/createLE.js");
+
+// Appears .success-message everytime you update or create a LE
+require("js/functions/modals/appearSuccessMessage.js");
+
+// Loads inputs text when you click on "EDIT" button and the edit modal appears
+require("js/functions/modals/loadInputsText.js");
+
+// openModal() and closeModal() functions
+require("js/functions/modals/openClose.js");
+
+// This is a function to generate a position information div
+require("js/functions/modals/positionInformationDiv.js");
+
+// All the functions related to time. Such as GetTimeDifference, etc.
+require("js/functions/modals/timesFunctions.js");
