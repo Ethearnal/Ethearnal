@@ -4,6 +4,7 @@ import config
 from toolkit import tools
 import argparse
 from io import BytesIO
+from datamodel.resource_webapi import LResView
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert web service node')
 
@@ -99,6 +100,9 @@ def main():
                             }
                          }
                         )
+
+    LResView.mount()
+
     cherrypy.engine.start()
     cherrypy.engine.block()
 

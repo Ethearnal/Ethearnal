@@ -16,7 +16,7 @@ resource_bson_model = {
 
 class ResourceType(object):
     JSON = b'json'
-    BSON = b'bin'
+    BIN = b'bin'
     HTML = b'html'
     JS = b'js'
     CSS = b'css'

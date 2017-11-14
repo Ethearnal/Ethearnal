@@ -14,6 +14,8 @@ from ert_profile import EthearnalProfileView, EthearnalProfileController
 from ert_profile import EthearnalJobView, EthearnalJobPostController
 from ert_profile import EthearnalUploadFileView
 
+from datamodel.resource_webapi import LResView
+
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
 
@@ -161,6 +163,7 @@ def main_http(http_webdir: str = config.http_webdir,
                             }
                          }
                         )
+    LResView.mount()
 
     cherrypy.engine.start()
 
