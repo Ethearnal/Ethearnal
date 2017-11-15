@@ -35,5 +35,12 @@ class ResourceSQLite(BaseSQLite):
         else:
             return self.cursor.execute(qs)
 
+    def insert_resource(self,
+                        pk_hash: bytes,
+                        owner_hash: bytes,
+                        
+                        ):
+        pass
+
 
 

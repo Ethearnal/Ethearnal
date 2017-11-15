@@ -41,7 +41,7 @@ class LResCollections(object):
         else:
             codec = self.codecs.get(content_type)
             if not codec:
-                st = 'err unsipoorted codec for content type % s' % content_type
+                st = 'err unsupported codec for content type % s' % content_type
                 return st.encode(encoding='utf-8')
 
             cherrypy.response.headers.__setitem__('Content-Type', content_type)
@@ -87,6 +87,7 @@ class LResHandler(object):
     def handle_delete(self, content_type, collection_name, resource_name):
         st = 'delete %s %s %s' % (content_type, collection_name, resource_name)
         st.encode(encoding='utf-8')
+        return b'200 deleted'
 
 
 class LResView(object):

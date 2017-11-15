@@ -11,6 +11,7 @@ resource_bson_model = {
     b'tc': b'',
     b'ta': b'',
     b'tu': b'',
+    b'tx': b'',
 }
 
 
@@ -62,15 +63,18 @@ class BaseResourceTime(object):
         self.time_created = d[b'tc']
         self.time_accessed = d[b'ta']
         self.time_updated = d[b'tu']
+        self.time_expiration = d[b'tx']
 
     def __init__(self,
                  time_created: bytes,
                  time_accessed: bytes,
                  time_updated: bytes,
+                 time_expiration: bytes,
                  ):
         self.time_created = time_created
         self.time_accessed = time_accessed
         self.time_updated = time_updated
+        self.time_expiration = time_expiration
 
     @property
     def to_time_data(self):
@@ -78,6 +82,7 @@ class BaseResourceTime(object):
             b'tc': self.time_created,
             b'ta': self.time_accessed,
             b'tu': self.time_updated,
+            b'tx': self.time_expiration
         }
 
 
