@@ -1,6 +1,4 @@
 from datamodel.base_sqlite import BaseSQLite
-from datetime import datetime
-from tzlocal import get_localzone
 
 # encoded bin resource store
 
@@ -10,9 +8,6 @@ from tzlocal import get_localzone
 # resource_owner_sig_bin
 # resource_codec_chain_bin
 # resource_data_bin
-# time_created_date
-# time_updated_date
-# time_expire_date
 # is_active_bool
 # is_encrypted_bool
 
@@ -32,11 +27,8 @@ class ResourceSQLite(BaseSQLite):
         resource_owner_sig_bin blob,
         resource_codec_chain_bin blob,
         resource_data_bin blob,
-        time_created_date,
-        time_updated_date,
-        time_expire_date,
-        is_active_bool,
-        is_encrypted_bool bool
+        is_encrypted_bool bool,
+        is_active_bool
         );
         ''' % self.table_name
 
@@ -54,13 +46,9 @@ class ResourceSQLite(BaseSQLite):
                         resource_codec_chain_bin: bytes,
                         resource_data_bin: bytes,
                         is_encrypted_bool: bool,
-                        is_active: bool,
-                        time_expire_date,
+                        is_active_bool: bool,
                         qs_only: bool=False
                         ):
-
-        time_created_date = datetime.now(tz=get_localzone())
-        time_updated_date = time_created_date
 
         values = (
             pk_hash,
@@ -69,14 +57,11 @@ class ResourceSQLite(BaseSQLite):
             resource_own_sig,
             resource_codec_chain_bin,
             resource_data_bin,
-            time_created_date,
-            time_updated_date,
-            time_expire_date,
             is_encrypted_bool,
-            is_active
+            is_active_bool,
         )
 
-        qs = 'INSERT INTO %s VALUES (?,?,?,?,?,?,?,?,?,?,?);' % self.table_name
+        qs = 'INSERT INTO %s VALUES (?,?,?,?,?,?,?,?);' % self.table_name
         if qs_only:
             return qs, values
         else:
