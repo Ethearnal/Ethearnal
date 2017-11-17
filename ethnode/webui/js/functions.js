@@ -51,83 +51,6 @@ function seeButtons() {
 
 
 
-// Initializing the date picker everytime we use this function.
-function datePickerInit(dateFrom, dateTo) {
-    dateTo.bootstrapMaterialDatePicker({weekStart: 0, time: false, format: "MM/YYYY"}).on('change', function(e, date) {
-        $(this).parent().addClass('is-dirty');
-    });
-    dateFrom.bootstrapMaterialDatePicker({weekStart: 0, time: false, format: "MM/YYYY"}).on('change', function(e, date) {
-        dateTo.bootstrapMaterialDatePicker('setMinDate', date);
-        $(this).parent().addClass('is-dirty');
-    });
-}
-
-// Collects 'CREATE JOB / EDIT JOB' data.
-function collectJobData(form) {
-    $form = form; $endDateVal = null;
-    if($form.find('input.date-ended').val() == '') {
-        $endDateVal = 'Present';
-    } else {
-        $endDateVal = $form.find('input.date-ended').val();
-    }
-
-    $data = {
-        // image: $imgSource,
-        company: $form.find('input#company-name').val(),
-        position: $form.find('input#position-name').val(),
-        description: $form.find('textarea#description').val(),
-        time: [
-            { from: $form.find('input.date-started').val(), to: $endDateVal }
-        ]
-    }
-
-    // $imgSource = $form.find('input#input-image-job').get(0).files[0];
-    // var formData = new FormData();
-
-    // console.log($imgSource);
-
-    // $.ajax({
-    //     type: 'POST',
-    //     url: 'profile.json',
-    //     dataType: 'json',
-    //     data: JSON.stringify($data),
-    //     contentType: false,
-    //     processData: false,
-    //     cache: false,
-    //     complete: function(data) {
-    //         console.log('success');
-    //     }
-    // });
-
-    return $data;
-}
-
-
-// Collects 'CREATE EDUCATION / EDIT EDUCATION' data.
-function collectEducationData(form) {
-    $form = form; $endDateVal = null;
-    if($form.find('input.date-ended').val() == '') {
-        $endDateVal = 'Present';
-    } else {
-        $endDateVal = $form.find('input.date-ended').val();
-    }
-
-    $data = {
-        // image: $imgSource,
-        institution: $form.find('input#education-name').val(),
-        course: $form.find('input#study-field').val(),
-        description: $form.find('textarea#description').val(),
-        time: [
-            { from: $form.find('input.date-started').val(), to: $endDateVal }
-        ]
-    }
-    return $data;
-}
-
-
-
-
-
 
 
 
@@ -141,11 +64,12 @@ function wordInString(s, word){
   return new RegExp( '\\b' + word + '\\b', 'i').test(s);
 }
 
+
 // Validate FORM function
 function validateForm(form) {
   var isValid = true;
   $(form).each(function() {
-    if ( $(this).find('input:not(.date-ended), textarea').filter(function() {
+    if ( $(this).find('input:not(.date-ended):not(.search):not([name="language"]), textarea').filter(function() {
         return $.trim($(this).val()).length == 0
     }).length == 0 ) {
         isValid = true;

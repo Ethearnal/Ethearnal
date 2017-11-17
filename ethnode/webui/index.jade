@@ -35,6 +35,9 @@ html(lang='en-US')
         // Icons
         link(rel="stylesheet", href="styles/icons.css")
 
+        // Flag icons
+        link(rel="stylesheet", href="https://cdn.rawgit.com/lipis/flag-icon-css/master/css/flag-icon.min.css")
+
         // START of FONTS
 
         // Google Material Icons
@@ -64,7 +67,13 @@ html(lang='en-US')
         include mixins/modals/new-modals/add-education
         include mixins/modals/new-modals/edit-education
 
+        include mixins/modals/new-modals/add-language
+        include mixins/modals/new-modals/edit-language
 
+        include mixins/modals/new-modals/add-skill
+        include mixins/modals/new-modals/edit-skill
+
+        include mixins/modals/new-modals/edit-profile
 
 
         include mixins/modals/shoutout-modal
@@ -149,7 +158,6 @@ html(lang='en-US')
 
 
 
-
                         ul.nav.navbar-nav.visible-xs
                             li
                                 // JSON DATA GOES HERE
@@ -191,29 +199,28 @@ html(lang='en-US')
                         // Profile header, including profile image, current work, city, state and two buttons.
                         .profile-upper
 
-                            .profile-image(data-toggle="modal", data-target="#avatarModal")
+                            .profile-image.open-modal(open-modal="#edit-profile")
                                 img(src="", alt="")
                                 .text-on-image: p Change
 
-                            //- h2 Dobri Stoilov
-                            //- h5.profile-information-position Founder at <strong>Ethearnal</strong>
-                            //- p Sofia, Bulgaria
-                            // Now... JSON data goes here. :(
+                            h2
+                            h5.profile-information-position
+                            p.location
 
-                            button.hire Hire ($50/hr)
+                            button.hire Hire ($X/hr)
                             button.leave-msg Send Message
 
                     .profile-information.middle
 
                         // Profile description including a description about you. (dark-gray section)
                         .profile-description
-                            // JSON data goes here.
+                            p Profile's description.
 
                     .profile-information.down
 
                         // Profile top skills and tools
                         .profile-bottom
-                            p.skills-text Skills & Languages
+                            p.skills-text Assimilated Skills
                                 //- i.material-icons keyboard_arrow_down
 
                             .skills
@@ -235,64 +242,39 @@ html(lang='en-US')
                     .profile-documentation.col-xs-12
 
                         ul.nav.nav-tabs(role="tablist")
-                            //- li.timeline-li(role="presentation"): a(href="#timeline", aria-controls="jobs", role="tab", data-toggle="tab") Search Work
-                            li.active.jobs-li(role="presentation"): a(href="#jobs", aria-controls="jobs", role="tab", data-toggle="tab") Jobs & Education
+                            li.active.work-experience-li(role="presentation"): a(href="#work-experience", aria-controls="work-experience", role="tab", data-toggle="tab") Work Experience
+                            li.timeline-li(role="presentation"): a(href="#education", aria-controls="education", role="tab", data-toggle="tab") Education
+                            li.timeline-li(role="presentation"): a(href="#languages", aria-controls="languages", role="tab", data-toggle="tab") Languages
+                            li.timeline-li(role="presentation"): a(href="#gigs", aria-controls="gigs", role="tab", data-toggle="tab") Gigs
+
                             li.dropdownButton
                                 button#addThings.mdl-button.mdl-js-button.mdl-button--icon: i.material-icons add
                                 ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="addThings")
                                     li.mdl-menu__item.open-modal(open-modal="#add-job") Add Work Experience
                                     li.mdl-menu__item.open-modal(open-modal="#add-education") Add Education
-                                    li.mdl-menu__item(disabled) Add Gig
+                                    li.mdl-menu__item.open-modal(open-modal="#add-language") Add Language
+                                    li.mdl-menu__item.open-modal(open-modal="#add-skill") Add Skill
+                                    li.mdl-menu__item.open-modal(open-modal="#add-gig" disabled) Add Gig
 
 
                         // All the information about above listed tabs.
                         .tab-content.col-xs-12
 
-                            //- // Timeline TAB
-                            //- .tab-pane.fade#timeline.list-block.col-xs-12(role="tabpanel")
+                            // Work Experience TAB
+                            .tab-pane.fade.in.active#work-experience.col-xs-12(role="tabpanel")
+                                include mixins/tabs/work-experience
 
-                            //-     .timeline-post.input-timeline.col-xs-12
-                            //-         include mixins/timeline/post-input
+                            // Education TAB
+                            .tab-pane.fade#education.col-xs-12(role="tabpanel")
+                                include mixins/tabs/education
 
-                            //-     ul
-                            //-         li.swipeout
-                            //-             .timeline-post.swipeout-content.item-content.col-xs-12(data-toggle="modal", data-target="#timelineModal")
-                            //-                 include mixins/timeline/default-post
+                            // Languages TAB
+                            .tab-pane.fade#languages.col-xs-12(role="tabpanel")
+                                include mixins/tabs/languages
 
-                            //-             .swipeout-actions-left
-                            //-             .swipeout-actions-right
-
-                            //-         li.swipeout
-                            //-             .timeline-post.swipeout-content.item-content.col-xs-12(data-toggle="modal", data-target="#timelineModal")
-                            //-                 include mixins/timeline/default-post
-
-                            //-             .swipeout-actions-left
-                            //-             .swipeout-actions-right
-
-
-
-                            // Jobs & Education TAB
-                            .tab-pane.fade.in.active#jobs.col-xs-12(role="tabpanel")
-
-                                // JOBS
-                                .jobs-container
-                                    //- .job.life-experience.col-lg-12.col-md-12.col-sm-12.col-xs-12
-                                    //-     include mixins/jobs/default-job
-
-                                    .jobs-see.see-more.col-xs-12
-                                        p + See more jobs
-
-                                    .jobs-see.see-less.col-xs-12
-                                        p - See less jobs
-
-
-                                // EDUCATION
-                                .education-container
-                                    .educations-see.see-more.col-xs-12
-                                        p + See more education
-
-                                    .educations-see.see-less.col-xs-12
-                                        p - See less education
+                            // Gigs TAB
+                            .tab-pane.fade#gigs.col-xs-12(role="tabpanel")
+                                include mixins/tabs/gigs
 
 
         // jQuery 3.1.1
