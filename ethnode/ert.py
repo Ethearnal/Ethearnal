@@ -13,6 +13,7 @@ from toolkit import store_handler
 from ert_profile import EthearnalProfileView, EthearnalProfileController
 from ert_profile import EthearnalJobView, EthearnalJobPostController
 from ert_profile import EthearnalUploadFileView
+from ert_profile import EthearnalUploadJsonView
 
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
@@ -154,6 +155,16 @@ def main_http(http_webdir: str = config.http_webdir,
 
     cherrypy.tree.mount(EthearnalUploadFileView(ert_profile_ctl),
                         '/api/v1/upload', {'/': {
+                            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+                            'tools.sessions.on': True,
+                            'tools.response_headers.on': True,
+                            'tools.response_headers.headers': [('Content-Type', 'text/plain')],
+                            }
+                         }
+                        )
+
+    cherrypy.tree.mount(EthearnalUploadJsonView(ert_profile_ctl),
+                        '/api/v1/uploadjson', {'/': {
                             'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
                             'tools.sessions.on': True,
                             'tools.response_headers.on': True,

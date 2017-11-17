@@ -434,3 +434,20 @@ class EthearnalUploadFileView(object):
         print(os.listdir(upload_path))
         return json.dumps(files, ensure_ascii=False).encode('utf-8')
 
+
+class EthearnalUploadJsonView(object):
+    exposed = True
+
+    def __init__(self, e_profile: EthearnalProfileController):
+        self.profile = e_profile
+
+    def POST(self, json_str, file_name):
+        upload_path = os.path.normpath(self.profile.files_dir)
+        upload_file = os.path.join(upload_path, file_name)
+        size = 0
+        bts = json_str.encode('utf-8')
+        with open(upload_file, 'wb') as out:
+            out.write(bts)
+        cherrypy.response.status = 201
+        return b''
+
