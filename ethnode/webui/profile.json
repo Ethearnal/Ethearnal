@@ -2,12 +2,10 @@
     "name": [
         { "first": "Dobri", "last": "Stoilov" }
     ],
-    "job": [
-        { "company": "Ethearnal", "position": "Back-End Developer" }
-    ],
     "location": [
-        { "country": "Bulgaria", "city": "Sofia" }
+        { "country": "Bulgaria", "city": "Sofia", "countryClass": "bg" }
     ],
+    "title": "This is my title",
     "description": "I love to code and make impossible things possible.",
     "skills": [
         { "name": "css", "experience": "5y" },
@@ -15,6 +13,7 @@
         { "name": "python", "experience": "3y" }
     ],
     "reputation": 50,
+    "hourlyRate": 60,
     "profilePicture": "https://media.licdn.com/media/AAIA_wDGAAAAAQAAAAAAAAoXAAAAJGMxMTJmNThjLTRhZTEtNDQ4Yy04NGMyLWQ5ZGI5ZTc1NGM0Mg.jpg",
     "workExperience": [
         {
@@ -51,6 +50,18 @@
             "institution": "Kingston University London",
             "course": "Accounting and Finance",
             "description": "",
+            "time": [
+                { "from": "09/2005", "to": "06/2009" }
+            ]
+        }
+    ],
+    "languages": [
+        {
+            "language": "Afghanistan",
+            "level": "Native or bilingual",
+            "levelValue": 3,
+            "iconClass": "af",
+            "description": "I'm a native speaker of Bulgarian language and can speak fluently.",
             "time": [
                 { "from": "09/2005", "to": "06/2009" }
             ]

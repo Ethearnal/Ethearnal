@@ -15,7 +15,7 @@ from .peer import Peer, PeerC
 from .shortlist import Shortlist
 # from . import hashing
 from toolkit import kadmini_codec
-from eth_profile import EthearnalProfileController
+from ert_profile import EthearnalProfileController
 
 cdx = kadmini_codec
 

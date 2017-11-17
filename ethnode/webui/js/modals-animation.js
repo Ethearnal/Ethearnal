@@ -66,7 +66,7 @@ function addImage(source) {
 
 // MATERIAL DESIGN DATE PICKER
 $(function() {
-    $datePickers = 3;
+    $datePickers = 15;
 });
 
 
@@ -75,9 +75,9 @@ $currentlyOpenModalID = null;
 $currentlyClosestLEdiv = null;
 
 
-$('body').delegate('li.open-modal', 'click', function(e) {
+$('body').delegate('.open-modal', 'click', function(e) {
     e.preventDefault();
-    $lifeExperienceDiv = $(this).closest('.life-experience');
+    $contentBlock = $(this).closest('.content-block');
     $modalID = $(this).attr('open-modal');
 
     // Other variables
@@ -85,7 +85,7 @@ $('body').delegate('li.open-modal', 'click', function(e) {
     $form = $content.find('form');
 
     $currentlyOpenModalID = $modalID;
-    $currentlyClosestLEdiv = $lifeExperienceDiv;
+    $currentlyClosestLEdiv = $contentBlock;
 
     // Dates inputs
     $inputDateFrom = $form.find('input.date-started');
@@ -98,15 +98,16 @@ $('body').delegate('li.open-modal', 'click', function(e) {
     openModal($modalID);
 
     // Functions for particular modals.
-    if($modalID == "#edit-job" || $modalID == "#edit-education") loadInputsText($form, $lifeExperienceDiv);
-    if($modalID == "#add-job" || $modalID == "#add-education") datePickerInit($inputDateFrom, $inputDateTo);
+    if($($modalID).hasClass('edit')) loadInputsText($form, $contentBlock);
+    if($($modalID).hasClass('add')) datePickerInit($inputDateFrom, $inputDateTo);
+    if($modalID == "#edit-profile") loadProfileInputs();
 });
 
 
 $('body').delegate('li.delete', 'click', function(e) {
     e.preventDefault();
-    $lifeExperienceDiv = $(this).closest('.life-experience');
-    $lifeExperienceDiv.fadeOut(300);
+    $contentBlock = $(this).closest('.content-block');
+    $contentBlock.fadeOut(300);
 });
 
 
@@ -129,14 +130,15 @@ $('.modal-box button').click(function() {
 
     // BUTTON.PUBLISH-BUTTON
     if($(this).hasClass('finish-button')) {
+        if(!validateForm($form) && $modalID !== "edit-profile") return; // Return if form isn't filled.
 
-        if(!validateForm($form)) return; // Return if form isn't filled.
 
-        if($modalID == 'add-job' || $modalID == 'edit-job') {
-            $data = collectJobData($form);
-        } else if($modalID == 'add-education' || $modalID == 'edit-education') {
-            $data = collectEducationData($form);
-        }
+        if($modalID == 'add-job' || $modalID == 'edit-job') $data = collectJobData($form);
+        if($modalID == 'add-education' || $modalID == 'edit-education') $data = collectEducationData($form);
+        if($modalID == 'add-language' || $modalID == 'edit-language') $data = collectLanguageData($form);
+        if($modalID == 'add-skill' || $modalID == 'edit-skill') $data = collectSkillData($form);
+        if($modalID == "edit-profile") $data = collectProfileData($form);
+
 
         // Fading out the initial modal and fading in success message.
         $modalContent.fadeOut(300);
@@ -147,43 +149,45 @@ $('.modal-box button').click(function() {
 
             var iExperience = 0;
             var iEducation = 0;
-            if($modalID == 'add-job') {
-                createLE($data, 'job', true);
 
-            } else if($modalID == 'add-education') {
-                createLE($data, 'education', true);
+            if($modalID == 'add-job') createLE($data, 'job');
+            if($modalID == 'add-education') createLE($data, 'education');
+            if($modalID == 'add-language') createLE($data, 'language', true);
+            if($modalID == 'edit-profile') updateProfile($data);
+            // if($modalID == 'add-skill') createLE($data, 'language', true);
 
-            } else if ( $modalID == 'edit-education' ) {
+
+            if ( $modalID == 'edit-education' ) {
 
                 $modalID = $currentlyOpenModalID;
-                $lifeExperienceDiv = $currentlyClosestLEdiv;
+                $contentBlock = $currentlyClosestLEdiv;
 
                 $dateDifferenceText = getTimeFirst($data.time);
 
-                $lifeExperienceDiv.find('.study-field').text($data.course);
-                $lifeExperienceDiv.find('.education-name').text($data.institution);
-                $lifeExperienceDiv.find('.date-name').text($dateDifferenceText);
-                $lifeExperienceDiv.find('.description').text($data.description);
+                $contentBlock.find('.study-field').text($data.course);
+                $contentBlock.find('.education-name').text($data.institution);
+                $contentBlock.find('.date-name').text($dateDifferenceText);
+                $contentBlock.find('.description').text($data.description);
 
 
             } else if ( $modalID == 'edit-job' ) {
 
                 $modalID = $currentlyOpenModalID;
-                $lifeExperienceDiv = $currentlyClosestLEdiv;
+                $contentBlock = $currentlyClosestLEdiv;
 
                 $dateDifferenceText = getTimeFirst($data.time);
 
-                $lifeExperienceDiv.find('.company-name').text($data.company);
-                $lifeExperienceDiv.find('.position-name').text($data.position);
-                $lifeExperienceDiv.find('.date-name').text($dateDifferenceText);
-                $lifeExperienceDiv.find('.description').text($data.description);
+                $contentBlock.find('.company-name').text($data.company);
+                $contentBlock.find('.position-name').text($data.position);
+                $contentBlock.find('.date-name').text($dateDifferenceText);
+                $contentBlock.find('.description').text($data.description);
             }
 
         }, 300);
 
 
 
-    // BUTTON.CREATE-NEW
+    // If button.create-new parent is .buttons (the div that shows up after clicking "publish") then it'll fade out content and clear form.
     } else if($(this).parent().is(".buttons")) {
         $successMessage.fadeOut(300);
 
@@ -206,9 +210,9 @@ $('.finish-button').hover(function() {
     $form = $content.find('form');
 
     if( validateForm($form) ) {
-        $(this).next().text('Great! Go ahead!').css({ display: 'initial' });
+        $(this).next().text('Great! Go ahead').css({ display: 'initial' });
     } else {
-        $(this).next().text('Ya need to fill the form!').css({ display: 'initial' });
+        $(this).next().text('Please fill the form').css({ display: 'initial' });
     }
 });
 

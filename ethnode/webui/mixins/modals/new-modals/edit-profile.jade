@@ -1,0 +1,73 @@
+#edit-profile.modal-box.flex.floating
+
+    .modal-box-content: .inner-modal: .content
+
+        .modal-header: h3 Edit profile
+
+        .success-message
+            h1.title Congratulations!
+            .success-content: p Your profile has been updated.
+
+            .buttons
+                button.mdl-button.mdl-js-button.close-button.congrats-close Close the modal to see it
+                span OR
+                button.mdl-button.mdl-js-button.create-new Edit profile again
+
+
+        .modal-body
+
+            //- .form-group
+            //-     input.input-file#input-image-job(type="file", placeholder="Add image or video")
+            //-     label(for="input-image-job") Add Educational Institution Logo
+            //-     img.file-input-first-image(src="images/image-video-image-file.png", alt="Add a file")
+            //-     img#input-image-job(src="#", alt="Preview")
+
+            // This is from avatar ui modal.
+            //- .form-group.col-lg-4.col-md-4.col-sm-4.col-xs-12
+            //-     input.input-file#input-image-avatar(type="file", placeholder="Add profile photo")
+            //-     label(for="input-image-avatar") Add profile photo
+            //-     img.file-input-first-image(src="images/image-video-image-file.png", alt="Add a file")
+            //-     img#input-image-avatar.img-responsive(src="#", alt="Preview", style="max-width: 100%")
+
+            .modal-inputs
+
+                form#form-update-education(action="POST")
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                        input#first-name.mdl-textfield__input(name="first-name", type="text")
+                        label.mdl-textfield__label(for="first-name") First Name
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                        input#last-name.mdl-textfield__input(name="last-name", type="text")
+                        label.mdl-textfield__label(for="last-name") Last Name
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                        input#hourly-rate.mdl-textfield__input(type="text", name="hourly-rate")
+                        label.mdl-textfield__label(for="hourly-rate") Hourly Rate
+                        span.mdl-textfield__error Input is not a number!
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                        input#title.mdl-textfield__input(type="text", name="title")
+                        label.mdl-textfield__label(for="title") Title
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                        .ui.search.selection.dropdown#country(style="float: left")
+                            input(type="hidden", name="country")
+                            i.dropdown.icon
+                            .default.text Select Country
+                            .menu
+                                .item(data-value="af") <i class="af flag"></i> Afghanistan
+                                .item(data-value="ax") <i class="ax flag"></i> Aland Islands
+                                .item(data-value="bg") <i class="bg flag"></i> Bulgaria
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                        input#city.mdl-textfield__input(type="text", name="city")
+                        label.mdl-textfield__label(for="city") City
+
+                    .mdl-textfield.mdl-js-textfield.whole-line
+                        textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
+                        label.mdl-textfield__label(for="description") Summary
+
+        .modal-footer
+            button.mdl-button.mdl-js-button.close-button Close
+            button#update1.mdl-button.mdl-js-button.finish-button(style="color: #5CAB7D") Update
+            .mdl-tooltip(data-mdl-for="update1") This text will be changed anyway.

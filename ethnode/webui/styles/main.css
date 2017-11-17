@@ -197,126 +197,6 @@ header .container nav #navigation ul ul.dropdown-menu li:hover a, header .contai
   color: #127fff;
 }
 
-.dropdown-menu .divider {
-  margin: 0;
-}
-
-.ui.active {
-  box-shadow: none;
-  border: none;
-}
-
-.ui {
-  border: none;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  outline: none;
-  display: block;
-  width: 100%;
-  float: right;
-  font-size: 18px;
-  font-weight: 300;
-  padding-left: 0;
-  padding-bottom: 0;
-  padding-top: 0;
-  color: #86939e;
-  margin-top: 5px;
-  box-shadow: none;
-  border: 1px solid transparent !important;
-  border-bottom: 2px solid #e4e8eb !important;
-}
-
-.ui.active {
-  border-color: #96C8DA !important;
-}
-
-.ui.active .text {
-  margin-left: 15px;
-}
-
-.ui input.search {
-  padding: inherit;
-  margin-top: 0;
-  padding-left: 0 !important;
-  margin-left: 15px;
-  line-height: 30px !important;
-}
-
-.ui .text {
-  margin-top: 0px !important;
-  line-height: 40px;
-  color: rgba(191, 191, 191, 0.87);
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  font-weight: normal;
-  position: relative;
-  top: 6px;
-}
-
-.ui .text:not(.default) {
-  padding: 8px 0px;
-  padding-top: 0;
-  margin-bottom: 8px;
-  margin-left: 15px;
-}
-
-.ui .default.text {
-  margin-top: 25px;
-}
-
-.ui i.dropdown.icon {
-  margin-top: 0;
-  margin-right: -20px;
-}
-
-.ui .menu {
-  position: relative;
-}
-
-.ui .menu::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background-color: white;
-}
-
-.ui .menu::-webkit-scrollbar {
-  width: 7px;
-  background-color: #F5F5F5;
-}
-
-.ui .menu::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: #e5e5e5;
-}
-
-.ui .menu .ui input {
-  font-size: 14px;
-}
-
-.ui .menu .header {
-  font-size: 16px;
-  font-weight: 400;
-  text-transform: none;
-  color: #606672;
-}
-
-.ui .menu .header i:before {
-  margin-right: 10px;
-  font-size: 14px;
-}
-
-.ui .menu .header span {
-  font-weight: 300;
-}
-
-.ui .menu .item span {
-  font-weight: 300;
-}
-
-.ui.fluid.search.selection.dropdown {
-  padding: 0 !important;
-}
-
 section.documentation {
   background-color: #f2f2f2;
 }
@@ -622,10 +502,6 @@ section.documentation .container .profile-information-after-fixed .container-flu
   background: none;
 }
 
-.educations .education .education-description .dropdown.more img {
-  margin-right: 25px;
-}
-
 .panel-group {
   margin: 0;
 }
@@ -664,24 +540,20 @@ section.documentation .container .profile-information-after-fixed .container-flu
   text-transform: uppercase;
 }
 
-.job, .story, .education {
-  cursor: pointer;
-}
-
-.job, .story, .shoutout, .education {
+.content-block {
   padding-top: 24px;
   padding-left: 0;
   padding-right: 0;
   border-bottom: 1px solid #e1e8ee;
 }
 
-.job .main-information, .story .main-information, .shoutout .main-information, .education .main-information {
+.content-block .main-information {
   padding-right: 0;
   padding-left: 0;
   padding-bottom: 25px;
 }
 
-.job .main-information .image img, .job .main-information .image .dont-have-logo, .story .main-information .image img, .story .main-information .image .dont-have-logo, .shoutout .main-information .image img, .shoutout .main-information .image .dont-have-logo, .education .main-information .image img, .education .main-information .image .dont-have-logo {
+.content-block .main-information .image img, .content-block .main-information .image .dont-have-logo {
   height: 60px;
   width: 60px;
   margin-left: 20px;
@@ -690,7 +562,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   border-radius: 3px;
 }
 
-.job .main-information .image .dont-have-logo, .story .main-information .image .dont-have-logo, .shoutout .main-information .image .dont-have-logo, .education .main-information .image .dont-have-logo {
+.content-block .main-information .image .dont-have-logo {
   color: #0065cc;
   font-size: 24px;
   font-weight: 500;
@@ -700,20 +572,12 @@ section.documentation .container .profile-information-after-fixed .container-flu
   display: none;
 }
 
-.job .main-information img.story-image, .story .main-information img.story-image, .shoutout .main-information img.story-image, .education .main-information img.story-image {
-  margin-left: 25px;
-}
-
-.job .main-information img.shoutout-image, .story .main-information img.shoutout-image, .shoutout .main-information img.shoutout-image, .education .main-information img.shoutout-image {
-  border-radius: 100%;
-}
-
-.job .main-information .position-information, .story .main-information .position-information, .shoutout .main-information .position-information, .education .main-information .position-information {
+.content-block .main-information .position-information {
   margin-left: 100px;
   word-wrap: break-word;
 }
 
-.job .main-information .position-information h4, .story .main-information .position-information h4, .shoutout .main-information .position-information h4, .education .main-information .position-information h4 {
+.content-block .main-information .position-information h4 {
   font-size: 18px;
   line-height: 1.09;
   font-weight: 500;
@@ -722,7 +586,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-bottom: 7px;
 }
 
-.job .main-information .position-information h5, .story .main-information .position-information h5, .shoutout .main-information .position-information h5, .education .main-information .position-information h5 {
+.content-block .main-information .position-information h5 {
   font-size: 14px;
   line-height: 1;
   color: #86939e;
@@ -731,15 +595,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   font-weight: 400;
 }
 
-.job .main-information .position-information h5.shoutout-position, .story .main-information .position-information h5.shoutout-position, .shoutout .main-information .position-information h5.shoutout-position, .education .main-information .position-information h5.shoutout-position {
-  font-size: 12px;
-  line-height: 1.17;
-  color: #86939e;
-  margin-top: 0;
-  margin-bottom: 7px;
-}
-
-.job .main-information .position-information p, .story .main-information .position-information p, .shoutout .main-information .position-information p, .education .main-information .position-information p {
+.content-block .main-information .position-information p {
   font-size: 12px;
   line-height: 1.17;
   color: #86939e;
@@ -747,34 +603,28 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-bottom: 0;
 }
 
-.job .main-information .position-information p.shoutout-information-related, .story .main-information .position-information p.shoutout-information-related, .shoutout .main-information .position-information p.shoutout-information-related, .education .main-information .position-information p.shoutout-information-related {
-  font-weight: 500;
-  margin-bottom: 5px;
-  text-align: left;
-}
-
-.job .main-information .position-information p.shoutout-business, .story .main-information .position-information p.shoutout-business, .shoutout .main-information .position-information p.shoutout-business, .education .main-information .position-information p.shoutout-business {
+.content-block .main-information .position-information p.shoutout-business {
   white-space: nowrap;
 }
 
-.job .main-information .position-information p.shoutout-business span, .story .main-information .position-information p.shoutout-business span, .shoutout .main-information .position-information p.shoutout-business span, .education .main-information .position-information p.shoutout-business span {
+.content-block .main-information .position-information p.shoutout-business span {
   position: relative;
   top: -5px;
   left: 5px;
   font-size: 12px;
 }
 
-.job .job-description, .job .story-description, .job .shoutout-description, .job .education-description, .job .main-description, .story .job-description, .story .story-description, .story .shoutout-description, .story .education-description, .story .main-description, .shoutout .job-description, .shoutout .story-description, .shoutout .shoutout-description, .shoutout .education-description, .shoutout .main-description, .education .job-description, .education .story-description, .education .shoutout-description, .education .education-description, .education .main-description {
+.content-block .main-description {
   padding-right: 0;
   padding-left: 0;
   margin-bottom: 25px;
 }
 
-.job .job-description .dropdown.more, .job .story-description .dropdown.more, .job .shoutout-description .dropdown.more, .job .education-description .dropdown.more, .job .main-description .dropdown.more, .story .job-description .dropdown.more, .story .story-description .dropdown.more, .story .shoutout-description .dropdown.more, .story .education-description .dropdown.more, .story .main-description .dropdown.more, .shoutout .job-description .dropdown.more, .shoutout .story-description .dropdown.more, .shoutout .shoutout-description .dropdown.more, .shoutout .education-description .dropdown.more, .shoutout .main-description .dropdown.more, .education .job-description .dropdown.more, .education .story-description .dropdown.more, .education .shoutout-description .dropdown.more, .education .education-description .dropdown.more, .education .main-description .dropdown.more {
+.content-block .main-description .dropdown.more {
   cursor: pointer;
 }
 
-.job .job-description .dropdown.more i, .job .story-description .dropdown.more i, .job .shoutout-description .dropdown.more i, .job .education-description .dropdown.more i, .job .main-description .dropdown.more i, .story .job-description .dropdown.more i, .story .story-description .dropdown.more i, .story .shoutout-description .dropdown.more i, .story .education-description .dropdown.more i, .story .main-description .dropdown.more i, .shoutout .job-description .dropdown.more i, .shoutout .story-description .dropdown.more i, .shoutout .shoutout-description .dropdown.more i, .shoutout .education-description .dropdown.more i, .shoutout .main-description .dropdown.more i, .education .job-description .dropdown.more i, .education .story-description .dropdown.more i, .education .shoutout-description .dropdown.more i, .education .education-description .dropdown.more i, .education .main-description .dropdown.more i {
+.content-block .main-description .dropdown.more i {
   float: right;
   margin-right: 25px;
   font-size: 28px;
@@ -782,11 +632,11 @@ section.documentation .container .profile-information-after-fixed .container-flu
   display: none;
 }
 
-.job .job-description .dropdown.more i:hover, .job .story-description .dropdown.more i:hover, .job .shoutout-description .dropdown.more i:hover, .job .education-description .dropdown.more i:hover, .job .main-description .dropdown.more i:hover, .story .job-description .dropdown.more i:hover, .story .story-description .dropdown.more i:hover, .story .shoutout-description .dropdown.more i:hover, .story .education-description .dropdown.more i:hover, .story .main-description .dropdown.more i:hover, .shoutout .job-description .dropdown.more i:hover, .shoutout .story-description .dropdown.more i:hover, .shoutout .shoutout-description .dropdown.more i:hover, .shoutout .education-description .dropdown.more i:hover, .shoutout .main-description .dropdown.more i:hover, .education .job-description .dropdown.more i:hover, .education .story-description .dropdown.more i:hover, .education .shoutout-description .dropdown.more i:hover, .education .education-description .dropdown.more i:hover, .education .main-description .dropdown.more i:hover {
+.content-block .main-description .dropdown.more i:hover {
   color: #b2bcc6;
 }
 
-.job .job-description .dropdown.more ul, .job .story-description .dropdown.more ul, .job .shoutout-description .dropdown.more ul, .job .education-description .dropdown.more ul, .job .main-description .dropdown.more ul, .story .job-description .dropdown.more ul, .story .story-description .dropdown.more ul, .story .shoutout-description .dropdown.more ul, .story .education-description .dropdown.more ul, .story .main-description .dropdown.more ul, .shoutout .job-description .dropdown.more ul, .shoutout .story-description .dropdown.more ul, .shoutout .shoutout-description .dropdown.more ul, .shoutout .education-description .dropdown.more ul, .shoutout .main-description .dropdown.more ul, .education .job-description .dropdown.more ul, .education .story-description .dropdown.more ul, .education .shoutout-description .dropdown.more ul, .education .education-description .dropdown.more ul, .education .main-description .dropdown.more ul {
+.content-block .main-description .dropdown.more ul {
   right: 15px;
   top: -15px;
   left: auto;
@@ -797,7 +647,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   z-index: 3000;
 }
 
-.job .job-description .dropdown.more ul li a, .job .story-description .dropdown.more ul li a, .job .shoutout-description .dropdown.more ul li a, .job .education-description .dropdown.more ul li a, .job .main-description .dropdown.more ul li a, .story .job-description .dropdown.more ul li a, .story .story-description .dropdown.more ul li a, .story .shoutout-description .dropdown.more ul li a, .story .education-description .dropdown.more ul li a, .story .main-description .dropdown.more ul li a, .shoutout .job-description .dropdown.more ul li a, .shoutout .story-description .dropdown.more ul li a, .shoutout .shoutout-description .dropdown.more ul li a, .shoutout .education-description .dropdown.more ul li a, .shoutout .main-description .dropdown.more ul li a, .education .job-description .dropdown.more ul li a, .education .story-description .dropdown.more ul li a, .education .shoutout-description .dropdown.more ul li a, .education .education-description .dropdown.more ul li a, .education .main-description .dropdown.more ul li a {
+.content-block .main-description .dropdown.more ul li a {
   font-size: 16px;
   font-weight: 500;
   color: #86939e;
@@ -805,12 +655,12 @@ section.documentation .container .profile-information-after-fixed .container-flu
   padding: 0 25px;
 }
 
-.job .job-description .dropdown.more ul li a:hover, .job .job-description .dropdown.more ul li a:focus, .job .job-description .dropdown.more ul li a:active, .job .story-description .dropdown.more ul li a:hover, .job .story-description .dropdown.more ul li a:focus, .job .story-description .dropdown.more ul li a:active, .job .shoutout-description .dropdown.more ul li a:hover, .job .shoutout-description .dropdown.more ul li a:focus, .job .shoutout-description .dropdown.more ul li a:active, .job .education-description .dropdown.more ul li a:hover, .job .education-description .dropdown.more ul li a:focus, .job .education-description .dropdown.more ul li a:active, .job .main-description .dropdown.more ul li a:hover, .job .main-description .dropdown.more ul li a:focus, .job .main-description .dropdown.more ul li a:active, .story .job-description .dropdown.more ul li a:hover, .story .job-description .dropdown.more ul li a:focus, .story .job-description .dropdown.more ul li a:active, .story .story-description .dropdown.more ul li a:hover, .story .story-description .dropdown.more ul li a:focus, .story .story-description .dropdown.more ul li a:active, .story .shoutout-description .dropdown.more ul li a:hover, .story .shoutout-description .dropdown.more ul li a:focus, .story .shoutout-description .dropdown.more ul li a:active, .story .education-description .dropdown.more ul li a:hover, .story .education-description .dropdown.more ul li a:focus, .story .education-description .dropdown.more ul li a:active, .story .main-description .dropdown.more ul li a:hover, .story .main-description .dropdown.more ul li a:focus, .story .main-description .dropdown.more ul li a:active, .shoutout .job-description .dropdown.more ul li a:hover, .shoutout .job-description .dropdown.more ul li a:focus, .shoutout .job-description .dropdown.more ul li a:active, .shoutout .story-description .dropdown.more ul li a:hover, .shoutout .story-description .dropdown.more ul li a:focus, .shoutout .story-description .dropdown.more ul li a:active, .shoutout .shoutout-description .dropdown.more ul li a:hover, .shoutout .shoutout-description .dropdown.more ul li a:focus, .shoutout .shoutout-description .dropdown.more ul li a:active, .shoutout .education-description .dropdown.more ul li a:hover, .shoutout .education-description .dropdown.more ul li a:focus, .shoutout .education-description .dropdown.more ul li a:active, .shoutout .main-description .dropdown.more ul li a:hover, .shoutout .main-description .dropdown.more ul li a:focus, .shoutout .main-description .dropdown.more ul li a:active, .education .job-description .dropdown.more ul li a:hover, .education .job-description .dropdown.more ul li a:focus, .education .job-description .dropdown.more ul li a:active, .education .story-description .dropdown.more ul li a:hover, .education .story-description .dropdown.more ul li a:focus, .education .story-description .dropdown.more ul li a:active, .education .shoutout-description .dropdown.more ul li a:hover, .education .shoutout-description .dropdown.more ul li a:focus, .education .shoutout-description .dropdown.more ul li a:active, .education .education-description .dropdown.more ul li a:hover, .education .education-description .dropdown.more ul li a:focus, .education .education-description .dropdown.more ul li a:active, .education .main-description .dropdown.more ul li a:hover, .education .main-description .dropdown.more ul li a:focus, .education .main-description .dropdown.more ul li a:active {
+.content-block .main-description .dropdown.more ul li a:hover, .content-block .main-description .dropdown.more ul li a:focus, .content-block .main-description .dropdown.more ul li a:active {
   color: #127fff;
   background-color: #edf3fa;
 }
 
-.job .job-description h4, .job .story-description h4, .job .shoutout-description h4, .job .education-description h4, .job .main-description h4, .story .job-description h4, .story .story-description h4, .story .shoutout-description h4, .story .education-description h4, .story .main-description h4, .shoutout .job-description h4, .shoutout .story-description h4, .shoutout .shoutout-description h4, .shoutout .education-description h4, .shoutout .main-description h4, .education .job-description h4, .education .story-description h4, .education .shoutout-description h4, .education .education-description h4, .education .main-description h4 {
+.content-block .main-description h4 {
   font-size: 16px;
   font-weight: 500;
   line-height: 1.23;
@@ -819,19 +669,13 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-right: 105px;
 }
 
-.job .job-description p.story-paragraph, .job .story-description p.story-paragraph, .job .shoutout-description p.story-paragraph, .job .education-description p.story-paragraph, .job .main-description p.story-paragraph, .story .job-description p.story-paragraph, .story .story-description p.story-paragraph, .story .shoutout-description p.story-paragraph, .story .education-description p.story-paragraph, .story .main-description p.story-paragraph, .shoutout .job-description p.story-paragraph, .shoutout .story-description p.story-paragraph, .shoutout .shoutout-description p.story-paragraph, .shoutout .education-description p.story-paragraph, .shoutout .main-description p.story-paragraph, .education .job-description p.story-paragraph, .education .story-description p.story-paragraph, .education .shoutout-description p.story-paragraph, .education .education-description p.story-paragraph, .education .main-description p.story-paragraph {
-  margin: 0;
-  margin-right: 85px;
-  margin-bottom: 15px;
-}
-
-.job .job-description p.education-paragraph, .job .story-description p.education-paragraph, .job .shoutout-description p.education-paragraph, .job .education-description p.education-paragraph, .job .main-description p.education-paragraph, .story .job-description p.education-paragraph, .story .story-description p.education-paragraph, .story .shoutout-description p.education-paragraph, .story .education-description p.education-paragraph, .story .main-description p.education-paragraph, .shoutout .job-description p.education-paragraph, .shoutout .story-description p.education-paragraph, .shoutout .shoutout-description p.education-paragraph, .shoutout .education-description p.education-paragraph, .shoutout .main-description p.education-paragraph, .education .job-description p.education-paragraph, .education .story-description p.education-paragraph, .education .shoutout-description p.education-paragraph, .education .education-description p.education-paragraph, .education .main-description p.education-paragraph {
+.content-block .main-description p.education-paragraph {
   margin-right: 40px;
   margin-bottom: 0;
   min-height: 100px;
 }
 
-.job .job-description p, .job .story-description p, .job .shoutout-description p, .job .education-description p, .job .main-description p, .story .job-description p, .story .story-description p, .story .shoutout-description p, .story .education-description p, .story .main-description p, .shoutout .job-description p, .shoutout .story-description p, .shoutout .shoutout-description p, .shoutout .education-description p, .shoutout .main-description p, .education .job-description p, .education .story-description p, .education .shoutout-description p, .education .education-description p, .education .main-description p {
+.content-block .main-description p {
   font-size: 14px;
   color: #86939e;
   line-height: 1.71;
@@ -840,25 +684,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-bottom: 15px;
 }
 
-.job .job-description p.shoutout-paragraph, .job .story-description p.shoutout-paragraph, .job .shoutout-description p.shoutout-paragraph, .job .education-description p.shoutout-paragraph, .job .main-description p.shoutout-paragraph, .story .job-description p.shoutout-paragraph, .story .story-description p.shoutout-paragraph, .story .shoutout-description p.shoutout-paragraph, .story .education-description p.shoutout-paragraph, .story .main-description p.shoutout-paragraph, .shoutout .job-description p.shoutout-paragraph, .shoutout .story-description p.shoutout-paragraph, .shoutout .shoutout-description p.shoutout-paragraph, .shoutout .education-description p.shoutout-paragraph, .shoutout .main-description p.shoutout-paragraph, .education .job-description p.shoutout-paragraph, .education .story-description p.shoutout-paragraph, .education .shoutout-description p.shoutout-paragraph, .education .education-description p.shoutout-paragraph, .education .main-description p.shoutout-paragraph {
-  font-size: 16px;
-  color: #43484d;
-  line-height: 1.6;
-  margin-right: 60px;
-  margin-bottom: 30px;
-  margin-left: 20px;
-}
-
-.job .job-description p.shoutout-paragraph.date, .job .story-description p.shoutout-paragraph.date, .job .shoutout-description p.shoutout-paragraph.date, .job .education-description p.shoutout-paragraph.date, .job .main-description p.shoutout-paragraph.date, .story .job-description p.shoutout-paragraph.date, .story .story-description p.shoutout-paragraph.date, .story .shoutout-description p.shoutout-paragraph.date, .story .education-description p.shoutout-paragraph.date, .story .main-description p.shoutout-paragraph.date, .shoutout .job-description p.shoutout-paragraph.date, .shoutout .story-description p.shoutout-paragraph.date, .shoutout .shoutout-description p.shoutout-paragraph.date, .shoutout .education-description p.shoutout-paragraph.date, .shoutout .main-description p.shoutout-paragraph.date, .education .job-description p.shoutout-paragraph.date, .education .story-description p.shoutout-paragraph.date, .education .shoutout-description p.shoutout-paragraph.date, .education .education-description p.shoutout-paragraph.date, .education .main-description p.shoutout-paragraph.date {
-  margin-bottom: 0;
-  margin-top: -20px;
-  font-weight: 400;
-  float: right;
-  margin-right: 40px;
-  color: #86939e;
-}
-
-.job .job-description span, .job .story-description span, .job .shoutout-description span, .job .education-description span, .job .main-description span, .story .job-description span, .story .story-description span, .story .shoutout-description span, .story .education-description span, .story .main-description span, .shoutout .job-description span, .shoutout .story-description span, .shoutout .shoutout-description span, .shoutout .education-description span, .shoutout .main-description span, .education .job-description span, .education .story-description span, .education .shoutout-description span, .education .education-description span, .education .main-description span {
+.content-block .main-description span {
   border-radius: 3px;
   font-weight: 500;
   font-size: 12px;
@@ -866,14 +692,10 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-left: 17px;
 }
 
-.job .job-description span.accomplishment, .job .story-description span.accomplishment, .job .shoutout-description span.accomplishment, .job .education-description span.accomplishment, .job .main-description span.accomplishment, .story .job-description span.accomplishment, .story .story-description span.accomplishment, .story .shoutout-description span.accomplishment, .story .education-description span.accomplishment, .story .main-description span.accomplishment, .shoutout .job-description span.accomplishment, .shoutout .story-description span.accomplishment, .shoutout .shoutout-description span.accomplishment, .shoutout .education-description span.accomplishment, .shoutout .main-description span.accomplishment, .education .job-description span.accomplishment, .education .story-description span.accomplishment, .education .shoutout-description span.accomplishment, .education .education-description span.accomplishment, .education .main-description span.accomplishment {
+.content-block .main-description span.accomplishment {
   background-color: rgba(254, 178, 48, 0.13);
   color: #d1a252;
   float: right;
-  margin-right: 30px;
-}
-
-.job .job-description .more img, .story .job-description .more img, .shoutout .job-description .more img, .education .job-description .more img {
   margin-right: 30px;
 }
 
@@ -1233,42 +1055,6 @@ section.documentation .container .profile-information-after-fixed .container-flu
   text-align: center;
 }
 
-.panel-body .accomplishment-full .description .team-members .ui {
-  padding: 6px 10px;
-  padding-right: 26px;
-  border-radius: 5px;
-  background-color: transparent;
-  border: 1px solid #dadada;
-  box-shadow: 0px 0px 3px #eaeaea;
-  position: relative;
-  transition: all 0.3s ease 0s;
-  top: 0;
-  display: inline-block;
-  margin-top: 5px;
-  float: left;
-}
-
-.panel-body .accomplishment-full .description .team-members .ui:hover {
-  background-color: #f5f5f5;
-  box-shadow: 0px 0px 10px #eaeaea;
-  top: -5px;
-}
-
-.panel-body .accomplishment-full .description .team-members .ui img {
-  width: 35px;
-  height: 35px;
-  border-radius: 100%;
-  float: left;
-  margin-top: 0;
-}
-
-.panel-body .accomplishment-full .description .team-members .ui span {
-  line-height: 35px;
-  color: #86939e;
-  position: relative;
-  left: 10px;
-}
-
 .panel-body .accomplishment-full .sharing {
   margin-top: 35px;
 }
@@ -1429,730 +1215,6 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-bottom: 25px;
 }
 
-.modal#accomplishmentModal .modal-lg,
-.new-test-modal .modal-lg {
-  width: 900px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content,
-.new-test-modal .modal-lg .modal-content {
-  padding: 0;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header button.close span,
-.new-test-modal .modal-lg .modal-content .modal-header button.close span {
-  font-size: 36px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group,
-.new-test-modal .modal-lg .modal-content .modal-header .form-group {
-  margin-top: 25px;
-  margin-bottom: -35px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group img,
-.new-test-modal .modal-lg .modal-content .modal-header .form-group img {
-  position: absolute;
-  z-index: 100;
-  left: 55px;
-  top: 10px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group [type=file],
-.new-test-modal .modal-lg .modal-content .modal-header .form-group [type=file] {
-  position: absolute;
-  filter: alpha(opacity=0);
-  opacity: 0;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group input.input-file,
-.new-test-modal .modal-lg .modal-content .modal-header .form-group input.input-file {
-  border: 1px solid #CCC;
-  border-radius: 3px;
-  text-align: left;
-  padding: 10px;
-  width: 180px;
-  margin: 0;
-  left: 0;
-  position: relative;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group [type=file] + label,
-.new-test-modal .modal-lg .modal-content .modal-header .form-group [type=file] + label {
-  border: 1px solid #CCC;
-  border-radius: 3px;
-  text-align: left;
-  padding: 10px 20px;
-  width: 180px;
-  margin: 0;
-  left: 2em;
-  top: -3.5em;
-  font-weight: 400;
-  position: relative;
-  text-align: right;
-  background: #f5f6fa;
-  color: #91969c;
-  border: none;
-  cursor: pointer;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group [type=file] + label:hover, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group [type=file] + label:focus, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group [type=file] + label:active,
-.new-test-modal .modal-lg .modal-content .modal-header .form-group [type=file] + label:hover,
-.new-test-modal .modal-lg .modal-content .modal-header .form-group [type=file] + label:focus,
-.new-test-modal .modal-lg .modal-content .modal-header .form-group [type=file] + label:active {
-  background: #dfe0e4;
-  color: #8b8f94;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header,
-.new-test-modal .modal-lg .modal-content .modal-header {
-  padding: 25px;
-  border: none;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .form-group,
-.new-test-modal .modal-lg .modal-content .modal-header .form-group {
-  margin-left: 10px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header img.file-input-first-image,
-.new-test-modal .modal-lg .modal-content .modal-header img.file-input-first-image {
-  top: 5px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .col-lg-2, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .col-lg-10,
-.new-test-modal .modal-lg .modal-content .modal-header .col-lg-2,
-.new-test-modal .modal-lg .modal-content .modal-header .col-lg-10 {
-  padding: 0;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-image img,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-image img {
-  height: 40px;
-  width: 40px;
-  float: left;
-  border-radius: 100%;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs {
-  margin-left: -80px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs textarea, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs input,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs textarea,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs input {
-  border: none;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  outline: none;
-  display: block;
-  width: 100%;
-  float: right;
-  resize: none;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar-track, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar-track,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar-track,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background-color: white;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar {
-  width: 7px;
-  background-color: #F5F5F5;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar-thumb, .modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar-thumb,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs textarea::-webkit-scrollbar-thumb,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs input::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: #e5e5e5;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs input.title,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs input.title {
-  color: #43484d;
-  font-size: 26px;
-  line-height: 1.31;
-  font-weight: 300;
-  font-family: 'Roboto', sans-serif;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-header .modal-inputs textarea.description,
-.new-test-modal .modal-lg .modal-content .modal-header .modal-inputs textarea.description {
-  color: #5c656c;
-  font-size: 16px;
-  font-weight: 400;
-  margin-top: 10px;
-  line-height: 1.4;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body,
-.new-test-modal .modal-lg .modal-content .modal-body {
-  padding: 0 25px;
-  border-bottom: none;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body h3.publish-modal-heading,
-.new-test-modal .modal-lg .modal-content .modal-body h3.publish-modal-heading {
-  color: #65a9fc;
-  font-size: 30px;
-  font-weight: 400;
-  text-align: center;
-  margin-bottom: 0;
-  margin-bottom: 100px;
-  display: none;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body h4.publish-modal-description,
-.new-test-modal .modal-lg .modal-content .modal-body h4.publish-modal-description {
-  color: #606467;
-  font-size: 18px;
-  font-weight: 400;
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 0;
-  padding: 0 200px;
-  display: none;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector:first-child,
-.new-test-modal .modal-lg .modal-content .modal-body .selector:first-child {
-  border-top: 1px solid #efefef;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-image,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-image {
-  padding: 0;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-image .form-group,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-image .form-group {
-  margin-top: 15px;
-  margin-left: -40px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-image .form-group img,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-image .form-group img {
-  left: 65px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector,
-.new-test-modal .modal-lg .modal-content .modal-body .selector {
-  border-bottom: 1px solid #efefef;
-  padding: 20px 0;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector p,
-.new-test-modal .modal-lg .modal-content .modal-body .selector p {
-  color: #5e6977;
-  font-size: 16px;
-  font-weight: 300;
-  padding: 0 50px;
-  text-align: center;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector .icon-image,
-.new-test-modal .modal-lg .modal-content .modal-body .selector .icon-image {
-  float: left;
-  background-color: #f5f6fa;
-  width: 36px;
-  height: 36px;
-  border-radius: 100%;
-  position: relative;
-  margin-right: 15px;
-  margin-top: -5px;
-  text-align: center;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector .icon-image i,
-.new-test-modal .modal-lg .modal-content .modal-body .selector .icon-image i {
-  line-height: 36px;
-  font-size: 14px;
-  color: #86939e;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector input,
-.new-test-modal .modal-lg .modal-content .modal-body .selector input {
-  border: none;
-  outline: none !important;
-  font-size: 14px;
-  font-weight: 400;
-  width: 265px;
-  line-height: 1;
-  margin-top: 4px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector input::-webkit-input-placeholder,
-.new-test-modal .modal-lg .modal-content .modal-body .selector input::-webkit-input-placeholder {
-  color: #5e6977;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  line-height: 1;
-  opacity: 1;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector input::-moz-placeholder,
-.new-test-modal .modal-lg .modal-content .modal-body .selector input::-moz-placeholder {
-  color: #5e6977;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  line-height: 1;
-  opacity: 1;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector input:-ms-input-placeholder,
-.new-test-modal .modal-lg .modal-content .modal-body .selector input:-ms-input-placeholder {
-  color: #5e6977;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  line-height: 1;
-  opacity: 1;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector input::placeholder,
-.new-test-modal .modal-lg .modal-content .modal-body .selector input::placeholder {
-  color: #5e6977;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  line-height: 1;
-  opacity: 1;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector:last-child,
-.new-test-modal .modal-lg .modal-content .modal-body .selector:last-child {
-  border-bottom: none;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something {
-  padding: 10px 0;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something .icon-image,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something .icon-image {
-  margin-top: 3px;
-  margin-right: 10px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something .icon-image i,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something .icon-image i {
-  font-size: 16px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something .ui.dropdown,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something .ui.dropdown {
-  margin-top: 5px !important;
-  width: 94%;
-  float: right;
-  border: none;
-  box-shadow: none;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something .ui.dropdown .text,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something .ui.dropdown .text {
-  color: #5e6977;
-  line-height: 1;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.select-something .ui.label,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.select-something .ui.label {
-  border: solid 1px #e1e8ee;
-  background-color: white;
-  color: #86939e;
-  box-shadow: none;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members {
-  z-index: 99999;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .text,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .text {
-  color: #5e6977;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar-track,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background-color: white;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar {
-  width: 7px;
-  background-color: #F5F5F5;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar-thumb,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: #e5e5e5;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .ui input,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .ui input {
-  font-size: 14px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header {
-  font-size: 16px;
-  font-weight: 400;
-  text-transform: none;
-  color: #5e6977;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header i:before,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header i:before {
-  margin-right: 10px;
-  font-size: 14px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header span,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .header span {
-  font-weight: 300;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .item span,
-.new-test-modal .modal-lg .modal-content .modal-body .selector.add-team-members .ui .menu .item span {
-  font-weight: 300;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer,
-.new-test-modal .modal-lg .modal-content .modal-footer {
-  border: none;
-  background-color: #f0f4f7;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button,
-.new-test-modal .modal-lg .modal-content .modal-footer button {
-  font-size: 16px;
-  border-radius: 8px;
-  width: 150px;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.save-draft,
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.close-modal,
-.new-test-modal .modal-lg .modal-content .modal-footer button.save-draft,
-.new-test-modal .modal-lg .modal-content .modal-footer button.close-modal {
-  border: 2px solid #e2e7eb;
-  color: #8b949d;
-  background-color: transparent;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.save-draft:hover, .modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.save-draft:active, .modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.close-modal:active,
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
-.new-test-modal .modal-lg .modal-content .modal-footer button.save-draft:hover,
-.new-test-modal .modal-lg .modal-content .modal-footer button.save-draft:active,
-.new-test-modal .modal-lg .modal-content .modal-footer button.save-draft:focus,
-.new-test-modal .modal-lg .modal-content .modal-footer button.close-modal:hover,
-.new-test-modal .modal-lg .modal-content .modal-footer button.close-modal:active,
-.new-test-modal .modal-lg .modal-content .modal-footer button.close-modal:focus {
-  background-color: #eaeef1;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.publish,
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.new-post,
-.new-test-modal .modal-lg .modal-content .modal-footer button.publish,
-.new-test-modal .modal-lg .modal-content .modal-footer button.new-post {
-  background-color: #76c84a;
-  color: #f7fff1;
-  border: 2px solid #76c84a;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.publish:hover, .modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.publish:focus, .modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.publish:active,
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.new-post:hover,
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.new-post:focus,
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.new-post:active,
-.new-test-modal .modal-lg .modal-content .modal-footer button.publish:hover,
-.new-test-modal .modal-lg .modal-content .modal-footer button.publish:focus,
-.new-test-modal .modal-lg .modal-content .modal-footer button.publish:active,
-.new-test-modal .modal-lg .modal-content .modal-footer button.new-post:hover,
-.new-test-modal .modal-lg .modal-content .modal-footer button.new-post:focus,
-.new-test-modal .modal-lg .modal-content .modal-footer button.new-post:active {
-  background-color: #6fba46;
-  border: 2px solid #6fba46;
-}
-
-.modal#accomplishmentModal .modal-lg .modal-content .modal-footer button.close-modal,
-.new-test-modal .modal-lg .modal-content .modal-footer button.close-modal {
-  display: none;
-}
-
-.modal#storyModal .modal-lg,
-.modal#jobModal .modal-lg,
-.modal#educationModal .modal-lg,
-.modal#shoutoutModal .modal-lg,
-.modal#avatarModal .modal-lg,
-.modal#inviteModal .modal-lg {
-  width: 750px;
-}
-
-.modal#storyModal .modal-lg .modal-content,
-.modal#jobModal .modal-lg .modal-content,
-.modal#educationModal .modal-lg .modal-content,
-.modal#shoutoutModal .modal-lg .modal-content,
-.modal#avatarModal .modal-lg .modal-content,
-.modal#inviteModal .modal-lg .modal-content {
-  padding: 0;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-header,
-.modal#jobModal .modal-lg .modal-content .modal-header,
-.modal#educationModal .modal-lg .modal-content .modal-header,
-.modal#shoutoutModal .modal-lg .modal-content .modal-header,
-.modal#avatarModal .modal-lg .modal-content .modal-header,
-.modal#inviteModal .modal-lg .modal-content .modal-header {
-  padding: 0;
-  border-bottom: 1px solid #e6e7e9;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-header h3,
-.modal#jobModal .modal-lg .modal-content .modal-header h3,
-.modal#educationModal .modal-lg .modal-content .modal-header h3,
-.modal#shoutoutModal .modal-lg .modal-content .modal-header h3,
-.modal#avatarModal .modal-lg .modal-content .modal-header h3,
-.modal#inviteModal .modal-lg .modal-content .modal-header h3 {
-  font-size: 18px;
-  color: #8a8d92;
-  margin: 20px 0 20px 20px;
-  font-weight: 400;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-header h3.avatar-h3,
-.modal#jobModal .modal-lg .modal-content .modal-header h3.avatar-h3,
-.modal#educationModal .modal-lg .modal-content .modal-header h3.avatar-h3,
-.modal#shoutoutModal .modal-lg .modal-content .modal-header h3.avatar-h3,
-.modal#avatarModal .modal-lg .modal-content .modal-header h3.avatar-h3,
-.modal#inviteModal .modal-lg .modal-content .modal-header h3.avatar-h3 {
-  float: left;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-header .avatar-message,
-.modal#jobModal .modal-lg .modal-content .modal-header .avatar-message,
-.modal#educationModal .modal-lg .modal-content .modal-header .avatar-message,
-.modal#shoutoutModal .modal-lg .modal-content .modal-header .avatar-message,
-.modal#avatarModal .modal-lg .modal-content .modal-header .avatar-message,
-.modal#inviteModal .modal-lg .modal-content .modal-header .avatar-message {
-  float: left;
-  margin-left: 15px;
-  margin-top: 11px;
-  display: inline-block;
-  padding: 10px;
-  padding-right: 30px;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-header .avatar-message i,
-.modal#jobModal .modal-lg .modal-content .modal-header .avatar-message i,
-.modal#educationModal .modal-lg .modal-content .modal-header .avatar-message i,
-.modal#shoutoutModal .modal-lg .modal-content .modal-header .avatar-message i,
-.modal#avatarModal .modal-lg .modal-content .modal-header .avatar-message i,
-.modal#inviteModal .modal-lg .modal-content .modal-header .avatar-message i {
-  color: #2185D0;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-header button.close,
-.modal#jobModal .modal-lg .modal-content .modal-header button.close,
-.modal#educationModal .modal-lg .modal-content .modal-header button.close,
-.modal#shoutoutModal .modal-lg .modal-content .modal-header button.close,
-.modal#avatarModal .modal-lg .modal-content .modal-header button.close,
-.modal#inviteModal .modal-lg .modal-content .modal-header button.close {
-  margin-top: 10px;
-  margin-right: 25px;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-header button.close span,
-.modal#jobModal .modal-lg .modal-content .modal-header button.close span,
-.modal#educationModal .modal-lg .modal-content .modal-header button.close span,
-.modal#shoutoutModal .modal-lg .modal-content .modal-header button.close span,
-.modal#avatarModal .modal-lg .modal-content .modal-header button.close span,
-.modal#inviteModal .modal-lg .modal-content .modal-header button.close span {
-  font-size: 40px;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-footer,
-.modal#jobModal .modal-lg .modal-content .modal-footer,
-.modal#educationModal .modal-lg .modal-content .modal-footer,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer,
-.modal#avatarModal .modal-lg .modal-content .modal-footer,
-.modal#inviteModal .modal-lg .modal-content .modal-footer {
-  border: none;
-  background-color: #f0f4f7;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-footer button,
-.modal#jobModal .modal-lg .modal-content .modal-footer button,
-.modal#educationModal .modal-lg .modal-content .modal-footer button,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button {
-  font-size: 16px;
-  border-radius: 8px;
-  width: 150px;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-footer button.save-draft,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.close-modal,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.close-avatar-modal,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.save-draft,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.close-modal,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.close-avatar-modal,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.save-draft,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.close-modal,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.close-avatar-modal,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.save-draft,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-modal,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-avatar-modal,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.save-draft,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-modal,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-avatar-modal,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.save-draft,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-modal,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-avatar-modal {
-  border: 2px solid #e2e7eb;
-  color: #8b949d;
-  background-color: transparent;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-footer button.save-draft:hover, .modal#storyModal .modal-lg .modal-content .modal-footer button.save-draft:active, .modal#storyModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.close-modal:active,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.save-draft:hover,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.save-draft:active,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.close-modal:active,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.save-draft:hover,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.save-draft:active,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.close-modal:active,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.save-draft:hover,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.save-draft:active,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-modal:active,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.save-draft:hover,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.save-draft:active,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-modal:active,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.save-draft:hover,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.save-draft:active,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.save-draft:focus,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-modal:hover,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-modal:active,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-modal:focus,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:hover,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:active,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-avatar-modal:focus {
-  background-color: #eaeef1;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-footer button.publish,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.new-post,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.publish,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.new-post,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.publish,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.new-post,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.publish,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.new-post,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.publish,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.new-post,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.publish,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.new-post {
-  background-color: #76c84a;
-  color: #f7fff1;
-  border: 2px solid #76c84a;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-footer button.publish:hover, .modal#storyModal .modal-lg .modal-content .modal-footer button.publish:focus, .modal#storyModal .modal-lg .modal-content .modal-footer button.publish:active,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.new-post:hover,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.new-post:focus,
-.modal#storyModal .modal-lg .modal-content .modal-footer button.new-post:active,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.publish:hover,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.publish:focus,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.publish:active,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.new-post:hover,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.new-post:focus,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.new-post:active,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.publish:hover,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.publish:focus,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.publish:active,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.new-post:hover,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.new-post:focus,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.new-post:active,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.publish:hover,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.publish:focus,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.publish:active,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.new-post:hover,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.new-post:focus,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.new-post:active,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.publish:hover,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.publish:focus,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.publish:active,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.new-post:hover,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.new-post:focus,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.new-post:active,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.publish:hover,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.publish:focus,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.publish:active,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.new-post:hover,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.new-post:focus,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.new-post:active {
-  background-color: #6fba46;
-  border: 2px solid #6fba46;
-}
-
-.modal#storyModal .modal-lg .modal-content .modal-footer button.close-modal,
-.modal#jobModal .modal-lg .modal-content .modal-footer button.close-modal,
-.modal#educationModal .modal-lg .modal-content .modal-footer button.close-modal,
-.modal#shoutoutModal .modal-lg .modal-content .modal-footer button.close-modal,
-.modal#avatarModal .modal-lg .modal-content .modal-footer button.close-modal,
-.modal#inviteModal .modal-lg .modal-content .modal-footer button.close-modal {
-  display: none;
-}
-
-.modal#inviteModal .modal-dialog .modal-content .modal-footer button.close-modal {
-  display: initial;
-}
-
 section.background-image {
   min-height: 400px;
   margin-top: 59px;
@@ -2225,584 +1287,6 @@ section.background-image .button-prev, .post .image .button-prev {
 .modal-body .post .image .owl-carousel .item img {
   width: 100%;
   height: 340px !important;
-}
-
-#timeline {
-  background-color: #f2f2f2;
-}
-
-#timeline ul {
-  padding: 0;
-  overflow: auto;
-  float: left;
-  list-style-type: none;
-}
-
-#timeline ul li.swipeout {
-  overflow: hidden;
-}
-
-.modal.timeline .modal-dialog .modal-content {
-  padding: 0;
-}
-
-.timeline-post {
-  max-height: 320px;
-}
-
-.timeline-post .post p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  max-height: 320px;
-  -webkit-line-clamp: 9;
-  -webkit-box-orient: vertical;
-}
-
-.input-timeline {
-  max-height: inherit;
-}
-
-.timeline-post, .modal.timeline .modal-dialog .modal-content .modal-body {
-  padding: 0;
-  border-bottom: 1px solid #e1e8ee;
-  cursor: pointer;
-  margin-top: 10px;
-  padding-top: 24px;
-  background-color: white;
-}
-
-.timeline-post .input-header, .modal.timeline .modal-dialog .modal-content .modal-body .input-header {
-  background-color: #f0f4f7;
-  padding-left: 20px;
-  margin-bottom: 10px;
-  cursor: auto;
-  margin-top: -24px;
-}
-
-.timeline-post .input-header i, .timeline-post .input-header span, .modal.timeline .modal-dialog .modal-content .modal-body .input-header i, .modal.timeline .modal-dialog .modal-content .modal-body .input-header span {
-  font-size: 14px;
-  line-height: 40px;
-  color: #5e6977;
-  margin: 0;
-  font-weight: 400;
-}
-
-.timeline-post .input-header span, .modal.timeline .modal-dialog .modal-content .modal-body .input-header span {
-  margin-left: 10px;
-}
-
-.timeline-post .picture, .modal.timeline .modal-dialog .modal-content .modal-body .picture {
-  float: left;
-}
-
-.timeline-post .picture img, .modal.timeline .modal-dialog .modal-content .modal-body .picture img {
-  height: 60px;
-  width: 60px;
-  margin-left: 20px;
-  border-radius: 100%;
-  margin-right: 15px;
-}
-
-.timeline-post .post.post-input, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input {
-  margin-bottom: 30px;
-  padding-right: 25px;
-  margin-top: 15px;
-  margin-left: 95px;
-}
-
-.timeline-post .post.post-input textarea, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input textarea {
-  box-shadow: none;
-  border: none;
-  border-bottom: 1px solid rgba(34, 36, 38, 0.15);
-  background-color: transparent;
-  font-family: 'Roboto', sans-serif;
-  line-height: 1.44;
-  color: #86939e;
-  margin-bottom: 15px;
-}
-
-.timeline-post .post.post-input .appearing-content, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content {
-  display: none;
-  position: relative;
-}
-
-.timeline-post .post.post-input .appearing-content .upload-photo, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .upload-photo {
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  border-left: none;
-  border-right: none;
-  height: 40px;
-  cursor: pointer;
-  float: left;
-  position: relative;
-}
-
-.timeline-post .post.post-input .appearing-content .upload-photo a, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .upload-photo a {
-  padding: 0 15px;
-  color: #B3B7BD;
-}
-
-.timeline-post .post.post-input .appearing-content .upload-photo a i, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .upload-photo a i {
-  line-height: 40px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui {
-  margin-top: 0 !important;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown {
-  padding: .78571429em 1em .7em 1em;
-  border: 1px solid rgba(34, 36, 38, 0.15) !important;
-  border-radius: 0;
-  height: 40px;
-  float: left;
-  position: relative;
-  margin-bottom: 15px;
-  width: 100%;
-  max-width: 100px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown input.search, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown input.search {
-  padding: 5px 0 !important;
-  margin-left: 15px;
-  padding-top: 3px !important;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown .text:not(.default), .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown .text:not(.default) {
-  left: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  top: -.78571429em;
-  margin-right: 27px;
-  padding: 0;
-  margin-bottom: 0;
-  margin: 0;
-  display: inline;
-  margin-right: 10px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown .text, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown .text {
-  position: relative;
-  top: -15px;
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown i.dropdown.icon, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown i.dropdown.icon {
-  display: inline;
-  position: relative;
-  top: -15px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown {
-  min-width: 17em;
-  max-width: 17em;
-  background-color: transparent;
-  border: none;
-  height: 40px;
-  border: 1px solid rgba(34, 36, 38, 0.15) !important;
-  border-radius: 0;
-  position: relative;
-  float: left;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown input.search, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown input.search {
-  padding: 5px 0 !important;
-  margin-left: 20px;
-  padding-top: 3px !important;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown i.remove.icon, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown i.remove.icon {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  z-index: 30;
-  display: none;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text {
-  margin-left: 15px;
-  top: -1px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default), .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) {
-  left: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  display: block;
-  top: -2px;
-  margin-right: 27px;
-  padding: 0;
-  margin-bottom: 0;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) img, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) img {
-  margin-right: 0 !important;
-  padding: 0 !important;
-  margin-right: 10px !important;
-  margin-bottom: 0;
-  width: auto;
-  max-height: 2em;
-  margin-top: 0;
-  width: 30px;
-  height: 30px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) span, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) span {
-  position: relative;
-  top: 2px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .header i span, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .header i span {
-  margin-left: 10px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .item, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .item {
-  padding: 10px !important;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .item img, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .item img {
-  margin-right: 0 !important;
-  padding: 0 !important;
-  margin-right: 10px !important;
-  margin-bottom: 5px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .input, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .input {
-  margin: 0px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .input input, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .input input {
-  padding: .5em 15px !important;
-  padding-right: 10% !important;
-}
-
-.timeline-post .post h5, .modal.timeline .modal-dialog .modal-content .modal-body .post h5 {
-  font-size: 14px;
-  line-height: 1;
-  color: #5e6977;
-  margin: 0;
-}
-
-.timeline-post .post h5.name, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.name {
-  margin-top: 5px;
-}
-
-.timeline-post .post h5.date, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.date {
-  font-weight: 400;
-  margin-top: 5px;
-  color: #86939e;
-}
-
-.timeline-post .post h5.year-happend, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.year-happend {
-  text-align: right;
-  position: absolute;
-  top: 29px;
-  right: 20px;
-  font-weight: 400;
-  color: #86939e;
-}
-
-.timeline-post .post h5.company, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.company {
-  text-align: right;
-  position: absolute;
-  top: 52px;
-  right: 20px;
-  font-weight: 400;
-  color: #86939e;
-}
-
-.timeline-post .post p, .modal.timeline .modal-dialog .modal-content .modal-body .post p {
-  font-size: 14px;
-  color: #86939e;
-  line-height: 1.71;
-  margin-left: 95px;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  padding-right: 15px;
-}
-
-.timeline-post .post .image, .modal.timeline .modal-dialog .modal-content .modal-body .post .image {
-  width: 50%;
-  height: 50%;
-  float: right;
-  padding-left: 25px;
-  margin-top: 20px;
-  margin-right: 15px;
-  margin-bottom: 30px;
-  position: relative;
-}
-
-.timeline-post .post .image img, .modal.timeline .modal-dialog .modal-content .modal-body .post .image img {
-  width: 100%;
-  min-height: 50px;
-  max-height: 200px;
-}
-
-.timeline-post .buttons, .modal.timeline .modal-dialog .modal-content .modal-body .buttons {
-  background-color: #f0f4f7;
-  text-align: right;
-  padding: 10px 25px;
-  display: none;
-  clear: both;
-}
-
-.timeline-post .buttons button, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button {
-  font-size: 16px;
-  border-radius: 8px;
-  width: 150px;
-}
-
-.timeline-post .buttons button.btn-cancel, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel {
-  border: 2px solid #e2e7eb;
-  color: #8b949d;
-  margin-right: 15px;
-  background-color: transparent;
-}
-
-.timeline-post .buttons button.btn-cancel:hover, .timeline-post .buttons button.btn-cancel:active, .timeline-post .buttons button.btn-cancel:focus, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel:hover, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel:active, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel:focus {
-  background-color: #eaeef1;
-}
-
-.timeline-post .buttons button.btn-post, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post {
-  background-color: #76c84a;
-  color: #f7fff1;
-  border: 2px solid #76c84a;
-}
-
-.timeline-post .buttons button.btn-post:hover, .timeline-post .buttons button.btn-post:focus, .timeline-post .buttons button.btn-post:active, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post:hover, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post:focus, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post:active {
-  background-color: #6fba46;
-  border: 2px solid #6fba46;
-}
-
-.modal.timeline .modal-dialog .modal-content {
-  border-radius: 0;
-}
-
-.modal.timeline .modal-dialog .modal-content .modal-body {
-  border: none;
-  cursor: auto;
-}
-
-.modal.timeline .modal-dialog .modal-content .modal-body i.icon-more {
-  position: absolute;
-  right: 30px;
-  font-size: 22px;
-  color: #bdc6cf;
-  -webkit-transform: rotate(-90deg);
-      -ms-transform: rotate(-90deg);
-          transform: rotate(-90deg);
-  top: 0;
-  cursor: pointer;
-}
-
-.modal.timeline .modal-dialog .modal-content .modal-body .visible-xs i {
-  position: absolute;
-  top: 0;
-  left: 10px;
-  font-size: 22px;
-  color: #bdc6cf;
-  cursor: pointer;
-}
-
-.modal.timeline .modal-dialog .modal-content .modal-body .post .image {
-  width: 100%;
-  height: 100%;
-  float: none;
-  margin: 0;
-  padding: 0;
-  margin-top: 20px;
-  padding-top: 20px;
-  position: relative;
-}
-
-.modal.timeline .modal-dialog .modal-content .modal-body .post .image .items .item img {
-  width: 100%;
-  height: 100%;
-  min-height: auto;
-  max-height: inherit;
-}
-
-.modal.timeline .modal-dialog .modal-content .modal-body .post p {
-  margin: 0;
-  padding: 0 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: justify;
-}
-
-.modal#timelineModalEdit .modal-dialog .modal-content .modal-body {
-  padding: 0;
-}
-
-.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .post {
-  margin-left: 15px;
-  padding-right: 15px;
-}
-
-.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .post .appearing-content {
-  display: inherit;
-}
-
-.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .post .appearing-content .ui .menu .item img {
-  width: inherit;
-  height: inherit;
-  width: auto;
-  max-height: 2em;
-}
-
-.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .buttons {
-  display: inherit;
-}
-
-.file-upload .photo-element {
-  float: left;
-  width: 100px;
-  height: 100px;
-  position: relative;
-  overflow: hidden;
-  background-color: #f6f7f8;
-  margin-left: 5px;
-  margin-top: 5px;
-  text-align: center;
-  border: 1px solid rgba(0, 0, 0, 0.0980392);
-}
-
-.file-upload .photo-element span.glyphicon-headphones,
-.file-upload .photo-element span.glyphicon-film,
-.file-upload .photo-element span.glyphicon-file {
-  font-size: 24px;
-  line-height: 100px;
-}
-
-.file-upload .photo-element a.remove {
-  color: #dcdcdc;
-  -webkit-text-fill-color: #fff;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #c7c8c8;
-  top: 5px;
-  right: 5px;
-  position: absolute;
-  z-index: 1;
-}
-
-.file-upload .photo-element a:hover.remove {
-  color: #fff;
-  -webkit-text-fill-color: #fff;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #c7c8c8;
-}
-
-.file-upload .photo-element a.remove .glyphicon {
-  top: 0;
-}
-
-.file-upload .photo-element img {
-  position: absolute;
-  background-color: #fff;
-  left: 50%;
-  top: 50%;
-  height: 100%;
-  width: auto;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.file-upload .photo-element img.portrait {
-  width: 100%;
-  height: auto;
-}
-
-.file-upload {
-  background-color: transparent !important;
-  border: none !important;
-  overflow: hidden;
-  display: none;
-  margin-top: 15px;
-  margin-left: -5px;
-  clear: both;
-}
-
-.file-upload-input {
-  display: none !important;
-}
-
-.file-upload .progress {
-  width: 90px;
-  height: 10px;
-  margin: 5px;
-  background-color: #fff;
-  border: 1px solid #3a5795;
-  border-radius: 0;
-  position: absolute;
-  bottom: 0;
-  z-index: 1;
-}
-
-.file-upload .progress-bar {
-  background-color: #6d84b4;
-}
-
-.file-upload .progress.active .progress-bar {
-  transition: none !important;
-}
-
-.status-alert {
-  padding: 10px;
-  top: 0;
-  left: 0;
-  position: absolute;
-  border-radius: 8px;
-  z-index: 999;
-  display: none;
-}
-
-.status-alert .alert-header {
-  float: left;
-  width: 100%;
-  height: auto;
-  color: #5e6977;
-  font-weight: 400;
-  padding: 5px 10px;
-  background-color: #f0f4f7;
-  border: 1px solid rgba(34, 36, 38, 0.15);
-}
-
-.status-alert .alert-body {
-  float: left;
-  width: 100%;
-  height: auto;
-  color: #86939e;
-  line-height: 1.44;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  border-top: none;
-}
-
-.status-alert .alert-footer {
-  float: left;
-  width: 100%;
-  height: auto;
-  padding: 8px 10px 8px 10px;
-  background: #f0f4f7;
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  border-top: none;
-}
-
-.status-alert .alert-footer button.btn-close {
-  border: 2px solid #e2e7eb;
-  color: #8b949d;
-  background-color: transparent;
-  font-size: 16px;
-  border-radius: 8px;
-  float: right;
-  padding: 2px 20px;
-}
-
-.status-alert .alert-footer button.btn-close:hover, .status-alert .alert-footer button.btn-close:active, .status-alert .alert-footer button.btn-close:focus {
-  background-color: #eaeef1;
 }
 
 .modal-box-content .inner-modal {
@@ -3515,19 +1999,6 @@ body header.main-header {
   background-color: #e7ecef;
 }
 
-.tab-content .tab-pane .panel-group .panel:last-child .panel-heading .col-lg-12 {
-  border-bottom: none;
-}
-
-.educations .education .education-description .dropdown.more img {
-  margin-right: 25px;
-}
-
-#accordion {
-  padding-right: 0;
-  padding-left: 0;
-}
-
 .tab-content {
   padding-right: 0;
   padding-left: 0;
@@ -3540,20 +2011,6 @@ body header.main-header {
 
 .owl-wrapper {
   margin-top: 0 !important;
-}
-
-.panel-group .panel + .panel {
-  margin: 0;
-}
-
-p.no-accomplishments {
-  margin-bottom: 0;
-  padding-bottom: 25px;
-  text-align: center;
-}
-
-.collapsing {
-  transition: height 1s;
 }
 
 .navbar-toggle {
@@ -3595,18 +2052,18 @@ p.no-accomplishments {
   background-color: #ffb230 !important;
 }
 
-.life-experience .job-description p, .life-experience .education-description p, .life-experience .main-description p {
+.content-block .main-description p {
   margin-right: 55px !important;
 }
 
-.life-experience .job-description button.dropdown-button, .life-experience .education-description button.dropdown-button, .life-experience .main-description button.dropdown-button {
+.content-block .main-description button.dropdown-button {
   float: right;
   margin-right: 10px;
   width: 40px;
   height: 40px;
 }
 
-.life-experience .job-description button.dropdown-button i, .life-experience .education-description button.dropdown-button i, .life-experience .main-description button.dropdown-button i {
+.content-block .main-description button.dropdown-button i {
   color: #c1c1c1;
   font-size: 30px;
   line-height: 30px;
@@ -3614,82 +2071,4 @@ p.no-accomplishments {
   -webkit-transform: translate(-15px, -15px);
       -ms-transform: translate(-15px, -15px);
           transform: translate(-15px, -15px);
-}
-
-.tick-animation-ctn {
-  text-align: center;
-  margin-top: 5em;
-}
-
-@-webkit-keyframes checkmark {
-  0% {
-    stroke-dashoffset: 100px;
-  }
-  100% {
-    stroke-dashoffset: 200px;
-  }
-}
-
-@keyframes checkmark {
-  0% {
-    stroke-dashoffset: 100px;
-  }
-  100% {
-    stroke-dashoffset: 0px;
-  }
-}
-
-@-webkit-keyframes checkmark-circle {
-  0% {
-    stroke-dashoffset: 480px;
-  }
-  100% {
-    stroke-dashoffset: 960px;
-  }
-}
-
-@keyframes checkmark-circle {
-  0% {
-    stroke-dashoffset: 480px;
-  }
-  100% {
-    stroke-dashoffset: 960px;
-  }
-}
-
-@-webkit-keyframes colored-circle {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 100;
-  }
-}
-
-@keyframes colored-circle {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 100;
-  }
-}
-
-.inlinesvg .svg svg {
-  display: inline;
-}
-
-.icon--order-success svg polyline {
-  -webkit-animation: checkmark 0.25s ease-in-out 0.7s backwards;
-  animation: checkmark 0.25s ease-in-out 0.7s backwards;
-}
-
-.icon--order-success svg circle {
-  -webkit-animation: checkmark-circle 0.6s ease-in-out backwards;
-  animation: checkmark-circle 0.6s ease-in-out backwards;
-}
-
-.icon--order-success svg circle#colored {
-  -webkit-animation: colored-circle 0.6s ease-in-out 0.7s backwards;
-  animation: colored-circle 0.6s ease-in-out 0.7s backwards;
 }

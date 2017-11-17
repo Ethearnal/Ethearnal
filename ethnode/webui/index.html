@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/css/bootstrap-material-datetimepicker.css">
     <!-- Icons-->
     <link rel="stylesheet" href="styles/icons.css">
+    <!-- Flag icons-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/lipis/flag-icon-css/master/css/flag-icon.min.css">
     <!-- START of FONTS-->
     <!-- Google Material Icons-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -38,7 +40,7 @@
     <!-- END of LINKS-->
   </head>
   <body>
-    <div id="add-job" class="modal-box flex floating">
+    <div id="add-job" class="add modal-box flex floating">
       <div class="modal-box-content">
         <div class="inner-modal">
           <div class="content">
@@ -94,7 +96,7 @@
         </div>
       </div>
     </div>
-    <div id="edit-job" class="modal-box flex floating">
+    <div id="edit-job" class="edit modal-box flex floating">
       <div class="modal-box-content">
         <div class="inner-modal">
           <div class="content">
@@ -150,7 +152,7 @@
         </div>
       </div>
     </div>
-    <div id="add-education" class="modal-box flex floating">
+    <div id="add-education" class="add modal-box flex floating">
       <div class="modal-box-content">
         <div class="inner-modal">
           <div class="content">
@@ -206,7 +208,7 @@
         </div>
       </div>
     </div>
-    <div id="edit-education" class="modal-box flex floating">
+    <div id="edit-education" class="edit modal-box flex floating">
       <div class="modal-box-content">
         <div class="inner-modal">
           <div class="content">
@@ -249,6 +251,256 @@
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
                     <input type="text" name="endDate" class="date-ended mdl-textfield__input">
                     <label for="date-from" class="mdl-textfield__label">End Date (leave blank if ongoing)</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button id="update1" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+              <div data-mdl-for="update1" class="mdl-tooltip">This text will be changed anyway.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="add-language" class="add modal-box flex floating">
+      <div class="modal-box-content">
+        <div class="inner-modal">
+          <div class="content">
+            <div class="modal-header">
+              <h3>Add language</h3>
+            </div>
+            <div class="success-message">
+              <h1 class="title">Congratulations!</h1>
+              <div class="success-content">
+                <p>Your language has been added.</p>
+              </div>
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                <button class="mdl-button mdl-js-button create-new">Add new language</button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="modal-inputs">
+                <form id="form-update-education" action="POST">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <div id="language-name" style="float: left" class="ui search selection dropdown">
+                      <input type="hidden" name="language"><i class="dropdown icon"></i>
+                      <div class="default text">Select Language</div>
+                      <div class="menu">
+                        <div data-value="af" class="item"><i class="af flag"></i> Afghanistan</div>
+                        <div data-value="ax" class="item"><i class="ax flag"></i> Aland Islands</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <select id="level" style="float: right" class="ui dropdown">
+                      <option value="">Skill Level</option>
+                      <option value="1">Beginner</option>
+                      <option value="2">Limited knowledge</option>
+                      <option value="3">Professional</option>
+                      <option value="4">Native or bilingual</option>
+                    </select>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield whole-line">
+                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                    <label for="description" class="mdl-textfield__label">Tell us more about it. Why and how did you started learning it, what's your plan for the future with this language?</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                    <label for="date-from" class="mdl-textfield__label">When did you start learning it?</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <input type="text" name="endDate" class="date-ended mdl-textfield__input">
+                    <label for="date-from" class="mdl-textfield__label">When did you feel like you picked it up?</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button id="publish2" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
+              <div data-mdl-for="publish2" class="mdl-tooltip">This text will be changed anyway.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="edit-language" class="edit modal-box flex floating">
+      <div class="modal-box-content">
+        <div class="inner-modal">
+          <div class="content">
+            <div class="modal-header">
+              <h3>Edit language</h3>
+            </div>
+            <div class="success-message">
+              <h1 class="title">Congratulations!</h1>
+              <div class="success-content">
+                <p>Your language has been updated.</p>
+              </div>
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                <button class="mdl-button mdl-js-button create-new">Edit language again</button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="modal-inputs">
+                <form id="form-update-education" action="POST">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <div id="language-name" style="float: left" class="ui search selection dropdown">
+                      <input type="hidden" name="language"><i class="dropdown icon"></i>
+                      <div class="default text">Select Language</div>
+                      <div class="menu">
+                        <div data-value="af" class="item"><i class="af flag"></i> Afghanistan</div>
+                        <div data-value="ax" class="item"><i class="ax flag"></i> Aland Islands</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <select id="level" style="float: right" class="ui dropdown">
+                      <option value="">Skill Level</option>
+                      <option value="1">Beginner</option>
+                      <option value="2">Limited knowledge</option>
+                      <option value="3">Professional</option>
+                      <option value="4">Native or bilingual</option>
+                    </select>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield whole-line">
+                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                    <label for="description" class="mdl-textfield__label">Tell us more about it. Why and how did you started learning it, what's your plan for the future with this language?</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                    <label for="date-from" class="mdl-textfield__label">When did you start learning it?</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <input type="text" name="endDate" class="date-ended mdl-textfield__input">
+                    <label for="date-from" class="mdl-textfield__label">When did you feel like you picked it up?</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button id="update2" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+              <div data-mdl-for="update2" class="mdl-tooltip">This text will be changed anyway.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="add-skill" class="add modal-box flex floating">
+      <div class="modal-box-content">
+        <div class="inner-modal">
+          <div class="content">
+            <div class="modal-header">
+              <h3>Add skill</h3>
+            </div>
+            <div class="success-message">
+              <h1 class="title">Congratulations!</h1>
+              <div class="success-content">
+                <p>Your skill has been added.</p>
+              </div>
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                <button class="mdl-button mdl-js-button create-new">Add new skill</button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="modal-inputs">
+                <form id="form-update-education" action="POST">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <input id="skill-name" name="skill-name" type="text" class="mdl-textfield__input">
+                    <label for="skill-name" class="mdl-textfield__label">Skill name</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <select class="ui dropdown">
+                      <option value="">Skill Level</option>
+                      <option value="1">Beginner</option>
+                      <option value="2">Limited knowledge</option>
+                      <option value="3">Professional</option>
+                    </select>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield whole-line">
+                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                    <label for="description" class="mdl-textfield__label">Tell us more about it. Why and how did you started learning it, what's your plan for the future with this skill?</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                    <label for="date-from" class="mdl-textfield__label">When did you start learning it?</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <input type="text" name="endDate" class="date-ended mdl-textfield__input">
+                    <label for="date-from" class="mdl-textfield__label">When did you feel like you picked it up?</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button id="publish3" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
+              <div data-mdl-for="publish3" class="mdl-tooltip">This text will be changed anyway.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="edit-profile" class="modal-box flex floating">
+      <div class="modal-box-content">
+        <div class="inner-modal">
+          <div class="content">
+            <div class="modal-header">
+              <h3>Edit profile</h3>
+            </div>
+            <div class="success-message">
+              <h1 class="title">Congratulations!</h1>
+              <div class="success-content">
+                <p>Your profile has been updated.</p>
+              </div>
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                <button class="mdl-button mdl-js-button create-new">Edit profile again</button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <!-- This is from avatar ui modal.-->
+              <div class="modal-inputs">
+                <form id="form-update-education" action="POST">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <input id="first-name" name="first-name" type="text" class="mdl-textfield__input">
+                    <label for="first-name" class="mdl-textfield__label">First Name</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <input id="last-name" name="last-name" type="text" class="mdl-textfield__input">
+                    <label for="last-name" class="mdl-textfield__label">Last Name</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <input id="hourly-rate" type="text" name="hourly-rate" class="mdl-textfield__input">
+                    <label for="hourly-rate" class="mdl-textfield__label">Hourly Rate</label><span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <input id="title" type="text" name="title" class="mdl-textfield__input">
+                    <label for="title" class="mdl-textfield__label">Title</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <div id="country" style="float: left" class="ui search selection dropdown">
+                      <input type="hidden" name="country"><i class="dropdown icon"></i>
+                      <div class="default text">Select Country</div>
+                      <div class="menu">
+                        <div data-value="af" class="item"><i class="af flag"></i> Afghanistan</div>
+                        <div data-value="ax" class="item"><i class="ax flag"></i> Aland Islands</div>
+                        <div data-value="bg" class="item"><i class="bg flag"></i> Bulgaria</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <input id="city" type="text" name="city" class="mdl-textfield__input">
+                    <label for="city" class="mdl-textfield__label">City</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield whole-line">
+                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                    <label for="description" class="mdl-textfield__label">Summary</label>
                   </div>
                 </form>
               </div>
@@ -1054,26 +1306,28 @@
           <div class="profile-information up">
             <!-- Profile header, including profile image, current work, city, state and two buttons.-->
             <div class="profile-upper">
-              <div data-toggle="modal" data-target="#avatarModal" class="profile-image"><img src="" alt="">
+              <div open-modal="#edit-profile" class="profile-image open-modal"><img src="" alt="">
                 <div class="text-on-image">
                   <p>Change</p>
                 </div>
               </div>
-              <!-- Now... JSON data goes here. :(-->
-              <button class="hire">Hire ($50/hr)</button>
+              <h2></h2>
+              <h5 class="profile-information-position"></h5>
+              <p class="location"></p>
+              <button class="hire">Hire ($X/hr)</button>
               <button class="leave-msg">Send Message</button>
             </div>
           </div>
           <div class="profile-information middle">
             <!-- Profile description including a description about you. (dark-gray section)-->
             <div class="profile-description">
-              <!-- JSON data goes here.-->
+              <p>Profile's description.</p>
             </div>
           </div>
           <div class="profile-information down">
             <!-- Profile top skills and tools-->
             <div class="profile-bottom">
-              <p class="skills-text">Skills & Languages
+              <p class="skills-text">Assimilated Skills
               </p>
               <div class="skills">
                 <!-- JSON data goes here.-->
@@ -1095,23 +1349,25 @@
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-documentation-full">
           <div class="profile-documentation col-xs-12">
             <ul role="tablist" class="nav nav-tabs">
-              <li role="presentation" class="active jobs-li"><a href="#jobs" aria-controls="jobs" role="tab" data-toggle="tab">Jobs & Education</a></li>
+              <li role="presentation" class="active work-experience-li"><a href="#work-experience" aria-controls="work-experience" role="tab" data-toggle="tab">Work Experience</a></li>
+              <li role="presentation" class="timeline-li"><a href="#education" aria-controls="education" role="tab" data-toggle="tab">Education</a></li>
+              <li role="presentation" class="timeline-li"><a href="#languages" aria-controls="languages" role="tab" data-toggle="tab">Languages</a></li>
+              <li role="presentation" class="timeline-li"><a href="#gigs" aria-controls="gigs" role="tab" data-toggle="tab">Gigs</a></li>
               <li class="dropdownButton">
                 <button id="addThings" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">add</i></button>
                 <ul for="addThings" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
                   <li open-modal="#add-job" class="mdl-menu__item open-modal">Add Work Experience</li>
                   <li open-modal="#add-education" class="mdl-menu__item open-modal">Add Education</li>
-                  <li disabled class="mdl-menu__item">Add Gig</li>
+                  <li open-modal="#add-language" class="mdl-menu__item open-modal">Add Language</li>
+                  <li open-modal="#add-skill" class="mdl-menu__item open-modal">Add Skill</li>
+                  <li open-modal="#add-gig" disabled class="mdl-menu__item open-modal">Add Gig</li>
                 </ul>
               </li>
             </ul>
             <!-- All the information about above listed tabs.-->
             <div class="tab-content col-xs-12">
-              
-              
-              <!-- Jobs & Education TAB-->
-              <div id="jobs" role="tabpanel" class="tab-pane fade in active col-xs-12">
-                <!-- JOBS-->
+              <!-- Work Experience TAB-->
+              <div id="work-experience" role="tabpanel" class="tab-pane fade in active col-xs-12">
                 <div class="jobs-container">
                   <div class="jobs-see see-more col-xs-12">
                     <p>+ See more jobs</p>
@@ -1120,7 +1376,9 @@
                     <p>- See less jobs</p>
                   </div>
                 </div>
-                <!-- EDUCATION-->
+              </div>
+              <!-- Education TAB-->
+              <div id="education" role="tabpanel" class="tab-pane fade col-xs-12">
                 <div class="education-container">
                   <div class="educations-see see-more col-xs-12">
                     <p>+ See more education</p>
@@ -1130,6 +1388,19 @@
                   </div>
                 </div>
               </div>
+              <!-- Languages TAB-->
+              <div id="languages" role="tabpanel" class="tab-pane fade col-xs-12">
+                <div class="languages-container">
+                  <div class="languages-see see-more col-xs-12">
+                    <p>+ See more languages</p>
+                  </div>
+                  <div class="languages-see see-less col-xs-12">
+                    <p>- See less languages</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Gigs TAB-->
+              <div id="gigs" role="tabpanel" class="tab-pane fade col-xs-12"></div>
             </div>
           </div>
         </div>

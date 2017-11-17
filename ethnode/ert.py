@@ -10,9 +10,9 @@ from toolkit.tools import mkdir, on_hook
 from toolkit import kadmini_codec
 from toolkit import store_handler
 
-from eth_profile import EthearnalProfileView, EthearnalProfileController
-from eth_profile import EthearnalJobView, EthearnalJobPostController
-from eth_profile import EthearnalUploadFileView
+from ert_profile import EthearnalProfileView, EthearnalProfileController
+from ert_profile import EthearnalJobView, EthearnalJobPostController
+from ert_profile import EthearnalUploadFileView
 
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
@@ -66,6 +66,7 @@ parser.add_argument('-b', '--dht_only',
 class EthearnalSite(object):
     @cherrypy.expose
     def index(self):
+        print('REQ LOCAL', cherrypy.request.local)
         return "ethearnal 0.0.1"
     # todo make entry point redirect to ui
 
@@ -98,6 +99,7 @@ def main_profile(http_webdir,
     profile_dir_abs = os.path.abspath(profile_dir)
     ert_profile_ctl = EthearnalProfileController(data_dir=profile_dir_abs, files_dir=files_dir)
     ert_profile_view = view = EthearnalProfileView(ert_profile_ctl)
+
     return ert_profile_ctl, ert_profile_view
 
 
@@ -107,9 +109,8 @@ def main_http(http_webdir: str = config.http_webdir,
               ert_profile_ctl: EthearnalProfileController = None,
               ert_profile_view: EthearnalProfileView = None,
               files_dir_name: str = config.static_files,
-              # profile_dir: str = config.data_dir,
               interactive: bool = config.interactive,
-              dht=None,
+              dht_=None,
               ):
 
     site_conf = {
@@ -126,8 +127,9 @@ def main_http(http_webdir: str = config.http_webdir,
             'tools.staticdir.on': True,
             'tools.staticdir.root': ert_profile_ctl.data_dir,
             'tools.staticdir.dir': files_dir_name,
-        }
+        },
     }
+
     cherrypy.server.socket_host = socket_host
     cherrypy.server.socket_port = socket_port
     # Cache-Control:public, max-age=5 # in seconds
@@ -160,6 +162,11 @@ def main_http(http_webdir: str = config.http_webdir,
                          }
                         )
 
+    cherrypy.config.update({
+        'global': {
+            'engine.autoreload.on': False
+        }
+    })
     cherrypy.engine.start()
 
     print('STATIC FILES DIR:', ert_profile_ctl.files_dir)
@@ -167,7 +174,7 @@ def main_http(http_webdir: str = config.http_webdir,
     print('PROFILE DIR:', ert_profile_ctl.data_dir)
 
     cherrypy.engine.exit = on_hook(target=tear_down_udp,
-                                   target_args=(dht,),
+                                   target_args=(dht_,),
                                    target_kwargs={})(cherrypy.engine.exit)
 
     if not interactive:
@@ -237,8 +244,8 @@ if __name__ == '__main__':
                       socket_port=socket_port,
                       ert_profile_ctl=ert_profile_ctl,
                       ert_profile_view=ert_profile_view,
-                      dht=dht,
-                      interactive=args.interactive_shell
+                      dht_=dht,
+                      interactive=args.interactive_shell,
                       )
         else:
             from IPython import embed

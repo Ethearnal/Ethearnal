@@ -14,6 +14,13 @@ from toolkit import basemodel
 from toolkit.store import CrudJsonListStore
 from toolkit.store_sqlite import ErtDHTSQLite, ErtREFSQLite
 from toolkit import kadmini_codec as cdx
+from datamodel.resource_sqlite import ResourceSQLite
+from datamodel.inv_norank_sqlite import InvIndexTimestampSQLite
+from datamodel.resource_plain_utf8 import PlainTextUTF8Resource, PlainTextUTF8ResourceKeyWordIndex
+from datamodel.resource_plain_utf8 import PlainTextUTF8ResourcePrefixIndex
+from datamodel.resource_plain_utf8 import PlainTextUTF8KeyWordIndexed, PlainTextUTF8PrefixIndexed
+from datamodel.resource_plain_utf8 import PLainTextUTF8WebApi
+from crypto.signer import LocalRsaSigner
 
 from randomavatar.randomavatar import Avatar
 
@@ -55,6 +62,9 @@ class EthearnalProfileController(object):
     PROFILE_DHT_SQLITE = 'dht.db'
     PROFILE_DHT_REF_PUBKEYS = 'pubkeys.db'
 
+    PROFILE_PLAIN_UTF8_TEXTS = 'plain_text_utf8.db'
+    PROFILE_PREFIXES_IDX = 'plain_text_utf8_prefix_idx.db'
+
     RSA_PRV = 'rsa_id.prv'
     RSA_PUB = 'rsa_id.pub'
     RSA_FORMAT = 'PEM'
@@ -86,6 +96,9 @@ class EthearnalProfileController(object):
         self.dht_fb_fn = '%s/%s' % (self.personal_dir, self.PROFILE_DHT_SQLITE)
         self.dht_ref_pubkeys_fn = '%s/%s' % (self.personal_dir, self.PROFILE_DHT_REF_PUBKEYS)
 
+        self.db_plain_text = '%s/%s' % (self.personal_dir, self.PROFILE_PLAIN_UTF8_TEXTS)
+        self.db_plain_text_inv = '%s/%s' % (self.personal_dir, self.PROFILE_PREFIXES_IDX)
+
         self.model = EthearnalProfileModel()
 
         self.dht_store = ErtDHTSQLite(self.dht_fb_fn)
@@ -112,6 +125,19 @@ class EthearnalProfileController(object):
         # create rsa keys if not present
         # todo win/ux chmod 400 secure keys
         self.rsa_keys()
+        # init local signer
+        self.rsa_signer = LocalRsaSigner(self.rsa_prv_der, self.rsa_pub_der)
+        self.plain_texts = PlainTextUTF8PrefixIndexed(
+            rs=PlainTextUTF8Resource(signer=self.rsa_signer, data_store=ResourceSQLite(db_name=self.db_plain_text,
+                                                                                       table_name='plain_text')),
+            inv=PlainTextUTF8ResourcePrefixIndex(data_store=InvIndexTimestampSQLite(db_name=self.db_plain_text_inv,
+                                                                                    table_name='plain_text_inv'))
+        )
+        self.dbeep = PLainTextUTF8WebApi(
+            cherrypy=cherrypy,
+            api=self.plain_texts,
+            mount=True,
+        )
 
     def get_profile_image_bytes(self):
         bts = None
@@ -407,5 +433,4 @@ class EthearnalUploadFileView(object):
         files = [f for f in os.listdir(upload_path)]
         print(os.listdir(upload_path))
         return json.dumps(files, ensure_ascii=False).encode('utf-8')
-
 

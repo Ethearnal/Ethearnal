@@ -4,11 +4,11 @@
 @import "profile-documentation-tabs"
 @import "panel-heading"
 @import "panel-body"
-@import "accomplishment-modal"
-@import "modals"
+// @import "accomplishment-modal"
+// @import "modals"
 @import "background-image"
-@import "timeline-post"
-@import "timeline-add-photos"
+// @import "timeline-post"
+// @import "timeline-add-photos"
 
 // IMPORTING NEW STYLES FOR MODALS
 @import "newstyles/modals"
@@ -36,23 +36,15 @@ body header.main-header
     z-index: 20
     box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
 
+
+
+
 .panel-collapse
     padding-right: 0
     padding-left: 0
     background-color: #e7ecef
 
-.tab-content .tab-pane
-    .panel-group
-        .panel:last-child
-            .panel-heading .col-lg-12
-                border-bottom: none
 
-.educations .education .education-description .dropdown.more img
-    margin-right: 25px
-
-#accordion
-    padding-right: 0
-    padding-left: 0
 
 .tab-content
     padding-right: 0
@@ -65,17 +57,6 @@ body header.main-header
 
 .owl-wrapper
     margin-top: 0 !important
-
-.panel-group .panel+.panel
-    margin: 0
-
-p.no-accomplishments
-    margin-bottom: 0
-    padding-bottom: 25px
-    text-align: center
-
-.collapsing
-    transition: height 1s
 
 
 .navbar-toggle
@@ -117,8 +98,8 @@ p.no-accomplishments
 
 
 // Job and education description changes
-.life-experience
-    .job-description, .education-description, .main-description
+.content-block
+    .main-description
 
         p
             margin-right: 55px !important
@@ -145,78 +126,78 @@ p.no-accomplishments
 
 
 
-.tick-animation-ctn
-  text-align: center
-  margin-top: 5em
+// .tick-animation-ctn
+//   text-align: center
+//   margin-top: 5em
 
-@-webkit-keyframes checkmark
-  0%
-    stroke-dashoffset: 100px
+// @-webkit-keyframes checkmark
+//   0%
+//     stroke-dashoffset: 100px
 
-  100%
-    stroke-dashoffset: 200px
-
-
-@-ms-keyframes checkmark
-  0%
-    stroke-dashoffset: 100px
-
-  100%
-    stroke-dashoffset: 200px
+//   100%
+//     stroke-dashoffset: 200px
 
 
-@keyframes checkmark
-  0%
-    stroke-dashoffset: 100px
+// @-ms-keyframes checkmark
+//   0%
+//     stroke-dashoffset: 100px
 
-  100%
-    stroke-dashoffset: 0px
-
-
-@-webkit-keyframes checkmark-circle
-  0%
-    stroke-dashoffset: 480px
-
-  100%
-    stroke-dashoffset: 960px
+//   100%
+//     stroke-dashoffset: 200px
 
 
-@-ms-keyframes checkmark-circle
-  0%
-    stroke-dashoffset: 240px
+// @keyframes checkmark
+//   0%
+//     stroke-dashoffset: 100px
 
-  100%
-    stroke-dashoffset: 480px
-
-
-@keyframes checkmark-circle
-  0%
-    stroke-dashoffset: 480px
-
-  100%
-    stroke-dashoffset: 960px
+//   100%
+//     stroke-dashoffset: 0px
 
 
-@keyframes colored-circle
-  0%
-    opacity: 0
+// @-webkit-keyframes checkmark-circle
+//   0%
+//     stroke-dashoffset: 480px
 
-  100%
-    opacity: 100
+//   100%
+//     stroke-dashoffset: 960px
 
-.inlinesvg .svg svg
-  display: inline
 
-.icon--order-success svg
-  polyline
-    -webkit-animation: checkmark 0.25s ease-in-out 0.7s backwards
-    animation: checkmark 0.25s ease-in-out 0.7s backwards
-  circle
-    -webkit-animation: checkmark-circle 0.6s ease-in-out backwards
-    animation: checkmark-circle 0.6s ease-in-out backwards
-    &#colored
-      -webkit-animation: colored-circle 0.6s ease-in-out 0.7s backwards
-      animation: colored-circle 0.6s ease-in-out 0.7s backwards
+// @-ms-keyframes checkmark-circle
+//   0%
+//     stroke-dashoffset: 240px
+
+//   100%
+//     stroke-dashoffset: 480px
+
+
+// @keyframes checkmark-circle
+//   0%
+//     stroke-dashoffset: 480px
+
+//   100%
+//     stroke-dashoffset: 960px
+
+
+// @keyframes colored-circle
+//   0%
+//     opacity: 0
+
+//   100%
+//     opacity: 100
+
+// .inlinesvg .svg svg
+//   display: inline
+
+// .icon--order-success svg
+//   polyline
+//     -webkit-animation: checkmark 0.25s ease-in-out 0.7s backwards
+//     animation: checkmark 0.25s ease-in-out 0.7s backwards
+//   circle
+//     -webkit-animation: checkmark-circle 0.6s ease-in-out backwards
+//     animation: checkmark-circle 0.6s ease-in-out backwards
+//     &#colored
+//       -webkit-animation: colored-circle 0.6s ease-in-out 0.7s backwards
+//       animation: colored-circle 0.6s ease-in-out 0.7s backwards
 
 
 
