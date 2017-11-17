@@ -305,31 +305,6 @@ $( document ).ready(function() {
         });
         $('.ui.dropdown').dropdown();
 
-        $('.skills-select, .tools-select').dropdown({
-            allowAdditions: true,
-            maxSelections: 5
-        });
-
-        $('.institution-select, .company-select').dropdown({
-            allowAdditions: true,
-            hideAdditions: false
-        });
-
-        $('.company-selection').dropdown({
-            allowAdditions: true,
-            hideAdditions: false,
-            onChange: function() {
-                $(this).find('i.dropdown.icon').css('top', '30%');
-                $(this).find('i.remove.icon').fadeIn();
-            }
-        });
-
-        $('.ui.dropdown .remove.icon').on('click', function(e){
-            $(this).parent('.dropdown').dropdown('clear');
-            e.stopPropagation();
-            $(this).parent('.dropdown').css('top', '0px');
-            $(this).fadeOut();
-        });
 
         $('.form-group i.remove.icon').click(function() {
             $(this).parent().find('label').removeClass('has-file').html('Add Photos');
@@ -339,29 +314,6 @@ $( document ).ready(function() {
         $('.skills-select, .tools-select').click(function() {
             $(this).find(".menu .item").removeClass('selected');
         })
-
-        // Semantic UI popup functions
-        var resizePopup = function(){$('.ui.popup').css('max-height', $(window).height());};
-
-        $(window).resize(function(e){
-            resizePopup();
-        });
-
-        $('.ui.button').popup({
-            on: 'hover'
-        });
-
-        $('.timeline-post .post-input textarea.form-control').click(function() {
-            $(this).next().fadeIn();
-            $(this).parent().next().fadeIn();
-            $(this).attr('rows', 3)
-        });
-
-        $('.timeline-post .buttons button.btn-cancel').click(function() {
-            $(this).parent().prev().find('.appearing-content').fadeOut();
-            $(this).parent().fadeOut();
-            $(this).parent().prev().find('textarea.form-control').attr('rows', 1);
-        });
     });
 });
 
@@ -391,6 +343,8 @@ function require(script) {
 // Rose #2 = #F2DDDE
 
 
+
+
 // GETTING DATA FROM profile.json
 $(function () {
 
@@ -411,60 +365,59 @@ $(function () {
                 $lastname = names.last;
             });
 
-            // Appends profile's JOB (position & company)
-            var job = profile.job;
-            $.each(job, function(i, jobs) {
-                $position = jobs.position;
-                $company = jobs.company;
-            });
-
-            // Appends profile's LOCATION (city & country)
-            var location = profile.location;
-            $.each(location, function(i, locations) {
-                $city = locations.city;
-                $country = locations.country;
-            });
+            // // Appends profile's LOCATION (city & country)
+            // var location = profile.location;
+            // $.each(location, function(i, locations) {
+            //     $city = locations.city;
+            //     $country = locations.country;
+            //     $countryClass = locations.countryClass;
+            // });
 
             // Appends a Job Experience on your profile page.
             var workExperience = profile.workExperience;
-            // var iExperience = 0;
             $.each(workExperience, function(i, experience) {
-                createLE(experience, 'job', false);
+                createLE(experience, 'job');
             });
-
 
             // Appends a Education on your profile page.
             var educations = profile.education;
-            // var iEducation = 0;
             $.each(educations, function(i, education) {
-                createLE(education, 'education', false);
+                createLE(education, 'education');
+            });
+
+            // Appends a Education on your profile page.
+            var languages = profile.languages;
+            $.each(languages, function(i, language) {
+                createLE(language, 'language');
             });
 
             seeButtons();
 
+            updateProfile(profile);
 
-            // Variables for texts. Just to make it easy to read & understand.
-            var $h2 = $('<h2>' + $firstname + ' ' + $lastname + '</h2>');
-            var $h5 = $('<h5 class="profile-information-position">' + $position + ' at <strong>' + $company + '</strong></h5>');
-            var $p = $('<p>' + $city + ', ' + $country + '</p>');
-
-            // This variable combines everything together.
-            var textProfile = $h2.get(0).outerHTML + $h5.get(0).outerHTML + $p.get(0).outerHTML;
-
+            // // Variables for texts. Just to make it easy to read & understand.
+            // $h2 = $('<h2>' + $firstname + ' ' + $lastname + '</h2>');
+            // $h5 = $('<h5 class="profile-information-position">' + profile.title + '</strong></h5>');
+            // $p = $('<p class="location ' + $countryClass + '">' + $city + ', ' + $country + '</p>');
+            // $buttonHire = $('<button class="hire">Hire ($' + profile.hourlyRate + '/hr)</button>');
+            // $buttonMessage = $('<button class="leave-msg">Send Message</button>');
 
 
-            // And this inserts all the text to the .profile-upper div
-            $(textProfile).insertAfter(".profile-upper .profile-image");
+            // // This variable combines everything together.
+            // var textProfile = $h2.get(0).outerHTML + $h5.get(0).outerHTML + $p.get(0).outerHTML + $buttonHire.get(0).outerHTML + $buttonMessage.get(0).outerHTML;
+
+            // // And this inserts all the text to the .profile-upper div
+            // $(textProfile).insertAfter(".profile-upper .profile-image");
 
             // Adding profile description .profile-description
-            $('.profile-description').append('<p>' + profile.description + '</p>');
+            // $('.profile-description').append('<p>' + profile.description + '</p>');
 
             // Adding profile reputation .navbar-collapse #alert-navbar
             $('li.asset#alert-navbar a .round-number span').text(profile.reputation);
 
             // Adding name to the header right side.
-            $('ul.navbar-nav.visible-xs li a').text($firstname);
-            $('li.profile span').text($firstname);
+            // $('ul.navbar-nav.visible-xs li a').text($firstname);
+            // $('li.profile span').text($firstname);
 
             // Adding profile pictures to the page.
             $('.profile-image img').attr('src', profile.profilePicture);
@@ -474,8 +427,10 @@ $(function () {
 
             // Appends each SKILL.
             var skill = profile.skills;
+            var iSkill = 0;
             $.each(skill, function(i, skills) {
-                $('.profile-bottom .skills').append("<p>" + skills.name + "<span> " + skills.experience + "</span></p>")
+                $('.profile-bottom .skills').append("<p id='skill-dropdown" + iSkill + "'>" + skills.name + "<span> " + skills.experience + "</span></p><ul for='skill-dropdown" + iSkill + "' class='mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect'><li class='mdl-menu__item open-modal' open-modal='#edit-skill'>Edit</li></ul>");
+                iSkill++;
             });
         }
     })
@@ -511,3 +466,15 @@ require("js/functions/modals/positionInformationDiv.js");
 
 // All the functions related to time. Such as GetTimeDifference, etc.
 require("js/functions/modals/timesFunctions.js");
+
+// Initializes the Date Picker.
+require("js/functions/modals/datePickerInit.js");
+
+// Loads profile modal inputs based on profile
+require("js/functions/modals/loadProfileInputs.js");
+
+// Updates the Profile.
+require("js/functions/modals/updateProfile.js");
+
+// Collects the data
+require("js/functions/modals/collectData.js");

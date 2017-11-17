@@ -2,10 +2,14 @@
 function loadInputsText(form, div) {
 
     $form = form;
-    $lifeExperienceDiv = div;
+    $divToLoad = div;
+
+    // Languages modal variables
+    $imageFlagClass = $divToLoad.find('.image span').attr('class').split(' ')[2];
+    $languageLevel = $divToLoad.find('.image span').attr('level');
 
     // Dates
-    $date = $lifeExperienceDiv.find('p.date-name').text();
+    $date = $divToLoad.find('p.date-name').text();
     $dateSplit = $date.split('-');
     $dateSplitPresent = $dateSplit[1].split('(');
     $dateFrom = $dateSplit[0];
@@ -18,11 +22,16 @@ function loadInputsText(form, div) {
     // Resetting the form
     clearForm($form);
 
+    if($divToLoad.hasClass('language')) {
+        $form.find('#language-name').dropdown('set selected', $imageFlagClass);
+        $form.find('#level').dropdown('set selected', $languageLevel);
+    }
+
     // Going thru each INPUT field, and adding value to them.
     var findings = $form.find('input, textarea');
     $.each(findings, function(i, field) {
         $id = $(field).attr('id');
-        $text = $lifeExperienceDiv.find('.' + $id).text();
+        $text = $divToLoad.find('.' + $id).text();
         $form.find('input#' + $id + ':not(.date-ended):not(.date-started), textarea#' + $id).val($text).parent().addClass('is-dirty');
 
         $inputDateFrom.bootstrapMaterialDatePicker({weekStart: 0, currentDate: $dateFrom, time: false, format: "MM/YYYY"}).on('change', function(e, date) {
