@@ -19,6 +19,7 @@ from datamodel.inv_norank_sqlite import InvIndexTimestampSQLite
 from datamodel.resource_plain_utf8 import PlainTextUTF8Resource, PlainTextUTF8ResourceKeyWordIndex
 from datamodel.resource_plain_utf8 import PlainTextUTF8ResourcePrefixIndex
 from datamodel.resource_plain_utf8 import PlainTextUTF8KeyWordIndexed, PlainTextUTF8PrefixIndexed
+from datamodel.resource_plain_utf8 import PLainTextUTF8WebApi
 from crypto.signer import LocalRsaSigner
 
 from randomavatar.randomavatar import Avatar
@@ -131,6 +132,11 @@ class EthearnalProfileController(object):
                                                                                        table_name='plain_text')),
             inv=PlainTextUTF8ResourcePrefixIndex(data_store=InvIndexTimestampSQLite(db_name=self.db_plain_text_inv,
                                                                                     table_name='plain_text_inv'))
+        )
+        self.dbeep = PLainTextUTF8WebApi(
+            cherrypy=cherrypy,
+            api=self.plain_texts,
+            mount=True,
         )
 
     def get_profile_image_bytes(self):

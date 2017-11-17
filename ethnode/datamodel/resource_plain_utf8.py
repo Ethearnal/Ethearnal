@@ -81,11 +81,16 @@ class PlainTextUTF8ResourcePrefixIndex(object):
             self.data_store.create(cmp_hash, container_hash)
         self.data_store.commit()
 
-    def query(self, prefixes: str):
+    def query(self, prefixes: str, asc=True):
         words = prefixes.lower().split(' ')
         words_set = set(words)
+        if len(words_set) == 1:
+            cmp_hash = self.component_hash(words_set.pop())
+            c = self.data_store.single_component(cmp_hash, asc=asc)
+            return c.fetchall()
+
         cmp_hashes = tuple([self.component_hash(w) for w in words_set])
-        c = self.data_store.inner_join_on_component(*cmp_hashes)
+        c = self.data_store.inner_join_on_component(*cmp_hashes, asc=asc)
         return c.fetchall()
 
 
@@ -111,6 +116,53 @@ class PlainTextUTF8PrefixIndexed(object):
         ctx_hash = self.rs.create(text_data)
         self.inv.create(text_data, ctx_hash)
 
+
+
     def query(self, prefixes: str):
         return self.inv.query(prefixes)
 
+
+class PLainTextUTF8WebApi(object):
+    exposed = True
+
+    def __init__(self, cherrypy, api: PlainTextUTF8PrefixIndexed, mount=False):
+        self.api = api
+        self.cherrypy = cherrypy
+        if mount:
+            self.mount()
+
+    def GET(self, q):
+        try:
+            rs = self.api.query(q)
+            result_xml = ""
+            for item in rs:
+                print(item)
+                ctx_hash = item[0]
+                resource = self.api.rs.read(ctx_hash)
+                # print('FETCHED ', resource)
+                text = resource[-1].decode('utf-8')
+                result_xml+="<p class='dbeep-entity'>%s</p>" % text
+            return result_xml.encode(encoding='utf-8')
+        except:
+            return b'400 error'
+
+    def POST(self):
+        try:
+            body = self.cherrypy.request.body.read()
+            if body:
+                str_body = body.decode(encoding='utf-8')
+                if str_body:
+                    self.api.create(str_body)
+                return b'201'
+            return b'400 empty'
+        except:
+            return b'400 error'
+
+    def mount(self):
+        self.cherrypy.tree.mount(self,
+                            '/api/v1/dbeep/',
+                            {'/': {
+                                    'request.dispatch': self.cherrypy.dispatch.MethodDispatcher(),
+                                    'tools.sessions.on': True,
+                                    }
+                            })

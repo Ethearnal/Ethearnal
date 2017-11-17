@@ -14,8 +14,6 @@ from ert_profile import EthearnalProfileView, EthearnalProfileController
 from ert_profile import EthearnalJobView, EthearnalJobPostController
 from ert_profile import EthearnalUploadFileView
 
-from datamodel.lr_web_api import LResView
-
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
 
@@ -163,8 +161,12 @@ def main_http(http_webdir: str = config.http_webdir,
                             }
                          }
                         )
-    LResView.mount()
 
+    cherrypy.config.update({
+        'global': {
+            'engine.autoreload.on': False
+        }
+    })
     cherrypy.engine.start()
 
     print('STATIC FILES DIR:', ert_profile_ctl.files_dir)
