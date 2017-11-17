@@ -7,7 +7,7 @@ from toolkit.kadmini_codec import sha256_bin_digest
 class PlainTextUTF8Resource(object):
     def __init__(self,
                  signer: SignerInterface,
-                 data_store: ResourceSQLite = ResourceSQLite('plain_text_utf8.db', 'plain_text'),
+                 data_store: ResourceSQLite,
                  content_type: bytes=b'text/plain',
                  content_encoding: bytes=b'utf-8'):
         self.data_store = data_store
@@ -33,7 +33,7 @@ class PlainTextUTF8Resource(object):
 
 class PlainTextUTF8ResourceKeyWordIndex(object):
     def __init__(self,
-                 data_store: InvIndexTimestampSQLite=InvIndexTimestampSQLite('plain_utf8_inv.db', 'keyword_inv')
+                 data_store: InvIndexTimestampSQLite
                  ):
         self.data_store = data_store
 
@@ -48,6 +48,7 @@ class PlainTextUTF8ResourceKeyWordIndex(object):
         for word in words_set:
             cmp_hash = self.component_hash(word)
             self.data_store.create(cmp_hash, container_hash)
+        self.data_store.commit()
 
     def query(self, keywords: str):
         words = keywords.lower().split(' ')
@@ -59,7 +60,7 @@ class PlainTextUTF8ResourceKeyWordIndex(object):
 
 class PlainTextUTF8ResourcePrefixIndex(object):
     def __init__(self,
-                 data_store: InvIndexTimestampSQLite=InvIndexTimestampSQLite('plain_utf8_prfx_inv.db', 'prefix_inv')
+                 data_store: InvIndexTimestampSQLite
                  ):
         self.data_store = data_store
 
@@ -78,6 +79,7 @@ class PlainTextUTF8ResourcePrefixIndex(object):
         for item in prefix_set:
             cmp_hash = self.component_hash(item)
             self.data_store.create(cmp_hash, container_hash)
+        self.data_store.commit()
 
     def query(self, prefixes: str):
         words = prefixes.lower().split(' ')

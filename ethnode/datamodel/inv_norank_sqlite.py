@@ -37,6 +37,9 @@ class InvIndexTimestampSQLite(BaseSQLite):
         pk_composite = component_hash + container_hash
         return pk_composite
 
+    def commit(self):
+        self.connection.commit()
+
     def create(self, component_hash: bytes, container_hash: bytes, qs_only=False):
         qs = 'INSERT INTO %s VALUES (?,?,?,?)' % self.table_name
         utc_timestamp = int(datetime.utcnow().timestamp())
@@ -51,12 +54,25 @@ class InvIndexTimestampSQLite(BaseSQLite):
             return qs, values
         else:
             self.cursor.execute(qs, values)
-            self.connection.commit()
+
+    def single_component(self, component_hash, asc=True, qs_only=False):
+        if asc:
+            order_st = ' ORDER BY a.utc_timestamp ASC; '
+        else:
+            order_st = ' ORDER BY a.utc_timestamp DSC; '
+        qs = 'SELECT a.container_hash FROM %s a WHERE a.component_hash=? %s' % (
+            self.table_name,
+            order_st
+        )
+
+        if qs_only:
+            return qs, (component_hash,)
+        c = self.cursor.execute(qs, (component_hash,))
+        return c
 
     def inner_join_on_component(self, *args, asc=True, qs_only=False):
         if len(args) < 2:
             raise ValueError('two or more args required')
-
         first = 'SELECT a.container_hash FROM %s a ' % self.table_name
         inner = 'INNER JOIN {t} {p} ON a.container_hash={p}.container_hash '
         andst = 'WHERE a.component_hash=? AND '
@@ -77,7 +93,8 @@ class InvIndexTimestampSQLite(BaseSQLite):
             order = order_dsc
         qs = first+inners+andst+ands_st+order
         values = args
-        # print(qs)
+        if qs_only:
+            return qs, values
         return self.cursor.execute(qs, values)
 
     # todo test
