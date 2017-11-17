@@ -31,7 +31,7 @@ class Rank4SQLite(BaseSQLite):
         q1_int int,
         q2_int int,
         q3_int int,
-        q4_int int,
+        q4_int int
         );
         ''' % self.table_name
         if qs_only:

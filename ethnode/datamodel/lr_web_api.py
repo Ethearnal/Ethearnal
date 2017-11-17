@@ -2,6 +2,12 @@ import cherrypy
 import json
 
 
+
+
+
+
+
+
 class ApplicationJsonCodec(object):
     @staticmethod
     def encode(o):

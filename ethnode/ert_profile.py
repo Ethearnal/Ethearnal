@@ -14,6 +14,10 @@ from toolkit import basemodel
 from toolkit.store import CrudJsonListStore
 from toolkit.store_sqlite import ErtDHTSQLite, ErtREFSQLite
 from toolkit import kadmini_codec as cdx
+from datamodel.resource_plain_utf8 import PlainTextUTF8Resource, PlainTextUTF8ResourceKeyWordIndex
+from datamodel.resource_plain_utf8 import PlainTextUTF8ResourcePrefixIndex
+from datamodel.resource_plain_utf8 import PlainTextUTF8KeyWordIndexed, PlainTextUTF8PrefixIndexed
+from crypto.signer import LocalRsaSigner
 
 from randomavatar.randomavatar import Avatar
 
@@ -112,6 +116,12 @@ class EthearnalProfileController(object):
         # create rsa keys if not present
         # todo win/ux chmod 400 secure keys
         self.rsa_keys()
+        # init local signer
+        self.rsa_signer = LocalRsaSigner(self.rsa_prv_der, self.rsa_pub_der)
+        self.plain_texts = PlainTextUTF8PrefixIndexed(
+            rs=PlainTextUTF8Resource(self.rsa_signer),
+            inv=PlainTextUTF8ResourcePrefixIndex()
+        )
 
     def get_profile_image_bytes(self):
         bts = None

@@ -3,6 +3,7 @@ import hashlib
 import binascii
 import bson
 import rsa
+from random import randint
 
 
 DEFAULT_REVISION = 1
@@ -107,6 +108,10 @@ def pub_der_guid_bts(pub_der: bytes):
     return hashlib.sha256(pub_der).digest()
 
 
+def sha256_bin_digest(data: bytes):
+    return hashlib.sha256(data).digest()
+
+
 def hash_function(bin_data):
     print('SHA256 HASHING')
     sha = hashlib.sha256(bin_data)
@@ -165,4 +170,20 @@ def encode(d: dict):
 
 def decode(bts: bytes):
     return decode_bson(bts)
+
+
+def q4_quanta_to_bytes(q1: int, q2: int, q3: int, q4: int, sz=8, order='big'):
+    b1 = q1.to_bytes(sz, order)
+    b2 = q2.to_bytes(sz, order)
+    b3 = q3.to_bytes(sz, order)
+    b4 = q4.to_bytes(sz, order)
+    b = b1 + b2 + b3 + b4
+    return b
+
+
+def composite_hash_sha256(b1: bytes, b2: bytes) -> bytes:
+    b_comp = b1+b2
+    sha = hashlib.sha256(b_comp)
+    r = sha.digest()
+    return r
 
