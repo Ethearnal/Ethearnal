@@ -1,0 +1,86 @@
+header.main-header
+
+    .container
+        nav.navbar.navbar-default
+
+            // Navigation header - logo.
+            .navbar-header
+
+                .button
+                    button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target="#navigation", aria-expanded="false")
+                        span
+                        span
+                        span
+                        span
+
+
+                a.navbar-brand(href='').hidden-xs Ethearnal BETA
+
+                form(action="#" style="float: left; max-height: 62px;")
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable.mdl-textfield--floating-label
+                        label.mdl-button.mdl-js-button.mdl-button--icon(for="search-header"): i.material-icons search
+                        .mdl-textfield__expandable-holder
+                            input#search-header.mdl-textfield__input(type="text")
+                            label.mdl-textfield__label(for="search-header") Enter search text below
+
+            // Navbar items ONLY for larger than mobile screens.
+            .collapse.navbar-collapse#navigation
+
+                ul.nav.navbar-nav.navbar-right.hidden-xs
+                    li.asset#comment-navbar: a(href="")
+                        i.icon-comment
+                        .round-number: span 1
+
+
+                    li.asset#alert-navbar
+
+                        a#reputation-dropdown(data-toggle="dropdown")
+                            i.material-icons polymer
+                            .round-number: span
+
+                        // Reputation dropdown
+                        ul.dropdown-menu(data-labelledby="reputation-dropdown")
+                            li.buy-rep: a(href="") <i class="bitcoin icon"></i> Buy reputation
+
+                            li.sell-rep: a(href="") <i class="dollar icon"></i> Sell reputation
+
+
+
+                    li.profile#settings-dropdown(data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+
+                        img.profile-picture(src="", alt="")
+
+                        // JSON DATA GOES HERE
+                        span
+
+
+                    // Settings dropdown
+                    ul.dropdown-menu(data-labelledby="settings-dropdown")
+                        li.view-profile: a(href="") View Profile
+                            i.material-icons account_box
+
+                        li.settings: a(href="") Settings
+                            i.material-icons settings
+
+                        li.logout: a(href="") Logout
+                            i.material-icons power_settings_new
+
+
+
+                ul.nav.navbar-nav.visible-xs
+                    li
+                        // JSON DATA GOES HERE
+                        a(href="")
+                            img.profile-picture(src="", alt="")
+
+                    li: a(href='#') Messages
+                        .round-number: span 1
+
+                    li: a(href='#') Alerts
+                        .round-number: span 1
+
+                    li.settings-mobile: a(href='#') Settings
+                        i.material-icons settings
+
+                    li.logout-mobile: a(href='#') Logout
+                        i.material-icons power_settings_new

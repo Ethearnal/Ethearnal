@@ -205,7 +205,8 @@ $( document ).ready(function() {
     });
 
     // Checks if input.file has changed, if so, checks his ID and stores it into a global variable, then uses that variable to add an ID near the img. You need to create input and image with the same ID and you will have live load image when you will upload it.
-    function readURL(input) {
+    function readURL(input, content) {
+        $content = content;
 
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -214,20 +215,21 @@ $( document ).ready(function() {
                 if( $inputID == "input-image-avatar" ) {
                     addImage(e.target.result);
                 }
-                $('img#' + $inputID + '').attr('src', e.target.result).show();
+                $content.find('img#' + $inputID + '').attr('src', e.target.result).show();
             }
-
             reader.readAsDataURL(input.files[0]);
         }
     }
 
     $("input.input-file").change(function(){
-        readURL(this);
+        $content = $(this).closest('.content');
+        readURL(this, $content);
         $inputID = $(this).attr("id");
     });
 
     // When you upload a file in an accomplishment modal, it would chance the text.
     $("input[type=file]").on("change", function(){
+        $content = $(this).closest('.content');
 
         // Name of file and placeholder
         var file = this.files[0].name;
@@ -236,8 +238,8 @@ $( document ).ready(function() {
         $imgClass = $(this).parent().find('.file-input-first-image').attr('class');
 
         if($(this).val()!=""){
-            $("label[for=" + $labelID + "]").text(' ' + file + ' ').addClass('active');
-            $('img.' + $imgClass).addClass('active');
+            $content.find("label[for=" + $labelID + "]").text(' ' + file + ' ').addClass('active');
+            $content.find('img.' + $imgClass).addClass('active');
         } else {
             $(this).next().text(dflt);
         }
@@ -299,7 +301,7 @@ $( document ).ready(function() {
             });
         }
 
-        $('.ui .menu, .panel-body').perfectScrollbar();
+        // $('.ui .menu, .panel-body').perfectScrollbar();
         $('section.background-image .items, .post .image .items').owlCarousel({
             singleItem: true
         });
@@ -322,7 +324,7 @@ $( document ).ready(function() {
 function require(script) {
     $.ajax({
       dataType: "jsonp",
-      url: script ,
+      url: script,
       }).done(function ( data ) {
       // do my stuff
     });
@@ -350,7 +352,7 @@ $(function () {
 
     $.ajax({
         type: 'GET',
-        url: 'profile.json',
+        url: 'profile_clean.json',
         dataType: 'text',
         success: function(data) {
             var profile = JSON.parse(data);
@@ -364,14 +366,6 @@ $(function () {
                 $firstname = names.first;
                 $lastname = names.last;
             });
-
-            // // Appends profile's LOCATION (city & country)
-            // var location = profile.location;
-            // $.each(location, function(i, locations) {
-            //     $city = locations.city;
-            //     $country = locations.country;
-            //     $countryClass = locations.countryClass;
-            // });
 
             // Appends a Job Experience on your profile page.
             var workExperience = profile.workExperience;
@@ -395,34 +389,14 @@ $(function () {
 
             updateProfile(profile);
 
-            // // Variables for texts. Just to make it easy to read & understand.
-            // $h2 = $('<h2>' + $firstname + ' ' + $lastname + '</h2>');
-            // $h5 = $('<h5 class="profile-information-position">' + profile.title + '</strong></h5>');
-            // $p = $('<p class="location ' + $countryClass + '">' + $city + ', ' + $country + '</p>');
-            // $buttonHire = $('<button class="hire">Hire ($' + profile.hourlyRate + '/hr)</button>');
-            // $buttonMessage = $('<button class="leave-msg">Send Message</button>');
-
-
-            // // This variable combines everything together.
-            // var textProfile = $h2.get(0).outerHTML + $h5.get(0).outerHTML + $p.get(0).outerHTML + $buttonHire.get(0).outerHTML + $buttonMessage.get(0).outerHTML;
-
-            // // And this inserts all the text to the .profile-upper div
-            // $(textProfile).insertAfter(".profile-upper .profile-image");
-
-            // Adding profile description .profile-description
-            // $('.profile-description').append('<p>' + profile.description + '</p>');
-
             // Adding profile reputation .navbar-collapse #alert-navbar
             $('li.asset#alert-navbar a .round-number span').text(profile.reputation);
 
-            // Adding name to the header right side.
-            // $('ul.navbar-nav.visible-xs li a').text($firstname);
-            // $('li.profile span').text($firstname);
 
             // Adding profile pictures to the page.
-            $('.profile-image img').attr('src', profile.profilePicture);
+            $('.profile-image img').attr('src', '/api/v1/profile/?q=avatar');
             $('.profile-image img').attr('alt', $firstname + ' ' + $lastname);
-            $('li.profile img.profile-picture').attr('src', profile.profilePicture);
+            $('li.profile img.profile-picture').attr('src', '/api/v1/profile/?q=avatar');
             $('li.profile img.profile-picture').attr('alt', $firstname + ' ' + $lastname);
 
             // Appends each SKILL.
@@ -437,12 +411,6 @@ $(function () {
 })
 
 
-
-// Include all functions
-require('js/functions.js');
-
-// Include modals animation JS file.
-require("js/modals-animation.js");
 
 
 // FUNCTIONS
@@ -476,5 +444,19 @@ require("js/functions/modals/loadProfileInputs.js");
 // Updates the Profile.
 require("js/functions/modals/updateProfile.js");
 
+// Resets images inputs in modals
+require("js/functions/modals/resetImages.js");
+
 // Collects the data
 require("js/functions/modals/collectData.js");
+
+
+
+
+// OTHER FUNCTION
+
+// Include all functions
+require('js/functions.js');
+
+// Include modals animation JS file.
+require("js/modals-animation.js");

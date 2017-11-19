@@ -8,8 +8,6 @@ function loadProfileInputs() {
     $buttonHire = $profile.find('.profile-upper button.hire').text();
     $location = $profile.find('.profile-upper p.location').text();
 
-    console.log($profile.find('.profile-upper p.location'));
-
     // Main variables
     $firstname = $fullname.split(' ')[0]; // FIRST NAME
     $lastname = $fullname.split(' ')[1]; // LAST NAME
@@ -18,9 +16,6 @@ function loadProfileInputs() {
     $city = $location.split(', ')[0]; // CITY
     $title = $profile.find('.profile-upper h5.profile-information-position').text(); // TITLE
     $summary = $profile.find('.profile-description p').text(); // SUMMARY / DESCRIPTION
-
-    // console.log('city: ' + $city);
-    // console.log('location: ' + $location);
 
     // FIRST NAME
     $form.find('input#first-name').val($firstname).parent().addClass('is-dirty');

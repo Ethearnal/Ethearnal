@@ -1,0 +1,183 @@
+doctype html
+html(lang='en-US')
+    head
+        meta(charset='UTF-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='description', content='')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+        title Ethearnal
+
+        // START of LINKS
+
+        // Normalize.css
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css")
+
+        // BootstrapCSS 3.3.7
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+
+        // Semantic UI CSS
+        link(rel="stylesheet", href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.css")
+
+        // Bootstrap Material Date and Time Picker
+        link(rel="stylesheet", href="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/css/bootstrap-material-datetimepicker.css")
+
+        // Icons
+        link(rel="stylesheet", href="styles/icons.css")
+
+        // Flag icons
+        link(rel="stylesheet", href="https://cdn.rawgit.com/lipis/flag-icon-css/master/css/flag-icon.min.css")
+
+        // START of FONTS
+
+        // Google Material Icons
+        link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+
+        // Material Design Bootstrap
+        link(rel="stylesheet", href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css")
+
+        // Roboto
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i")
+
+        // Montserrat
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800,900")
+
+        // END of FONTS
+
+        // Main CSS file
+        link(rel="stylesheet", href="styles/main.css")
+
+        // END of LINKS
+
+    body
+
+        // Header includes "Aspire" logo, search option, messages, alerts icons and profile image and it's name.
+        // There's 2 collapse divs, one for mobile screens and another one for everything higher than mobile screens.
+        include mixins/header
+
+
+        section.page-content(style="position: relative; top: 61px;")
+
+            .container
+
+                .filters.col-md-3
+
+                    .filter
+                        p Category
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-1")
+                            input#checkbox-1.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Development
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-2")
+                            input#checkbox-2.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Mobile Development
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-3")
+                            input#checkbox-3.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Graphic Design
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-4")
+                            input#checkbox-4.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Content Writing
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-5")
+                            input#checkbox-5.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Accountants
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-6")
+                            input#checkbox-6.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Consultants
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-7")
+                            input#checkbox-7.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Assistants
+
+
+                    .filter
+                        p Job Type
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-8")
+                            input#checkbox-8.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Hourly
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-9")
+                            input#checkbox-9.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Fixed Price
+
+
+                    .filter
+                        p Experience Level
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-10")
+                            input#checkbox-10.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Entry Level
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-11")
+                            input#checkbox-11.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Intermediate
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-12")
+                            input#checkbox-12.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label Expert
+
+
+                    .filter
+                        p Budget
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-13")
+                            input#checkbox-13.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label <$100
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-14")
+                            input#checkbox-14.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label $100 - $500
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-15")
+                            input#checkbox-15.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label $500 - $1k
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-16")
+                            input#checkbox-16.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label $1k - $5k
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-17")
+                            input#checkbox-17.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label $5k - $50k
+
+                        label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-18")
+                            input#checkbox-18.mdl-checkbox__input(type="checkbox")
+                            span.mdl-checkbox__label $50k+
+
+                .gigs.col-md-9
+                    p Gigs
+
+
+
+
+        // jQuery 3.1.1
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+
+        // BootstrapJS 3.3.7
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
+
+        // Semantic UI JS
+        script(src="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.js")
+
+        // Moment.JS
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js")
+
+        // Bootstrap Date Time Picker
+        script(src="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/js/bootstrap-material-datetimepicker.js")
+
+        // Moment JS
+        script(src="https://cdn.jsdelivr.net/npm/moment@2.19.1/moment.min.js")
+
+        // Material Design Bootstrap
+        script(defer src="https://code.getmdl.io/1.3.0/material.min.js")
+
+        // Jquery Easing
+        script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js")
+
+        // Main JS file
+        script(src="js/main.js")

@@ -1,6 +1,7 @@
 // Collects 'CREATE JOB / EDIT JOB' data.
 function collectJobData(form) {
     $form = form; $endDateVal = null;
+    $content = $form.closest('.content');
     if($form.find('input.date-ended').val() == '') {
         $endDateVal = 'Present';
     } else {
@@ -8,6 +9,7 @@ function collectJobData(form) {
     }
 
     $data = {
+        image: $content.find('img#input-image-job').attr('src'),
         company: $form.find('input#company-name').val(),
         position: $form.find('input#position-name').val(),
         description: $form.find('textarea#description').val(),
@@ -16,13 +18,59 @@ function collectJobData(form) {
         ]
     }
 
+    // $dataToPost = JSON.stringify($data);
+
+    // formData= new FormData();
+    // formData.append("json_str", "profile.json");
+    // $.ajax({
+    //     url: "/api/v1/uploadjson",
+    //     type: "POST",
+    //     data: formData,
+    //     contentType: 'multipart/form-data',
+    //     processData: false,
+    //     success: function(data){
+    //         alert('success');
+    //     }
+    // });
+
+    // uploadFile();
+
+    console.log($data);
+
     return $data;
+}
+
+
+function uploadFile(){
+  var input = document.getElementById("input-image-job");
+  file = input.files[0];
+  if(file != undefined){
+    formData= new FormData();
+    if(!!file.type.match(/image.*/)){
+      formData.append("ufile", file);
+      $.ajax({
+        url: "/api/v1/upload",
+        type: "POST",
+        data: formData,
+        contentType: 'multipart/form-data',
+        processData: false,
+        success: function(data){
+            alert('success');
+        }
+      });
+    }else{
+      alert('Not a valid image!');
+    }
+  }else{
+    alert('Input something!');
+  }
 }
 
 
 // Collects 'CREATE EDUCATION / EDIT EDUCATION' data.
 function collectEducationData(form) {
     $form = form; $endDateVal = null;
+    $content = $form.closest('.content');
     if($form.find('input.date-ended').val() == '') {
         $endDateVal = 'Present';
     } else {
@@ -30,7 +78,7 @@ function collectEducationData(form) {
     }
 
     $data = {
-        // image: $imgSource,
+        image: $content.find('img#input-image-education').attr('src'),
         institution: $form.find('input#education-name').val(),
         course: $form.find('input#study-field').val(),
         description: $form.find('textarea#description').val(),
