@@ -132,9 +132,19 @@ $('.modal-box button').click(function() {
     if($(this).hasClass('finish-button')) {
         if(!validateForm($form) && $modalID !== "edit-profile") return; // Return if form isn't filled.
 
+        // Resetting images and collecting data for JOB
+        if($modalID == 'add-job' || $modalID == 'edit-job') {
+            $data = collectJobData($form);
+            resetImage($content, "job");
+        }
 
-        if($modalID == 'add-job' || $modalID == 'edit-job') $data = collectJobData($form);
-        if($modalID == 'add-education' || $modalID == 'edit-education') $data = collectEducationData($form);
+        // Resetting images and collecting data for EDUCATION
+        if($modalID == 'add-education' || $modalID == 'edit-education') {
+            $data = collectEducationData($form);
+            resetImage($content, "education");
+        }
+
+        // Collecting data for other things.
         if($modalID == 'add-language' || $modalID == 'edit-language') $data = collectLanguageData($form);
         if($modalID == 'add-skill' || $modalID == 'edit-skill') $data = collectSkillData($form);
         if($modalID == "edit-profile") $data = collectProfileData($form);
@@ -164,6 +174,7 @@ $('.modal-box button').click(function() {
 
                 $dateDifferenceText = getTimeFirst($data.time);
 
+                $contentBlock.find('.image img').attr('src', $data.image);
                 $contentBlock.find('.study-field').text($data.course);
                 $contentBlock.find('.education-name').text($data.institution);
                 $contentBlock.find('.date-name').text($dateDifferenceText);
@@ -177,6 +188,7 @@ $('.modal-box button').click(function() {
 
                 $dateDifferenceText = getTimeFirst($data.time);
 
+                $contentBlock.find('.image img').attr('src', $data.image);
                 $contentBlock.find('.company-name').text($data.company);
                 $contentBlock.find('.position-name').text($data.position);
                 $contentBlock.find('.date-name').text($dateDifferenceText);

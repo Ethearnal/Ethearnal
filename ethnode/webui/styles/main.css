@@ -1988,7 +1988,6 @@ body header.main-header {
   position: fixed;
   width: 100%;
   background-color: white;
-  margin-top: -59px;
   z-index: 20;
   box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
 }
@@ -2071,4 +2070,26 @@ body header.main-header {
   -webkit-transform: translate(-15px, -15px);
       -ms-transform: translate(-15px, -15px);
           transform: translate(-15px, -15px);
+}
+
+section.page-content .container {
+  padding-top: 100px;
+}
+
+section.page-content .container .filters .filter {
+  margin-bottom: 20px;
+}
+
+section.page-content .container .filters .filter p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.29;
+  color: #4a4a4a;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+section.page-content .container .filters .filter label.mdl-checkbox {
+  margin-left: 15px;
 }

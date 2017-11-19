@@ -3,10 +3,7 @@ function loadInputsText(form, div) {
 
     $form = form;
     $divToLoad = div;
-
-    // Languages modal variables
-    $imageFlagClass = $divToLoad.find('.image span').attr('class').split(' ')[2];
-    $languageLevel = $divToLoad.find('.image span').attr('level');
+    $content = $form.closest('.content');
 
     // Dates
     $date = $divToLoad.find('p.date-name').text();
@@ -22,7 +19,34 @@ function loadInputsText(form, div) {
     // Resetting the form
     clearForm($form);
 
+    // // Resetting images in modals
+    // if($divToLoad.hasClass('education')) resetImage($content, 'education');
+    // if($divToLoad.hasClass('job')) resetImage($content, 'job');
+
+    if($divToLoad.hasClass('education')) {
+        $imageSrc = $divToLoad.find('.image img').attr('src');
+
+        // console.log($imageSrc);
+
+        $content.find('input#input-image-education').attr('value', $imageSrc);
+        $content.find('img#input-image-education').attr('src', $imageSrc);
+        $content.find('img.img-education').removeClass('active');
+        $content.find('label[for="input-image-education"]').text('Click here to change image').removeClass('active');
+
+
+        // $content.find('input#input-image-education').removeAttr('value');
+        // $content.find('img#input-image-education').removeAttr('src');
+        // $content.find('img.img-education').removeClass('active');
+        // $content.find('label[for="input-image-education"]').text('Add Educational Institution Logo').removeClass('active');
+
+    }
+
+
+    // Adding value to dropdowns in language modals.
     if($divToLoad.hasClass('language')) {
+        $imageFlagClass = $divToLoad.find('.image span').attr('class').split(' ')[2];
+        $languageLevel = $divToLoad.find('.image span').attr('level');
+
         $form.find('#language-name').dropdown('set selected', $imageFlagClass);
         $form.find('#level').dropdown('set selected', $languageLevel);
     }

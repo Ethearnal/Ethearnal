@@ -19,15 +19,8 @@ html(lang='en-US')
         // Semantic UI CSS
         link(rel="stylesheet", href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.css")
 
-        // Perfect Scrollbar jQuery CSS
-        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.12/css/perfect-scrollbar.min.css")
-
         // Owl Carousel CSS
-        //- link(rel="stylesheet", href="https://cdn.rawgit.com/OwlFonk/OwlCarousel/master/owl-carousel/owl.carousel.css")
         link(rel="stylesheet", href="https://bbcdn.githack.com/shahzadns/owlfonk-owlcarousel/raw/31413692812896e19db89baee9be30b9d36d1e64/owl-carousel/owl.carousel.css")
-
-        // Cropper jQuery CSS
-        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css")
 
         // Bootstrap Material Date and Time Picker
         link(rel="stylesheet", href="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/css/bootstrap-material-datetimepicker.css")
@@ -59,7 +52,7 @@ html(lang='en-US')
 
         // END of LINKS
 
-    body
+    body(style="margin-top: -59px")
 
         include mixins/modals/new-modals/add-job
         include mixins/modals/new-modals/edit-job
@@ -74,17 +67,6 @@ html(lang='en-US')
         include mixins/modals/new-modals/edit-skill
 
         include mixins/modals/new-modals/edit-profile
-
-
-        include mixins/modals/shoutout-modal
-        include mixins/modals/education-modal
-        include mixins/modals/job-modal
-        include mixins/modals/story-modal
-        include mixins/modals/accomplishment-modal
-        include mixins/modals/avatar-ui-modal
-        include mixins/modals/modal-invite
-        include mixins/modals/timeline-modal
-        include mixins/modals/timeline-modal-edit
 
 
         // Header includes "Aspire" logo, search option, messages, alerts icons and profile image and it's name.
@@ -162,7 +144,7 @@ html(lang='en-US')
                             li
                                 // JSON DATA GOES HERE
                                 a(href="")
-                                    img.profile-picture(src="images/dobri.png", alt="Dobri")
+                                    img.profile-picture(src="", alt="")
 
                             li: a(href='#') Messages
                                 .round-number: span 1
@@ -242,49 +224,39 @@ html(lang='en-US')
                     .profile-documentation.col-xs-12
 
                         ul.nav.nav-tabs(role="tablist")
-                            li.active.work-experience-li(role="presentation"): a(href="#work-experience", aria-controls="work-experience", role="tab", data-toggle="tab") Work Experience
-                            li.timeline-li(role="presentation"): a(href="#education", aria-controls="education", role="tab", data-toggle="tab") Education
-                            li.timeline-li(role="presentation"): a(href="#languages", aria-controls="languages", role="tab", data-toggle="tab") Languages
-                            li.timeline-li(role="presentation"): a(href="#gigs", aria-controls="gigs", role="tab", data-toggle="tab") Gigs
+                            li.active.timeline-li(role="presentation"): a(href="#gigs", aria-controls="gigs", role="tab", data-toggle="tab") Gigs
+                            li.timeline-li(role="presentation"): a(href="#portfolio", aria-controls="portfolio", role="tab", data-toggle="tab") Portfolio
+                            li.timeline-li(role="presentation"): a(href="#profile", aria-controls="profile", role="tab", data-toggle="tab") Profile
 
                             li.dropdownButton
                                 button#addThings.mdl-button.mdl-js-button.mdl-button--icon: i.material-icons add
                                 ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="addThings")
+                                    li.mdl-menu__item.open-modal(open-modal="#add-portfolio") Add Portfolio Element
                                     li.mdl-menu__item.open-modal(open-modal="#add-job") Add Work Experience
                                     li.mdl-menu__item.open-modal(open-modal="#add-education") Add Education
                                     li.mdl-menu__item.open-modal(open-modal="#add-language") Add Language
                                     li.mdl-menu__item.open-modal(open-modal="#add-skill") Add Skill
-                                    li.mdl-menu__item.open-modal(open-modal="#add-gig" disabled) Add Gig
+                                    li.mdl-menu__item.open-modal(open-modal="#add-gig") Add Gig
 
 
                         // All the information about above listed tabs.
                         .tab-content.col-xs-12
 
-                            // Work Experience TAB
-                            .tab-pane.fade.in.active#work-experience.col-xs-12(role="tabpanel")
-                                include mixins/tabs/work-experience
-
-                            // Education TAB
-                            .tab-pane.fade#education.col-xs-12(role="tabpanel")
-                                include mixins/tabs/education
-
-                            // Languages TAB
-                            .tab-pane.fade#languages.col-xs-12(role="tabpanel")
-                                include mixins/tabs/languages
-
                             // Gigs TAB
-                            .tab-pane.fade#gigs.col-xs-12(role="tabpanel")
+                            .tab-pane.fade.in.active#gigs.col-xs-12(role="tabpanel")
                                 include mixins/tabs/gigs
+
+                            // Portfolio TAB
+                            .tab-pane.fade#portfolio.col-xs-12(role="tabpanel")
+                                include mixins/tabs/portfolio
+
+                            // Profile TAB
+                            .tab-pane.fade#profile.col-xs-12(role="tabpanel")
+                                include mixins/tabs/profile
 
 
         // jQuery 3.1.1
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
-
-        // jQuery UI 1.21.1
-        script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js")
-
-        // jQuery UI Monthpicker
-        script(src="https://cdn.rawgit.com/lucianocosta/jquery.mtz.monthpicker/master/jquery.mtz.monthpicker.js")
 
         // BootstrapJS 3.3.7
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
@@ -292,24 +264,14 @@ html(lang='en-US')
         // Semantic UI JS
         script(src="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.js")
 
-        // Perfect Scrollbar jQuery JS
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.12/js/perfect-scrollbar.jquery.min.js")
-
         // Owl Carousel JS
-        //- script(src="https://cdn.rawgit.com/OwlFonk/OwlCarousel/master/owl-carousel/owl.carousel.min.js")
         script(src="https://bbcdn.githack.com/shahzadns/owlfonk-owlcarousel/raw/31413692812896e19db89baee9be30b9d36d1e64/owl-carousel/owl.carousel.min.js")
-
-        // Cropper jQuery JS
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.js")
 
         // Moment.JS
         script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js")
 
         // Bootstrap Date Time Picker
         script(src="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/js/bootstrap-material-datetimepicker.js")
-
-        // Framework7.JS
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.0/js/framework7.min.js")
 
         // Moment JS
         script(src="https://cdn.jsdelivr.net/npm/moment@2.19.1/moment.min.js")
@@ -322,3 +284,8 @@ html(lang='en-US')
 
         // Main JS file
         script(src="js/main.js")
+
+
+        // PROFILE AVATAR CROPPING / CHANGING
+        //- // Cropper jQuery JS
+        //- script(src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.js")
