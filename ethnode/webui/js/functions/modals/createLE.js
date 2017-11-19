@@ -1,6 +1,5 @@
 var iEP = 0;
 function createLE(data, purpose) {
-    // newDiv = newDiv || false;
     $data = data;
     var imageDiv = null;
     $timeFrom = null; $timeTo = null; $dateDifference = null; $dropdownID = null; $finalDiv = null; var twoLetters = null;
@@ -29,7 +28,7 @@ function createLE(data, purpose) {
     // HERE WE ARE STARTING TO RENDER THE WHOLE CONTENT BLOCK DIV
 
     // Image's div rendering
-    if( $data.image == null ) {
+    if( $data.image == null && purpose !== "language" ) {
         imageDiv = '<div class="image"><div class="dont-have-logo" style="display: block">' + $twoLetters + '</div></div>';
     } else {
         imageDiv = '<div class="image"><img src="' + $data.image + '" alt="Logo Image"></div>';
