@@ -116,8 +116,6 @@ class PlainTextUTF8PrefixIndexed(object):
         ctx_hash = self.rs.create(text_data)
         self.inv.create(text_data, ctx_hash)
 
-
-
     def query(self, prefixes: str):
         return self.inv.query(prefixes)
 
@@ -134,6 +132,7 @@ class PLainTextUTF8WebApi(object):
     def GET(self, q):
         try:
             rs = self.api.query(q)
+            print(q, rs)
             result_xml = ""
             for item in rs:
                 print(item)
