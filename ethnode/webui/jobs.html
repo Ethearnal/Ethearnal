@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethearnal</title>
+    <title>Ethearnal - Jobs</title>
     <!-- START of LINKS-->
     <!-- Normalize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
@@ -34,8 +34,6 @@
     <!-- END of LINKS-->
   </head>
   <body>
-    <!-- Header includes "Aspire" logo, search option, messages, alerts icons and profile image and it's name.-->
-    <!-- There's 2 collapse divs, one for mobile screens and another one for everything higher than mobile screens.-->
     <header class="main-header">
       <div class="container">
         <nav class="navbar navbar-default">
@@ -57,6 +55,8 @@
           <!-- Navbar items ONLY for larger than mobile screens.-->
           <div id="navigation" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right hidden-xs">
+              <li style="margin-right: 25px; margin-top: 2px" class="asset"><a href="/ui/gigs.html">Gigs</a></li>
+              <li style="margin-right: 50px; margin-top: 2px" class="asset"><a href="/ui/jobs.html">Jobs</a></li>
               <li id="comment-navbar" class="asset"><a href=""><i class="icon-comment"></i>
                   <div class="round-number"><span>1</span></div></a></li>
               <li id="alert-navbar" class="asset"><a id="reputation-dropdown" data-toggle="dropdown"><i class="material-icons">polymer</i>
@@ -72,7 +72,7 @@
               </li>
               <!-- Settings dropdown-->
               <ul data-labelledby="settings-dropdown" class="dropdown-menu">
-                <li class="view-profile"><a href="">View Profile<i class="material-icons">account_box</i></a></li>
+                <li class="view-profile"><a href="/ui">View Profile<i class="material-icons">account_box</i></a></li>
                 <li class="settings"><a href="">Settings<i class="material-icons">settings</i></a></li>
                 <li class="logout"><a href="">Logout<i class="material-icons">power_settings_new</i></a></li>
               </ul>
@@ -142,6 +142,9 @@
           </div>
           <div class="filter">
             <p>Budget</p>
+            <div class="rkmd-slider slider-continous slider-shadow slider-lightBlue slider-light">
+              <input type="range" min="0" max="100" value="65">
+            </div>
             <label for="checkbox-13" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
               <input id="checkbox-13" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label"><$100</span>
             </label>
@@ -163,7 +166,12 @@
           </div>
         </div>
         <div class="gigs col-md-9">
-          <p>Gigs</p>
+          <p>Jobs</p>
+          
+          
+          
+          
+          
         </div>
       </div>
     </section>
@@ -183,7 +191,7 @@
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <!-- Jquery Easing-->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <!-- Main JS file-->
-    <script src="js/main.js"></script>
+    <!-- loadProfile.js-->
+    <script src="js/loadProfile.js"></script>
   </body>
 </html>

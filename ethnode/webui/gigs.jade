@@ -6,7 +6,7 @@ html(lang='en-US')
         meta(name='description', content='')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
-        title Ethearnal
+        title Ethearnal - Gigs
 
         // START of LINKS
 
@@ -51,8 +51,6 @@ html(lang='en-US')
 
     body
 
-        // Header includes "Aspire" logo, search option, messages, alerts icons and profile image and it's name.
-        // There's 2 collapse divs, one for mobile screens and another one for everything higher than mobile screens.
         include mixins/header
 
 
@@ -125,6 +123,10 @@ html(lang='en-US')
                     .filter
                         p Budget
 
+                        .rkmd-slider.slider-continous.slider-shadow.slider-lightBlue.slider-light
+                            input(type='range', min='0', max='100', value='65')
+
+
                         label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-13")
                             input#checkbox-13.mdl-checkbox__input(type="checkbox")
                             span.mdl-checkbox__label <$100
@@ -150,7 +152,24 @@ html(lang='en-US')
                             span.mdl-checkbox__label $50k+
 
                 .gigs.col-md-9
-                    p Gigs
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable.mdl-textfield--floating-label
+                        label.mdl-button.mdl-js-button.mdl-button--icon(for="search-gigs"): i.material-icons search
+                        .mdl-textfield__expandable-holder
+                            input#search-gigs.mdl-textfield__input(type="text")
+                            label.mdl-textfield__label(for="search-gigs") Enter text to search Gigs
+
+
+                    .gigs-container
+
+                        .gig
+                            img(src="images/paypal.jpg", alt="Gig")
+                            h5 by FirstName L.
+                            p Gig Description
+
+                            .footer
+                                h4 Starting at <span>$25</span>
+
 
 
 
@@ -179,5 +198,8 @@ html(lang='en-US')
         // Jquery Easing
         script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js")
 
-        // Main JS file
-        script(src="js/main.js")
+        // loadProfile.js
+        script(src="js/loadProfile.js")
+
+        //- // Main JS file
+        //- script(src="js/main.js")

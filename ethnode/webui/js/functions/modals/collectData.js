@@ -113,6 +113,25 @@ function collectLanguageData(form) {
 }
 
 
+// Collects 'CREATE LANGUAGE / EDIT LANGUAGE' data.
+function collectGigData(form) {
+    $form = form;
+
+    $data = {
+        title: $form.find('#gig-title').val(),
+        category: $form.find('#category').dropdown('get value'),
+        experienceLevel: $form.find('#experience-level').dropdown('get value'),
+        description: $form.find('textarea#description').val(),
+        budget: $form.find('input#budget'),
+        date: [
+            { expire: $form.find('input.date-started').val() }
+        ]
+    }
+    return $data;
+}
+
+
+
 
 // Collects PROFILE data.
 function collectProfileData(form) {

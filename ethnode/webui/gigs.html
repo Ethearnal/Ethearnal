@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethearnal - Gigs</title>
+    <!-- START of LINKS-->
+    <!-- Normalize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
+    <!-- BootstrapCSS 3.3.7-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Semantic UI CSS-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.css">
+    <!-- Bootstrap Material Date and Time Picker-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/css/bootstrap-material-datetimepicker.css">
+    <!-- Icons-->
+    <link rel="stylesheet" href="styles/icons.css">
+    <!-- Flag icons-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/lipis/flag-icon-css/master/css/flag-icon.min.css">
+    <!-- START of FONTS-->
+    <!-- Google Material Icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Material Design Bootstrap-->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Roboto-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i">
+    <!-- Montserrat-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800,900">
+    <!-- END of FONTS-->
+    <!-- Main CSS file-->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- END of LINKS-->
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container">
+        <nav class="navbar navbar-default">
+          <!-- Navigation header - logo.-->
+          <div class="navbar-header">
+            <div class="button">
+              <button type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" class="navbar-toggle collapsed"><span></span><span></span><span></span><span></span></button>
+            </div><a href="" class="navbar-brand hidden-xs">Ethearnal BETA</a>
+            <form action="#" style="float: left; max-height: 62px;">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label">
+                <label for="search-header" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">search</i></label>
+                <div class="mdl-textfield__expandable-holder">
+                  <input id="search-header" type="text" class="mdl-textfield__input">
+                  <label for="search-header" class="mdl-textfield__label">Enter search text below</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- Navbar items ONLY for larger than mobile screens.-->
+          <div id="navigation" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+              <li style="margin-right: 25px; margin-top: 2px" class="asset"><a href="/ui/gigs.html">Gigs</a></li>
+              <li style="margin-right: 50px; margin-top: 2px" class="asset"><a href="/ui/jobs.html">Jobs</a></li>
+              <li id="comment-navbar" class="asset"><a href=""><i class="icon-comment"></i>
+                  <div class="round-number"><span>1</span></div></a></li>
+              <li id="alert-navbar" class="asset"><a id="reputation-dropdown" data-toggle="dropdown"><i class="material-icons">polymer</i>
+                  <div class="round-number"><span></span></div></a>
+                <!-- Reputation dropdown-->
+                <ul data-labelledby="reputation-dropdown" class="dropdown-menu">
+                  <li class="buy-rep"><a href=""><i class="bitcoin icon"></i> Buy reputation</a></li>
+                  <li class="sell-rep"><a href=""><i class="dollar icon"></i> Sell reputation</a></li>
+                </ul>
+              </li>
+              <li id="settings-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="profile"><img src="" alt="" class="profile-picture">
+                <!-- JSON DATA GOES HERE--><span></span>
+              </li>
+              <!-- Settings dropdown-->
+              <ul data-labelledby="settings-dropdown" class="dropdown-menu">
+                <li class="view-profile"><a href="/ui">View Profile<i class="material-icons">account_box</i></a></li>
+                <li class="settings"><a href="">Settings<i class="material-icons">settings</i></a></li>
+                <li class="logout"><a href="">Logout<i class="material-icons">power_settings_new</i></a></li>
+              </ul>
+            </ul>
+            <ul class="nav navbar-nav visible-xs">
+              <li>
+                <!-- JSON DATA GOES HERE--><a href=""><img src="" alt="" class="profile-picture"></a>
+              </li>
+              <li><a href="#">Messages
+                  <div class="round-number"><span>1</span></div></a></li>
+              <li><a href="#">Alerts
+                  <div class="round-number"><span>1</span></div></a></li>
+              <li class="settings-mobile"><a href="#">Settings<i class="material-icons">settings</i></a></li>
+              <li class="logout-mobile"><a href="#">Logout<i class="material-icons">power_settings_new</i></a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <section style="position: relative; top: 61px;" class="page-content">
+      <div class="container">
+        <div class="filters col-md-3">
+          <div class="filter">
+            <p>Category</p>
+            <label for="checkbox-1" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-1" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Development</span>
+            </label>
+            <label for="checkbox-2" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-2" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Mobile Development</span>
+            </label>
+            <label for="checkbox-3" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-3" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Graphic Design</span>
+            </label>
+            <label for="checkbox-4" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-4" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Content Writing</span>
+            </label>
+            <label for="checkbox-5" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-5" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Accountants</span>
+            </label>
+            <label for="checkbox-6" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-6" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Consultants</span>
+            </label>
+            <label for="checkbox-7" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-7" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Assistants</span>
+            </label>
+          </div>
+          <div class="filter">
+            <p>Job Type</p>
+            <label for="checkbox-8" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-8" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Hourly</span>
+            </label>
+            <label for="checkbox-9" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-9" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Fixed Price</span>
+            </label>
+          </div>
+          <div class="filter">
+            <p>Experience Level</p>
+            <label for="checkbox-10" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-10" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Entry Level</span>
+            </label>
+            <label for="checkbox-11" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-11" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Intermediate</span>
+            </label>
+            <label for="checkbox-12" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-12" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Expert</span>
+            </label>
+          </div>
+          <div class="filter">
+            <p>Budget</p>
+            <div class="rkmd-slider slider-continous slider-shadow slider-lightBlue slider-light">
+              <input type="range" min="0" max="100" value="65">
+            </div>
+            <label for="checkbox-13" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-13" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label"><$100</span>
+            </label>
+            <label for="checkbox-14" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-14" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">$100 - $500</span>
+            </label>
+            <label for="checkbox-15" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-15" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">$500 - $1k</span>
+            </label>
+            <label for="checkbox-16" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-16" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">$1k - $5k</span>
+            </label>
+            <label for="checkbox-17" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-17" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">$5k - $50k</span>
+            </label>
+            <label for="checkbox-18" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-18" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">$50k+</span>
+            </label>
+          </div>
+        </div>
+        <div class="gigs col-md-9">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label">
+            <label for="search-gigs" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">search</i></label>
+            <div class="mdl-textfield__expandable-holder">
+              <input id="search-gigs" type="text" class="mdl-textfield__input">
+              <label for="search-gigs" class="mdl-textfield__label">Enter text to search Gigs</label>
+            </div>
+          </div>
+          <div class="gigs-container">
+            <div class="gig"><img src="images/paypal.jpg" alt="Gig">
+              <h5>by FirstName L.</h5>
+              <p>Gig Description</p>
+              <div class="footer">
+                <h4>Starting at <span>$25</span></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- jQuery 3.1.1-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- BootstrapJS 3.3.7-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Semantic UI JS-->
+    <script src="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.js"></script>
+    <!-- Moment.JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <!-- Bootstrap Date Time Picker-->
+    <script src="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Moment JS-->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.19.1/moment.min.js"></script>
+    <!-- Material Design Bootstrap-->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Jquery Easing-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <!-- loadProfile.js-->
+    <script src="js/loadProfile.js"></script>
+  </body>
+</html>

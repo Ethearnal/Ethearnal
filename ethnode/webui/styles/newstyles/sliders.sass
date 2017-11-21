@@ -1,0 +1,200 @@
+.rkmd-slider
+  display: block
+  position: relative
+  font-size: 16px
+  font-family: 'Roboto', sans-serif
+  input[type="range"]
+    overflow: hidden
+    position: absolute
+    width: 1px
+    height: 1px
+    opacity: 0
+    + .slider
+      display: block
+      position: relative
+      width: 100%
+      height: 4px
+      background-color: #bebebe
+      .slider-fill
+        display: block
+        position: absolute
+        width: 0%
+        height: 100%
+        user-select: none
+        z-index: 1
+      .slider-handle
+        cursor: pointer
+        position: absolute
+        top: -5.5px
+        left: 0%
+        width: 15px
+        height: 15px
+        margin-left: -8px
+        border-radius: 50%
+        transition: all .2s ease
+        user-select: none
+        z-index: 2
+    &:disabled + .slider
+      background-color: #b0b0b0 !important
+      .slider-fill, .slider-handle
+        cursor: default !important
+        background-color: #b0b0b0 !important
+      .slider-fill .slider-label, .slider-handle .slider-label
+        display: none
+        background-color: #b0b0b0 !important
+      .slider-fill.is-active, .slider-handle.is-active
+        top: -5.5px
+        width: 15px
+        height: 15px
+        margin-left: -8px
+      .slider-fill.is-active .slider-label
+        display: none
+        border-radius: 50%
+        transform: none
+      .slider-handle
+        &.is-active .slider-label
+          display: none
+          border-radius: 50%
+          transform: none
+        &:active
+          box-shadow: none !important
+          transform: scale(1) !important
+  &.slider-light input[type="range"]
+    + .slider
+      background-color: #5c5c5c
+    &:disabled + .slider
+      background-color: #5c5c5c !important
+      .slider-fill, .slider-handle
+        background-color: #5c5c5c !important
+  &.slider-continuous
+    &.slider-scale .slider-handle:active
+      transform: scale(1.4)
+    &.slider-shadow
+      &.slider-lightBlue .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(3, 169, 244, 0.26)
+      &.slider-teal .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(0, 150, 136, 0.26)
+      &.slider-orange .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(255, 152, 0, 0.26)
+      &.slider-amber .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(255, 193, 7, 0.26)
+      &.slider-green .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0.26)
+      &.slider-cyan .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(0, 188, 212, 0.26)
+      &.slider-indigo .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(63, 81, 181, 0.26)
+      &.slider-deepPurple .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(103, 58, 183, 0.26)
+      &.slider-pink .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(233, 30, 99, 0.26)
+      &.slider-red .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(244, 67, 54, 0.26)
+      &.slider-yellow .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(255, 235, 59, 0.26)
+      &.slider-lime .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(205, 220, 57, 0.26)
+      &.slider-brown .slider-handle:active
+        box-shadow: 0 0 0 10px rgba(121, 85, 72, 0.26)
+  &.slider-discrete
+    .slider .slider-handle
+      position: relative
+      z-index: 1
+      .slider-label
+        position: absolute
+        top: -17.5px
+        left: -2px
+        width: 30px
+        height: 30px
+        transform-origin: 50% 100%
+        border-radius: 50%
+        transform: scale(0.5) rotate(-45deg)
+        transition: all .2s ease
+        span
+          position: absolute
+          top: 7px
+          left: 0px
+          width: 100%
+          color: #fff
+          font-size: 12px
+          text-align: center
+          transform: rotate(45deg)
+          opacity: 0
+          user-select: none
+      &.is-active
+        top: 0px
+        margin-left: -2px
+        width: 4px
+        height: 4px
+        .slider-label
+          top: -15px
+          left: -2px
+          border-radius: 15px 15px 15px 0
+          transform: rotate(-45deg) translate(23px, -25px)
+          span
+            opacity: 1
+    &.slider-lightBlue .slider-label
+      background-color: #03a9f4
+    &.slider-teal .slider-label
+      background-color: #009688
+    &.slider-orange .slider-label
+      background-color: #ff9800
+    &.slider-amber .slider-label
+      background-color: #ffc107
+    &.slider-green .slider-label
+      background-color: #4caf50
+    &.slider-cyan .slider-label
+      background-color: #00bcd4
+    &.slider-indigo .slider-label
+      background-color: #3f51b5
+    &.slider-deepPurple .slider-label
+      background-color: #673ab7
+    &.slider-pink .slider-label
+      background-color: #e91e63
+    &.slider-red .slider-label
+      background-color: #f44336
+    &.slider-yellow .slider-label
+      background-color: #ffeb3b
+    &.slider-lime .slider-label
+      background-color: #cddc39
+    &.slider-brown .slider-label
+      background-color: #795548
+  &.slider-lightBlue
+    .slider-fill, .slider-handle
+      background-color: #03a9f4
+  &.slider-teal
+    .slider-fill, .slider-handle
+      background-color: #009688
+  &.slider-orange
+    .slider-fill, .slider-handle
+      background-color: #ff9800
+  &.slider-amber
+    .slider-fill, .slider-handle
+      background-color: #ffc107
+  &.slider-green
+    .slider-fill, .slider-handle
+      background-color: #4caf50
+  &.slider-cyan
+    .slider-fill, .slider-handle
+      background-color: #00bcd4
+  &.slider-indigo
+    .slider-fill, .slider-handle
+      background-color: #3f51b5
+  &.slider-deepPurple
+    .slider-fill, .slider-handle
+      background-color: #673ab7
+  &.slider-pink
+    .slider-fill, .slider-handle
+      background-color: #e91e63
+  &.slider-red
+    .slider-fill, .slider-handle
+      background-color: #f44336
+  &.slider-yellow
+    .slider-fill, .slider-handle
+      background-color: #ffeb3b
+  &.slider-lime
+    .slider-fill, .slider-handle
+      background-color: #cddc39
+  &.slider-brown
+    .slider-fill, .slider-handle
+      background-color: #795548
