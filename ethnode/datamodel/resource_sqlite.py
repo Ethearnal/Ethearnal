@@ -60,6 +60,11 @@ class ResourceSQLite(BaseSQLite):
         resource_hash = self.resource_hash(resource_data_bin)
         pk_hash = self.pk_hash_compose(owner_hash, resource_hash)
 
+        r = self.read_resource(pk_hash)
+        t = r.fetchone()
+        if t:
+            return pk_hash
+
         values = (
             pk_hash,
             owner_hash,

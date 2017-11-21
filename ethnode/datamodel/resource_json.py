@@ -30,8 +30,10 @@ class JsonStringResource(object):
 
     def delete(self, pk_hash):
         res = self.read(pk_hash)
-        res_data = res[-1]
-        c = self.data_store.delete_resource(pk_hash)
+        res_data = b''
+        if res:
+            res_data = res[-1]
+            c = self.data_store.delete_resource(pk_hash)
         return res_data
 
 
