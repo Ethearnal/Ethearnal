@@ -20,6 +20,10 @@ from datamodel.resource_plain_utf8 import PlainTextUTF8Resource, PlainTextUTF8Re
 from datamodel.resource_plain_utf8 import PlainTextUTF8ResourcePrefixIndex
 from datamodel.resource_plain_utf8 import PlainTextUTF8KeyWordIndexed, PlainTextUTF8PrefixIndexed
 from datamodel.resource_plain_utf8 import PLainTextUTF8WebApi
+from datamodel.resource_json import JsonStringResource
+from datamodel.resource_json import GigResourceWebLocalApi, JsonStringResourceLocalApi
+
+
 from crypto.signer import LocalRsaSigner
 
 from randomavatar.randomavatar import Avatar
@@ -65,6 +69,8 @@ class EthearnalProfileController(object):
     PROFILE_PLAIN_UTF8_TEXTS = 'plain_text_utf8.db'
     PROFILE_PREFIXES_IDX = 'plain_text_utf8_prefix_idx.db'
 
+    PROFILE_GIGS_DB = 'gigs.db'
+
     RSA_PRV = 'rsa_id.prv'
     RSA_PUB = 'rsa_id.pub'
     RSA_FORMAT = 'PEM'
@@ -98,6 +104,8 @@ class EthearnalProfileController(object):
 
         self.db_plain_text = '%s/%s' % (self.personal_dir, self.PROFILE_PLAIN_UTF8_TEXTS)
         self.db_plain_text_inv = '%s/%s' % (self.personal_dir, self.PROFILE_PREFIXES_IDX)
+
+        self.db_gigs = '%s/%s' % (self.personal_dir, self.PROFILE_GIGS_DB)
 
         self.model = EthearnalProfileModel()
 
@@ -133,10 +141,25 @@ class EthearnalProfileController(object):
             inv=PlainTextUTF8ResourcePrefixIndex(data_store=InvIndexTimestampSQLite(db_name=self.db_plain_text_inv,
                                                                                     table_name='plain_text_inv'))
         )
+
+        self.gigs_api = JsonStringResourceLocalApi(
+            jsr=JsonStringResource(
+                data_store=ResourceSQLite(
+                    db_name=self.db_gigs,
+                    table_name='gigs')
+                ),
+            signer=self.rsa_signer)
+
         self.dbeep = PLainTextUTF8WebApi(
             cherrypy=cherrypy,
             api=self.plain_texts,
             mount=True,
+        )
+
+        self.gigs_wapi = GigResourceWebLocalApi(
+             cherrypy=cherrypy,
+             api=self.gigs_api,
+             mount=True,
         )
 
     def get_profile_image_bytes(self):
