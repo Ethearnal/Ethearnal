@@ -8,7 +8,9 @@
 
 
 @import "newstyles/sliders"
-@import "newstyles/main-page-gigs"
+
+// Gigs page content styles
+@import "pages/gigs"
 
 // IMPORTING NEW STYLES FOR MODALS
 @import "newstyles/modals"
@@ -27,6 +29,9 @@ body
     background-color: #f2f2f2
     -webkit-overflow-scrolling: touch
     overflow-y: scroll
+
+    &.up
+        margin-top: -59px
 
 body header.main-header
     position: fixed
@@ -106,8 +111,6 @@ body header.main-header
 
 
 
-
-
 // Job and education description changes
 .content-block
     .main-description
@@ -127,33 +130,6 @@ body header.main-header
                 line-height: 30px
                 width: 30px
                 transform: translate(-15px, -15px)
-
-
-
-// MAIN PAGE (FILTERS AND GIGS) STYLES
-section.page-content
-
-    .container
-        padding-top: 100px
-
-        .filters
-
-
-            .filter
-                margin-bottom: 20px
-
-                p
-                    font-family: 'Roboto', sans-serif
-                    font-size: 16px
-                    font-weight: 700
-                    line-height: 1.29
-                    color: #4a4a4a
-                    margin: 0
-                    margin-bottom: 5px
-
-                label.mdl-checkbox
-                    margin-left: 15px
-
 
 
 

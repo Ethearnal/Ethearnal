@@ -1,3 +1,54 @@
+
+
+// TODO
+
+
+// Sukurti gigs.json ir traukti informacija is ten, loadinti gigus.
+// Kai paspaudi ant profiles, turi sukurti kita puslapi ir traukti visus profilius is profiles.json
+// Kai paspaudi ant JOBS, turi traukti visus is jobs.json
+
+
+// Kai sukurti GIG'a, jis turi atsirasti gigs.json ir taip pat atsirasti GIGS puslapyje.
+// Prideti funkcija EDIT/DELETE GIG'a.
+// Sukurti EDIT GIG modal.
+// Padaryti profile page, kad galetum skillus pridet (paimt is Aspire)
+
+
+
+$('a[load]').click(function(e) {
+    e.preventDefault();
+    $load = $(this).attr('load');
+
+    // Removing all set classes and nulling everything.
+    $('section.background-image, section.documentation, section.gigs-page-content, section.jobs-page-content, section.profiles-page-content').hide();
+    $('body').removeClass('up');
+
+
+    // Showing content based on clicked button
+    if($load == 'gigs') {
+        $('section.gigs-page-content').show();
+        $('input#search-header').focus();
+    }
+
+    if($load == 'jobs') {
+        $('section.jobs-page-content').show();
+        $('input#search-header').focus();
+    }
+
+    if($load == 'profiles') {
+        $('section.profiles-page-content').show();
+        $('input#search-header').focus();
+    }
+
+    if($load == 'profile') {
+        $('section.background-image').show();
+        $('section.documentation').show();
+        $('body').addClass('up');
+    }
+});
+
+
+
 $( document ).ready(function() {
 
     // Global variables, defining how many tabs should appear on click and showing them.
