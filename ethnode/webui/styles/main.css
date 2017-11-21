@@ -96,6 +96,11 @@ header .container nav #navigation ul li.asset {
   margin-top: -5px;
 }
 
+header .container nav #navigation ul li.asset.text {
+  margin-right: 25px;
+  margin-top: 2px;
+}
+
 header .container nav #navigation ul li.asset ul.dropdown-menu {
   min-width: 155px;
   padding: 0;
@@ -1618,48 +1623,94 @@ section.background-image .button-prev, .post .image .button-prev {
   background-color: #795548;
 }
 
-.gigs .gigs-container .gig {
+section.gigs-page-content .container,
+section.jobs-page-content .container,
+section.profiles-page-content .container {
+  padding-top: 150px;
+}
+
+section.gigs-page-content .container .filters .filter,
+section.jobs-page-content .container .filters .filter,
+section.profiles-page-content .container .filters .filter {
+  margin-bottom: 20px;
+}
+
+section.gigs-page-content .container .filters .filter p,
+section.jobs-page-content .container .filters .filter p,
+section.profiles-page-content .container .filters .filter p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.29;
+  color: #4a4a4a;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+section.gigs-page-content .container .filters .filter label.mdl-checkbox,
+section.jobs-page-content .container .filters .filter label.mdl-checkbox,
+section.profiles-page-content .container .filters .filter label.mdl-checkbox {
+  margin-left: 15px;
+}
+
+section.gigs-page-content .container .gigs .gigs-container .gig,
+section.jobs-page-content .container .gigs .gigs-container .gig,
+section.profiles-page-content .container .gigs .gigs-container .gig {
   width: 230px;
   border: 1px solid #e5e5e5;
   box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
   background-color: white;
 }
 
-.gigs .gigs-container .gig img {
+section.gigs-page-content .container .gigs .gigs-container .gig img,
+section.jobs-page-content .container .gigs .gigs-container .gig img,
+section.profiles-page-content .container .gigs .gigs-container .gig img {
   width: 100%;
 }
 
-.gigs .gigs-container .gig h5 {
+section.gigs-page-content .container .gigs .gigs-container .gig h5,
+section.jobs-page-content .container .gigs .gigs-container .gig h5,
+section.profiles-page-content .container .gigs .gigs-container .gig h5 {
   margin: 0;
   margin-top: 10px;
   margin-left: 10px;
   margin-bottom: 5px;
 }
 
-.gigs .gigs-container .gig h5 {
+section.gigs-page-content .container .gigs .gigs-container .gig h5,
+section.jobs-page-content .container .gigs .gigs-container .gig h5,
+section.profiles-page-content .container .gigs .gigs-container .gig h5 {
   font-size: 14px;
   color: #86939e;
 }
 
-.gigs .gigs-container .gig p {
+section.gigs-page-content .container .gigs .gigs-container .gig p,
+section.jobs-page-content .container .gigs .gigs-container .gig p,
+section.profiles-page-content .container .gigs .gigs-container .gig p {
   font-size: 16px;
   color: black;
   line-height: 1.71;
   padding: 0 10px;
 }
 
-.gigs .gigs-container .gig .footer {
+section.gigs-page-content .container .gigs .gigs-container .gig .footer,
+section.jobs-page-content .container .gigs .gigs-container .gig .footer,
+section.profiles-page-content .container .gigs .gigs-container .gig .footer {
   border-top: 1px solid #e5e5e5;
 }
 
-.gigs .gigs-container .gig .footer h4 {
+section.gigs-page-content .container .gigs .gigs-container .gig .footer h4,
+section.jobs-page-content .container .gigs .gigs-container .gig .footer h4,
+section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 {
   text-align: right;
   font-size: 15px;
   color: black;
   margin-right: 5px;
 }
 
-.gigs .gigs-container .gig .footer h4 span {
+section.gigs-page-content .container .gigs .gigs-container .gig .footer h4 span,
+section.jobs-page-content .container .gigs .gigs-container .gig .footer h4 span,
+section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 span {
   font-size: 17px;
 }
 
@@ -2358,6 +2409,10 @@ body {
   overflow-y: scroll;
 }
 
+body.up {
+  margin-top: -59px;
+}
+
 body header.main-header {
   position: fixed;
   width: 100%;
@@ -2452,26 +2507,4 @@ body header.main-header {
   -webkit-transform: translate(-15px, -15px);
       -ms-transform: translate(-15px, -15px);
           transform: translate(-15px, -15px);
-}
-
-section.page-content .container {
-  padding-top: 100px;
-}
-
-section.page-content .container .filters .filter {
-  margin-bottom: 20px;
-}
-
-section.page-content .container .filters .filter p {
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.29;
-  color: #4a4a4a;
-  margin: 0;
-  margin-bottom: 5px;
-}
-
-section.page-content .container .filters .filter label.mdl-checkbox {
-  margin-left: 15px;
 }
