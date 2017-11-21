@@ -28,6 +28,11 @@ class JsonStringResource(object):
         c = self.data_store.read_resource(pk_hash)
         return c.fetchone()
 
+    def hashid_list(self, owner_hash):
+        ll = self.data_store.list_by_owner(owner_hash)
+        if ll:
+            return [guid_bin_to_hex(k[0]).decode() for k in ll]
+
     def delete(self, pk_hash):
         res = self.read(pk_hash)
         res_data = b''
@@ -54,6 +59,12 @@ class JsonStringResourceLocalApi(object):
         res = self.jsr.read(pk_hash)
         data = res[-1]
         return data
+
+    def hashid_list(self):
+        import json
+        ll = self.jsr.hashid_list(self.signer.owner)
+        js = json.dumps(ll)
+        return js.encode(encoding='utf-8')
 
     def delete(self, pk_hash):
         res = self.jsr.delete(pk_hash)
@@ -113,6 +124,36 @@ class GigResourceWebLocalApi(object):
         self.cherrypy.tree.mount(
             self,
             '/api/v1/my/gig/', {'/': {
+                    'request.dispatch': self.cherrypy.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
+
+
+class GigsMyResourceWebLocalApi(object):
+    exposed = True
+
+    def __init__(self, cherrypy, api: JsonStringResourceLocalApi, mount=False):
+        self.api = api
+        self.cherrypy = cherrypy
+        if mount:
+            self.mount()
+
+    def GET(self):
+        try:
+            bin_rs = self.api.hashid_list()
+            self.cherrypy.response.status = 200
+            return bin_rs
+        except:
+            self.cherrypy.response.status = 400
+            traceback.print_exc()
+            return b''
+
+    def mount(self):
+        self.cherrypy.tree.mount(
+            self,
+            '/api/v1/my/gigs/', {'/': {
                     'request.dispatch': self.cherrypy.dispatch.MethodDispatcher(),
                     'tools.sessions.on': True,
                 }

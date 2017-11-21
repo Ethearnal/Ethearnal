@@ -103,6 +103,16 @@ class ResourceSQLite(BaseSQLite):
         else:
             return self.cursor.execute(qs, (pk_hash,))
 
+    def list_by_owner(self,
+                      owner_hash: bytes,
+                      qs_only=False):
+        qs = 'SELECT * FROM %s WHERE owner_hash_bin=?' % self.table_name
+        if qs_only:
+            return qs, owner_hash
+        else:
+            c = self.cursor.execute(qs, (owner_hash,))
+            return c.fetchall()
+
     def fetch_resource(self, pk_hash: bytes):
         c = self.read_resource(pk_hash)
         return c.fetchone()

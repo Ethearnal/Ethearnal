@@ -22,6 +22,7 @@ from datamodel.resource_plain_utf8 import PlainTextUTF8KeyWordIndexed, PlainText
 from datamodel.resource_plain_utf8 import PLainTextUTF8WebApi
 from datamodel.resource_json import JsonStringResource
 from datamodel.resource_json import GigResourceWebLocalApi, JsonStringResourceLocalApi
+from datamodel.resource_json import GigsMyResourceWebLocalApi
 
 
 from crypto.signer import LocalRsaSigner
@@ -156,11 +157,18 @@ class EthearnalProfileController(object):
             mount=True,
         )
 
-        self.gigs_wapi = GigResourceWebLocalApi(
+        self.gig_web_api = GigResourceWebLocalApi(
              cherrypy=cherrypy,
              api=self.gigs_api,
              mount=True,
         )
+
+        self.gigs_web_api = GigsMyResourceWebLocalApi(
+            cherrypy=cherrypy,
+            api=self.gigs_api,
+            mount=True,
+        )
+
 
     def get_profile_image_bytes(self):
         bts = None
