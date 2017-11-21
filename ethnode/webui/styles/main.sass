@@ -4,11 +4,11 @@
 @import "profile-documentation-tabs"
 @import "panel-heading"
 @import "panel-body"
-// @import "accomplishment-modal"
-// @import "modals"
 @import "background-image"
-// @import "timeline-post"
-// @import "timeline-add-photos"
+
+
+@import "newstyles/sliders"
+@import "newstyles/main-page-gigs"
 
 // IMPORTING NEW STYLES FOR MODALS
 @import "newstyles/modals"
@@ -94,6 +94,18 @@ body header.main-header
 
 .mdl-textfield__label:after
   background-color: #ffb230 !important
+
+
+.mdl-textfield
+
+    &.left-side .selection
+        float: left !important
+
+    &.right-side .selection
+        float: right !important
+
+
+
 
 
 // Job and education description changes

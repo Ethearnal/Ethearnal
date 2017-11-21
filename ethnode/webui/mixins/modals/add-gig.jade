@@ -1,0 +1,66 @@
+#add-gig.add.modal-box.flex.floating
+
+    .modal-box-content: .inner-modal: .content
+
+        .modal-header: h3 Add Gig
+
+        .success-message
+            h1.title Congratulations!
+            .success-content: p Your gig was created.
+
+            .buttons
+                button.mdl-button.mdl-js-button.close-button.congrats-close Close the modal to see it
+                span OR
+                button.mdl-button.mdl-js-button.create-new create new gig
+
+
+        .modal-body
+
+            .form-group
+                input.input-file#input-image-job(type="file", accept="image/*", placeholder="Add image or video")
+                label(for="input-image-job") Add Photo
+                img.file-input-first-image.img-job(src="images/image-video-image-file.png", alt="Add a file")
+                img#input-image-job(src="#", alt="")
+
+            .modal-inputs
+
+                form(action="POST")
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.whole-line
+                        input#gig-title.mdl-textfield__input(name="gig-title", type="text")
+                        label.mdl-textfield__label(for="gig-title") Gig Title
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                        select.ui.dropdown#category
+                            option(value="") Select Category
+                            option(value="1") Development
+                            option(value="2") Mobile Development
+                            option(value="3") Graphic Design
+                            option(value="4") Content Writing
+                            option(value="5") Accountants
+                            option(value="6") Consultants
+                            option(value="7") Assistants
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                        select.ui.dropdown#experience-level
+                            option(value="") Experience Level
+                            option(value="1") Entry Level
+                            option(value="2") Intermediate
+                            option(value="3") Expert
+
+                    .mdl-textfield.mdl-js-textfield.whole-line
+                        textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
+                        label.mdl-textfield__label(for="description") Description (what have you done or currently do?)
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                        input#budget.mdl-textfield__input(type="text", name="budget")
+                        label.mdl-textfield__label(for="budget") Price
+                        span.mdl-textfield__error Input is not a number!
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                        input.date-started.mdl-textfield__input(type="text", name="startDate")
+                        label.mdl-textfield__label(for="date-from") Expire Date
+
+        .modal-footer
+            button.mdl-button.mdl-js-button.close-button Close
+            button#publish.mdl-button.mdl-js-button.finish-button(style="color: #5CAB7D") Publish
+            .mdl-tooltip(data-mdl-for="publish") This text will be changed anyway.

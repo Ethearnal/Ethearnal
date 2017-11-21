@@ -442,6 +442,78 @@
         </div>
       </div>
     </div>
+    <div id="add-gig" class="add modal-box flex floating">
+      <div class="modal-box-content">
+        <div class="inner-modal">
+          <div class="content">
+            <div class="modal-header">
+              <h3>Add Gig</h3>
+            </div>
+            <div class="success-message">
+              <h1 class="title">Congratulations!</h1>
+              <div class="success-content">
+                <p>Your gig was created.</p>
+              </div>
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                <button class="mdl-button mdl-js-button create-new">create new gig</button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <input id="input-image-job" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                <label for="input-image-job">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-job"><img id="input-image-job" src="#" alt="">
+              </div>
+              <div class="modal-inputs">
+                <form action="POST">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                    <input id="gig-title" name="gig-title" type="text" class="mdl-textfield__input">
+                    <label for="gig-title" class="mdl-textfield__label">Gig Title</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <select id="category" class="ui dropdown">
+                      <option value="">Select Category</option>
+                      <option value="1">Development</option>
+                      <option value="2">Mobile Development</option>
+                      <option value="3">Graphic Design</option>
+                      <option value="4">Content Writing</option>
+                      <option value="5">Accountants</option>
+                      <option value="6">Consultants</option>
+                      <option value="7">Assistants</option>
+                    </select>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <select id="experience-level" class="ui dropdown">
+                      <option value="">Experience Level</option>
+                      <option value="1">Entry Level</option>
+                      <option value="2">Intermediate</option>
+                      <option value="3">Expert</option>
+                    </select>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield whole-line">
+                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                    <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <input id="budget" type="text" name="budget" class="mdl-textfield__input">
+                    <label for="budget" class="mdl-textfield__label">Price</label><span class="mdl-textfield__error">Input is not a number!</span>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                    <label for="date-from" class="mdl-textfield__label">Expire Date</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button id="publish" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
+              <div data-mdl-for="publish" class="mdl-tooltip">This text will be changed anyway.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="edit-profile" class="modal-box flex floating">
       <div class="modal-box-content">
         <div class="inner-modal">
@@ -510,8 +582,7 @@
         </div>
       </div>
     </div>
-    <!-- Header includes "Aspire" logo, search option, messages, alerts icons and profile image and it's name.-->
-    <!-- There's 2 collapse divs, one for mobile screens and another one for everything higher than mobile screens.-->
+    <!-- Including header-->
     <header class="main-header">
       <div class="container">
         <nav class="navbar navbar-default">
@@ -533,6 +604,8 @@
           <!-- Navbar items ONLY for larger than mobile screens.-->
           <div id="navigation" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right hidden-xs">
+              <li style="margin-right: 25px; margin-top: 2px" class="asset"><a href="/ui/gigs.html">Gigs</a></li>
+              <li style="margin-right: 50px; margin-top: 2px" class="asset"><a href="/ui/jobs.html">Jobs</a></li>
               <li id="comment-navbar" class="asset"><a href=""><i class="icon-comment"></i>
                   <div class="round-number"><span>1</span></div></a></li>
               <li id="alert-navbar" class="asset"><a id="reputation-dropdown" data-toggle="dropdown"><i class="material-icons">polymer</i>
@@ -548,7 +621,7 @@
               </li>
               <!-- Settings dropdown-->
               <ul data-labelledby="settings-dropdown" class="dropdown-menu">
-                <li class="view-profile"><a href="">View Profile<i class="material-icons">account_box</i></a></li>
+                <li class="view-profile"><a href="/ui">View Profile<i class="material-icons">account_box</i></a></li>
                 <li class="settings"><a href="">Settings<i class="material-icons">settings</i></a></li>
                 <li class="logout"><a href="">Logout<i class="material-icons">power_settings_new</i></a></li>
               </ul>
@@ -604,16 +677,6 @@
               <p>Profile's description.</p>
             </div>
           </div>
-          <div class="profile-information down">
-            <!-- Profile top skills and tools-->
-            <div class="profile-bottom">
-              <p class="skills-text">Assimilated Skills
-              </p>
-              <div class="skills">
-                <!-- JSON data goes here.-->
-              </div>
-            </div>
-          </div>
           <!-- Profile footer, including social media links.-->
           <div class="profile-footer">
             <ul class="list-inline">
@@ -653,28 +716,12 @@
               <!-- Profile TAB-->
               <div id="profile" role="tabpanel" class="tab-pane fade col-xs-12">
                 <div class="jobs-container">
-                  <div class="jobs-see see-more col-xs-12">
-                    <p>+ See more jobs</p>
-                  </div>
-                  <div class="jobs-see see-less col-xs-12">
-                    <p>- See less jobs</p>
-                  </div>
+                  
                 </div>
                 <div class="education-container">
-                  <div class="educations-see see-more col-xs-12">
-                    <p>+ See more education</p>
-                  </div>
-                  <div class="educations-see see-less col-xs-12">
-                    <p>- See less education</p>
-                  </div>
+                  
                 </div>
                 <div class="languages-container">
-                  <div class="languages-see see-more col-xs-12">
-                    <p>+ See more languages</p>
-                  </div>
-                  <div class="languages-see see-less col-xs-12">
-                    <p>- See less languages</p>
-                  </div>
                 </div>
                 <div class="skills-container"></div>
               </div>
