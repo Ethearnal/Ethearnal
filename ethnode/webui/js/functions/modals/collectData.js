@@ -2,6 +2,12 @@
 function collectJobData(form) {
     $form = form; $endDateVal = null;
     $content = $form.closest('.content');
+
+    // IMG
+    $imgSrc = $content.find('img#input-image-job').attr('src');
+    if($imgSrc == "#") $imgData = null;
+    if($imgSrc !== "#") $imgData = $imgSrc;
+
     if($form.find('input.date-ended').val() == '') {
         $endDateVal = 'Present';
     } else {
@@ -9,7 +15,7 @@ function collectJobData(form) {
     }
 
     $data = {
-        image: $content.find('img#input-image-job').attr('src'),
+        image: $imgData,
         company: $form.find('input#company-name').val(),
         position: $form.find('input#position-name').val(),
         description: $form.find('textarea#description').val(),
@@ -120,13 +126,16 @@ function collectGigData(form) {
     $data = {
         title: $form.find('#gig-title').val(),
         category: $form.find('#category').dropdown('get value'),
+        ownerName: $form.closest('body').find('li#settings-dropdown span').text(),
         experienceLevel: $form.find('#experience-level').dropdown('get value'),
         description: $form.find('textarea#description').val(),
-        budget: $form.find('input#budget'),
+        price: $form.find('input#price').val(),
         date: [
             { expire: $form.find('input.date-started').val() }
         ]
     }
+
+    console.log($data);
     return $data;
 }
 

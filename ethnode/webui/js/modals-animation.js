@@ -107,7 +107,10 @@ $('body').delegate('.open-modal', 'click', function(e) {
 $('body').delegate('li.delete', 'click', function(e) {
     e.preventDefault();
     $contentBlock = $(this).closest('.content-block');
+    $gig = $(this).closest('.gig');
+
     $contentBlock.fadeOut(300);
+    $gig.fadeOut(300);
 });
 
 
@@ -158,13 +161,14 @@ $('.modal-box button').click(function() {
             appearSuccessMessage($content);
             clearForm($form);
 
-            var iExperience = 0;
-            var iEducation = 0;
+            // var iExperience = 0;
+            // var iEducation = 0;
 
             if($modalID == 'add-job') createLE($data, 'job');
             if($modalID == 'add-education') createLE($data, 'education');
             if($modalID == 'add-language') createLE($data, 'language', true);
             if($modalID == 'edit-profile') updateProfile($data);
+            if($modalID == 'add-gig') createGig($data);
             // if($modalID == 'add-skill') createLE($data, 'language', true);
 
 
