@@ -8,9 +8,6 @@
 // Kai paspaudi ant JOBS, turi traukti visus is jobs.json
 
 
-// Kai sukurti GIG'a, jis turi atsirasti gigs.json ir taip pat atsirasti GIGS puslapyje.
-// Prideti funkcija EDIT/DELETE GIG'a.
-// Sukurti EDIT GIG modal.
 // Padaryti profile page, kad galetum skillus pridet (paimt is Aspire)
 
 
@@ -28,16 +25,19 @@ $('a[load]').click(function(e) {
     if($load == 'gigs') {
         $('section.gigs-page-content').show();
         $('input#search-header').focus();
+        $('input#search-header').next().text('Enter text to search gigs');
     }
 
     if($load == 'jobs') {
         $('section.jobs-page-content').show();
         $('input#search-header').focus();
+        $('input#search-header').next().text('Enter text to search jobs');
     }
 
     if($load == 'profiles') {
         $('section.profiles-page-content').show();
         $('input#search-header').focus();
+        $('input#search-header').next().text('Enter text to search profiles');
     }
 
     if($load == 'profile') {
@@ -403,7 +403,10 @@ function require(script) {
 // MODALS
 
 // Create Life Experience div based on input values.
-require("js/functions/modals/createLE.js");
+require("js/functions/modals/create/createLE.js");
+
+// Create GIG function
+require("js/functions/modals/create/createGig.js");
 
 // Appears .success-message everytime you update or create a LE
 require("js/functions/modals/appearSuccessMessage.js");

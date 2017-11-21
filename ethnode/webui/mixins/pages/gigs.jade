@@ -99,7 +99,12 @@ section.gigs-page-content
 
             .gigs-container
 
-                .gig
+                .gig.content-block
+                    button#dropdowngiga0.mdl-button.mdl-js-button.mdl-button--icon.dropdown-button: i.material-icons more_vert
+                    ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="dropdowngiga0")
+                        li.mdl-menu__item.open-modal(open-modal="#edit-gig") Edit
+                        li.mdl-menu__item.delete Delete
+
                     img(src="images/paypal.jpg", alt="Gig")
                     h5 by FirstName L.
                     p Gig Description

@@ -545,20 +545,20 @@ section.documentation .container .profile-information-after-fixed .container-flu
   text-transform: uppercase;
 }
 
-.content-block {
+section.documentation .container .content-block {
   padding-top: 24px;
   padding-left: 0;
   padding-right: 0;
   border-bottom: 1px solid #e1e8ee;
 }
 
-.content-block .main-information {
+section.documentation .container .content-block .main-information {
   padding-right: 0;
   padding-left: 0;
   padding-bottom: 25px;
 }
 
-.content-block .main-information .image img, .content-block .main-information .image .dont-have-logo {
+section.documentation .container .content-block .main-information .image img, section.documentation .container .content-block .main-information .image .dont-have-logo {
   height: 60px;
   width: 60px;
   margin-left: 20px;
@@ -567,7 +567,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   border-radius: 3px;
 }
 
-.content-block .main-information .image .dont-have-logo {
+section.documentation .container .content-block .main-information .image .dont-have-logo {
   color: #0065cc;
   font-size: 24px;
   font-weight: 500;
@@ -577,12 +577,12 @@ section.documentation .container .profile-information-after-fixed .container-flu
   display: none;
 }
 
-.content-block .main-information .position-information {
+section.documentation .container .content-block .main-information .position-information {
   margin-left: 100px;
   word-wrap: break-word;
 }
 
-.content-block .main-information .position-information h4 {
+section.documentation .container .content-block .main-information .position-information h4 {
   font-size: 18px;
   line-height: 1.09;
   font-weight: 500;
@@ -591,7 +591,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-bottom: 7px;
 }
 
-.content-block .main-information .position-information h5 {
+section.documentation .container .content-block .main-information .position-information h5 {
   font-size: 14px;
   line-height: 1;
   color: #86939e;
@@ -600,7 +600,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   font-weight: 400;
 }
 
-.content-block .main-information .position-information p {
+section.documentation .container .content-block .main-information .position-information p {
   font-size: 12px;
   line-height: 1.17;
   color: #86939e;
@@ -608,28 +608,28 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-bottom: 0;
 }
 
-.content-block .main-information .position-information p.shoutout-business {
+section.documentation .container .content-block .main-information .position-information p.shoutout-business {
   white-space: nowrap;
 }
 
-.content-block .main-information .position-information p.shoutout-business span {
+section.documentation .container .content-block .main-information .position-information p.shoutout-business span {
   position: relative;
   top: -5px;
   left: 5px;
   font-size: 12px;
 }
 
-.content-block .main-description {
+section.documentation .container .content-block .main-description {
   padding-right: 0;
   padding-left: 0;
   margin-bottom: 25px;
 }
 
-.content-block .main-description .dropdown.more {
+section.documentation .container .content-block .main-description .dropdown.more {
   cursor: pointer;
 }
 
-.content-block .main-description .dropdown.more i {
+section.documentation .container .content-block .main-description .dropdown.more i {
   float: right;
   margin-right: 25px;
   font-size: 28px;
@@ -637,11 +637,11 @@ section.documentation .container .profile-information-after-fixed .container-flu
   display: none;
 }
 
-.content-block .main-description .dropdown.more i:hover {
+section.documentation .container .content-block .main-description .dropdown.more i:hover {
   color: #b2bcc6;
 }
 
-.content-block .main-description .dropdown.more ul {
+section.documentation .container .content-block .main-description .dropdown.more ul {
   right: 15px;
   top: -15px;
   left: auto;
@@ -652,7 +652,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   z-index: 3000;
 }
 
-.content-block .main-description .dropdown.more ul li a {
+section.documentation .container .content-block .main-description .dropdown.more ul li a {
   font-size: 16px;
   font-weight: 500;
   color: #86939e;
@@ -660,12 +660,12 @@ section.documentation .container .profile-information-after-fixed .container-flu
   padding: 0 25px;
 }
 
-.content-block .main-description .dropdown.more ul li a:hover, .content-block .main-description .dropdown.more ul li a:focus, .content-block .main-description .dropdown.more ul li a:active {
+section.documentation .container .content-block .main-description .dropdown.more ul li a:hover, section.documentation .container .content-block .main-description .dropdown.more ul li a:focus, section.documentation .container .content-block .main-description .dropdown.more ul li a:active {
   color: #127fff;
   background-color: #edf3fa;
 }
 
-.content-block .main-description h4 {
+section.documentation .container .content-block .main-description h4 {
   font-size: 16px;
   font-weight: 500;
   line-height: 1.23;
@@ -674,13 +674,13 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-right: 105px;
 }
 
-.content-block .main-description p.education-paragraph {
+section.documentation .container .content-block .main-description p.education-paragraph {
   margin-right: 40px;
   margin-bottom: 0;
   min-height: 100px;
 }
 
-.content-block .main-description p {
+section.documentation .container .content-block .main-description p {
   font-size: 14px;
   color: #86939e;
   line-height: 1.71;
@@ -689,7 +689,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-bottom: 15px;
 }
 
-.content-block .main-description span {
+section.documentation .container .content-block .main-description span {
   border-radius: 3px;
   font-weight: 500;
   font-size: 12px;
@@ -697,7 +697,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
   margin-left: 17px;
 }
 
-.content-block .main-description span.accomplishment {
+section.documentation .container .content-block .main-description span.accomplishment {
   background-color: rgba(254, 178, 48, 0.13);
   color: #d1a252;
   float: right;
@@ -1640,7 +1640,7 @@ section.jobs-page-content .container .filters .filter p,
 section.profiles-page-content .container .filters .filter p {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.29;
   color: #4a4a4a;
   margin: 0;
@@ -1653,13 +1653,53 @@ section.profiles-page-content .container .filters .filter label.mdl-checkbox {
   margin-left: 15px;
 }
 
+section.gigs-page-content .container .gigs .gigs-container,
+section.jobs-page-content .container .gigs .gigs-container,
+section.profiles-page-content .container .gigs .gigs-container {
+  width: calc(100% - 45px);
+  margin: 0 auto;
+}
+
+section.gigs-page-content .container .gigs .gigs-container:after,
+section.jobs-page-content .container .gigs .gigs-container:after,
+section.profiles-page-content .container .gigs .gigs-container:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  line-height: 0;
+  visibility: hidden;
+}
+
 section.gigs-page-content .container .gigs .gigs-container .gig,
 section.jobs-page-content .container .gigs .gigs-container .gig,
 section.profiles-page-content .container .gigs .gigs-container .gig {
-  width: 230px;
+  width: 240px;
+  height: 306px;
   border: 1px solid #e5e5e5;
   box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
   background-color: white;
+  position: relative;
+  max-width: 240px;
+  max-height: 306px;
+  float: left;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+section.gigs-page-content .container .gigs .gigs-container .gig:nth-child(3n),
+section.jobs-page-content .container .gigs .gigs-container .gig:nth-child(3n),
+section.profiles-page-content .container .gigs .gigs-container .gig:nth-child(3n) {
+  margin-right: 0;
+}
+
+section.gigs-page-content .container .gigs .gigs-container .gig button.mdl-button--icon,
+section.jobs-page-content .container .gigs .gigs-container .gig button.mdl-button--icon,
+section.profiles-page-content .container .gigs .gigs-container .gig button.mdl-button--icon {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  color: #c1c1c1;
 }
 
 section.gigs-page-content .container .gigs .gigs-container .gig img,
@@ -1944,7 +1984,7 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 s
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  z-index: 12;
+  z-index: 21;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -2488,18 +2528,18 @@ body header.main-header {
   float: right !important;
 }
 
-.content-block .main-description p {
+section.documentation .container .content-block .main-description p {
   margin-right: 55px !important;
 }
 
-.content-block .main-description button.dropdown-button {
+section.documentation .container .content-block .main-description button.dropdown-button {
   float: right;
   margin-right: 10px;
   width: 40px;
   height: 40px;
 }
 
-.content-block .main-description button.dropdown-button i {
+section.documentation .container .content-block .main-description button.dropdown-button i {
   color: #c1c1c1;
   font-size: 30px;
   line-height: 30px;
