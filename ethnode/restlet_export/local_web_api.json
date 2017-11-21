@@ -1,0 +1,174 @@
+{
+  "front-version": "2.12.0",
+  "version": 3,
+  "nodes": [
+    {
+      "type": "Project",
+      "id": "1d8c29cc-084b-458d-8074-b04c5961b68f",
+      "lastModified": "2017-11-21T20:47:47.743+02:00",
+      "name": "my_gigs"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\"whatever\":\"data\", \"you\":\"want\", \"put\":\"here\"}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/gig"
+      },
+      "id": "137ecc37-1875-4906-90f0-35108a950cca",
+      "lastModified": "2017-11-21T14:54:57.788+02:00",
+      "name": "CREATE GIG",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "1d8c29cc-084b-458d-8074-b04c5961b68f"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "q",
+              "value": "916602d8997e720f683d76594e3472cf65d4b3159bf20f53a10ae248b20beaf0"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/gig/"
+      },
+      "id": "7811e057-c7e1-4c4c-a578-ab1338b89af2",
+      "lastModified": "2017-11-21T14:55:09.043+02:00",
+      "name": "DELETE GIG",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "1d8c29cc-084b-458d-8074-b04c5961b68f"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/gigs/"
+      },
+      "id": "ceab3114-f2d6-48ba-a1fb-504a40aa7a10",
+      "lastModified": "2017-11-21T20:47:47.743+02:00",
+      "name": "HASHID LIST",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "1d8c29cc-084b-458d-8074-b04c5961b68f"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "q",
+              "value": "916602d8997e720f683d76594e3472cf65d4b3159bf20f53a10ae248b20beaf0"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/gig/"
+      },
+      "id": "51ceb26a-1e4e-41a8-9f77-4aa2d17b3320",
+      "lastModified": "2017-11-21T14:58:21.771+02:00",
+      "name": "READ GIG",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "1d8c29cc-084b-458d-8074-b04c5961b68f"
+    }
+  ]
+}
