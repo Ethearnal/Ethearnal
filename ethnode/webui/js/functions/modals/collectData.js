@@ -138,11 +138,10 @@ function collectGigData(form) {
     if(file != undefined) {
         formData= new FormData();
         if(!!file.type.match(/image.*/)) {
-            formData.append("ufile", file);
             $.ajax({
                 url: "/api/v1/my/img",
                 type: "POST",
-                data: formData,
+                data: file,
                 contentType: 'image/jpeg',
                 processData: false,
                 success: function(data){
