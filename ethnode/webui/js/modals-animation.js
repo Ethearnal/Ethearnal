@@ -151,7 +151,7 @@ $('.modal-box button').click(function() {
         if($modalID == 'add-language' || $modalID == 'edit-language') $data = collectLanguageData($form);
         if($modalID == 'add-skill' || $modalID == 'edit-skill') $data = collectSkillData($form);
         if($modalID == "edit-profile") $data = collectProfileData($form);
-        if($modalID == "add-gig") $data = collectGigData($form);
+        if($modalID == "add-gig") collectGigData($form);
 
 
         // Fading out the initial modal and fading in success message.
@@ -168,7 +168,7 @@ $('.modal-box button').click(function() {
             if($modalID == 'add-education') createLE($data, 'education');
             if($modalID == 'add-language') createLE($data, 'language', true);
             if($modalID == 'edit-profile') updateProfile($data);
-            if($modalID == 'add-gig') createGig($data);
+            // if($modalID == 'add-gig') createGig($data);
             // if($modalID == 'add-skill') createLE($data, 'language', true);
 
 

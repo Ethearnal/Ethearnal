@@ -47,28 +47,28 @@ function collectJobData(form) {
 }
 
 
-function uploadFile(){
-  var input = document.getElementById("input-image-job");
+function uploadFile(inputID){
+  var input = document.getElementById(inputID);
   file = input.files[0];
   if(file != undefined){
     formData= new FormData();
     if(!!file.type.match(/image.*/)){
       formData.append("ufile", file);
       $.ajax({
-        url: "/api/v1/upload",
+        url: "/api/v1/my/img",
         type: "POST",
         data: formData,
-        contentType: 'multipart/form-data',
+        contentType: 'image/jpeg',
         processData: false,
         success: function(data){
-            alert('success');
+            return data;
         }
       });
     }else{
-      alert('Not a valid image!');
+      console.log('Not a valid image!');
     }
   }else{
-    alert('Input something!');
+    console.log('Input something!');
   }
 }
 
@@ -122,21 +122,65 @@ function collectLanguageData(form) {
 // Collects 'CREATE LANGUAGE / EDIT LANGUAGE' data.
 function collectGigData(form) {
     $form = form;
+    $content = $form.closest('.content');
+    $imgInputID = $content.find('input.input-file').attr('id');
 
-    $data = {
-        title: $form.find('#gig-title').val(),
-        category: $form.find('#category').dropdown('get value'),
-        ownerName: $form.closest('body').find('li#settings-dropdown span').text(),
-        experienceLevel: $form.find('#experience-level').dropdown('get value'),
-        description: $form.find('textarea#description').val(),
-        price: $form.find('input#price').val(),
-        date: [
-            { expire: $form.find('input.date-started').val() }
-        ]
+    $title = $form.find('#gig-title').val();
+    $category = $form.find('#category').dropdown('get value');
+    $ownerName = $form.closest('body').find('li#settings-dropdown span').text();
+    $experienceLevel = $form.find('#experience-level').dropdown('get value');
+    $description = $form.find('textarea#description').val();
+    $price = $form.find('input#price').val();
+    $dateExpire = $form.find('input.date-started').val();
+
+    var input = document.getElementById($imgInputID);
+    file = input.files[0];
+    if(file != undefined) {
+        formData= new FormData();
+        if(!!file.type.match(/image.*/)) {
+            formData.append("ufile", file);
+            $.ajax({
+                url: "/api/v1/my/img",
+                type: "POST",
+                data: formData,
+                contentType: 'image/jpeg',
+                processData: false,
+                success: function(data){
+                    $data = {
+                        imageHash: data,
+                        title: $title,
+                        category: $category,
+                        ownerName: $ownerName,
+                        experienceLevel: $experienceLevel,
+                        description: $description,
+                        price: $price,
+                        date: [
+                            { expire: $dateExpire }
+                        ]
+                    }
+
+                    console.log($data);
+
+                    $.ajax({
+                        url: "/api/v1/my/gig",
+                        type: "POST",
+                        data: JSON.stringify($data),
+                        contentType: 'application/json; charset=utf-8',
+                        processData: false,
+                        success: function(gigData){
+                            createGig(gigData);
+                        }
+                    });
+                }
+            });
+        } else {
+            console.log('Not a valid image!');
+        }
+
+    } else {
+        console.log('Input something!');
     }
-
-    console.log($data);
-    return $data;
+    return;
 }
 
 

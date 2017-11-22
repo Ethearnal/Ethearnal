@@ -408,6 +408,9 @@ require("js/functions/modals/create/createLE.js");
 // Create GIG function
 require("js/functions/modals/create/createGig.js");
 
+// Load GIGS function
+require("js/functions/modals/load/gigs.js");
+
 // Appears .success-message everytime you update or create a LE
 require("js/functions/modals/appearSuccessMessage.js");
 

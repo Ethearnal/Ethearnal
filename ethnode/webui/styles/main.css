@@ -1936,16 +1936,7 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 s
   display: none;
 }
 
-.modal-box-content .inner-modal .content .modal-body .form-group input#input-image-avatar + label {
-  width: 200px;
-  height: 200px;
-  padding: 200px 0 0 0;
-}
-
-.modal-box-content .inner-modal .content .modal-body .form-group img#input-image-story,
-.modal-box-content .inner-modal .content .modal-body .form-group img#input-image-job,
-.modal-box-content .inner-modal .content .modal-body .form-group img#input-image-education,
-.modal-box-content .inner-modal .content .modal-body .form-group img#input-image-avatar {
+.modal-box-content .inner-modal .content .modal-body .form-group img.show-image {
   position: absolute;
   width: auto;
   max-width: 440px;
