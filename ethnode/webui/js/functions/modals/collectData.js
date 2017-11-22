@@ -159,16 +159,14 @@ function collectGigData(form) {
                         ]
                     }
 
-                    console.log($data);
-
                     $.ajax({
                         url: "/api/v1/my/gig",
                         type: "POST",
                         data: JSON.stringify($data),
                         contentType: 'application/json; charset=utf-8',
                         processData: false,
-                        success: function(gigData){
-                            createGig(gigData);
+                        success: function(gigID){
+                            createGig(gigID);
                         }
                     });
                 }
