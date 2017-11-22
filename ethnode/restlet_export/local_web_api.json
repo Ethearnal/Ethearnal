@@ -5,7 +5,7 @@
     {
       "type": "Project",
       "id": "1d8c29cc-084b-458d-8074-b04c5961b68f",
-      "lastModified": "2017-11-21T20:47:47.743+02:00",
+      "lastModified": "2017-11-22T15:05:40.405+02:00",
       "name": "my_gigs"
     },
     {
@@ -23,7 +23,7 @@
         },
         "bodyType": "Text",
         "autoSetLength": true,
-        "textBody": "{\"whatever\":\"data\", \"you\":\"want\", \"put\":\"here\"}"
+        "textBody": "{\"whatever\":\"data\", \"you2\":\"want\", \"put\":\"here3\"}"
       },
       "headersType": "Form",
       "uri": {
@@ -39,7 +39,7 @@
         "path": "/api/v1/my/gig"
       },
       "id": "137ecc37-1875-4906-90f0-35108a950cca",
-      "lastModified": "2017-11-21T14:54:57.788+02:00",
+      "lastModified": "2017-11-22T14:59:00.452+02:00",
       "name": "CREATE GIG",
       "headers": [
         {
@@ -71,23 +71,17 @@
       "uri": {
         "query": {
           "delimiter": "&",
-          "items": [
-            {
-              "enabled": true,
-              "name": "q",
-              "value": "916602d8997e720f683d76594e3472cf65d4b3159bf20f53a10ae248b20beaf0"
-            }
-          ]
+          "items": []
         },
         "scheme": {
           "name": "http",
           "version": "V11"
         },
         "host": "127.0.0.1:4567",
-        "path": "/api/v1/my/gig/"
+        "path": "/api/v1/my/gig/1524323f6a86cac065b63171a0bad9d5657eab4945efc5a16f82d87c2cb43b93"
       },
       "id": "7811e057-c7e1-4c4c-a578-ab1338b89af2",
-      "lastModified": "2017-11-21T14:55:09.043+02:00",
+      "lastModified": "2017-11-22T15:05:40.405+02:00",
       "name": "DELETE GIG",
       "headers": [],
       "metaInfo": {},
@@ -122,7 +116,7 @@
         "path": "/api/v1/my/gigs/"
       },
       "id": "ceab3114-f2d6-48ba-a1fb-504a40aa7a10",
-      "lastModified": "2017-11-21T20:47:47.743+02:00",
+      "lastModified": "2017-11-22T14:57:46.596+02:00",
       "name": "HASHID LIST",
       "headers": [],
       "metaInfo": {},
@@ -148,11 +142,122 @@
       "uri": {
         "query": {
           "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/gig/1524323f6a86cac065b63171a0bad9d5657eab4945efc5a16f82d87c2cb43b93"
+      },
+      "id": "51ceb26a-1e4e-41a8-9f77-4aa2d17b3320",
+      "lastModified": "2017-11-22T15:05:31.747+02:00",
+      "name": "READ GIG",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "1d8c29cc-084b-458d-8074-b04c5961b68f"
+    },
+    {
+      "type": "Project",
+      "id": "d1575e9e-d557-43ad-80bd-be1a9434e38d",
+      "lastModified": "2017-11-22T15:05:03.406+02:00",
+      "name": "my_imgs"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/img/876ff7c91126a5113ca722100d1d5f2a6924c1eaca251894d06e3392f4381192"
+      },
+      "id": "231288ad-a28a-4996-8520-1a4fa3c4db85",
+      "lastModified": "2017-11-22T14:24:12.131+02:00",
+      "name": "DELETE IMG",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "d1575e9e-d557-43ad-80bd-be1a9434e38d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/imgs/"
+      },
+      "id": "1f9bf1f6-5af3-42d1-bf8a-f533d4a8203a",
+      "lastModified": "2017-11-22T14:37:12.176+02:00",
+      "name": "HASHID LIST",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "d1575e9e-d557-43ad-80bd-be1a9434e38d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
           "items": [
             {
               "enabled": true,
               "name": "q",
-              "value": "916602d8997e720f683d76594e3472cf65d4b3159bf20f53a10ae248b20beaf0"
+              "value": "876ff7c91126a5113ca722100d1d5f2a6924c1eaca251894d06e3392f4381192"
             }
           ]
         },
@@ -161,14 +266,56 @@
           "version": "V11"
         },
         "host": "127.0.0.1:4567",
-        "path": "/api/v1/my/gig/"
+        "path": "/api/v1/my/img/"
       },
-      "id": "51ceb26a-1e4e-41a8-9f77-4aa2d17b3320",
-      "lastModified": "2017-11-21T14:58:21.771+02:00",
-      "name": "READ GIG",
+      "id": "a8318ed3-794a-4061-9698-076eaec1dbdd",
+      "lastModified": "2017-11-22T14:44:18.405+02:00",
+      "name": "READ IMG",
       "headers": [],
       "metaInfo": {},
-      "parentId": "1d8c29cc-084b-458d-8074-b04c5961b68f"
+      "parentId": "d1575e9e-d557-43ad-80bd-be1a9434e38d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "File",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/img/"
+      },
+      "id": "84000e9f-fa53-424f-a363-4c642991d7e1",
+      "lastModified": "2017-11-22T15:05:03.406+02:00",
+      "name": "UPLOAD IMG",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "image/jpeg"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "d1575e9e-d557-43ad-80bd-be1a9434e38d"
     }
   ]
 }

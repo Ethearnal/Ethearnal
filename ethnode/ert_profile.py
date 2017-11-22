@@ -20,9 +20,10 @@ from datamodel.resource_plain_utf8 import PlainTextUTF8Resource, PlainTextUTF8Re
 from datamodel.resource_plain_utf8 import PlainTextUTF8ResourcePrefixIndex
 from datamodel.resource_plain_utf8 import PlainTextUTF8KeyWordIndexed, PlainTextUTF8PrefixIndexed
 from datamodel.resource_plain_utf8 import PLainTextUTF8WebApi
-from datamodel.resource_json import JsonStringResource
-from datamodel.resource_json import GigResourceWebLocalApi, JsonStringResourceLocalApi
+from datamodel.resource_json import BinResource
+from datamodel.resource_json import GigResourceWebLocalApi, BinResourceLocalApi
 from datamodel.resource_json import GigsMyResourceWebLocalApi
+from datamodel.resource_json import ImageResourceWebLocalApi, ResourceImagesWebLocalApi
 
 
 from crypto.signer import LocalRsaSigner
@@ -71,6 +72,7 @@ class EthearnalProfileController(object):
     PROFILE_PREFIXES_IDX = 'plain_text_utf8_prefix_idx.db'
 
     PROFILE_GIGS_DB = 'gigs.db'
+    PROFILE_IMGS_DB = 'imgs.db'
 
     RSA_PRV = 'rsa_id.prv'
     RSA_PUB = 'rsa_id.pub'
@@ -107,6 +109,7 @@ class EthearnalProfileController(object):
         self.db_plain_text_inv = '%s/%s' % (self.personal_dir, self.PROFILE_PREFIXES_IDX)
 
         self.db_gigs = '%s/%s' % (self.personal_dir, self.PROFILE_GIGS_DB)
+        self.db_imgs = '%s/%s' % (self.personal_dir, self.PROFILE_IMGS_DB)
 
         self.model = EthearnalProfileModel()
 
@@ -143,8 +146,8 @@ class EthearnalProfileController(object):
                                                                                     table_name='plain_text_inv'))
         )
 
-        self.gigs_api = JsonStringResourceLocalApi(
-            jsr=JsonStringResource(
+        self.gigs_api = BinResourceLocalApi(
+            jsr=BinResource(
                 data_store=ResourceSQLite(
                     db_name=self.db_gigs,
                     table_name='gigs')
@@ -169,6 +172,24 @@ class EthearnalProfileController(object):
             mount=True,
         )
 
+        self.img_api = BinResourceLocalApi(
+            jsr=BinResource(
+                data_store=ResourceSQLite(db_name=self.db_imgs, table_name='imgs')
+            ),
+            signer=self.rsa_signer
+        )
+
+        self.img_web_api = ImageResourceWebLocalApi(
+            cherrypy=cherrypy,
+            api=self.img_api,
+            mount=True
+        )
+
+        self.imgs_web_api = ResourceImagesWebLocalApi(
+            cherrypy=cherrypy,
+            api=self.img_api,
+            mount=True
+        )
 
     def get_profile_image_bytes(self):
         bts = None

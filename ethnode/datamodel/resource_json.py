@@ -6,21 +6,29 @@ from toolkit.kadmini_codec import guid_hex_to_bin, guid_bin_to_hex
 import traceback
 
 
-class JsonStringResource(object):
+class BinResource(object):
     def __init__(self,
                  data_store: ResourceSQLite,
                  content_type: bytes=b'application/json',
-                 content_encoding: bytes=b'utf-8'):
+                 content_encoding: bytes=b'identity'):
         self.data_store = data_store
         # self.signer = signer
         self.content_type = content_type
         self.content_encoding = content_encoding
 
-    def create(self, json_data: bytes, owner_hash: bytes, resource_signature: bytes):
+    def create(self, json_data: bytes, owner_hash: bytes, resource_signature: bytes,
+               content_type=None,
+               content_encoding=None,
+               ):
+        if not content_type:
+            content_type = self.content_type
+        if not content_encoding:
+            content_encoding = self.content_encoding
+
         pk_hash = self.data_store.create_resource(owner_hash,
                                                   resource_signature,
-                                                  self.content_type,
-                                                  self.content_encoding,
+                                                  content_type,
+                                                  content_encoding,
                                                   json_data)
         return pk_hash
 
@@ -35,30 +43,42 @@ class JsonStringResource(object):
 
     def delete(self, pk_hash):
         res = self.read(pk_hash)
-        res_data = b''
         if res:
-            res_data = res[-1]
-            c = self.data_store.delete_resource(pk_hash)
-        return res_data
+            self.data_store.delete_resource(pk_hash)
+            return res
+        return res
 
 
-class JsonStringResourceLocalApi(object):
-    def __init__(self, jsr: JsonStringResource, signer: SignerInterface):
+class BinResourceLocalApi(object):
+    def __init__(self, jsr: BinResource, signer: SignerInterface):
         self.signer = signer
         self.jsr = jsr
 
-    def create(self, js_data: bin):
+    def create(self, js_data: bin,
+               content_type=None, content_encoding=None):
         bin_sig = self.signer.sign(js_data)
+        if not content_type:
+            content_type = self.jsr.content_type
+        if not content_encoding:
+            content_encoding = self.jsr.content_encoding
+
         r = self.jsr.create(
-            js_data, self.signer.owner, bin_sig
+            js_data, self.signer.owner, bin_sig,
+            content_type=content_type,
+            content_encoding=content_encoding
         )
         return r
 
     # todo signature verification
     def query(self, pk_hash, verify=False):
         res = self.jsr.read(pk_hash)
-        data = res[-1]
-        return data
+        if res:
+            data = res[-1]
+            content_encoding = res[-2].decode('utf-8')
+            content_type = res[-3].decode('utf-8')
+            return data, content_type, content_encoding
+        else:
+            return None, None, None
 
     def hashid_list(self):
         import json
@@ -68,13 +88,19 @@ class JsonStringResourceLocalApi(object):
 
     def delete(self, pk_hash):
         res = self.jsr.delete(pk_hash)
-        return res
+        if res:
+            data = res[-1]
+            content_encoding = res[-2].decode('utf-8')
+            content_type = res[-3].decode('utf-8')
+            return data, content_type, content_encoding
+        else:
+            return None, None, None
 
 
 class GigResourceWebLocalApi(object):
     exposed = True
 
-    def __init__(self, cherrypy, api: JsonStringResourceLocalApi, mount=False):
+    def __init__(self, cherrypy, api: BinResourceLocalApi, mount=False):
         self.api = api
         self.cherrypy = cherrypy
         if mount:
@@ -83,17 +109,19 @@ class GigResourceWebLocalApi(object):
     def GET(self, q: str):
         try:
             pk_hash_bin = guid_hex_to_bin(q)
-            bin_rs = self.api.query(pk_hash=pk_hash_bin)
+            bin_rs, content_type, content_encoding = self.api.query(pk_hash=pk_hash_bin)
             self.cherrypy.response.status = 200
-            print(bin_rs)
-            return bin_rs
+            if bin_rs:
+                return bin_rs
+            else:
+                self.cherrypy.response.status = 400
+                return b'null'
         except:
             self.cherrypy.response.status = 400
             traceback.print_exc()
-            return b''
+            return b'null'
 
     def POST(self):
-        print('POST MY GIG')
         try:
             body = self.cherrypy.request.body.read()
             if body:
@@ -102,23 +130,22 @@ class GigResourceWebLocalApi(object):
                 self.cherrypy.response.status = 201
                 return pk_hex
             self.cherrypy.response.status = 400
-            return b''
+            return b'null'
         except:
             traceback.print_exc()
             self.cherrypy.response.status = 400
-            return b''
+            return b'null'
 
     def DELETE(self, q):
         try:
             pk_hash_bin = guid_hex_to_bin(q)
-            bin_rs = self.api.delete(pk_hash=pk_hash_bin)
+            bin_rs, content_type, content_encoding = self.api.delete(pk_hash=pk_hash_bin)
             self.cherrypy.response.status = 200
-            print(bin_rs)
             return bin_rs
         except:
             self.cherrypy.response.status = 400
             traceback.print_exc()
-            return b''
+            return b'null'
 
     def mount(self):
         self.cherrypy.tree.mount(
@@ -134,7 +161,7 @@ class GigResourceWebLocalApi(object):
 class GigsMyResourceWebLocalApi(object):
     exposed = True
 
-    def __init__(self, cherrypy, api: JsonStringResourceLocalApi, mount=False):
+    def __init__(self, cherrypy, api: BinResourceLocalApi, mount=False):
         self.api = api
         self.cherrypy = cherrypy
         if mount:
@@ -154,6 +181,108 @@ class GigsMyResourceWebLocalApi(object):
         self.cherrypy.tree.mount(
             self,
             '/api/v1/my/gigs/', {'/': {
+                    'request.dispatch': self.cherrypy.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
+
+
+class ImageResourceWebLocalApi(object):
+    exposed = True
+
+    def __init__(self, cherrypy, api: BinResourceLocalApi, mount=False):
+        self.api = api
+        self.cherrypy = cherrypy
+        if mount:
+            self.mount()
+
+    def GET(self, q: str):
+        try:
+            pk_hash_bin = guid_hex_to_bin(q)
+            bin_rs, content_type, content_encoding = self.api.query(pk_hash=pk_hash_bin)
+            if bin_rs:
+                self.cherrypy.response.headers['Content-Type'] = content_type
+                self.cherrypy.response.headers['Content-Encoding'] = content_encoding
+                self.cherrypy.response.status = 200
+                return bin_rs
+            else:
+                self.cherrypy.response.status = 400
+                return b'null'
+            # return bin_rs
+        except:
+            self.cherrypy.response.status = 400
+            traceback.print_exc()
+            return b'null'
+
+    def POST(self):
+        try:
+            body = self.cherrypy.request.body.read()
+            if body:
+                content_type = self.cherrypy.request.headers['Content-Type'].encode('utf8')
+                content_encoding='identity'.encode('utf-8')
+                pk_bin = self.api.create(body, content_type=content_type, content_encoding=content_encoding)
+                pk_hex = guid_bin_to_hex(pk_bin)
+                self.cherrypy.response.status = 201
+                return pk_hex
+            self.cherrypy.response.status = 400
+            return b'null'
+        except:
+            traceback.print_exc()
+            self.cherrypy.response.status = 400
+            return b'null'
+
+    def DELETE(self, q):
+        try:
+            pk_hash_bin = guid_hex_to_bin(q)
+            bin_rs, content_type, content_encoding = self.api.delete(pk_hash=pk_hash_bin)
+            if bin_rs:
+                self.cherrypy.response.headers['Content-Type'] = content_type
+                self.cherrypy.response.headers['Content-Encoding'] = content_encoding
+                self.cherrypy.response.status = 200
+                return bin_rs
+            else:
+                self.cherrypy.response.status = 400
+                return b'null'
+        except:
+            self.cherrypy.response.status = 400
+            traceback.print_exc()
+            return b'null'
+
+    def mount(self):
+        self.cherrypy.tree.mount(
+            self,
+            '/api/v1/my/img/', {'/': {
+                    'request.dispatch': self.cherrypy.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
+
+
+class ResourceImagesWebLocalApi(object):
+    exposed = True
+
+    def __init__(self, cherrypy, api: BinResourceLocalApi, mount=False):
+        self.api = api
+        self.cherrypy = cherrypy
+        if mount:
+            self.mount()
+
+    def GET(self):
+        try:
+            bin_rs = self.api.hashid_list()
+            self.cherrypy.response.status = 200
+            return bin_rs
+        except:
+            self.cherrypy.response.status = 400
+            traceback.print_exc()
+            return b'null'
+
+    def mount(self):
+        self.cherrypy.tree.mount(
+            self,
+            '/api/v1/my/imgs/', {'/': {
                     'request.dispatch': self.cherrypy.dispatch.MethodDispatcher(),
                     'tools.sessions.on': True,
                 }
