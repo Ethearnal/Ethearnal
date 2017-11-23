@@ -1,5 +1,6 @@
 from datamodel.base_sqlite import BaseSQLite
 from datetime import datetime
+from random import randint
 
 # pk_composite #
 # component_hash bin
@@ -21,6 +22,7 @@ class InvIndexTimestampSQLite(BaseSQLite):
         component_hash blob,
         container_hash blob,
         utc_timestamp int
+        ert_tokens int,
         );
         ''' % self.table_name
 
@@ -33,7 +35,6 @@ class InvIndexTimestampSQLite(BaseSQLite):
 
     @staticmethod
     def pk_compose(component_hash: bytes, container_hash: bytes):
-        # utc_timestamp_bts = utc_timestamp.to_bytes(8, 'big')
         pk_composite = component_hash + container_hash
         return pk_composite
 
@@ -41,14 +42,16 @@ class InvIndexTimestampSQLite(BaseSQLite):
         self.connection.commit()
 
     def create(self, component_hash: bytes, container_hash: bytes, qs_only=False):
-        qs = 'INSERT INTO %s VALUES (?,?,?,?)' % self.table_name
+        qs = 'INSERT INTO %s VALUES (?,?,?,?,?)' % self.table_name
         utc_timestamp = int(datetime.utcnow().timestamp())
+        ert_tokens = randint(0, 10000)
         pk_composite = self.pk_compose(component_hash, container_hash)
         values = (
             pk_composite,
             component_hash,
             container_hash,
             utc_timestamp,
+            ert_tokens,
         )
         if qs_only:
             return qs, values
