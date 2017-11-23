@@ -22,7 +22,8 @@ class InvIndexTimestampSQLite(BaseSQLite):
         component_hash blob,
         container_hash blob,
         utc_timestamp int
-        ert_tokens int,
+        ert_tokens_major int,
+        ert_tokens_minor int,
         );
         ''' % self.table_name
 
@@ -44,14 +45,16 @@ class InvIndexTimestampSQLite(BaseSQLite):
     def create(self, component_hash: bytes, container_hash: bytes, qs_only=False):
         qs = 'INSERT INTO %s VALUES (?,?,?,?,?)' % self.table_name
         utc_timestamp = int(datetime.utcnow().timestamp())
-        ert_tokens = randint(0, 10000)
+        ert_tokens_major = randint(0, 10000)
+        ert_tokens_minor = randint(0, 10000)
         pk_composite = self.pk_compose(component_hash, container_hash)
         values = (
             pk_composite,
             component_hash,
             container_hash,
             utc_timestamp,
-            ert_tokens,
+            ert_tokens_major,
+            ert_tokens_minor,
         )
         if qs_only:
             return qs, values
