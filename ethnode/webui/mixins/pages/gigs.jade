@@ -99,15 +99,27 @@ section.gigs-page-content
 
             .gigs-container
 
-                .gig.content-block
+                .gig.content-block(data-toggle="modal", data-target="#gigModal")
                     button#dropdowngiga0.mdl-button.mdl-js-button.mdl-button--icon.dropdown-button: i.material-icons more_vert
                     ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="dropdowngiga0")
                         li.mdl-menu__item.open-modal(open-modal="#edit-gig") Edit
                         li.mdl-menu__item.delete Delete
 
-                    img(src="images/paypal.jpg", alt="Gig")
-                    h5 by FirstName L.
+                    .image: img(src="images/paypal.jpg", alt="Gig")
+
+                    .owner-info
+                        img(src="/api/v1/profile/?q=avatar", alt="Avatar")
+                        h5 owner_nickname
+                        h4 Entry Level
+
                     p Gig Description
+
+                    .lower-info
+                        .reputation
+                            i.material-icons polymer
+                            span 5k+
+
+                        h6.expire expires in 5 mins
 
                     .footer
                         h4 Starting at <span>$25</span>

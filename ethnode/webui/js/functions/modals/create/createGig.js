@@ -8,10 +8,13 @@ function createGig(data) {
         processData: false,
         success: function(gigData) {
             $data = JSON.parse(gigData);
+            $expiresIn = null;
 
-            console.log($data.imageHash);
+            $($data.date).each(function(i, dates) {
+                $expiresIn = dates.expiresIn;
+            });
 
-            image = '<img src="/api/v1/my/img/?q='+$data.imageHash+'" alt="Gig Image" />';
+            image = '<div class="image"><img src="/api/v1/my/img/?q='+$data.imageHash+'" alt="Gig Image" /></div>';
 
             // dropdown button
             var dropdownButton = '<button id="dropdowngig'+ iGig +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>';
@@ -19,13 +22,23 @@ function createGig(data) {
             // dropdown UL
             var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="dropdowngig'+ iGig +'"><li class="mdl-menu__item open-modal" open-modal="#edit-gig">Edit</li><li class="mdl-menu__item delete">Delete</li></ul>';
 
-            // Other gig variables
-            var ownerGig = '<h5>by ' + $data.ownerName + '</h5>';
+            // Other gig variables [owner-info div]
+            var ownerAvatar = '<img src="data:image/png;base64,'+$data.ownerAvatar+'" alt="Avatar" />';
+            var ownerName = '<h5>' + $data.ownerName + '</h5>';
+            var experienceName = '<h4>' + $data.experienceName + '</h4>';
+            var ownerInfo = '<div class="owner-info">' + ownerAvatar + ownerName + experienceName + '</div>';
+
             var gigTitle = '<p>' + $data.title + '</p>';
+
+            // Lower Info Div
+            var reputationDiv = '<div class="reputation"><i class="material-icons">polymer</i><span>' + $data.ownerReputation + '</span></div>';
+            var lowerInfo = '<div class="lower-info">' + reputationDiv + '<h6 class="expire">expires '+ $expiresIn +'</h6></div>';
+
+
             var gigFooter = '<div class="footer"><h4>Starting at <span>$' + $data.price + '</span></h4></div>';
 
             // Creating div based on variables
-            $gig = $('<div class="gig content-block">' + dropdownButton + dropdownUL + image + ownerGig + gigTitle + gigFooter + '</div>');
+            $gig = $('<div class="gig content-block" gigID="' + data + '">' + dropdownButton + dropdownUL + image + ownerInfo + lowerInfo + gigTitle + gigFooter + '</div>');
 
             // Rendering div
             var divToRender = $gig.get(0).outerHTML;

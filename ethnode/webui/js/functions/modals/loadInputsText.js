@@ -21,28 +21,40 @@ function loadInputsText(form, div) {
     // Resetting the form
     clearForm($form);
 
-    // // Resetting images in modals
-    // if($divToLoad.hasClass('education')) resetImage($content, 'education');
-    // if($divToLoad.hasClass('job')) resetImage($content, 'job');
-
     if($divToLoad.hasClass('gig')) {
-        $gigData = $divToLoad.attr('data'); $gigExpireDate = null;
-        var gig = JSON.parse($gigData);
+        $gigID = $divToLoad.attr('gigID');
 
-        // Gets GIG Expire Date
-        var dates = gig.date;
-        $.each(dates, function(i, date) {
-            $gigExpireDate = date.expire;
+        $.ajax({
+            url: "/api/v1/my/gig/" + $gigID,
+            type: "GET",
+            processData: false,
+            success: function(gigData) {
+                $gigExpireDate = null;
+                $gig = JSON.parse(gigData);
+
+                // Gets GIG Expire Date
+                var dates = $gig.date;
+                $.each(dates, function(i, date) {
+                    $gigExpireDate = date.expire;
+                });
+
+                // IMAGE
+                $content.find('img#input-image-gig-edit').attr('src', '/api/v1/my/img/?q=' + $gig.imageHash);
+                $content.find('img.img-gig-edit').removeClass('active');
+                $content.find('label[for="input-image-gig-edit"]').text('Click here to change image').removeClass('active');
+
+                // INPUT FIELDS
+                $content.find('input#gig-title').val($gig.title).parent().addClass('is-dirty');
+                $form.find('#category').dropdown('set selected', $gig.category);
+                $form.find('#experience-level').dropdown('set selected', $gig.experienceLevel);
+                $content.find('textarea#description').val($gig.description).parent().addClass('is-dirty');
+                $content.find('input#price').val($gig.price).parent().addClass('is-dirty');
+
+                // DATE PICKER
+                $inputDateFrom.bootstrapMaterialDatePicker({format: "DD/MM/YYYY", weekStart: 0, time: false, currentDate: $gigExpireDate });
+                $inputDateFrom.val($gigExpireDate).parent().addClass('is-dirty');
+            }
         });
-
-        $content.find('input#gig-title').val(gig.title).parent().addClass('is-dirty');
-        $form.find('#category').dropdown('set selected', gig.category);
-        $form.find('#experience-level').dropdown('set selected', gig.experienceLevel);
-        $content.find('textarea#description').val(gig.description).parent().addClass('is-dirty');
-        $content.find('input#price').val(gig.price).parent().addClass('is-dirty');
-
-        $inputDateFrom.bootstrapMaterialDatePicker({format: "MM/YYYY", weekStart: 0, time: false, currentDate: $gigExpireDate });
-        $inputDateFrom.parent().addClass('is-dirty');
     }
 
     if($divToLoad.hasClass('education')) {

@@ -9,7 +9,10 @@ function wordInString(s, word){
 // Validate FORM function
 function validateForm(form) {
   var isValid = true;
-  $(form).each(function() {
+  $form = form; $content = $form.closest('.content');
+  $form.each(function() {
+
+    // GET EVERY INPUT VALUE, IF NULL, THEN NOT VALID.
     if ( $(this).find('input:not(.date-ended):not(.search):not([name="language"]), textarea').filter(function() {
         return $.trim($(this).val()).length == 0
     }).length == 0 ) {
@@ -18,16 +21,38 @@ function validateForm(form) {
         isValid = false;
     }
   });
+
+  // CHECKS EVERY DROPDOWN, IF NULL, THEN IT IS NOT VALID
+  $form.find('.ui.dropdown').each(function() {
+    if($(this).dropdown('get value').length == 0) isValid = false;
+  });
+
+  // Checks if image is added and if its not an EDIT modal.
+  if($content.find('img.show-image').hasClass('empty') && !$content.closest('.modal-box').hasClass('edit')) isValid = false;
+
   return isValid;
 }
 
-
 // Clears the form.
 function clearForm(form) {
-    $form = form;
+    $form = form; $content = $form.closest('.content');
     $form[0].reset();
+
+    // REMOVING CLASSES
     $form.find('.is-dirty').removeClass('is-dirty');
     $form.find('.is-focused').removeClass('is-focused');
+
+    // MAKING INPUTS EMPTY
+    $form.find('.is-dirty').children().val('');
+    $form.find('.is-focused').children().val('');
+
+    // MAKING DROPDOWN EMPTY
+    $form.find('.ui.dropdown').dropdown('clear');
+
+    // CLEARING IMAGE
+    $content.find('img.show-image').attr('src', '').addClass('empty');
+    $content.find('label.img-label').text('Add Photo').removeClass('active');
+    $content.find('img.file-input-first-image').removeClass('active');
 }
 
 

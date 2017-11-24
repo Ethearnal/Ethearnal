@@ -24,54 +24,10 @@ function collectJobData(form) {
         ]
     }
 
-    // $dataToPost = JSON.stringify($data);
-
-    // formData= new FormData();
-    // formData.append("json_str", "profile.json");
-    // $.ajax({
-    //     url: "/api/v1/uploadjson",
-    //     type: "POST",
-    //     data: formData,
-    //     contentType: 'multipart/form-data',
-    //     processData: false,
-    //     success: function(data){
-    //         alert('success');
-    //     }
-    // });
-
-    // uploadFile();
-
     console.log($data);
 
     return $data;
 }
-
-
-function uploadFile(inputID){
-  var input = document.getElementById(inputID);
-  file = input.files[0];
-  if(file != undefined){
-    formData= new FormData();
-    if(!!file.type.match(/image.*/)){
-      formData.append("ufile", file);
-      $.ajax({
-        url: "/api/v1/my/img",
-        type: "POST",
-        data: formData,
-        contentType: 'image/jpeg',
-        processData: false,
-        success: function(data){
-            return data;
-        }
-      });
-    }else{
-      console.log('Not a valid image!');
-    }
-  }else{
-    console.log('Input something!');
-  }
-}
-
 
 // Collects 'CREATE EDUCATION / EDIT EDUCATION' data.
 function collectEducationData(form) {
@@ -119,6 +75,17 @@ function collectLanguageData(form) {
 }
 
 
+function getBase64Image(img) {
+  var canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+  var dataURL = canvas.toDataURL("image/png");
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+
+
 // Collects 'CREATE LANGUAGE / EDIT LANGUAGE' data.
 function collectGigData(form) {
     $form = form;
@@ -127,16 +94,30 @@ function collectGigData(form) {
 
     $title = $form.find('#gig-title').val();
     $category = $form.find('#category').dropdown('get value');
+    $reputation = $('header').find('a#reputation-dropdown .round-number span').text();
     $ownerName = $form.closest('body').find('li#settings-dropdown span').text();
     $experienceLevel = $form.find('#experience-level').dropdown('get value');
+    $experienceName = $form.find('#experience-level').dropdown('get text');
+    $categoryName = $form.find('#category').dropdown('get text');
     $description = $form.find('textarea#description').val();
     $price = $form.find('input#price').val();
     $dateExpire = $form.find('input.date-started').val();
 
+    // getting expire date's difference in text.
+    $expireDateClear = $dateExpire.replace(/\//g, '-');
+    $expireDateDifference = moment($expireDateClear, "DDMMYYYY").fromNow();
+
+    var avatarImage = getBase64Image(document.getElementById("avatar-img"));
     var input = document.getElementById($imgInputID);
     file = input.files[0];
+
+    if (file == undefined) {
+        if($content.find('img.show-image').attr('src') != null) {
+
+        }
+    }
+
     if(file != undefined) {
-        formData= new FormData();
         if(!!file.type.match(/image.*/)) {
             $.ajax({
                 url: "/api/v1/my/img",
@@ -145,16 +126,28 @@ function collectGigData(form) {
                 contentType: 'image/jpeg',
                 processData: false,
                 success: function(data){
+
+                    // Deletes GIG if not EDIT modal
+                    if( $content.closest('.modal-box').hasClass('edit') ) {
+                        $gigID = $currentlyClosestLEdiv.attr('gigID');
+                        deleteGig($gigID);
+                    }
+
+                    // AND CREATE A NEW ONE
                     $data = {
                         imageHash: data,
+                        ownerAvatar: avatarImage,
+                        ownerReputation: $reputation,
+                        ownerName: $ownerName,
+                        categoryName: $categoryName,
+                        experienceName: $experienceName,
                         title: $title,
                         category: $category,
-                        ownerName: $ownerName,
                         experienceLevel: $experienceLevel,
                         description: $description,
                         price: $price,
                         date: [
-                            { expire: $dateExpire }
+                            { expire: $dateExpire, expiresIn: $expireDateDifference }
                         ]
                     }
 
@@ -174,8 +167,45 @@ function collectGigData(form) {
             console.log('Not a valid image!');
         }
 
-    } else {
-        console.log('Input something!');
+    // IF YOU EDIT GIG
+    } else if (file == undefined) {
+
+        // Checks if the GIG already has image and re-use image hash.
+        if($content.find('img.show-image').attr('src') != null) {
+            $imageSrc = $content.find('img.show-image').attr('src');
+            $imageHash = $imageSrc.split('/api/v1/my/img/?q=')[1];
+
+            $gigID = $currentlyClosestLEdiv.attr('gigID');
+            deleteGig($gigID);
+
+            $data = {
+                imageHash: $imageHash,
+                ownerAvatar: avatarImage,
+                ownerReputation: $reputation,
+                ownerName: $ownerName,
+                categoryName: $categoryName,
+                experienceName: $experienceName,
+                title: $title,
+                category: $category,
+                experienceLevel: $experienceLevel,
+                description: $description,
+                price: $price,
+                date: [
+                    { expire: $dateExpire, expiresIn: $expireDateDifference }
+                ]
+            }
+
+            $.ajax({
+                url: "/api/v1/my/gig",
+                type: "POST",
+                data: JSON.stringify($data),
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                success: function(gigID){
+                    createGig(gigID);
+                }
+            });
+        }
     }
     return;
 }

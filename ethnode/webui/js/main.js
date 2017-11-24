@@ -3,13 +3,13 @@
 // TODO
 
 
-// Sukurti gigs.json ir traukti informacija is ten, loadinti gigus.
-// Kai paspaudi ant profiles, turi sukurti kita puslapi ir traukti visus profilius is profiles.json
-// Kai paspaudi ant JOBS, turi traukti visus is jobs.json
 
 
-// Padaryti profile page, kad galetum skillus pridet (paimt is Aspire)
+// Prideti Budget sliderius.
+// Gigai turi buti atvaizduojami tavo profile page.
 
+// // Padaryti profile page, kad galetum skillus pridet (paimt is Aspire)
+// // Atskirti Education/Job/Language/Skills PROFILE TAB'e. Jeigu nera nieko toje skiltyje - centruotas tekstas "There's no jobs".
 
 
 $('a[load]').click(function(e) {
@@ -286,11 +286,12 @@ $( document ).ready(function() {
         var file = this.files[0].name;
         var dflt = $(this).attr("placeholder");
         $labelID = $(this).attr("id");
-        $imgClass = $(this).parent().find('.file-input-first-image').attr('class');
+        // $imgClass = $(this).parent().find('.file-input-first-image').attr('class');
 
         if($(this).val()!=""){
             $content.find("label[for=" + $labelID + "]").text(' ' + file + ' ').addClass('active');
-            $content.find('img.' + $imgClass).addClass('active');
+            $content.find('img.file-input-first-image').addClass('active');
+            $content.find('img.show-image').removeClass('empty');
         } else {
             $(this).next().text(dflt);
         }
@@ -407,6 +408,9 @@ require("js/functions/modals/create/createLE.js");
 
 // Create GIG function
 require("js/functions/modals/create/createGig.js");
+
+// Delete GIG function
+require("js/functions/modals/delete/gig.js");
 
 // Load GIGS function
 require("js/functions/modals/load/gigs.js");
