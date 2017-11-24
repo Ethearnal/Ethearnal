@@ -1,0 +1,327 @@
+{
+  "front-version": "2.12.0",
+  "version": 3,
+  "nodes": [
+    {
+      "type": "Project",
+      "id": "1191a8ba-f774-43cf-9ae7-f3e55dd90a96",
+      "lastModified": "2017-11-25T00:42:24.782+02:00",
+      "name": "my_idx"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "q",
+              "value": "e2dac8b6db3def18f0837de7da4b7c488d2e567953f957b1db1a6fb885d91c76"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/idx/text/"
+      },
+      "id": "66d2d56d-f154-4eb3-9092-cc15bf3762f2",
+      "lastModified": "2017-11-24T21:36:38.313+02:00",
+      "name": "DELETE INDEX TEXT",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "1191a8ba-f774-43cf-9ae7-f3e55dd90a96"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "name": "description",
+              "value": "star wars"
+            },
+            {
+              "enabled": true,
+              "name": "title",
+              "value": "sat"
+            },
+            {
+              "name": "price_range",
+              "value": "in-top-100"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/idx/query/guids/"
+      },
+      "id": "6569bbcf-6524-4132-a3a9-d0427f0da3c6",
+      "lastModified": "2017-11-25T00:42:03.708+02:00",
+      "name": "GET SEARCH QUERY GUID",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "1191a8ba-f774-43cf-9ae7-f3e55dd90a96"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "name": "description",
+              "value": "star wars"
+            },
+            {
+              "enabled": true,
+              "name": "title",
+              "value": "sat 2"
+            },
+            {
+              "name": "price_range",
+              "value": "in-top-100"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/idx/query/objects/"
+      },
+      "id": "6fee5469-3e3c-4937-848a-2adda3adbfa7",
+      "lastModified": "2017-11-25T00:42:24.782+02:00",
+      "name": "GET SEARCH QUERY OBJ",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "1191a8ba-f774-43cf-9ae7-f3e55dd90a96"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"documentHashId\":\"e2dac8b6db3def18f0837de7da4b7c488d2e567953f957b1db1a6fb885d91c76\",\n  \"fieldName\":\"description\",\n  \"fieldText\":\"Star wars\"\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/idx/text/"
+      },
+      "id": "c80b4035-5840-48d3-bd9f-4ef72ac50792",
+      "lastModified": "2017-11-24T22:19:16.501+02:00",
+      "name": "POST INDEX TEXT description",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "1191a8ba-f774-43cf-9ae7-f3e55dd90a96"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"documentHashId\":\"e2dac8b6db3def18f0837de7da4b7c488d2e567953f957b1db1a6fb885d91c76\",\n  \"fieldName\":\"price_range\",\n  \"fieldText\":\"100-500\"\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/idx/text/"
+      },
+      "id": "490c9d6d-3dfd-458d-ab09-fd8bcfd6b7dc",
+      "lastModified": "2017-11-25T00:41:39.940+02:00",
+      "name": "POST INDEX TEXT price_range",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "1191a8ba-f774-43cf-9ae7-f3e55dd90a96"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"documentHashId\":\"e2dac8b6db3def18f0837de7da4b7c488d2e567953f957b1db1a6fb885d91c76\",\n  \"fieldName\":\"title\",\n  \"fieldText\":\"Star Wars out now\"\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/idx/text/"
+      },
+      "id": "62d6d9a5-2fca-4193-b86c-677736904f76",
+      "lastModified": "2017-11-24T21:49:56.388+02:00",
+      "name": "POST INDEX TEXT title",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "1191a8ba-f774-43cf-9ae7-f3e55dd90a96"
+    },
+    {
+      "bodyEvaluationDisabled": true,
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": ""
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:4567",
+        "path": "/api/v1/my/idx/all/"
+      },
+      "id": "76a8ff36-1759-41eb-ba48-7ca702052056",
+      "lastModified": "2017-11-25T00:37:48.766+02:00",
+      "name": "PUT INDEX ALL by title and description",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "1191a8ba-f774-43cf-9ae7-f3e55dd90a96"
+    }
+  ]
+}

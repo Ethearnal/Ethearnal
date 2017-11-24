@@ -24,7 +24,7 @@ from datamodel.resource_json import BinResource
 from datamodel.resource_json import GigResourceWebLocalApi, BinResourceLocalApi
 from datamodel.resource_json import GigsMyResourceWebLocalApi
 from datamodel.resource_json import ImageResourceWebLocalApi, ResourceImagesWebLocalApi
-
+from datamodel.resource_index import IndexApiBundle
 
 from crypto.signer import LocalRsaSigner
 
@@ -67,9 +67,9 @@ class EthearnalProfileController(object):
     JOB_POSTS_JSON_FILE_NAME = 'job_posts.json'
     PROFILE_DHT_SQLITE = 'dht.db'
     PROFILE_DHT_REF_PUBKEYS = 'pubkeys.db'
-
     PROFILE_PLAIN_UTF8_TEXTS = 'plain_text_utf8.db'
     PROFILE_PREFIXES_IDX = 'plain_text_utf8_prefix_idx.db'
+    PROFILE_MY_GIGS_INDEX = 'my_gigs_idx.db'
 
     PROFILE_GIGS_DB = 'gigs.db'
     PROFILE_IMGS_DB = 'imgs.db'
@@ -110,6 +110,7 @@ class EthearnalProfileController(object):
 
         self.db_gigs = '%s/%s' % (self.personal_dir, self.PROFILE_GIGS_DB)
         self.db_imgs = '%s/%s' % (self.personal_dir, self.PROFILE_IMGS_DB)
+        self.db_my_gigs_idx = '%s/%s' % (self.personal_dir, self.PROFILE_MY_GIGS_INDEX)
 
         self.model = EthearnalProfileModel()
 
@@ -190,6 +191,12 @@ class EthearnalProfileController(object):
             api=self.img_api,
             mount=True
         )
+
+        self.idx = IndexApiBundle(self.db_my_gigs_idx, self.gigs_api, cherrypy=cherrypy)
+        self.idx.text_web_api.mount()
+        self.idx.query_web_api_guids.mount()
+        self.idx.query_web_api_obj.mount()
+        self.idx.index_all_by_title_desc_web.mount()
 
     def get_profile_image_bytes(self):
         bts = None

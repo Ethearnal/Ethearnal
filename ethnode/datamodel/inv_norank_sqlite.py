@@ -21,11 +21,11 @@ class InvIndexTimestampSQLite(BaseSQLite):
         pk_composite blob PRIMARY KEY,
         component_hash blob,
         container_hash blob,
-        utc_timestamp int
+        utc_timestamp int,
         ert_tokens_major int,
         ert_tokens_minor int,
         q1 int,
-        q2 int,
+        q2 int
         );
         ''' % self.table_name
 

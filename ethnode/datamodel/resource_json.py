@@ -4,6 +4,7 @@ from crypto.signer import SignerInterface
 # from toolkit.kadmini_codec import sha256_bin_digest
 from toolkit.kadmini_codec import guid_hex_to_bin, guid_bin_to_hex
 import traceback
+import json
 
 
 class BinResource(object):
@@ -40,6 +41,11 @@ class BinResource(object):
         ll = self.data_store.list_by_owner(owner_hash)
         if ll:
             return [guid_bin_to_hex(k[0]).decode() for k in ll]
+
+    def hashid_list_bin(self, owner_hash):
+        ll = self.data_store.list_by_owner(owner_hash)
+        if ll:
+            return [k[0] for k in ll]
 
     def delete(self, pk_hash):
         res = self.read(pk_hash)
@@ -81,7 +87,6 @@ class BinResourceLocalApi(object):
             return None, None, None
 
     def hashid_list(self):
-        import json
         ll = self.jsr.hashid_list(self.signer.owner)
         js = json.dumps(ll)
         return js.encode(encoding='utf-8')
@@ -114,7 +119,7 @@ class GigResourceWebLocalApi(object):
             if bin_rs:
                 return bin_rs
             else:
-                self.cherrypy.response.status = 400
+                self.cherrypy.response.status = 404
                 return b'null'
         except:
             self.cherrypy.response.status = 400
@@ -129,7 +134,7 @@ class GigResourceWebLocalApi(object):
                 pk_hex = guid_bin_to_hex(pk_bin)
                 self.cherrypy.response.status = 201
                 return pk_hex
-            self.cherrypy.response.status = 400
+            self.cherrypy.response.status = 404
             return b'null'
         except:
             traceback.print_exc()
