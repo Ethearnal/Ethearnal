@@ -25,7 +25,6 @@ function getTimeDifference(timeFrom, timeTo) {
     return $differenceText;
 }
 
-
 // Gets time at first. Then counts the difference and turns it into a text.
 function getTimeFirst(varTime) {
     $.each(varTime, function(i, times) {

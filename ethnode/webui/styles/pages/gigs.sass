@@ -7,6 +7,7 @@ section.profiles-page-content
 
         // FILTERS --- LEFT
         .filters
+            position: fixed
 
             .filter
                 margin-bottom: 20px
@@ -26,9 +27,10 @@ section.profiles-page-content
 
         // GIGS --- RIGHT
         .gigs
+            float: right
 
             .gigs-container
-                width: calc(100% - 45px)
+                width: calc(100% - 15px)
                 margin: 0 auto
 
                 &:after
@@ -51,43 +53,116 @@ section.profiles-page-content
                     float: left
                     margin-right: 30px
                     margin-bottom: 30px
+                    transition: all 0.15s ease-in
 
-                    &:nth-child(3n)
-                        margin-right: 0
+                    &:hover, &:focus, &:active
+                        background-color: #fbfafa
+                        cursor: pointer
 
                     button.mdl-button--icon
                         position: absolute
                         right: 0
                         top: 5px
                         color: #c1c1c1
+                        z-index: 1
 
-                    img
+                    .image
+                        position: relative
                         width: 100%
+                        height: 142px
+                        overflow: hidden
 
-                    h5
-                        margin: 0
-                        margin-top: 10px
+                        img
+                            width: 100%
+                            height: auto
+                            overflow: hidden
+
+                    .owner-info
                         margin-left: 10px
-                        margin-bottom: 5px
+                        margin-top: 10px
 
-                    h5
-                        font-size: 14px
-                        color: #86939e
+                        img
+                            float: left
+                            width: 24px
+                            height: 24px
+                            border-radius: 100%
+                            margin-top: 1px
+
+
+                        h5, h4
+                            margin: 0
+                            font-size: 12px
+                            font-weight: 400
+                            line-height: 1
+                            color: black
+                            margin-left: 32px
+                            transition: all 0.15s ease-in
+
+                        h5:hover, h5:active, h5:focus
+                            cursor: pointer
+                            text-decoration: underline
+
+                        h4
+                            color: #86939e
+                            font-size: 12px
+                            margin-top: 2px
 
                     p
                         font-size: 16px
                         color: black
-                        line-height: 1.71
+                        overflow: hidden
                         padding: 0 10px
+                        height: 50px
+                        margin: 0
+                        margin-top: 10px
+
+                    .lower-info
+                        position: absolute
+                        bottom: 38px
+                        width: 100%
+
+                        .reputation
+                            float: left
+                            height: 24px
+                            margin-left: 10px
+
+                            i
+                                color: #92A8D1
+                                font-size: 20px
+
+                            span
+                                color: #92A8D1
+                                position: relative
+                                top: -4.5px
+                                left: 4px
+                                font-weight: 500
+
+                        h6.expire
+                            float: right
+                            font-size: 12px
+                            color: #86939e
+                            margin: 0
+                            margin-right: 10px
 
                     .footer
                         border-top: 1px solid #e5e5e5
+                        position: absolute
+                        bottom: 0
+                        width: 100%
+                        height: 38px
 
                         h4
                             text-align: right
-                            font-size: 15px
                             color: black
-                            margin-right: 5px
+                            margin-right: 10px
+                            line-height: 35px
+                            font-weight: 300
+                            font-size: 11px
+                            text-transform: uppercase
 
                             span
-                                font-size: 17px
+                                font-size: 18px
+                                font-weight: 400
+                                margin-left: 2px
+                                position: relative
+                                top: 2px

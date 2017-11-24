@@ -99,7 +99,15 @@ $('body').delegate('.open-modal', 'click', function(e) {
 
     // Functions for particular modals.
     if($($modalID).hasClass('edit')) loadInputsText($form, $contentBlock);
-    if($($modalID).hasClass('add')) datePickerInit($inputDateFrom, $inputDateTo);
+
+    if($($modalID).hasClass('add')) {
+        if($modalID == "#add-gig") {
+            datePickerInitGig($inputDateFrom, $inputDateTo);
+        } else {
+            datePickerInit($inputDateFrom, $inputDateTo);
+        }
+    }
+
     if($modalID == "#edit-profile") loadProfileInputs();
 });
 
@@ -109,8 +117,13 @@ $('body').delegate('li.delete', 'click', function(e) {
     $contentBlock = $(this).closest('.content-block');
     $gig = $(this).closest('.gig');
 
-    $contentBlock.fadeOut(300);
-    $gig.fadeOut(300);
+    if( $contentBlock ) $contentBlock.fadeOut(300);
+
+    if( $gig ) {
+        // $gig.fadeOut(300);
+        $gigID = $gig.attr('gigID');
+        deleteGig($gigID);
+    }
 });
 
 
@@ -151,18 +164,16 @@ $('.modal-box button').click(function() {
         if($modalID == 'add-language' || $modalID == 'edit-language') $data = collectLanguageData($form);
         if($modalID == 'add-skill' || $modalID == 'edit-skill') $data = collectSkillData($form);
         if($modalID == "edit-profile") $data = collectProfileData($form);
-        if($modalID == "add-gig") collectGigData($form);
+        if($modalID == "add-gig" || $modalID == "edit-gig") collectGigData($form);
 
 
         // Fading out the initial modal and fading in success message.
         $modalContent.fadeOut(300);
 
+        // DO SOMETHING MORE AFTER CLICKING THAT BUTTON AND WAITING FOR A TIMEOUT TO END
         setTimeout(function() {
             appearSuccessMessage($content);
             clearForm($form);
-
-            // var iExperience = 0;
-            // var iEducation = 0;
 
             if($modalID == 'add-job') createLE($data, 'job');
             if($modalID == 'add-education') createLE($data, 'education');
@@ -172,7 +183,7 @@ $('.modal-box button').click(function() {
             // if($modalID == 'add-skill') createLE($data, 'language', true);
 
 
-            if ( $modalID == 'edit-education' ) {
+            if ($modalID == 'edit-education') {
 
                 $modalID = $currentlyOpenModalID;
                 $contentBlock = $currentlyClosestLEdiv;
@@ -186,7 +197,7 @@ $('.modal-box button').click(function() {
                 $contentBlock.find('.description').text($data.description);
 
 
-            } else if ( $modalID == 'edit-job' ) {
+            } else if ($modalID == 'edit-job') {
 
                 $modalID = $currentlyOpenModalID;
                 $contentBlock = $currentlyClosestLEdiv;
