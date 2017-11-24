@@ -24,6 +24,8 @@ class InvIndexTimestampSQLite(BaseSQLite):
         utc_timestamp int
         ert_tokens_major int,
         ert_tokens_minor int,
+        q1 int,
+        q2 int,
         );
         ''' % self.table_name
 
@@ -42,12 +44,33 @@ class InvIndexTimestampSQLite(BaseSQLite):
     def commit(self):
         self.connection.commit()
 
-    def create(self, component_hash: bytes, container_hash: bytes, qs_only=False):
-        qs = 'INSERT INTO %s VALUES (?,?,?,?,?)' % self.table_name
+    def has_item(self, pk_composite: bytes, qs_only=False):
+        qs = 'SELECT pk_composite FROM %s WHERE pk_composite=?;' % self.table_name
+
+        if qs_only:
+            return qs, (pk_composite,)
+        c = self.cursor.execute(qs, (pk_composite,))
+        t = c.fetchone()
+        if t:
+            return True
+        else:
+            return False
+
+    def create(self, component_hash: bytes,
+               container_hash: bytes,
+               q1: int=0,
+               q2: int=0,
+               qs_only=False):
+        qs = 'INSERT INTO %s VALUES (?,?,?,?,?,?,?,?);' % self.table_name
         utc_timestamp = int(datetime.utcnow().timestamp())
         ert_tokens_major = randint(0, 10000)
         ert_tokens_minor = randint(0, 10000)
         pk_composite = self.pk_compose(component_hash, container_hash)
+        cr = self.has_item(pk_composite)
+
+        if self.has_item(pk_composite):
+            return
+
         values = (
             pk_composite,
             component_hash,
@@ -55,6 +78,8 @@ class InvIndexTimestampSQLite(BaseSQLite):
             utc_timestamp,
             ert_tokens_major,
             ert_tokens_minor,
+            q1,
+            q2,
         )
         if qs_only:
             return qs, values
@@ -74,6 +99,13 @@ class InvIndexTimestampSQLite(BaseSQLite):
         if qs_only:
             return qs, (component_hash,)
         c = self.cursor.execute(qs, (component_hash,))
+        return c
+
+    def delete_components_by_container(self, container_hash: bytes, qs_only=False):
+        qs = 'DELETE FROM %s WHERE container_hash=?;' % self.table_name
+        if qs_only:
+            return qs, (container_hash,)
+        c = self.cursor.execute(qs, (container_hash,))
         return c
 
     def inner_join_on_component(self, *args, asc=True, qs_only=False):
