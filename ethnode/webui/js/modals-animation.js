@@ -117,8 +117,17 @@ $('input#search-header').keypress(function (e) {
 
         });
 
-        console.log('/api/v1/my/idx/query/objects/?' + $search + $category + $jobType + $experienceLevel + $budget);
+        $searchQuery = '/api/v1/my/idx/query/objects/?' + $search + $category + $jobType + $experienceLevel + $budget;
 
+
+        $.ajax({
+            url: $searchQuery,
+            type: "GET",
+            processData: false,
+            success: function(result) {
+                console.log('works');
+            }
+        });
 
         return false;
     }
