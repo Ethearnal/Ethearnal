@@ -198,6 +198,10 @@ class EthearnalProfileController(object):
         self.idx.query_web_api_obj.mount()
         self.idx.index_all_by_title_desc_web.mount()
 
+        from testing.loadset import TestGigGenerator
+        tweets_fname = 'test_sets/head-10k-tweets-json-to-text-stream-syria.json.txt'
+        self.test_gig_gen = TestGigGenerator(fname=tweets_fname, gigs_api=self.gigs_api)
+
     def get_profile_image_bytes(self):
         bts = None
         with open(self.profile_image_file_name, 'rb') as fs:

@@ -106,7 +106,7 @@ class ResourceSQLite(BaseSQLite):
     def list_by_owner(self,
                       owner_hash: bytes,
                       qs_only=False):
-        qs = 'SELECT * FROM %s WHERE owner_hash_bin=?' % self.table_name
+        qs = 'SELECT * FROM %s WHERE owner_hash_bin=?;' % self.table_name
         if qs_only:
             return qs, owner_hash
         else:

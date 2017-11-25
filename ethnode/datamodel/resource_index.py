@@ -68,10 +68,6 @@ class ResourceIndexingEngine(object):
         self.index_store.commit()
 
     def qry_hashes(self, component_hashes: list):
-        print('COMPONENT HASHES')
-        for hsh in component_hashes:
-            print(hsh)
-        print('_____________________')
         if len(component_hashes) == 1:
             return self.index_store.single_component(component_hashes[0])
         else:
@@ -175,8 +171,17 @@ class IndexQueryGenericApi(object):
         for key_spec, val in kwargs.items():
             print('SEARCH QUERY: %s' % key_spec, val)
         c = self.engine.qry_terms(terms=kwargs)
+        rs_ls = list()
         if c:
-            return [self.repr_f(k[0]) for k in c if self.repr_f(k[0])]
+            for item in c:
+
+                if item:
+                    ctx_hash = item[2]
+                    rep_maj = item[4]
+                    # print(rep_maj)
+                    # print('-->', item, self.repr_f, self.repr_f(item[0]))
+                    rs_ls.append(self.repr_f(ctx_hash, rep_maj=rep_maj))
+            return rs_ls
         return None
 
 
@@ -197,13 +202,17 @@ class ReprFNplusOne(object):
     def __init__(self, api: BinResourceLocalApi):
         self.api = api
 
-    def __call__(self, pk_hash_bin):
+    def __call__(self, pk_hash_bin, rep_maj=0):
         bin_rs, content_type, content_encoding = self.api.query(pk_hash=pk_hash_bin)
+        print('B', bin_rs)
         if bin_rs:
             if content_type != 'application/json':
                 print("WARN content type not supported", content_type)
             try:
-                return json.loads(bin_rs.decode('utf-8'))
+                d = json.loads(bin_rs.decode('utf-8'))
+                d['ownerReputation'] = rep_maj
+                return d
+
             except:
                 print("WARN failed object decoding", guid_bin_to_hex(pk_hash_bin))
                 return None

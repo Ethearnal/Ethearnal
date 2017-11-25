@@ -88,10 +88,10 @@ class InvIndexTimestampSQLite(BaseSQLite):
 
     def single_component(self, component_hash, asc=True, qs_only=False):
         if asc:
-            order_st = ' ORDER BY a.utc_timestamp ASC; '
+            order_st = ' ORDER BY a.ert_tokens_major, a.utc_timestamp; '
         else:
-            order_st = ' ORDER BY a.utc_timestamp DSC; '
-        qs = 'SELECT a.container_hash FROM %s a WHERE a.component_hash=? %s' % (
+            order_st = ' ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC; '
+        qs = 'SELECT * FROM %s a WHERE a.component_hash=? %s' % (
             self.table_name,
             order_st
         )
@@ -111,7 +111,7 @@ class InvIndexTimestampSQLite(BaseSQLite):
     def inner_join_on_component(self, *args, asc=True, qs_only=False):
         if len(args) < 2:
             raise ValueError('two or more args required')
-        first = 'SELECT a.container_hash FROM %s a ' % self.table_name
+        first = 'SELECT * FROM %s a ' % self.table_name
         inner = 'INNER JOIN {t} {p} ON a.container_hash={p}.container_hash '
         andst = 'WHERE a.component_hash=? AND '
         and_l = list()
@@ -123,8 +123,8 @@ class InvIndexTimestampSQLite(BaseSQLite):
             and_st = '%s.component_hash=?' % param
             and_l.append(and_st)
         ands_st = ' AND '.join(and_l)
-        order_asc = ' ORDER BY a.utc_timestamp ASC;'
-        order_dsc = ' ORDER BY a.utc_timestamp DSC;'
+        order_asc = ' ORDER BY a.ert_tokens_major DESC, a.utc_timestamp DESC LIMIT 100;'
+        order_dsc = ' ORDER BY a.ert_tokens_major DESC, a.utc_timestamp DESC LIMIT 100;'
         if asc:
             order = order_asc
         else:
