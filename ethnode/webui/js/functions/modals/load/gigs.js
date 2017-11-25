@@ -5,7 +5,10 @@ function loadGigs() {
         dataType: 'text',
         success: function(data) {
             var gigIDS = JSON.parse(data);
-            $.each(gigIDS, function(i, gigID) { createGig(gigID); });
+
+            for(i = 0; i < 20; i++) {
+                createGig(gigIDS[i]);
+            }
         }
     });
 }

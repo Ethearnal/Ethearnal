@@ -67,8 +67,10 @@ section.gigs-page-content
             .filter.budget
                 p Budget
 
-                .rkmd-slider.slider-continous.slider-shadow.slider-lightBlue.slider-light
-                    input(type='range', min='0', max='100', value='65')
+                #slider
+
+                //- .rkmd-slider.slider-continous.slider-shadow.slider-lightBlue.slider-light
+                //-     input(type='range', min='0', max='100', value='65')
 
 
                 label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-13")
@@ -99,27 +101,27 @@ section.gigs-page-content
 
             .gigs-container
 
-                .gig.content-block(data-toggle="modal", data-target="#gigModal")
-                    button#dropdowngiga0.mdl-button.mdl-js-button.mdl-button--icon.dropdown-button: i.material-icons more_vert
-                    ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="dropdowngiga0")
-                        li.mdl-menu__item.open-modal(open-modal="#edit-gig") Edit
-                        li.mdl-menu__item.delete Delete
+                //- .gig.content-block(data-toggle="modal", data-target="#gigModal")
+                //-     button#dropdowngiga0.mdl-button.mdl-js-button.mdl-button--icon.dropdown-button: i.material-icons more_vert
+                //-     ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="dropdowngiga0")
+                //-         li.mdl-menu__item.open-modal(open-modal="#edit-gig") Edit
+                //-         li.mdl-menu__item.delete Delete
 
-                    .image: img(src="images/paypal.jpg", alt="Gig")
+                //-     .image: img(src="images/paypal.jpg", alt="Gig")
 
-                    .owner-info
-                        img(src="/api/v1/profile/?q=avatar", alt="Avatar")
-                        h5 owner_nickname
-                        h4 Entry Level
+                //-     .owner-info
+                //-         img(src="/api/v1/profile/?q=avatar", alt="Avatar")
+                //-         h5 owner_nickname
+                //-         h4 Entry Level
 
-                    p Gig Description
+                //-     p Gig Description
 
-                    .lower-info
-                        .reputation
-                            i.material-icons polymer
-                            span 5k+
+                //-     .lower-info
+                //-         .reputation
+                //-             i.material-icons polymer
+                //-             span 5k+
 
-                        h6.expire expires in 5 mins
+                //-         h6.expire expires in 5 mins
 
-                    .footer
-                        h4 Starting at <span>$25</span>
+                //-     .footer
+                //-         h4 Starting at <span>$25</span>

@@ -2664,3 +2664,31 @@ section.documentation .container .content-block .main-description button.dropdow
       -ms-transform: translate(-15px, -15px);
           transform: translate(-15px, -15px);
 }
+
+.value {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  margin: 0 0 0 -20px;
+  width: 40px;
+  text-align: center;
+  display: block;
+  font-weight: normal;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+.value i {
+  font-style: normal;
+}
+
+.price-range-both.value {
+  width: 100px;
+  margin: 0 0 0 -50px;
+  top: 26px;
+}
+
+.price-range-both {
+  display: none;
+}

@@ -1,184 +1,52 @@
-$(document).ready(function() {
+function collision($div1, $div2) {
+      var x1 = $div1.offset().left;
+      var w1 = 40;
+      var r1 = x1 + w1;
+      var x2 = $div2.offset().left;
+      var w2 = 40;
+      var r2 = x2 + w2;
 
-  $('.rkmd-slider').rkmd_rangeSlider();
-  change_slider_color();
+      if (r1 < x2 || x1 > r2) return false;
+      return true;
 
+    }
+
+// // slider call
+
+$('#slider').slider({
+    range: true,
+    min: 0,
+    max: 500,
+    values: [ 75, 300 ],
+    slide: function(event, ui) {
+
+        $('.ui-slider-handle:eq(0) .price-range-min').html('$' + ui.values[ 0 ]);
+        $('.ui-slider-handle:eq(1) .price-range-max').html('$' + ui.values[ 1 ]);
+        $('.price-range-both').html('<i>$' + ui.values[ 0 ] + ' - </i>$' + ui.values[ 1 ] );
+
+        //
+
+    if ( ui.values[0] == ui.values[1] ) {
+      $('.price-range-both i').css('display', 'none');
+    } else {
+      $('.price-range-both i').css('display', 'inline');
+    }
+
+        //
+
+        if (collision($('.price-range-min'), $('.price-range-max')) == true) {
+            $('.price-range-min, .price-range-max').css('opacity', '0');
+            $('.price-range-both').css('display', 'block');
+        } else {
+            $('.price-range-min, .price-range-max').css('opacity', '1');
+            $('.price-range-both').css('display', 'none');
+        }
+
+    }
 });
 
-/* Range Slider Function */
-(function($) {
+$('.ui-slider-range').append('<span class="price-range-both value"><i>$' + $('#slider').slider('values', 0 ) + ' - </i>' + $('#slider').slider('values', 1 ) + '</span>');
 
-  $.fn.rkmd_rangeSlider = function() {
-    var self, slider_width, slider_offset, curnt, sliderContinuous, sliderDiscrete, range, slider;
-    self             = $(this);
-    slider_width     = self.outerWidth();
-    slider_offset    = self.offset().left;
+$('.ui-slider-handle:eq(0)').append('<span class="price-range-min value">$' + $('#slider').slider('values', 0 ) + '</span>');
 
-    sliderContinuous = $('.slider-continuous');
-    sliderDiscrete   = $('.slider-discrete');
-
-    if(self.hasClass('slider-continuous') === true) {
-
-      sliderContinuous.each(function(i, v) {
-        curnt         = $(this);
-        curnt.append(sliderContinuous_tmplt());
-        range         = curnt.find('input[type="range"]');
-        slider        = curnt.find('.slider');
-        slider_fill   = slider.find('.slider-fill');
-        slider_handle = slider.find('.slider-handle');
-
-        var range_val = range.val();
-        slider_fill.css('width', range_val +'%');
-        slider_handle.css('left', range_val +'%');
-
-      });
-    }
-
-    if(self.hasClass('slider-discrete') === true) {
-
-      sliderDiscrete.each(function(i, v) {
-        curnt         = $(this);
-        curnt.append(sliderDiscrete_tmplt());
-        range         = curnt.find('input[type="range"]');
-        slider        = curnt.find('.slider');
-        slider_fill   = slider.find('.slider-fill');
-        slider_handle = slider.find('.slider-handle');
-        slider_label  = slider.find('.slider-label');
-
-        var range_val = parseInt(range.val());
-        slider_fill.css('width', range_val +'%');
-        slider_handle.css('left', range_val +'%');
-        slider_label.find('span').text(range_val);
-      });
-    }
-
-    self.on('mousedown', '.slider-handle', function(e) {
-      if(e.button === 2) {
-        return false;
-      }
-
-      var parents       = $(this).parents('.rkmd-slider');
-      var slider_width  = parents.outerWidth();
-      var slider_offset = parents.offset().left;
-      var check_range   = parents.find('input[type="range"]').is(':disabled');
-
-      if(check_range === true) {
-        return false;
-      }
-
-      if(parents.hasClass('slider-discrete') === true) {
-        $(this).addClass('is-active');
-      }
-      var handlers = {
-        mousemove: function(e) {
-          var slider_new_width = e.pageX - slider_offset;
-
-          if(slider_new_width <= slider_width && !(slider_new_width < '0')) {
-            slider_move(parents, slider_new_width, slider_width);
-          }
-        },
-        mouseup: function(e) {
-          $(this).off(handlers);
-
-          if(parents.hasClass('slider-discrete') === true) {
-            parents.find('.is-active').removeClass('is-active');
-          }
-        }
-      };
-      $(document).on(handlers);
-    });
-
-    self.on('mousedown', '.slider', function(e) {
-      if(e.button === 2) {
-        return false;
-      }
-
-      var parents       = $(this).parents('.rkmd-slider');
-      var slider_width  = parents.outerWidth();
-      var slider_offset = parents.offset().left;
-      var check_range   = parents.find('input[type="range"]').is(':disabled');
-
-      if(check_range === true) {
-        return false;
-      }
-
-      var slider_new_width = e.pageX - slider_offset;
-      if(slider_new_width <= slider_width && !(slider_new_width < '0')) {
-        slider_move(parents, slider_new_width, slider_width);
-      }
-
-      var handlers = {
-        mouseup: function(e) {
-          $(this).off(handlers);
-        }
-      };
-      $(document).on(handlers);
-
-    });
-  };
-
-  function sliderContinuous_tmplt() {
-    var tmplt = '<div class="slider">' +
-        '<div class="slider-fill"></div>' +
-        '<div class="slider-handle"></div>' +
-        '</div>';
-
-    return tmplt;
-  }
-  function sliderDiscrete_tmplt() {
-    var tmplt = '<div class="slider">' +
-        '<div class="slider-fill"></div>' +
-        '<div class="slider-handle"><div class="slider-label"><span>0</span></div></div>' +
-        '</div>';
-
-    return tmplt;
-  }
-  function slider_move(parents, newW, sliderW) {
-    var slider_new_val = parseInt(Math.round(newW / sliderW * 100));
-
-    var slider_fill    = parents.find('.slider-fill');
-    var slider_handle  = parents.find('.slider-handle');
-    var range          = parents.find('input[type="range"]');
-
-    slider_fill.css('width', slider_new_val +'%');
-    slider_handle.css({
-      'left': slider_new_val +'%',
-      'transition': 'none',
-      '-webkit-transition': 'none',
-      '-moz-transition': 'none'
-    });
-
-    range.val(slider_new_val);
-
-    if(parents.hasClass('slider-discrete') === true) {
-      parents.find('.slider-handle span').text(slider_new_val);
-    }
-  }
-
-}(jQuery));
-
-
-/* Change Slider Color */
-function change_slider_color() {
-  $('.color-box .show-box').on('click', function() {
-    $(".color-box").toggleClass("open");
-  });
-
-  $('.colors-list a').on('click', function() {
-    var curr_color = $('main').data('slider-color');
-    var color      = $(this).data('slider-color');
-    var new_colot  = 'slider-' + color;
-
-    $('.rkmd-slider').each(function(i, v) {
-      var findColor = $(this).hasClass(curr_color);
-
-      if(findColor) {
-        $(this).removeClass(curr_color);
-        $(this).addClass(new_colot);
-      }
-
-      $('main').data('slider-color', new_colot);
-
-    });
-  });
-}
+$('.ui-slider-handle:eq(1)').append('<span class="price-range-max value">$' + $('#slider').slider('values', 1 ) + '</span>');

@@ -119,13 +119,17 @@ $('input#search-header').keypress(function (e) {
 
         $searchQuery = '/api/v1/my/idx/query/objects/?' + $search + $category + $jobType + $experienceLevel + $budget;
 
-
         $.ajax({
             url: $searchQuery,
             type: "GET",
             processData: false,
             success: function(result) {
-                console.log('works');
+                $result = JSON.parse(result);
+                $('.gig').remove();
+
+                for(i = 0; i < $result.length; i++) {
+                    createGigBox($result[i]);
+                }
             }
         });
 

@@ -406,7 +406,8 @@ function require(script) {
 
 // CREATE
 require("js/functions/modals/create/createLE.js"); // CREATES CONTENT BLOCK - NOT GIG
-require("js/functions/modals/create/createGig.js"); // CREATES GIG
+require("js/functions/modals/create/createGig.js"); // GETS GIG DATA
+require("js/functions/modals/create/createGigBox.js") // CREATES GIG BOX
 
 // DELETE
 require("js/functions/modals/delete/function.js") // DELETE FUNCTION

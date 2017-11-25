@@ -866,9 +866,8 @@
           </div>
           <div class="filter budget">
             <p>Budget</p>
-            <div class="rkmd-slider slider-continous slider-shadow slider-lightBlue slider-light">
-              <input type="range" min="0" max="100" value="65">
-            </div>
+            <div id="slider"></div>
+            
             <label for="checkbox-13" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
               <input id="checkbox-13" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label"><$100</span>
             </label>
@@ -891,26 +890,6 @@
         </div>
         <div class="gigs col-md-9">
           <div class="gigs-container">
-            <div data-toggle="modal" data-target="#gigModal" class="gig content-block">
-              <button id="dropdowngiga0" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>
-              <ul for="dropdowngiga0" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
-                <li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edit</li>
-                <li class="mdl-menu__item delete">Delete</li>
-              </ul>
-              <div class="image"><img src="images/paypal.jpg" alt="Gig"></div>
-              <div class="owner-info"><img src="/api/v1/profile/?q=avatar" alt="Avatar">
-                <h5>owner_nickname</h5>
-                <h4>Entry Level</h4>
-              </div>
-              <p>Gig Description</p>
-              <div class="lower-info">
-                <div class="reputation"><i class="material-icons">polymer</i><span>5k+</span></div>
-                <h6 class="expire">expires in 5 mins</h6>
-              </div>
-              <div class="footer">
-                <h4>Starting at <span>$25</span></h4>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -1002,6 +981,8 @@
     </section>
     <!-- jQuery 3.1.1-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.2-->
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <!-- BootstrapJS 3.3.7-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!-- Semantic UI JS-->
