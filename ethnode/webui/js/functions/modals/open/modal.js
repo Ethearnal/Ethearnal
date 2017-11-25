@@ -1,4 +1,4 @@
-// Function to open modal. var modal = $modalID
+// Function to open modal
 function openModal(modal) {
     $(modal).css({ display: 'flex' });
     $(modal).find('.modal-box-content .inner-modal').animate({ width: '200vw', height: '200vw' }, 400, "easeInSine");

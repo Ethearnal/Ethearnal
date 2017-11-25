@@ -62,67 +62,65 @@ function addImage(source) {
 }
 
 
-
-
-// MATERIAL DESIGN DATE PICKER
-$(function() {
-    $datePickers = 15;
+//
+$('.mdl-checkbox').click(function() {
+    $(this).parent().find('.is-checked').removeClass('is-checked');
+    $(this).addClass('is-checked');
 });
 
 
-// Global variables for modals
-$currentlyOpenModalID = null;
-$currentlyClosestLEdiv = null;
+
+$('input#search-header').keypress(function (e) {
+    if (e.which == 13) {
+        e.preventDefault();
+
+        // Filters and other semi-global variables
+        $filters = $('.gigs-page-content .filters');
+        $checkedLabel = $filters.find('label.is-checked');
+
+        // Search Engine Variables
+        $category = '';
+        $jobType = '';
+        $experienceLevel = '';
+        $budget = '';
+
+        // Search Input Value
+        $search = $(this).val().replace(/ /g,"%20").toLowerCase();
+        $search = 'title=' + $search;
 
 
-$('body').delegate('.open-modal', 'click', function(e) {
-    e.preventDefault();
-    $contentBlock = $(this).closest('.content-block');
-    $modalID = $(this).attr('open-modal');
+        $checkedLabel.each(function() {
 
-    // Other variables
-    $content = $($modalID).find('.modal-box-content .content');
-    $form = $content.find('form');
+            if ($(this).parent().hasClass('category')) {
+                $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
 
-    $currentlyOpenModalID = $modalID;
-    $currentlyClosestLEdiv = $contentBlock;
+                if ($checkValue !== '') $category += '&category=' + $checkValue;
+            }
 
-    // Dates inputs
-    $inputDateFrom = $form.find('input.date-started');
-    $inputDateTo = $form.find('input.date-ended');
+            if ($(this).parent().hasClass('job-type')) {
+                $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
 
-    // Removing .success-message SVG
-    $content.find('.success-message svg').remove();
+                if ($checkValue !== '') $jobType += '&job_type=' + $checkValue;
+            }
 
-    // Open modal
-    openModal($modalID);
+            if ($(this).parent().hasClass('experience-level')) {
+                $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
 
-    // Functions for particular modals.
-    if($($modalID).hasClass('edit')) loadInputsText($form, $contentBlock);
+                if ($checkValue !== '') $experienceLevel += '&experience_level=' + $checkValue;
+            }
 
-    if($($modalID).hasClass('add')) {
-        if($modalID == "#add-gig") {
-            datePickerInitGig($inputDateFrom, $inputDateTo);
-        } else {
-            datePickerInit($inputDateFrom, $inputDateTo);
-        }
-    }
+            if ($(this).parent().hasClass('budget')) {
+                $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
 
-    if($modalID == "#edit-profile") loadProfileInputs();
-});
+                if ($checkValue !== '') $budget += '&budget=' + $checkValue;
+            }
+
+        });
+
+        console.log('/api/v1/my/idx/query/objects/?' + $search + $category + $jobType + $experienceLevel + $budget);
 
 
-$('body').delegate('li.delete', 'click', function(e) {
-    e.preventDefault();
-    $contentBlock = $(this).closest('.content-block');
-    $gig = $(this).closest('.gig');
-
-    if( $contentBlock ) $contentBlock.fadeOut(300);
-
-    if( $gig ) {
-        // $gig.fadeOut(300);
-        $gigID = $gig.attr('gigID');
-        deleteGig($gigID);
+        return false;
     }
 });
 

@@ -401,28 +401,58 @@ function require(script) {
 
 // FUNCTIONS
 
+
+// GIGS -- OTHER THINGS
+
+// CREATE
+require("js/functions/modals/create/createLE.js"); // CREATES CONTENT BLOCK - NOT GIG
+require("js/functions/modals/create/createGig.js"); // CREATES GIG
+
+// DELETE
+require("js/functions/modals/delete/function.js") // DELETE FUNCTION
+require("js/functions/modals/delete/gig.js"); // DELETES GIG
+
+// LOAD
+require("js/functions/modals/load/gigs.js"); // LOADS ALL GIGS
+
+// COLLECT DATA
+require("js/functions/modals/collectData/gig.js") // COLLECTS GIG DATA
+
+
 // MODALS
 
-// Create Life Experience div based on input values.
-require("js/functions/modals/create/createLE.js");
+// OPEN
+require("js/functions/modals/open/function.js") // OPEN MODAL MAIN FUNCTION
+require("js/functions/modals/open/modal.js") // OPEN --- CLOSE MODAL FUNCTIONS
 
-// Create GIG function
-require("js/functions/modals/create/createGig.js");
+// INITIALIZING
+require("js/functions/modals/initializing/successMessage.js") // SHOWING SUCCESS MESSAGE FUNCTION
+require("js/functions/modals/initializing/datePickers.js") // INITIALIZING DATE PICKERS
+require("js/functions/modals/initializing/modalInputs.js") // ADDING TEXT TO INPUTS IN #EDIT MODALS
+require("js/functions/modals/initializing/profileModalInputs.js") // ADDING TEXT TO #EDIT PROFILE MODAL INPUTS
 
-// Delete GIG function
-require("js/functions/modals/delete/gig.js");
 
-// Load GIGS function
-require("js/functions/modals/load/gigs.js");
+
+// // Create Life Experience div based on input values.
+// require("js/functions/modals/create/createLE.js");
+
+// // Create GIG function
+// require("js/functions/modals/create/createGig.js");
+
+// // Delete GIG function
+// require("js/functions/modals/delete/gig.js");
+
+// // Load GIGS function
+// require("js/functions/modals/load/gigs.js");
 
 // Appears .success-message everytime you update or create a LE
-require("js/functions/modals/appearSuccessMessage.js");
+// require("js/functions/modals/appearSuccessMessage.js");
 
 // Loads inputs text when you click on "EDIT" button and the edit modal appears
-require("js/functions/modals/loadInputsText.js");
+// require("js/functions/modals/loadInputsText.js");
 
 // openModal() and closeModal() functions
-require("js/functions/modals/openClose.js");
+// require("js/functions/modals/openClose.js");
 
 // This is a function to generate a position information div
 require("js/functions/modals/positionInformationDiv.js");
@@ -431,10 +461,10 @@ require("js/functions/modals/positionInformationDiv.js");
 require("js/functions/modals/timesFunctions.js");
 
 // Initializes the Date Picker.
-require("js/functions/modals/datePickerInit.js");
+// require("js/functions/modals/datePickerInit.js");
 
 // Loads profile modal inputs based on profile
-require("js/functions/modals/loadProfileInputs.js");
+// require("js/functions/modals/loadProfileInputs.js");
 
 // Updates the Profile.
 require("js/functions/modals/updateProfile.js");

@@ -1,5 +1,10 @@
 // --- MISC FUNCTIONS --- \\
 
+// MATERIAL DESIGN DATE PICKER
+$(function() {
+    $datePickers = 15;
+});
+
 // Checks if there's a word in a string.
 function wordInString(s, word){
   return new RegExp( '\\b' + word + '\\b', 'i').test(s);
