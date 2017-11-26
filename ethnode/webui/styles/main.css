@@ -1721,20 +1721,34 @@ section.profiles-page-content .container .gigs .gigs-container .gig button.mdl-b
   z-index: 1;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .image,
+section.gigs-page-content .container .gigs .gigs-container .gig .ui.label,
+section.jobs-page-content .container .gigs .gigs-container .gig .ui.label,
+section.profiles-page-content .container .gigs .gigs-container .gig .ui.label {
+  z-index: 1;
+}
+
+section.gigs-page-content .container .gigs .gigs-container .gig .image-block, section.gigs-page-content .container .gigs .gigs-container .gig .image,
+section.jobs-page-content .container .gigs .gigs-container .gig .image-block,
 section.jobs-page-content .container .gigs .gigs-container .gig .image,
+section.profiles-page-content .container .gigs .gigs-container .gig .image-block,
 section.profiles-page-content .container .gigs .gigs-container .gig .image {
   position: relative;
   width: 100%;
   height: 142px;
-  overflow: hidden;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .image img,
+section.gigs-page-content .container .gigs .gigs-container .gig .image-block img, section.gigs-page-content .container .gigs .gigs-container .gig .image img,
+section.jobs-page-content .container .gigs .gigs-container .gig .image-block img,
 section.jobs-page-content .container .gigs .gigs-container .gig .image img,
+section.profiles-page-content .container .gigs .gigs-container .gig .image-block img,
 section.profiles-page-content .container .gigs .gigs-container .gig .image img {
   width: 100%;
   height: auto;
+}
+
+section.gigs-page-content .container .gigs .gigs-container .gig .image-block,
+section.jobs-page-content .container .gigs .gigs-container .gig .image-block,
+section.profiles-page-content .container .gigs .gigs-container .gig .image-block {
   overflow: hidden;
 }
 
@@ -2001,6 +2015,11 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 s
   display: flex;
   clear: both;
   width: 100%;
+}
+
+.modal-box-content .inner-modal .content .modal-body .modal-inputs form > div.ui.right.labeled.input {
+  float: left;
+  margin-top: 10px;
 }
 
 .modal-box-content .inner-modal .content .modal-body .form-group {

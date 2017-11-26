@@ -24,20 +24,17 @@ $('a[load]').click(function(e) {
     // Showing content based on clicked button
     if($load == 'gigs') {
         $('section.gigs-page-content').show();
-        $('input#search-header').focus();
-        $('input#search-header').next().text('Enter text to search gigs');
+        $('input#search-header').focus().attr('placeholder', 'Search gigs...');
     }
 
     if($load == 'jobs') {
         $('section.jobs-page-content').show();
-        $('input#search-header').focus();
-        $('input#search-header').next().text('Enter text to search jobs');
+        $('input#search-header').focus().attr('placeholder', 'Search jobs...');
     }
 
     if($load == 'profiles') {
         $('section.profiles-page-content').show();
-        $('input#search-header').focus();
-        $('input#search-header').next().text('Enter text to search profiles');
+        $('input#search-header').focus().attr('placeholder', 'Search profiles...');
     }
 
     if($load == 'profile') {
