@@ -17,11 +17,9 @@ header.main-header
                 a.navbar-brand(href='').hidden-xs Ethearnal BETA
 
                 form(action="#" style="float: left; max-height: 62px;")
-                    .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable.mdl-textfield--floating-label.navigation-search-bar
-                        label.mdl-button.mdl-js-button.mdl-button--icon(for="search-header"): i.material-icons search
-                        .mdl-textfield__expandable-holder
-                            input#search-header.mdl-textfield__input(type="text")
-                            label.mdl-textfield__label(for="search-header") Enter search text below
+                    .ui.action.input(style="margin-left: 25px; margin-top: 10px")
+                        input#search-header(type="text", placeholder="Search...")
+                        button.ui.button Search
 
             // Navbar items ONLY for larger than mobile screens.
             .collapse.navbar-collapse#navigation

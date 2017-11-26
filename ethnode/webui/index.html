@@ -447,7 +447,23 @@
         <div class="inner-modal">
           <div class="content">
             <div class="modal-header">
-              <h3>Add Gig</h3>
+              <div style="margin-bottom: 30px" class="ui three steps">
+                <div class="active step"><i class="tasks icon"></i>
+                  <div class="content">
+                    <div class="title">Fill</div>
+                  </div>
+                </div>
+                <div class="disabled step"><i class="book icon"></i>
+                  <div class="content">
+                    <div class="title">Extras</div>
+                  </div>
+                </div>
+                <div class="disabled step"><i class="info icon"></i>
+                  <div class="content">
+                    <div class="title">Confirm</div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="success-message">
               <h1 class="title">Congratulations!</h1>
@@ -470,33 +486,43 @@
                     <input id="gig-title" name="gig-title" type="text" class="mdl-textfield__input">
                     <label for="gig-title" class="mdl-textfield__label">Gig Title</label>
                   </div>
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
-                    <select id="category" class="ui dropdown">
-                      <option value="">Select Category</option>
-                      <option value="1">Software Development</option>
-                      <option value="2">Entertainment</option>
-                      <option value="3">Graphic Design</option>
-                      <option value="4">Content Writing</option>
-                      <option value="5">Accountants</option>
-                      <option value="6">Consultants</option>
-                      <option value="7">Assistants</option>
-                    </select>
-                  </div>
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
-                    <select id="experience-level" class="ui dropdown">
-                      <option value="">Experience Level</option>
-                      <option value="1">Entry Level</option>
-                      <option value="2">Intermediate</option>
-                      <option value="3">Expert</option>
-                    </select>
+                  <div class="selects whole-line">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                      <select id="category" class="ui dropdown">
+                        <option value="">Select Category</option>
+                        <option value="1">Software Development</option>
+                        <option value="2">Entertainment</option>
+                        <option value="3">Graphic Design</option>
+                        <option value="4">Content Writing</option>
+                        <option value="5">Accountants</option>
+                        <option value="6">Consultants</option>
+                        <option value="7">Assistants</option>
+                      </select>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <select id="job-type" class="ui dropdown">
+                        <option value="">Job Type</option>
+                        <option value="1">Fixed Price</option>
+                        <option value="2">Hourly</option>
+                      </select>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                      <select id="experience-level" class="ui dropdown">
+                        <option value="">Experience Level</option>
+                        <option value="1">Entry Level</option>
+                        <option value="2">Intermediate</option>
+                        <option value="3">Expert</option>
+                      </select>
+                    </div>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield whole-line">
                     <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
                     <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
                   </div>
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
-                    <input id="price" type="text" name="price" class="mdl-textfield__input">
-                    <label for="price" class="mdl-textfield__label">Price</label><span class="mdl-textfield__error">Input is not a number!</span>
+                  <div class="ui right labeled input">
+                    <label for="amount" class="ui label">$</label>
+                    <input id="amount" type="text" placeholder="Amount">
+                    <div class="ui basic label">.00</div>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
                     <input type="text" name="startDate" class="date-started mdl-textfield__input">
@@ -542,25 +568,34 @@
                     <input id="gig-title" name="gig-title" type="text" class="mdl-textfield__input">
                     <label for="gig-title" class="mdl-textfield__label">Gig Title</label>
                   </div>
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
-                    <select id="category" class="ui dropdown">
-                      <option value="">Select Category</option>
-                      <option value="1">Software Development</option>
-                      <option value="2">Entertainment</option>
-                      <option value="3">Graphic Design</option>
-                      <option value="4">Content Writing</option>
-                      <option value="5">Accountants</option>
-                      <option value="6">Consultants</option>
-                      <option value="7">Assistants</option>
-                    </select>
-                  </div>
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
-                    <select id="experience-level" class="ui dropdown">
-                      <option value="">Experience Level</option>
-                      <option value="1">Entry Level</option>
-                      <option value="2">Intermediate</option>
-                      <option value="3">Expert</option>
-                    </select>
+                  <div class="selects whole-line">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                      <select id="category" class="ui dropdown">
+                        <option value="">Select Category</option>
+                        <option value="1">Software Development</option>
+                        <option value="2">Entertainment</option>
+                        <option value="3">Graphic Design</option>
+                        <option value="4">Content Writing</option>
+                        <option value="5">Accountants</option>
+                        <option value="6">Consultants</option>
+                        <option value="7">Assistants</option>
+                      </select>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <select id="job-type" class="ui dropdown">
+                        <option value="">Job Type</option>
+                        <option value="1">Fixed Price</option>
+                        <option value="2">Hourly</option>
+                      </select>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                      <select id="experience-level" class="ui dropdown">
+                        <option value="">Experience Level</option>
+                        <option value="1">Entry Level</option>
+                        <option value="2">Intermediate</option>
+                        <option value="3">Expert</option>
+                      </select>
+                    </div>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield whole-line">
                     <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
@@ -675,12 +710,9 @@
               <button type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" class="navbar-toggle collapsed"><span></span><span></span><span></span><span></span></button>
             </div><a href="" class="navbar-brand hidden-xs">Ethearnal BETA</a>
             <form action="#" style="float: left; max-height: 62px;">
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label navigation-search-bar">
-                <label for="search-header" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">search</i></label>
-                <div class="mdl-textfield__expandable-holder">
-                  <input id="search-header" type="text" class="mdl-textfield__input">
-                  <label for="search-header" class="mdl-textfield__label">Enter search text below</label>
-                </div>
+              <div style="margin-left: 25px; margin-top: 10px" class="ui action input">
+                <input id="search-header" type="text" placeholder="Search...">
+                <button class="ui button">Search</button>
               </div>
             </form>
           </div>

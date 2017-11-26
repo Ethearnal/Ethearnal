@@ -70,57 +70,74 @@ $('.mdl-checkbox').click(function() {
 
 
 
+$('label.mdl-checkbox').click(function() {
+    $labelParent = $(this).parent();
+
+    // Search Engine Variables
+    $category = '';
+    $jobType = '';
+    $experienceLevel = '';
+    $budget = '';
+
+    // Search Input variables
+    $search = $('input#search-header').val().replace(/ /g,"%20").toLowerCase();
+    $search = 'title=' + $search;
+
+
+    if ($labelParent.hasClass('category')) {
+        $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
+
+        if ($checkValue !== '') $category += '&category=' + $checkValue;
+    }
+
+    if ($labelParent.hasClass('job-type')) {
+        $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
+
+        if ($checkValue !== '') $jobType += '&job_type=' + $checkValue;
+    }
+
+    if ($labelParent.hasClass('experience-level')) {
+        $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
+
+        if ($checkValue !== '') $experienceLevel += '&experience_level=' + $checkValue;
+    }
+
+    if ($labelParent.hasClass('budget')) {
+        $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
+
+        if ($checkValue !== '') $budget += '&budget=' + $checkValue;
+    }
+
+
+    $searchQuery = '/api/v1/my/idx/query/objects/?' + $search + $category + $jobType + $experienceLevel + $budget;
+
+    $.ajax({
+        url: $searchQuery,
+        type: "GET",
+        processData: false,
+        success: function(result) {
+            $result = JSON.parse(result);
+            $('.gig').remove();
+
+            for(i = 0; i < $result.length; i++) {
+                createGigBox($result[i]);
+            }
+        }
+    });
+
+
+});
+
 $('input#search-header').keypress(function (e) {
     if (e.which == 13) {
         e.preventDefault();
-
-        // Filters and other semi-global variables
-        $filters = $('.gigs-page-content .filters');
-        $checkedLabel = $filters.find('label.is-checked');
-
-        // Search Engine Variables
-        $category = '';
-        $jobType = '';
-        $experienceLevel = '';
-        $budget = '';
 
         // Search Input Value
         $search = $(this).val().replace(/ /g,"%20").toLowerCase();
         $search = 'title=' + $search;
 
-
-        $checkedLabel.each(function() {
-
-            if ($(this).parent().hasClass('category')) {
-                $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
-
-                if ($checkValue !== '') $category += '&category=' + $checkValue;
-            }
-
-            if ($(this).parent().hasClass('job-type')) {
-                $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
-
-                if ($checkValue !== '') $jobType += '&job_type=' + $checkValue;
-            }
-
-            if ($(this).parent().hasClass('experience-level')) {
-                $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
-
-                if ($checkValue !== '') $experienceLevel += '&experience_level=' + $checkValue;
-            }
-
-            if ($(this).parent().hasClass('budget')) {
-                $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
-
-                if ($checkValue !== '') $budget += '&budget=' + $checkValue;
-            }
-
-        });
-
-        $searchQuery = '/api/v1/my/idx/query/objects/?' + $search + $category + $jobType + $experienceLevel + $budget;
-
         $.ajax({
-            url: $searchQuery,
+            url: '/api/v1/my/idx/query/objects/?' + $search,
             type: "GET",
             processData: false,
             success: function(result) {

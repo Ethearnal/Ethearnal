@@ -3,10 +3,15 @@ function createGigBox(gigData) {
     $expiresIn = null;
 
     $($data.date).each(function(i, dates) {
-        $expiresIn = dates.expiresIn;
+        if (dates.expiresIn == undefined || dates.expiresIn == null) {
+            $expiresIn = ''
+        } else {
+           $expiresIn = 'expires ' + dates.expiresIn;
+        }
     });
 
-    image = '<div class="image"><img src="/api/v1/my/img/?q='+$data.imageHash+'" alt="Gig Image" /></div>';
+    // image = '<div class="image"><img src="/api/v1/my/img/?q='+$data.imageHash+'" alt="Gig Image" /></div>';
+    image = '<div class="ui fluid image"><div class="ui black ribbon label">'+ $data.categoryName +'</div><div class="image-block"><img src="/api/v1/my/img/?q='+$data.imageHash+'" /></div></div>';
 
     // dropdown button
     var dropdownButton = '<button id="dropdowngig'+ iGig +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>';
@@ -24,7 +29,7 @@ function createGigBox(gigData) {
 
     // Lower Info Div
     var reputationDiv = '<div class="reputation"><i class="material-icons">polymer</i><span>' + $data.ownerReputation + '</span></div>';
-    var lowerInfo = '<div class="lower-info">' + reputationDiv + '<h6 class="expire">expires '+ $expiresIn +'</h6></div>';
+    var lowerInfo = '<div class="lower-info">' + reputationDiv + '<h6 class="expire">'+ $expiresIn +'</h6></div>';
 
 
     var gigFooter = '<div class="footer"><h4>Starting at <span>$' + $data.price + '</span></h4></div>';

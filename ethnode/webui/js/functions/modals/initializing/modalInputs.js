@@ -46,6 +46,7 @@ function loadInputsText(form, div) {
                 // INPUT FIELDS
                 $content.find('input#gig-title').val($gig.title).parent().addClass('is-dirty');
                 $form.find('#category').dropdown('set selected', $gig.category);
+                $form.find('#job-type').dropdown('set selected', $gig.jobType);
                 $form.find('#experience-level').dropdown('set selected', $gig.experienceLevel);
                 $content.find('textarea#description').val($gig.description).parent().addClass('is-dirty');
                 $content.find('input#price').val($gig.price).parent().addClass('is-dirty');

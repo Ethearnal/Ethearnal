@@ -2,7 +2,20 @@
 
     .modal-box-content: .inner-modal: .content
 
-        .modal-header: h3 Add Gig
+        .modal-header
+            .ui.three.steps(style="margin-bottom: 30px")
+                .active.step
+                    i.tasks.icon
+                    .content: .title Fill
+
+                .disabled.step
+                    i.book.icon
+                    .content: .title Extras
+
+                .disabled.step
+                    i.info.icon
+                    .content: .title Confirm
+
 
         .success-message
             h1.title Congratulations!
@@ -29,32 +42,40 @@
                         input#gig-title.mdl-textfield__input(name="gig-title", type="text")
                         label.mdl-textfield__label(for="gig-title") Gig Title
 
-                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
-                        select.ui.dropdown#category
-                            option(value="") Select Category
-                            option(value="1") Software Development
-                            option(value="2") Entertainment
-                            option(value="3") Graphic Design
-                            option(value="4") Content Writing
-                            option(value="5") Accountants
-                            option(value="6") Consultants
-                            option(value="7") Assistants
+                    .selects.whole-line
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                            select.ui.dropdown#category
+                                option(value="") Select Category
+                                option(value="1") Software Development
+                                option(value="2") Entertainment
+                                option(value="3") Graphic Design
+                                option(value="4") Content Writing
+                                option(value="5") Accountants
+                                option(value="6") Consultants
+                                option(value="7") Assistants
 
-                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
-                        select.ui.dropdown#experience-level
-                            option(value="") Experience Level
-                            option(value="1") Entry Level
-                            option(value="2") Intermediate
-                            option(value="3") Expert
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                            select.ui.dropdown#job-type
+                                option(value="") Job Type
+                                option(value="1") Fixed Price
+                                option(value="2") Hourly
+
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                            select.ui.dropdown#experience-level
+                                option(value="") Experience Level
+                                option(value="1") Entry Level
+                                option(value="2") Intermediate
+                                option(value="3") Expert
 
                     .mdl-textfield.mdl-js-textfield.whole-line
                         textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
                         label.mdl-textfield__label(for="description") Description (what have you done or currently do?)
 
-                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
-                        input#price.mdl-textfield__input(type="text", name="price")
-                        label.mdl-textfield__label(for="price") Price
-                        span.mdl-textfield__error Input is not a number!
+                    .ui.right.labeled.input
+                        label.ui.label(for="amount") $
+                        input#amount(type="text", placeholder="Amount")
+                        .ui.basic.label .00
+
 
                     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
                         input.date-started.mdl-textfield__input(type="text", name="startDate")
