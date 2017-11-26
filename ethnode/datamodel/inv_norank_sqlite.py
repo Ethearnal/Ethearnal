@@ -111,7 +111,7 @@ class InvIndexTimestampSQLite(BaseSQLite):
     def inner_join_on_component(self, *args, asc=True, qs_only=False):
         if len(args) < 2:
             raise ValueError('two or more args required')
-        first = 'SELECT * FROM %s a ' % self.table_name
+        first = 'SELECT DISTINCT * FROM %s a ' % self.table_name
         inner = 'INNER JOIN {t} {p} ON a.container_hash={p}.container_hash '
         andst = 'WHERE a.component_hash=? AND '
         and_l = list()
