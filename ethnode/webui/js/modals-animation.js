@@ -61,55 +61,68 @@ function addImage(source) {
     });
 }
 
-
-//
-$('.mdl-checkbox').click(function() {
-    $(this).parent().find('.is-checked').removeClass('is-checked');
-    $(this).addClass('is-checked');
-});
+$category = '';
+$jobType = '';
+$experienceLevel = '';
+$budget = '';
 
 
-
-$('label.mdl-checkbox').click(function() {
+$('label.mdl-checkbox').click(function(e) {
+    e.preventDefault();
     $labelParent = $(this).parent();
 
-    // Search Engine Variables
-    $category = '';
-    $jobType = '';
-    $experienceLevel = '';
-    $budget = '';
+    $labelParent.find('.is-checked').not($(this)).removeClass('is-checked');
+    $(this).toggleClass('is-checked');
 
     // Search Input variables
     $search = $('input#search-header').val().replace(/ /g,"%20").toLowerCase();
+    // $search == '' ? $search = '' : $search = 'title=' + $search;
     $search = 'title=' + $search;
 
+    // Gets Check text variable
+    $checkboxText = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
 
+
+    // CATEGORY
     if ($labelParent.hasClass('category')) {
-        $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
-
-        if ($checkValue !== '') $category += '&category=' + $checkValue;
+        if ($(this).hasClass('is-checked')) {
+            if ($checkboxText !== '') $category += '&category=' + $checkboxText;
+        } else {
+            $category = '';
+        }
     }
 
+    // JOB TYPE
     if ($labelParent.hasClass('job-type')) {
-        $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
-
-        if ($checkValue !== '') $jobType += '&job_type=' + $checkValue;
+        if ($(this).hasClass('is-checked')) {
+            if ($checkboxText !== '') $jobType += '&job_type=' + $checkboxText;
+        } else {
+            $jobType = '';
+        }
     }
 
+    // EXPERIENCE LEVEL
     if ($labelParent.hasClass('experience-level')) {
-        $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
-
-        if ($checkValue !== '') $experienceLevel += '&experience_level=' + $checkValue;
+        if ($(this).hasClass('is-checked')) {
+            if ($checkboxText !== '') $experienceLevel += '&experience_level=' + $checkboxText;
+        } else {
+            $experienceLevel = '';
+        }
     }
 
+    // BUDGET
     if ($labelParent.hasClass('budget')) {
-        $checkValue = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
-
-        if ($checkValue !== '') $budget += '&budget=' + $checkValue;
+        if ($(this).hasClass('is-checked')) {
+            if ($checkboxText !== '') $budget += '&budget=' + $checkboxText;
+        } else {
+            $budget = '';
+        }
     }
-
 
     $searchQuery = '/api/v1/my/idx/query/objects/?' + $search + $category + $jobType + $experienceLevel + $budget;
+
+    // Returns false if you unselect everything.
+    if ($searchQuery == "/api/v1/my/idx/query/objects/?title=") return false;
 
     $.ajax({
         url: $searchQuery,
@@ -124,8 +137,6 @@ $('label.mdl-checkbox').click(function() {
             }
         }
     });
-
-
 });
 
 $('input#search-header').keypress(function (e) {
@@ -148,6 +159,12 @@ $('input#search-header').keypress(function (e) {
                     createGigBox($result[i]);
                 }
             }
+
+            // error: function(error) {
+            //     $('.gig').remove();
+
+
+            // }
         });
 
         return false;
