@@ -1,10 +1,26 @@
 from datamodel.resource_sqlite import ResourceSQLite
 # from datamodel.inv_norank_sqlite import InvIndexTimestampSQLite
 from crypto.signer import SignerInterface
+# from datamodel.resource_index import TextIndexingApi
 # from toolkit.kadmini_codec import sha256_bin_digest
 from toolkit.kadmini_codec import guid_hex_to_bin, guid_bin_to_hex
 import traceback
 import json
+
+
+def calculate_price_range(price):
+    if price <= 100:
+        return '<$100'
+    elif price <=  500:
+        return '$100_-_$500'
+    elif price <= 1000:
+        return '$500_-_$1k'
+    elif price <= 5000:
+        return '$1K_-_$5K'
+    elif price <= 50000:
+        return '$5k_-_$50k'
+    elif price > 50000:
+        return '$50k+'
 
 
 class BinResource(object):
@@ -105,8 +121,12 @@ class BinResourceLocalApi(object):
 class GigResourceWebLocalApi(object):
     exposed = True
 
-    def __init__(self, cherrypy, api: BinResourceLocalApi, mount=False):
+    def __init__(self, cherrypy,
+                 api: BinResourceLocalApi,
+                 text_api=None,
+                 mount=False):
         self.api = api
+        self.text_api = text_api
         self.cherrypy = cherrypy
         if mount:
             self.mount()
@@ -132,6 +152,57 @@ class GigResourceWebLocalApi(object):
             if body:
                 pk_bin = self.api.create(body)
                 pk_hex = guid_bin_to_hex(pk_bin)
+
+                # indexing
+
+                js = body.decode('utf-8')
+                d = json.loads(js)
+                title = d.get('title')
+                description = d.get('description')
+                category = d.get('categoryName')
+                experience_level = d.get('experienceName')
+                # job_type = d.get('jobType')
+
+                experience_level = '_'.join(experience_level.lower().split(' '))
+                category = '_'.join(category.lower().split(' '))
+
+                budget = None
+                price_st = d.get('price')
+                price = None
+                try:
+                    price = int(price_st)
+                except:
+                    print('ERR with price to int')
+                if price:
+                    budget = calculate_price_range(price)
+
+                print('CAT LEV', category, experience_level)
+
+                price = d.get('price')
+
+                if title:
+                    self.text_api.idx_engine.index_bag_of_spec_text(
+                        container_hash=pk_bin, specifier='title', text_data=title)
+                if description:
+                    self.text_api.idx_engine.index_bag_of_spec_text(
+                        container_hash=pk_bin, specifier='description', text_data=description)
+
+                if experience_level:
+                    self.text_api.idx_engine.index_bag_of_spec_text(
+                        container_hash=pk_bin, specifier='experience_level', text_data=experience_level)
+
+                if category:
+                    self.text_api.idx_engine.index_bag_of_spec_text(
+                        container_hash=pk_bin, specifier='category', text_data=category)
+
+                if budget:
+                    self.text_api.idx_engine.index_bag_of_spec_text(
+                        container_hash=pk_bin, specifier='budget', text_data=budget
+                    )
+
+                # self.text_api.idx_engine.index_bag_of_spec_text(
+                #     container_hash=pk_bin, specifier='job_type', text_data=job_type)
+
                 self.cherrypy.response.status = 201
                 return pk_hex
             self.cherrypy.response.status = 404
@@ -196,8 +267,10 @@ class GigsMyResourceWebLocalApi(object):
 class ImageResourceWebLocalApi(object):
     exposed = True
 
-    def __init__(self, cherrypy, api: BinResourceLocalApi, mount=False):
+    def __init__(self, cherrypy, api: BinResourceLocalApi,
+                 mount=False):
         self.api = api
+        # self.text_api = text_api
         self.cherrypy = cherrypy
         if mount:
             self.mount()
@@ -225,7 +298,7 @@ class ImageResourceWebLocalApi(object):
             body = self.cherrypy.request.body.read()
             if body:
                 content_type = self.cherrypy.request.headers['Content-Type'].encode('utf8')
-                content_encoding='identity'.encode('utf-8')
+                content_encoding = 'identity'.encode('utf-8')
                 pk_bin = self.api.create(body, content_type=content_type, content_encoding=content_encoding)
                 pk_hex = guid_bin_to_hex(pk_bin)
                 self.cherrypy.response.status = 201
