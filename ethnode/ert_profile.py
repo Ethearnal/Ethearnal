@@ -197,6 +197,7 @@ class EthearnalProfileController(object):
         self.idx.query_web_api_guids.mount()
         self.idx.query_web_api_obj.mount()
         self.idx.index_all_by_title_desc_web.mount()
+        self.gig_web_api.text_api = self.idx.text_api
 
         from testing.loadset import TestGigGenerator
         tweets_fname = 'test_sets/head-10k-tweets-json-to-text-stream-syria.json.txt'

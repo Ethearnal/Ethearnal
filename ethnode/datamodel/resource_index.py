@@ -8,6 +8,16 @@ CONTAINER_HASH_KEY = 'documentHashId'
 FIELD_NAME = 'fieldName'
 FIELD_TEXT = 'fieldText'
 ALL_FIELDS = (CONTAINER_HASH_KEY, FIELD_NAME, FIELD_TEXT)
+CATEGORIES = {
+    '1': 'software_development',
+    '2': 'entertainment',
+    '3': 'graphic_design',
+    '4': 'content_writing',
+    '5': 'accountants',
+    '6': 'consultants',
+    '7': 'assistants'
+
+}
 
 
 class ResourceIndexingEngine(object):
