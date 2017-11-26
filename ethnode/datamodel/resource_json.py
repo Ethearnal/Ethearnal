@@ -8,6 +8,21 @@ import traceback
 import json
 
 
+def calculate_price_range(price):
+    if price <= 100:
+        return '<$100'
+    elif price <=  500:
+        return '$100_-_$500'
+    elif price <= 1000:
+        return '$500_-_$1k'
+    elif price <= 5000:
+        return '$1K_-_$5K'
+    elif price <= 50000:
+        return '$5k_-_$50k'
+    elif price > 50000:
+        return '$50k+'
+
+
 class BinResource(object):
     def __init__(self,
                  data_store: ResourceSQLite,
@@ -151,18 +166,39 @@ class GigResourceWebLocalApi(object):
                 experience_level = '_'.join(experience_level.lower().split(' '))
                 category = '_'.join(category.lower().split(' '))
 
+                budget = None
+                price_st = d.get('price')
+                price = None
+                try:
+                    price = int(price_st)
+                except:
+                    print('ERR with price to int')
+                if price:
+                    budget = calculate_price_range(price)
 
                 print('CAT LEV', category, experience_level)
+
                 price = d.get('price')
 
-                self.text_api.idx_engine.index_bag_of_spec_text(
-                    container_hash=pk_bin, specifier='title', text_data=title)
-                self.text_api.idx_engine.index_bag_of_spec_text(
-                    container_hash=pk_bin, specifier='description', text_data=description)
-                self.text_api.idx_engine.index_bag_of_spec_text(
-                    container_hash=pk_bin, specifier='experience_level', text_data=experience_level)
-                self.text_api.idx_engine.index_bag_of_spec_text(
-                    container_hash=pk_bin, specifier='category', text_data=category)
+                if title:
+                    self.text_api.idx_engine.index_bag_of_spec_text(
+                        container_hash=pk_bin, specifier='title', text_data=title)
+                if description:
+                    self.text_api.idx_engine.index_bag_of_spec_text(
+                        container_hash=pk_bin, specifier='description', text_data=description)
+
+                if experience_level:
+                    self.text_api.idx_engine.index_bag_of_spec_text(
+                        container_hash=pk_bin, specifier='experience_level', text_data=experience_level)
+
+                if category:
+                    self.text_api.idx_engine.index_bag_of_spec_text(
+                        container_hash=pk_bin, specifier='category', text_data=category)
+
+                if budget:
+                    self.text_api.idx_engine.index_bag_of_spec_text(
+                        container_hash=pk_bin, specifier='budget', text_data=budget
+                    )
 
                 # self.text_api.idx_engine.index_bag_of_spec_text(
                 #     container_hash=pk_bin, specifier='job_type', text_data=job_type)
