@@ -1659,6 +1659,18 @@ section.profiles-page-content .container .filters .filter label.mdl-checkbox {
   margin-left: 15px;
 }
 
+section.gigs-page-content .container .filters .filter label.mdl-checkbox.is-wrong .mdl-checkbox__box-outline,
+section.jobs-page-content .container .filters .filter label.mdl-checkbox.is-wrong .mdl-checkbox__box-outline,
+section.profiles-page-content .container .filters .filter label.mdl-checkbox.is-wrong .mdl-checkbox__box-outline {
+  border: 2px solid #d50000;
+}
+
+section.gigs-page-content .container .filters .filter label.mdl-checkbox.is-wrong .mdl-checkbox__box-outline .mdl-checkbox__tick-outline,
+section.jobs-page-content .container .filters .filter label.mdl-checkbox.is-wrong .mdl-checkbox__box-outline .mdl-checkbox__tick-outline,
+section.profiles-page-content .container .filters .filter label.mdl-checkbox.is-wrong .mdl-checkbox__box-outline .mdl-checkbox__tick-outline {
+  background-color: #d50000;
+}
+
 section.gigs-page-content .container .gigs,
 section.jobs-page-content .container .gigs,
 section.profiles-page-content .container .gigs {

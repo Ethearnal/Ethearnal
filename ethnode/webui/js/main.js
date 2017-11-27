@@ -12,6 +12,27 @@
 // // Atskirti Education/Job/Language/Skills PROFILE TAB'e. Jeigu nera nieko toje skiltyje - centruotas tekstas "There's no jobs".
 
 
+
+
+// PREVENTING DEFAULT (redirecting) WHEN YOU CLICK ON a(href="")
+$('a').click(function(e) {
+    e.preventDefault();
+});
+
+
+// WHEN YOU CLICK ON ETHEARNAL LOGO IT WILL REDIRECT YOU TO GIGS PAGE
+$('a.navbar-brand').click(function() {
+
+    // Removing all set classes and nulling everything.
+    $('section.background-image, section.documentation, section.gigs-page-content, section.jobs-page-content, section.profiles-page-content').hide();
+    $('body').removeClass('up');
+
+    $('section.gigs-page-content').show();
+    $('input#search-header').attr('placeholder', 'Search gigs...');
+})
+
+
+// WHEN YOU CLICK ON HEADER PAGE BUTTONS (gigs/jobs/profiles/etc) IT WILL TURN THE PAGE INTO ANOTHER PAGE
 $('a[load]').click(function(e) {
     e.preventDefault();
     $load = $(this).attr('load');
