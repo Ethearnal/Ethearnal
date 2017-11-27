@@ -1725,6 +1725,8 @@ section.gigs-page-content .container .gigs .gigs-container .gig .ui.label,
 section.jobs-page-content .container .gigs .gigs-container .gig .ui.label,
 section.profiles-page-content .container .gigs .gigs-container .gig .ui.label {
   z-index: 1;
+  background-color: #bfc0c1bd !important;
+  border-color: #bfc0c1bd !important;
 }
 
 section.gigs-page-content .container .gigs .gigs-container .gig .image-block, section.gigs-page-content .container .gigs .gigs-container .gig .image,
@@ -2574,7 +2576,7 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 s
 }
 
 body {
-  background-color: #f2f2f2;
+  background-color: #bfc0c121;
   -webkit-overflow-scrolling: touch;
   overflow: auto;
   height: 100%;

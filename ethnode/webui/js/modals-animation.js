@@ -86,7 +86,7 @@ $('label.mdl-checkbox').click(function(e) {
     // CATEGORY
     if ($labelParent.hasClass('category')) {
         if ($(this).hasClass('is-checked')) {
-            if ($checkboxText !== '') $category += '&category=' + $checkboxText;
+            if ($checkboxText !== '') $category = '&category=' + $checkboxText;
         } else {
             $category = '';
         }
@@ -95,7 +95,7 @@ $('label.mdl-checkbox').click(function(e) {
     // JOB TYPE
     if ($labelParent.hasClass('job-type')) {
         if ($(this).hasClass('is-checked')) {
-            if ($checkboxText !== '') $jobType += '&job_type=' + $checkboxText;
+            if ($checkboxText !== '') $jobType = '&job_type=' + $checkboxText;
         } else {
             $jobType = '';
         }
@@ -104,7 +104,7 @@ $('label.mdl-checkbox').click(function(e) {
     // EXPERIENCE LEVEL
     if ($labelParent.hasClass('experience-level')) {
         if ($(this).hasClass('is-checked')) {
-            if ($checkboxText !== '') $experienceLevel += '&experience_level=' + $checkboxText;
+            if ($checkboxText !== '') $experienceLevel = '&experience_level=' + $checkboxText;
         } else {
             $experienceLevel = '';
         }
@@ -113,7 +113,7 @@ $('label.mdl-checkbox').click(function(e) {
     // BUDGET
     if ($labelParent.hasClass('budget')) {
         if ($(this).hasClass('is-checked')) {
-            if ($checkboxText !== '') $budget += '&budget=' + $checkboxText;
+            if ($checkboxText !== '') $budget = '&budget=' + $checkboxText;
         } else {
             $budget = '';
         }
