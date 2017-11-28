@@ -8,7 +8,7 @@ function createGig(data) {
         processData: false,
         success: function(gigData) {
             $data = JSON.parse(gigData);
-            createGigBox($data);
+            createGigBox($data, data);
         }
     });
 }
