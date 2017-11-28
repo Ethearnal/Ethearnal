@@ -545,7 +545,23 @@
         <div class="inner-modal">
           <div class="content">
             <div class="modal-header">
-              <h3>Edit Gig</h3>
+              <div style="margin-bottom: 30px" class="ui three steps">
+                <div class="active step"><i class="tasks icon"></i>
+                  <div class="content">
+                    <div class="title">Fill</div>
+                  </div>
+                </div>
+                <div class="disabled step"><i class="book icon"></i>
+                  <div class="content">
+                    <div class="title">Extras</div>
+                  </div>
+                </div>
+                <div class="disabled step"><i class="info icon"></i>
+                  <div class="content">
+                    <div class="title">Confirm</div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="success-message">
               <h1 class="title">Congratulations!</h1>
@@ -601,9 +617,10 @@
                     <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
                     <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
                   </div>
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
-                    <input id="price" type="text" name="price" class="mdl-textfield__input">
-                    <label for="price" class="mdl-textfield__label">Price</label><span class="mdl-textfield__error">Input is not a number!</span>
+                  <div class="ui right labeled input">
+                    <label for="amount" class="ui label">$</label>
+                    <input id="amount" type="text" placeholder="Amount">
+                    <div class="ui basic label">.00</div>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
                     <input type="text" name="startDate" class="date-started mdl-textfield__input">

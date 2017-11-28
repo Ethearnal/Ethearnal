@@ -6,7 +6,18 @@ function loadGigs() {
         success: function(data) {
             var gigIDS = JSON.parse(data);
 
-            for(i = 0; i < 20; i++) {
+            // // THIS IS FOR DELETE IF NEEDED
+            // for(i = 0; i < gigIDS.length; i++) {
+            //     deleteGig(gigIDS[i]);
+            // }
+
+            // // THIS IS TO CREATE 20 GIGS ON LOAD
+            // for(i = 0; i < 20; i++) {
+            //     createGig(gigIDS[i]);
+            // }
+
+            // THIS IS FOR LOAD ALL THE GIGS
+            for(i = 0; i < gigIDS.length; i++) {
                 createGig(gigIDS[i]);
             }
         }

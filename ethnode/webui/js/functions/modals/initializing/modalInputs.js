@@ -49,7 +49,7 @@ function loadInputsText(form, div) {
                 $form.find('#job-type').dropdown('set selected', $gig.jobType);
                 $form.find('#experience-level').dropdown('set selected', $gig.experienceLevel);
                 $content.find('textarea#description').val($gig.description).parent().addClass('is-dirty');
-                $content.find('input#price').val($gig.price).parent().addClass('is-dirty');
+                $content.find('input#amount').val($gig.price).parent().addClass('is-dirty');
 
                 // DATE PICKER
                 $inputDateFrom.bootstrapMaterialDatePicker({format: "DD/MM/YYYY", weekStart: 0, time: false, currentDate: $gigExpireDate });
