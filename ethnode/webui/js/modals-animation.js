@@ -66,66 +66,44 @@ $jobType = '';
 $experienceLevel = '';
 $budget = '';
 
+// SEARCH QUERY MAIN FUNCTION
+function searchQueryDo() {
 
-$('label.mdl-checkbox').click(function(e) {
-    e.preventDefault();
-    $labelParent = $(this).parent();
+    // Function variables
+    $filter = $('.filters .filter');
 
-    $labelParent.find('.is-checked').not($(this)).removeClass('is-checked');
-    $(this).toggleClass('is-checked');
-
-    // Search Input variables
+    // Search variables
     $search = $('input#search-header').val().replace(/ /g,"%20").toLowerCase();
-    // $search == '' ? $search = '' : $search = 'title=' + $search;
-    $search = 'title=' + $search;
+    $search == '' ? $search = '' : $search = 'title=' + $search;
 
-    // Gets Check text variable
-    $checkboxText = $(this).find('span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
+    // SEARCH QUERY VARIABLES
+    $categoryParent = $filter.parent().find('.filter.category');
+    $categoryText = $categoryParent.find('.is-checked span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
+
+    $jobTypeParent = $filter.parent().find('.filter.job-type');
+    $jobTypeText = $jobTypeParent.find('.is-checked span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
+
+    $experienceLevelParent = $filter.parent().find('.filter.experience-level');
+    $experienceLevelText = $experienceLevelParent.find('.is-checked span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
+
+    $budgetParent = $filter.parent().find('.filter.budget');
+    $budgetText = $budgetParent.find('.is-checked span.mdl-checkbox__label').text().replace(/ /g,"_").toLowerCase();
+
+    if ($categoryText !== '') $category = '&category=' + $categoryText;
+    if ($jobTypeText !== '') $jobType = '&job_type=' + $jobTypeText;
+    if ($experienceLevelText !== '') $experienceLevel = '&experience_level=' + $experienceLevelText;
+    if ($budgetText !== '') $budget = '&budget=' + $budgetText;
 
 
-    // CATEGORY
-    if ($labelParent.hasClass('category')) {
-        if ($(this).hasClass('is-checked')) {
-            if ($checkboxText !== '') $category = '&category=' + $checkboxText;
-        } else {
-            $category = '';
-        }
+    // FORMING SEARCH QUERY
+    var search = '/api/v1/my/idx/query/objects/?' + $search + $category + $jobType + $experienceLevel + $budget;
+    var searchQuery = search.replace('/api/v1/my/idx/query/objects/?&', '/api/v1/my/idx/query/objects/?');
+    if (searchQuery == "/api/v1/my/idx/query/objects/?title=" || searchQuery == "/api/v1/my/idx/query/objects/?" || searchQuery == false) {
+        return false;
     }
-
-    // JOB TYPE
-    if ($labelParent.hasClass('job-type')) {
-        if ($(this).hasClass('is-checked')) {
-            if ($checkboxText !== '') $jobType = '&job_type=' + $checkboxText;
-        } else {
-            $jobType = '';
-        }
-    }
-
-    // EXPERIENCE LEVEL
-    if ($labelParent.hasClass('experience-level')) {
-        if ($(this).hasClass('is-checked')) {
-            if ($checkboxText !== '') $experienceLevel = '&experience_level=' + $checkboxText;
-        } else {
-            $experienceLevel = '';
-        }
-    }
-
-    // BUDGET
-    if ($labelParent.hasClass('budget')) {
-        if ($(this).hasClass('is-checked')) {
-            if ($checkboxText !== '') $budget = '&budget=' + $checkboxText;
-        } else {
-            $budget = '';
-        }
-    }
-
-    $searchQuery = '/api/v1/my/idx/query/objects/?' + $search + $category + $jobType + $experienceLevel + $budget;
-
-    // Returns false if you unselect everything.
-    if ($searchQuery == "/api/v1/my/idx/query/objects/?title=") return false;
 
     $.ajax({
-        url: $searchQuery,
+        url: searchQuery,
         type: "GET",
         processData: false,
         success: function(result) {
@@ -135,41 +113,127 @@ $('label.mdl-checkbox').click(function(e) {
             for(i = 0; i < $result.length; i++) {
                 createGigBox($result[i]);
             }
+            $filter.children().stop(true, true).removeClass('is-wrong');
+        },
+        error: function(error) {
+            $('.gig').remove();
+            $filter.find('.is-checked').stop(true, true).addClass('is-wrong');
         }
     });
+
+    // null every filter
+    $category = ''; $jobType = ''; $experienceLevel = ''; $budget = '';
+}
+
+
+
+// Loads more gigs on scroll down
+$(window).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+        searchQueryDo();
+        loadGigs();
+    }
 });
+
+
+
+
+$('label.mdl-checkbox').click(function(e) {
+    e.preventDefault();
+    $label = $(this);
+    $labelParent = $(this).parent();
+
+    // IF USER UNSELECTS THE FILTER, THEN THIS HAPPENS
+    if ($(this).hasClass('is-checked')) {
+        $(this).stop(true, true).removeClass('is-checked is-wrong');
+
+        searchQueryDo();
+
+        return false;
+    }
+
+
+    // Making sure you can select only one checkbox per filter
+    $labelParent.find('.is-checked').not($(this)).stop(true, true).removeClass('is-checked is-wrong');
+    $(this).stop(true, true).toggleClass('is-checked');
+
+    searchQueryDo();
+});
+
+$('button#search-button').click(function(e) {
+    e.preventDefault();
+    searchQueryDo();
+})
 
 $('input#search-header').keypress(function (e) {
     if (e.which == 13) {
         e.preventDefault();
 
-        // Search Input Value
-        $search = $(this).val().replace(/ /g,"%20").toLowerCase();
-        $search = 'title=' + $search;
-
-        $.ajax({
-            url: '/api/v1/my/idx/query/objects/?' + $search,
-            type: "GET",
-            processData: false,
-            success: function(result) {
-                $result = JSON.parse(result);
-                $('.gig').remove();
-
-                for(i = 0; i < $result.length; i++) {
-                    createGigBox($result[i]);
-                }
-            }
-
-            // error: function(error) {
-            //     $('.gig').remove();
-
-
-            // }
-        });
+        searchQueryDo();
 
         return false;
     }
 });
+
+
+
+$('body').delegate('.gig', 'click', function(e) {
+    var gigID = $(this).attr('gigID');
+
+    function createGigInner(data) {
+        // null everything
+        $(".modal#gigModal .modal-content").html('');
+
+        $data = data;
+        var picture = '<div class="picture"><img src="data:image/png;base64,'+$data.ownerAvatar+'" /></div>';
+        var texts = '<h5 class="name">'+$data.ownerName+'</h5><h5 class="date">count time difference</h5><h5 class="year-happend">date posted (2017/11/28)</h5><h5 class="company">Gig type: '+$data.jobTypeText+'</h5>';
+
+        // .image DIV
+        var imageItem = '<div class="item"><img src="/api/v1/my/img/?q='+$data.imageHash+'" /></div>';
+
+        var buttonPrev = '<div class="button-prev"><i class="material-icons">keyboard_arrow_left</i></div>';
+        var buttonNext = '<div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div>';
+
+        var items = '<div class="items">' + imageItem + '</div>';
+
+        var images = '<div class="image">' + buttonPrev + buttonNext + items + '</div>';
+
+
+        // GIG description
+        var description = '<p class="timeline-text">' + $data.description + '</p>';
+
+        var post = '<div class="post">' + texts + images + description + '</div>'
+
+
+        $innerContent = $('<div class="modal-body">' + picture + post + '</div>');
+
+
+        // Rendering div
+        var divToRender = $innerContent.get(0).outerHTML;
+
+        // Appending GIG
+        $(".modal#gigModal .modal-content").append(divToRender);
+
+        // Upgrading the DOM so you can use the dropdown, edit and delete the div.
+        componentHandler.upgradeDom();
+    }
+
+
+    $.ajax({
+        url: "/api/v1/my/gig/" + gigID,
+        type: "GET",
+        processData: false,
+        success: function(gigData) {
+            $data = JSON.parse(gigData);
+            createGigInner($data);
+        }
+    });
+})
+
+
+
+
+
 
 
 

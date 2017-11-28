@@ -1,6 +1,7 @@
-function createGigBox(gigData) {
+function createGigBox(gigData, gigID) {
     $data = gigData;
     $expiresIn = null;
+    gigData = gigData || '';
 
     $($data.date).each(function(i, dates) {
         if (dates.expiresIn == undefined || dates.expiresIn == null) {
@@ -34,8 +35,13 @@ function createGigBox(gigData) {
 
     var gigFooter = '<div class="footer"><h4>Starting at <span>$' + $data.price + '</span></h4></div>';
 
-    // Creating div based on variables
-    $gig = $('<div class="gig content-block">' + dropdownButton + dropdownUL + image + ownerInfo + lowerInfo + gigTitle + gigFooter + '</div>');
+    // Creating div based on variables AND
+    // Adding gigID attribute to the GIG.
+    if (gigID !== '') {
+        $gig = $('<div gigID="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">' + dropdownButton + dropdownUL + image + ownerInfo + lowerInfo + gigTitle + gigFooter + '</div>');
+    } else {
+        $gig = $('<div class="gig content-block">' + dropdownButton + dropdownUL + image + ownerInfo + lowerInfo + gigTitle + gigFooter + '</div>');
+    }
 
     // Rendering div
     var divToRender = $gig.get(0).outerHTML;
