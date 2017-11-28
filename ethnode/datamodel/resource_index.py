@@ -18,6 +18,10 @@ CATEGORIES = {
     '7': 'assistants'
 
 }
+JOBTYPES = {
+    '1': 'hourly',
+    '3': 'fixed_price'
+}
 
 
 class ResourceIndexingEngine(object):
@@ -203,7 +207,7 @@ class IndexQueryApiRepr(object):
 
 
 class ReprHexGuid(object):
-    def __call__(self, pk_hash_bin):
+    def __call__(self, pk_hash_bin, rep_maj=None):
         return guid_bin_to_hex(pk_hash_bin).decode('utf-8')
 
 

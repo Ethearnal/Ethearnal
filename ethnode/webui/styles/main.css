@@ -1688,22 +1688,28 @@ section.profiles-page-content .container .filters .filter label.mdl-checkbox.is-
   background-color: #d50000;
 }
 
-section.gigs-page-content .container .gigs,
+section.gigs-page-content .container .gigs, section.gigs-page-content .container .jobs,
 section.jobs-page-content .container .gigs,
-section.profiles-page-content .container .gigs {
+section.jobs-page-content .container .jobs,
+section.profiles-page-content .container .gigs,
+section.profiles-page-content .container .jobs {
   float: right;
 }
 
-section.gigs-page-content .container .gigs .gigs-container,
+section.gigs-page-content .container .gigs .gigs-container, section.gigs-page-content .container .jobs .gigs-container,
 section.jobs-page-content .container .gigs .gigs-container,
-section.profiles-page-content .container .gigs .gigs-container {
+section.jobs-page-content .container .jobs .gigs-container,
+section.profiles-page-content .container .gigs .gigs-container,
+section.profiles-page-content .container .jobs .gigs-container {
   width: calc(100% - 15px);
   margin: 0 auto;
 }
 
-section.gigs-page-content .container .gigs .gigs-container:after,
+section.gigs-page-content .container .gigs .gigs-container:after, section.gigs-page-content .container .jobs .gigs-container:after,
 section.jobs-page-content .container .gigs .gigs-container:after,
-section.profiles-page-content .container .gigs .gigs-container:after {
+section.jobs-page-content .container .jobs .gigs-container:after,
+section.profiles-page-content .container .gigs .gigs-container:after,
+section.profiles-page-content .container .jobs .gigs-container:after {
   clear: both;
   content: '.';
   display: block;
@@ -1712,9 +1718,11 @@ section.profiles-page-content .container .gigs .gigs-container:after {
   visibility: hidden;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig,
+section.gigs-page-content .container .gigs .gigs-container .gig, section.gigs-page-content .container .jobs .gigs-container .gig,
 section.jobs-page-content .container .gigs .gigs-container .gig,
-section.profiles-page-content .container .gigs .gigs-container .gig {
+section.jobs-page-content .container .jobs .gigs-container .gig,
+section.profiles-page-content .container .gigs .gigs-container .gig,
+section.profiles-page-content .container .jobs .gigs-container .gig {
   width: 240px;
   height: 306px;
   border: 1px solid #e5e5e5;
@@ -1729,20 +1737,28 @@ section.profiles-page-content .container .gigs .gigs-container .gig {
   transition: all 0.15s ease-in;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig:hover, section.gigs-page-content .container .gigs .gigs-container .gig:focus, section.gigs-page-content .container .gigs .gigs-container .gig:active,
+section.gigs-page-content .container .gigs .gigs-container .gig:hover, section.gigs-page-content .container .gigs .gigs-container .gig:focus, section.gigs-page-content .container .gigs .gigs-container .gig:active, section.gigs-page-content .container .jobs .gigs-container .gig:hover, section.gigs-page-content .container .jobs .gigs-container .gig:focus, section.gigs-page-content .container .jobs .gigs-container .gig:active,
 section.jobs-page-content .container .gigs .gigs-container .gig:hover,
 section.jobs-page-content .container .gigs .gigs-container .gig:focus,
 section.jobs-page-content .container .gigs .gigs-container .gig:active,
+section.jobs-page-content .container .jobs .gigs-container .gig:hover,
+section.jobs-page-content .container .jobs .gigs-container .gig:focus,
+section.jobs-page-content .container .jobs .gigs-container .gig:active,
 section.profiles-page-content .container .gigs .gigs-container .gig:hover,
 section.profiles-page-content .container .gigs .gigs-container .gig:focus,
-section.profiles-page-content .container .gigs .gigs-container .gig:active {
+section.profiles-page-content .container .gigs .gigs-container .gig:active,
+section.profiles-page-content .container .jobs .gigs-container .gig:hover,
+section.profiles-page-content .container .jobs .gigs-container .gig:focus,
+section.profiles-page-content .container .jobs .gigs-container .gig:active {
   background-color: #fbfafa;
   cursor: pointer;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig button.mdl-button--icon,
+section.gigs-page-content .container .gigs .gigs-container .gig button.mdl-button--icon, section.gigs-page-content .container .jobs .gigs-container .gig button.mdl-button--icon,
 section.jobs-page-content .container .gigs .gigs-container .gig button.mdl-button--icon,
-section.profiles-page-content .container .gigs .gigs-container .gig button.mdl-button--icon {
+section.jobs-page-content .container .jobs .gigs-container .gig button.mdl-button--icon,
+section.profiles-page-content .container .gigs .gigs-container .gig button.mdl-button--icon,
+section.profiles-page-content .container .jobs .gigs-container .gig button.mdl-button--icon {
   position: absolute;
   right: 0;
   top: 5px;
@@ -1750,49 +1766,65 @@ section.profiles-page-content .container .gigs .gigs-container .gig button.mdl-b
   z-index: 1;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .ui.label,
+section.gigs-page-content .container .gigs .gigs-container .gig .ui.label, section.gigs-page-content .container .jobs .gigs-container .gig .ui.label,
 section.jobs-page-content .container .gigs .gigs-container .gig .ui.label,
-section.profiles-page-content .container .gigs .gigs-container .gig .ui.label {
+section.jobs-page-content .container .jobs .gigs-container .gig .ui.label,
+section.profiles-page-content .container .gigs .gigs-container .gig .ui.label,
+section.profiles-page-content .container .jobs .gigs-container .gig .ui.label {
   z-index: 1;
   background-color: #bfc0c1bd !important;
   border-color: #bfc0c1bd !important;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .image-block, section.gigs-page-content .container .gigs .gigs-container .gig .image,
+section.gigs-page-content .container .gigs .gigs-container .gig .image-block, section.gigs-page-content .container .gigs .gigs-container .gig .image, section.gigs-page-content .container .jobs .gigs-container .gig .image-block, section.gigs-page-content .container .jobs .gigs-container .gig .image,
 section.jobs-page-content .container .gigs .gigs-container .gig .image-block,
 section.jobs-page-content .container .gigs .gigs-container .gig .image,
+section.jobs-page-content .container .jobs .gigs-container .gig .image-block,
+section.jobs-page-content .container .jobs .gigs-container .gig .image,
 section.profiles-page-content .container .gigs .gigs-container .gig .image-block,
-section.profiles-page-content .container .gigs .gigs-container .gig .image {
+section.profiles-page-content .container .gigs .gigs-container .gig .image,
+section.profiles-page-content .container .jobs .gigs-container .gig .image-block,
+section.profiles-page-content .container .jobs .gigs-container .gig .image {
   position: relative;
   width: 100%;
   height: 142px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .image-block img, section.gigs-page-content .container .gigs .gigs-container .gig .image img,
+section.gigs-page-content .container .gigs .gigs-container .gig .image-block img, section.gigs-page-content .container .gigs .gigs-container .gig .image img, section.gigs-page-content .container .jobs .gigs-container .gig .image-block img, section.gigs-page-content .container .jobs .gigs-container .gig .image img,
 section.jobs-page-content .container .gigs .gigs-container .gig .image-block img,
 section.jobs-page-content .container .gigs .gigs-container .gig .image img,
+section.jobs-page-content .container .jobs .gigs-container .gig .image-block img,
+section.jobs-page-content .container .jobs .gigs-container .gig .image img,
 section.profiles-page-content .container .gigs .gigs-container .gig .image-block img,
-section.profiles-page-content .container .gigs .gigs-container .gig .image img {
+section.profiles-page-content .container .gigs .gigs-container .gig .image img,
+section.profiles-page-content .container .jobs .gigs-container .gig .image-block img,
+section.profiles-page-content .container .jobs .gigs-container .gig .image img {
   width: 100%;
   height: auto;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .image-block,
+section.gigs-page-content .container .gigs .gigs-container .gig .image-block, section.gigs-page-content .container .jobs .gigs-container .gig .image-block,
 section.jobs-page-content .container .gigs .gigs-container .gig .image-block,
-section.profiles-page-content .container .gigs .gigs-container .gig .image-block {
+section.jobs-page-content .container .jobs .gigs-container .gig .image-block,
+section.profiles-page-content .container .gigs .gigs-container .gig .image-block,
+section.profiles-page-content .container .jobs .gigs-container .gig .image-block {
   overflow: hidden;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .owner-info,
+section.gigs-page-content .container .gigs .gigs-container .gig .owner-info, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info,
 section.jobs-page-content .container .gigs .gigs-container .gig .owner-info,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info {
+section.jobs-page-content .container .jobs .gigs-container .gig .owner-info,
+section.profiles-page-content .container .gigs .gigs-container .gig .owner-info,
+section.profiles-page-content .container .jobs .gigs-container .gig .owner-info {
   margin-left: 10px;
   margin-top: 10px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .owner-info img,
+section.gigs-page-content .container .gigs .gigs-container .gig .owner-info img, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info img,
 section.jobs-page-content .container .gigs .gigs-container .gig .owner-info img,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info img {
+section.jobs-page-content .container .jobs .gigs-container .gig .owner-info img,
+section.profiles-page-content .container .gigs .gigs-container .gig .owner-info img,
+section.profiles-page-content .container .jobs .gigs-container .gig .owner-info img {
   float: left;
   width: 24px;
   height: 24px;
@@ -1800,11 +1832,15 @@ section.profiles-page-content .container .gigs .gigs-container .gig .owner-info 
   margin-top: 1px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5, section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h4,
+section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5, section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h4, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h5, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h4,
 section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h5,
 section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h4,
+section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h5,
+section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h4,
 section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h5,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h4 {
+section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h4,
+section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h5,
+section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h4 {
   margin: 0;
   font-size: 12px;
   font-weight: 400;
@@ -1814,28 +1850,38 @@ section.profiles-page-content .container .gigs .gigs-container .gig .owner-info 
   transition: all 0.15s ease-in;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5:hover, section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5:active, section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5:focus,
+section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5:hover, section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5:active, section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5:focus, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h5:hover, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h5:active, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h5:focus,
 section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h5:hover,
 section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h5:active,
 section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h5:focus,
+section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h5:hover,
+section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h5:active,
+section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h5:focus,
 section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h5:hover,
 section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h5:active,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h5:focus {
+section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h5:focus,
+section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h5:hover,
+section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h5:active,
+section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h5:focus {
   cursor: pointer;
   text-decoration: underline;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h4,
+section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h4, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h4,
 section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h4,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h4 {
+section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h4,
+section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h4,
+section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h4 {
   color: #86939e;
   font-size: 12px;
   margin-top: 2px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig p,
+section.gigs-page-content .container .gigs .gigs-container .gig p, section.gigs-page-content .container .jobs .gigs-container .gig p,
 section.jobs-page-content .container .gigs .gigs-container .gig p,
-section.profiles-page-content .container .gigs .gigs-container .gig p {
+section.jobs-page-content .container .jobs .gigs-container .gig p,
+section.profiles-page-content .container .gigs .gigs-container .gig p,
+section.profiles-page-content .container .jobs .gigs-container .gig p {
   font-size: 16px;
   color: black;
   overflow: hidden;
@@ -1845,32 +1891,40 @@ section.profiles-page-content .container .gigs .gigs-container .gig p {
   margin-top: 10px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .lower-info,
+section.gigs-page-content .container .gigs .gigs-container .gig .lower-info, section.gigs-page-content .container .jobs .gigs-container .gig .lower-info,
 section.jobs-page-content .container .gigs .gigs-container .gig .lower-info,
-section.profiles-page-content .container .gigs .gigs-container .gig .lower-info {
+section.jobs-page-content .container .jobs .gigs-container .gig .lower-info,
+section.profiles-page-content .container .gigs .gigs-container .gig .lower-info,
+section.profiles-page-content .container .jobs .gigs-container .gig .lower-info {
   position: absolute;
   bottom: 38px;
   width: 100%;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .lower-info .reputation,
+section.gigs-page-content .container .gigs .gigs-container .gig .lower-info .reputation, section.gigs-page-content .container .jobs .gigs-container .gig .lower-info .reputation,
 section.jobs-page-content .container .gigs .gigs-container .gig .lower-info .reputation,
-section.profiles-page-content .container .gigs .gigs-container .gig .lower-info .reputation {
+section.jobs-page-content .container .jobs .gigs-container .gig .lower-info .reputation,
+section.profiles-page-content .container .gigs .gigs-container .gig .lower-info .reputation,
+section.profiles-page-content .container .jobs .gigs-container .gig .lower-info .reputation {
   float: left;
   height: 24px;
   margin-left: 10px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .lower-info .reputation i,
+section.gigs-page-content .container .gigs .gigs-container .gig .lower-info .reputation i, section.gigs-page-content .container .jobs .gigs-container .gig .lower-info .reputation i,
 section.jobs-page-content .container .gigs .gigs-container .gig .lower-info .reputation i,
-section.profiles-page-content .container .gigs .gigs-container .gig .lower-info .reputation i {
+section.jobs-page-content .container .jobs .gigs-container .gig .lower-info .reputation i,
+section.profiles-page-content .container .gigs .gigs-container .gig .lower-info .reputation i,
+section.profiles-page-content .container .jobs .gigs-container .gig .lower-info .reputation i {
   color: #92A8D1;
   font-size: 20px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .lower-info .reputation span,
+section.gigs-page-content .container .gigs .gigs-container .gig .lower-info .reputation span, section.gigs-page-content .container .jobs .gigs-container .gig .lower-info .reputation span,
 section.jobs-page-content .container .gigs .gigs-container .gig .lower-info .reputation span,
-section.profiles-page-content .container .gigs .gigs-container .gig .lower-info .reputation span {
+section.jobs-page-content .container .jobs .gigs-container .gig .lower-info .reputation span,
+section.profiles-page-content .container .gigs .gigs-container .gig .lower-info .reputation span,
+section.profiles-page-content .container .jobs .gigs-container .gig .lower-info .reputation span {
   color: #92A8D1;
   position: relative;
   top: -4.5px;
@@ -1878,9 +1932,11 @@ section.profiles-page-content .container .gigs .gigs-container .gig .lower-info 
   font-weight: 500;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .lower-info h6.expire,
+section.gigs-page-content .container .gigs .gigs-container .gig .lower-info h6.expire, section.gigs-page-content .container .jobs .gigs-container .gig .lower-info h6.expire,
 section.jobs-page-content .container .gigs .gigs-container .gig .lower-info h6.expire,
-section.profiles-page-content .container .gigs .gigs-container .gig .lower-info h6.expire {
+section.jobs-page-content .container .jobs .gigs-container .gig .lower-info h6.expire,
+section.profiles-page-content .container .gigs .gigs-container .gig .lower-info h6.expire,
+section.profiles-page-content .container .jobs .gigs-container .gig .lower-info h6.expire {
   float: right;
   font-size: 12px;
   color: #86939e;
@@ -1888,9 +1944,11 @@ section.profiles-page-content .container .gigs .gigs-container .gig .lower-info 
   margin-right: 10px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .footer,
+section.gigs-page-content .container .gigs .gigs-container .gig .footer, section.gigs-page-content .container .jobs .gigs-container .gig .footer,
 section.jobs-page-content .container .gigs .gigs-container .gig .footer,
-section.profiles-page-content .container .gigs .gigs-container .gig .footer {
+section.jobs-page-content .container .jobs .gigs-container .gig .footer,
+section.profiles-page-content .container .gigs .gigs-container .gig .footer,
+section.profiles-page-content .container .jobs .gigs-container .gig .footer {
   border-top: 1px solid #e5e5e5;
   position: absolute;
   bottom: 0;
@@ -1898,9 +1956,11 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer {
   height: 38px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .footer h4,
+section.gigs-page-content .container .gigs .gigs-container .gig .footer h4, section.gigs-page-content .container .jobs .gigs-container .gig .footer h4,
 section.jobs-page-content .container .gigs .gigs-container .gig .footer h4,
-section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 {
+section.jobs-page-content .container .jobs .gigs-container .gig .footer h4,
+section.profiles-page-content .container .gigs .gigs-container .gig .footer h4,
+section.profiles-page-content .container .jobs .gigs-container .gig .footer h4 {
   text-align: right;
   color: black;
   margin-right: 10px;
@@ -1910,9 +1970,11 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 {
   text-transform: uppercase;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .footer h4 span,
+section.gigs-page-content .container .gigs .gigs-container .gig .footer h4 span, section.gigs-page-content .container .jobs .gigs-container .gig .footer h4 span,
 section.jobs-page-content .container .gigs .gigs-container .gig .footer h4 span,
-section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 span {
+section.jobs-page-content .container .jobs .gigs-container .gig .footer h4 span,
+section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 span,
+section.profiles-page-content .container .jobs .gigs-container .gig .footer h4 span {
   font-size: 18px;
   font-weight: 400;
   margin-left: 2px;
@@ -2185,21 +2247,6 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 s
   max-height: 90vh;
 }
 
-#timeline {
-  background-color: #f2f2f2;
-}
-
-#timeline ul {
-  padding: 0;
-  overflow: auto;
-  float: left;
-  list-style-type: none;
-}
-
-#timeline ul li.swipeout {
-  overflow: hidden;
-}
-
 .modal.timeline .modal-dialog .modal-content {
   padding: 0;
 }
@@ -2215,10 +2262,6 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 s
   max-height: 320px;
   -webkit-line-clamp: 9;
   -webkit-box-orient: vertical;
-}
-
-.input-timeline {
-  max-height: inherit;
 }
 
 .timeline-post, .modal.timeline .modal-dialog .modal-content .modal-body {
@@ -2278,161 +2321,6 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 s
   line-height: 1.44;
   color: #86939e;
   margin-bottom: 15px;
-}
-
-.timeline-post .post.post-input .appearing-content, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content {
-  display: none;
-  position: relative;
-}
-
-.timeline-post .post.post-input .appearing-content .upload-photo, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .upload-photo {
-  border: 1px solid rgba(34, 36, 38, 0.15);
-  border-left: none;
-  border-right: none;
-  height: 40px;
-  cursor: pointer;
-  float: left;
-  position: relative;
-}
-
-.timeline-post .post.post-input .appearing-content .upload-photo a, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .upload-photo a {
-  padding: 0 15px;
-  color: #B3B7BD;
-}
-
-.timeline-post .post.post-input .appearing-content .upload-photo a i, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .upload-photo a i {
-  line-height: 40px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui {
-  margin-top: 0 !important;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown {
-  padding: .78571429em 1em .7em 1em;
-  border: 1px solid rgba(34, 36, 38, 0.15) !important;
-  border-radius: 0;
-  height: 40px;
-  float: left;
-  position: relative;
-  margin-bottom: 15px;
-  width: 100%;
-  max-width: 100px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown input.search, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown input.search {
-  padding: 5px 0 !important;
-  margin-left: 15px;
-  padding-top: 3px !important;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown .text:not(.default), .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown .text:not(.default) {
-  left: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  top: -.78571429em;
-  margin-right: 27px;
-  padding: 0;
-  margin-bottom: 0;
-  margin: 0;
-  display: inline;
-  margin-right: 10px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown .text, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown .text {
-  position: relative;
-  top: -15px;
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.scrolling.dropdown i.dropdown.icon, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.scrolling.dropdown i.dropdown.icon {
-  display: inline;
-  position: relative;
-  top: -15px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown {
-  min-width: 17em;
-  max-width: 17em;
-  background-color: transparent;
-  border: none;
-  height: 40px;
-  border: 1px solid rgba(34, 36, 38, 0.15) !important;
-  border-radius: 0;
-  position: relative;
-  float: left;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown input.search, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown input.search {
-  padding: 5px 0 !important;
-  margin-left: 20px;
-  padding-top: 3px !important;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown i.remove.icon, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown i.remove.icon {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  z-index: 30;
-  display: none;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text {
-  margin-left: 15px;
-  top: -1px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default), .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) {
-  left: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  display: block;
-  top: -2px;
-  margin-right: 27px;
-  padding: 0;
-  margin-bottom: 0;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) img, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) img {
-  margin-right: 0 !important;
-  padding: 0 !important;
-  margin-right: 10px !important;
-  margin-bottom: 0;
-  width: auto;
-  max-height: 2em;
-  margin-top: 0;
-  width: 30px;
-  height: 30px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) span, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .text:not(.default) span {
-  position: relative;
-  top: 2px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .header i span, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .header i span {
-  margin-left: 10px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .item, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .item {
-  padding: 10px !important;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .item img, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .item img {
-  margin-right: 0 !important;
-  padding: 0 !important;
-  margin-right: 10px !important;
-  margin-bottom: 5px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .input, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .input {
-  margin: 0px;
-}
-
-.timeline-post .post.post-input .appearing-content .ui.selection.dropdown .menu .input input, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input .appearing-content .ui.selection.dropdown .menu .input input {
-  padding: .5em 15px !important;
-  padding-right: 10% !important;
 }
 
 .timeline-post .post h5, .modal.timeline .modal-dialog .modal-content .modal-body .post h5 {
@@ -2497,42 +2385,6 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 s
   max-height: 200px;
 }
 
-.timeline-post .buttons, .modal.timeline .modal-dialog .modal-content .modal-body .buttons {
-  background-color: #f0f4f7;
-  text-align: right;
-  padding: 10px 25px;
-  display: none;
-  clear: both;
-}
-
-.timeline-post .buttons button, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button {
-  font-size: 16px;
-  border-radius: 8px;
-  width: 150px;
-}
-
-.timeline-post .buttons button.btn-cancel, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel {
-  border: 2px solid #e2e7eb;
-  color: #8b949d;
-  margin-right: 15px;
-  background-color: transparent;
-}
-
-.timeline-post .buttons button.btn-cancel:hover, .timeline-post .buttons button.btn-cancel:active, .timeline-post .buttons button.btn-cancel:focus, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel:hover, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel:active, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-cancel:focus {
-  background-color: #eaeef1;
-}
-
-.timeline-post .buttons button.btn-post, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post {
-  background-color: #76c84a;
-  color: #f7fff1;
-  border: 2px solid #76c84a;
-}
-
-.timeline-post .buttons button.btn-post:hover, .timeline-post .buttons button.btn-post:focus, .timeline-post .buttons button.btn-post:active, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post:hover, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post:focus, .modal.timeline .modal-dialog .modal-content .modal-body .buttons button.btn-post:active {
-  background-color: #6fba46;
-  border: 2px solid #6fba46;
-}
-
 .modal.timeline .modal-dialog .modal-content {
   border-radius: 0;
 }
@@ -2587,30 +2439,6 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 s
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: justify;
-}
-
-.modal#timelineModalEdit .modal-dialog .modal-content .modal-body {
-  padding: 0;
-}
-
-.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .post {
-  margin-left: 15px;
-  padding-right: 15px;
-}
-
-.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .post .appearing-content {
-  display: inherit;
-}
-
-.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .post .appearing-content .ui .menu .item img {
-  width: inherit;
-  height: inherit;
-  width: auto;
-  max-height: 2em;
-}
-
-.modal#timelineModalEdit .modal-dialog .modal-content .modal-body .buttons {
-  display: inherit;
 }
 
 @media screen and (max-width: 1199px) and (min-width: 992px) {

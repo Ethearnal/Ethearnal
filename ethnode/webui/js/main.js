@@ -4,9 +4,7 @@
 
 
 // Prideti croppinima nuotrauku
-// Patobulinti profile change avatar
-// Sutvarkyti edit-gig modal ir padaryti taip kaip add-gig modalyje.
-// Sutvarkyti gig-inner.sass style faila.
+// Patobulinti profile change avatar modal
 
 
 

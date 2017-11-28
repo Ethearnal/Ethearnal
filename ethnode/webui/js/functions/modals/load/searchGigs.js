@@ -33,9 +33,11 @@ function searchQueryDo() {
 
 
     // FORMING SEARCH QUERY
-    var search = '/api/v1/my/idx/query/objects/?' + $search + $category + $jobType + $experienceLevel + $budget;
-    var searchQuery = search.replace('/api/v1/my/idx/query/objects/?&', '/api/v1/my/idx/query/objects/?');
-    if (searchQuery == "/api/v1/my/idx/query/objects/?title=" || searchQuery == "/api/v1/my/idx/query/objects/?" || searchQuery == false) {
+    var search = '/api/v1/my/idx/query/guids/?' + $search + $category + $jobType + $experienceLevel + $budget;
+    var searchQuery = search.replace('/api/v1/my/idx/query/guids/?&', '/api/v1/my/idx/query/guids/?');
+    if (searchQuery == "/api/v1/my/idx/query/guids/?title=" || searchQuery == "/api/v1/my/idx/query/guids/?" || searchQuery == false) {
+        $('.gig').remove();
+        loadGigs();
         return false;
     }
 
@@ -45,14 +47,13 @@ function searchQueryDo() {
         processData: false,
         success: function(result) {
             $result = JSON.parse(result);
-            console.log($result.length);
             if (result == '' || result == null || $result.length == null) return false;
 
             $result = JSON.parse(result);
             $('.gig').remove();
 
             for(i = 0; i < $result.length; i++) {
-                createGigBox($result[i]);
+                createGig($result[i]);
             }
 
             $('input#search-header, button#search-button').removeClass('wrong');

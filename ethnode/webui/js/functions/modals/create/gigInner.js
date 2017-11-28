@@ -13,7 +13,7 @@ $('body').delegate('.gig', 'click', function(e) {
 
         $data = data;
         var picture = '<div class="picture"><img src="data:image/png;base64,'+$data.ownerAvatar+'" /></div>';
-        var texts = '<h5 class="name">'+$data.ownerName+'</h5><h5 class="date">count time difference</h5><h5 class="year-happend">date posted (2017/11/28)</h5><h5 class="company">Gig type: '+$data.jobTypeText+'</h5>';
+        var texts = '<h5 class="name">'+$data.ownerName+'</h5><h5 class="date">count time difference</h5><h5 class="year-happend">date posted (2017/11/28)</h5><h5 class="company">Gig type: ' + $data.jobTypeName + '</h5>';
 
         // .image DIV
         var imageItem = '<div class="item"><img src="/api/v1/my/img/?q='+$data.imageHash+'" /></div>';
