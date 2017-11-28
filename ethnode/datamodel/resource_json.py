@@ -161,10 +161,11 @@ class GigResourceWebLocalApi(object):
                 description = d.get('description')
                 category = d.get('categoryName')
                 experience_level = d.get('experienceName')
-                # job_type = d.get('jobType')
+                job_type = d.get('jobTypeName')
 
                 experience_level = '_'.join(experience_level.lower().split(' '))
                 category = '_'.join(category.lower().split(' '))
+                job_type = '_'.join(job_type.lower().split(' '))
 
                 budget = None
                 price_st = d.get('price')
@@ -194,6 +195,11 @@ class GigResourceWebLocalApi(object):
                 if category:
                     self.text_api.idx_engine.index_bag_of_spec_text(
                         container_hash=pk_bin, specifier='category', text_data=category)
+
+                if job_type:
+                    self.text_api.idx_engine.index_bag_of_spec_text(container_hash=pk_bin,
+                                                                    specifier='job_type',
+                                                                    text_data=job_type)
 
                 if budget:
                     self.text_api.idx_engine.index_bag_of_spec_text(

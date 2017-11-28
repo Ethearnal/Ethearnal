@@ -18,6 +18,10 @@ CATEGORIES = {
     '7': 'assistants'
 
 }
+JOBTYPES = {
+    '1': 'hourly',
+    '3': 'fixed_price'
+}
 
 
 class ResourceIndexingEngine(object):
