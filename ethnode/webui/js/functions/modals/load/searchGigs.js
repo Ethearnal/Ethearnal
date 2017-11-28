@@ -35,7 +35,13 @@ function searchQueryDo() {
     // FORMING SEARCH QUERY
     var search = '/api/v1/my/idx/query/guids/?' + $search + $category + $jobType + $experienceLevel + $budget;
     var searchQuery = search.replace('/api/v1/my/idx/query/guids/?&', '/api/v1/my/idx/query/guids/?');
-    if (searchQuery == "/api/v1/my/idx/query/guids/?title=" || searchQuery == "/api/v1/my/idx/query/guids/?" || searchQuery == false) {
+
+    if (searchQuery == "/api/v1/my/idx/query/guids/?") {
+        // loadGigs();
+        return false;
+    }
+
+    if (searchQuery == "/api/v1/my/idx/query/guids/?title=" || searchQuery == false) {
         $('.gig').remove();
         loadGigs();
         return false;
