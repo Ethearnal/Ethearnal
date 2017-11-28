@@ -2,7 +2,19 @@
 
     .modal-box-content: .inner-modal: .content
 
-        .modal-header: h3 Edit Gig
+        .modal-header
+            .ui.three.steps(style="margin-bottom: 30px")
+                .active.step
+                    i.tasks.icon
+                    .content: .title Fill
+
+                .disabled.step
+                    i.book.icon
+                    .content: .title Extras
+
+                .disabled.step
+                    i.info.icon
+                    .content: .title Confirm
 
         .success-message
             h1.title Congratulations!
@@ -58,10 +70,10 @@
                         textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
                         label.mdl-textfield__label(for="description") Description (what have you done or currently do?)
 
-                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
-                        input#price.mdl-textfield__input(type="text", name="price")
-                        label.mdl-textfield__label(for="price") Price
-                        span.mdl-textfield__error Input is not a number!
+                    .ui.right.labeled.input
+                        label.ui.label(for="amount") $
+                        input#amount(type="text", placeholder="Amount")
+                        .ui.basic.label .00
 
                     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
                         input.date-started.mdl-textfield__input(type="text", name="startDate")

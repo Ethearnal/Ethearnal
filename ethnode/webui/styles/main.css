@@ -4,6 +4,23 @@ header .container nav {
   margin-bottom: 0;
 }
 
+header .container nav .navbar-header input#search-header {
+  border-color: #89ABE3;
+}
+
+header .container nav .navbar-header input#search-header.wrong {
+  border-color: #d50000;
+}
+
+header .container nav .navbar-header button#search-button {
+  background-color: #89ABE3;
+  color: white;
+}
+
+header .container nav .navbar-header button#search-button.wrong {
+  background-color: #d50000;
+}
+
 header .container nav .navbar-header .button button.navbar-toggle {
   position: relative;
   width: 60px;

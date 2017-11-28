@@ -3,6 +3,11 @@
 // TODO
 
 
+// Prideti croppinima nuotrauku
+// Patobulinti profile change avatar
+// Sutvarkyti edit-gig modal ir padaryti taip kaip add-gig modalyje.
+// Sutvarkyti gig-inner.sass style faila.
+
 
 
 // Prideti Budget sliderius.
@@ -426,6 +431,7 @@ function require(script) {
 require("js/functions/modals/create/createLE.js"); // CREATES CONTENT BLOCK - NOT GIG
 require("js/functions/modals/create/createGig.js"); // GETS GIG DATA
 require("js/functions/modals/create/createGigBox.js") // CREATES GIG BOX
+require("js/functions/modals/create/gigInner.js") // CREATES GIG INNER MODAL
 
 // DELETE
 require("js/functions/modals/delete/function.js") // DELETE FUNCTION
@@ -433,6 +439,8 @@ require("js/functions/modals/delete/gig.js"); // DELETES GIG
 
 // LOAD
 require("js/functions/modals/load/gigs.js"); // LOADS ALL GIGS
+require("js/functions/modals/load/searchGigs.js") // LOADS ALL GIGS BASED ON YOUR SEARCH
+require("js/functions/modals/load/moreGigsScrollDown.js") // LOADS MORE GIGS ON SCROLL DOWN
 
 // COLLECT DATA
 require("js/functions/modals/collectData/gig.js") // COLLECTS GIG DATA
@@ -452,26 +460,6 @@ require("js/functions/modals/initializing/profileModalInputs.js") // ADDING TEXT
 
 
 
-// // Create Life Experience div based on input values.
-// require("js/functions/modals/create/createLE.js");
-
-// // Create GIG function
-// require("js/functions/modals/create/createGig.js");
-
-// // Delete GIG function
-// require("js/functions/modals/delete/gig.js");
-
-// // Load GIGS function
-// require("js/functions/modals/load/gigs.js");
-
-// Appears .success-message everytime you update or create a LE
-// require("js/functions/modals/appearSuccessMessage.js");
-
-// Loads inputs text when you click on "EDIT" button and the edit modal appears
-// require("js/functions/modals/loadInputsText.js");
-
-// openModal() and closeModal() functions
-// require("js/functions/modals/openClose.js");
 
 // This is a function to generate a position information div
 require("js/functions/modals/positionInformationDiv.js");
@@ -479,11 +467,6 @@ require("js/functions/modals/positionInformationDiv.js");
 // All the functions related to time. Such as GetTimeDifference, etc.
 require("js/functions/modals/timesFunctions.js");
 
-// Initializes the Date Picker.
-// require("js/functions/modals/datePickerInit.js");
-
-// Loads profile modal inputs based on profile
-// require("js/functions/modals/loadProfileInputs.js");
 
 // Updates the Profile.
 require("js/functions/modals/updateProfile.js");
