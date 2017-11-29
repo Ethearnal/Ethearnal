@@ -63,9 +63,24 @@ function addImage(source) {
 
 
 
+var Timer;
+
+function Start() {
+
+    $('input#search-header').keyup(function () {
+        clearTimeout(Timer);
+        Timer = setTimeout(SendRequest, 400);
+    });
+}
 
 
+function SendRequest() {
+    // formatSearchQuery();
+    searchQueryDo();
+    // console.log(searchQuery);
+}
 
+$(Start);
 
 
 

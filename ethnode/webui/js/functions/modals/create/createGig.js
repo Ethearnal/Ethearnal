@@ -1,6 +1,5 @@
-var iGig = 0;
 function createGig(data) {
-    var image = null;
+    if (data == undefined) return false;
 
     $.ajax({
         url: "/api/v1/my/gig/" + data,

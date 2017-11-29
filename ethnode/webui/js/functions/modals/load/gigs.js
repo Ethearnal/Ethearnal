@@ -1,5 +1,3 @@
-var timesLoaded = 0;
-
 function loadGigs() {
     $.ajax({
         type: 'GET',
@@ -10,14 +8,15 @@ function loadGigs() {
             var gigsToLoad = 10;
             $gigsLoaded = $('.gig').length;
 
-            var timesLoadAfter = (timesLoaded * gigsToLoad) + gigsToLoad;
+            if (gigIDS.length > $gigsLoaded) {
+                gigsToLoad = $gigsLoaded + gigsToLoad;
 
-            // THIS IS TO CREATE 20 GIGS ON LOAD
-            for(i = $gigsLoaded; i < timesLoadAfter; i++) {
-                createGig(gigIDS[i]);
+                // LOADING MORE GIGS
+                for(i = $gigsLoaded; i < gigsToLoad; i++) {
+                    createGig(gigIDS[i]);
+                }
             }
 
-            timesLoaded++;
 
             // // THIS IS FOR DELETE IF NEEDED
             // for(i = 0; i < gigIDS.length; i++) {

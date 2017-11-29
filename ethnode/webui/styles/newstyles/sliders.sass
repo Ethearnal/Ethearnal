@@ -1,200 +1,245 @@
-.rkmd-slider
-  display: block
+sup
+  font-size: 80%
   position: relative
-  font-size: 16px
-  font-family: 'Roboto', sans-serif
-  input[type="range"]
-    overflow: hidden
+  top: -1px
+
+.slider-wrapper, .slider-wrapper-2
+    width: 200px
+    display: inline-block
+    position: relative
+    font-family: arial
+    margin-top: 65px
+    margin-left: 13px
+
+    .marker, .marker-2
+        position: absolute
+        top: 100%
+        padding-top: 16px
+        font-size: 13px
+        color: #555
+        letter-spacing: 0.05em
+        transform: translateX(-50%)
+
+        &:after
+            content: ''
+            width: 1px
+            height: 8px
+            background: #d2d2d2
+            position: absolute
+            top: 0
+            left: 50%
+            transform: translateX(-50%)
+
+    .marker-0:after
+        display: none
+
+    .marker-25
+        left: 25%
+
+    .marker-50
+        left: 50%
+
+    .marker-75
+        left: 75%
+
+    .marker-100
+        right: 0
+        transform: translateX(50%)
+
+        &:after
+            display: none
+
+    .ui-slider, .ui-slider-2
+        background: #efefef
+        border: 1px solid #d2d2d2
+        height: 20px
+        position: relative
+        border-radius: 100px
+
+        .ui-slider-range, .ui-slider-range-2
+            background: #89ABE3
+            height: 20px
+            position: absolute
+            border-top: 1px solid #89ABE3
+            border-bottom: 1px solid #89ABE3
+            transform: translateY(-1px)
+
+            &:after
+                content: ''
+                width: 100%
+                height: 1px
+                background: #fff
+                position: absolute
+                top: 0
+                left: 0
+                opacity: 0.3
+
+    .range-wrapper, .range-wrapper-2
+        position: absolute
+        top: -50px
+        left: 50%
+        transform: translateX(-50%)
+
+        .range, .range-2
+            background: #fff
+            white-space: nowrap
+            border: 1px solid #d2d2d2
+            border-radius: 2px
+            font-size: 13px
+            letter-spacing: 0.02em
+            color: #555
+            width: 150px
+            z-index: 10
+            position: relative
+
+            &:after
+                content: ''
+                position: absolute
+                top: 100%
+                left: 50%
+                transform: translateX(-50%)
+                border-left: 67px solid transparent
+                border-right: 67px solid transparent
+                border-top: 6px solid #d2d2d2
+
+            .range-value, .range-value-2
+                width: 74px
+                padding: 8px 0
+                text-align: center
+                display: inline-block
+                transition: background 0.1s
+
+            .range-divider, .range-divider-2
+                width: 1px
+                display: inline-block
+
+                &:after
+                    position: absolute
+                    top: 0
+                    left: 50%
+                    width: 1px
+                    height: 100%
+                    background: #d2d2d2
+                    content: ''
+
+        .range-alert, .range-alert-2
+            width: 16px
+            height: 16px
+            position: absolute
+            top: 50%
+            right: 0
+            transform: translateY(-50%)
+            background: #fff
+            border-top-right-radius: 2px
+            border-bottom-right-radius: 2px
+            border: 1px solid #d2d2d2
+            color: #0E0E0E
+            line-height: 15px
+            transition: right 0.2s
+
+            span
+                position: relative
+                left: 2.5px
+                top: -1px
+
+            &.active
+                right: -15px
+
+
+        .gear-wrapper, .gear-wrapper-2
+            position: absolute
+            top: -14px
+            left: 50%
+            transform: translateX(-50%)
+            z-index: 5
+            backface-visibility: hidden
+            width: 150px
+            height: 20px
+            overflow: hidden
+
+            .gear-large, .gear-large-2
+                width: 40px
+                height: 40px
+                background: #d2d2d2
+                border-radius: 100px
+                position: absolute
+                top: 18px
+                left: 18px
+                transform-origin: 50% 50%
+                transition: top 0.15s
+
+                &:after
+                    position: absolute
+                    content: ''
+                    width: 28px
+                    height: 28px
+                    top: 50%
+                    left: 50%
+                    transform: translate(-50%, -50%)
+                    background: #e8e8e8
+                    border-radius: 100px
+
+                &:nth-child(2)
+                    background: #d2d2d2
+                    left: auto
+                    right: 18px
+
+                    .gear-tooth
+                        background: #d2d2d2
+
+                &.active
+                    top: 4px
+
+
+.ui-slider-handle, .ui-slider-handle-2
+    background: #555
     position: absolute
-    width: 1px
-    height: 1px
-    opacity: 0
-    + .slider
-      display: block
-      position: relative
-      width: 100%
-      height: 4px
-      background-color: #bebebe
-      .slider-fill
-        display: block
-        position: absolute
-        width: 0%
-        height: 100%
-        user-select: none
-        z-index: 1
-      .slider-handle
-        cursor: pointer
-        position: absolute
-        top: -5.5px
-        left: 0%
-        width: 15px
-        height: 15px
-        margin-left: -8px
-        border-radius: 50%
-        transition: all .2s ease
-        user-select: none
-        z-index: 2
-    &:disabled + .slider
-      background-color: #b0b0b0 !important
-      .slider-fill, .slider-handle
-        cursor: default !important
-        background-color: #b0b0b0 !important
-      .slider-fill .slider-label, .slider-handle .slider-label
-        display: none
-        background-color: #b0b0b0 !important
-      .slider-fill.is-active, .slider-handle.is-active
-        top: -5.5px
-        width: 15px
-        height: 15px
-        margin-left: -8px
-      .slider-fill.is-active .slider-label
-        display: none
-        border-radius: 50%
-        transform: none
-      .slider-handle
-        &.is-active .slider-label
-          display: none
-          border-radius: 50%
-          transform: none
-        &:active
-          box-shadow: none !important
-          transform: scale(1) !important
-  &.slider-light input[type="range"]
-    + .slider
-      background-color: #5c5c5c
-    &:disabled + .slider
-      background-color: #5c5c5c !important
-      .slider-fill, .slider-handle
-        background-color: #5c5c5c !important
-  &.slider-continuous
-    &.slider-scale .slider-handle:active
-      transform: scale(1.4)
-    &.slider-shadow
-      &.slider-lightBlue .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(3, 169, 244, 0.26)
-      &.slider-teal .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(0, 150, 136, 0.26)
-      &.slider-orange .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(255, 152, 0, 0.26)
-      &.slider-amber .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(255, 193, 7, 0.26)
-      &.slider-green .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0.26)
-      &.slider-cyan .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(0, 188, 212, 0.26)
-      &.slider-indigo .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(63, 81, 181, 0.26)
-      &.slider-deepPurple .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(103, 58, 183, 0.26)
-      &.slider-pink .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(233, 30, 99, 0.26)
-      &.slider-red .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(244, 67, 54, 0.26)
-      &.slider-yellow .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(255, 235, 59, 0.26)
-      &.slider-lime .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(205, 220, 57, 0.26)
-      &.slider-brown .slider-handle:active
-        box-shadow: 0 0 0 10px rgba(121, 85, 72, 0.26)
-  &.slider-discrete
-    .slider .slider-handle
-      position: relative
-      z-index: 1
-      .slider-label
-        position: absolute
-        top: -17.5px
-        left: -2px
-        width: 30px
-        height: 30px
-        transform-origin: 50% 100%
-        border-radius: 50%
-        transform: scale(0.5) rotate(-45deg)
-        transition: all .2s ease
-        span
-          position: absolute
-          top: 7px
-          left: 0px
-          width: 100%
-          color: #fff
-          font-size: 12px
-          text-align: center
-          transform: rotate(45deg)
-          opacity: 0
-          user-select: none
-      &.is-active
-        top: 0px
-        margin-left: -2px
-        width: 4px
-        height: 4px
-        .slider-label
-          top: -15px
-          left: -2px
-          border-radius: 15px 15px 15px 0
-          transform: rotate(-45deg) translate(23px, -25px)
-          span
-            opacity: 1
-    &.slider-lightBlue .slider-label
-      background-color: #03a9f4
-    &.slider-teal .slider-label
-      background-color: #009688
-    &.slider-orange .slider-label
-      background-color: #ff9800
-    &.slider-amber .slider-label
-      background-color: #ffc107
-    &.slider-green .slider-label
-      background-color: #4caf50
-    &.slider-cyan .slider-label
-      background-color: #00bcd4
-    &.slider-indigo .slider-label
-      background-color: #3f51b5
-    &.slider-deepPurple .slider-label
-      background-color: #673ab7
-    &.slider-pink .slider-label
-      background-color: #e91e63
-    &.slider-red .slider-label
-      background-color: #f44336
-    &.slider-yellow .slider-label
-      background-color: #ffeb3b
-    &.slider-lime .slider-label
-      background-color: #cddc39
-    &.slider-brown .slider-label
-      background-color: #795548
-  &.slider-lightBlue
-    .slider-fill, .slider-handle
-      background-color: #03a9f4
-  &.slider-teal
-    .slider-fill, .slider-handle
-      background-color: #009688
-  &.slider-orange
-    .slider-fill, .slider-handle
-      background-color: #ff9800
-  &.slider-amber
-    .slider-fill, .slider-handle
-      background-color: #ffc107
-  &.slider-green
-    .slider-fill, .slider-handle
-      background-color: #4caf50
-  &.slider-cyan
-    .slider-fill, .slider-handle
-      background-color: #00bcd4
-  &.slider-indigo
-    .slider-fill, .slider-handle
-      background-color: #3f51b5
-  &.slider-deepPurple
-    .slider-fill, .slider-handle
-      background-color: #673ab7
-  &.slider-pink
-    .slider-fill, .slider-handle
-      background-color: #e91e63
-  &.slider-red
-    .slider-fill, .slider-handle
-      background-color: #f44336
-  &.slider-yellow
-    .slider-fill, .slider-handle
-      background-color: #ffeb3b
-  &.slider-lime
-    .slider-fill, .slider-handle
-      background-color: #cddc39
-  &.slider-brown
-    .slider-fill, .slider-handle
-      background-color: #795548
+    width: 32px
+    height: 32px
+    top: 50%
+    display: block
+    transform: translate(-50%, -50%)
+    border-radius: 100px
+    z-index: 10
+    background: linear-gradient(#555, #454545)
+    cursor: move
+
+    // fallback if grab cursor is unsupported
+    cursor: grab
+    cursor: -moz-grab
+    cursor: -webkit-grab
+    box-shadow: inset -2px -2px 6px 2px rgba(0, 0, 0, 0.1)
+    transition: width 0.1s
+
+    &:focus
+        outline: none
+
+    &:active
+        cursor: grabbing
+        cursor: -moz-grabbing
+        cursor: -webkit-grabbing
+
+.ui-state-active, .ui-status-active-2
+    width: 22px
+
+
+
+.gear-tooth, .gear-tooth-2
+    width: 22%
+    height: 114%
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    transform-origin: 0 0
+    background: #d2d2d2
+    border-radius: 2px
+
+    &:nth-child(2)
+        transform: rotate(90deg) translate(-50%, -50%)
+
+    &:nth-child(3)
+        transform: rotate(45deg) translate(-50%, -50%)
+
+    &:nth-child(4)
+        transform: rotate(-45deg) translate(-50%, -50%)

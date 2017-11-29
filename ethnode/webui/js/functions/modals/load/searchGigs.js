@@ -2,7 +2,7 @@ $category = '';
 $jobType = '';
 $experienceLevel = '';
 $budget = '';
-var searchQuery = ''
+var searchQuery = '';
 
 function formatSearchQuery() {
     // Function variables
@@ -44,6 +44,7 @@ function searchQueryDo() {
 
     if (searchQuery == "/api/v1/my/idx/query/guids/?title=" || searchQuery == "/api/v1/my/idx/query/guids/?" || searchQuery == false) {
         $('.gig').remove();
+        $('input#search-header, button#search-button').removeClass('wrong');
         loadGigs();
         return false;
     }
@@ -52,18 +53,42 @@ function searchQueryDo() {
         url: searchQuery,
         type: "GET",
         processData: false,
-        success: function(result) {
-            $result = JSON.parse(result);
-            if (result == '' || result == null || $result.length == null) return false;
+        success: function(data) {
+            var gigIDS = JSON.parse(data); var gigsToLoad = 10;
+            if (data == '' || data == null || gigIDS.length == null) return false;
 
+            // SEARCHING...
             $('.gig').remove();
 
-            for(i = 0; i < $result.length; i++) {
-                createGig($result[i]);
+            $gigsLoaded = $('.gig').length;
+
+            if (gigIDS.length > $gigsLoaded) {
+                gigsToLoad = $gigsLoaded + gigsToLoad;
+
+                // LOADING MORE GIGS
+                for(i = $gigsLoaded; i < gigsToLoad; i++) {
+                    createGig(gigIDS[i]);
+                }
             }
 
             $('input#search-header, button#search-button').removeClass('wrong');
             $filter.children().stop(true, true).removeClass('is-wrong');
+
+
+
+
+            // console.log(result);
+            // $result = JSON.parse(result);
+            // if (result == '' || result == null || $result.length == null) return false;
+
+            // $('.gig').remove();
+
+            // for(i = 0; i < $result.length; i++) {
+            //     createGig($result[i]);
+            // }
+
+            // $('input#search-header, button#search-button').removeClass('wrong');
+            // $filter.children().stop(true, true).removeClass('is-wrong');
         },
         error: function(error) {
             $('.gig').remove();
