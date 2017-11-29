@@ -2,10 +2,9 @@ $category = '';
 $jobType = '';
 $experienceLevel = '';
 $budget = '';
+var searchQuery = ''
 
-// SEARCH QUERY MAIN FUNCTION
-function searchQueryDo() {
-
+function formatSearchQuery() {
     // Function variables
     $filter = $('.filters .filter');
 
@@ -31,17 +30,19 @@ function searchQueryDo() {
     if ($experienceLevelText !== '') $experienceLevel = '&experience_level=' + $experienceLevelText;
     if ($budgetText !== '') $budget = '&budget=' + $budgetText;
 
-
     // FORMING SEARCH QUERY
     var search = '/api/v1/my/idx/query/guids/?' + $search + $category + $jobType + $experienceLevel + $budget;
-    var searchQuery = search.replace('/api/v1/my/idx/query/guids/?&', '/api/v1/my/idx/query/guids/?');
+    searchQuery = search.replace('/api/v1/my/idx/query/guids/?&', '/api/v1/my/idx/query/guids/?');
+}
 
-    if (searchQuery == "/api/v1/my/idx/query/guids/?") {
-        // loadGigs();
-        return false;
-    }
 
-    if (searchQuery == "/api/v1/my/idx/query/guids/?title=" || searchQuery == false) {
+// SEARCH QUERY MAIN FUNCTION
+function searchQueryDo() {
+
+    // FORMATING SEARCH QUERY
+    formatSearchQuery();
+
+    if (searchQuery == "/api/v1/my/idx/query/guids/?title=" || searchQuery == "/api/v1/my/idx/query/guids/?" || searchQuery == false) {
         $('.gig').remove();
         loadGigs();
         return false;
@@ -55,7 +56,6 @@ function searchQueryDo() {
             $result = JSON.parse(result);
             if (result == '' || result == null || $result.length == null) return false;
 
-            $result = JSON.parse(result);
             $('.gig').remove();
 
             for(i = 0; i < $result.length; i++) {

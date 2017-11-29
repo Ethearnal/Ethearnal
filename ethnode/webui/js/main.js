@@ -32,6 +32,30 @@ $('a.navbar-brand').click(function() {
 
     $('section.gigs-page-content').show();
     $('input#search-header').attr('placeholder', 'Search gigs...');
+
+
+    $filter = $('.filters .filter');
+    $filter.find('.is-checked').stop(true, true).removeClass('is-wrong is-checked');
+    $('input#search-header, button#search-button').removeClass('wrong');
+
+    $('.gig').remove();
+
+    $.ajax({
+        type: 'GET',
+        url: '/api/v1/my/gigs/',
+        dataType: 'text',
+        success: function(data) {
+            var gigIDS = JSON.parse(data);
+            var gigsToLoad = 10;
+
+            // THIS IS TO CREATE 20 GIGS ON LOAD
+            for(i = 0; i < gigsToLoad; i++) {
+                createGig(gigIDS[i]);
+            }
+        }
+    });
+
+    return false;
 })
 
 

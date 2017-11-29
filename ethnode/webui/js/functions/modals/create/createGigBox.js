@@ -23,7 +23,7 @@ function createGigBox(gigData, gigID) {
     // Other gig variables [owner-info div]
     var ownerAvatar = '<img src="data:image/png;base64,'+$data.ownerAvatar+'" alt="Avatar" />';
     var ownerName = '<h5>' + $data.ownerName + '</h5>';
-    var experienceName = '<h4>' + $data.experienceName + '</h4>';
+    var experienceName = '<h4>' + $data.experienceName + ' - ' + $data.jobTypeName + '</h4>';
     var ownerInfo = '<div class="owner-info">' + ownerAvatar + ownerName + experienceName + '</div>';
 
     var gigTitle = '<p>' + $data.title + '</p>';
