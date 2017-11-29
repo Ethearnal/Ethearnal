@@ -6,6 +6,7 @@ header .container nav {
 
 header .container nav .navbar-header input#search-header {
   border-color: #89ABE3;
+  transition: all .15s linear;
 }
 
 header .container nav .navbar-header input#search-header.wrong {
@@ -15,6 +16,7 @@ header .container nav .navbar-header input#search-header.wrong {
 header .container nav .navbar-header button#search-button {
   background-color: #89ABE3;
   color: white;
+  transition: all .15s linear;
 }
 
 header .container nav .navbar-header button#search-button.wrong {
