@@ -1,3 +1,4 @@
+var iGig = 0;
 function createGigBox(gigData, gigID) {
     $data = gigData;
     $expiresIn = null;

@@ -1,6 +1,4 @@
 // Loads more gigs on scroll down
-var timesLoadedScrollDown = 0;
-
 $(window).scroll(function() {
     if($(window).scrollTop() == $(document).height() - $(window).height()) {
 
@@ -21,14 +19,14 @@ $(window).scroll(function() {
                 var gigsToLoad = 10;
                 $gigsLoaded = $('.gig').length;
 
-                var timesLoadAfter = (timesLoaded * gigsToLoad) + gigsToLoad;
+                if (gigIDS.length > $gigsLoaded) {
+                    gigsToLoad = $gigsLoaded + gigsToLoad;
 
-                // LOADING MORE GIGS
-                for(i = $gigsLoaded; i < timesLoadAfter; i++) {
-                    createGig(gigIDS[i]);
+                    // LOADING MORE GIGS
+                    for(i = $gigsLoaded; i < gigsToLoad; i++) {
+                        createGig(gigIDS[i]);
+                    }
                 }
-
-                timesLoadedScrollDown++;
             },
             error: function(error) {
                 console.log('error! Search Query has not succeeded and has not been executed. Please contact support!')

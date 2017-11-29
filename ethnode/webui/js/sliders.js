@@ -1,52 +1,210 @@
-// function collision($div1, $div2) {
-//       var x1 = $div1.offset().left;
-//       var w1 = 40;
-//       var r1 = x1 + w1;
-//       var x2 = $div2.offset().left;
-//       var w2 = 40;
-//       var r2 = x2 + w2;
+$(function() {
 
-//       if (r1 < x2 || x1 > r2) return false;
-//       return true;
+  // Initiate Slider
+  $('#slider-range').slider({
+    range: true,
+    min: 0,
+    max: 10000,
+    step: 50,
+    values: [0, 5000]
+  });
 
-//     }
+  // Move the range wrapper into the generated divs
+  $('.ui-slider-range').append($('.range-wrapper'));
 
-// // // slider call
+  // Apply initial values to the range container
+  $('.range').html('<span class="range-value"><sup>$</sup>' + $('#slider-range').slider("values", 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider"></span><span class="range-value"><sup>$</sup>' + $("#slider-range").slider("values", 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
 
-// $('#slider').slider({
-//     range: true,
-//     min: 0,
-//     max: 500,
-//     values: [ 75, 300 ],
-//     slide: function(event, ui) {
+  // Show the gears on press of the handles
+  $('.ui-slider-handle, .ui-slider-range').on('mousedown', function() {
+    $(this).parent().parent().find('.gear-large').addClass('active');
+  });
 
-//         $('.ui-slider-handle:eq(0) .price-range-min').html('$' + ui.values[ 0 ]);
-//         $('.ui-slider-handle:eq(1) .price-range-max').html('$' + ui.values[ 1 ]);
-//         $('.price-range-both').html('<i>$' + ui.values[ 0 ] + ' - </i>$' + ui.values[ 1 ] );
+  // Hide the gears when the mouse is released
+  // Done on document just incase the user hovers off of the handle
+  $(document).on('mouseup', function() {
+    if ($('.gear-large').hasClass('active')) {
+      $('.gear-large').removeClass('active');
+    }
+  });
 
-//         //
+  // Rotate the gears
+  var gearOneAngle = 0,
+    gearTwoAngle = 0,
+    rangeWidth = $('.ui-slider-range').css('width');
 
-//     if ( ui.values[0] == ui.values[1] ) {
-//       $('.price-range-both i').css('display', 'none');
-//     } else {
-//       $('.price-range-both i').css('display', 'inline');
-//     }
+  $('.gear-one').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+  $('.gear-two').css('transform', 'rotate(' + gearTwoAngle + 'deg)');
 
-//         //
+  $('#slider-range').slider({
+    slide: function(event, ui) {
 
-//         if (collision($('.price-range-min'), $('.price-range-max')) == true) {
-//             $('.price-range-min, .price-range-max').css('opacity', '0');
-//             $('.price-range-both').css('display', 'block');
-//         } else {
-//             $('.price-range-min, .price-range-max').css('opacity', '1');
-//             $('.price-range-both').css('display', 'none');
-//         }
+      // Update the range container values upon sliding
 
-//     }
-// });
+      $('.range').html('<span class="range-value"><sup>$</sup>' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider"></span><span class="range-value"><sup>$</sup>' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
 
-// $('.ui-slider-range').append('<span class="price-range-both value"><i>$' + $('#slider').slider('values', 0 ) + ' - </i>' + $('#slider').slider('values', 1 ) + '</span>');
+      // Get old value
+      var previousVal = parseInt($(this).data('value'));
 
-// $('.ui-slider-handle:eq(0)').append('<span class="price-range-min value">$' + $('#slider').slider('values', 0 ) + '</span>');
+      // Save new value
+      $(this).data({
+        'value': parseInt(ui.value)
+      });
 
-// $('.ui-slider-handle:eq(1)').append('<span class="price-range-max value">$' + $('#slider').slider('values', 1 ) + '</span>');
+      // Figure out which handle is being used
+      if (ui.values[0] == ui.value) {
+
+        // Left handle
+        if (previousVal > parseInt(ui.value)) {
+          // value decreased
+          gearOneAngle -= 7;
+          $('.gear-one').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+        } else {
+          // value increased
+          gearOneAngle += 7;
+          $('.gear-one').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+        }
+
+      } else {
+
+        // Right handle
+        if (previousVal > parseInt(ui.value)) {
+          // value decreased
+          gearOneAngle -= 7;
+          $('.gear-two').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+        } else {
+          // value increased
+          gearOneAngle += 7;
+          $('.gear-two').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+        }
+
+      }
+
+      if (ui.values[1] === 10000) {
+        if (!$('.range-alert').hasClass('active')) {
+          $('.range-alert').addClass('active');
+        }
+      } else {
+        if ($('.range-alert').hasClass('active')) {
+          $('.range-alert').removeClass('active');
+        }
+      }
+    }
+  });
+
+  // Prevent the range container from moving the slider
+  $('.range, .range-alert').on('mousedown', function(event) {
+    event.stopPropagation();
+  });
+
+});
+
+
+
+
+
+
+$(function() {
+
+  // Initiate Slider
+  $('#slider-range-2').slider({
+    range: true,
+    min: 0,
+    max: 5000,
+    step: 25,
+    values: [0, 2500]
+  });
+
+  // Move the range wrapper into the generated divs
+  $('.ui-slider-range-2').append($('.range-wrapper-2'));
+
+  // Apply initial values to the range container
+  $('.range-2').html('<span class="range-value-2"><sup>$</sup>' + $('#slider-range-2').slider("values", 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider-2"></span><span class="range-value-2"><sup>$</sup>' + $("#slider-range-2").slider("values", 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
+
+  // Show the gears on press of the handles
+  $('.ui-slider-handle, .ui-slider-range').on('mousedown', function() {
+    $(this).parent().parent().find('.gear-large-2').addClass('active');
+  });
+
+  // Hide the gears when the mouse is released
+  // Done on document just incase the user hovers off of the handle
+  $(document).on('mouseup', function() {
+    if ($('.gear-large-2').hasClass('active')) {
+        $('.gear-large-2').removeClass('active');
+    }
+  });
+
+  // Rotate the gears
+  var gearOneAngle = 0,
+    gearTwoAngle = 0,
+    rangeWidth = $('.ui-slider-range-2').css('width');
+
+  $('.gear-one-2').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+  $('.gear-two-2').css('transform', 'rotate(' + gearTwoAngle + 'deg)');
+
+  $('#slider-range-2').slider({
+    slide: function(event, ui) {
+
+      // Update the range container values upon sliding
+
+      $('.range-2').html('<span class="range-value-2"><sup>$</sup>' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider-2"></span><span class="range-value-2"><sup>$</sup>' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
+
+      // Get old value
+      var previousVal = parseInt($(this).data('value'));
+
+      // Save new value
+      $(this).data({
+        'value': parseInt(ui.value)
+      });
+
+      // Figure out which handle is being used
+      if (ui.values[0] == ui.value) {
+
+        // Left handle
+        if (previousVal > parseInt(ui.value)) {
+          // value decreased
+          gearOneAngle -= 7;
+          $('.gear-one-2').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+        } else {
+          // value increased
+          gearOneAngle += 7;
+          $('.gear-one-2').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+        }
+
+      } else {
+
+        // Right handle
+        if (previousVal > parseInt(ui.value)) {
+          // value decreased
+          gearOneAngle -= 7;
+          $('.gear-two-2').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+        } else {
+          // value increased
+          gearOneAngle += 7;
+          $('.gear-two-2').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+        }
+
+      }
+
+      if (ui.values[1] === 10000) {
+        if (!$('.range-alert-2').hasClass('active')) {
+          $('.range-alert-2').addClass('active');
+        }
+      } else {
+        if ($('.range-alert-2').hasClass('active')) {
+          $('.range-alert-2').removeClass('active');
+        }
+      }
+    }
+  });
+
+  // Prevent the range container from moving the slider
+  $('.range-2, .range-alert-2').on('mousedown', function(event) {
+    event.stopPropagation();
+  });
+
+});
+
+
+
+
