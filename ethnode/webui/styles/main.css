@@ -2129,6 +2129,11 @@ sup {
   margin-left: 13px;
 }
 
+.slider-wrapper.slider-wrapper-2 .ui-slider .ui-slider-range, .slider-wrapper-2.slider-wrapper-2 .ui-slider .ui-slider-range {
+  border-bottom-left-radius: 100px;
+  border-top-left-radius: 100px;
+}
+
 .slider-wrapper .marker, .slider-wrapper .marker-2, .slider-wrapper-2 .marker, .slider-wrapper-2 .marker-2 {
   position: absolute;
   top: 100%;
@@ -2221,9 +2226,7 @@ sup {
 }
 
 .slider-wrapper .range-wrapper .range, .slider-wrapper .range-wrapper .range-2, .slider-wrapper .range-wrapper-2 .range, .slider-wrapper .range-wrapper-2 .range-2, .slider-wrapper-2 .range-wrapper .range, .slider-wrapper-2 .range-wrapper .range-2, .slider-wrapper-2 .range-wrapper-2 .range, .slider-wrapper-2 .range-wrapper-2 .range-2 {
-  background: #fff;
   white-space: nowrap;
-  border: 1px solid #d2d2d2;
   border-radius: 2px;
   font-size: 13px;
   letter-spacing: 0.02em;
@@ -2231,6 +2234,16 @@ sup {
   width: 150px;
   z-index: 10;
   position: relative;
+}
+
+.slider-wrapper .range-wrapper .range.range-2, .slider-wrapper .range-wrapper .range-2.range-2, .slider-wrapper .range-wrapper-2 .range.range-2, .slider-wrapper .range-wrapper-2 .range-2.range-2, .slider-wrapper-2 .range-wrapper .range.range-2, .slider-wrapper-2 .range-wrapper .range-2.range-2, .slider-wrapper-2 .range-wrapper-2 .range.range-2, .slider-wrapper-2 .range-wrapper-2 .range-2.range-2 {
+  width: 75px;
+}
+
+.slider-wrapper .range-wrapper .range.range-2:after, .slider-wrapper .range-wrapper .range-2.range-2:after, .slider-wrapper .range-wrapper-2 .range.range-2:after, .slider-wrapper .range-wrapper-2 .range-2.range-2:after, .slider-wrapper-2 .range-wrapper .range.range-2:after, .slider-wrapper-2 .range-wrapper .range-2.range-2:after, .slider-wrapper-2 .range-wrapper-2 .range.range-2:after, .slider-wrapper-2 .range-wrapper-2 .range-2.range-2:after {
+  border-left: 33px solid transparent;
+  border-right: 33px solid transparent;
+  border-top: 3px solid #d2d2d2;
 }
 
 .slider-wrapper .range-wrapper .range:after, .slider-wrapper .range-wrapper .range-2:after, .slider-wrapper .range-wrapper-2 .range:after, .slider-wrapper .range-wrapper-2 .range-2:after, .slider-wrapper-2 .range-wrapper .range:after, .slider-wrapper-2 .range-wrapper .range-2:after, .slider-wrapper-2 .range-wrapper-2 .range:after, .slider-wrapper-2 .range-wrapper-2 .range-2:after {
@@ -2246,27 +2259,25 @@ sup {
   border-top: 6px solid #d2d2d2;
 }
 
+.slider-wrapper .range-wrapper .range .range-value:nth-child(1), .slider-wrapper .range-wrapper .range-2 .range-value:nth-child(1), .slider-wrapper .range-wrapper-2 .range .range-value:nth-child(1), .slider-wrapper .range-wrapper-2 .range-2 .range-value:nth-child(1), .slider-wrapper-2 .range-wrapper .range .range-value:nth-child(1), .slider-wrapper-2 .range-wrapper .range-2 .range-value:nth-child(1), .slider-wrapper-2 .range-wrapper-2 .range .range-value:nth-child(1), .slider-wrapper-2 .range-wrapper-2 .range-2 .range-value:nth-child(1) {
+  border-right: none;
+}
+
 .slider-wrapper .range-wrapper .range .range-value, .slider-wrapper .range-wrapper .range .range-value-2, .slider-wrapper .range-wrapper .range-2 .range-value, .slider-wrapper .range-wrapper .range-2 .range-value-2, .slider-wrapper .range-wrapper-2 .range .range-value, .slider-wrapper .range-wrapper-2 .range .range-value-2, .slider-wrapper .range-wrapper-2 .range-2 .range-value, .slider-wrapper .range-wrapper-2 .range-2 .range-value-2, .slider-wrapper-2 .range-wrapper .range .range-value, .slider-wrapper-2 .range-wrapper .range .range-value-2, .slider-wrapper-2 .range-wrapper .range-2 .range-value, .slider-wrapper-2 .range-wrapper .range-2 .range-value-2, .slider-wrapper-2 .range-wrapper-2 .range .range-value, .slider-wrapper-2 .range-wrapper-2 .range .range-value-2, .slider-wrapper-2 .range-wrapper-2 .range-2 .range-value, .slider-wrapper-2 .range-wrapper-2 .range-2 .range-value-2 {
   width: 74px;
   padding: 8px 0;
   text-align: center;
   display: inline-block;
   transition: background 0.1s;
+  background-color: white;
+  border: 1px solid #d2d2d2;
 }
 
-.slider-wrapper .range-wrapper .range .range-divider, .slider-wrapper .range-wrapper .range .range-divider-2, .slider-wrapper .range-wrapper .range-2 .range-divider, .slider-wrapper .range-wrapper .range-2 .range-divider-2, .slider-wrapper .range-wrapper-2 .range .range-divider, .slider-wrapper .range-wrapper-2 .range .range-divider-2, .slider-wrapper .range-wrapper-2 .range-2 .range-divider, .slider-wrapper .range-wrapper-2 .range-2 .range-divider-2, .slider-wrapper-2 .range-wrapper .range .range-divider, .slider-wrapper-2 .range-wrapper .range .range-divider-2, .slider-wrapper-2 .range-wrapper .range-2 .range-divider, .slider-wrapper-2 .range-wrapper .range-2 .range-divider-2, .slider-wrapper-2 .range-wrapper-2 .range .range-divider, .slider-wrapper-2 .range-wrapper-2 .range .range-divider-2, .slider-wrapper-2 .range-wrapper-2 .range-2 .range-divider, .slider-wrapper-2 .range-wrapper-2 .range-2 .range-divider-2 {
-  width: 1px;
-  display: inline-block;
-}
-
-.slider-wrapper .range-wrapper .range .range-divider:after, .slider-wrapper .range-wrapper .range .range-divider-2:after, .slider-wrapper .range-wrapper .range-2 .range-divider:after, .slider-wrapper .range-wrapper .range-2 .range-divider-2:after, .slider-wrapper .range-wrapper-2 .range .range-divider:after, .slider-wrapper .range-wrapper-2 .range .range-divider-2:after, .slider-wrapper .range-wrapper-2 .range-2 .range-divider:after, .slider-wrapper .range-wrapper-2 .range-2 .range-divider-2:after, .slider-wrapper-2 .range-wrapper .range .range-divider:after, .slider-wrapper-2 .range-wrapper .range .range-divider-2:after, .slider-wrapper-2 .range-wrapper .range-2 .range-divider:after, .slider-wrapper-2 .range-wrapper .range-2 .range-divider-2:after, .slider-wrapper-2 .range-wrapper-2 .range .range-divider:after, .slider-wrapper-2 .range-wrapper-2 .range .range-divider-2:after, .slider-wrapper-2 .range-wrapper-2 .range-2 .range-divider:after, .slider-wrapper-2 .range-wrapper-2 .range-2 .range-divider-2:after {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 1px;
-  height: 100%;
-  background: #d2d2d2;
-  content: '';
+.slider-wrapper .range-wrapper .range .range-value.range-value-2 sup i, .slider-wrapper .range-wrapper .range .range-value-2.range-value-2 sup i, .slider-wrapper .range-wrapper .range-2 .range-value.range-value-2 sup i, .slider-wrapper .range-wrapper .range-2 .range-value-2.range-value-2 sup i, .slider-wrapper .range-wrapper-2 .range .range-value.range-value-2 sup i, .slider-wrapper .range-wrapper-2 .range .range-value-2.range-value-2 sup i, .slider-wrapper .range-wrapper-2 .range-2 .range-value.range-value-2 sup i, .slider-wrapper .range-wrapper-2 .range-2 .range-value-2.range-value-2 sup i, .slider-wrapper-2 .range-wrapper .range .range-value.range-value-2 sup i, .slider-wrapper-2 .range-wrapper .range .range-value-2.range-value-2 sup i, .slider-wrapper-2 .range-wrapper .range-2 .range-value.range-value-2 sup i, .slider-wrapper-2 .range-wrapper .range-2 .range-value-2.range-value-2 sup i, .slider-wrapper-2 .range-wrapper-2 .range .range-value.range-value-2 sup i, .slider-wrapper-2 .range-wrapper-2 .range .range-value-2.range-value-2 sup i, .slider-wrapper-2 .range-wrapper-2 .range-2 .range-value.range-value-2 sup i, .slider-wrapper-2 .range-wrapper-2 .range-2 .range-value-2.range-value-2 sup i {
+  position: relative;
+  top: 3px;
+  left: -3px;
+  font-size: 12px;
 }
 
 .slider-wrapper .range-wrapper .range-alert, .slider-wrapper .range-wrapper .range-alert-2, .slider-wrapper .range-wrapper-2 .range-alert, .slider-wrapper .range-wrapper-2 .range-alert-2, .slider-wrapper-2 .range-wrapper .range-alert, .slider-wrapper-2 .range-wrapper .range-alert-2, .slider-wrapper-2 .range-wrapper-2 .range-alert, .slider-wrapper-2 .range-wrapper-2 .range-alert-2 {
@@ -2274,10 +2285,10 @@ sup {
   height: 16px;
   position: absolute;
   top: 50%;
-  right: 0;
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
+  right: 2px;
+  -webkit-transform: translateY(-51%);
+      -ms-transform: translateY(-51%);
+          transform: translateY(-51%);
   background: #fff;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
@@ -2294,7 +2305,7 @@ sup {
 }
 
 .slider-wrapper .range-wrapper .range-alert.active, .slider-wrapper .range-wrapper .range-alert-2.active, .slider-wrapper .range-wrapper-2 .range-alert.active, .slider-wrapper .range-wrapper-2 .range-alert-2.active, .slider-wrapper-2 .range-wrapper .range-alert.active, .slider-wrapper-2 .range-wrapper .range-alert-2.active, .slider-wrapper-2 .range-wrapper-2 .range-alert.active, .slider-wrapper-2 .range-wrapper-2 .range-alert-2.active {
-  right: -15px;
+  right: -14px;
 }
 
 .slider-wrapper .range-wrapper .gear-wrapper, .slider-wrapper .range-wrapper .gear-wrapper-2, .slider-wrapper .range-wrapper-2 .gear-wrapper, .slider-wrapper .range-wrapper-2 .gear-wrapper-2, .slider-wrapper-2 .range-wrapper .gear-wrapper, .slider-wrapper-2 .range-wrapper .gear-wrapper-2, .slider-wrapper-2 .range-wrapper-2 .gear-wrapper, .slider-wrapper-2 .range-wrapper-2 .gear-wrapper-2 {
@@ -2310,6 +2321,10 @@ sup {
   width: 150px;
   height: 20px;
   overflow: hidden;
+}
+
+.slider-wrapper .range-wrapper .gear-wrapper.gear-wrapper-2, .slider-wrapper .range-wrapper .gear-wrapper-2.gear-wrapper-2, .slider-wrapper .range-wrapper-2 .gear-wrapper.gear-wrapper-2, .slider-wrapper .range-wrapper-2 .gear-wrapper-2.gear-wrapper-2, .slider-wrapper-2 .range-wrapper .gear-wrapper.gear-wrapper-2, .slider-wrapper-2 .range-wrapper .gear-wrapper-2.gear-wrapper-2, .slider-wrapper-2 .range-wrapper-2 .gear-wrapper.gear-wrapper-2, .slider-wrapper-2 .range-wrapper-2 .gear-wrapper-2.gear-wrapper-2 {
+  display: none;
 }
 
 .slider-wrapper .range-wrapper .gear-wrapper .gear-large, .slider-wrapper .range-wrapper .gear-wrapper .gear-large-2, .slider-wrapper .range-wrapper .gear-wrapper-2 .gear-large, .slider-wrapper .range-wrapper .gear-wrapper-2 .gear-large-2, .slider-wrapper .range-wrapper-2 .gear-wrapper .gear-large, .slider-wrapper .range-wrapper-2 .gear-wrapper .gear-large-2, .slider-wrapper .range-wrapper-2 .gear-wrapper-2 .gear-large, .slider-wrapper .range-wrapper-2 .gear-wrapper-2 .gear-large-2, .slider-wrapper-2 .range-wrapper .gear-wrapper .gear-large, .slider-wrapper-2 .range-wrapper .gear-wrapper .gear-large-2, .slider-wrapper-2 .range-wrapper .gear-wrapper-2 .gear-large, .slider-wrapper-2 .range-wrapper .gear-wrapper-2 .gear-large-2, .slider-wrapper-2 .range-wrapper-2 .gear-wrapper .gear-large, .slider-wrapper-2 .range-wrapper-2 .gear-wrapper .gear-large-2, .slider-wrapper-2 .range-wrapper-2 .gear-wrapper-2 .gear-large, .slider-wrapper-2 .range-wrapper-2 .gear-wrapper-2 .gear-large-2 {
