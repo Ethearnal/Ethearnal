@@ -75,12 +75,18 @@ function Start() {
 
 
 function SendRequest() {
-    // formatSearchQuery();
     searchQueryDo();
-    // console.log(searchQuery);
 }
 
 $(Start);
+
+function SendRequestBudget() {
+    console.log('Budget: ' + budgetSliderFromValue + ' - ' + budgetSliderToValue);
+}
+
+function SendRequestReputation() {
+    console.log('Reputation: ' + reputationValue);
+}
 
 
 

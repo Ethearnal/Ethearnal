@@ -1,3 +1,8 @@
+var reputationValue = 0;
+
+var budgetSliderFromValue = 0;
+var budgetSliderToValue = 5000;
+
 $(function() {
 
   // Initiate Slider
@@ -6,7 +11,7 @@ $(function() {
     min: 0,
     max: 10000,
     step: 50,
-    values: [0, 5000]
+    values: [budgetSliderFromValue, budgetSliderToValue]
   });
 
   // Move the range wrapper into the generated divs
@@ -40,7 +45,6 @@ $(function() {
     slide: function(event, ui) {
 
       // Update the range container values upon sliding
-
       $('.range').html('<span class="range-value"><sup>$</sup>' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider"></span><span class="range-value"><sup>$</sup>' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
 
       // Get old value
@@ -50,6 +54,12 @@ $(function() {
       $(this).data({
         'value': parseInt(ui.value)
       });
+
+      budgetSliderFromValue = ui.values[0];
+      budgetSliderToValue = ui.values[1];
+
+      clearTimeout(Timer);
+      Timer = setTimeout(SendRequestBudget, 400);
 
       // Figure out which handle is being used
       if (ui.values[0] == ui.value) {
@@ -108,46 +118,22 @@ $(function() {
 
   // Initiate Slider
   $('#slider-range-2').slider({
-    range: true,
+    range: "min",
     min: 0,
     max: 5000,
     step: 25,
-    values: [0, 2500]
-  });
+    value: 0,
 
-  // Move the range wrapper into the generated divs
-  $('.ui-slider-range-2').append($('.range-wrapper-2'));
-
-  // Apply initial values to the range container
-  $('.range-2').html('<span class="range-value-2"><sup>$</sup>' + $('#slider-range-2').slider("values", 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider-2"></span><span class="range-value-2"><sup>$</sup>' + $("#slider-range-2").slider("values", 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
-
-  // Show the gears on press of the handles
-  $('.ui-slider-handle, .ui-slider-range').on('mousedown', function() {
-    $(this).parent().parent().find('.gear-large-2').addClass('active');
-  });
-
-  // Hide the gears when the mouse is released
-  // Done on document just incase the user hovers off of the handle
-  $(document).on('mouseup', function() {
-    if ($('.gear-large-2').hasClass('active')) {
-        $('.gear-large-2').removeClass('active');
-    }
-  });
-
-  // Rotate the gears
-  var gearOneAngle = 0,
-    gearTwoAngle = 0,
-    rangeWidth = $('.ui-slider-range-2').css('width');
-
-  $('.gear-one-2').css('transform', 'rotate(' + gearOneAngle + 'deg)');
-  $('.gear-two-2').css('transform', 'rotate(' + gearTwoAngle + 'deg)');
-
-  $('#slider-range-2').slider({
+    // SLIDE FUNCTION
     slide: function(event, ui) {
 
-      // Update the range container values upon sliding
+      // Show the gears on press of the handles
+      $(this).find('.ui-slider-handle, .ui-slider-range').on('mousedown', function() {
+          $(this).parent().parent().find('.gear-large-2').addClass('active');
+      });
 
-      $('.range-2').html('<span class="range-value-2"><sup>$</sup>' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider-2"></span><span class="range-value-2"><sup>$</sup>' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
+      // Update the range container values upon sliding
+      $('.range-2').html('<span class="range-divider-2"></span><span class="range-value-2"><sup><i class="material-icons">polymer</i></sup>' + ui.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
 
       // Get old value
       var previousVal = parseInt($(this).data('value'));
@@ -157,46 +143,19 @@ $(function() {
         'value': parseInt(ui.value)
       });
 
-      // Figure out which handle is being used
-      if (ui.values[0] == ui.value) {
+      reputationValue = ui.value;
 
-        // Left handle
-        if (previousVal > parseInt(ui.value)) {
-          // value decreased
-          gearOneAngle -= 7;
-          $('.gear-one-2').css('transform', 'rotate(' + gearOneAngle + 'deg)');
-        } else {
-          // value increased
-          gearOneAngle += 7;
-          $('.gear-one-2').css('transform', 'rotate(' + gearOneAngle + 'deg)');
-        }
-
-      } else {
-
-        // Right handle
-        if (previousVal > parseInt(ui.value)) {
-          // value decreased
-          gearOneAngle -= 7;
-          $('.gear-two-2').css('transform', 'rotate(' + gearOneAngle + 'deg)');
-        } else {
-          // value increased
-          gearOneAngle += 7;
-          $('.gear-two-2').css('transform', 'rotate(' + gearOneAngle + 'deg)');
-        }
-
-      }
-
-      if (ui.values[1] === 10000) {
-        if (!$('.range-alert-2').hasClass('active')) {
-          $('.range-alert-2').addClass('active');
-        }
-      } else {
-        if ($('.range-alert-2').hasClass('active')) {
-          $('.range-alert-2').removeClass('active');
-        }
-      }
+      clearTimeout(Timer);
+      Timer = setTimeout(SendRequestReputation, 400);
     }
   });
+
+  // Move the range wrapper into the generated divs
+  $('.ui-slider-range-2').append($('.range-wrapper-2'));
+
+  // Apply initial values to the range container
+  $('.range-2').html('<span class="range-divider-2"></span><span class="range-value-2"><sup><i class="material-icons">polymer</i></sup>' + $("#slider-range-2").slider("values", 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
+
 
   // Prevent the range container from moving the slider
   $('.range-2, .range-alert-2').on('mousedown', function(event) {
@@ -204,7 +163,3 @@ $(function() {
   });
 
 });
-
-
-
-
