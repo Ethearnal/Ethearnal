@@ -21,7 +21,7 @@ ownerAvatar="iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAiUlEQVRYR+2VMQ6AIBA
 
 
 class TestGigGenerator(object):
-    def __init__(self, fname, gigs_api: BinResourceLocalApi):
+    def eache__init__(self, fname, gigs_api: BinResourceLocalApi):
         self.fname = fname
         self.d = json.loads(js)
         self.gigs_api = gigs_api
@@ -42,7 +42,6 @@ class TestGigGenerator(object):
                     self.d['ownerName'] = author[0]
                     self.d['description'] = author[0]
                 self.d['price'] = randint(1, 1000)
-
 
                 js_data = json.dumps(self.d, ensure_ascii=False)
                 js_bin_data = js_data.encode()

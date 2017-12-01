@@ -18,11 +18,16 @@ udp_host = '0.0.0.0'
 udp_port = 34567
 udp_host_port = '%s:%d' % (udp_host, udp_port)
 
+# ertcdn service
+ertcdn_data_dir = 'ertcdn_profile'
+ertcdn_socket_host = '0.0.0.0'
+ertcdn_socket_port = 5678
+ertcdn_host_port = '%s:%d' % (ertcdn_socket_host, ertcdn_socket_port)
+
 
 # web service defaults
-
-web_svc_data_dir = 'websvc_profile'
-web_svc_upload_dir = 'websvc_uploads_profile'
-web_svc_socket_host = '0.0.0.0'
-web_svc_socket_port = 5678
-web_svc_host_port = '%s:%d' % (web_svc_socket_host, web_svc_socket_port)
+# web_svc_data_dir = 'websvc_profile'
+# web_svc_upload_dir = 'websvc_uploads_profile'
+# web_svc_socket_host = '0.0.0.0'
+# web_svc_socket_port = 5678
+# web_svc_host_port = '%s:%d' % (web_svc_socket_host, web_svc_socket_port)

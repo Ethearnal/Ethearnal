@@ -46,17 +46,27 @@ class PubkeySQLite(BaseSQLite):
             return self.cursor.execute(qs, (pk_hash,))
 
     def read(self,
-                pk_hash: bytes,
-                qs_only=False):
-        qs = 'SELECT FROM %s WHERE pk_hash=?' % self.table_name
+             pk_hash: bytes,
+             qs_only=False):
+        qs = 'SELECT * FROM %s WHERE pk_hash=?' % self.table_name
         if qs_only:
             return qs, (pk_hash,)
         else:
             return self.cursor.execute(qs, (pk_hash,))
 
+    def all(self, qs_only=False):
+        qs = 'SELECT * FROM %s;'
+        if qs_only:
+            return qs, tuple()
+        else:
+            return self.cursor.execute(qs)
+
     def fetchone(self, pk_hash: bytes):
         c = self.read(pk_hash)
         return c.fetchone()
+
+    def fetchall(self):
+        return self.all().fetchmany()
 
 
 
