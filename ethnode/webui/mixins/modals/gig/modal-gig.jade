@@ -1,5 +1,36 @@
-.modal.fade.timeline#gigModal(tabindex="-1", role="dialog", aria-labelledby="myModalLabel")
+.modal.fade#gigModal(tabindex="-1", role="dialog", aria-labelledby="myModalLabel")
     .modal-dialog.modal-lg(role="document")
         .modal-content.col-xs-12
+
+            .modal-body.col-xs-12
+                button#dropdowngig606.mdl-button.mdl-js-button.mdl-button--icon.dropdown-button: i.material-icons more_vert
+                ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="dropdowngig606")
+                    li.mdl-menu__item.open-modal(open-modal="#edit-gig") Edit
+                    li.mdl-menu__item.delete Delete
+
+                h2.title Title goes here
+
+                .owner-info
+                    img(src="/api/v1/profile/?q=avatar", alt="Avatar")
+                    h5 owner_nickname
+                    h4 <i class="material-icons">polymer</i> 306 <span>expires in a day</span>
+
+                .image
+                    .button-prev: i.material-icons keyboard_arrow_left
+                    .button-next: i.material-icons keyboard_arrow_right
+                    .items
+                        .item: img(src="http://puu.sh/uyh0h/248cb32eca.png", alt="Building")
+                        .item: img(src="http://puu.sh/uyh1c/2b0d7529eb.png", alt="Building")
+                        .item: img(src="http://puu.sh/uyh1r/b8a98339c7.png", alt="Building")
+
+                p.gig-description Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis atque, iure eligendi illo quam expedita vero ipsum similique, esse ratione debitis aperiam provident excepturi rerum saepe, praesentium maiores asperiores totam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, soluta modi esse accusantium sit velit cupiditate minima ipsam ex, sunt eaque quas dignissimos fugiat itaque fuga unde minus totam sequi? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis illum magnam aliquam, deserunt quisquam excepturi assumenda odit! Deserunt illo, atque repellat voluptates adipisci et, nihil blanditiis! Amet reiciendis repudiandae, iste.
+
+                .extras-box: h3 BOX FOR EXTRAS
+
+                .footer
+                    button.mdl-button.mdl-js-button.close-button Close
+                    button#publish4.mdl-button.mdl-js-button.buy <span><i class="material-icons">polymer</i> 30</span> Order
+                    .mdl-tooltip(data-mdl-for="publish4") This text will be changed anyway.
+
 
             // JSON AJAX DATA GOES HERE

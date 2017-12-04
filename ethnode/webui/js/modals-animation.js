@@ -69,7 +69,7 @@ function Start() {
 
     $('input#search-header').keyup(function () {
         clearTimeout(Timer);
-        Timer = setTimeout(SendRequest, 400);
+        Timer = setTimeout(SendRequest, 200);
     });
 }
 

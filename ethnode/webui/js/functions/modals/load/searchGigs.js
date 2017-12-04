@@ -33,6 +33,9 @@ function formatSearchQuery() {
     // FORMING SEARCH QUERY
     var search = '/api/v1/my/idx/query/guids/?' + $search + $category + $jobType + $experienceLevel + $budget;
     searchQuery = search.replace('/api/v1/my/idx/query/guids/?&', '/api/v1/my/idx/query/guids/?');
+
+    // null every filter
+    $category = ''; $jobType = ''; $experienceLevel = ''; $budget = '';
 }
 
 
@@ -54,41 +57,10 @@ function searchQueryDo() {
         type: "GET",
         processData: false,
         success: function(data) {
-            var gigIDS = JSON.parse(data); var gigsToLoad = 10;
-            if (data == '' || data == null || gigIDS.length == null) return false;
-
-            // SEARCHING...
-            $('.gig').remove();
-
-            $gigsLoaded = $('.gig').length;
-
-            if (gigIDS.length > $gigsLoaded) {
-                gigsToLoad = $gigsLoaded + gigsToLoad;
-
-                // LOADING MORE GIGS
-                for(i = $gigsLoaded; i < gigsToLoad; i++) {
-                    createGig(gigIDS[i]);
-                }
-            }
+            loadGigsOnAjaxSuccess(data, true);
 
             $('input#search-header, button#search-button').removeClass('wrong');
             $filter.children().stop(true, true).removeClass('is-wrong');
-
-
-
-
-            // console.log(result);
-            // $result = JSON.parse(result);
-            // if (result == '' || result == null || $result.length == null) return false;
-
-            // $('.gig').remove();
-
-            // for(i = 0; i < $result.length; i++) {
-            //     createGig($result[i]);
-            // }
-
-            // $('input#search-header, button#search-button').removeClass('wrong');
-            // $filter.children().stop(true, true).removeClass('is-wrong');
         },
         error: function(error) {
             $('.gig').remove();
@@ -96,9 +68,6 @@ function searchQueryDo() {
             $('input#search-header, button#search-button').addClass('wrong');
         }
     });
-
-    // null every filter
-    $category = ''; $jobType = ''; $experienceLevel = ''; $budget = '';
 }
 
 

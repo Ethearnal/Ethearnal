@@ -15,18 +15,7 @@ $(window).scroll(function() {
             type: "GET",
             processData: false,
             success: function(data) {
-                var gigIDS = JSON.parse(data);
-                var gigsToLoad = 10;
-                $gigsLoaded = $('.gig').length;
-
-                if (gigIDS.length > $gigsLoaded) {
-                    gigsToLoad = $gigsLoaded + gigsToLoad;
-
-                    // LOADING MORE GIGS
-                    for(i = $gigsLoaded; i < gigsToLoad; i++) {
-                        createGig(gigIDS[i]);
-                    }
-                }
+                loadGigsOnAjaxSuccess(data, false);
             },
             error: function(error) {
                 console.log('error! Search Query has not succeeded and has not been executed. Please contact support!')

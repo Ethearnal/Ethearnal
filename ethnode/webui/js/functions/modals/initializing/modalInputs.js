@@ -24,6 +24,8 @@ function loadInputsText(form, div) {
     if($divToLoad.hasClass('gig')) {
         $gigID = $divToLoad.attr('gigID');
 
+        // $('#gigModal').modal('hide');
+
         $.ajax({
             url: "/api/v1/my/gig/" + $gigID,
             type: "GET",
@@ -46,10 +48,9 @@ function loadInputsText(form, div) {
                 // INPUT FIELDS
                 $content.find('input#gig-title').val($gig.title).parent().addClass('is-dirty');
                 $form.find('#category').dropdown('set selected', $gig.category);
-                $form.find('#job-type').dropdown('set selected', $gig.jobType);
-                $form.find('#experience-level').dropdown('set selected', $gig.experienceLevel);
                 $content.find('textarea#description').val($gig.description).parent().addClass('is-dirty');
-                $content.find('input#amount').val($gig.price).parent().addClass('is-dirty');
+                $content.find('input#amount').val($gig.price);
+                $content.find('input#reputationCost').val($gig.reputationCost);
 
                 // DATE PICKER
                 $inputDateFrom.bootstrapMaterialDatePicker({format: "DD/MM/YYYY", weekStart: 0, time: false, currentDate: $gigExpireDate });

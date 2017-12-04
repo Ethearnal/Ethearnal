@@ -8,13 +8,10 @@ function collectGigData(form) {
     $category = $form.find('#category').dropdown('get value');
     $reputation = $('header').find('a#reputation-dropdown .round-number span').text();
     $ownerName = $form.closest('body').find('li#settings-dropdown span').text();
-    $experienceLevel = $form.find('#experience-level').dropdown('get value');
-    $experienceName = $form.find('#experience-level').dropdown('get text');
-    $jobType = $form.find('#job-type').dropdown('get value');
-    $jobTypeName = $form.find('#job-type').dropdown('get text');
     $categoryName = $form.find('#category').dropdown('get text');
     $description = $form.find('textarea#description').val();
     $price = $form.find('input#amount').val();
+    $reputationCost = $form.find('input#reputationCost').val();
     $dateExpire = $form.find('input.date-started').val();
 
     // getting expire date's difference in text.
@@ -48,12 +45,9 @@ function collectGigData(form) {
                         ownerReputation: $reputation,
                         ownerName: $ownerName,
                         categoryName: $categoryName,
-                        experienceName: $experienceName,
-                        jobType: $jobType,
-                        jobTypeName: $jobTypeName,
                         title: $title,
                         category: $category,
-                        experienceLevel: $experienceLevel,
+                        reputationCost: $reputationCost,
                         description: $description,
                         price: $price,
                         date: [
@@ -94,13 +88,10 @@ function collectGigData(form) {
                 ownerReputation: $reputation,
                 ownerName: $ownerName,
                 categoryName: $categoryName,
-                experienceName: $experienceName,
-                jobType: $jobType,
-                jobTypeName: $jobTypeName,
                 title: $title,
                 category: $category,
-                experienceLevel: $experienceLevel,
                 description: $description,
+                reputationCost: $reputationCost,
                 price: $price,
                 date: [
                     { expire: $dateExpire, expiresIn: $expireDateDifference }

@@ -12,6 +12,7 @@ function createGigBox(gigData, gigID) {
         }
     });
 
+
     // image = '<div class="image"><img src="/api/v1/my/img/?q='+$data.imageHash+'" alt="Gig Image" /></div>';
     image = '<div class="ui fluid image"><div class="ui black ribbon label">'+ $data.categoryName +'</div><div class="image-block"><img src="/api/v1/my/img/?q='+$data.imageHash+'" /></div></div>';
 
@@ -24,14 +25,13 @@ function createGigBox(gigData, gigID) {
     // Other gig variables [owner-info div]
     var ownerAvatar = '<img src="data:image/png;base64,'+$data.ownerAvatar+'" alt="Avatar" />';
     var ownerName = '<h5>' + $data.ownerName + '</h5>';
-    var experienceName = '<h4>' + $data.experienceName + ' - ' + $data.jobTypeName + '</h4>';
-    var ownerInfo = '<div class="owner-info">' + ownerAvatar + ownerName + experienceName + '</div>';
+    var ownerReputation = '<h4><i class="material-icons">polymer</i> '+$data.ownerReputation+'</h4>'
+    var ownerInfo = '<div class="owner-info">' + ownerAvatar + ownerName + ownerReputation + '</div>';
 
     var gigTitle = '<p>' + $data.title + '</p>';
 
     // Lower Info Div
-    var reputationDiv = '<div class="reputation"><i class="material-icons">polymer</i><span>' + $data.ownerReputation + '</span></div>';
-    var lowerInfo = '<div class="lower-info">' + reputationDiv + '<h6 class="expire">'+ $expiresIn +'</h6></div>';
+    var lowerInfo = '<div class="lower-info"><h6 class="expire">'+ $expiresIn +'</h6></div>';
 
 
     var gigFooter = '<div class="footer"><h4>Starting at <span>$' + $data.price + '</span></h4></div>';
