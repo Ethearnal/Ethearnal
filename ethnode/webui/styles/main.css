@@ -82,9 +82,13 @@ header .container nav .navbar-header .button button:not(.collapsed) span:nth-chi
 }
 
 header .container nav .navbar-header a {
-  padding: 18px;
+  padding: 0;
   position: relative;
-  top: 3px;
+  top: -3px;
+}
+
+header .container nav .navbar-header a img {
+  max-width: 205px;
 }
 
 header .container nav #navigation ul.navbar-right {
@@ -1250,13 +1254,13 @@ section.background-image .owl-carousel .item img {
   height: 400px;
 }
 
-section.background-image .button-next, section.background-image .button-prev, .post .image .button-next, .post .image .button-prev {
+section.background-image .button-next, section.background-image .button-prev, .modal-body .image .button-next, .modal-body .image .button-prev {
   position: absolute;
-  z-index: 100;
+  z-index: 1;
   display: none;
 }
 
-section.background-image .button-next i, section.background-image .button-prev i, .post .image .button-next i, .post .image .button-prev i {
+section.background-image .button-next i, section.background-image .button-prev i, .modal-body .image .button-next i, .modal-body .image .button-prev i {
   font-size: 80px;
   color: #f2f2f2;
   opacity: 0.5;
@@ -1265,50 +1269,37 @@ section.background-image .button-next i, section.background-image .button-prev i
   cursor: pointer;
 }
 
-section.background-image .button-next i:hover, section.background-image .button-prev i:hover, .post .image .button-next i:hover, .post .image .button-prev i:hover {
+section.background-image .button-next i:hover, section.background-image .button-prev i:hover, .modal-body .image .button-next i:hover, .modal-body .image .button-prev i:hover {
   opacity: 0.8;
 }
 
-section.background-image .button-next, .post .image .button-next {
+section.background-image .button-next, .modal-body .image .button-next {
   right: 0;
 }
 
-section.background-image .button-prev, .post .image .button-prev {
+section.background-image .button-prev, .modal-body .image .button-prev {
   left: 0;
 }
 
-.post .image .button-prev i, .post .image .button-next i {
-  line-height: 125px;
-  font-size: 55px;
+.modal-body .image .button-prev, .modal-body .image .button-next {
+  position: absolute;
+  z-index: 1;
 }
 
-.post .image .button-prev {
-  left: 15px;
-}
-
-.post .image .button-next {
-  right: -10px;
-}
-
-.post .image .owl-carousel .item img {
-  width: 100%;
-  height: 125px !important;
-}
-
-.modal-body .post .image .button-prev i, .modal-body .post .image .button-next i {
+.modal-body .image .button-prev i, .modal-body .image .button-next i {
   font-size: 75px;
   line-height: 340px;
 }
 
-.modal-body .post .image .button-prev {
+.modal-body .image .button-prev {
   left: 0;
 }
 
-.modal-body .post .image .button-next {
+.modal-body .image .button-next {
   right: 0;
 }
 
-.modal-body .post .image .owl-carousel .item img {
+.modal-body .image .owl-carousel .item img {
   width: 100%;
   height: 340px !important;
 }
@@ -1545,9 +1536,19 @@ section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h4,
 section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h4,
 section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h4,
 section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h4 {
-  color: #86939e;
+  color: #92A8D1;
   font-size: 12px;
   margin-top: 2px;
+}
+
+section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h4 i, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h4 i,
+section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h4 i,
+section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h4 i,
+section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h4 i,
+section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h4 i {
+  font-size: 12px;
+  position: relative;
+  top: 1px;
 }
 
 section.gigs-page-content .container .gigs .gigs-container .gig p, section.gigs-page-content .container .jobs .gigs-container .gig p,
@@ -1924,194 +1925,146 @@ section.profiles-page-content .container .jobs .gigs-container .gig .footer h4 s
   padding: 0;
 }
 
-.timeline-post {
-  max-height: 320px;
-}
-
-.timeline-post .post p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  max-height: 320px;
-  -webkit-line-clamp: 9;
-  -webkit-box-orient: vertical;
-}
-
-.timeline-post, .modal.timeline .modal-dialog .modal-content .modal-body {
+#gigModal .modal-content {
+  border-radius: 0;
   padding: 0;
-  border-bottom: 1px solid #e1e8ee;
+}
+
+#gigModal .modal-content .modal-body {
+  border: none;
+  cursor: auto;
+  padding: 0;
+  border-bottom: none;
   cursor: pointer;
   margin-top: 10px;
-  padding-top: 24px;
   background-color: white;
 }
 
-.timeline-post .input-header, .modal.timeline .modal-dialog .modal-content .modal-body .input-header {
-  background-color: #f0f4f7;
-  padding-left: 20px;
-  margin-bottom: 10px;
-  cursor: auto;
-  margin-top: -24px;
-}
-
-.timeline-post .input-header i, .timeline-post .input-header span, .modal.timeline .modal-dialog .modal-content .modal-body .input-header i, .modal.timeline .modal-dialog .modal-content .modal-body .input-header span {
-  font-size: 14px;
-  line-height: 40px;
-  color: #5e6977;
+#gigModal .modal-content .modal-body h2.title {
+  font-size: 32px;
+  font-weight: 400;
+  color: #4a4a4a;
   margin: 0;
-  font-weight: 400;
-}
-
-.timeline-post .input-header span, .modal.timeline .modal-dialog .modal-content .modal-body .input-header span {
-  margin-left: 10px;
-}
-
-.timeline-post .picture, .modal.timeline .modal-dialog .modal-content .modal-body .picture {
-  float: left;
-}
-
-.timeline-post .picture img, .modal.timeline .modal-dialog .modal-content .modal-body .picture img {
-  height: 60px;
-  width: 60px;
-  margin-left: 20px;
-  border-radius: 100%;
-  margin-right: 15px;
-}
-
-.timeline-post .post.post-input, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input {
-  margin-bottom: 30px;
-  padding-right: 25px;
-  margin-top: 15px;
-  margin-left: 95px;
-}
-
-.timeline-post .post.post-input textarea, .modal.timeline .modal-dialog .modal-content .modal-body .post.post-input textarea {
-  box-shadow: none;
-  border: none;
-  border-bottom: 1px solid rgba(34, 36, 38, 0.15);
-  background-color: transparent;
-  font-family: 'Roboto', sans-serif;
-  line-height: 1.44;
-  color: #86939e;
-  margin-bottom: 15px;
-}
-
-.timeline-post .post h5, .modal.timeline .modal-dialog .modal-content .modal-body .post h5 {
-  font-size: 14px;
-  line-height: 1;
-  color: #5e6977;
-  margin: 0;
-}
-
-.timeline-post .post h5.name, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.name {
-  margin-top: 5px;
-}
-
-.timeline-post .post h5.date, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.date {
-  font-weight: 400;
-  margin-top: 5px;
-  color: #86939e;
-}
-
-.timeline-post .post h5.year-happend, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.year-happend {
-  text-align: right;
-  position: absolute;
-  top: 29px;
-  right: 20px;
-  font-weight: 400;
-  color: #86939e;
-}
-
-.timeline-post .post h5.company, .modal.timeline .modal-dialog .modal-content .modal-body .post h5.company {
-  text-align: right;
-  position: absolute;
-  top: 52px;
-  right: 20px;
-  font-weight: 400;
-  color: #86939e;
-}
-
-.timeline-post .post p, .modal.timeline .modal-dialog .modal-content .modal-body .post p {
-  font-size: 14px;
-  color: #86939e;
-  line-height: 1.71;
-  margin-left: 95px;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  padding-right: 15px;
-}
-
-.timeline-post .post .image, .modal.timeline .modal-dialog .modal-content .modal-body .post .image {
-  width: 50%;
-  height: 50%;
-  float: right;
   padding-left: 25px;
-  margin-top: 20px;
-  margin-right: 15px;
-  margin-bottom: 30px;
-  position: relative;
+  padding-right: 50px;
 }
 
-.timeline-post .post .image img, .modal.timeline .modal-dialog .modal-content .modal-body .post .image img {
-  width: 100%;
-  min-height: 50px;
-  max-height: 200px;
-}
-
-.modal.timeline .modal-dialog .modal-content {
-  border-radius: 0;
-}
-
-.modal.timeline .modal-dialog .modal-content .modal-body {
-  border: none;
-  cursor: auto;
-}
-
-.modal.timeline .modal-dialog .modal-content .modal-body i.icon-more {
+#gigModal .modal-content .modal-body button.dropdown-button {
   position: absolute;
-  right: 30px;
-  font-size: 22px;
+  right: 10px;
+  font-size: 28px;
   color: #bdc6cf;
-  -webkit-transform: rotate(-90deg);
-      -ms-transform: rotate(-90deg);
-          transform: rotate(-90deg);
-  top: 0;
+  top: 8px;
   cursor: pointer;
 }
 
-.modal.timeline .modal-dialog .modal-content .modal-body .visible-xs i {
-  position: absolute;
-  top: 0;
-  left: 10px;
-  font-size: 22px;
-  color: #bdc6cf;
-  cursor: pointer;
-}
-
-.modal.timeline .modal-dialog .modal-content .modal-body .post .image {
+#gigModal .modal-content .modal-body .image {
   width: 100%;
   height: 100%;
   float: none;
   margin: 0;
   padding: 0;
   margin-top: 20px;
-  padding-top: 20px;
   position: relative;
 }
 
-.modal.timeline .modal-dialog .modal-content .modal-body .post .image .items .item img {
-  width: 100%;
+#gigModal .modal-content .modal-body .image .items .item {
+  max-height: 505px;
   height: 100%;
+  overflow: hidden;
+}
+
+#gigModal .modal-content .modal-body .image .items .item img {
+  width: 100%;
+  height: auto;
   min-height: auto;
   max-height: inherit;
 }
 
-.modal.timeline .modal-dialog .modal-content .modal-body .post p {
+#gigModal .modal-content .modal-body .owner-info {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+#gigModal .modal-content .modal-body .owner-info img {
+  float: left;
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+  margin-top: 1px;
+}
+
+#gigModal .modal-content .modal-body .owner-info h5, #gigModal .modal-content .modal-body .owner-info h4 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  color: black;
+  margin-left: 40px;
+  transition: all 0.15s ease-in;
+}
+
+#gigModal .modal-content .modal-body .owner-info h5:hover, #gigModal .modal-content .modal-body .owner-info h5:active, #gigModal .modal-content .modal-body .owner-info h5:focus {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#gigModal .modal-content .modal-body .owner-info h4 {
+  color: #86939e;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+#gigModal .modal-content .modal-body .owner-info h4 i {
+  font-size: 13px;
+  position: relative;
+  top: 2px;
+  color: #92A8D1;
+}
+
+#gigModal .modal-content .modal-body .owner-info h4 span {
+  float: right;
+  margin-right: 25px;
+}
+
+#gigModal .modal-content .modal-body p.gig-description {
   margin: 0;
   padding: 0 20px;
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: justify;
+}
+
+#gigModal .modal-content .modal-body .extras-box {
+  height: 150px;
+  border: 2px solid #5e6977;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 15px;
+}
+
+#gigModal .modal-content .modal-body .extras-box h3 {
+  text-transform: uppercase;
+  color: #5e6977;
+  margin: 0 auto;
+  line-height: 150px;
+  text-align: center;
+}
+
+#gigModal .modal-content .modal-body .footer {
+  float: right;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+#gigModal .modal-content .modal-body .footer button.buy {
+  color: #89ABE3;
+}
+
+#gigModal .modal-content .modal-body .footer button.buy span i {
+  font-size: 14px;
+  position: relative;
+  top: -1px;
 }
 
 sup {
@@ -2964,32 +2917,4 @@ section.documentation .container .content-block .main-description button.dropdow
   -webkit-transform: translate(-15px, -15px);
       -ms-transform: translate(-15px, -15px);
           transform: translate(-15px, -15px);
-}
-
-.value {
-  position: absolute;
-  top: 30px;
-  left: 50%;
-  margin: 0 0 0 -20px;
-  width: 40px;
-  text-align: center;
-  display: block;
-  font-weight: normal;
-  font-family: Verdana, Arial, sans-serif;
-  font-size: 14px;
-  color: #333;
-}
-
-.value i {
-  font-style: normal;
-}
-
-.price-range-both.value {
-  width: 100px;
-  margin: 0 0 0 -50px;
-  top: 26px;
-}
-
-.price-range-both {
-  display: none;
 }

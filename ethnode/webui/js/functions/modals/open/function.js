@@ -4,7 +4,7 @@ $currentlyClosestLEdiv = null;
 
 $('body').delegate('.open-modal', 'click', function(e) {
     e.preventDefault();
-    $contentBlock = $(this).closest('.content-block');
+    $contentBlock = $(this).closest('.content-block, .modal-body');
     $modalID = $(this).attr('open-modal');
 
     // Other variables

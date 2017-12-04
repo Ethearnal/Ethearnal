@@ -41,30 +41,34 @@
                         input#gig-title.mdl-textfield__input(name="gig-title", type="text")
                         label.mdl-textfield__label(for="gig-title") Gig Title
 
-                    .selects.whole-line
-                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
-                            select.ui.dropdown#category
-                                option(value="") Select Category
-                                option(value="1") Software Development
-                                option(value="2") Entertainment
-                                option(value="3") Graphic Design
-                                option(value="4") Content Writing
-                                option(value="5") Accountants
-                                option(value="6") Consultants
-                                option(value="7") Assistants
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                        select.ui.dropdown#category
+                            option(value="") Select Category
+                            option(value="1") Software Development
+                            option(value="2") Entertainment
+                            option(value="3") Graphic Design
+                            option(value="4") Content Writing
+                            option(value="5") Accountants
+                            option(value="6") Consultants
+                            option(value="7") Assistants
 
-                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                            select.ui.dropdown#job-type
-                                option(value="") Job Type
-                                option(value="1") Fixed Price
-                                option(value="2") Hourly
+                    .ui.right.labeled.input(style="height: 38px; float: right; margin-top: 20px")
+                        label.ui.label(for="reputationCost"): i.material-icons(style="font-size: 17px") polymer
+                        input#reputationCost(type="text", placeholder="Cost of reputation")
+                        .ui.basic.label .00
 
-                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
-                            select.ui.dropdown#experience-level
-                                option(value="") Experience Level
-                                option(value="1") Entry Level
-                                option(value="2") Intermediate
-                                option(value="3") Expert
+                        //- .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                        //-     select.ui.dropdown#job-type
+                        //-         option(value="") Job Type
+                        //-         option(value="1") Fixed Price
+                        //-         option(value="2") Hourly
+
+                        //- .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                        //-     select.ui.dropdown#experience-level
+                        //-         option(value="") Experience Level
+                        //-         option(value="1") Entry Level
+                        //-         option(value="2") Intermediate
+                        //-         option(value="3") Expert
 
                     .mdl-textfield.mdl-js-textfield.whole-line
                         textarea#description.mdl-textfield__input(type="text" rows="3", name="description")

@@ -6,11 +6,10 @@
 // Prideti croppinima nuotrauku
 // Patobulinti profile change avatar modal
 
+// PADARYTI KAD SUKURTU NAUJO LAYOUT GIG INNER MODAL ir ijungti vel CreateGigBox() funkcija kad veiktu
 
 
-// Prideti Budget sliderius.
 // Gigai turi buti atvaizduojami tavo profile page.
-
 // // Padaryti profile page, kad galetum skillus pridet (paimt is Aspire)
 // // Atskirti Education/Job/Language/Skills PROFILE TAB'e. Jeigu nera nieko toje skiltyje - centruotas tekstas "There's no jobs".
 
@@ -37,6 +36,7 @@ $('a.navbar-brand').click(function() {
     $filter = $('.filters .filter');
     $filter.find('.is-checked').stop(true, true).removeClass('is-wrong is-checked');
     $('input#search-header, button#search-button').removeClass('wrong');
+    $('input#search-header').val('');
 
     $('.gig').remove();
 
@@ -45,13 +45,7 @@ $('a.navbar-brand').click(function() {
         url: '/api/v1/my/gigs/',
         dataType: 'text',
         success: function(data) {
-            var gigIDS = JSON.parse(data);
-            var gigsToLoad = 10;
-
-            // THIS IS TO CREATE 20 GIGS ON LOAD
-            for(i = 0; i < gigsToLoad; i++) {
-                createGig(gigIDS[i]);
-            }
+            loadGigsOnAjaxSuccess(data, true);
         }
     });
 
@@ -360,10 +354,10 @@ $( document ).ready(function() {
     $(".button-next").click(function () {
         $(this).parent().find('.items').trigger('owl.next');
     });
-    $( "section.background-image, .post .image" ).hover(function() {
+    $( "section.background-image, .modal-body .image" ).hover(function() {
         $(this).find(".button-prev, .button-next").stop(true).fadeIn(300);
     });
-    $( "section.background-image, .post .image" ).mouseleave(function() {
+    $( "section.background-image, .modal-body .image" ).mouseleave(function() {
         $(this).find(".button-prev, .button-next").stop(true).fadeOut(300);
     });
 
@@ -399,7 +393,7 @@ $( document ).ready(function() {
         }
 
         // $('.ui .menu, .panel-body').perfectScrollbar();
-        $('section.background-image .items, .post .image .items').owlCarousel({
+        $('section.background-image .items, .modal-body .image .items').owlCarousel({
             singleItem: true
         });
         $('.ui.dropdown').dropdown();
@@ -463,6 +457,7 @@ require("js/functions/modals/delete/gig.js"); // DELETES GIG
 require("js/functions/modals/load/gigs.js"); // LOADS ALL GIGS
 require("js/functions/modals/load/searchGigs.js") // LOADS ALL GIGS BASED ON YOUR SEARCH
 require("js/functions/modals/load/moreGigsScrollDown.js") // LOADS MORE GIGS ON SCROLL DOWN
+require("js/functions/modals/load/loadGigsOnAjaxSuccess.js") // LOADS GIGS ON AJAX SUCCESS
 
 // COLLECT DATA
 require("js/functions/modals/collectData/gig.js") // COLLECTS GIG DATA

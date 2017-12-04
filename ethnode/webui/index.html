@@ -6,6 +6,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethearnal</title>
+    <!-- FAVICON-->
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
     <!-- START of LINKS-->
     <!-- Normalize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
@@ -486,34 +488,22 @@
                     <input id="gig-title" name="gig-title" type="text" class="mdl-textfield__input">
                     <label for="gig-title" class="mdl-textfield__label">Gig Title</label>
                   </div>
-                  <div class="selects whole-line">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
-                      <select id="category" class="ui dropdown">
-                        <option value="">Select Category</option>
-                        <option value="1">Software Development</option>
-                        <option value="2">Entertainment</option>
-                        <option value="3">Graphic Design</option>
-                        <option value="4">Content Writing</option>
-                        <option value="5">Accountants</option>
-                        <option value="6">Consultants</option>
-                        <option value="7">Assistants</option>
-                      </select>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <select id="job-type" class="ui dropdown">
-                        <option value="">Job Type</option>
-                        <option value="1">Fixed Price</option>
-                        <option value="2">Hourly</option>
-                      </select>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
-                      <select id="experience-level" class="ui dropdown">
-                        <option value="">Experience Level</option>
-                        <option value="1">Entry Level</option>
-                        <option value="2">Intermediate</option>
-                        <option value="3">Expert</option>
-                      </select>
-                    </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <select id="category" class="ui dropdown">
+                      <option value="">Select Category</option>
+                      <option value="1">Software Development</option>
+                      <option value="2">Entertainment</option>
+                      <option value="3">Graphic Design</option>
+                      <option value="4">Content Writing</option>
+                      <option value="5">Accountants</option>
+                      <option value="6">Consultants</option>
+                      <option value="7">Assistants</option>
+                    </select>
+                  </div>
+                  <div style="height: 38px; float: right; margin-top: 20px" class="ui right labeled input">
+                    <label for="reputationCost" class="ui label"><i style="font-size: 17px" class="material-icons">polymer</i></label>
+                    <input id="reputationCost" type="text" placeholder="Cost of reputation">
+                    <div class="ui basic label">.00</div>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield whole-line">
                     <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
@@ -584,34 +574,22 @@
                     <input id="gig-title" name="gig-title" type="text" class="mdl-textfield__input">
                     <label for="gig-title" class="mdl-textfield__label">Gig Title</label>
                   </div>
-                  <div class="selects whole-line">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
-                      <select id="category" class="ui dropdown">
-                        <option value="">Select Category</option>
-                        <option value="1">Software Development</option>
-                        <option value="2">Entertainment</option>
-                        <option value="3">Graphic Design</option>
-                        <option value="4">Content Writing</option>
-                        <option value="5">Accountants</option>
-                        <option value="6">Consultants</option>
-                        <option value="7">Assistants</option>
-                      </select>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                      <select id="job-type" class="ui dropdown">
-                        <option value="">Job Type</option>
-                        <option value="1">Fixed Price</option>
-                        <option value="2">Hourly</option>
-                      </select>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
-                      <select id="experience-level" class="ui dropdown">
-                        <option value="">Experience Level</option>
-                        <option value="1">Entry Level</option>
-                        <option value="2">Intermediate</option>
-                        <option value="3">Expert</option>
-                      </select>
-                    </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                    <select id="category" class="ui dropdown">
+                      <option value="">Select Category</option>
+                      <option value="1">Software Development</option>
+                      <option value="2">Entertainment</option>
+                      <option value="3">Graphic Design</option>
+                      <option value="4">Content Writing</option>
+                      <option value="5">Accountants</option>
+                      <option value="6">Consultants</option>
+                      <option value="7">Assistants</option>
+                    </select>
+                  </div>
+                  <div style="height: 38px; float: right; margin-top: 20px" class="ui right labeled input">
+                    <label for="reputationCost" class="ui label"><i style="font-size: 17px" class="material-icons">polymer</i></label>
+                    <input id="reputationCost" type="text" placeholder="Cost of reputation">
+                    <div class="ui basic label">.00</div>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield whole-line">
                     <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
@@ -638,9 +616,39 @@
         </div>
       </div>
     </div>
-    <div id="gigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade timeline">
+    <div id="gigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
       <div role="document" class="modal-dialog modal-lg">
         <div class="modal-content col-xs-12">
+          <div class="modal-body col-xs-12">
+            <button id="dropdowngig606" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>
+            <ul for="dropdowngig606" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
+              <li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edit</li>
+              <li class="mdl-menu__item delete">Delete</li>
+            </ul>
+            <h2 class="title">Title goes here</h2>
+            <div class="owner-info"><img src="/api/v1/profile/?q=avatar" alt="Avatar">
+              <h5>owner_nickname</h5>
+              <h4><i class="material-icons">polymer</i> 306 <span>expires in a day</span></h4>
+            </div>
+            <div class="image">
+              <div class="button-prev"><i class="material-icons">keyboard_arrow_left</i></div>
+              <div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div>
+              <div class="items">
+                <div class="item"><img src="http://puu.sh/uyh0h/248cb32eca.png" alt="Building"></div>
+                <div class="item"><img src="http://puu.sh/uyh1c/2b0d7529eb.png" alt="Building"></div>
+                <div class="item"><img src="http://puu.sh/uyh1r/b8a98339c7.png" alt="Building"></div>
+              </div>
+            </div>
+            <p class="gig-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis atque, iure eligendi illo quam expedita vero ipsum similique, esse ratione debitis aperiam provident excepturi rerum saepe, praesentium maiores asperiores totam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, soluta modi esse accusantium sit velit cupiditate minima ipsam ex, sunt eaque quas dignissimos fugiat itaque fuga unde minus totam sequi? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis illum magnam aliquam, deserunt quisquam excepturi assumenda odit! Deserunt illo, atque repellat voluptates adipisci et, nihil blanditiis! Amet reiciendis repudiandae, iste.</p>
+            <div class="extras-box">
+              <h3>BOX FOR EXTRAS</h3>
+            </div>
+            <div class="footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button id="publish4" class="mdl-button mdl-js-button buy"><span><i class="material-icons">polymer</i> 30</span> Order</button>
+              <div data-mdl-for="publish4" class="mdl-tooltip">This text will be changed anyway.</div>
+            </div>
+          </div>
           <!-- JSON AJAX DATA GOES HERE-->
         </div>
       </div>
@@ -721,7 +729,7 @@
           <div class="navbar-header">
             <div class="button">
               <button type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" class="navbar-toggle collapsed"><span></span><span></span><span></span><span></span></button>
-            </div><a href="" class="navbar-brand hidden-xs">Ethearnal Alpha</a>
+            </div><a href="" class="navbar-brand hidden-xs"><img src="images/logo.png" alt="Ethearnal Logo"></a>
             <form action="#" style="float: left; max-height: 62px;">
               <div style="margin-left: 25px; margin-top: 10px" class="ui action input">
                 <input id="search-header" type="text" placeholder="Search gigs...">
@@ -921,6 +929,29 @@
         </div>
         <div class="gigs col-md-9">
           <div class="gigs-container">
+            <div data-toggle="modal" data-target="#gigModal" class="gig content-block">
+              <button id="dropdowngiga0" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>
+              <ul for="dropdowngiga0" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
+                <li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edit</li>
+                <li class="mdl-menu__item delete">Delete</li>
+              </ul>
+              <div class="ui fluid image">
+                <div class="ui black ribbon label">Category</div>
+                <div class="image-block"><img src="images/paypal.jpg"></div>
+              </div>
+              <div class="owner-info"><img src="/api/v1/profile/?q=avatar" alt="Avatar">
+                <h5>owner_nickname</h5>
+                <h4>Entry Level</h4>
+              </div>
+              <p>Gig Description</p>
+              <div class="lower-info">
+                <div class="reputation"><i class="material-icons">polymer</i><span>5k+</span></div>
+                <h6 class="expire">expires in 5 mins</h6>
+              </div>
+              <div class="footer">
+                <h4>Starting at <span>$25</span></h4>
+              </div>
+            </div>
           </div>
         </div>
       </div>

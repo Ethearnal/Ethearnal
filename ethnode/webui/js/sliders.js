@@ -3,6 +3,8 @@ var reputationValue = 0;
 var budgetSliderFromValue = 0;
 var budgetSliderToValue = 5000;
 
+
+// BUDGET SLIDER
 $(function() {
 
   // Initiate Slider
@@ -112,54 +114,54 @@ $(function() {
 
 
 
+// REPUTATION SLIDER
+
+// $(function() {
+
+//   // Initiate Slider
+//   $('#slider-range-2').slider({
+//     range: "min",
+//     min: 0,
+//     max: 5000,
+//     step: 25,
+//     value: 0,
+
+//     // SLIDE FUNCTION
+//     slide: function(event, ui) {
+
+//       // Show the gears on press of the handles
+//       $(this).find('.ui-slider-handle, .ui-slider-range').on('mousedown', function() {
+//           $(this).parent().parent().find('.gear-large-2').addClass('active');
+//       });
+
+//       // Update the range container values upon sliding
+//       $('.range-2').html('<span class="range-divider-2"></span><span class="range-value-2"><sup><i class="material-icons">polymer</i></sup>' + ui.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
+
+//       // Get old value
+//       var previousVal = parseInt($(this).data('value'));
+
+//       // Save new value
+//       $(this).data({
+//         'value': parseInt(ui.value)
+//       });
+
+//       reputationValue = ui.value;
+
+//       clearTimeout(Timer);
+//       Timer = setTimeout(SendRequestReputation, 400);
+//     }
+//   });
+
+//   // Move the range wrapper into the generated divs
+//   $('.ui-slider-range-2').append($('.range-wrapper-2'));
+
+//   // Apply initial values to the range container
+//   $('.range-2').html('<span class="range-divider-2"></span><span class="range-value-2"><sup><i class="material-icons">polymer</i></sup>' + $("#slider-range-2").slider("values", 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
 
 
-$(function() {
+//   // Prevent the range container from moving the slider
+//   $('.range-2, .range-alert-2').on('mousedown', function(event) {
+//     event.stopPropagation();
+//   });
 
-  // Initiate Slider
-  $('#slider-range-2').slider({
-    range: "min",
-    min: 0,
-    max: 5000,
-    step: 25,
-    value: 0,
-
-    // SLIDE FUNCTION
-    slide: function(event, ui) {
-
-      // Show the gears on press of the handles
-      $(this).find('.ui-slider-handle, .ui-slider-range').on('mousedown', function() {
-          $(this).parent().parent().find('.gear-large-2').addClass('active');
-      });
-
-      // Update the range container values upon sliding
-      $('.range-2').html('<span class="range-divider-2"></span><span class="range-value-2"><sup><i class="material-icons">polymer</i></sup>' + ui.value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
-
-      // Get old value
-      var previousVal = parseInt($(this).data('value'));
-
-      // Save new value
-      $(this).data({
-        'value': parseInt(ui.value)
-      });
-
-      reputationValue = ui.value;
-
-      clearTimeout(Timer);
-      Timer = setTimeout(SendRequestReputation, 400);
-    }
-  });
-
-  // Move the range wrapper into the generated divs
-  $('.ui-slider-range-2').append($('.range-wrapper-2'));
-
-  // Apply initial values to the range container
-  $('.range-2').html('<span class="range-divider-2"></span><span class="range-value-2"><sup><i class="material-icons">polymer</i></sup>' + $("#slider-range-2").slider("values", 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
-
-
-  // Prevent the range container from moving the slider
-  $('.range-2, .range-alert-2').on('mousedown', function(event) {
-    event.stopPropagation();
-  });
-
-});
+// });
