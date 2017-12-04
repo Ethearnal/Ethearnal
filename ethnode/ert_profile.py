@@ -25,6 +25,7 @@ from datamodel.resource_json import GigResourceWebLocalApi, BinResourceLocalApi
 from datamodel.resource_json import GigsMyResourceWebLocalApi
 from datamodel.resource_json import ImageResourceWebLocalApi, ResourceImagesWebLocalApi
 from datamodel.resource_index import IndexApiBundle
+from ertcdn.resource_web_client import CdnBinResourceBsonApiClientRequests
 
 from crypto.signer import LocalRsaSigner
 
@@ -78,13 +79,24 @@ class EthearnalProfileController(object):
     RSA_PUB = 'rsa_id.pub'
     RSA_FORMAT = 'PEM'
 
-    def __init__(self, data_dir=config.data_dir, personal_dir=None, files_dir=None):
+    def __init__(self,
+                 data_dir=config.data_dir,
+                 personal_dir=None,
+                 files_dir=None,
+                 cdn_bootstrap_host=None,
+                 cdn_bootstrap_port=None,
+                 ):
 
         self.cdx = cdx
+        if not cdn_bootstrap_host and not cdn_bootstrap_port:
+            raise ValueError('bootstrap to ertcdn service is required')
 
-        #
+        self.cdn_gigs = CdnBinResourceBsonApiClientRequests(endpoint_host=cdn_bootstrap_host,
+                                                            endpoint_port=cdn_bootstrap_port,
+                                                            endpoint_path='/api/v1/gigs')
 
         self.data_dir = os.path.abspath(data_dir)
+
         if personal_dir:
             self.personal_dir = os.path.abspath(personal_dir)
         else:
@@ -151,9 +163,12 @@ class EthearnalProfileController(object):
             jsr=BinResource(
                 data_store=ResourceSQLite(
                     db_name=self.db_gigs,
-                    table_name='gigs')
+                    table_name='gigs'),
+                cdn_client=self.cdn_gigs,
                 ),
-            signer=self.rsa_signer)
+            signer=self.rsa_signer,
+
+        )
 
         self.dbeep = PLainTextUTF8WebApi(
             cherrypy=cherrypy,

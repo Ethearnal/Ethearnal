@@ -24,6 +24,9 @@ ertcdn_socket_host = '0.0.0.0'
 ertcdn_socket_port = 5678
 ertcdn_host_port = '%s:%d' % (ertcdn_socket_host, ertcdn_socket_port)
 
+ertcdn_dev_bootstrap_host = '127.0.0.1'
+ertcdn_dev_bootstrap_port = 5678
+ertcdn_dev_bootstrap_host_port = '%s:%d' % (ertcdn_dev_bootstrap_host, ertcdn_dev_bootstrap_port)
 
 # web service defaults
 # web_svc_data_dir = 'websvc_profile'

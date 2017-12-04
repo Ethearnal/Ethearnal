@@ -64,6 +64,14 @@ parser.add_argument('-b', '--dht_only',
                     )
 
 
+parser.add_argument('-c', '--cdn_bootstrap_host_port',
+                    default=config.ertcdn_dev_bootstrap_host_port,
+                    help='bootstrap to web service',
+                    required=False,
+                    action='store_true'
+                    )
+
+
 class EthearnalSite(object):
     @cherrypy.expose
     def index(self):
@@ -90,7 +98,9 @@ def tear_down_udp(dht):
 
 
 def main_profile(http_webdir,
-                 files_dir_name):
+                 files_dir_name,
+                 cdn_host,
+                 cdn_port,):
 
     http_webdir = os.path.abspath(http_webdir)
     files_dir = os.path.abspath('%s/%s' % (profile_dir, files_dir_name))
@@ -98,7 +108,10 @@ def main_profile(http_webdir,
         print('Creating dir for static files')
         mkdir(files_dir)
     profile_dir_abs = os.path.abspath(profile_dir)
-    ert_profile_ctl = EthearnalProfileController(data_dir=profile_dir_abs, files_dir=files_dir)
+    ert_profile_ctl = EthearnalProfileController(data_dir=profile_dir_abs,
+                                                 files_dir=files_dir,
+                                                 cdn_bootstrap_host=cdn_host,
+                                                 cdn_bootstrap_port=cdn_port)
     ert_profile_view = view = EthearnalProfileView(ert_profile_ctl)
 
     return ert_profile_ctl, ert_profile_view
@@ -209,6 +222,8 @@ if __name__ == '__main__':
     seed_host = None
     seed_port = None
 
+    boot_cdn_host, boot_cdn_port = args.cdn_bootstrap_host_port.split(':')
+
     if args.udp_seed_host_port:
         seed_host, seed_port = args.udp_seed_host_port.split(':')
         seed_port = int(seed_port)
@@ -224,7 +239,9 @@ if __name__ == '__main__':
     try:
         ert_profile_ctl, ert_profile_view = main_profile(
             http_webdir=http_webdir,
-            files_dir_name=config.static_files
+            files_dir_name=config.static_files,
+            cdn_host=boot_cdn_host,
+            cdn_port=boot_cdn_port,
         )
         ert = ert_profile_ctl
         hex_guid, bin_guid = ert_profile_ctl.rsa_guid_hex_bin

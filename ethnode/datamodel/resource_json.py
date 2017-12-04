@@ -4,8 +4,11 @@ from crypto.signer import SignerInterface
 # from datamodel.resource_index import TextIndexingApi
 # from toolkit.kadmini_codec import sha256_bin_digest
 from toolkit.kadmini_codec import guid_hex_to_bin, guid_bin_to_hex
+from toolkit.kadmini_codec import sha256_bin_digest
 import traceback
 import json
+from ertcdn.resource_web_client import CdnBinResourceBsonApiClientRequests
+from ertcdn.resource_model import SignedBinResource
 
 
 def calculate_price_range(price):
@@ -27,11 +30,13 @@ class BinResource(object):
     def __init__(self,
                  data_store: ResourceSQLite,
                  content_type: bytes=b'application/json',
-                 content_encoding: bytes=b'identity'):
+                 content_encoding: bytes=b'identity',
+                 cdn_client: CdnBinResourceBsonApiClientRequests=None):
         self.data_store = data_store
         # self.signer = signer
         self.content_type = content_type
         self.content_encoding = content_encoding
+        self.cdn_client = cdn_client
 
     def create(self, json_data: bytes, owner_hash: bytes, resource_signature: bytes,
                content_type=None,
@@ -47,6 +52,25 @@ class BinResource(object):
                                                   content_type,
                                                   content_encoding,
                                                   json_data)
+
+        res = SignedBinResource()
+        res.orig_res_hash = sha256_bin_digest(json_data)
+        res.content_type = content_type
+        res.content_encoding = content_encoding
+        res.owner_bin = owner_hash
+        res.data_bin = json_data
+        res.sig_bin = resource_signature
+        pk_hash_hex = guid_bin_to_hex(pk_hash).decode()
+
+        if self.cdn_client:
+            cdn_pk_hash = self.cdn_client.create(res)
+            if cdn_pk_hash == pk_hash_hex:
+                # all good
+                pass
+            else:
+                print('Warning cdn hash not equal to local pk hash')
+                print('CDN:', cdn_pk_hash)
+                print('LOC:', pk_hash_hex)
         return pk_hash
 
     def read(self, pk_hash):
@@ -72,7 +96,9 @@ class BinResource(object):
 
 
 class BinResourceLocalApi(object):
-    def __init__(self, jsr: BinResource, signer: SignerInterface):
+    def __init__(self,
+                 jsr: BinResource,
+                 signer: SignerInterface,):
         self.signer = signer
         self.jsr = jsr
 
@@ -163,9 +189,10 @@ class GigResourceWebLocalApi(object):
                 experience_level = d.get('experienceName')
                 job_type = d.get('jobTypeName')
 
-                experience_level = '_'.join(experience_level.lower().split(' '))
+                experience_level = None
+                # experience_level = '_'.join(experience_level.lower().split(' '))
                 category = '_'.join(category.lower().split(' '))
-                job_type = '_'.join(job_type.lower().split(' '))
+                # job_type = '_'.join(job_type.lower().split(' '))
 
                 budget = None
                 price_st = d.get('price')
@@ -188,18 +215,18 @@ class GigResourceWebLocalApi(object):
                     self.text_api.idx_engine.index_bag_of_spec_text(
                         container_hash=pk_bin, specifier='description', text_data=description)
 
-                if experience_level:
-                    self.text_api.idx_engine.index_bag_of_spec_text(
-                        container_hash=pk_bin, specifier='experience_level', text_data=experience_level)
+                # if experience_level:
+                #     self.text_api.idx_engine.index_bag_of_spec_text(
+                #         container_hash=pk_bin, specifier='experience_level', text_data=experience_level)
 
                 if category:
                     self.text_api.idx_engine.index_bag_of_spec_text(
                         container_hash=pk_bin, specifier='category', text_data=category)
 
-                if job_type:
-                    self.text_api.idx_engine.index_bag_of_spec_text(container_hash=pk_bin,
-                                                                    specifier='job_type',
-                                                                    text_data=job_type)
+                # if job_type:
+                #     self.text_api.idx_engine.index_bag_of_spec_text(container_hash=pk_bin,
+                #                                                     specifier='job_type',
+                #                                                     text_data=job_type)
 
                 if budget:
                     self.text_api.idx_engine.index_bag_of_spec_text(

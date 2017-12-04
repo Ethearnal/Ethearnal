@@ -31,10 +31,10 @@ class ErtCdnServiceProfile(object):
         self.data_db_file = '%s/%s' % (data_dir, 'res.db')
         self.bin_res_data_store = ResourceSQLite(self.data_db_file, 'res')
         self.bin_res_api = CdnBinResourceApiSQlite(data_store=self.bin_res_data_store)
-        self.service = CdnBinResourceBsonApiCherry(
+        self.gigs = CdnBinResourceBsonApiCherry(
             cherrypy,
             api=self.bin_res_api,
-            endpoint_path='/api/v1/res/',
+            endpoint_path='/api/v1/gigs/',
             mount=True
         )
 
