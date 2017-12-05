@@ -4,7 +4,7 @@ from ertcdn.resource_api_interface import CdnBinResourceApiInterface
 from ertcdn.resource_model import SignedBinResource
 from ertcdn.pubkey import CdnBinResourceVeritasApi
 import bson
-
+import json
 
 class ResourceFieldsMeta(object):
     DATA = 'dta'
@@ -43,6 +43,35 @@ class ResourceBsonCodec(object):
             print('fields missing')
         except:
             print('encoding of bson fail')
+
+
+class CdnBinResourceListBsonApiCherry(object):
+    exposed = True
+
+    def __init__(self, cherrypy,
+                 api: CdnBinResourceApiInterface,
+                 endpoint_path: str,
+                 mount=True):
+        self.api = api
+        self.endpoint_path = endpoint_path
+        self.cherrypy = cherrypy
+        if mount:
+            self.mount()
+
+    def GET(self):
+        ll = self.api.hashid_list_all()
+        js = json.dumps(ll, ensure_ascii=False)
+        return js.encode()
+
+    def mount(self):
+        self.cherrypy.tree.mount(
+            self,
+            self.endpoint_path, {'/': {
+                    'request.dispatch': self.cherrypy.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
 
 
 class CdnBinResourceBsonApiCherry(object):

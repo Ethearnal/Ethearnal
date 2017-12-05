@@ -113,6 +113,14 @@ class ResourceSQLite(BaseSQLite):
             c = self.cursor.execute(qs, (owner_hash,))
             return c.fetchall()
 
+    def list_all(self, qs_only=False):
+        qs = 'SELECT * FROM %s;' % self.table_name
+        if qs_only:
+            return (qs,)
+        else:
+            c = self.cursor.execute(qs)
+            return c.fetchall()
+
     def fetch_resource(self, pk_hash: bytes):
         c = self.read_resource(pk_hash)
         return c.fetchone()

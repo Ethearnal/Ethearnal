@@ -66,6 +66,8 @@ class BinResource(object):
             cdn_pk_hash = self.cdn_client.create(res)
             if cdn_pk_hash == pk_hash_hex:
                 # all good
+                print('RESOURCE CREATE ON CDN PEER')
+                print('RES:', cdn_pk_hash)
                 pass
             else:
                 print('Warning cdn hash not equal to local pk hash')
@@ -93,6 +95,11 @@ class BinResource(object):
             self.data_store.delete_resource(pk_hash)
             return res
         return res
+
+
+class BinResourceRemoteApi(object):
+    def __init__(self, cdn):
+        pass
 
 
 class BinResourceLocalApi(object):
@@ -290,6 +297,36 @@ class GigsMyResourceWebLocalApi(object):
         self.cherrypy.tree.mount(
             self,
             '/api/v1/my/gigs/', {'/': {
+                    'request.dispatch': self.cherrypy.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
+
+
+class GigsOthersResourceWebLocalApi(object):
+    exposed = True
+
+    def __init__(self, cherrypy, api: BinResourceLocalApi, mount=False):
+        self.api = api
+        self.cherrypy = cherrypy
+        if mount:
+            self.mount()
+
+    def GET(self):
+        try:
+            bin_rs = self.api.hashid_list()
+            self.cherrypy.response.status = 200
+            return bin_rs
+        except:
+            self.cherrypy.response.status = 400
+            traceback.print_exc()
+            return b''
+
+    def mount(self):
+        self.cherrypy.tree.mount(
+            self,
+            '/api/v1/other/gigs/', {'/': {
                     'request.dispatch': self.cherrypy.dispatch.MethodDispatcher(),
                     'tools.sessions.on': True,
                 }

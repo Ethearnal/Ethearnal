@@ -93,7 +93,11 @@ class EthearnalProfileController(object):
 
         self.cdn_gigs = CdnBinResourceBsonApiClientRequests(endpoint_host=cdn_bootstrap_host,
                                                             endpoint_port=cdn_bootstrap_port,
-                                                            endpoint_path='/api/v1/gigs')
+                                                            endpoint_path='/api/v1/gig')
+
+        self.cdn_imgs = CdnBinResourceBsonApiClientRequests(endpoint_host=cdn_bootstrap_host,
+                                                            endpoint_port=cdn_bootstrap_port,
+                                                            endpoint_path='/api/v1/img')
 
         self.data_dir = os.path.abspath(data_dir)
 
@@ -190,7 +194,8 @@ class EthearnalProfileController(object):
 
         self.img_api = BinResourceLocalApi(
             jsr=BinResource(
-                data_store=ResourceSQLite(db_name=self.db_imgs, table_name='imgs')
+                data_store=ResourceSQLite(db_name=self.db_imgs, table_name='imgs'),
+                cdn_client=self.cdn_imgs
             ),
             signer=self.rsa_signer
         )

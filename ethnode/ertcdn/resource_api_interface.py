@@ -10,3 +10,9 @@ class CdnBinResourceApiInterface(object):
     def read(self, pk_hex_hash: str) -> SignedBinResource:
         pass
 
+    def hashid_list(self, owner_hash) -> list:
+        pass
+
+    def hashid_list_all(self) -> list:
+        pass
+

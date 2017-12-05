@@ -6,6 +6,7 @@ from toolkit import tools
 from datamodel.resource_sqlite import ResourceSQLite
 from ertcdn.resource_web_service import CdnBinResourceBsonApiCherry
 from ertcdn.resource_api_sqlite import CdnBinResourceApiSQlite
+from ertcdn.resource_web_service import CdnBinResourceListBsonApiCherry
 
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert web service node')
@@ -28,14 +29,31 @@ class ErtCdnServiceProfile(object):
                  data_dir=config.ertcdn_data_dir,
                  ):
         self.data_dir = tools.mkd(data_dir)
-        self.data_db_file = '%s/%s' % (data_dir, 'res.db')
-        self.bin_res_data_store = ResourceSQLite(self.data_db_file, 'res')
-        self.bin_res_api = CdnBinResourceApiSQlite(data_store=self.bin_res_data_store)
-        self.gigs = CdnBinResourceBsonApiCherry(
+        self.gigs_db = '%s/%s' % (data_dir, 'gigs.db')
+        self.imgs_db = '%s/%s' % (data_dir, 'imgs.db')
+        self.gigs_data_store = ResourceSQLite(self.gigs_db, 'gigs')
+        self.imgs_data_store = ResourceSQLite(self.imgs_db, 'imgs')
+        self.gigs_res_api = CdnBinResourceApiSQlite(data_store=self.gigs_data_store)
+        self.imgs_res_api = CdnBinResourceApiSQlite(data_store=self.imgs_data_store)
+
+        self.gigs_list = CdnBinResourceListBsonApiCherry(
             cherrypy,
-            api=self.bin_res_api,
+            api=self.gigs_res_api,
             endpoint_path='/api/v1/gigs/',
             mount=True
+        )
+
+        self.gigs = CdnBinResourceBsonApiCherry(
+            cherrypy,
+            api=self.gigs_res_api,
+            endpoint_path='/api/v1/gig/',
+            mount=True
+        )
+        self.imgs = CdnBinResourceBsonApiCherry(
+            cherrypy,
+            endpoint_path='/api/v1/img/',
+            api=self.imgs_res_api,
+            mount=True,
         )
 
 
@@ -46,8 +64,9 @@ def main():
     socket_port = int(socket_port)
 
     cdn = ErtCdnServiceProfile(data_dir=data_dir)
-    print('CDN DATA DIR:', cdn.data_dir)
-    print('CDN DATA  DB:', cdn.data_db_file)
+    print('CDN DATA DR:', cdn.data_dir)
+    print('CDN GIGS DB:', cdn.gigs_db)
+    print('CDN IMGS DB:', cdn.imgs_db)
     cherrypy.server.socket_host = socket_host
     cherrypy.server.socket_port = socket_port
     cherrypy.engine.start()

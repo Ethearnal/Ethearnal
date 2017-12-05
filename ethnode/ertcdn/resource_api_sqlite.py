@@ -1,7 +1,7 @@
 from datamodel.resource_sqlite import ResourceSQLite
 from ertcdn.resource_api_interface import CdnBinResourceApiInterface
 from ertcdn.resource_model import SignedBinResource
-# from toolkit.kadmini_codec import guid_bin_to_hex
+from toolkit.kadmini_codec import guid_bin_to_hex
 from toolkit.kadmini_codec import guid_hex_to_bin
 
 
@@ -38,16 +38,21 @@ class CdnBinResourceApiSQlite(CdnBinResourceApiInterface):
                 res.orig_res_hash = resource_hash
                 return res
 
-    # def hashid_list(self, owner_hash):
-    #     ll = self.data_store.list_by_owner(owner_hash)
-    #     if ll:
-    #         return [guid_bin_to_hex(k[0]).decode() for k in ll]
-    #
-    # def hashid_list_bin(self, owner_hash):
-    #     ll = self.data_store.list_by_owner(owner_hash)
-    #     if ll:
-    #         return [k[0] for k in ll]
-    #
+    def hashid_list_all(self):
+        ll = self.data_store.list_all()
+        if ll:
+            return [guid_bin_to_hex(k[0]).decode() for k in ll]
+
+    def hashid_list(self, owner_hash):
+        ll = self.data_store.list_by_owner(owner_hash)
+        if ll:
+            return [guid_bin_to_hex(k[0]).decode() for k in ll]
+
+    def hashid_list_bin(self, owner_hash):
+        ll = self.data_store.list_by_owner(owner_hash)
+        if ll:
+            return [k[0] for k in ll]
+
     # def delete(self, pk_hash):
     #     res = self.read(pk_hash)
     #     if res:

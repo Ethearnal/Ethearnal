@@ -73,6 +73,7 @@ class CdnBinResourceBsonApiClientRequests(CdnBinResourceApiInterface):
             traceback.print_exc()
 
     def create(self, res: SignedBinResource) -> str:
+        print('CDN CREATE', res.content_type)
         d = dict()
         d[RM.CONTENT_ENCODING] = res.content_encoding
         d[RM.CONTENT_TYPE] = res.content_type
