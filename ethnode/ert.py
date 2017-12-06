@@ -15,6 +15,9 @@ from ert_profile import EthearnalJobView, EthearnalJobPostController
 from ert_profile import EthearnalUploadFileView
 from ert_profile import EthearnalUploadJsonView
 
+from webdht.wdht import WebDHTPulse, DHTPulse, WebSysGuidApi, OwnerGuidHashIO
+from webdht.wdht import WebSelfPredicateApi, WebGuidPredicateApi
+#
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
 
@@ -125,6 +128,7 @@ def main_http(http_webdir: str = config.http_webdir,
               files_dir_name: str = config.static_files,
               interactive: bool = config.interactive,
               dht_=None,
+              dht_facade_=None
               ):
 
     site_conf = {
@@ -191,6 +195,32 @@ def main_http(http_webdir: str = config.http_webdir,
             'engine.autoreload.on': False
         }
     })
+    # // WEB DHT NEW API
+
+    webdht = WebDHTPulse(
+        cherry=cherrypy,
+        dht_pulse=DHTPulse(dht_facade_),
+        mount_point='/api/v1/dht',
+        mount_it=True,
+    )
+    websys = WebSysGuidApi(
+        cherry=cherrypy,
+        dht_pulse=DHTPulse(dht_facade_),
+        owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    )
+
+    webself = WebSelfPredicateApi(
+        cherry=cherrypy,
+        dht_pulse=DHTPulse(dht_facade_),
+        owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex),
+    )
+    webguid = WebGuidPredicateApi(
+        cherry=cherrypy,
+        dht_pulse=DHTPulse(dht_facade_),
+    )
+
+    # WebGuidPredicateApi
+    # WebSelfPredicateApi
     cherrypy.engine.start()
 
     print('STATIC FILES DIR:', ert_profile_ctl.files_dir)
@@ -274,6 +304,7 @@ if __name__ == '__main__':
                       ert_profile_view=ert_profile_view,
                       dht_=dht,
                       interactive=args.interactive_shell,
+                      dht_facade_= d
                       )
         else:
             from IPython import embed

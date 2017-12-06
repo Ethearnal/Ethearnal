@@ -28,7 +28,7 @@ alpha = 3
 
 id_bits = kadmini_codec.id_bits
 
-iteration_sleep = 2
+iteration_sleep = 0.1
 
 # all the things have to be bson encoded
 
@@ -76,6 +76,7 @@ class DHTFacade(object):
                        socket=self.dht.server.socket,
                        peer_id=self.dht.peer.id,
                        signature=sg)
+        return hk
 
     def push_peer(self, guid=None):
         if not guid:
