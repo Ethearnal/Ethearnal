@@ -8,6 +8,7 @@ CTX_TXT = 'txt'
 CTX_HEX = 'hex'
 CTX_OPO = 'opo'  #
 CTX_JSN = 'jsn'
+CTX_DLS = 'dls'
 
 
 def d_kv_value(k, v) -> dict:
@@ -91,3 +92,12 @@ class OwnerPredicateObject(KVInterface):
 
     def set_value(self, ctx, obj):
         self._v = {'ctx': ctx, 'obj': obj}
+
+
+
+class DoubleLinkedItem(object):
+
+    def __init__(self, next_item, prev_item, item):
+        self.next_item = next_item
+        self.prev_item = prev_item
+        self.current_item = item

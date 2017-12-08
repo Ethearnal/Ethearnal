@@ -74,7 +74,7 @@ class DHTPulse(PulseCallerIO, PulseListenerIO):
         print("PULL K", key)
         print("PULL O", owner.hex())
         print("PULL B", owner())
-        guid_bin  = owner()
+        guid_bin = owner()
         t = self.dht.pull_remote(key, guid=guid_bin)
         if not t:
             t = self.dht.pull_local(key, guid=guid_bin)
@@ -89,6 +89,16 @@ class DHTPulse(PulseCallerIO, PulseListenerIO):
         pass
 
     def on_push(self, key: dict, value: dict, res_hash: HashIO):
+        pass
+
+
+class WebMyGigs(object):
+    exposed = True
+
+    def __init__(self):
+        pass
+
+    def GET(self):
         pass
 
 

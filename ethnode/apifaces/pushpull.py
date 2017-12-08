@@ -24,3 +24,9 @@ class PulseListenerIO(object):
 
     def on_pull(self, owner: HashIO, key: dict,  value: dict):
         pass
+
+
+class IteratorIO(object):
+    def iterator(self):
+        pass
+
