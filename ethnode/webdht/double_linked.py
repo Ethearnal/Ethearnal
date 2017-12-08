@@ -39,7 +39,6 @@ class DList(object):
                 o_item = DLItem(key, value)
                 o_item.prev_key = o_last_item.key
                 self.dht.__setitem__(o_item.key, o_item)
-                # o_last_item.next_key =
 
     def iterate_items(self):
         if self.first_key:
@@ -66,11 +65,5 @@ class DList(object):
         for item in self.iterate_items():
             yield (item.key, item.value)
 
-
-d = DList()
-d.insert(1, '1')
-d.insert(2, '2')
-d.insert(3, '3')
-print([k for k in d.iter_kv()])
 
 

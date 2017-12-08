@@ -3,6 +3,7 @@ from kadem.kad import DHTFacade
 from toolkit.kadmini_codec import sha256_bin_digest, guid_bin_to_hex, guid_hex_to_bin, decode_bson_val
 import json
 from webdht.wdht_document import OwnerPredicateObject, CTX_HEX, CTX_JSN
+from webdht.wdht_document import DLMeta
 
 
 class StrToBinHash(HashIO):
@@ -90,6 +91,87 @@ class DHTPulse(PulseCallerIO, PulseListenerIO):
 
     def on_push(self, key: dict, value: dict, res_hash: HashIO):
         pass
+
+
+class DLItem(object):
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+        self.prev_key = None
+        self.next_key = None
+
+    def to_dict(self) -> dict():
+        return dict({'key': self.key, 'value': self.value})
+
+
+class DLFromDict(object):
+    def __new__(cls, d: dict) -> DLItem:
+        return DLItem(d['key'], d['value'])
+
+
+class DList(object):
+    def __init__(self,
+                 collection_name: str,
+                 dht_pulse: DHTPulse,
+                 own: HashIO):
+        self.collection_name = collection_name
+        self.pulse = dht_pulse
+        self.last_key = None
+        self.first_key = None
+        self.owner = own
+        # todo to save itself in dht
+        self.dl_meta = DLMeta(collection_name)
+        self.dl_meta_item = self.pulse.pull(self.owner, key=self.dl_meta.key)
+
+    def insert(self, key: dict, value: dict):
+        if not self.last_key:
+            self.first_key = key
+            self.last_key = key
+            o_item = DLItem(key, value)
+            o_item.prev_key = key
+            o_item.next_key = key
+            self.pulse.push(key, o_item.to_dict())
+        else:
+            o_item = DLFromDict(self.pulse.pull(self.owner, key))
+            if o_item:
+                # update
+                o_item.value = value
+                self.pulse.push(o_item.key, o_item.to_dict())
+            else:
+                # insert
+                pass
+                o_last_item = DLFromDict(self.pulse.pull(self.owner, self.last_key))
+                self.last_key = key
+                o_last_item.next_key = key
+                self.pulse.push(o_last_item.key, o_last_item.to_dict())
+                o_item = DLItem(key, value)
+                o_item.prev_key = o_last_item.key
+                self.pulse.push(o_item.key, o_item.to_dict())
+
+    def iterate_items(self):
+        if self.first_key:
+            nx_key = self.first_key
+            while nx_key:
+                item = DLFromDict(self.pulse.pull(self.owner, nx_key))
+                if item:
+                    nx_key = item.next_key
+                    yield item
+                else:
+                    break
+        else:
+            pass
+
+    def iterate_keys(self):
+        for item in self.iterate_items():
+            yield item.key
+
+    def iter_values(self):
+        for item in self.iterate_items():
+            yield item.value
+
+    def iter_kv(self):
+        for item in self.iterate_items():
+            yield (item.key, item.value)
 
 
 class WebMyGigs(object):
@@ -218,7 +300,7 @@ class WebSysGuidApi(object):
         if mount_it:
             self.mount()
             print('MOUNT WEB:', mount_point)
-            hash = self.dht_pulse.push(self.doc.key, self.doc.val)
+            hash = self.dht_pulse.push(self.doc.key, self.doc.value)
 
     def GET(self):
         d = self.dht_pulse.pull(owner=self.owner, key=self.doc.key)
@@ -255,7 +337,7 @@ class WebSelfPredicateApi(object):
         if mount_it:
             self.mount()
             print('MOUNT WEB:', mount_point)
-            hash = self.dht_pulse.push(self.doc.key, self.doc.val)
+            hash = self.dht_pulse.push(self.doc.key, self.doc.value)
 
     def post(self, key):
         self.doc.set_key(key)
@@ -265,7 +347,7 @@ class WebSelfPredicateApi(object):
         self.doc.set_value(CTX_JSN, value)
         # hash = self.dht_pulse.push(key, value)
         # resp = self.dht_pulse.push(key, value)
-        return self.dht_pulse.push(self.doc.key, self.doc.val)
+        return self.dht_pulse.push(self.doc.key, self.doc.value)
 
     def POST(self, key):
         return self.post(key)

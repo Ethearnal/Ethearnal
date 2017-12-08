@@ -18,7 +18,7 @@ def d_kv_value(k, v) -> dict:
 class KVInterface(object):
 
     @property
-    def val(self):
+    def value(self):
         return None
 
     @property
@@ -26,7 +26,7 @@ class KVInterface(object):
         return None
 
     def key_value_dict(self) -> dict:
-        return dict({'key': self.key, 'val': {'key': self.key, 'val': self.val}})
+        return dict({'key': self.key, 'val': {'key': self.key, 'val': self.value}})
 
 
 class ListItem(KVInterface):
@@ -40,7 +40,7 @@ class ListItem(KVInterface):
         return self._k
 
     @property
-    def val(self):
+    def value(self):
         return self._v
 
     def set_key(self, item_idx: int):
@@ -61,14 +61,47 @@ class ListMeta(object):
         return self._k
 
     @property
-    def val(self):
+    def value(self):
         return self._v
+
+    @value.setter
+    def value(self, length):
+        self.set_value(length)
 
     def set_key(self):
         self._k = {'ctx': CTX_LST, 'lid': self._lid}
 
-    def set_value(self, len):
-        self._v = {'ctx': CTX_INT, 'len': len}
+    def set_value(self, length):
+        self._v = {'ctx': CTX_INT, 'len': length}
+
+
+class DLMeta(object):
+    def __init__(self, collection_name):
+        self._collection_name = collection_name
+        self._k = None
+        self._v = None
+
+    @property
+    def key(self):
+        return self._k
+
+    @key.setter
+    def key(self, value):
+        self.set_key()
+
+    @property
+    def value(self):
+        return self._v
+
+    @value.setter
+    def value(self, first_key):
+        self.set_value(first_key)
+
+    def set_key(self):
+        self._k = {'ctx': CTX_DLS, 'nam': self._collection_name}
+
+    def set_value(self, first_key):
+        self._v = {'ctx': CTX_INT, 'fky': first_key}
 
 
 class OwnerPredicateObject(KVInterface):
@@ -82,7 +115,7 @@ class OwnerPredicateObject(KVInterface):
         return self._k
 
     @property
-    def val(self):
+    def value(self):
         return self._v
 
     def set_key(self, idk=None):
@@ -93,11 +126,3 @@ class OwnerPredicateObject(KVInterface):
     def set_value(self, ctx, obj):
         self._v = {'ctx': ctx, 'obj': obj}
 
-
-
-class DoubleLinkedItem(object):
-
-    def __init__(self, next_item, prev_item, item):
-        self.next_item = next_item
-        self.prev_item = prev_item
-        self.current_item = item
