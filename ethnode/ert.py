@@ -16,7 +16,7 @@ from ert_profile import EthearnalUploadFileView
 from ert_profile import EthearnalUploadJsonView
 
 from webdht.wdht import WebDHTPulse, DHTPulse, WebSysGuidApi, OwnerGuidHashIO
-from webdht.wdht import WebSelfPredicateApi, WebGuidPredicateApi
+from webdht.wdht import WebSelfPredicateApi, WebGuidPredicateApi, WebDHTKnownGuids
 #
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
@@ -217,6 +217,12 @@ def main_http(http_webdir: str = config.http_webdir,
     webguid = WebGuidPredicateApi(
         cherry=cherrypy,
         dht_pulse=DHTPulse(dht_facade_),
+    )
+
+    knownguids = WebDHTKnownGuids(
+        cherry=cherrypy,
+        dhtf=dht_facade_,
+        mount_point='/api/v1/guids'
     )
 
     # WebGuidPredicateApi

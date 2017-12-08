@@ -26,6 +26,7 @@ class OwnerGuidHashIO(HashIO):
     def hex(self):
         return self.str_guid_hex
 
+
 class DummyHashIO(HashIO):
     def __call__(self, *args, **kwargs):
         key, val = args
@@ -62,8 +63,8 @@ class DHTPulse(PulseCallerIO, PulseListenerIO):
 
     def push(self, key: dict, value: dict) -> HashIO:
         # encode decode
-        print("PUSH K",key)
-        print("PUSH V",value)
+        print("PUSH K", key)
+        print("PUSH V", value)
         hash_bin_ascii = DummyHashIO()(key, value)
         hk = self.dht.push(key, value)
         print('HK', hk)
@@ -89,6 +90,41 @@ class DHTPulse(PulseCallerIO, PulseListenerIO):
 
     def on_push(self, key: dict, value: dict, res_hash: HashIO):
         pass
+
+
+class WebDHTKnownGuids(object):
+    exposed = True
+
+    def __init__(self,
+                 cherry,
+                 dhtf: DHTFacade,
+                 mount_point: str,
+                 mount_it=True):
+        self.cherry = cherry
+        self.dhtf = dhtf
+        self.mount_point = mount_point
+        if mount_it:
+            self.mount()
+            print('MOUNT GUIDS ENDPOINT')
+
+    def GET(self):
+        # todo
+        c = self.dhtf.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
+        guid_list = [guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
+        print(guid_list)
+        js = json.dumps(guid_list)
+        js_b = js.encode()
+        return js_b
+
+    def mount(self):
+        self.cherry.tree.mount(
+            self,
+            self.mount_point, {'/': {
+                    'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
 
 
 class WebDHTPulse(object):
@@ -216,7 +252,7 @@ class WebSelfPredicateApi(object):
         body = self.cherry.request.body.read()
         data = json.loads(body.decode())
         value = data['value']
-        self.doc.set_value(CTX_JSN,value)
+        self.doc.set_value(CTX_JSN, value)
         # hash = self.dht_pulse.push(key, value)
         # resp = self.dht_pulse.push(key, value)
         return self.dht_pulse.push(self.doc.key, self.doc.val)
