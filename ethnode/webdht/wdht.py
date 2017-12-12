@@ -4,6 +4,7 @@ from toolkit.kadmini_codec import sha256_bin_digest, guid_bin_to_hex, guid_hex_t
 import json
 from webdht.wdht_document import OwnerPredicateObject, CTX_HEX, CTX_JSN
 from webdht.wdht_document import DLMeta
+from apifaces.pushpull import HashIO
 
 
 class StrToBinHash(HashIO):
@@ -105,8 +106,11 @@ class DLItem(object):
 
 
 class DLFromDict(object):
-    def __new__(cls, d: dict) -> DLItem:
-        return DLItem(d['key'], d['value'])
+    def __new__(cls, d: dict) -> DLItem or None:
+        if d:
+            if 'key' in d and 'value' in d:
+                return DLItem(d['key'], d['value'])
+        return None
 
 
 class DList(object):
@@ -119,9 +123,12 @@ class DList(object):
         self.last_key = None
         self.first_key = None
         self.owner = own
-        # todo to save itself in dht
         self.dl_meta = DLMeta(collection_name)
         self.dl_meta_item = self.pulse.pull(self.owner, key=self.dl_meta.key)
+        # if not self.dl_meta_item:
+        #     self.pulse.push(key=self.dl_meta.key, value=self.dl_meta.value)
+        # else:
+        #     print('META', self.dl_meta_item)
 
     def insert(self, key: dict, value: dict):
         if not self.last_key:
@@ -131,7 +138,11 @@ class DList(object):
             o_item.prev_key = key
             o_item.next_key = key
             self.pulse.push(key, o_item.to_dict())
+            self.dl_meta.set_value(self.first_key)
+            self.pulse.push(self.dl_meta.key, self.dl_meta.value)
         else:
+            itm = self.pulse.pull(self.owner, key)
+            print('+ ++ + DEBUG PRINT +++ ',itm)
             o_item = DLFromDict(self.pulse.pull(self.owner, key))
             if o_item:
                 # update
@@ -152,6 +163,7 @@ class DList(object):
         if self.first_key:
             nx_key = self.first_key
             while nx_key:
+                print("NX_KEY", nx_key)
                 item = DLFromDict(self.pulse.pull(self.owner, nx_key))
                 if item:
                     nx_key = item.next_key
