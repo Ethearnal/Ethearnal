@@ -4,7 +4,7 @@ from kadem.kad import DHTFacade
 from webdht.wdht import HashIO, OwnerGuidHashIO
 
 
-class WebGiudCollectionListApi(object):
+class WebGuidCollectionListApi(object):
     exposed = True
 
     def __init__(self, cherry,

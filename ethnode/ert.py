@@ -19,7 +19,7 @@ from webdht.wdht import WebDHTPulse, DHTPulse, WebSysGuidApi, OwnerGuidHashIO
 from webdht.wdht import WebSelfPredicateApi, WebGuidPredicateApi, WebDHTKnownGuids
 #
 from webdht.double_linked import DList, DLItemDict, OwnPulse, instance_dl
-from webdht.wdht_listing import WebGiudCollectionListApi
+from webdht.wdht_listing import WebGuidCollectionListApi
 
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
@@ -302,7 +302,7 @@ if __name__ == '__main__':
                        seed_port=seed_port)
         d = DHTFacade(dht, ert_profile_ctl)
 
-        gigs_cn = WebGiudCollectionListApi(cherry=cherrypy,
+        gigs_cn = WebGuidCollectionListApi(cherry=cherrypy,
                                            dhf=d,
                                            collection_name='cngigs')
 
