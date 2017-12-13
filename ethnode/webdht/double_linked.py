@@ -1,4 +1,5 @@
 from kadem.kad import DHTFacade
+from webdht.wdht import OwnerGuidHashIO
 from apifaces.pushpull import HashIO, PulseCallerIO
 from toolkit.kadmini_codec import sha256_bin_digest, guid_bin_to_hex, guid_hex_to_bin, decode_bson_val
 
@@ -91,23 +92,23 @@ class DLFromDict(object):
 
 
 class DLItemDict(object):
-    def __init__(self, dhf: OwnPulse,
+    def __init__(self, pulse: OwnPulse,
                  collection_name: str):
-        self.dhf = dhf
+        self.pulse = pulse
         self.collection_name = collection_name
 
     def set_meta(self, meta_item: DLMetaItem):
-        self.dhf.push(meta_item.collection_name, meta_item.to_dict())
+        self.pulse.push(meta_item.collection_name, meta_item.to_dict())
 
     def get_meta(self):
-        d = self.dhf.pull(self.collection_name)
+        d = self.pulse.pull(self.collection_name)
         if not d:
             return None
         meta_item = DLMetaItemFromDict(d)
         return meta_item
 
     def get(self, key) -> DLItem or None:
-        d_val = self.dhf.pull(key)
+        d_val = self.pulse.pull(key)
         if not d_val:
             return None
         item_dl = DLFromDict(d_val)
@@ -117,7 +118,7 @@ class DLItemDict(object):
         if key == self.collection_name:
             raise ValueError('DLItemDict can not use collection name as a key')
         dict_value = value.to_dict()
-        self.dhf.push(key, dict_value)
+        self.pulse.push(key, dict_value)
 
     def __getitem__(self, key) -> DLItem:
         return self.get(key)
@@ -191,4 +192,14 @@ class DList(object):
             yield (item.key, item.value)
 
 
-dl = DList(DLItemDict(FakePulse(), collection_name='dht:gigs'))
+def instance_dl(dhf, hex, collection_name):
+    dl = DList(
+        DLItemDict(
+            pulse=OwnPulse(dhf, OwnerGuidHashIO(hex)),
+            collection_name=collection_name,
+        )
+    )
+    return dl
+
+
+# dl = DList(DLItemDict(FakePulse(), collection_name='dht:gigs'))

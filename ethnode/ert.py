@@ -18,7 +18,8 @@ from ert_profile import EthearnalUploadJsonView
 from webdht.wdht import WebDHTPulse, DHTPulse, WebSysGuidApi, OwnerGuidHashIO
 from webdht.wdht import WebSelfPredicateApi, WebGuidPredicateApi, WebDHTKnownGuids
 #
-from webdht.double_linked import DList, DLItemDict, OwnPulse
+from webdht.double_linked import DList, DLItemDict, OwnPulse, instance_dl
+from webdht.wdht_listing import WebGiudCollectionListApi
 
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
@@ -301,12 +302,9 @@ if __name__ == '__main__':
                        seed_port=seed_port)
         d = DHTFacade(dht, ert_profile_ctl)
 
-        dl = DList(
-            DLItemDict(
-                dhf=OwnPulse(d, OwnerGuidHashIO(ert.rsa_guid_hex)),
-                collection_name='collection:gigs',
-            )
-        )
+        gigs_cn = WebGiudCollectionListApi(cherry=cherrypy,
+                                           dhf=d,
+                                           collection_name='cngigs')
 
         if dht.server_thread.is_alive():
             print('UDP server thread is alive')
