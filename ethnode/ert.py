@@ -149,6 +149,12 @@ def main_http(http_webdir: str = config.http_webdir,
             'tools.staticdir.root': ert_profile_ctl.data_dir,
             'tools.staticdir.dir': files_dir_name,
         },
+        '/api/ui': {
+            'tools.staticdir.on': True,
+            'tools.staticdir.dir': 'apidef/dist',
+            'tools.staticdir.index': 'index.html',
+        }
+
     }
 
     cherrypy.server.socket_host = socket_host
