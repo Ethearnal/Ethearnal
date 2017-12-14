@@ -209,7 +209,7 @@ def main_http(http_webdir: str = config.http_webdir,
     webdht = WebDHTPulse(
         cherry=cherrypy,
         dht_pulse=DHTPulse(dht_facade_),
-        mount_point='/api/v1/dht',
+        mount_point='/api/v1/dhtpulse',
         mount_it=True,
     )
     websys = WebSysGuidApi(
