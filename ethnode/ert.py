@@ -233,7 +233,12 @@ def main_http(http_webdir: str = config.http_webdir,
         dhtf=dht_facade_,
         mount_point='/api/v1/guids'
     )
-
+    from webdht.wdht_ertapi import DhtGigsWebAPI
+    dht_gigs = DhtGigsWebAPI(
+        cherry=cherrypy,
+        dhf=dht_facade_,
+        me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    )
     # WebGuidPredicateApi
     # WebSelfPredicateApi
     cherrypy.engine.start()

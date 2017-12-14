@@ -5,14 +5,14 @@
     "version" : "1",
     "title" : "ErtAPI"
   },
-  "host" : "localhost:4567",
+
   "basePath" : "/api/v1/",
   "schemes" : [ "http" ],
   "paths" : {
-    "/dht/gigs" : {
+    "/dht/gigs/" : {
       "get" : {
-        "tags" : [ "DHT Listings" ],
-        "summary" : "Listing of owned gigs",
+        "tags" : [ "DHT Gigs" ],
+        "summary" : "Gigs Listings by owner (if not provide own gigs)",
         "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
         "operationId" : "ownedGigs",
         "produces" : [ "application/json" ],
@@ -41,16 +41,16 @@
         }
       },
       "post" : {
-        "tags" : [ "DHT Create Gig" ],
-        "summary" : "adds an gig item",
-        "description" : "Adds an item to the system",
-        "operationId" : "addInventory",
+        "tags" : [ "DHT Gigs" ],
+        "summary" : "Insert a Gig into a dht virtual collection",
+        "description" : "Insert a Gig into a dht virtual collection",
+        "operationId" : "insertGig",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "in" : "body",
-          "name" : "inventoryItem",
-          "description" : "Inventory item to add",
+          "name" : "gigItem",
+          "description" : "Gig item to add",
           "required" : false,
           "schema" : {
             "$ref" : "#/definitions/Gig"
@@ -71,9 +71,9 @@
     },
     "/dht/guids" : {
       "get" : {
-        "tags" : [ "DHT Listings" ],
-        "summary" : "Listing of known identies ( have their pubkey )",
-        "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "tags" : [ "DHT Guids" ],
+        "summary" : "Listing of known profile identities ( those with with known pubkey )",
+        "description" : "known identities with pubkeys",
         "operationId" : "dhtGuids",
         "produces" : [ "application/json" ],
         "parameters" : [ {
@@ -87,7 +87,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "retrieve Gigs listing via DHT",
+            "description" : "retrieve GUIDS listing from local PKI",
             "schema" : {
               "type" : "array",
               "items" : {
@@ -101,22 +101,13 @@
         }
       }
     },
-    "/dht/ip4/udp/peers" : {
+    "/dht/ip4/" : {
       "get" : {
-        "tags" : [ "DHT Listings" ],
+        "tags" : [ "DHT Guids" ],
         "summary" : "Listing of DHT UDP peers",
-        "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "description" : "last known peers in dht",
         "operationId" : "dhtIP4Peers",
         "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "owner_guid",
-          "in" : "query",
-          "description" : "pass an optional search string for looking up inventory",
-          "required" : false,
-          "type" : "string",
-          "maxLength" : 64,
-          "minLength" : 64
-        } ],
         "responses" : {
           "200" : {
             "description" : "retrieve Gigs listing via DHT",
