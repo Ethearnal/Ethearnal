@@ -151,7 +151,7 @@ def main_http(http_webdir: str = config.http_webdir,
         },
         '/api/ui': {
             'tools.staticdir.on': True,
-            'tools.staticdir.dir': 'apidef/dist',
+            'tools.staticdir.dir': 'apidef/swagger',
             'tools.staticdir.index': 'index.html',
         }
 
