@@ -304,7 +304,8 @@ if __name__ == '__main__':
 
         gigs_cn = WebGuidCollectionListApi(cherry=cherrypy,
                                            dhf=d,
-                                           collection_name='cngigs')
+                                           collection_name='cngigs',
+                                           me_owner=OwnerGuidHashIO(ert.rsa_guid_hex))
 
         if dht.server_thread.is_alive():
             print('UDP server thread is alive')
