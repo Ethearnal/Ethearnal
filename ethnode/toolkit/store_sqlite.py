@@ -144,12 +144,16 @@ hkey blob
 REF_INSERT_ITEM = 'INSERT INTO ertref VALUES (?,?);'
 REF_GET_BY_BKEY = 'SELECT * FROM ertref WHERE bkey=?;'
 REF_UPDATE_ITEM = 'UPDATE ertref SET hkey=? WHERE bkey=?;'
+SELECT_ALL = 'SELECT * FROM ertref;'
 
 
 class ErtREFSQLite(BaseSQLite):
     def __init__(self, db_name):
         super(ErtREFSQLite, self).__init__(db_name)
         self.init_db()
+
+    def select_all(self):
+        return self.cursor.execute(SELECT_ALL)
 
     def init_db(self):
         self.cursor.execute(REF_TABLE_CREATE)
@@ -197,5 +201,5 @@ class ErtREFSQLite(BaseSQLite):
         return self.get_hkey(bkey)
 
     def __iter__(self):
-        # todo when needed
-        return iter([])
+        for item in self.select_all().fetchall():
+            yield item

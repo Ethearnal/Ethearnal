@@ -39,6 +39,8 @@ class DHTFacade(object):
         self.ert = ert
         self.cdx = cdx
         self.push_pubkey(local_only=True)
+        self.dht.storage.dhf = self
+        # self.dht.storage
 
     def boot_to(self, host, port):
         self.dht.bootstrap([(host, port), ])
@@ -46,6 +48,10 @@ class DHTFacade(object):
     @property
     def peers(self):
         return self.dht.peers()
+
+    @property
+    def ip4_peers(self):
+        return self.dht.buckets.host_port__host_port_binguid
 
     @property
     def data(self):
@@ -57,14 +63,15 @@ class DHTFacade(object):
 
     def push(self, key, value,
              revision=cdx.DEFAULT_REVISION,
-             nearest_nodes=None, local_only=False):
+             nearest_nodes=None, local_only=False, remote_only=False):
         guid = self.bin_guid
         hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
         ev = cdx.encode_val_bson(value, revision)
         sg = self.ert.rsa_sign(ev)
         print('PUSH HK', hk)
 
-        self.dht.storage.push(hk, ev, sg, guid)
+        if not remote_only:
+            self.dht.storage.push(hk, ev, sg, guid)
 
         if local_only:
             return
@@ -78,23 +85,22 @@ class DHTFacade(object):
                        signature=sg)
         return hk
 
-    def push_peer(self, guid=None):
-        if not guid:
-            guid = self.bin_guid
-        key = {'udp.host.ip4': guid}
-        host_port = '%s_%d' % (self.dht.peer.host, self.dht.peer.port)
-        value = {'h_p': host_port}
-        self.push(key, value)
+    def push_self_peer(self):
+        # todo gethost iface ip
+        pass
+        # copy_d = dict(self.ip4_peers)
+        # for host_port in copy_d:
+        #     self.push_host_port(host_port)
 
     def push_pubkey(self, local_only=False):
         key = {'ert': 'pubkey'}
         value = {'ert:pubkey': self.ert.rsa_pub_der}
         self.push(key, value, local_only=local_only)
 
-    def push_host(self, local_only=False):
+    def push_host_port(self, host_port, local_only=False):
         key = {'ert': 'udp_ip4_port'}
-        value = {'ert:udp_ip4_port': {'h': self.dht.peer.host, 'p': self.dht.peer.port}}
-        self.push(key, value, local_only=local_only)
+        value = {'ert:udp_ip4_port': {'h:p': host_port}}
+        self.push(key,  value, local_only=local_only)
 
     def pull_pubkey(self, guid=None):
         key = {'ert': 'pubkey'}

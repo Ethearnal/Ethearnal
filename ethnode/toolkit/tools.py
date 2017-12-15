@@ -43,7 +43,8 @@ def upnp_map_port(local_port, nat_router_port, proto):
     upnp.discover()
     upnp.selectigd()
     description = 'Ethearnal protocol upnp map %s %d -> %d' % (proto, nat_router_port, local_port)
-    upnp.addportmapping(nat_router_port, 'TCP', upnp.lanaddr, local_port, description, '')
+    print(description)
+    upnp.addportmapping(nat_router_port, proto, upnp.lanaddr, local_port, description, '')
 
 
 def on_hook(target, target_args, target_kwargs):

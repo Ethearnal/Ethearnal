@@ -1,6 +1,7 @@
 import heapq
 import threading
-
+from time import sleep
+from toolkit.kadmini_codec import guid_int_to_bts
 from .peer import Peer
 
 
@@ -14,11 +15,14 @@ def largest_differing_bit(value1, value2):
 
 
 class BucketSet(object):
-    def __init__(self, bucket_size, buckets, id):
+    def __init__(self, bucket_size, buckets, id, dhf=None):
         self.id = id
         self.bucket_size = bucket_size
         self.buckets = [list() for _ in range(buckets)]
         self.lock = threading.Lock()
+        self.dhf = dhf
+        self.host_port__host_port_binguid = dict()
+
 
     def to_list(self):
         l = []
@@ -33,6 +37,16 @@ class BucketSet(object):
                     l.append({'host': peer[0], 'port': peer[1], 'id': peer[2], 'info': peer[3]})
         return l
 
+    def to_host_port_dict(self):
+        d = {}
+        for bucket in self.buckets:
+            for peer in bucket:
+                if len(peer) == 4:
+                    host, port = peer[0], peer[1]
+                    host_port = '%s:%d' % (host, port)
+                    d[host_port] = (host, port, guid_int_to_bts(peer[2]))
+        return d
+
     def insert(self, peer):
         if peer.id != self.id:
             bucket_number = largest_differing_bit(self.id, peer.id)
@@ -44,6 +58,12 @@ class BucketSet(object):
                 elif len(bucket) >= self.bucket_size:
                     bucket.pop(0)
                 bucket.append(peer_triple)
+                host = peer_triple[0]
+                port = peer_triple[1]
+                guid = peer_triple[2]
+                host_port = '%s:%d' % (host, port)
+                if host_port not in self.host_port__host_port_binguid:
+                    self.host_port__host_port_binguid[host_port] = (host, port, guid_int_to_bts(guid))
 
     def nearest_nodes(self, key, limit=None):
         num_results = limit if limit else self.bucket_size

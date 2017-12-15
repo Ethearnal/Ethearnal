@@ -251,6 +251,9 @@ def main_http(http_webdir: str = config.http_webdir,
                                    target_args=(dht_,),
                                    target_kwargs={})(cherrypy.engine.exit)
 
+    from toolkit.upnpc import open_port
+    # open_port(34567)
+
     if not interactive:
         cherrypy.engine.block()
     else:
