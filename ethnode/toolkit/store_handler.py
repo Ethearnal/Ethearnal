@@ -144,6 +144,7 @@ class DHTStoreHandlerOne(object):
                     host = v['h']
                     port = v['p']
                     # print('PEERS REQUESTED TO----->', host, port)
+                    print('SEND LAZY PEERS TO', host, port)
             except Exception as e:
                 print('ON PULL DECODING FAIL', str(e))
         return self.store.get(hk)
