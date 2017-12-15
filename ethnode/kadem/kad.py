@@ -77,14 +77,6 @@ class DHTFacade(object):
     def bin_guid(self):
         return cdx.guid_int_to_bts(self.dht.peer.id)
 
-    # def push_to_host(self, key, value,  host, port, revision=cdx.DEFAULT_REVISION):
-    #     guid = self.bin_guid
-    #     hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
-    #     ev = cdx.encode_val_bson(value, revision)
-    #     sg = self.ert.rsa_sign(ev)
-    #     self.dht.server.socket.sendto(
-    #
-    #     )
 
     def push(self, key, value,
              revision=cdx.DEFAULT_REVISION,
@@ -110,19 +102,20 @@ class DHTFacade(object):
                        signature=sg)
         return hk
 
-    # def push_peer_wan(self):
-    #     # todo gethost iface ip
-    #     # lan_ip = get_lan_ip()
-    #     wan_ip = self.ert.my_wan_ip
-    #     wan_port = self.ert.my_wan_port
-    #     print(wan_ip, self.dht.peer.port)
-    #     host_port = '%s:%d' % (wan_ip, wan_port)
-    #     self.push_host_port(host_port)
+    def direct_push_pubkey(self, host, port):
+        key = {'ert': 'pubkey'}
+        value = {'ert:pubkey': self.ert.rsa_pub_der}
+        self.direct_push(key, value, host, port)
 
     def push_pubkey(self, local_only=False):
         key = {'ert': 'pubkey'}
         value = {'ert:pubkey': self.ert.rsa_pub_der}
         self.push(key, value, local_only=local_only)
+
+    def kwnown_guids(self):
+        c = self.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
+        guid_list = [cdx.guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
+        return guid_list
 
     def push_host_port(self, host_port, local_only=False):
         key = {'ert': 'udp_ip4_port'}
@@ -138,7 +131,11 @@ class DHTFacade(object):
                 ip_host = self.ert.my_lan_ip
         key = {'ert': 'peer'}
         val = {'ert:peer': {'h': ip_host, 'p': self.dht.peer.port}}
-        self.push(key, value=val, remote_only=True)
+        print('IP', ip_host, self.dht.peer.port)
+        for item in self.dht.peers():
+            peer_host = item['host']
+            peer_port = item['port']
+            self.direct_push(key, val, peer_host, peer_port)
 
     def pull_peer_request(self):
         key = {'ert': 'peer'}

@@ -81,6 +81,12 @@ parser.add_argument('-c', '--cdn_bootstrap_host_port',
                     action='store_true'
                     )
 
+parser.add_argument('-n', '--no_upnp_attempts',
+                    help='bootstrap to web service',
+                    required=False,
+                    action='store_true'
+                    )
+
 
 class EthearnalSite(object):
     @cherrypy.expose
@@ -302,6 +308,8 @@ if __name__ == '__main__':
     udp_port = int(udp_port)
     seed_host = None
     seed_port = None
+    no_upnp = args.no_upnp_attempts
+
 
     boot_cdn_host, boot_cdn_port = args.cdn_bootstrap_host_port.split(':')
 
@@ -344,10 +352,11 @@ if __name__ == '__main__':
         # messup with lan and wan
         # if local_ip == '127.0.0.1' or '192.168' in local_ip:
         #     ert.my_wan_ip = local_ip
-        if local_ip != ert.my_wan_ip:
-            if not punch_dht_udp_hole(udp_port):
-                print('\n\n\n\ PUNCH HOLE FAILED \n\n\n')
-        ert.my_lan_ip = local_ip
+        if not no_upnp:
+            if local_ip != ert.my_wan_ip:
+                if not punch_dht_udp_hole(udp_port):
+                    print('\n\n\n\ PUNCH HOLE FAILED \n\n\n')
+            ert.my_lan_ip = local_ip
 
         dht = main_dht(udp_host, udp_port,
                        store=storage_handle,

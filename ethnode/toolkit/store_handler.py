@@ -56,7 +56,15 @@ class DHTStoreHandlerOne(object):
     #         print('\n\n\n *** ** !!! PUSH SELF HOST \n\n\n')
 
     def on_pushed_ip4_peer(self, data):
-        pass
+        # value = {'ert:boot_to': {'h': host, 'p': port}}
+        print("DATA ASDFASD FAS",data)
+        if 'ert:boot_to' in data:
+            host = data['ert:boot_to']['h']
+            port = data['ert:boot_to']['p']
+            print(' + + \n\n + + + -!@#!@#!@#!@# BOOT TO',  host, port)
+            self.dhf.direct_push_pubkey(host, port)
+            self.dhf.boot_to(host, port)
+            # self.dhf.direct_push_pubkey(host, port)
 
     # local push
     def push(self, key, val, signature, guid_owner):
@@ -130,7 +138,6 @@ class DHTStoreHandlerOne(object):
     # local pull
 
     def pull(self, hk):
-        from time import sleep
         print('STORE HANDLER PULL', hk)
         t = self.store.get(hk)
         if t:
@@ -143,8 +150,18 @@ class DHTStoreHandlerOne(object):
                     v = data[self.ON_PUSH_PEER_KEY]
                     host = v['h']
                     port = v['p']
-                    # print('PEERS REQUESTED TO----->', host, port)
-                    print('SEND LAZY PEERS TO', host, port)
+                    print('\n \n \n \n \n + + @ SEND PEER TO BOOT', host, port)
+                    for item in self.dhf.peers:
+                        try:
+                            peer_host = item['host']
+                            peer_port = item['port']
+                            key = {'ert': 'boot_to'}
+                            value = {'ert:boot_to': {'h': peer_host, 'p': peer_port}}
+                            self.dhf.direct_push_pubkey(host, port)
+                            self.dhf.direct_push(key, value, host, port)
+                            # self.dhf.boot_to(peer_host, peer_port)
+                        except Exception as e:
+                            print('ERROR bootstaraping peers to requester', str(e))
             except Exception as e:
                 print('ON PULL DECODING FAIL', str(e))
         return self.store.get(hk)

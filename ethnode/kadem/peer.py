@@ -51,8 +51,8 @@ class Peer(object):
                          host = None,
                          port = None
                          ):
-        print('SEND MSG', message, sock)
-        print('SEND H P',host, port)
+        # print('SEND MSG', message, sock)
+        # print('SEND H P',host, port)
         message["peer_id"] = peer_id  # more like sender_id
         bts = codec.encode(message)
 
@@ -67,7 +67,7 @@ class Peer(object):
             sock = self.socket
        # self.dht
         if sock:
-            print('HAS SOCK')
+            # print('HAS SOCK')
             if lock:
                 with lock:
                     print('SEND')
@@ -181,7 +181,7 @@ class Peer(object):
             self._sendmessage(message, socket, peer_id=peer_id, peer_info=peer_info, lock=lock)
 
     def find_value(self, id, rpc_id, socket=None, peer_id=None, peer_info=None, lock=None):
-        print('SEND FIND_VALUE')
+        # print('SEND FIND_VALUE')
         id_bts = kadmini_codec.guid_int_to_bts(id)
         rpc_id_bts = kadmini_codec.guid_int_to_bts(rpc_id)
         message = {
@@ -193,7 +193,7 @@ class Peer(object):
 
     def found_value(self, id, value, rpc_id,
                     socket=None, peer_id=None, peer_info=None, lock=None):
-        print('SEND FOUND_VALUE')
+        # print('SEND FOUND_VALUE')
         id_bts = kadmini_codec.guid_int_to_bts(id)
         rpc_id_bts = kadmini_codec.guid_int_to_bts(rpc_id)
         message = {
