@@ -82,7 +82,7 @@ def get_wanip_path(upnp_url):
     bts = c1.getresponse().read()
     directory = bts.decode()
     # create a DOM object that represents the `directory` document
-    print(directory)
+    # print(directory)
     dom = parseString(directory)
 
     # find all 'serviceType' elements
