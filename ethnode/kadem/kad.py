@@ -16,7 +16,7 @@ from .shortlist import Shortlist
 # from . import hashing
 from toolkit import kadmini_codec
 from ert_profile import EthearnalProfileController
-
+from toolkit.upnpc import get_lan_ip
 cdx = kadmini_codec
 
 # k = 20
@@ -85,12 +85,14 @@ class DHTFacade(object):
                        signature=sg)
         return hk
 
-    def push_self_peer(self):
+    def push_peer_wan(self):
         # todo gethost iface ip
-        pass
-        # copy_d = dict(self.ip4_peers)
-        # for host_port in copy_d:
-        #     self.push_host_port(host_port)
+        # lan_ip = get_lan_ip()
+        wan_ip = self.ert.my_wan_ip
+        wan_port = self.ert.my_wan_port
+        print(wan_ip, self.dht.peer.port)
+        host_port = '%s:%d' % (wan_ip, wan_port)
+        self.push_host_port(host_port)
 
     def push_pubkey(self, local_only=False):
         key = {'ert': 'pubkey'}
@@ -321,6 +323,7 @@ class DHT(object):
         self.info = info
         self.hash_function = cdx.hash_function
         self.peer = Peer(host, port, guid, info)
+        # self.wan_peer = Peer(host, port, guid)
         self.data = self.storage
         self.buckets = BucketSet(k, id_bits, self.peer.id)
         self.rpc_ids = {}  # should probably have a lock for this

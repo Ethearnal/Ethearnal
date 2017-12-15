@@ -115,6 +115,10 @@ def _parse_igd_profile(profile_xml):
     return False
 
 
+def get_lan_ip():
+    return _get_local_ip()
+
+
 def _get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)

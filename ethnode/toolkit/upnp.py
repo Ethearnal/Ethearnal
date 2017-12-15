@@ -46,7 +46,9 @@ def discover():
             data, fromaddr = sock.recvfrom(1024)
             ip = fromaddr[0]
             # print "from ip: %s"%ip
-            parsed = re.findall(r'(?P<name>.*?): (?P<value>.*?)\r\n', data.decode())
+            decoded = data.decode()
+           #  print(' *  * *', decoded)
+            parsed = re.findall(r'(?P<name>.*?): (?P<value>.*?)\r\n', decoded)
             print(parsed)
             # get the location header
             # location = filter(lambda x: x[0].lower() == "location", parsed)
@@ -80,6 +82,7 @@ def get_wanip_path(upnp_url):
     bts = c1.getresponse().read()
     directory = bts.decode()
     # create a DOM object that represents the `directory` document
+    print(directory)
     dom = parseString(directory)
 
     # find all 'serviceType' elements
@@ -89,12 +92,14 @@ def get_wanip_path(upnp_url):
     # (this should also check for WANPPPConnection, which, if I remember correctly
     # exposed a similar SOAP interface on ADSL routers.
     for service in service_types:
-        print('service',service)
+        # print('service',service)
         # I'm using the fact that a 'serviceType' element contains a single text node, who's data can
         # be accessed by the 'data' attribute.
         # When I find the right element, I take a step up into its parent and search for 'controlURL'
         if service.childNodes[0].data.find('WANIPConnection') > 0:
-            print('PATH',service.parentNode.getElementsByTagName('controlURL')[0].childNodes[0].data)
+            #for node in service.childNodes[0].data.find('WANIPConnection'):
+                #print('NODE',node)
+            # print('PATH',service.parentNode.getElementsByTagName('controlURL')[0].childNodes[0].data)
             path = service.parentNode.getElementsByTagName('controlURL')[0].childNodes[0].data
             return path
 
@@ -236,8 +241,10 @@ def punch_port(ext_port, int_port, proto='UDP'):
                                     enabled=enabled)
         if status == 200:
             print("%sport forward on %s successful, %s->%s:%s" % (dis, routerip, ext_port, localip, int_port))
+            return True
         else:
             sys.stderr.write("%sport forward on %s failed, status=%s message=%s\n" % (dis, routerip, status, message))
+            return False
 
 
 

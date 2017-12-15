@@ -9,6 +9,8 @@ import rsa
 import hashlib
 import base64
 
+import ipgetter
+
 from toolkit import tools
 from toolkit import basemodel
 from toolkit.store import CrudJsonListStore
@@ -86,7 +88,8 @@ class EthearnalProfileController(object):
                  cdn_bootstrap_host=None,
                  cdn_bootstrap_port=None,
                  ):
-
+        self.my_wan_ip = ipgetter.myip()
+        # self.my_wan_port = 0
         self.cdx = cdx
         if not cdn_bootstrap_host and not cdn_bootstrap_port:
             raise ValueError('bootstrap to ertcdn service is required')

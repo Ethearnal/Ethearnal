@@ -4,11 +4,14 @@ import sys
 import traceback
 import config
 import argparse
+from random import randint
+#
 from kadem.kad import DHT, DHTFacade
 
 from toolkit.tools import mkdir, on_hook
 from toolkit import kadmini_codec
 from toolkit import store_handler
+from toolkit import upnp
 
 from ert_profile import EthearnalProfileView, EthearnalProfileController
 from ert_profile import EthearnalJobView, EthearnalJobPostController
@@ -17,6 +20,7 @@ from ert_profile import EthearnalUploadJsonView
 
 from webdht.wdht import WebDHTPulse, DHTPulse, WebSysGuidApi, OwnerGuidHashIO
 from webdht.wdht import WebSelfPredicateApi, WebGuidPredicateApi, WebDHTKnownGuids
+
 #
 from webdht.double_linked import DList, DLItemDict, OwnPulse, instance_dl
 from webdht.wdht_listing import WebGuidCollectionListApi
@@ -88,12 +92,18 @@ class EthearnalSite(object):
 
 def main_dht(host: str, port: int, store: store_handler.DHTStoreHandlerOne,
              guid: int =None, seed_host=None, seed_port=None):
+
+
+
     if seed_host and seed_port and (host, port) != (seed_host, seed_port):
         print('BOOTSTRAP TO SEED', seed_host, seed_port)
         dht = DHT(host=host, port=port, guid=guid,  seeds=[(seed_host, seed_port)],
                   storage=store)
     else:
         dht = DHT(host=host, port=port, guid=guid, storage=store)
+
+    # if ert.my_wan_port != 0:
+    #     # dht.peer.port = ert.my_wan_port
     return dht
 
 
@@ -264,6 +274,26 @@ def main_http(http_webdir: str = config.http_webdir,
             pass
 
 
+def punch_dht_udp_hole(port, attempts=3):
+    punch_hole_failed = True
+    for i in range(attempts):
+        print('\n\n\n UPnP try firewall punch hole')
+        try:
+            if upnp.punch_port(port, port, proto='UDP'):
+                punch_hole_failed = False
+                break
+            else:
+                print('\n\n\n FAIL: UPnP try firewall punch hole')
+        except Exception as e:
+            print('\n\n\n FAIL: UPnP try firewall punch hole', str(e))
+
+    if punch_hole_failed:
+        print('\n\n\n PUNCH HOLE IN FIREWALL FAILED')
+        return False
+    else:
+        return True
+
+
 if __name__ == '__main__':
     args = parser.parse_args()
     socket_host, socket_port = args.http_host_port.split(':')
@@ -309,6 +339,14 @@ if __name__ == '__main__':
             dht_sqlite_file=ert.dht_fb_fn,
             pubkeys_sqlite_file=ert.dht_ref_pubkeys_fn,
         )
+
+        local_ip = upnp.get_my_ip()
+        print('UDP_PORT', udp_port)
+        if local_ip != ert.my_wan_ip:
+            if not punch_dht_udp_hole(udp_port):
+
+                print('\n\n\n\ PUNCH HOLE FAILED \n\n\n')
+
         dht = main_dht(udp_host, udp_port,
                        store=storage_handle,
                        guid=int_guid,
@@ -316,10 +354,10 @@ if __name__ == '__main__':
                        seed_port=seed_port)
         d = DHTFacade(dht, ert_profile_ctl)
 
-        gigs_cn = WebGuidCollectionListApi(cherry=cherrypy,
-                                           dhf=d,
-                                           collection_name='cngigs',
-                                           me_owner=OwnerGuidHashIO(ert.rsa_guid_hex))
+        # gigs_cn = WebGuidCollectionListApi(cherry=cherrypy,
+        #                                    dhf=d,
+        #                                    collection_name='cngigs',
+        #                                    me_owner=OwnerGuidHashIO(ert.rsa_guid_hex))
 
         if dht.server_thread.is_alive():
             print('UDP server thread is alive')
