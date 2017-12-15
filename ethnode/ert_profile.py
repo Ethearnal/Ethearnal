@@ -94,7 +94,8 @@ class EthearnalProfileController(object):
         if not cdn_bootstrap_host and not cdn_bootstrap_port:
             raise ValueError('bootstrap to ertcdn service is required')
 
-        self.cdn_gigs = CdnBinResourceBsonApiClientRequests(endpoint_host=cdn_bootstrap_host,
+        self.cdn_gigs = CdnBinRe
+        sourceBsonApiClientRequests(endpoint_host=cdn_bootstrap_host,
                                                             endpoint_port=cdn_bootstrap_port,
                                                             endpoint_path='/api/v1/gig')
 

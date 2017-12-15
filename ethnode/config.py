@@ -15,7 +15,7 @@ interactive = False
 # upnp defaults
 
 udp_host = '0.0.0.0'
-udp_port = 34567
+udp_port = 56789
 udp_host_port = '%s:%d' % (udp_host, udp_port)
 
 # ertcdn service
