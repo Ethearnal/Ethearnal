@@ -16,7 +16,7 @@ from .shortlist import Shortlist
 # from . import hashing
 from toolkit import kadmini_codec
 from ert_profile import EthearnalProfileController
-from toolkit.upnpc import get_lan_ip
+
 cdx = kadmini_codec
 
 # k = 20
