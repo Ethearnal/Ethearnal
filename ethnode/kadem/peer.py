@@ -47,23 +47,38 @@ class Peer(object):
         return repr(self.astriple())
 
     def _sendmessage_dht(self, message, codec,
-                         sock=None, peer_id=None, peer_info=None, lock=None):
+                         sock=None, peer_id=None, peer_info=None, lock=None,
+                         host = None,
+                         port = None
+                         ):
+        print('SEND MSG', message, sock)
+        print('SEND H P',host, port)
         message["peer_id"] = peer_id  # more like sender_id
         bts = codec.encode(message)
 
         # todo, originally server socket is used for sending
         # todo refactor this asap
+        if not host:
+            host = self.host
+        if not port:
+            port = self.port
 
+        if not sock:
+            sock = self.socket
+       # self.dht
         if sock:
+            print('HAS SOCK')
             if lock:
                 with lock:
-                    sock.sendto(bts, (self.host, self.port))
+                    print('SEND')
+                    sock.sendto(bts, (host, port))
             else:
-                sock.sendto(bts, (self.host, self.port))
+                print('SEND no lock')
+                sock.sendto(bts, (host, port))
 
     # handle send of all udp msg here
     def _sendmessage(self, message,
-                     sock=None, peer_id=None, peer_info=None, lock=None):
+                     sock=None, peer_id=None, peer_info=None, lock=None, host=None, port=None):
 
         if not sock:
             sock = self.socket
@@ -78,6 +93,8 @@ class Peer(object):
             peer_id=peer_id,
             peer_info=peer_info,  # disable originally unused
             lock=lock,
+            host=host,
+            port=port,
         )
 
     def push_pubkey(self, sender_id=None, pubkey_der=None):
@@ -100,6 +117,22 @@ class Peer(object):
             "message_type": "pong"
         }
         self._sendmessage(message, socket, peer_id=peer_id, peer_info=peer_info, lock=lock)
+
+    def direct_store(self, key, value, host, port,
+              socket=None,
+              peer_id=None,
+              peer_info=None,
+              lock=None,
+              signature=None):
+        key_bts = kadmini_codec.guid_int_to_bts(key)
+        message = {
+            "message_type": "store",
+            "id": key_bts,
+            "value": value
+        }
+        if signature:
+            message['signature'] = signature
+        self._sendmessage(message, socket, peer_id=peer_id, peer_info=peer_info, lock=lock, host=host, port=port)
 
     def store(self, key, value, socket=None,
               peer_id=None,

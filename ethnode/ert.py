@@ -94,7 +94,6 @@ def main_dht(host: str, port: int, store: store_handler.DHTStoreHandlerOne,
              guid: int =None, seed_host=None, seed_port=None):
 
 
-
     if seed_host and seed_port and (host, port) != (seed_host, seed_port):
         print('BOOTSTRAP TO SEED', seed_host, seed_port)
         dht = DHT(host=host, port=port, guid=guid,  seeds=[(seed_host, seed_port)],
@@ -241,7 +240,7 @@ def main_http(http_webdir: str = config.http_webdir,
     knownguids = WebDHTKnownGuids(
         cherry=cherrypy,
         dhtf=dht_facade_,
-        mount_point='/api/v1/guids'
+        mount_point='/api/v1/dht/guids'
     )
     from webdht.wdht_ertapi import DhtGigsWebAPI
     dht_gigs = DhtGigsWebAPI(
@@ -341,10 +340,14 @@ if __name__ == '__main__':
 
         local_ip = upnp.get_my_ip()
         print('UDP_PORT', udp_port)
+        print('LOCAL IP', local_ip)
+        # messup with lan and wan
+        # if local_ip == '127.0.0.1' or '192.168' in local_ip:
+        #     ert.my_wan_ip = local_ip
         if local_ip != ert.my_wan_ip:
             if not punch_dht_udp_hole(udp_port):
-
                 print('\n\n\n\ PUNCH HOLE FAILED \n\n\n')
+        ert.my_lan_ip = local_ip
 
         dht = main_dht(udp_host, udp_port,
                        store=storage_handle,

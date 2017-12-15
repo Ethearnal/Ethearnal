@@ -40,10 +40,26 @@ class DHTFacade(object):
         self.cdx = cdx
         self.push_pubkey(local_only=True)
         self.dht.storage.dhf = self
+
         # self.dht.storage
 
     def boot_to(self, host, port):
         self.dht.bootstrap([(host, port), ])
+
+    def direct_push(self, key, value, host, port):
+        guid = self.bin_guid
+        hk = cdx.encode_key_hash(key, guid=guid, revision=cdx.DEFAULT_REVISION)
+        ev = cdx.encode_val_bson(value, cdx.DEFAULT_REVISION)
+        sg = self.ert.rsa_sign(ev)
+        self.dht.peer.direct_store(hk, ev,  host, port,
+                   socket=self.dht.server.socket,
+                   peer_id=self.dht.peer.id,
+                   signature=sg)
+
+    def push_peer(self, host_port, to_host, to_port):
+        key = 'ert:peer'
+        value = {'ert:peer':host_port}
+        self.direct_push(key, value, to_host, to_port)
 
     @property
     def peers(self):
@@ -60,6 +76,15 @@ class DHTFacade(object):
     @property
     def bin_guid(self):
         return cdx.guid_int_to_bts(self.dht.peer.id)
+
+    # def push_to_host(self, key, value,  host, port, revision=cdx.DEFAULT_REVISION):
+    #     guid = self.bin_guid
+    #     hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
+    #     ev = cdx.encode_val_bson(value, revision)
+    #     sg = self.ert.rsa_sign(ev)
+    #     self.dht.server.socket.sendto(
+    #
+    #     )
 
     def push(self, key, value,
              revision=cdx.DEFAULT_REVISION,
@@ -85,14 +110,14 @@ class DHTFacade(object):
                        signature=sg)
         return hk
 
-    def push_peer_wan(self):
-        # todo gethost iface ip
-        # lan_ip = get_lan_ip()
-        wan_ip = self.ert.my_wan_ip
-        wan_port = self.ert.my_wan_port
-        print(wan_ip, self.dht.peer.port)
-        host_port = '%s:%d' % (wan_ip, wan_port)
-        self.push_host_port(host_port)
+    # def push_peer_wan(self):
+    #     # todo gethost iface ip
+    #     # lan_ip = get_lan_ip()
+    #     wan_ip = self.ert.my_wan_ip
+    #     wan_port = self.ert.my_wan_port
+    #     print(wan_ip, self.dht.peer.port)
+    #     host_port = '%s:%d' % (wan_ip, wan_port)
+    #     self.push_host_port(host_port)
 
     def push_pubkey(self, local_only=False):
         key = {'ert': 'pubkey'}
@@ -104,11 +129,29 @@ class DHTFacade(object):
         value = {'ert:udp_ip4_port': {'h:p': host_port}}
         self.push(key,  value, local_only=local_only)
 
-    def pull_pubkey(self, guid=None):
+    def push_peer_request(self):
+        ip_host = self.dht.peer.host
+        if ip_host == '0.0.0.0':
+            if not self.ert.my_lan_ip:
+                ip_host = '127.0.0.1'
+            else:
+                ip_host = self.ert.my_lan_ip
+        key = {'ert': 'peer'}
+        val = {'ert:peer': {'h': ip_host, 'p': self.dht.peer.port}}
+        self.push(key, value=val, remote_only=True)
+
+    def pull_peer_request(self):
+        key = {'ert': 'peer'}
+        return self.pull_remote(key)
+
+    def pull_pubkey(self, guid=None, remote_only=False):
         key = {'ert': 'pubkey'}
         if not guid:
             guid = self.bin_guid
-        val = self.pull_local(key, guid=guid)
+        val = None
+        if not remote_only:
+            val = self.pull_local(key, guid=guid)
+
         if val:
             print('LOCAL VAL PUBKEY')
         else:
@@ -152,7 +195,10 @@ class DHTFacade(object):
         if not guid:
             guid = self.bin_guid
         hk = cdx.encode_key_hash(key, guid, revision)
+        # from time import sleep
         print('HK', hk)
+        # sleep(3)
+
         val = self.dht.iterative_find_value(hk)
         if val:
             print('HAVE VAL')
@@ -226,6 +272,17 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
 
         if id == key:
             print('KEY IS PEER')
+            guid_owner = cdx.guid_int_to_bts(key)
+            print('\n\n\n + + + ++ ++ GUID' , guid_owner)
+            if guid_owner in self.server.dht.storage.pubkeys:
+                print(' \n\n\n + + ++ ++ + IN PUBKEYS \n \n \n\ ')
+            else:
+                # todo async
+                self.server.dht.storage.dhf.pull_pubkey(guid=guid_owner, remote_only=True)
+                pass
+                # self.server.dht
+            # if guid_owner in self.pubkeys:
+            #     print('HAVE PUBKEY', guid_owner)
 
         msg_rpc_id_int = cdx.guid_bts_to_int(message["rpc_id"])
         info = None
@@ -334,6 +391,8 @@ class DHT(object):
         self.server_thread.daemon = True
         self.server_thread.start()
         self.bootstrap(seeds)
+        # self.dhf = None
+
 
         # ext
 
@@ -388,6 +447,7 @@ class DHT(object):
         if len(bootstrap_nodes) == 0:
             for bnode in self.buckets.to_list():
                 self.iterative_find_nodes(self.peer.id, boot_peer=Peer(bnode[0], bnode[1], bnode[2], bnode[3]))
+
 
 
 

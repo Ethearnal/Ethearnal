@@ -89,6 +89,7 @@ class EthearnalProfileController(object):
                  cdn_bootstrap_port=None,
                  ):
         self.my_wan_ip = ipgetter.myip()
+        self.my_lan_ip = None
         # self.my_wan_port = 0
         self.cdx = cdx
         if not cdn_bootstrap_host and not cdn_bootstrap_port:

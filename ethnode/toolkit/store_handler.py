@@ -13,8 +13,10 @@ from kadem.kad import DHTFacade
 
 
 class DHTStoreHandlerOne(object):
-    ON_PUSH_PEER_KEY = 'ert:udp_ip4_port'
-    ON_PUSH_REQUEST_PEERS = 'ert:req:udp_ip4_peers'
+    ON_PUSH_PEER_KEY = 'ert:peer'
+    # ON_PUSH_REQUEST_PEERS = 'ert:req:udp_ip4_peers'
+    # ON_PULL_REQUEST_PEERS = 'ert:peer'
+    # ON_PEERS_REQUEST
 
     def __init__(self, dht_sqlite_file=None, pubkeys_sqlite_file=None):
 
@@ -44,35 +46,17 @@ class DHTStoreHandlerOne(object):
     def dhf(self, val):
         self._dhf = val
 
-    def on_push_request_peers(self, data):
-        if self.ON_PUSH_REQUEST_PEERS in data:
-            print('PUSHING RELAY PEERs')
-            print('DATA', data)
-            # from time import sleep
-            # self.dhf.push_peers()
-            # self.dhf.push_relay_peers()
-            print('\n\n\n *** ** !!! PUSH SELF HOST \n\n\n')
+    # def on_push_request_peers(self, data):
+    #     if self.ON_PUSH_REQUEST_PEERS in data:
+    #         print('PUSHING RELAY PEERs')
+    #         print('DATA', data)
+    #         # from time import sleep
+    #         # self.dhf.push_peers()
+    #         # self.dhf.push_relay_peers()
+    #         print('\n\n\n *** ** !!! PUSH SELF HOST \n\n\n')
 
     def on_pushed_ip4_peer(self, data):
-        if self.ON_PUSH_PEER_KEY in data:
-            print(data)
-            print('\n\n\ *******')
-            val = data[self.ON_PUSH_PEER_KEY]
-            if 'h' in val and 'p' in val:
-                host_port = val['h:p']
-                d = dict(self.dhf.ip4_peers)
-                if host_port not in d:
-                    try:
-                        host, port = host_port.split(':')
-                        if host != '0.0.0.0' and self.dhf:
-                            try:
-                                port = int(port)
-                                self.dhf.boot_to(host, port)
-                                print('\n\n\n BOOTED TO HOST:PORT ', host, port)
-                            except Exception as e:
-                                print('\n\n\n ERROR WHEN TRY BOOT TO%s:%d %s ' % (host, port, str(e)))
-                    except Exception as e:
-                        print('\n\n\n ERROR incorrect host port format', host_port, e)
+        pass
 
     # local push
     def push(self, key, val, signature, guid_owner):
@@ -142,35 +126,26 @@ class DHTStoreHandlerOne(object):
                     'ERR ert:pubkey not found'
             else:
                 print('NO PUB KEY FOUND')
-                #
-                print('\n\n\n *+ ++ ++ ++ * ** * TRY PULLING PUBKEY')
-                # todo dry this
-                self.dhf.pull_pubkey(guid=guid_owner)
-                # guid_owner, signature, val
-                # pk_rev, pubkey_data = cdx.decode_bson_val(pk_value)
-                if guid_owner in self.pubkeys:
-                    print('HAVE PUBKEY', guid_owner)
-                    hk_from_store = self.pubkeys[guid_owner]
-                    hk = hk_from_store
-                    if isinstance(hk_from_store, bytes):
-                        hk = cdx.guid_bts_to_int(hk_from_store)
-                    elif isinstance(hk_from_store, int):
-                        hk = hk_from_store
-                    else:
-                        raise ValueError('HKEY REF PUBKEY ERROR')
-
-                    pk_owner, pk_signature, pk_value = self.pull(hk)
-                    # pk_value =
-                    pk_rev, pubkey_data = cdx.decode_bson_val(pk_value)
-                    return self.store.__setitem__(key, owner_signature_value)
-                else:
-                    print('VAL SIG FAILED')
-
 
     # local pull
 
     def pull(self, hk):
+        from time import sleep
         print('STORE HANDLER PULL', hk)
+        t = self.store.get(hk)
+        if t:
+            try:
+                pk_owner, pk_signature, pk_value = self.store.get(hk)
+                revision, data = cdx.decode_bson_val(pk_value)
+                # print(data, data[self.ON_PUSH_PEER_KEY])
+                if self.ON_PUSH_PEER_KEY in data:
+                    # self.dhf.pus
+                    v = data[self.ON_PUSH_PEER_KEY]
+                    host = v['h']
+                    port = v['p']
+                    # print('PEERS REQUESTED TO----->', host, port)
+            except Exception as e:
+                print('ON PULL DECODING FAIL', str(e))
         return self.store.get(hk)
 
     def __contains__(self, hk):
