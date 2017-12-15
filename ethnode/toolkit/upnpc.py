@@ -2,7 +2,7 @@ import gevent
 from gevent import socket
 from gevent import monkey
 
-monkey.patch_socket()
+# monkey.patch_socket()
 import re
 from http.client import HTTPConnection
 from urllib.parse import urlparse
