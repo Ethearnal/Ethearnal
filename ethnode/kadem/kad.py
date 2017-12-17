@@ -137,6 +137,21 @@ class DHTFacade(object):
             peer_port = item['port']
             self.direct_push(key, val, peer_host, peer_port)
 
+    def push_peer_ping(self):
+        ip_host = self.dht.peer.host
+        if ip_host == '0.0.0.0':
+            if not self.ert.my_lan_ip:
+                ip_host = '127.0.0.1'
+            else:
+                ip_host = self.ert.my_lan_ip
+        key = {'ert': 'pong_to'}
+        val = {'ert:pong_to': {'h': ip_host, 'p': self.dht.peer.port}}
+        print('IP', ip_host, self.dht.peer.port)
+        for item in self.dht.peers():
+            peer_host = item['host']
+            peer_port = item['port']
+            self.direct_push(key, val, peer_host, peer_port)
+
     def pull_peer_request(self):
         key = {'ert': 'peer'}
         return self.pull_remote(key)

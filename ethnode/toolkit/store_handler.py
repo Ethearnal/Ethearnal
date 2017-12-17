@@ -14,6 +14,7 @@ from kadem.kad import DHTFacade
 
 class DHTStoreHandlerOne(object):
     ON_PUSH_PEER_KEY = 'ert:peer'
+
     # ON_PUSH_REQUEST_PEERS = 'ert:req:udp_ip4_peers'
     # ON_PULL_REQUEST_PEERS = 'ert:peer'
     # ON_PEERS_REQUEST
@@ -57,10 +58,22 @@ class DHTStoreHandlerOne(object):
 
     def on_pushed_ip4_peer(self, data):
         # value = {'ert:boot_to': {'h': host, 'p': port}}
-        print("DATA ASDFASD FAS",data)
+        print("DATA ASDFASD FAS", data)
         if 'ert:boot_to' in data:
             host = data['ert:boot_to']['h']
             port = data['ert:boot_to']['p']
+            print(' + + \n\n + + + -!@#!@#!@#!@# BOOT TO',  host, port)
+            self.dhf.direct_push_pubkey(host, port)
+            self.dhf.boot_to(host, port)
+            # self.dhf.direct_push_pubkey(host, port)
+
+    def on_pushed_ip4_ping(self, data):
+        # value = {'ert:pong_to': {'h': host, 'p': port}}
+        print("DATA ASDFASD FAS", data)
+        if 'ert:boot_to' in data:
+            val = data['ert:boot_to']
+            host = val['h']
+            port = val['p']
             print(' + + \n\n + + + -!@#!@#!@#!@# BOOT TO',  host, port)
             self.dhf.direct_push_pubkey(host, port)
             self.dhf.boot_to(host, port)
