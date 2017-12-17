@@ -101,7 +101,7 @@ class WebDHTKnownPeers(object):
 
     def GET(self):
         # todo
-        js = json.dumps(self.dhtf.ip4_peers)
+        js = json.dumps(self.dhtf.ip4_peers_hex)
         js_b = js.encode()
         return js_b
 

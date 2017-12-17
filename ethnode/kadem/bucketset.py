@@ -1,7 +1,7 @@
 import heapq
 import threading
 from time import sleep
-from toolkit.kadmini_codec import guid_int_to_bts
+from toolkit.kadmini_codec import guid_int_to_bts, guid_int_to_hex
 from .peer import Peer
 
 
@@ -22,7 +22,7 @@ class BucketSet(object):
         self.lock = threading.Lock()
         self.dhf = dhf
         self.host_port__host_port_binguid = dict()
-
+        self.host_port__host_port_hexguid = dict()
 
     def to_list(self):
         l = []
@@ -64,6 +64,7 @@ class BucketSet(object):
                 host_port = '%s:%d' % (host, port)
                 if host_port not in self.host_port__host_port_binguid:
                     self.host_port__host_port_binguid[host_port] = (host, port, guid_int_to_bts(guid))
+                    self.host_port__host_port_hexguid[host_port] = (host, port, guid_int_to_hex(guid))
 
     def nearest_nodes(self, key, limit=None):
         num_results = limit if limit else self.bucket_size

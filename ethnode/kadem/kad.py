@@ -67,6 +67,15 @@ class DHTFacade(object):
 
     @property
     def ip4_peers(self):
+        return self.ip4_peers_format()
+
+    @property
+    def ip4_peers_hex(self):
+        return self.ip4_peers_format(hex_format=True)
+
+    def ip4_peers_format(self, hex_format=False):
+        if hex_format:
+            return self.dht.buckets.host_port__host_port_hexguid
         return self.dht.buckets.host_port__host_port_binguid
 
     @property
