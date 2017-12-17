@@ -248,11 +248,17 @@ def main_http(http_webdir: str = config.http_webdir,
         dhtf=dht_facade_,
         mount_point='/api/v1/dht/guids'
     )
-    from webdht.wdht_ertapi import DhtGigsWebAPI
+
+    from webdht.wdht_ertapi import DhtGigsWebAPI, WebDHTKnownPeers
     dht_gigs = DhtGigsWebAPI(
         cherry=cherrypy,
         dhf=dht_facade_,
         me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    )
+
+    dht_ip4 = WebDHTKnownPeers(
+        cherry=cherrypy,
+        dhf=dht_facade_,
     )
     # WebGuidPredicateApi
     # WebSelfPredicateApi

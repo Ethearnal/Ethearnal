@@ -83,3 +83,36 @@ class DhtGigsWebAPI(object):
             }
         )
 
+
+class WebDHTKnownPeers(object):
+    exposed = True
+
+    def __init__(self,
+                 cherry,
+                 dhf: DHTFacade,
+                 mount_point: str='/api/v1/dht/ip4/',
+                 mount_it=True):
+        self.cherry = cherry
+        self.dhtf = dhf
+        self.mount_point = mount_point
+        if mount_it:
+            self.mount()
+            print('MOUNT GUIDS ENDPOINT')
+
+    def GET(self):
+        # todo
+        js = json.dumps(self.dhtf.ip4_peers)
+        js_b = js.encode()
+        return js_b
+
+    def mount(self):
+        self.cherry.tree.mount(
+            self,
+            self.mount_point, {'/': {
+                    'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
+
+
