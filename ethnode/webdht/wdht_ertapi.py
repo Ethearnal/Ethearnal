@@ -2,6 +2,8 @@ import json
 from webdht.double_linked import DList, instance_dl
 from kadem.kad import DHTFacade
 from webdht.wdht import HashIO, OwnerGuidHashIO
+from toolkit.kadmini_codec import guid_bin_to_hex
+
 
 
 class DhtGigsWebAPI(object):
@@ -24,14 +26,26 @@ class DhtGigsWebAPI(object):
 
         self.required_fields = ('general_domain_of_expertise', 'title', 'description', 'price', 'required_ert')
 
-    def GET(self, owner_guid=None):
-        if not owner_guid:
-            owner_guid = self.me.hex()
+    def get_per_guid(self, owner_guid):
         dl = instance_dl(self.dhf, owner_guid, self.collection_name)
         ll = list(dl.iter_values())
-        d_js = json.dumps(ll, ensure_ascii=False)
-        d_sj_bin = d_js.encode()
-        return d_sj_bin
+        return ll
+
+    def GET(self, owner_guid=None):
+        if owner_guid:
+            ll = self.get_per_guid(owner_guid)
+            d_js = json.dumps(ll, ensure_ascii=False)
+            d_sj_bin = d_js.encode()
+            return d_sj_bin
+        else:
+            c = self.dhf.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
+            guid_list = [guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
+            ll = list()
+            for guid in guid_list:
+                ll.append({guid: self.get_per_guid(guid)})
+            d_js = json.dumps(ll, ensure_ascii=False)
+            d_sj_bin = d_js.encode()
+            return d_sj_bin
 
     def POST(self):
         body = self.cherry.request.body.read()

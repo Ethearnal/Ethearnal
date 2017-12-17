@@ -152,6 +152,16 @@ class DHTFacade(object):
             peer_port = item['port']
             self.direct_push(key, val, peer_host, peer_port)
 
+    def converge_peers(self):
+        from time import sleep
+        while True:
+            self.push_pubkey()
+            sleep(1)
+            self.push_peer_request()
+            sleep(1)
+            self.pull_peer_request()
+            sleep(300)
+
     def pull_peer_request(self):
         key = {'ert': 'peer'}
         return self.pull_remote(key)

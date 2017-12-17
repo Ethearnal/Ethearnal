@@ -215,7 +215,7 @@ class WebDHTKnownGuids(object):
         # todo
         c = self.dhtf.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
         guid_list = [guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
-        print(guid_list)
+        # print(guid_list)
         js = json.dumps(guid_list)
         js_b = js.encode()
         return js_b

@@ -227,6 +227,7 @@ class EthearnalProfileController(object):
         bts = None
         with open(self.profile_image_file_name, 'rb') as fs:
             bts = fs.read()
+            fs.close()
         return bts
 
     @staticmethod
@@ -254,8 +255,10 @@ class EthearnalProfileController(object):
             pubkey, prvkey = rsa.newkeys(key_sz)
             with open(self.rsa_prv_fn, 'wb') as fp_prv:
                 fp_prv.write(prvkey.save_pkcs1(format=self.RSA_FORMAT))
+                fp_prv.close()
                 with open(self.rsa_pub_fn, 'wb') as fp_pub:
                     fp_pub.write(pubkey.save_pkcs1(format=self.RSA_FORMAT))
+                    fp_pub.close()
             print('RSA KEYS GENERATED')
 
     @property
@@ -263,6 +266,7 @@ class EthearnalProfileController(object):
         with open(self.rsa_pub_fn, 'rb') as fp:
             bts = fp.read()
             b64, der = self.rsa_b64_der(bts)
+            fp.close()
         return b64
 
     @staticmethod
@@ -279,20 +283,22 @@ class EthearnalProfileController(object):
         with open(self.rsa_pub_fn, 'rb') as fp:
             cherrypy.response.headers['Content-Type'] = 'text/html; charset=ascii'
             bts = fp.read()
+            fp.close()
         b64, der = self.rsa_b64_der(bts)
         return b64, der
 
     def rsa_prv_obj(self):
         with open(self.rsa_prv_fn, 'rb') as fp:
             pem_bts = fp.read()
+            fp.close()
         rsa.PrivateKey.load_pkcs1()
-
 
 
     @property
     def rsa_prv_b64_der(self):
         with open(self.rsa_prv_fn, 'rb') as fp:
             bts = fp.read()
+            fp.close()
         b64, der = self.rsa_b64_der(bts)
         return b64, der
 
