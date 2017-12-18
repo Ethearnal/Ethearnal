@@ -398,6 +398,11 @@ $( document ).ready(function() {
         });
         $('.ui.dropdown').dropdown();
 
+        $('.skills-dropdown, .languages-dropdown, .gig-tags').dropdown({
+            allowAdditions: true,
+            maxSelections: 10
+        });
+
 
         $('.form-group i.remove.icon').click(function() {
             $(this).parent().find('label').removeClass('has-file').html('Add Photos');

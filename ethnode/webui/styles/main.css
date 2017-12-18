@@ -1651,9 +1651,21 @@ section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 s
 section.profiles-page-content .container .jobs .gigs-container .gig .footer h4 span {
   font-size: 18px;
   font-weight: 400;
-  margin-left: 2px;
+  margin-left: 5px;
   position: relative;
   top: 2px;
+}
+
+section.gigs-page-content .container .gigs .gigs-container .gig .footer h4 span i, section.gigs-page-content .container .jobs .gigs-container .gig .footer h4 span i,
+section.jobs-page-content .container .gigs .gigs-container .gig .footer h4 span i,
+section.jobs-page-content .container .jobs .gigs-container .gig .footer h4 span i,
+section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 span i,
+section.profiles-page-content .container .jobs .gigs-container .gig .footer h4 span i {
+  font-size: 18px;
+  position: relative;
+  top: 2px;
+  right: 2px;
+  color: #111;
 }
 
 .modal-box-content .inner-modal {
@@ -1787,6 +1799,12 @@ section.profiles-page-content .container .jobs .gigs-container .gig .footer h4 s
 .modal-box-content .inner-modal .content .modal-body .modal-inputs form > div.ui.right.labeled.input {
   float: left;
   margin-top: 10px;
+}
+
+.modal-box-content .inner-modal .content .modal-body .modal-inputs form label.ui.label i {
+  font-size: 14px;
+  position: relative;
+  top: 2px;
 }
 
 .modal-box-content .inner-modal .content .modal-body .form-group {
@@ -2071,6 +2089,13 @@ sup {
   font-size: 80%;
   position: relative;
   top: -1px;
+}
+
+sup i.material-icons {
+  font-size: 11px;
+  position: relative;
+  top: 2px;
+  right: 2px;
 }
 
 .slider-wrapper, .slider-wrapper-2 {

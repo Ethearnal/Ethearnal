@@ -58,25 +58,19 @@
                         input#reputationCost(type="text", placeholder="Cost of reputation")
                         .ui.basic.label .00
 
-                        //- .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                        //-     select.ui.dropdown#job-type
-                        //-         option(value="") Job Type
-                        //-         option(value="1") Fixed Price
-                        //-         option(value="2") Hourly
-
-                        //- .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
-                        //-     select.ui.dropdown#experience-level
-                        //-         option(value="") Experience Level
-                        //-         option(value="1") Entry Level
-                        //-         option(value="2") Intermediate
-                        //-         option(value="3") Expert
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.whole-line
+                        select.ui.fluid.dropdown.normal.search.skills-dropdown(name="skills", multiple="")
+                            option(value="") Add gig tags (limit: 10)...
+                            option(value="programming") Programming
+                            option(value="copywriting") Copywriting
+                            option(value="userexperience") User Experience
 
                     .mdl-textfield.mdl-js-textfield.whole-line
                         textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
                         label.mdl-textfield__label(for="description") Description (what have you done or currently do?)
 
                     .ui.right.labeled.input
-                        label.ui.label(for="amount") $
+                        label.ui.label(for="amount"): i.material-icons polymer
                         input#amount(type="text", placeholder="Amount")
                         .ui.basic.label .00
 

@@ -34,7 +34,7 @@ function createGigBox(gigData, gigID) {
     var lowerInfo = '<div class="lower-info"><h6 class="expire">'+ $expiresIn +'</h6></div>';
 
 
-    var gigFooter = '<div class="footer"><h4>Starting at <span>$' + $data.price + '</span></h4></div>';
+    var gigFooter = '<div class="footer"><h4>Starting at <span><i class="material-icons">polymer</i>' + $data.price + '</span></h4></div>';
 
     // Creating div based on variables AND
     // Adding gigID attribute to the GIG.

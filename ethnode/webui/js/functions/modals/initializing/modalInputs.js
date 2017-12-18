@@ -59,24 +59,24 @@ function loadInputsText(form, div) {
         });
     }
 
-    if($divToLoad.hasClass('education')) {
-        $imageSrc = $divToLoad.find('.image img').attr('src');
+    // if($divToLoad.hasClass('education')) {
+    //     $imageSrc = $divToLoad.find('.image img').attr('src');
 
-        $content.find('input#input-image-education').attr('value', $imageSrc);
-        $content.find('img#input-image-education').attr('src', $imageSrc);
-        $content.find('img.img-education').removeClass('active');
-        $content.find('label[for="input-image-education"]').text('Click here to change image').removeClass('active');
-    }
+    //     $content.find('input#input-image-education').attr('value', $imageSrc);
+    //     $content.find('img#input-image-education').attr('src', $imageSrc);
+    //     $content.find('img.img-education').removeClass('active');
+    //     $content.find('label[for="input-image-education"]').text('Click here to change image').removeClass('active');
+    // }
 
 
-    // Adding value to dropdowns in language modals.
-    if($divToLoad.hasClass('language')) {
-        $imageFlagClass = $divToLoad.find('.image span').attr('class').split(' ')[2];
-        $languageLevel = $divToLoad.find('.image span').attr('level');
+    // // Adding value to dropdowns in language modals.
+    // if($divToLoad.hasClass('language')) {
+    //     $imageFlagClass = $divToLoad.find('.image span').attr('class').split(' ')[2];
+    //     $languageLevel = $divToLoad.find('.image span').attr('level');
 
-        $form.find('#language-name').dropdown('set selected', $imageFlagClass);
-        $form.find('#level').dropdown('set selected', $languageLevel);
-    }
+    //     $form.find('#language-name').dropdown('set selected', $imageFlagClass);
+    //     $form.find('#level').dropdown('set selected', $languageLevel);
+    // }
 
 
     if(!$divToLoad.hasClass('gig')) {

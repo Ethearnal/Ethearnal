@@ -40,14 +40,23 @@
                         input#last-name.mdl-textfield__input(name="last-name", type="text")
                         label.mdl-textfield__label(for="last-name") Last Name
 
-                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
-                        input#hourly-rate.mdl-textfield__input(type="text", name="hourly-rate")
-                        label.mdl-textfield__label(for="hourly-rate") Hourly Rate
-                        span.mdl-textfield__error Input is not a number!
-
-                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.whole-line
                         input#title.mdl-textfield__input(type="text", name="title")
                         label.mdl-textfield__label(for="title") Title
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.whole-line
+                        select.ui.fluid.dropdown.normal.search.skills-dropdown(name="skills", multiple="")
+                            option(value="") Add skills tags (limit: 10)...
+                            option(value="angular") Angular
+                            option(value="python") Python
+                            option(value="userexperience") User Experience
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.whole-line
+                        select.ui.fluid.dropdown.normal.search.languages-dropdown(name="skills", multiple="")
+                            option(value="") Add languages you know (limit: 10)...
+                            option(value="bulgarian") Bulgarian
+                            option(value="lithuanian") Lithuanian
+
 
                     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
                         .ui.search.selection.dropdown#country(style="float: left")
