@@ -139,14 +139,14 @@ class WebDHTProfileKeyVal(object):
         self.dhtf.push(key, value)
         return b''
 
-    def GET(self, profile_key, guid=None):
+    def GET(self, profile_key, owner_guid=None):
         # todo
         key = {'profile:key': profile_key}
         t = None
-        if not guid:
+        if not owner_guid:
             t = self.dhtf.pull_local(key)
         else:
-            guid_bin = guid_hex_to_bin(guid)
+            guid_bin = guid_hex_to_bin(owner_guid)
             if guid_bin == self.dhtf.ert.rsa_guid_bin:
                 t = self.dhtf.pull_local(key)
             else:
