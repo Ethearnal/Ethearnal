@@ -163,6 +163,9 @@ class WebDHTProfileKeyVal(object):
                         return js_b
         return b'null'
 
+    def PUT(self, profile_key):
+        return self.post(profile_key)
+
     def POST(self, profile_key):
         return self.post(profile_key)
 
