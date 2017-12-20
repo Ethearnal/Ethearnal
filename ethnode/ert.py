@@ -249,7 +249,7 @@ def main_http(http_webdir: str = config.http_webdir,
         mount_point='/api/v1/dht/guids'
     )
 
-    from webdht.wdht_ertapi import DhtGigsWebAPI, WebDHTKnownPeers
+    from webdht.wdht_ertapi import DhtGigsWebAPI, WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
     dht_gigs = DhtGigsWebAPI(
         cherry=cherrypy,
         dhf=dht_facade_,
@@ -260,6 +260,17 @@ def main_http(http_webdir: str = config.http_webdir,
         cherry=cherrypy,
         dhf=dht_facade_,
     )
+
+    dht_profile = WebDHTProfileKeyVal(
+        cherry=cherrypy,
+        dhf=dht_facade_,
+    )
+
+    dht_node = WebDHTAboutNode(
+        cherry=cherrypy,
+        dhf=dht_facade_,
+    )
+
     # WebGuidPredicateApi
     # WebSelfPredicateApi
     cherrypy.engine.start()

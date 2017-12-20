@@ -139,16 +139,22 @@
           "type" : "string",
           "maxLength" : 64,
           "minLength" : 64
-        } ],
+        } ,
+           {
+          "name" : "profile_key",
+          "in" : "query",
+          "description" : "pass an optional search string for looking up inventory",
+          "required" : false,
+          "type" : "string",
+          "maxLength" : 64,
+          "minLength" : 64
+        }
+
+
+        ],
         "responses" : {
           "200" : {
-            "description" : "retrieve Profile data",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/Profile"
-              }
-            }
+            "description" : "retrieve Profile data"
           },
           "400" : {
             "description" : "bad input parameter"
