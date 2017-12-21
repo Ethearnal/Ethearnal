@@ -472,12 +472,63 @@ section.documentation .container .profile-information-after-fixed .container-flu
 .profile-documentation-full .profile-documentation {
   position: relative;
   margin-left: 15px;
-  background-color: white;
-  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  box-shadow: none;
   padding-right: 0;
   padding-left: 0;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+}
+
+.profile-documentation-full .profile-documentation .plusIcon, .profile-documentation-full .profile-documentation .shoutoutIcon {
+  position: absolute;
+  width: 52px;
+  height: 50px;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2);
+  background-color: #92A8D1;
+  border-radius: 100%;
+  right: 28px;
+  top: 32px;
+  z-index: 11;
+  text-align: center;
+  display: none;
+  transition: all 0.3s ease-in;
+}
+
+.profile-documentation-full .profile-documentation .plusIcon.active, .profile-documentation-full .profile-documentation .shoutoutIcon.active {
+  display: initial;
+}
+
+.profile-documentation-full .profile-documentation .plusIcon:hover, .profile-documentation-full .profile-documentation .plusIcon:focus, .profile-documentation-full .profile-documentation .plusIcon:active, .profile-documentation-full .profile-documentation .shoutoutIcon:hover, .profile-documentation-full .profile-documentation .shoutoutIcon:focus, .profile-documentation-full .profile-documentation .shoutoutIcon:active {
+  background-color: #8194b7;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.profile-documentation-full .profile-documentation .plusIcon i, .profile-documentation-full .profile-documentation .shoutoutIcon i {
+  line-height: 50px;
+  font-size: 24px;
+  color: white;
+}
+
+.profile-documentation-full .profile-documentation .shoutoutIcon {
+  background-color: #127fff;
+  text-align: center;
+}
+
+.profile-documentation-full .profile-documentation .shoutoutIcon i {
+  line-height: 50px;
+  font-size: 18px;
+  color: white;
+  margin-left: 5px;
+}
+
+.profile-documentation-full .profile-documentation .shoutoutIcon:hover, .profile-documentation-full .profile-documentation .shoutoutIcon:focus, .profile-documentation-full .profile-documentation .shoutoutIcon:active {
+  background-color: #1174e7;
+}
+
+.profile-documentation-full .profile-documentation ul.nav {
+  background-color: white;
 }
 
 .profile-documentation-full .profile-documentation ul.nav li:not(.mdl-menu__item):hover, .profile-documentation-full .profile-documentation ul.nav li:not(.mdl-menu__item):focus, .profile-documentation-full .profile-documentation ul.nav li:not(.mdl-menu__item):active {
@@ -1382,11 +1433,11 @@ section.profiles-page-content .container .jobs .gigs-container:after {
   visibility: hidden;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig, section.gigs-page-content .container .jobs .gigs-container .gig,
-section.jobs-page-content .container .gigs .gigs-container .gig,
-section.jobs-page-content .container .jobs .gigs-container .gig,
-section.profiles-page-content .container .gigs .gigs-container .gig,
-section.profiles-page-content .container .jobs .gigs-container .gig {
+.gigs-container-profile, .gigs-container-orders {
+  margin-top: 25px;
+}
+
+.gig {
   width: 240px;
   height: 306px;
   border: 1px solid #e5e5e5;
@@ -1401,28 +1452,12 @@ section.profiles-page-content .container .jobs .gigs-container .gig {
   transition: all 0.15s ease-in;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig:hover, section.gigs-page-content .container .gigs .gigs-container .gig:focus, section.gigs-page-content .container .gigs .gigs-container .gig:active, section.gigs-page-content .container .jobs .gigs-container .gig:hover, section.gigs-page-content .container .jobs .gigs-container .gig:focus, section.gigs-page-content .container .jobs .gigs-container .gig:active,
-section.jobs-page-content .container .gigs .gigs-container .gig:hover,
-section.jobs-page-content .container .gigs .gigs-container .gig:focus,
-section.jobs-page-content .container .gigs .gigs-container .gig:active,
-section.jobs-page-content .container .jobs .gigs-container .gig:hover,
-section.jobs-page-content .container .jobs .gigs-container .gig:focus,
-section.jobs-page-content .container .jobs .gigs-container .gig:active,
-section.profiles-page-content .container .gigs .gigs-container .gig:hover,
-section.profiles-page-content .container .gigs .gigs-container .gig:focus,
-section.profiles-page-content .container .gigs .gigs-container .gig:active,
-section.profiles-page-content .container .jobs .gigs-container .gig:hover,
-section.profiles-page-content .container .jobs .gigs-container .gig:focus,
-section.profiles-page-content .container .jobs .gigs-container .gig:active {
+.gig:hover, .gig:focus, .gig:active {
   background-color: #fbfafa;
   cursor: pointer;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig button.mdl-button--icon, section.gigs-page-content .container .jobs .gigs-container .gig button.mdl-button--icon,
-section.jobs-page-content .container .gigs .gigs-container .gig button.mdl-button--icon,
-section.jobs-page-content .container .jobs .gigs-container .gig button.mdl-button--icon,
-section.profiles-page-content .container .gigs .gigs-container .gig button.mdl-button--icon,
-section.profiles-page-content .container .jobs .gigs-container .gig button.mdl-button--icon {
+.gig button.mdl-button--icon {
   position: absolute;
   right: 0;
   top: 5px;
@@ -1430,65 +1465,33 @@ section.profiles-page-content .container .jobs .gigs-container .gig button.mdl-b
   z-index: 1;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .ui.label, section.gigs-page-content .container .jobs .gigs-container .gig .ui.label,
-section.jobs-page-content .container .gigs .gigs-container .gig .ui.label,
-section.jobs-page-content .container .jobs .gigs-container .gig .ui.label,
-section.profiles-page-content .container .gigs .gigs-container .gig .ui.label,
-section.profiles-page-content .container .jobs .gigs-container .gig .ui.label {
+.gig .ui.label {
   z-index: 1;
   background-color: #bfc0c1bd !important;
   border-color: #bfc0c1bd !important;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .image-block, section.gigs-page-content .container .gigs .gigs-container .gig .image, section.gigs-page-content .container .jobs .gigs-container .gig .image-block, section.gigs-page-content .container .jobs .gigs-container .gig .image,
-section.jobs-page-content .container .gigs .gigs-container .gig .image-block,
-section.jobs-page-content .container .gigs .gigs-container .gig .image,
-section.jobs-page-content .container .jobs .gigs-container .gig .image-block,
-section.jobs-page-content .container .jobs .gigs-container .gig .image,
-section.profiles-page-content .container .gigs .gigs-container .gig .image-block,
-section.profiles-page-content .container .gigs .gigs-container .gig .image,
-section.profiles-page-content .container .jobs .gigs-container .gig .image-block,
-section.profiles-page-content .container .jobs .gigs-container .gig .image {
+.gig .image-block, .gig .image {
   position: relative;
   width: 100%;
   height: 142px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .image-block img, section.gigs-page-content .container .gigs .gigs-container .gig .image img, section.gigs-page-content .container .jobs .gigs-container .gig .image-block img, section.gigs-page-content .container .jobs .gigs-container .gig .image img,
-section.jobs-page-content .container .gigs .gigs-container .gig .image-block img,
-section.jobs-page-content .container .gigs .gigs-container .gig .image img,
-section.jobs-page-content .container .jobs .gigs-container .gig .image-block img,
-section.jobs-page-content .container .jobs .gigs-container .gig .image img,
-section.profiles-page-content .container .gigs .gigs-container .gig .image-block img,
-section.profiles-page-content .container .gigs .gigs-container .gig .image img,
-section.profiles-page-content .container .jobs .gigs-container .gig .image-block img,
-section.profiles-page-content .container .jobs .gigs-container .gig .image img {
+.gig .image-block img, .gig .image img {
   width: 100%;
   height: auto;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .image-block, section.gigs-page-content .container .jobs .gigs-container .gig .image-block,
-section.jobs-page-content .container .gigs .gigs-container .gig .image-block,
-section.jobs-page-content .container .jobs .gigs-container .gig .image-block,
-section.profiles-page-content .container .gigs .gigs-container .gig .image-block,
-section.profiles-page-content .container .jobs .gigs-container .gig .image-block {
+.gig .image-block {
   overflow: hidden;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .owner-info, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info,
-section.jobs-page-content .container .gigs .gigs-container .gig .owner-info,
-section.jobs-page-content .container .jobs .gigs-container .gig .owner-info,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info,
-section.profiles-page-content .container .jobs .gigs-container .gig .owner-info {
+.gig .owner-info {
   margin-left: 10px;
   margin-top: 10px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .owner-info img, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info img,
-section.jobs-page-content .container .gigs .gigs-container .gig .owner-info img,
-section.jobs-page-content .container .jobs .gigs-container .gig .owner-info img,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info img,
-section.profiles-page-content .container .jobs .gigs-container .gig .owner-info img {
+.gig .owner-info img {
   float: left;
   width: 24px;
   height: 24px;
@@ -1496,15 +1499,7 @@ section.profiles-page-content .container .jobs .gigs-container .gig .owner-info 
   margin-top: 1px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5, section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h4, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h5, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h4,
-section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h5,
-section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h4,
-section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h5,
-section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h4,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h5,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h4,
-section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h5,
-section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h4 {
+.gig .owner-info h5, .gig .owner-info h4 {
   margin: 0;
   font-size: 12px;
   font-weight: 400;
@@ -1514,48 +1509,24 @@ section.profiles-page-content .container .jobs .gigs-container .gig .owner-info 
   transition: all 0.15s ease-in;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5:hover, section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5:active, section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h5:focus, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h5:hover, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h5:active, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h5:focus,
-section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h5:hover,
-section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h5:active,
-section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h5:focus,
-section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h5:hover,
-section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h5:active,
-section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h5:focus,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h5:hover,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h5:active,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h5:focus,
-section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h5:hover,
-section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h5:active,
-section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h5:focus {
+.gig .owner-info h5:hover, .gig .owner-info h5:active, .gig .owner-info h5:focus {
   cursor: pointer;
   text-decoration: underline;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h4, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h4,
-section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h4,
-section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h4,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h4,
-section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h4 {
+.gig .owner-info h4 {
   color: #92A8D1;
   font-size: 12px;
   margin-top: 2px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .owner-info h4 i, section.gigs-page-content .container .jobs .gigs-container .gig .owner-info h4 i,
-section.jobs-page-content .container .gigs .gigs-container .gig .owner-info h4 i,
-section.jobs-page-content .container .jobs .gigs-container .gig .owner-info h4 i,
-section.profiles-page-content .container .gigs .gigs-container .gig .owner-info h4 i,
-section.profiles-page-content .container .jobs .gigs-container .gig .owner-info h4 i {
+.gig .owner-info h4 i {
   font-size: 12px;
   position: relative;
   top: 1px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig p, section.gigs-page-content .container .jobs .gigs-container .gig p,
-section.jobs-page-content .container .gigs .gigs-container .gig p,
-section.jobs-page-content .container .jobs .gigs-container .gig p,
-section.profiles-page-content .container .gigs .gigs-container .gig p,
-section.profiles-page-content .container .jobs .gigs-container .gig p {
+.gig p {
   font-size: 16px;
   color: black;
   overflow: hidden;
@@ -1565,40 +1536,24 @@ section.profiles-page-content .container .jobs .gigs-container .gig p {
   margin-top: 10px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .lower-info, section.gigs-page-content .container .jobs .gigs-container .gig .lower-info,
-section.jobs-page-content .container .gigs .gigs-container .gig .lower-info,
-section.jobs-page-content .container .jobs .gigs-container .gig .lower-info,
-section.profiles-page-content .container .gigs .gigs-container .gig .lower-info,
-section.profiles-page-content .container .jobs .gigs-container .gig .lower-info {
+.gig .lower-info {
   position: absolute;
   bottom: 38px;
   width: 100%;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .lower-info .reputation, section.gigs-page-content .container .jobs .gigs-container .gig .lower-info .reputation,
-section.jobs-page-content .container .gigs .gigs-container .gig .lower-info .reputation,
-section.jobs-page-content .container .jobs .gigs-container .gig .lower-info .reputation,
-section.profiles-page-content .container .gigs .gigs-container .gig .lower-info .reputation,
-section.profiles-page-content .container .jobs .gigs-container .gig .lower-info .reputation {
+.gig .lower-info .reputation {
   float: left;
   height: 24px;
   margin-left: 10px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .lower-info .reputation i, section.gigs-page-content .container .jobs .gigs-container .gig .lower-info .reputation i,
-section.jobs-page-content .container .gigs .gigs-container .gig .lower-info .reputation i,
-section.jobs-page-content .container .jobs .gigs-container .gig .lower-info .reputation i,
-section.profiles-page-content .container .gigs .gigs-container .gig .lower-info .reputation i,
-section.profiles-page-content .container .jobs .gigs-container .gig .lower-info .reputation i {
+.gig .lower-info .reputation i {
   color: #92A8D1;
   font-size: 20px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .lower-info .reputation span, section.gigs-page-content .container .jobs .gigs-container .gig .lower-info .reputation span,
-section.jobs-page-content .container .gigs .gigs-container .gig .lower-info .reputation span,
-section.jobs-page-content .container .jobs .gigs-container .gig .lower-info .reputation span,
-section.profiles-page-content .container .gigs .gigs-container .gig .lower-info .reputation span,
-section.profiles-page-content .container .jobs .gigs-container .gig .lower-info .reputation span {
+.gig .lower-info .reputation span {
   color: #92A8D1;
   position: relative;
   top: -4.5px;
@@ -1606,11 +1561,7 @@ section.profiles-page-content .container .jobs .gigs-container .gig .lower-info 
   font-weight: 500;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .lower-info h6.expire, section.gigs-page-content .container .jobs .gigs-container .gig .lower-info h6.expire,
-section.jobs-page-content .container .gigs .gigs-container .gig .lower-info h6.expire,
-section.jobs-page-content .container .jobs .gigs-container .gig .lower-info h6.expire,
-section.profiles-page-content .container .gigs .gigs-container .gig .lower-info h6.expire,
-section.profiles-page-content .container .jobs .gigs-container .gig .lower-info h6.expire {
+.gig .lower-info h6.expire {
   float: right;
   font-size: 12px;
   color: #86939e;
@@ -1618,11 +1569,7 @@ section.profiles-page-content .container .jobs .gigs-container .gig .lower-info 
   margin-right: 10px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .footer, section.gigs-page-content .container .jobs .gigs-container .gig .footer,
-section.jobs-page-content .container .gigs .gigs-container .gig .footer,
-section.jobs-page-content .container .jobs .gigs-container .gig .footer,
-section.profiles-page-content .container .gigs .gigs-container .gig .footer,
-section.profiles-page-content .container .jobs .gigs-container .gig .footer {
+.gig .footer {
   border-top: 1px solid #e5e5e5;
   position: absolute;
   bottom: 0;
@@ -1630,11 +1577,7 @@ section.profiles-page-content .container .jobs .gigs-container .gig .footer {
   height: 38px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .footer h4, section.gigs-page-content .container .jobs .gigs-container .gig .footer h4,
-section.jobs-page-content .container .gigs .gigs-container .gig .footer h4,
-section.jobs-page-content .container .jobs .gigs-container .gig .footer h4,
-section.profiles-page-content .container .gigs .gigs-container .gig .footer h4,
-section.profiles-page-content .container .jobs .gigs-container .gig .footer h4 {
+.gig .footer h4 {
   text-align: right;
   color: black;
   margin-right: 10px;
@@ -1644,11 +1587,7 @@ section.profiles-page-content .container .jobs .gigs-container .gig .footer h4 {
   text-transform: uppercase;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .footer h4 span, section.gigs-page-content .container .jobs .gigs-container .gig .footer h4 span,
-section.jobs-page-content .container .gigs .gigs-container .gig .footer h4 span,
-section.jobs-page-content .container .jobs .gigs-container .gig .footer h4 span,
-section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 span,
-section.profiles-page-content .container .jobs .gigs-container .gig .footer h4 span {
+.gig .footer h4 span {
   font-size: 18px;
   font-weight: 400;
   margin-left: 5px;
@@ -1656,11 +1595,7 @@ section.profiles-page-content .container .jobs .gigs-container .gig .footer h4 s
   top: 2px;
 }
 
-section.gigs-page-content .container .gigs .gigs-container .gig .footer h4 span i, section.gigs-page-content .container .jobs .gigs-container .gig .footer h4 span i,
-section.jobs-page-content .container .gigs .gigs-container .gig .footer h4 span i,
-section.jobs-page-content .container .jobs .gigs-container .gig .footer h4 span i,
-section.profiles-page-content .container .gigs .gigs-container .gig .footer h4 span i,
-section.profiles-page-content .container .jobs .gigs-container .gig .footer h4 span i {
+.gig .footer h4 span i {
   font-size: 18px;
   position: relative;
   top: 2px;
@@ -2842,6 +2777,7 @@ body {
 
 body.up {
   margin-top: -59px;
+  background-color: #f2f2f2;
 }
 
 body.modal-open {

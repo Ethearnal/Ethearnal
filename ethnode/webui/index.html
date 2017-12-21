@@ -262,6 +262,94 @@
         </div>
       </div>
     </div>
+    <div id="add-portfolio" class="add modal-box flex floating">
+      <div class="modal-box-content">
+        <div class="inner-modal">
+          <div class="content">
+            <div class="modal-header">
+              <h3>Add portfolio</h3>
+            </div>
+            <div class="success-message">
+              <h1 class="title">Congratulations!</h1>
+              <div class="success-content">
+                <p>Your portfolio was added.</p>
+              </div>
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                <button class="mdl-button mdl-js-button create-new">create new portfolio</button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <input id="input-image-portfolio" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                <label for="input-image-portfolio" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-portfolio"><img id="input-image-portfolio" src="#" alt="" class="show-image empty">
+              </div>
+              <div class="modal-inputs">
+                <form action="POST">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                    <input id="title" name="title" type="text" class="mdl-textfield__input">
+                    <label for="title" class="mdl-textfield__label">Title</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield whole-line">
+                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                    <label for="description" class="mdl-textfield__label">Description (what have you accomplished with this?)</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button id="publish5" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
+              <div data-mdl-for="publish5" class="mdl-tooltip">This text will be changed anyway.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="edit-portfolio" class="add modal-box flex floating">
+      <div class="modal-box-content">
+        <div class="inner-modal">
+          <div class="content">
+            <div class="modal-header">
+              <h3>Edit portfolio</h3>
+            </div>
+            <div class="success-message">
+              <h1 class="title">Congratulations!</h1>
+              <div class="success-content">
+                <p>Your portfolio was updated.</p>
+              </div>
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                <button class="mdl-button mdl-js-button create-new">edit portfolio again</button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <input id="input-image-portfolio" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                <label for="input-image-portfolio" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-portfolio"><img id="input-image-portfolio" src="#" alt="" class="show-image empty">
+              </div>
+              <div class="modal-inputs">
+                <form action="POST">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                    <input id="gig-title" name="gig-title" type="text" class="mdl-textfield__input">
+                    <label for="gig-title" class="mdl-textfield__label">Portfolio title</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield whole-line">
+                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                    <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button id="update5" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+              <div data-mdl-for="update5" class="mdl-tooltip">This text will be changed anyway.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="add-language" class="add modal-box flex floating">
       <div class="modal-box-content">
         <div class="inner-modal">
@@ -760,7 +848,6 @@
           <div id="navigation" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right hidden-xs">
               <li class="asset text"><a href="" load="gigs">Gigs</a></li>
-              <li class="asset text"><a href="" load="jobs">Jobs</a></li>
               <li class="asset text"><a href="" load="profiles">Profiles</a></li>
               <li id="comment-navbar" class="asset"><a href=""><i class="icon-comment"></i>
                   <div class="round-number"><span>1</span></div></a></li>
@@ -850,20 +937,72 @@
             <ul role="tablist" class="nav nav-tabs">
               <li role="presentation" class="active timeline-li"><a href="#gigs" aria-controls="gigs" role="tab" data-toggle="tab">Gigs</a></li>
               <li role="presentation" class="timeline-li"><a href="#portfolio" aria-controls="portfolio" role="tab" data-toggle="tab">Portfolio</a></li>
-              <li class="dropdownButton">
-                <button id="addThings" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">add</i></button>
-                <ul for="addThings" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
-                  <li open-modal="#add-portfolio" class="mdl-menu__item open-modal">Add Portfolio Element</li>
-                  <li open-modal="#add-gig" class="mdl-menu__item open-modal">Add Gig</li>
-                </ul>
-              </li>
+              <li role="presentation" class="timeline-li"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
             </ul>
+            <div open-modal="#add-gig" class="plusIcon gigs active open-modal"><i class="material-icons">library_add</i></div>
+            <div open-modal="#add-portfolio" class="plusIcon portfolio open-modal"><i class="material-icons">note_add</i></div>
             <!-- All the information about above listed tabs.-->
             <div class="tab-content col-xs-12">
               <!-- Gigs TAB-->
-              <div id="gigs" role="tabpanel" class="tab-pane fade in active col-xs-12"></div>
+              <div id="gigs" role="tabpanel" class="tab-pane fade in active col-xs-12">
+                <div class="gigs-container-profile">
+                  <div data-toggle="modal" data-target="#gigModal" class="gig content-block">
+                    <button id="dropdowngiga0" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>
+                    <ul for="dropdowngiga0" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
+                      <li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edit</li>
+                      <li class="mdl-menu__item delete">Delete</li>
+                    </ul>
+                    <div class="ui fluid image">
+                      <div class="ui black ribbon label">Category</div>
+                      <div class="image-block"><img src="images/paypal.jpg"></div>
+                    </div>
+                    <div class="owner-info"><img src="/api/v1/profile/?q=avatar" alt="Avatar">
+                      <h5>owner_nickname</h5>
+                      <h4>Entry Level</h4>
+                    </div>
+                    <p>Gig Description</p>
+                    <div class="lower-info">
+                      <div class="reputation"><i class="material-icons">polymer</i><span>5k+</span></div>
+                      <h6 class="expire">expires in 5 mins</h6>
+                    </div>
+                    <div class="footer">
+                      <h4>Starting at <span><i class="material-icons">polymer</i>25</span></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <!-- Portfolio TAB-->
-              <div id="portfolio" role="tabpanel" class="tab-pane fade col-xs-12"></div>
+              <div id="portfolio" role="tabpanel" class="tab-pane fade col-xs-12">
+                <div class="portfolio-container"></div>
+              </div>
+              <!-- Portfolio TAB-->
+              <div id="orders" role="tabpanel" class="tab-pane fade col-xs-12">
+                <div class="gigs-container-orders">
+                  <div data-toggle="modal" data-target="#gigModal" class="gig content-block">
+                    <button id="dropdowngiga0" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>
+                    <ul for="dropdowngiga0" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
+                      <li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edit</li>
+                      <li class="mdl-menu__item delete">Delete</li>
+                    </ul>
+                    <div class="ui fluid image">
+                      <div class="ui black ribbon label">Category</div>
+                      <div class="image-block"><img src="images/paypal.jpg"></div>
+                    </div>
+                    <div class="owner-info"><img src="/api/v1/profile/?q=avatar" alt="Avatar">
+                      <h5>owner_nickname</h5>
+                      <h4>Entry Level</h4>
+                    </div>
+                    <p>Gig Description</p>
+                    <div class="lower-info">
+                      <div class="reputation"><i class="material-icons">polymer</i><span>5k+</span></div>
+                      <h6 class="expire">expires in 5 mins</h6>
+                    </div>
+                    <div class="footer">
+                      <h4>Starting at <span><i class="material-icons">polymer</i>25</span></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -69,13 +69,15 @@ function loadInputsText(form, div) {
     // }
 
 
-    // // Adding value to dropdowns in language modals.
-    // if($divToLoad.hasClass('language')) {
-    //     $imageFlagClass = $divToLoad.find('.image span').attr('class').split(' ')[2];
-    //     $languageLevel = $divToLoad.find('.image span').attr('level');
+    // // Adding value to dropdowns in portfolio element modals.
+    // if($divToLoad.hasClass('portfolio')) {
+    //     // $imageFlagClass = $divToLoad.find('.image span').attr('class').split(' ')[2];
+    //     // $languageLevel = $divToLoad.find('.image span').attr('level');
 
-    //     $form.find('#language-name').dropdown('set selected', $imageFlagClass);
-    //     $form.find('#level').dropdown('set selected', $languageLevel);
+    //     $form.find('')
+
+    //     // $form.find('#language-name').dropdown('set selected', $imageFlagClass);
+    //     // $form.find('#level').dropdown('set selected', $languageLevel);
     // }
 
 

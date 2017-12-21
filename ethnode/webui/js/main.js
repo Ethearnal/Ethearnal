@@ -15,6 +15,21 @@
 
 
 
+// Changes .plusIcon based on what tab user opens
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var target = $(e.target).attr("href"); // activated tab
+    target = target.replace("#", "");
+
+    $('.plusIcon').removeClass('active');
+    $('.plusIcon.' + target).addClass('active');
+
+    if (target == "gigs" || target == "orders") {
+        $('.profile-documentation').css({ backgroundColor: 'transparent', boxShadow: 'none' });
+    } else {
+        $('.profile-documentation').css({ backgroundColor: 'white', boxShadow: '1px 2px 3px 0 rgba(0, 0, 0, 0.1)' });
+    }
+});
+
 
 // PREVENTING DEFAULT (redirecting) WHEN YOU CLICK ON a(href="")
 $('a').click(function(e) {
@@ -449,9 +464,11 @@ function require(script) {
 // GIGS -- OTHER THINGS
 
 // CREATE
-require("js/functions/modals/create/createLE.js"); // CREATES CONTENT BLOCK - NOT GIG
+// require("js/functions/modals/create/createLE.js"); // CREATES CONTENT BLOCK - NOT GIG
 require("js/functions/modals/create/createGig.js"); // GETS GIG DATA
 require("js/functions/modals/create/createGigBox.js") // CREATES GIG BOX
+require("js/functions/modals/create/createGigToProfile.js") // CREATES GIG BOX
+require("js/functions/modals/create/createPortfolio.js") // CREATES GIG BOX
 require("js/functions/modals/create/gigInner.js") // CREATES GIG INNER MODAL
 
 // DELETE
@@ -466,6 +483,7 @@ require("js/functions/modals/load/loadGigsOnAjaxSuccess.js") // LOADS GIGS ON AJ
 
 // COLLECT DATA
 require("js/functions/modals/collectData/gig.js") // COLLECTS GIG DATA
+require("js/functions/modals/collectData/portfolio.js") // COLLECTS PORTFOLIO ELEMENT DATA
 
 
 // MODALS
