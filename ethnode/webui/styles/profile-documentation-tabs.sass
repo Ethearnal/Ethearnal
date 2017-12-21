@@ -9,14 +9,60 @@ section.documentation .container .profile-information-after-fixed .container-flu
     .profile-documentation
         position: relative
         margin-left: 15px
-        background-color: white
-        box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
+        background-color: transparent
+        box-shadow: none
         padding-right: 0
         padding-left: 0
         border-top-left-radius: 6px
         border-top-right-radius: 6px
 
+        .plusIcon, .shoutoutIcon
+            position: absolute
+            width: 52px
+            height: 50px
+            box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2)
+            background-color: #92A8D1
+            border-radius: 100%
+            right: 28px
+            top: 32px
+            z-index: 11
+            text-align: center
+            display: none
+            transition: all 0.3s ease-in
+
+            &.active
+                display: initial
+
+
+            &:hover,
+            &:focus,
+            &:active
+                background-color: #8194b7
+                box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2)
+                cursor: pointer
+
+            i
+                line-height: 50px
+                font-size: 24px
+                color: white
+
+        .shoutoutIcon
+            background-color: #127fff
+            text-align: center
+
+            i
+                line-height: 50px
+                font-size: 18px
+                color: white
+                margin-left: 5px
+
+            &:hover,
+            &:focus,
+            &:active
+                background-color: #1174e7
+
         ul.nav
+            background-color: white
 
             li:not(.mdl-menu__item)
 
@@ -42,6 +88,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
 
                 a
                     color: #89ABE3
+
 
             li.dropdownButton
                 float: right

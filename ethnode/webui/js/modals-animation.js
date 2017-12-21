@@ -124,6 +124,12 @@ $('.modal-box button').click(function() {
             resetImage($content, "education");
         }
 
+        // Resetting images and collecting data for PORTFOLIO ELEMENT
+        if($modalID == 'add-portfolio' || $modalID == 'edit-portfolio') {
+            $data = collectPortfolioData($form);
+            resetImage($content, "portfolio");
+        }
+
         // Collecting data for other things.
         if($modalID == 'add-language' || $modalID == 'edit-language') $data = collectLanguageData($form);
         if($modalID == 'add-skill' || $modalID == 'edit-skill') $data = collectSkillData($form);
@@ -143,12 +149,9 @@ $('.modal-box button').click(function() {
             if($modalID == 'add-education') createLE($data, 'education');
             if($modalID == 'add-language') createLE($data, 'language', true);
             if($modalID == 'edit-profile') updateProfile($data);
-            // if($modalID == 'add-gig') createGig($data);
-            // if($modalID == 'add-skill') createLE($data, 'language', true);
 
 
             if ($modalID == 'edit-education') {
-
                 $modalID = $currentlyOpenModalID;
                 $contentBlock = $currentlyClosestLEdiv;
 
@@ -162,7 +165,6 @@ $('.modal-box button').click(function() {
 
 
             } else if ($modalID == 'edit-job') {
-
                 $modalID = $currentlyOpenModalID;
                 $contentBlock = $currentlyClosestLEdiv;
 
@@ -173,7 +175,16 @@ $('.modal-box button').click(function() {
                 $contentBlock.find('.position-name').text($data.position);
                 $contentBlock.find('.date-name').text($dateDifferenceText);
                 $contentBlock.find('.description').text($data.description);
+
+            } else if ($modalID == 'edit-portfolio') {
+                $modalID = $currentlyOpenModalID;
+                $contentBlock = $currentlyClosestLEdiv;
+
+                $contentBlock.find('.image img').attr('src', $data.image);
+                $contentBlock.find('.portfolio-title').text($data.title);
+                $contentBlock.find('.description').text($data.description);
             }
+
 
         }, 300);
 

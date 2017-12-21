@@ -28,7 +28,6 @@ section.documentation(style="display: none")
                     h5.profile-information-position
                     p.location
 
-                    //- button.hire Hire ($X/hr)
                     button.leave-msg Send Message
 
             .profile-information.middle
@@ -55,12 +54,10 @@ section.documentation(style="display: none")
                 ul.nav.nav-tabs(role="tablist")
                     li.active.timeline-li(role="presentation"): a(href="#gigs", aria-controls="gigs", role="tab", data-toggle="tab") Gigs
                     li.timeline-li(role="presentation"): a(href="#portfolio", aria-controls="portfolio", role="tab", data-toggle="tab") Portfolio
+                    li.timeline-li(role="presentation"): a(href="#orders", aria-controls="orders", role="tab", data-toggle="tab") Orders
 
-                    li.dropdownButton
-                        button#addThings.mdl-button.mdl-js-button.mdl-button--icon: i.material-icons add
-                        ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="addThings")
-                            li.mdl-menu__item.open-modal(open-modal="#add-portfolio") Add Portfolio Element
-                            li.mdl-menu__item.open-modal(open-modal="#add-gig") Add Gig
+                .plusIcon.gigs.active.open-modal(open-modal="#add-gig"): i.material-icons library_add
+                .plusIcon.portfolio.open-modal(open-modal="#add-portfolio"): i.material-icons note_add
 
 
                 // All the information about above listed tabs.
@@ -73,3 +70,7 @@ section.documentation(style="display: none")
                     // Portfolio TAB
                     .tab-pane.fade#portfolio.col-xs-12(role="tabpanel")
                         include ../tabs/portfolio
+
+                    // Portfolio TAB
+                    .tab-pane.fade#orders.col-xs-12(role="tabpanel")
+                        include ../tabs/orders

@@ -62,6 +62,7 @@ function collectGigData(form) {
                         contentType: 'application/json; charset=utf-8',
                         processData: false,
                         success: function(gigID){
+                            createGigToProfile(gigID);
                             createGig(gigID);
                         }
                     });
