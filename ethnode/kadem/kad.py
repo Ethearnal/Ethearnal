@@ -40,6 +40,8 @@ class DHTFacade(object):
         self.cdx = cdx
         self.push_pubkey(local_only=True)
         self.dht.storage.dhf = self
+        self._last_pushed_hk_hex = None
+        self._last_pulled_hk_hex = None
 
         # self.dht.storage
 
@@ -51,14 +53,16 @@ class DHTFacade(object):
         hk = cdx.encode_key_hash(key, guid=guid, revision=cdx.DEFAULT_REVISION)
         ev = cdx.encode_val_bson(value, cdx.DEFAULT_REVISION)
         sg = self.ert.rsa_sign(ev)
-        self.dht.peer.direct_store(hk, ev,  host, port,
-                   socket=self.dht.server.socket,
-                   peer_id=self.dht.peer.id,
-                   signature=sg)
+        self.dht.peer.direct_store(hk, ev, host, port,
+                                   socket=self.dht.server.socket,
+                                   peer_id=self.dht.peer.id,
+                                   signature=sg)
+
+        self._last_pushed_hk_hex = cdx.guid_int_to_hex(hk)
 
     def push_peer(self, host_port, to_host, to_port):
         key = 'ert:peer'
-        value = {'ert:peer':host_port}
+        value = {'ert:peer': host_port}
         self.direct_push(key, value, to_host, to_port)
 
     @property
@@ -86,7 +90,6 @@ class DHTFacade(object):
     def bin_guid(self):
         return cdx.guid_int_to_bts(self.dht.peer.id)
 
-
     def push(self, key, value,
              revision=cdx.DEFAULT_REVISION,
              nearest_nodes=None, local_only=False, remote_only=False):
@@ -109,6 +112,7 @@ class DHTFacade(object):
                        socket=self.dht.server.socket,
                        peer_id=self.dht.peer.id,
                        signature=sg)
+        self._last_pushed_hk_hex = cdx.guid_int_to_hex(hk)
         return hk
 
     def direct_push_pubkey(self, host, port):
@@ -218,19 +222,41 @@ class DHTFacade(object):
     def pull_local(self, key,
                    guid=None,
                    revision=cdx.DEFAULT_REVISION,
+                   hk_hex=None
                    ):
         if not guid:
             guid = self.bin_guid
-        hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
-        return self.dht.data.pull(hk)
+        if hk_hex:
+            hk = cdx.guid_bts_to_int(cdx.guid_hex_to_bin(hk_hex))
+            self._last_pulled_hk_hex = hk_hex
+        else:
+            hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
+            self._last_pulled_hk_hex = cdx.guid_int_to_hex(hk)
 
-    def pull_remote(self, key, guid=None, revision=cdx.DEFAULT_REVISION):
+        v = self.dht.data.pull(hk)
+
+        return v
+
+    @property
+    def last_pushed_hk_hex(self):
+        return self._last_pushed_hk_hex
+
+    @property
+    def last_pulled_hk_hex(self):
+        return self._last_pulled_hk_hex
+
+    def pull_remote(self, key, guid=None, revision=cdx.DEFAULT_REVISION,
+                    hk_hex=None):
         if not guid:
             guid = self.bin_guid
-        hk = cdx.encode_key_hash(key, guid, revision)
-        # from time import sleep
-        print('HK', hk)
-        # sleep(3)
+
+        if hk_hex:
+            hk = cdx.guid_bts_to_int(cdx.guid_hex_to_bin(hk_hex))
+            self._last_pulled_hk_hex = hk_hex
+        else:
+            hk = cdx.encode_key_hash(key, guid, revision)
+            self._last_pulled_hk_hex = cdx.guid_int_to_hex(hk)
+            # return cdx.guid_int_to_hex(hk)
 
         val = self.dht.iterative_find_value(hk)
         if val:

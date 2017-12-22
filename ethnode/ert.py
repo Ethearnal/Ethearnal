@@ -249,8 +249,30 @@ def main_http(http_webdir: str = config.http_webdir,
         mount_point='/api/v1/dht/guids'
     )
 
-    from webdht.wdht_ertapi import DhtGigsWebAPI, WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
-    dht_gigs = DhtGigsWebAPI(
+    from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
+    from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
+
+    # from webdht.wdht_ertapi import DhtGigsWebAPI
+
+    # dht_gigs = DhtGigsWebAPI(
+    #     cherry=cherrypy,
+    #     dhf=dht_facade_,
+    #     me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    # )
+
+    dht_get_hk = DhtGetByHkeyWebAPI(
+        cherry=cherrypy,
+        dhf=dht_facade_,
+    )
+
+
+    dht_gigs_hk = DhtGigsHkeysWebAPI(
+        cherry=cherrypy,
+        dhf=dht_facade_,
+        me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    )
+
+    dht_portfolios_hk = DhtPortfoliosWebAPI(
         cherry=cherrypy,
         dhf=dht_facade_,
         me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
