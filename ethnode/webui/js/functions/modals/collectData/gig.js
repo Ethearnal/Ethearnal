@@ -13,6 +13,7 @@ function collectGigData(form) {
     $price = $form.find('input#amount').val();
     $reputationCost = $form.find('input#reputationCost').val();
     $dateExpire = $form.find('input.date-started').val();
+    $tags = $form.find('.gig-tags').dropdown('get value');
 
     // getting expire date's difference in text.
     $expireDateClear = $dateExpire.replace(/\//g, '-');
@@ -50,13 +51,14 @@ function collectGigData(form) {
                         reputationCost: $reputationCost,
                         description: $description,
                         price: $price,
+                        tags: $tags,
                         date: [
                             { expire: $dateExpire, expiresIn: $expireDateDifference }
                         ]
                     }
 
                     $.ajax({
-                        url: "/api/v1/my/gig",
+                        url: "/api/v1/dht/gigs/",
                         type: "POST",
                         data: JSON.stringify($data),
                         contentType: 'application/json; charset=utf-8',
@@ -94,18 +96,20 @@ function collectGigData(form) {
                 description: $description,
                 reputationCost: $reputationCost,
                 price: $price,
+                tags: $tags,
                 date: [
                     { expire: $dateExpire, expiresIn: $expireDateDifference }
                 ]
             }
 
             $.ajax({
-                url: "/api/v1/my/gig",
+                url: "/api/v1/dht/gigs/",
                 type: "POST",
                 data: JSON.stringify($data),
                 contentType: 'application/json; charset=utf-8',
                 processData: false,
                 success: function(gigID){
+                    createGigToProfile(gigID);
                     createGig(gigID);
                 }
             });

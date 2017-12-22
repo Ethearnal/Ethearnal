@@ -1,18 +1,3 @@
-// // Collects 'CREATE LANGUAGE / EDIT LANGUAGE' data.
-// function collectPortfolioData(form) {
-//     $form = form;
-
-//     $data = {
-//         image: $form.find('#language-name').dropdown('get text'),
-//         title: $form.find('input#title').val(),
-//         description: $form.find('textarea#description').val(),
-//     }
-//     return $data;
-// }
-
-
-
-
 // Collects GIG /EDIT /CREATE data.
 function collectPortfolioData(form) {
     $form = form;
@@ -21,6 +6,7 @@ function collectPortfolioData(form) {
 
     $title = $form.find('#title').val();
     $description = $form.find('textarea#description').val();
+    $tags = $form.find('.portfolio-tags').dropdown('get value');
 
     var avatarImage = getBase64Image(document.getElementById("avatar-img"));
     var input = document.getElementById($imgInputID);
@@ -39,7 +25,8 @@ function collectPortfolioData(form) {
                     $data = {
                         imageHash: data,
                         title: $title,
-                        description: $description
+                        description: $description,
+                        tags: $tags
                     }
 
                     console.log($data);

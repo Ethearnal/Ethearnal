@@ -624,6 +624,7 @@ section.documentation .container .content-block {
   padding-left: 0;
   padding-right: 0;
   border-bottom: 1px solid #e1e8ee;
+  position: relative;
 }
 
 section.documentation .container .content-block .main-information {
@@ -639,6 +640,11 @@ section.documentation .container .content-block .main-information .image img, se
   margin-right: 17px;
   float: left;
   border-radius: 3px;
+}
+
+section.documentation .container .content-block .main-information .image img.portfolio-image, section.documentation .container .content-block .main-information .image .dont-have-logo.portfolio-image {
+  width: 80%;
+  height: auto;
 }
 
 section.documentation .container .content-block .main-information .image .dont-have-logo {
@@ -697,6 +703,26 @@ section.documentation .container .content-block .main-description {
   padding-right: 0;
   padding-left: 0;
   margin-bottom: 25px;
+  position: unset;
+}
+
+section.documentation .container .content-block .main-description h6.port-tags {
+  font-size: 14px;
+  margin: 0;
+  padding-top: 10px;
+}
+
+section.documentation .container .content-block .main-description h3.portfolio-heading {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.23;
+  color: #43484d;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+section.documentation .container .content-block .main-description p.portfolio-description {
+  margin-left: 0;
 }
 
 section.documentation .container .content-block .main-description .dropdown.more {
@@ -1740,6 +1766,10 @@ section.profiles-page-content .container .jobs .gigs-container:after {
   font-size: 14px;
   position: relative;
   top: 2px;
+}
+
+.modal-box-content .inner-modal .content .modal-body .modal-inputs form label[for="reputationCost"] i {
+  top: 0px !important;
 }
 
 .modal-box-content .inner-modal .content .modal-body .form-group {
