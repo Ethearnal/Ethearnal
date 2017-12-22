@@ -413,7 +413,7 @@ $( document ).ready(function() {
         });
         $('.ui.dropdown').dropdown();
 
-        $('.skills-dropdown, .languages-dropdown, .gig-tags').dropdown({
+        $('.skills-dropdown, .languages-dropdown, .gig-tags, .portfolio-tags').dropdown({
             allowAdditions: true,
             maxSelections: 10
         });

@@ -2,7 +2,7 @@ function createGig(data) {
     if (data == undefined) return false;
 
     $.ajax({
-        url: "/api/v1/my/gig/" + data,
+        url: "api/v1/dht/gigs/" + data,
         type: "GET",
         processData: false,
         success: function(gigData) {

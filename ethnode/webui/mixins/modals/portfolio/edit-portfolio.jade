@@ -33,6 +33,13 @@
                         textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
                         label.mdl-textfield__label(for="description") Description (what have you done or currently do?)
 
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.whole-line
+                        select.ui.fluid.dropdown.normal.search.portfolio-tags(name="skills", multiple="")
+                            option(value="") Add gig tags (limit: 10)...
+                            option(value="programming") Programming
+                            option(value="copywriting") Copywriting
+                            option(value="userexperience") User Experience
+
         .modal-footer
             button.mdl-button.mdl-js-button.close-button Close
             button#update5.mdl-button.mdl-js-button.finish-button(style="color: #5CAB7D") Update

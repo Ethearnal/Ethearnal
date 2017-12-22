@@ -2,19 +2,21 @@
 
     .modal-box-content: .inner-modal: .content
 
-        .modal-header
-            .ui.three.steps(style="margin-bottom: 30px")
-                .active.step
-                    i.tasks.icon
-                    .content: .title Fill
+        //- .modal-header
+        //-     .ui.three.steps(style="margin-bottom: 30px")
+        //-         .active.step
+        //-             i.tasks.icon
+        //-             .content: .title Fill
 
-                .disabled.step
-                    i.book.icon
-                    .content: .title Extras
+        //-         .disabled.step
+        //-             i.book.icon
+        //-             .content: .title Extras
 
-                .disabled.step
-                    i.info.icon
-                    .content: .title Confirm
+        //-         .disabled.step
+        //-             i.info.icon
+        //-             .content: .title Confirm
+
+        .modal-header: h3 Edit gig
 
         .success-message
             h1.title Congratulations!
@@ -57,18 +59,12 @@
                         input#reputationCost(type="text", placeholder="Cost of reputation")
                         .ui.basic.label .00
 
-                        //- .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                        //-     select.ui.dropdown#job-type
-                        //-         option(value="") Job Type
-                        //-         option(value="1") Fixed Price
-                        //-         option(value="2") Hourly
-
-                        //- .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
-                        //-     select.ui.dropdown#experience-level
-                        //-         option(value="") Experience Level
-                        //-         option(value="1") Entry Level
-                        //-         option(value="2") Intermediate
-                        //-         option(value="3") Expert
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.whole-line
+                        select.ui.fluid.dropdown.normal.search.gig-tags(name="gig-tags", multiple="")
+                            option(value="") Add gig tags (limit: 10)...
+                            option(value="programming") Programming
+                            option(value="copywriting") Copywriting
+                            option(value="userexperience") User Experience
 
                     .mdl-textfield.mdl-js-textfield.whole-line
                         textarea#description.mdl-textfield__input(type="text" rows="3", name="description")

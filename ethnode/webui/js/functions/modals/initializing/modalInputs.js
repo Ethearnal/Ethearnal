@@ -51,6 +51,7 @@ function loadInputsText(form, div) {
                 $content.find('textarea#description').val($gig.description).parent().addClass('is-dirty');
                 $content.find('input#amount').val($gig.price);
                 $content.find('input#reputationCost').val($gig.reputationCost);
+                $form.find('.gig-tags').dropdown('set selected', $gig.tags);
 
                 // DATE PICKER
                 $inputDateFrom.bootstrapMaterialDatePicker({format: "DD/MM/YYYY", weekStart: 0, time: false, currentDate: $gigExpireDate });

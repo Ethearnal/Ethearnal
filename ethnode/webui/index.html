@@ -294,6 +294,14 @@
                     <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
                     <label for="description" class="mdl-textfield__label">Description (what have you accomplished with this?)</label>
                   </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                    <select name="skills" multiple="" class="ui fluid dropdown normal search portfolio-tags">
+                      <option value="">Add gig tags (limit: 10)...</option>
+                      <option value="programming">Programming</option>
+                      <option value="copywriting">Copywriting</option>
+                      <option value="userexperience">User Experience</option>
+                    </select>
+                  </div>
                 </form>
               </div>
             </div>
@@ -337,6 +345,14 @@
                   <div class="mdl-textfield mdl-js-textfield whole-line">
                     <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
                     <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                    <select name="skills" multiple="" class="ui fluid dropdown normal search portfolio-tags">
+                      <option value="">Add gig tags (limit: 10)...</option>
+                      <option value="programming">Programming</option>
+                      <option value="copywriting">Copywriting</option>
+                      <option value="userexperience">User Experience</option>
+                    </select>
                   </div>
                 </form>
               </div>
@@ -537,23 +553,7 @@
         <div class="inner-modal">
           <div class="content">
             <div class="modal-header">
-              <div style="margin-bottom: 30px" class="ui three steps">
-                <div class="active step"><i class="tasks icon"></i>
-                  <div class="content">
-                    <div class="title">Fill</div>
-                  </div>
-                </div>
-                <div class="disabled step"><i class="book icon"></i>
-                  <div class="content">
-                    <div class="title">Extras</div>
-                  </div>
-                </div>
-                <div class="disabled step"><i class="info icon"></i>
-                  <div class="content">
-                    <div class="title">Confirm</div>
-                  </div>
-                </div>
-              </div>
+              <h3>Add gig</h3>
             </div>
             <div class="success-message">
               <h1 class="title">Congratulations!</h1>
@@ -594,7 +594,7 @@
                     <div class="ui basic label">.00</div>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
-                    <select name="skills" multiple="" class="ui fluid dropdown normal search skills-dropdown">
+                    <select name="gig-tags" multiple="" class="ui fluid dropdown normal search gig-tags">
                       <option value="">Add gig tags (limit: 10)...</option>
                       <option value="programming">Programming</option>
                       <option value="copywriting">Copywriting</option>
@@ -631,23 +631,7 @@
         <div class="inner-modal">
           <div class="content">
             <div class="modal-header">
-              <div style="margin-bottom: 30px" class="ui three steps">
-                <div class="active step"><i class="tasks icon"></i>
-                  <div class="content">
-                    <div class="title">Fill</div>
-                  </div>
-                </div>
-                <div class="disabled step"><i class="book icon"></i>
-                  <div class="content">
-                    <div class="title">Extras</div>
-                  </div>
-                </div>
-                <div class="disabled step"><i class="info icon"></i>
-                  <div class="content">
-                    <div class="title">Confirm</div>
-                  </div>
-                </div>
-              </div>
+              <h3>Edit gig</h3>
             </div>
             <div class="success-message">
               <h1 class="title">Congratulations!</h1>
@@ -686,6 +670,14 @@
                     <label for="reputationCost" class="ui label"><i style="font-size: 17px" class="material-icons">polymer</i></label>
                     <input id="reputationCost" type="text" placeholder="Cost of reputation">
                     <div class="ui basic label">.00</div>
+                  </div>
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                    <select name="gig-tags" multiple="" class="ui fluid dropdown normal search gig-tags">
+                      <option value="">Add gig tags (limit: 10)...</option>
+                      <option value="programming">Programming</option>
+                      <option value="copywriting">Copywriting</option>
+                      <option value="userexperience">User Experience</option>
+                    </select>
                   </div>
                   <div class="mdl-textfield mdl-js-textfield whole-line">
                     <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>

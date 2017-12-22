@@ -2,19 +2,21 @@
 
     .modal-box-content: .inner-modal: .content
 
-        .modal-header
-            .ui.three.steps(style="margin-bottom: 30px")
-                .active.step
-                    i.tasks.icon
-                    .content: .title Fill
+        //- .modal-header
+        //-     .ui.three.steps(style="margin-bottom: 30px")
+        //-         .active.step
+        //-             i.tasks.icon
+        //-             .content: .title Fill
 
-                .disabled.step
-                    i.book.icon
-                    .content: .title Extras
+        //-         .disabled.step
+        //-             i.book.icon
+        //-             .content: .title Extras
 
-                .disabled.step
-                    i.info.icon
-                    .content: .title Confirm
+        //-         .disabled.step
+        //-             i.info.icon
+        //-             .content: .title Confirm
+
+        .modal-header: h3 Add gig
 
 
         .success-message
@@ -59,7 +61,7 @@
                         .ui.basic.label .00
 
                     .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.whole-line
-                        select.ui.fluid.dropdown.normal.search.skills-dropdown(name="skills", multiple="")
+                        select.ui.fluid.dropdown.normal.search.gig-tags(name="gig-tags", multiple="")
                             option(value="") Add gig tags (limit: 10)...
                             option(value="programming") Programming
                             option(value="copywriting") Copywriting
