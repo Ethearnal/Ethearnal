@@ -134,10 +134,12 @@ class DHTFacade(object):
     def push_peer_request(self):
         ip_host = self.dht.peer.host
         if ip_host == '0.0.0.0':
-            if not self.ert.my_lan_ip:
-                ip_host = '127.0.0.1'
-            else:
+            if self.ert.my_wan_ip:
+                ip_host = self.ert.my_wan_ip
+            elif self.ert.my_lan_ip:
                 ip_host = self.ert.my_lan_ip
+            else:
+                ip_host = '127.0.0.1'
         key = {'ert': 'peer'}
         val = {'ert:peer': {'h': ip_host, 'p': self.dht.peer.port}}
         print('IP', ip_host, self.dht.peer.port)

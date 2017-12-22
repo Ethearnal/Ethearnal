@@ -367,9 +367,11 @@ class WebSelfPredicateApi(object):
     def GET(self, key):
         self.doc.set_key(key)
         d = self.dht_pulse.pull(owner=self.owner, key=self.doc.key)
-        d_js = json.dumps(d, ensure_ascii=False)
-        d_sj_bin = d_js.encode()
-        return d_sj_bin
+        if 'value' in d:
+            d_js = json.dumps(d, ensure_ascii=False)
+            d_sj_bin = d_js.encode()
+            return d_sj_bin
+        return b''
 
     def mount(self):
         self.cherry.tree.mount(

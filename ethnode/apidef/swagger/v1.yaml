@@ -1,0 +1,290 @@
+---
+swagger: "2.0"
+info:
+  description: "Ertnode API"
+  version: "1"
+  title: "ErtAPI"
+basePath: "/api/v1/"
+schemes:
+- "http"
+paths:
+  /dht/gigs/:
+    get:
+      tags:
+      - "DHT Gigs"
+      summary: "Gigs Listings by owner (if not provide own gigs)"
+      description: "Post and retrieve self or foreign Gigs"
+      operationId: "getGigs"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "owner_guid"
+        in: "query"
+        description: "pass an optional search string for looking up inventory"
+        required: false
+        type: "string"
+        maxLength: 64
+        minLength: 64
+      responses:
+        200:
+          description: "retrieve Gigs listing via DHT"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Gig"
+        400:
+          description: "bad input parameter"
+    post:
+      tags:
+      - "DHT Gigs"
+      summary: "Insert a Gig into a dht virtual collection"
+      description: "Insert a Gig into a dht virtual collection"
+      operationId: "insertGig"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "gigItem"
+        description: "Gig item to add"
+        required: false
+        schema:
+          $ref: "#/definitions/Gig"
+      responses:
+        201:
+          description: "item created"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "an existing item already exists"
+  /dht/guids:
+    get:
+      tags:
+      - "DHT Guids"
+      summary: "Listing of known profile identities GUIDS"
+      description: "Known identities with pubkeys"
+      operationId: "dhtGuids"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "retrieve GUIDS listing from local PKI"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        400:
+          description: "Something wrong"
+  /dht/ip4/:
+    get:
+      tags:
+      - "DHT Guids"
+      summary: "Listing of DHT UDP peers"
+      description: "Last known peers in dht"
+      operationId: "dhtIP4Peers"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "retrieve DHT ip4 peers"
+          schema:
+            type: "object"
+        400:
+          description: "bad input parameter"
+  /dht/node/:
+    get:
+      tags:
+      - "DHT Guids"
+      summary: "Infromation about node"
+      description: "Information about node"
+      operationId: "dhtNode"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "retrieve Gigs listing via DHT"
+          schema:
+            type: "object"
+        400:
+          description: "bad input parameter"
+  /dht/profile:
+    get:
+      tags:
+      - "DHT Profile"
+      summary: "Retrieve self or foreign profile value by key"
+      description: "Retrieve profile data by Key"
+      operationId: "dhtProfile"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "owner_guid"
+        in: "query"
+        required: false
+        description: "Pass optional for foreign GUID"
+        type: "string"
+        maxLength: 64
+        minLength: 64
+      - name: "profile_key"
+        in: "query"
+        description: "Get profile value by key"
+        required: true
+        type: "string"
+        maxLength: 64
+      responses:
+        200:
+          description: "Retrieve profile value by key"
+        400:
+          description: "Something wrong"
+    put:
+      tags:
+      - "DHT Profile"
+      summary: "Update self profile value"
+      description: "Insert Profile Key, Value"
+      operationId: "updateProfileKey"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "profile_key"
+        required: true
+        in: "query"
+        description: "Profile key to update it's value"
+        type: "string"
+        maxLength: 64
+      - in: "body"
+        name: "profile_value"
+        description: "Profile Value"
+        required: false
+        schema:
+          type: string
+      responses:
+        203:
+          description: "Updated"
+        400:
+          description: "Someting wrong"
+definitions:
+  GeneralDomainOfExpertise:
+    type: "string"
+    enum:
+    - "MARKETING"
+    - "SOFTWAREDEV"
+    - "FINANCEACC"
+    - "MUSICAUDIO"
+    - "GRAPHICDES"
+    - "VIDEOANIM"
+    - "VR3DMODEL"
+    - "WRITNGTEXT"
+    - "CONSULTING"
+  Gig:
+    type: "object"
+    required:
+    - "description"
+    - "general_domain_of_expertise"
+    - "price"
+    - "required_ert"
+    - "title"
+    properties:
+      title:
+        type: "string"
+        minLength: 32
+        maxLength: 64
+      price:
+        type: "number"
+        format: "double"
+      required_ert:
+        type: "number"
+        format: "double"
+      expire_date:
+        type: "string"
+        format: "int32"
+        example: "2016-08-29T09:12:33.001Z"
+      description:
+        type: "string"
+        minLength: 32
+        maxLength: 160
+      owner_guid:
+        type: "string"
+        maxLength: 64
+      thumbnail_image_hash:
+        type: "string"
+        minLength: 64
+        maxLength: 64
+      related_resource_collection_name:
+        type: "string"
+        minLength: 64
+        maxLength: 64
+      related_document_collection_name:
+        type: "string"
+        minLength: 64
+        maxLength: 64
+      general_domain_of_expertise:
+        $ref: "#/definitions/GeneralDomainOfExpertise"
+    example:
+      general_domain_of_expertise: "SOFTWAREDEV"
+      price: 2134.80082819046
+      required_ert: 634.02745618307040320615897144
+      description: "Example GIG  description"
+      title: "Test GIG title"
+  Profile:
+    type: "object"
+    required:
+    - "description"
+    - "general_domain_of_expertise"
+    - "names"
+    - "nick"
+    - "skills"
+    - "title"
+    properties:
+      names:
+        type: "string"
+        minLength: 3
+        maxLength: 128
+      nick:
+        type: "string"
+        minLength: 3
+        maxLength: 32
+      title:
+        type: "string"
+        minLength: 3
+        maxLength: 128
+      ert_amount:
+        type: "number"
+        format: "double"
+      description:
+        type: "string"
+        minLength: 32
+        maxLength: 160
+      owner_guid:
+        type: "string"
+        maxLength: 64
+      thumbnail_avatar_image_hash:
+        type: "string"
+        minLength: 64
+        maxLength: 64
+      big_avatar_image_hash:
+        type: "string"
+        minLength: 64
+        maxLength: 64
+      general_domain_of_expertise:
+        $ref: "#/definitions/GeneralDomainOfExpertise"
+      skills:
+        type: "array"
+        items:
+          type: "string"
+          maxLength: 32
+    example:
+      nick: "nick"
+      skills:
+      - "skills"
+      - "skills"
+      names: "names"
+      ert_amount: 0.80082819046101150206595775671303272247314453125
+      general_domain_of_expertise: {}
+      owner_guid: "owner_guid"
+      description: "description"
+      title: "title"
+      big_avatar_image_hash: "big_avatar_image_hash"
