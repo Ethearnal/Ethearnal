@@ -29,6 +29,8 @@ class DhtGetByHkeyWebAPI(object):
             t = t2
         else:
             t = t1
+        if not t:
+            return b'null'
         d = bson.loads(t[-1])
         if 'e' in d:
             l = d['e']
