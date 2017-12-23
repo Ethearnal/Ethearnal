@@ -24,7 +24,7 @@ site_conf = {
     }
 
 }
-
+cherrypy.response.headers['Cache-Control'] = 'public, max-age=5'
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
 
 

@@ -17,7 +17,7 @@ class WebCDN(object):
     exposed = True
 
     def __init__(self, cherry=cherrypy,
-                 mount_point: str='/api/cdn/v1/cdn/resource',
+                 mount_point: str='/api/cdn/v1/resource',
                  store_dir: str='cdn_profile/',
                  mount_it=True):
         self.cherry = cherry
