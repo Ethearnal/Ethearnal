@@ -125,7 +125,7 @@ class DHTFacade(object):
         value = {'ert:pubkey': self.ert.rsa_pub_der}
         self.push(key, value, local_only=local_only)
 
-    def kwnown_guids(self):
+    def known_guids(self):
         c = self.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
         guid_list = [cdx.guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
         return guid_list

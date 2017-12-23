@@ -9,7 +9,7 @@ class WebCDNSite(object):
     @cherrypy.expose
     def index(self):
         print('REQ LOCAL', cherrypy.request.local)
-        return "CDN ethearnal 0.0.1"
+        return "ErtCDN ethearnal 0.0.1"
     # todo make entry point redirect to ui
 
 

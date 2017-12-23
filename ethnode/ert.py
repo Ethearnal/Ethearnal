@@ -96,7 +96,7 @@ class EthearnalSite(object):
     @cherrypy.expose
     def index(self):
         print('REQ LOCAL', cherrypy.request.local)
-        return "ethearnal 0.0.1"
+        return "ErtAPI: Ethearnal 0.0.1"
     # todo make entry point redirect to ui
 
 
@@ -319,12 +319,12 @@ def main_http(http_webdir: str = config.http_webdir,
             pass
 
 
-def punch_dht_udp_hole(port, attempts=3):
+def punch_dht_udp_hole(port, attempts=3, proto='UDP'):
     punch_hole_failed = True
     for i in range(attempts):
         print('\n\n\n UPnP try firewall punch hole')
         try:
-            if upnp.punch_port(port, port, proto='UDP'):
+            if upnp.punch_port(port, port, proto=proto):
                 punch_hole_failed = False
                 break
             else:

@@ -73,7 +73,7 @@ class Peer(object):
                     print('SEND')
                     sock.sendto(bts, (host, port))
             else:
-                print('SEND no lock')
+                print('SEND no lock', host, port)
                 sock.sendto(bts, (host, port))
 
     # handle send of all udp msg here
