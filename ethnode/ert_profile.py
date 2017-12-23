@@ -84,24 +84,29 @@ class EthearnalProfileController(object):
     def __init__(self,
                  data_dir=config.data_dir,
                  personal_dir=None,
-                 files_dir=None,
+                 # files_dir=None,
                  cdn_bootstrap_host=None,
                  cdn_bootstrap_port=None,
+                 cdn_service_node=False
                  ):
+        self.cdn_service_node = cdn_service_node
         self.my_wan_ip = ipgetter.myip()
         self.my_lan_ip = None
         # self.my_wan_port = 0
         self.cdx = cdx
-        if not cdn_bootstrap_host and not cdn_bootstrap_port:
-            raise ValueError('bootstrap to ertcdn service is required')
+        self.cdn_host = cdn_bootstrap_host
+        self.cdn_port = cdn_bootstrap_port
+        if not self.cdn_service_node:
+            if not cdn_bootstrap_host and not cdn_bootstrap_port:
+                raise ValueError('bootstrap to ertcdn service is required')
 
-        self.cdn_gigs = CdnBinResourceBsonApiClientRequests(endpoint_host=cdn_bootstrap_host,
-                                                            endpoint_port=cdn_bootstrap_port,
-                                                            endpoint_path='/api/v1/gig')
-
-        self.cdn_imgs = CdnBinResourceBsonApiClientRequests(endpoint_host=cdn_bootstrap_host,
-                                                            endpoint_port=cdn_bootstrap_port,
-                                                            endpoint_path='/api/v1/img')
+        # self.cdn_gigs = CdnBinResourceBsonApiClientRequests(endpoint_host=cdn_bootstrap_host,
+        #                                                     endpoint_port=cdn_bootstrap_port,
+        #                                                     endpoint_path='/api/v1/gig')
+        #
+        # self.cdn_imgs = CdnBinResourceBsonApiClientRequests(endpoint_host=cdn_bootstrap_host,
+        #                                                     endpoint_port=cdn_bootstrap_port,
+        #                                                     endpoint_path='/api/v1/img')
 
         self.data_dir = os.path.abspath(data_dir)
 
@@ -111,10 +116,10 @@ class EthearnalProfileController(object):
             self.personal_dir = os.path.abspath('%s/%s' % (self.data_dir, self.PERSONAL_DIRECTORY_NAME))
             tools.mkdir(self.personal_dir)
 
-        if files_dir:
-            self.files_dir = os.path.abspath(files_dir)
-        else:
-            self.files_dir = os.path.abspath('%s/%s' % (self.data_dir, config.static_files))
+        # if files_dir:
+        #     self.files_dir = os.path.abspath(files_dir)
+        # else:
+        #     self.files_dir = os.path.abspath('%s/%s' % (self.data_dir, config.static_files))
 
         self.profile_json_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_JSON_FILE_NAME)
         self.profile_html_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_HTML_FILE_NAME)
@@ -125,31 +130,31 @@ class EthearnalProfileController(object):
         self.dht_fb_fn = '%s/%s' % (self.personal_dir, self.PROFILE_DHT_SQLITE)
         self.dht_ref_pubkeys_fn = '%s/%s' % (self.personal_dir, self.PROFILE_DHT_REF_PUBKEYS)
 
-        self.db_plain_text = '%s/%s' % (self.personal_dir, self.PROFILE_PLAIN_UTF8_TEXTS)
-        self.db_plain_text_inv = '%s/%s' % (self.personal_dir, self.PROFILE_PREFIXES_IDX)
+        # self.db_plain_text = '%s/%s' % (self.personal_dir, self.PROFILE_PLAIN_UTF8_TEXTS)
+        # self.db_plain_text_inv = '%s/%s' % (self.personal_dir, self.PROFILE_PREFIXES_IDX)
+        #
+        # self.db_gigs = '%s/%s' % (self.personal_dir, self.PROFILE_GIGS_DB)
+        # self.db_imgs = '%s/%s' % (self.personal_dir, self.PROFILE_IMGS_DB)
+        # self.db_my_gigs_idx = '%s/%s' % (self.personal_dir, self.PROFILE_MY_GIGS_INDEX)
 
-        self.db_gigs = '%s/%s' % (self.personal_dir, self.PROFILE_GIGS_DB)
-        self.db_imgs = '%s/%s' % (self.personal_dir, self.PROFILE_IMGS_DB)
-        self.db_my_gigs_idx = '%s/%s' % (self.personal_dir, self.PROFILE_MY_GIGS_INDEX)
-
-        self.model = EthearnalProfileModel()
+        # self.model = EthearnalProfileModel()
 
         self.dht_store = ErtDHTSQLite(self.dht_fb_fn)
         self.dht_pubkeys = ErtREFSQLite(self.dht_ref_pubkeys_fn)
 
         # create empty profile if not found
-        if not os.path.isfile(self.profile_json_file_name):
-            self.model.to_json_file(self.profile_json_file_name)
-        else:
-            self.model.from_json_file(self.profile_json_file_name)
+        # if not os.path.isfile(self.profile_json_file_name):
+        #     self.model.to_json_file(self.profile_json_file_name)
+        # else:
+        #     self.model.from_json_file(self.profile_json_file_name)
 
         # create empty profile html if not found
-        if not os.path.isfile(self.profile_html_file_name):
-            # todo
-            pass
-        else:
-            # todo
-            pass
+        # if not os.path.isfile(self.profile_html_file_name):
+        #     # todo
+        #     pass
+        # else:
+        #     # todo
+        #     pass
 
         # create generated avatar if not found
         if not os.path.isfile(self.profile_image_file_name):
@@ -160,68 +165,68 @@ class EthearnalProfileController(object):
         self.rsa_keys()
         # init local signer
         self.rsa_signer = LocalRsaSigner(self.rsa_prv_der, self.rsa_pub_der)
-        self.plain_texts = PlainTextUTF8PrefixIndexed(
-            rs=PlainTextUTF8Resource(signer=self.rsa_signer, data_store=ResourceSQLite(db_name=self.db_plain_text,
-                                                                                       table_name='plain_text')),
-            inv=PlainTextUTF8ResourcePrefixIndex(data_store=InvIndexTimestampSQLite(db_name=self.db_plain_text_inv,
-                                                                                    table_name='plain_text_inv'))
-        )
-
-        self.gigs_api = BinResourceLocalApi(
-            jsr=BinResource(
-                data_store=ResourceSQLite(
-                    db_name=self.db_gigs,
-                    table_name='gigs'),
-                cdn_client=self.cdn_gigs,
-                ),
-            signer=self.rsa_signer,
-
-        )
-
-        self.dbeep = PLainTextUTF8WebApi(
-            cherrypy=cherrypy,
-            api=self.plain_texts,
-            mount=True,
-        )
-
-        self.gig_web_api = GigResourceWebLocalApi(
-             cherrypy=cherrypy,
-             api=self.gigs_api,
-             mount=True,
-        )
-
-        self.gigs_web_api = GigsMyResourceWebLocalApi(
-            cherrypy=cherrypy,
-            api=self.gigs_api,
-            mount=True,
-        )
-
-        self.img_api = BinResourceLocalApi(
-            jsr=BinResource(
-                data_store=ResourceSQLite(db_name=self.db_imgs, table_name='imgs'),
-                cdn_client=self.cdn_imgs
-            ),
-            signer=self.rsa_signer
-        )
-
-        self.img_web_api = ImageResourceWebLocalApi(
-            cherrypy=cherrypy,
-            api=self.img_api,
-            mount=True
-        )
-
-        self.imgs_web_api = ResourceImagesWebLocalApi(
-            cherrypy=cherrypy,
-            api=self.img_api,
-            mount=True
-        )
-
-        self.idx = IndexApiBundle(self.db_my_gigs_idx, self.gigs_api, cherrypy=cherrypy)
-        self.idx.text_web_api.mount()
-        self.idx.query_web_api_guids.mount()
-        self.idx.query_web_api_obj.mount()
-        self.idx.index_all_by_title_desc_web.mount()
-        self.gig_web_api.text_api = self.idx.text_api
+        # self.plain_texts = PlainTextUTF8PrefixIndexed(
+        #     rs=PlainTextUTF8Resource(signer=self.rsa_signer, data_store=ResourceSQLite(db_name=self.db_plain_text,
+        #                                                                                table_name='plain_text')),
+        #     inv=PlainTextUTF8ResourcePrefixIndex(data_store=InvIndexTimestampSQLite(db_name=self.db_plain_text_inv,
+        #                                                                             table_name='plain_text_inv'))
+        # )
+        #
+        # self.gigs_api = BinResourceLocalApi(
+        #     jsr=BinResource(
+        #         data_store=ResourceSQLite(
+        #             db_name=self.db_gigs,
+        #             table_name='gigs'),
+        #         cdn_client=self.cdn_gigs,
+        #         ),
+        #     signer=self.rsa_signer,
+        #
+        # )
+        #
+        # self.dbeep = PLainTextUTF8WebApi(
+        #     cherrypy=cherrypy,
+        #     api=self.plain_texts,
+        #     mount=True,
+        # )
+        #
+        # self.gig_web_api = GigResourceWebLocalApi(
+        #      cherrypy=cherrypy,
+        #      api=self.gigs_api,
+        #      mount=True,
+        # )
+        #
+        # self.gigs_web_api = GigsMyResourceWebLocalApi(
+        #     cherrypy=cherrypy,
+        #     api=self.gigs_api,
+        #     mount=True,
+        # )
+        #
+        # self.img_api = BinResourceLocalApi(
+        #     jsr=BinResource(
+        #         data_store=ResourceSQLite(db_name=self.db_imgs, table_name='imgs'),
+        #         cdn_client=self.cdn_imgs
+        #     ),
+        #     signer=self.rsa_signer
+        # )
+        #
+        # self.img_web_api = ImageResourceWebLocalApi(
+        #     cherrypy=cherrypy,
+        #     api=self.img_api,
+        #     mount=True
+        # )
+        #
+        # self.imgs_web_api = ResourceImagesWebLocalApi(
+        #     cherrypy=cherrypy,
+        #     api=self.img_api,
+        #     mount=True
+        # )
+        #
+        # self.idx = IndexApiBundle(self.db_my_gigs_idx, self.gigs_api, cherrypy=cherrypy)
+        # self.idx.text_web_api.mount()
+        # self.idx.query_web_api_guids.mount()
+        # self.idx.query_web_api_obj.mount()
+        # self.idx.index_all_by_title_desc_web.mount()
+        # self.gig_web_api.text_api = self.idx.text_api
 
     def get_profile_image_bytes(self):
         bts = None
@@ -323,11 +328,15 @@ class EthearnalProfileController(object):
         return hexd, bts
 
     @property
-    def rsa_guid_hex(self):
+    def rsa_guid_hex(self) -> str:
         return self.rsa_guid_hex_bin[0]
 
     @property
-    def rsa_guid_bin(self):
+    def rsa_guid_int(self) -> int:
+        return cdx.guid_bts_to_int(self.rsa_guid_bin)
+
+    @property
+    def rsa_guid_bin(self) -> bytes:
         return self.rsa_guid_hex_bin[1]
 
     def rsa_sign(self, bin_msg):
@@ -339,205 +348,205 @@ class EthearnalProfileController(object):
         return cdx.verify_message(bin_msg, sig, pub_der)
 
 
-class EthearnalProfileView(object):
-    exposed = True
-
-    def __init__(self, eth_profile):
-        self.profile = eth_profile
-        # todo content types
-        # cherrypy.response.headers['Content-Type'] = 'text/html; charset=ascii'
-        self.query_dispatch = {
-            'avatar': self.avatar,
-            'data': self.data,
-            'html': self.html,
-            'guid': lambda: self.profile.rsa_guid_hex,
-            'guid_bin': lambda: self.profile.rsa_guid_bin,
-            'pubkey': lambda: self.profile.rsa_public_pem,
-        }
-
-    def GET(self, q):
-        # todo fix this keep profile in object
-        if q in self.query_dispatch:
-            return self.query_dispatch[q]()
-        else:
-            return 'todo: 404'
-
-    def avatar(self):
-        cherrypy.response.headers['Content-Type'] = "image/png"
-        fs = io.BytesIO(self.profile.get_profile_image_bytes())
-        fs.seek(0)
-        return cherrypy.lib.file_generator(fs)
-
-    def data(self):
-        return self.profile.data
-
-    def html(self):
-        if not os.path.isfile(self.profile.profile_html_file_name):
-            return ""  # todo 404
-
-        bts = None
-        with open(self.profile.profile_html_file_name, 'rb') as fp:
-            fs = io.BytesIO(fp.read())
-            fs.seek(0)
-        return cherrypy.lib.file_generator(fs)
-
-
-class EthearnalJobPostModel(basemodel.BaseModel):
-    SPEC_PREFIX = 'spe'
-    dict_cls = dict
-    list_cls = list
-    none_cls = basemodel.none_cls
-
-    FIELDS_SPEC = {
-        'title': ('text', 'UTF-8', basemodel.blank_st_cls),
-        'description': ('text', 'UTF-8', basemodel.blank_st_cls),
-    }
-
-    title = ''
-    description = ''
-
-    def __init__(self, title=None, description=None):
-        super(EthearnalJobPostModel, self).__init__()
-        if not title or not description:
-            raise ValueError('Title and/or description are required to post a job')
-        self.title = title
-        self.description = description
-
-    def __hash__(self):
-        st = '%s%s' % (self.title, self.description)
-        return hash(st)
+# class EthearnalProfileView(object):
+#     exposed = True
+#
+#     def __init__(self, eth_profile):
+#         self.profile = eth_profile
+#         # todo content types
+#         # cherrypy.response.headers['Content-Type'] = 'text/html; charset=ascii'
+#         self.query_dispatch = {
+#             'avatar': self.avatar,
+#             'data': self.data,
+#             'html': self.html,
+#             'guid': lambda: self.profile.rsa_guid_hex,
+#             'guid_bin': lambda: self.profile.rsa_guid_bin,
+#             'pubkey': lambda: self.profile.rsa_public_pem,
+#         }
+#
+#     def GET(self, q):
+#         # todo fix this keep profile in object
+#         if q in self.query_dispatch:
+#             return self.query_dispatch[q]()
+#         else:
+#             return 'todo: 404'
+#
+#     def avatar(self):
+#         cherrypy.response.headers['Content-Type'] = "image/png"
+#         fs = io.BytesIO(self.profile.get_profile_image_bytes())
+#         fs.seek(0)
+#         return cherrypy.lib.file_generator(fs)
+#
+#     def data(self):
+#         return self.profile.data
+#
+#     def html(self):
+#         if not os.path.isfile(self.profile.profile_html_file_name):
+#             return ""  # todo 404
+#
+#         bts = None
+#         with open(self.profile.profile_html_file_name, 'rb') as fp:
+#             fs = io.BytesIO(fp.read())
+#             fs.seek(0)
+#         return cherrypy.lib.file_generator(fs)
 
 
-class EthearnalJobPostController(object):
-
-    def __init__(self, eth_profile: EthearnalProfileController):
-        self.profile = eth_profile
-        self.crud = CrudJsonListStore(self.profile.job_post_json_store_fn)
-
-
-class EthearnalJobView(object):
-    exposed = True
-
-    def __init__(self, ctl: EthearnalJobPostController):
-        self.ctl = ctl
-        self.query_dispatch = {
-            'get_list': self.get_list,
-            'get_item': self.get_item
-        }
-
-    def POST(self, title=None, description=None):
-        o = EthearnalJobPostModel(title, description)
-        self.ctl.crud.create(o.to_dict())
-        self.ctl.crud.commit()
-        self.ctl.crud.commit()
-        cherrypy.response.status = 201
-        return ''
-
-    def get_list(self):
-        js = self.ctl.crud.load()
-        return js
-
-    def get_item(self, idx):
-        cherrypy.response.status = 404
-        try:
-            idx = int(idx)
-        except ValueError:
-            return ''
-        try:
-            d = self.ctl.crud.read(idx)
-            if d:
-                o = EthearnalJobPostModel(**d)
-                o.from_dict(d)
-                cherrypy.response.status = 200
-                return o.to_json().encode(encoding='utf-8')
-        except IndexError:
-            pass
-        return ''
-
-    def GET(self, idx=None):
-        cherrypy.response.headers['Content-Type'] = 'application/json'
-        if idx:
-            return self.get_item(idx)
-        return self.get_list()
-
-    def DELETE(self, idx=None):
-        cherrypy.response.status = 404
-        if idx:
-            try:
-                idx = int(idx)
-                self.ctl.crud.delete(idx)
-                self.ctl.crud.commit()
-                cherrypy.response.status = 200
-                return b''
-            except Exception as e:
-                # todo logging
-                pass
-        return b''
-
-    def patch(self, idx, title=None, description=None):
-        cherrypy.response.status = 404
-        try:
-            idx = int(idx)
-        except ValueError:
-            return ''
-        try:
-            o = EthearnalJobPostModel(title, description)
-            self.ctl.crud.update(idx, o.to_dict())
-            self.ctl.crud.commit()
-            self.ctl.crud.commit()
-            cherrypy.response.status = 201
-            return b''
-        except IndexError:
-            return b''
-
-    def PATCH(self, idx, title=None, description=None):
-        return self.patch(idx, title, description)
-
-    def PUT(self, idx, title=None, description=None):
-        return self.patch(idx, title, description)
-
-
-class EthearnalUploadFileView(object):
-    exposed = True
-
-    def __init__(self, e_profile: EthearnalProfileController):
-        self.profile = e_profile
-
-    def POST(self, ufile):
-        upload_path = os.path.normpath(self.profile.files_dir)
-        upload_file = os.path.join(upload_path, ufile.filename)
-        size = 0
-        with open(upload_file, 'wb') as out:
-            while True:
-                data = ufile.file.read(8192)
-                if not data:
-                    break
-                out.write(data)
-                # print(data)
-                size += len(data)
-        cherrypy.response.status = 201
-        return b''
-
-    def GET(self):
-        upload_path = os.path.normpath(self.profile.files_dir)
-        files = [f for f in os.listdir(upload_path)]
-        print(os.listdir(upload_path))
-        return json.dumps(files, ensure_ascii=False).encode('utf-8')
-
-
-class EthearnalUploadJsonView(object):
-    exposed = True
-
-    def __init__(self, e_profile: EthearnalProfileController):
-        self.profile = e_profile
-
-    def POST(self, json_str, file_name):
-        upload_path = os.path.normpath(self.profile.files_dir)
-        upload_file = os.path.join(upload_path, file_name)
-        size = 0
-        bts = json_str.encode('utf-8')
-        with open(upload_file, 'wb') as out:
-            out.write(bts)
-        cherrypy.response.status = 201
-        return b''
+# class EthearnalJobPostModel(basemodel.BaseModel):
+#     SPEC_PREFIX = 'spe'
+#     dict_cls = dict
+#     list_cls = list
+#     none_cls = basemodel.none_cls
+#
+#     FIELDS_SPEC = {
+#         'title': ('text', 'UTF-8', basemodel.blank_st_cls),
+#         'description': ('text', 'UTF-8', basemodel.blank_st_cls),
+#     }
+#
+#     title = ''
+#     description = ''
+#
+#     def __init__(self, title=None, description=None):
+#         super(EthearnalJobPostModel, self).__init__()
+#         if not title or not description:
+#             raise ValueError('Title and/or description are required to post a job')
+#         self.title = title
+#         self.description = description
+#
+#     def __hash__(self):
+#         st = '%s%s' % (self.title, self.description)
+#         return hash(st)
+#
+#
+# class EthearnalJobPostController(object):
+#
+#     def __init__(self, eth_profile: EthearnalProfileController):
+#         self.profile = eth_profile
+#         self.crud = CrudJsonListStore(self.profile.job_post_json_store_fn)
+#
+#
+# class EthearnalJobView(object):
+#     exposed = True
+#
+#     def __init__(self, ctl: EthearnalJobPostController):
+#         self.ctl = ctl
+#         self.query_dispatch = {
+#             'get_list': self.get_list,
+#             'get_item': self.get_item
+#         }
+#
+#     def POST(self, title=None, description=None):
+#         o = EthearnalJobPostModel(title, description)
+#         self.ctl.crud.create(o.to_dict())
+#         self.ctl.crud.commit()
+#         self.ctl.crud.commit()
+#         cherrypy.response.status = 201
+#         return ''
+#
+#     def get_list(self):
+#         js = self.ctl.crud.load()
+#         return js
+#
+#     def get_item(self, idx):
+#         cherrypy.response.status = 404
+#         try:
+#             idx = int(idx)
+#         except ValueError:
+#             return ''
+#         try:
+#             d = self.ctl.crud.read(idx)
+#             if d:
+#                 o = EthearnalJobPostModel(**d)
+#                 o.from_dict(d)
+#                 cherrypy.response.status = 200
+#                 return o.to_json().encode(encoding='utf-8')
+#         except IndexError:
+#             pass
+#         return ''
+#
+#     def GET(self, idx=None):
+#         cherrypy.response.headers['Content-Type'] = 'application/json'
+#         if idx:
+#             return self.get_item(idx)
+#         return self.get_list()
+#
+#     def DELETE(self, idx=None):
+#         cherrypy.response.status = 404
+#         if idx:
+#             try:
+#                 idx = int(idx)
+#                 self.ctl.crud.delete(idx)
+#                 self.ctl.crud.commit()
+#                 cherrypy.response.status = 200
+#                 return b''
+#             except Exception as e:
+#                 # todo logging
+#                 pass
+#         return b''
+#
+#     def patch(self, idx, title=None, description=None):
+#         cherrypy.response.status = 404
+#         try:
+#             idx = int(idx)
+#         except ValueError:
+#             return ''
+#         try:
+#             o = EthearnalJobPostModel(title, description)
+#             self.ctl.crud.update(idx, o.to_dict())
+#             self.ctl.crud.commit()
+#             self.ctl.crud.commit()
+#             cherrypy.response.status = 201
+#             return b''
+#         except IndexError:
+#             return b''
+#
+#     def PATCH(self, idx, title=None, description=None):
+#         return self.patch(idx, title, description)
+#
+#     def PUT(self, idx, title=None, description=None):
+#         return self.patch(idx, title, description)
+#
+#
+# class EthearnalUploadFileView(object):
+#     exposed = True
+#
+#     def __init__(self, e_profile: EthearnalProfileController):
+#         self.profile = e_profile
+#
+#     def POST(self, ufile):
+#         upload_path = os.path.normpath(self.profile.files_dir)
+#         upload_file = os.path.join(upload_path, ufile.filename)
+#         size = 0
+#         with open(upload_file, 'wb') as out:
+#             while True:
+#                 data = ufile.file.read(8192)
+#                 if not data:
+#                     break
+#                 out.write(data)
+#                 # print(data)
+#                 size += len(data)
+#         cherrypy.response.status = 201
+#         return b''
+#
+#     def GET(self):
+#         upload_path = os.path.normpath(self.profile.files_dir)
+#         files = [f for f in os.listdir(upload_path)]
+#         print(os.listdir(upload_path))
+#         return json.dumps(files, ensure_ascii=False).encode('utf-8')
+#
+#
+# class EthearnalUploadJsonView(object):
+#     exposed = True
+#
+#     def __init__(self, e_profile: EthearnalProfileController):
+#         self.profile = e_profile
+#
+#     def POST(self, json_str, file_name):
+#         upload_path = os.path.normpath(self.profile.files_dir)
+#         upload_file = os.path.join(upload_path, file_name)
+#         size = 0
+#         bts = json_str.encode('utf-8')
+#         with open(upload_file, 'wb') as out:
+#             out.write(bts)
+#         cherrypy.response.status = 201
+#         return b''
 

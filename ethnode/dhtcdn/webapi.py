@@ -4,6 +4,7 @@ import cherrypy
 import json
 from toolkit.kadmini_codec import sha256_bin_digest, guid_bin_to_hex
 
+
 class WebCDNSite(object):
     @cherrypy.expose
     def index(self):
@@ -55,7 +56,6 @@ class WebCDN(object):
             return msg.encode()
         # if 'range' in cherrypy.request.headers:
         #     print(cherrypy.request.headers['range'], 'CT RANGE')
-        print('FEXT',fext, ct.strip())
         bts = b''
         if not fext:
             self.cherry.response.status = 408
@@ -65,7 +65,6 @@ class WebCDN(object):
             f_name = '%s.%s' % (hkey, fext)
             #  upload_path = os.path.join(self.store_dir)
             upload_file = os.path.join(self.store_dir, f_name)
-            print('--->',upload_file,'<---')
         except Exception as e:
             msg = '{"error":"general error with upload file name %s"}' % str(e)
             return msg.encode()
@@ -99,8 +98,6 @@ class WebCDN(object):
         cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
         ct = None
         try:
-            # ct = cherrypy.request.headers['Content-Type']
-            print(ufile.content_type,' - - - -',type(ufile.content_type))
             ct = str(ufile.content_type)
             fext = ct.split('/')[1]
             if not ct:
@@ -109,12 +106,8 @@ class WebCDN(object):
         except:
             self.cherry.response.status = 408
             return b'{"error":"can\'t determine content-type"}'
-        upload_path = os.path.normpath(self.store_dir)
-        #
         size = 0
         uf = io.BytesIO()
-        # body = self.cherry.request.body.read()
-        data = b''
         while True:
             data = ufile.file.read(8192)
             if not data:
@@ -154,6 +147,7 @@ class WebCDN(object):
                     'tools.staticdir.on': True,
                     'tools.staticdir.dir': 'cdnapidef/swagger',
                     'tools.staticdir.index': 'index.html',
+                    'tools.staticdir.root': os.path.abspath(os.getcwd())
                 }
 
             }

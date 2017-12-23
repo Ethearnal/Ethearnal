@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Ertnode API"
   version: "1"
-  title: "ErtAPI"
+  title: "ErtCDN"
 basePath: "/api/v1/"
 schemes:
 - "http"

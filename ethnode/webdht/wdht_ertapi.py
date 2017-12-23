@@ -444,13 +444,12 @@ class WebDHTAboutNode(object):
 
         d = {
             'guid': self.dhtf.ert.rsa_guid_hex,
-            'ip4': "%s:%s" % (ip4, self.dhtf.dht.peer.port)
+            'ip4': "%s:%s" % (ip4, self.dhtf.dht.peer.port,),
+            'cdn': ["%s:%s" % (self.dhtf.ert.cdn_host, self.dhtf.ert.cdn_port)]
         }
-        js = json.dumps(d,ensure_ascii=False)
+        js = json.dumps(d, ensure_ascii=False)
         b_js = js.encode()
         return b_js
-
-
 
     def mount(self):
         self.cherry.tree.mount(
