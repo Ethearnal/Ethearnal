@@ -12,18 +12,22 @@ from toolkit.tools import mkdir, on_hook
 from toolkit import kadmini_codec
 from toolkit import store_handler
 from toolkit import upnp
+from ert_profile import EthearnalProfileController
+# from ert_profile import EthearnalProfileView, EthearnalProfileController
+# from ert_profile import EthearnalJobView, EthearnalJobPostController
+# from ert_profile import EthearnalUploadFileView
+# from ert_profile import EthearnalUploadJsonView
 
-from ert_profile import EthearnalProfileView, EthearnalProfileController
-from ert_profile import EthearnalJobView, EthearnalJobPostController
-from ert_profile import EthearnalUploadFileView
-from ert_profile import EthearnalUploadJsonView
+# from webdht.wdht import WebDHTPulse, DHTPulse, WebSysGuidApi, OwnerGuidHashIO
+# from webdht.wdht import WebSelfPredicateApi, WebGuidPredicateApi, WebDHTKnownGuids
 
-from webdht.wdht import WebDHTPulse, DHTPulse, WebSysGuidApi, OwnerGuidHashIO
-from webdht.wdht import WebSelfPredicateApi, WebGuidPredicateApi, WebDHTKnownGuids
+from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
+from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
+from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
 
-#
-from webdht.double_linked import DList, DLItemDict, OwnPulse, instance_dl
-from webdht.wdht_listing import WebGuidCollectionListApi
+# #
+# from webdht.double_linked import DList, DLItemDict, OwnPulse, instance_dl
+# from webdht.wdht_listing import WebGuidCollectionListApi
 
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
@@ -92,13 +96,12 @@ class EthearnalSite(object):
     @cherrypy.expose
     def index(self):
         print('REQ LOCAL', cherrypy.request.local)
-        return "ethearnal 0.0.1"
+        return "ErtAPI: Ethearnal 0.0.1"
     # todo make entry point redirect to ui
 
 
 def main_dht(host: str, port: int, store: store_handler.DHTStoreHandlerOne,
              guid: int =None, seed_host=None, seed_port=None):
-
 
     if seed_host and seed_port and (host, port) != (seed_host, seed_port):
         print('BOOTSTRAP TO SEED', seed_host, seed_port)
@@ -106,14 +109,11 @@ def main_dht(host: str, port: int, store: store_handler.DHTStoreHandlerOne,
                   storage=store)
     else:
         dht = DHT(host=host, port=port, guid=guid, storage=store)
-
-    # if ert.my_wan_port != 0:
-    #     # dht.peer.port = ert.my_wan_port
     return dht
 
 
 def tear_down_udp(dht):
-    print('UDP stopping...')
+    print('ErtCDN: UDP stopping...')
     if dht:
         dht.server.shutdown()
 
@@ -124,25 +124,25 @@ def main_profile(http_webdir,
                  cdn_port,):
 
     http_webdir = os.path.abspath(http_webdir)
+
     files_dir = os.path.abspath('%s/%s' % (profile_dir, files_dir_name))
     if not os.path.isdir(files_dir):
         print('Creating dir for static files')
         mkdir(files_dir)
     profile_dir_abs = os.path.abspath(profile_dir)
-    ert_profile_ctl = EthearnalProfileController(data_dir=profile_dir_abs,
-                                                 files_dir=files_dir,
-                                                 cdn_bootstrap_host=cdn_host,
-                                                 cdn_bootstrap_port=cdn_port)
-    ert_profile_view = view = EthearnalProfileView(ert_profile_ctl)
 
-    return ert_profile_ctl, ert_profile_view
+    ert_profile_ctl = EthearnalProfileController(data_dir=profile_dir_abs,
+                                                 cdn_bootstrap_host=cdn_host,
+                                                 cdn_bootstrap_port=cdn_port
+                                                 )
+    return ert_profile_ctl
 
 
 def main_http(http_webdir: str = config.http_webdir,
               socket_host: str = config.http_socket_host,
               socket_port: int = config.http_socket_port,
               ert_profile_ctl: EthearnalProfileController = None,
-              ert_profile_view: EthearnalProfileView = None,
+              # ert_profile_view: EthearnalProfileView = None,
               files_dir_name: str = config.static_files,
               interactive: bool = config.interactive,
               dht_=None,
@@ -179,69 +179,85 @@ def main_http(http_webdir: str = config.http_webdir,
 
     cherrypy.tree.mount(EthearnalSite(), '/', site_conf)
     #
-    cherrypy.tree.mount(ert_profile_view,
-                        '/api/v1/profile',
-                        {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
-                        )
+    # cherrypy.tree.mount(ert_profile_view,
+    #                     '/api/v1/profile',
+    #                     {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
+    #                     )
+    # #
+    # cherrypy.tree.mount(EthearnalJobView(EthearnalJobPostController(ert_profile_ctl)),
+    #                     '/api/v1/job', {'/': {
+    #                         'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+    #                         'tools.sessions.on': True,
+    #                         'tools.response_headers.on': True,
+    #                         'tools.response_headers.headers': [('Content-Type', 'text/plain')],
+    #                         }
+    #                      }
+    #                     )
     #
-    cherrypy.tree.mount(EthearnalJobView(EthearnalJobPostController(ert_profile_ctl)),
-                        '/api/v1/job', {'/': {
-                            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-                            'tools.sessions.on': True,
-                            'tools.response_headers.on': True,
-                            'tools.response_headers.headers': [('Content-Type', 'text/plain')],
-                            }
-                         }
-                        )
-
-    cherrypy.tree.mount(EthearnalUploadFileView(ert_profile_ctl),
-                        '/api/v1/upload', {'/': {
-                            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-                            'tools.sessions.on': True,
-                            'tools.response_headers.on': True,
-                            'tools.response_headers.headers': [('Content-Type', 'text/plain')],
-                            }
-                         }
-                        )
-
-    cherrypy.tree.mount(EthearnalUploadJsonView(ert_profile_ctl),
-                        '/api/v1/uploadjson', {'/': {
-                            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-                            'tools.sessions.on': True,
-                            'tools.response_headers.on': True,
-                            'tools.response_headers.headers': [('Content-Type', 'text/plain')],
-                            }
-                         }
-                        )
+    # cherrypy.tree.mount(EthearnalUploadFileView(ert_profile_ctl),
+    #                     '/api/v1/upload', {'/': {
+    #                         'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+    #                         'tools.sessions.on': True,
+    #                         'tools.response_headers.on': True,
+    #                         'tools.response_headers.headers': [('Content-Type', 'text/plain')],
+    #                         }
+    #                      }
+    #                     )
+    #
+    # cherrypy.tree.mount(EthearnalUploadJsonView(ert_profile_ctl),
+    #                     '/api/v1/uploadjson', {'/': {
+    #                         'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+    #                         'tools.sessions.on': True,
+    #                         'tools.response_headers.on': True,
+    #                         'tools.response_headers.headers': [('Content-Type', 'text/plain')],
+    #                         }
+    #                      }
+    #                     )
 
     cherrypy.config.update({
         'global': {
             'engine.autoreload.on': False
         }
     })
-    # // WEB DHT NEW API
+    #
 
-    webdht = WebDHTPulse(
-        cherry=cherrypy,
-        dht_pulse=DHTPulse(dht_facade_),
-        mount_point='/api/v1/dhtpulse',
-        mount_it=True,
-    )
-    websys = WebSysGuidApi(
-        cherry=cherrypy,
-        dht_pulse=DHTPulse(dht_facade_),
-        owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
-    )
+    # webdht = WebDHTPulse(
+    #     cherry=cherrypy,
+    #     dht_pulse=DHTPulse(dht_facade_),
+    #     mount_point='/api/v1/dhtpulse',
+    #     mount_it=True,
+    # )
+    # websys = WebSysGuidApi(
+    #     cherry=cherrypy,
+    #     dht_pulse=DHTPulse(dht_facade_),
+    #     owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    # )
+    #
+    # webself = WebSelfPredicateApi(
+    #     cherry=cherrypy,
+    #     dht_pulse=DHTPulse(dht_facade_),
+    #     owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex),
+    # )
+    # webguid = WebGuidPredicateApi(
+    #     cherry=cherrypy,
+    #     dht_pulse=DHTPulse(dht_facade_),
+    # )
+    #
+    # knownguids = WebDHTKnownGuids(
+    #     cherry=cherrypy,
+    #     dhtf=dht_facade_,
+    #     mount_point='/api/v1/dht/guids'
+    # )
 
-    webself = WebSelfPredicateApi(
-        cherry=cherrypy,
-        dht_pulse=DHTPulse(dht_facade_),
-        owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex),
-    )
-    webguid = WebGuidPredicateApi(
-        cherry=cherrypy,
-        dht_pulse=DHTPulse(dht_facade_),
-    )
+
+
+    # from webdht.wdht_ertapi import DhtGigsWebAPI
+
+    # dht_gigs = DhtGigsWebAPI(
+    #     cherry=cherrypy,
+    #     dhf=dht_facade_,
+    #     me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    # )
 
     knownguids = WebDHTKnownGuids(
         cherry=cherrypy,
@@ -249,8 +265,19 @@ def main_http(http_webdir: str = config.http_webdir,
         mount_point='/api/v1/dht/guids'
     )
 
-    from webdht.wdht_ertapi import DhtGigsWebAPI, WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
-    dht_gigs = DhtGigsWebAPI(
+    dht_get_hk = DhtGetByHkeyWebAPI(
+        cherry=cherrypy,
+        dhf=dht_facade_,
+    )
+
+
+    dht_gigs_hk = DhtGigsHkeysWebAPI(
+        cherry=cherrypy,
+        dhf=dht_facade_,
+        me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    )
+
+    dht_portfolios_hk = DhtPortfoliosWebAPI(
         cherry=cherrypy,
         dhf=dht_facade_,
         me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
@@ -275,15 +302,12 @@ def main_http(http_webdir: str = config.http_webdir,
     # WebSelfPredicateApi
     cherrypy.engine.start()
 
-    print('STATIC FILES DIR:', ert_profile_ctl.files_dir)
     print('WEBUI DIR:', http_webdir)
     print('PROFILE DIR:', ert_profile_ctl.data_dir)
 
     cherrypy.engine.exit = on_hook(target=tear_down_udp,
                                    target_args=(dht_,),
                                    target_kwargs={})(cherrypy.engine.exit)
-
-
 
     if not interactive:
         cherrypy.engine.block()
@@ -295,12 +319,12 @@ def main_http(http_webdir: str = config.http_webdir,
             pass
 
 
-def punch_dht_udp_hole(port, attempts=3):
+def punch_dht_udp_hole(port, attempts=3, proto='UDP'):
     punch_hole_failed = True
     for i in range(attempts):
         print('\n\n\n UPnP try firewall punch hole')
         try:
-            if upnp.punch_port(port, port, proto='UDP'):
+            if upnp.punch_port(port, port, proto=proto):
                 punch_hole_failed = False
                 break
             else:
@@ -327,7 +351,6 @@ if __name__ == '__main__':
     seed_port = None
     no_upnp = args.no_upnp_attempts
 
-
     boot_cdn_host, boot_cdn_port = args.cdn_bootstrap_host_port.split(':')
 
     if args.udp_seed_host_port:
@@ -344,7 +367,7 @@ if __name__ == '__main__':
     dl = None
 
     try:
-        ert_profile_ctl, ert_profile_view = main_profile(
+        ert_profile_ctl = main_profile(
             http_webdir=http_webdir,
             files_dir_name=config.static_files,
             cdn_host=boot_cdn_host,
@@ -366,9 +389,6 @@ if __name__ == '__main__':
         local_ip = upnp.get_my_ip()
         print('UDP_PORT', udp_port)
         print('LOCAL IP', local_ip)
-        # messup with lan and wan
-        # if local_ip == '127.0.0.1' or '192.168' in local_ip:
-        #     ert.my_wan_ip = local_ip
         if not no_upnp:
             if local_ip != ert.my_wan_ip:
                 if not punch_dht_udp_hole(udp_port):
@@ -397,10 +417,10 @@ if __name__ == '__main__':
                       socket_host=socket_host,
                       socket_port=socket_port,
                       ert_profile_ctl=ert_profile_ctl,
-                      ert_profile_view=ert_profile_view,
+                      # ert_profile_view=ert_profile_view,
                       dht_=dht,
                       interactive=args.interactive_shell,
-                      dht_facade_= d
+                      dht_facade_=d
                       )
         else:
             from IPython import embed

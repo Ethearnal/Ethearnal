@@ -10,7 +10,7 @@ class OwnPulse(object):
         self.owner = owner
 
     def push(self, k, v):
-        self.dhf.push(k, v)
+        return self.dhf.push(k, v)
 
     def pull(self, k):
         item = self.dhf.pull_local(k)
@@ -27,7 +27,7 @@ class OwnPulse(object):
 
         guid, sign, val = t
         rev, val_d = decode_bson_val(val)
-        print('VAL D', val_d)
+        # print('VAL D', val_d)
         return val_d
 
 
@@ -71,11 +71,13 @@ class DLItem(object):
                  key,
                  value,
                  prev_key,
-                 next_key):
+                 next_key,
+                 hk=None):
         self.key = key
         self.value = value
         self.prev_key = prev_key
         self.next_key = next_key
+        self.hk = hk
 
     def to_dict(self):
         return {
@@ -83,6 +85,7 @@ class DLItem(object):
             'value': self.value,
             'next_key': self.next_key,
             'prev_key': self.prev_key,
+            'hk': self.hk
         }
 
 
@@ -96,6 +99,7 @@ class DLItemDict(object):
                  collection_name: str):
         self.pulse = pulse
         self.collection_name = collection_name
+        self._hk = None
 
     def set_meta(self, meta_item: DLMetaItem):
         self.pulse.push(meta_item.collection_name, meta_item.to_dict())
@@ -112,13 +116,18 @@ class DLItemDict(object):
         if not d_val:
             return None
         item_dl = DLFromDict(d_val)
+        item_dl.hk = self.pulse.dhf.last_pulled_hk_hex
         return item_dl
+
+    @property
+    def last_set_hkey(self):
+        return self._hk
 
     def __setitem__(self, key, value: DLItem):
         if key == self.collection_name:
             raise ValueError('DLItemDict can not use collection name as a key')
         dict_value = value.to_dict()
-        self.pulse.push(key, dict_value)
+        self._hk = self.pulse.push(key, dict_value)
 
     def __getitem__(self, key) -> DLItem:
         return self.get(key)
@@ -142,18 +151,22 @@ class DList(object):
         self.dlitem_dict.set_meta(meta_item)
 
     def insert(self, key, value):
+        o_item_hk = None
         if not self.last_key:
             self.first_key = key
             self.last_key = key
             o_item = DLItem(key, value, next_key=None, prev_key=None)
             self.dlitem_dict.__setitem__(key, o_item)
+            o_item_hk = self.dlitem_dict.last_set_hkey
             self.update_meta_item()
+
         else:
             o_item = self.dlitem_dict.get(key)
             if o_item:
                 # update
                 o_item.value = value
                 self.dlitem_dict.__setitem__(o_item.key, o_item)
+                o_item_hk = self.dlitem_dict.last_set_hkey
             else:
                 # insert
                 o_last_item = self.dlitem_dict.get(self.last_key)
@@ -164,7 +177,9 @@ class DList(object):
                 o_item.prev_key = o_last_item.key
                 o_item.next_key = None
                 self.dlitem_dict.__setitem__(o_item.key, o_item)
+                o_item_hk = self.dlitem_dict.last_set_hkey
                 self.update_meta_item()
+        return o_item_hk
 
     def iter_items(self):
         if self.first_key:
@@ -178,6 +193,10 @@ class DList(object):
                     break
         else:
             pass
+
+    def iter_hk(self):
+        for item in self.iter_items():
+            yield item.hk
 
     def iter_keys(self):
         for item in self.iter_items():

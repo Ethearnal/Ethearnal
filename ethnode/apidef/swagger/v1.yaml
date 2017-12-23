@@ -8,6 +8,58 @@ basePath: "/api/v1/"
 schemes:
 - "http"
 paths:
+  /dht/portfolios/:
+    get:
+      tags:
+      - "DHT Portfolios"
+      summary: "Gigs Listings by owner (if not provide own gigs)"
+      description: "Post and retrieve self or foreign Portfolio"
+      operationId: "getPortfolios"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "owner_guid"
+        in: "query"
+        description: "Portfolios"
+        required: false
+        type: "string"
+        maxLength: 64
+        minLength: 64
+      responses:
+        200:
+          description: "retrieve Gigs listing via DHT"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Portfolio"
+        400:
+          description: "bad input parameter"
+    post:
+      tags:
+      - "DHT Portfolios"
+      summary: "Insert a Portfolio into a dht virtual collection"
+      description: "Insert a Portfolio into a dht virtual collection"
+      operationId: "insertPortfolio"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "gigItem"
+        description: "Portfolios item to add"
+        required: false
+        schema:
+          $ref: "#/definitions/Portfolio"
+      responses:
+        201:
+          description: "item created"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "an existing item already exists"
+
+
   /dht/gigs/:
     get:
       tags:
@@ -20,7 +72,7 @@ paths:
       parameters:
       - name: "owner_guid"
         in: "query"
-        description: "pass an optional search string for looking up inventory"
+        description: "Gigs"
         required: false
         type: "string"
         maxLength: 64
@@ -58,10 +110,34 @@ paths:
           description: "invalid input, object invalid"
         409:
           description: "an existing item already exists"
+  /dht/hkey/:
+    get:
+      tags:
+      - "DHT HKey"
+      summary: "Get value from hash key"
+      description: "dht"
+      operationId: "dhthkey"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "hkey"
+        in: "query"
+        description: "Hex hash id"
+        required: true
+        type: "string"
+        maxLength: 64
+        minLength: 64
+      responses:
+        200:
+          description: "retrieve DHT value"
+          schema:
+            type: "object"
+        400:
+          description: "bad input parameter"
   /dht/guids:
     get:
       tags:
-      - "DHT Guids"
+      - "DHT Network"
       summary: "Listing of known profile identities GUIDS"
       description: "Known identities with pubkeys"
       operationId: "dhtGuids"
@@ -79,7 +155,7 @@ paths:
   /dht/ip4/:
     get:
       tags:
-      - "DHT Guids"
+      - "DHT Network"
       summary: "Listing of DHT UDP peers"
       description: "Last known peers in dht"
       operationId: "dhtIP4Peers"
@@ -96,7 +172,7 @@ paths:
   /dht/node/:
     get:
       tags:
-      - "DHT Guids"
+      - "DHT Network"
       summary: "Infromation about node"
       description: "Information about node"
       operationId: "dhtNode"
@@ -110,6 +186,7 @@ paths:
             type: "object"
         400:
           description: "bad input parameter"
+
   /dht/profile:
     get:
       tags:
@@ -165,7 +242,8 @@ paths:
         203:
           description: "Updated"
         400:
-          description: "Someting wrong"
+          description: "something wrong"
+
 definitions:
   GeneralDomainOfExpertise:
     type: "string"
@@ -288,3 +366,31 @@ definitions:
       description: "description"
       title: "title"
       big_avatar_image_hash: "big_avatar_image_hash"
+  Portfolio:
+    type: "object"
+    required:
+    - "description"
+    - "title"
+    properties:
+      title:
+        type: "string"
+        minLength: 32
+        maxLength: 64
+      description:
+        type: "string"
+        minLength: 32
+        maxLength: 160
+      owner_guid:
+        type: "string"
+        maxLength: 64
+      thumbnail_image_hash:
+        type: "string"
+        minLength: 64
+        maxLength: 64
+      original_image_hash:
+        type: "string"
+        minLength: 64
+        maxLength: 64
+    example:
+      description: "Example Portfolio Description"
+      title: "Test Portfolio Title"
