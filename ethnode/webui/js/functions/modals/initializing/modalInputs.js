@@ -27,7 +27,7 @@ function loadInputsText(form, div) {
         // $('#gigModal').modal('hide');
 
         $.ajax({
-            url: "/api/v1/my/gig/" + $gigID,
+            url: "/api/v1/dht/gigs/" + $gigID,
             type: "GET",
             processData: false,
             success: function(gigData) {

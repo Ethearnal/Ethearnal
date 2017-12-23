@@ -6,10 +6,9 @@ function loadGigs() {
         success: function(data) {
             $data = JSON.parse(data);
 
-
-            $(data).each(function(key, value) {
-                console.log(key);
-            })
+            // $(data).each(function(key, value) {
+            //     console.log(key);
+            // })
 
             // $data2 = JSON.stringify($data[0]);
 
