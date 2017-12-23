@@ -243,6 +243,47 @@ paths:
           description: "Updated"
         400:
           description: "Someting wrong"
+  /cdn/resource:
+    get:
+      tags:
+      - "CDN"
+      summary: "get cdn resource"
+      description: "Post and retrieve self or foreign Portfolio"
+      operationId: "getResource"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "hkey"
+        in: "query"
+        description: "retrieve resource by hkey"
+        required: true
+        type: "string"
+        maxLength: 64
+        minLength: 64
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "err"
+    post:
+      tags:
+      - "CDN"
+      summary: Uploads a file.
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: ufile
+          type: file
+          description: The file to upload.
+      responses:
+        201:
+          description: "object created"
+          schema:
+            type: "string"
+            maxLength: 64
+            minLength: 64
+
 definitions:
   GeneralDomainOfExpertise:
     type: "string"

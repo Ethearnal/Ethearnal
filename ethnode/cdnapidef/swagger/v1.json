@@ -1,0 +1,329 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Ertnode API",
+    "version" : "1",
+    "title" : "ErtAPI"
+  },
+
+  "basePath" : "/api/v1/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/dht/gigs/" : {
+      "get" : {
+        "tags" : [ "DHT Gigs" ],
+        "summary" : "Gigs Listings by owner (if not provide own gigs)",
+        "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "operationId" : "ownedGigs",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "owner_guid",
+          "in" : "query",
+          "description" : "pass an optional search string for looking up inventory",
+          "required" : false,
+          "type" : "string",
+          "maxLength" : 64,
+          "minLength" : 64
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "retrieve Gigs listing via DHT",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Gig"
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "DHT Gigs" ],
+        "summary" : "Insert a Gig into a dht virtual collection",
+        "description" : "Insert a Gig into a dht virtual collection",
+        "operationId" : "insertGig",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "gigItem",
+          "description" : "Gig item to add",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Gig"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "item created"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "409" : {
+            "description" : "an existing item already exists"
+          }
+        }
+      }
+    },
+    "/dht/guids" : {
+      "get" : {
+        "tags" : [ "DHT Guids" ],
+        "summary" : "Listing of known profile identities ( those with with known pubkey )",
+        "description" : "known identities with pubkeys",
+        "operationId" : "dhtGuids",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "owner_guid",
+          "in" : "query",
+          "description" : "pass an optional search string for looking up inventory",
+          "required" : false,
+          "type" : "string",
+          "maxLength" : 64,
+          "minLength" : 64
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "retrieve GUIDS listing from local PKI",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Gig"
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/dht/ip4/" : {
+      "get" : {
+        "tags" : [ "DHT Guids" ],
+        "summary" : "Listing of DHT UDP peers",
+        "description" : "last known peers in dht",
+        "operationId" : "dhtIP4Peers",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "retrieve Gigs listing via DHT",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Gig"
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      }
+    },
+    "/dht/profile" : {
+      "get" : {
+        "tags" : [ "DHT Profile" ],
+        "summary" : "get profile data",
+        "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "operationId" : "dhtProfile",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "owner_guid",
+          "in" : "query",
+          "description" : "pass an optional search string for looking up inventory",
+          "required" : false,
+          "type" : "string",
+          "maxLength" : 64,
+          "minLength" : 64
+        } ,
+           {
+          "name" : "profile_key",
+          "in" : "query",
+          "description" : "pass an optional search string for looking up inventory",
+          "required" : false,
+          "type" : "string",
+          "maxLength" : 64,
+          "minLength" : 64
+        }
+
+
+        ],
+        "responses" : {
+          "200" : {
+            "description" : "retrieve Profile data"
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "DHT Profile" ],
+        "summary" : "update profile",
+        "description" : "update profile",
+        "operationId" : "updateProfile",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "inventoryItem",
+          "description" : "Inventory item to add",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Profile"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "item created"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "409" : {
+            "description" : "an existing item already exists"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "GeneralDomainOfExpertise" : {
+      "type" : "string",
+      "enum" : [ "MARKETING", "SOFTWAREDEV", "FINANCEACC", "MUSICAUDIO", "GRAPHICDES", "VIDEOANIM", "VR3DMODEL", "WRITNGTEXT", "CONSULTING" ]
+    },
+    "Gig" : {
+      "type" : "object",
+      "required" : [ "description", "general_domain_of_expertise", "price", "required_ert", "title" ],
+      "properties" : {
+        "title" : {
+          "type" : "string",
+          "minLength" : 32,
+          "maxLength" : 64
+        },
+        "price" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "required_ert" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "expire_date" : {
+          "type" : "string",
+          "format" : "int32",
+          "example" : "2016-08-29T09:12:33.001Z"
+        },
+        "description" : {
+          "type" : "string",
+          "minLength" : 32,
+          "maxLength" : 160
+        },
+        "owner_guid" : {
+          "type" : "string",
+          "maxLength" : 64
+        },
+        "thumbnail_image_hash" : {
+          "type" : "string",
+          "minLength" : 64,
+          "maxLength" : 64
+        },
+        "related_resource_collection_name" : {
+          "type" : "string",
+          "minLength" : 64,
+          "maxLength" : 64
+        },
+        "related_document_collection_name" : {
+          "type" : "string",
+          "minLength" : 64,
+          "maxLength" : 64
+        },
+        "general_domain_of_expertise" : {
+          "$ref" : "#/definitions/GeneralDomainOfExpertise"
+        }
+      },
+      "example" : {
+        "related_document_collection_name" : "related_document_collection_name",
+        "expire_date" : "2016-08-29T09:12:33.001Z",
+        "general_domain_of_expertise" : { },
+        "price" : 0.8008281904610115,
+        "required_ert" : 6.027456183070403,
+        "owner_guid" : "owner_guid",
+        "thumbnail_image_hash" : "thumbnail_image_hash",
+        "related_resource_collection_name" : "related_resource_collection_name",
+        "description" : "description",
+        "title" : "title"
+      }
+    },
+    "Profile" : {
+      "type" : "object",
+      "required" : [ "description", "general_domain_of_expertise", "names", "nick", "skills", "title" ],
+      "properties" : {
+        "names" : {
+          "type" : "string",
+          "minLength" : 3,
+          "maxLength" : 128
+        },
+        "nick" : {
+          "type" : "string",
+          "minLength" : 3,
+          "maxLength" : 32
+        },
+        "title" : {
+          "type" : "string",
+          "minLength" : 3,
+          "maxLength" : 128
+        },
+        "ert_amount" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "description" : {
+          "type" : "string",
+          "minLength" : 32,
+          "maxLength" : 160
+        },
+        "owner_guid" : {
+          "type" : "string",
+          "maxLength" : 64
+        },
+        "thumbnail_avatar_image_hash" : {
+          "type" : "string",
+          "minLength" : 64,
+          "maxLength" : 64
+        },
+        "big_avatar_image_hash" : {
+          "type" : "string",
+          "minLength" : 64,
+          "maxLength" : 64
+        },
+        "general_domain_of_expertise" : {
+          "$ref" : "#/definitions/GeneralDomainOfExpertise"
+        },
+        "skills" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "maxLength" : 32
+          }
+        }
+      },
+      "example" : {
+        "nick" : "nick",
+        "skills" : [ "skills", "skills" ],
+        "names" : "names",
+        "thumbnail_avatar_image_hash" : "thumbnail_avatar_image_hash",
+        "ert_amount" : 0.8008281904610115,
+        "general_domain_of_expertise" : { },
+        "owner_guid" : "owner_guid",
+        "description" : "description",
+        "title" : "title",
+        "big_avatar_image_hash" : "big_avatar_image_hash"
+      }
+    }
+  }
+}
