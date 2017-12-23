@@ -26,7 +26,7 @@ function collectGigData(form) {
     if(file != undefined) {
         if(!!file.type.match(/image.*/)) {
             $.ajax({
-                url: "/api/v1/my/img",
+                url: "/api/v1/cdn/resource",
                 type: "POST",
                 data: file,
                 contentType: 'image/jpeg',
@@ -64,7 +64,6 @@ function collectGigData(form) {
                         contentType: 'application/json; charset=utf-8',
                         processData: false,
                         success: function(gigID){
-                            createGigToProfile(gigID);
                             createGig(gigID);
                         }
                     });
@@ -109,7 +108,6 @@ function collectGigData(form) {
                 contentType: 'application/json; charset=utf-8',
                 processData: false,
                 success: function(gigID){
-                    createGigToProfile(gigID);
                     createGig(gigID);
                 }
             });

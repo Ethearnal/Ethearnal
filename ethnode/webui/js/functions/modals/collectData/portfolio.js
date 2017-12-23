@@ -15,7 +15,7 @@ function collectPortfolioData(form) {
     if(file != undefined) {
         if(!!file.type.match(/image.*/)) {
             $.ajax({
-                url: "/api/v1/my/img",
+                url: "/api/v1/cdn/resource",
                 type: "POST",
                 data: file,
                 contentType: 'image/jpeg',
@@ -28,8 +28,6 @@ function collectPortfolioData(form) {
                         description: $description,
                         tags: $tags
                     }
-
-                    console.log($data);
 
                     createPortfolio($data);
                 }
