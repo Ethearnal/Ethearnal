@@ -4,7 +4,7 @@ info:
   description: "Ertnode API"
   version: "1"
   title: "ErtCDN"
-basePath: "/api/v1/"
+basePath: "/api/cdn/v1/"
 schemes:
 - "http"
 paths:
