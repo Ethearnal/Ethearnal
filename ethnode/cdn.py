@@ -25,7 +25,7 @@ site_conf = {
 
 }
 cherrypy.response.headers['Cache-Control'] = 'public, max-age=5'
-parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
+parser = argparse.ArgumentParser(description='Ethearnal p2p cdn node')
 
 
 parser.add_argument('-l', '--http_host_port',
@@ -125,12 +125,9 @@ if not args.no_upnp_attempts:
     if local_ip != ert.my_wan_ip:
         if not punch_dht_udp_hole(udp_port):
             print('\n\n\n\ PUNCH UDP HOLE FAILED \n\n\n')
-        if not punch_dht_udp_hole(port, proto='TCP'):
-            print('\n\n\n\ PUNCH HTTP HOLE FAILED \n\n\n')
     ert.my_lan_ip = local_ip
 
 
-cdn = WebCDN(store_dir=cdn_files_dir, cherry=cherrypy)
 stor = store_handler.DHTStoreHandlerOne(
     dht_sqlite_file=ert.dht_fb_fn,
     pubkeys_sqlite_file=ert.dht_ref_pubkeys_fn
@@ -144,7 +141,6 @@ try:
 except:
     pass
 
-seeds = [(config.udp_host, config.udp_port)]
 if args.udp_seed_host_port:
     seed_host, seed_port = args.udp_seed_host_port.split(':')
     seed_port = int(seed_port)
@@ -157,6 +153,9 @@ dht = DHT(host=udp_host, port=int(udp_port), guid=ert.rsa_guid_int, seeds=seeds,
 
 dhf = DHTFacade(dht, ert)
 d = dhf
+
+
+cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy)
 
 knownguids = WebDHTKnownGuids(
     cherry=cherrypy,
@@ -200,6 +199,11 @@ dht_node = WebDHTAboutNode(
 cherrypy.engine.exit = on_hook(target=tear_down_udp,
                                target_args=(dht,),
                                target_kwargs={})(cherrypy.engine.exit)
+
+ip = '127.0.0.1'
+if ert.my_lan_ip:
+    ip = ert.my_lan_ip
+ert.cdn_service_http_url = 'http://%s:%s' % (ip, port)
 
 if dht.server_thread.is_alive():
     print('UDP server thread is alive')
