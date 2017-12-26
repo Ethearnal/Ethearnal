@@ -128,6 +128,7 @@ if not args.no_upnp_attempts:
     ert.my_lan_ip = local_ip
 
 
+
 stor = store_handler.DHTStoreHandlerOne(
     dht_sqlite_file=ert.dht_fb_fn,
     pubkeys_sqlite_file=ert.dht_ref_pubkeys_fn
@@ -195,6 +196,12 @@ dht_node = WebDHTAboutNode(
     dhf=dhf,
 )
 
+
+def cors():
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+
+
+cherrypy.tools.CORS = cherrypy.Tool('before_handler', cors)
 
 cherrypy.engine.exit = on_hook(target=tear_down_udp,
                                target_args=(dht,),
