@@ -21,59 +21,63 @@ function collectGigData(form) {
 
     var avatarImage = getBase64Image(document.getElementById("avatar-img"));
     var input = document.getElementById($imgInputID);
+    // var data = new FormData(document.getElementById($imgInputID));
     file = input.files[0];
+    console.log(file);
+
+    input.append('ufile', file);
 
     if(file != undefined) {
-        if(!!file.type.match(/image.*/)) {
-            $.ajax({
-                url: "http://localhost:5678/api/cdn/v1/resource",
-                type: "POST",
-                data: file,
-                contentType: 'image/jpeg',
-                processData: false,
-                success: function(data){
+        // if(!!file.type.match(/image.*/)) {
+        $.ajax({
+            url: "http://localhost:5678/api/cdn/v1/resource",
+            type: "POST",
+            data: file,
+            processData: false,
+            contentType: false,
+            success: function(data){
 
-                    // Deletes GIG if not EDIT modal
-                    if( $content.closest('.modal-box').hasClass('edit') ) {
-                        $gigID = $currentlyClosestLEdiv.attr('gigID');
-                        deleteGig($gigID);
-                    }
-
-                    // AND CREATE A NEW ONE
-                    $data = {
-                        imageHash: data,
-                        ownerAvatar: avatarImage,
-                        ownerReputation: $reputation,
-                        ownerName: $ownerName,
-                        categoryName: $categoryName,
-                        title: $title,
-                        category: $category,
-                        reputationCost: $reputationCost,
-                        description: $description,
-                        price: $price,
-                        tags: $tags,
-                        date: [
-                            { expire: $dateExpire, expiresIn: $expireDateDifference }
-                        ]
-                    }
-
-                    console.log($data);
-
-                    $.ajax({
-                        url: "/api/v1/dht/gigs/",
-                        type: "POST",
-                        data: JSON.stringify($data),
-                        contentType: 'application/json; charset=utf-8',
-                        processData: false,
-                        success: function(gigID){
-                            createGig(gigID);
-                        }
-                    });
+                // Deletes GIG if not EDIT modal
+                if( $content.closest('.modal-box').hasClass('edit') ) {
+                    $gigID = $currentlyClosestLEdiv.attr('gigID');
+                    deleteGig($gigID);
                 }
-            });
-        } else {
-            console.log('Not a valid image!');
-        }
+
+                // AND CREATE A NEW ONE
+                $data = {
+                    imageHash: data,
+                    ownerAvatar: avatarImage,
+                    ownerReputation: $reputation,
+                    ownerName: $ownerName,
+                    categoryName: $categoryName,
+                    title: $title,
+                    category: $category,
+                    reputationCost: $reputationCost,
+                    description: $description,
+                    price: $price,
+                    tags: $tags,
+                    date: [
+                        { expire: $dateExpire, expiresIn: $expireDateDifference }
+                    ]
+                }
+
+                console.log($data);
+
+                $.ajax({
+                    url: "/api/v1/dht/gigs/",
+                    type: "POST",
+                    data: JSON.stringify($data),
+                    contentType: 'application/json; charset=utf-8',
+                    processData: false,
+                    success: function(gigID){
+                        createGig(gigID);
+                    }
+                });
+            }
+        });
+        // } else {
+        //     console.log('Not a valid image!');
+        // }
 
     // IF YOU EDIT GIG
     } else if (file == undefined) {

@@ -84,7 +84,7 @@ function loadProfile(profileID) {
 
 
             // Adding profile pictures to the page.
-            // $('.profile-image img').attr('src', '/api/v1/profile/?q=avatar');
+            $('.profile-image img').attr('src', 'http://localhost:5678/api/cdn/v1/resource?hkey=be1c7fdd0d8603e787ca989b563741fac11334bbd76bc74c6576dd6e71f79d9c');
             $('.profile-image img').attr('alt', $firstname + ' ' + $lastname);
             // $('li.profile img.profile-picture').attr('src', '/api/v1/profile/?q=avatar');
             $('li.profile img.profile-picture').attr('alt', $firstname + ' ' + $lastname);

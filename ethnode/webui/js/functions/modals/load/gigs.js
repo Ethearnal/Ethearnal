@@ -42,10 +42,16 @@ function loadGigsToProfile() {
             $profileID = 'c5086e8bbf2fdd3a814e6aef565bb94f233ed14d862774cbccec2f196e347331';
 
             $($data).each(function(i, gig) {
-
                 $(gig[$profileID]).each(function(x, gigID) {
-                    console.log(gigID);
-                    createGig(gigID);
+                    $.ajax({
+                        url: "/api/v1/dht/hkey/?hkey=" + gigID,
+                        type: "GET",
+                        processData: false,
+                        success: function(gigData) {
+                            $data = JSON.parse(gigData);
+                            createGigToProfile($data, gigID);
+                        }
+                    });
                 })
             })
         }

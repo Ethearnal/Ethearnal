@@ -15,7 +15,7 @@ function collectPortfolioData(form) {
     if(file != undefined) {
         if(!!file.type.match(/image.*/)) {
             $.ajax({
-                url: "/api/v1/cdn/resource",
+                url: "http://localhost:5678/api/cdn/v1/resource",
                 type: "POST",
                 data: file,
                 contentType: 'image/jpeg',
