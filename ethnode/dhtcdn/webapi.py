@@ -300,6 +300,7 @@ class WebCDN(object):
                 },
                 '/api/ui': {
                     'tools.staticdir.on': True,
+                    'tools.CORS.on': True,
                     'tools.staticdir.dir': 'cdnapidef/swagger',
                     'tools.staticdir.index': 'index.html',
                     'tools.staticdir.root': os.path.abspath(os.getcwd())
