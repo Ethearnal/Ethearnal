@@ -125,10 +125,7 @@ if not args.no_upnp_attempts:
     if local_ip != ert.my_wan_ip:
         if not punch_dht_udp_hole(udp_port):
             print('\n\n\n\ PUNCH UDP HOLE FAILED \n\n\n')
-        if not punch_dht_udp_hole(port, proto='TCP'):
-            print('\n\n\n\ PUNCH HTTP HOLE FAILED \n\n\n')
     ert.my_lan_ip = local_ip
-
 
 
 stor = store_handler.DHTStoreHandlerOne(

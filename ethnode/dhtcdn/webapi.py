@@ -140,9 +140,26 @@ class WebCDN(object):
                            'hk_hex': hk_hex,
                            }, hk_hex=hk_hex, remote_only=True)
 
-    def on_get(self, hk_hex):
-        v = self.dhf.pull_remote(hk_hex=hk_hex)
-        print('PULL', v)
+    def try_get_meta(self, hkey):
+        print('TRY GET META:', hkey)
+        try:
+            t = self.dhf.pull_remote(key='', hk_hex=hkey)
+            v = bson.loads(t[-1])
+            if 'e' in v:
+                l = v['e']
+                d = l[1]
+                if 'cdn_url' in d:
+                    bts = self.get_remote_meta_data(cdn_url=d['cdn_url'], hkey=hkey)
+                    meta_dict = json.loads(bts.decode())
+                    self.set_local_meta_data(hkey, data=meta_dict)
+                    print('METADATA SAVED')
+                    # return meta_dict
+                    return d['cdn_url']
+
+            # print('ON GET ', d)
+        except Exception as e:
+            print('e e e ', str(e))
+        # print("T", t, len(t))
 
     def GET(self, hkey, meta=None):
         cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
@@ -152,14 +169,16 @@ class WebCDN(object):
             f_name_meta = '%s.%s' % (hkey, 'json')
             upload_file_meta = os.path.join(self.store_dir, f_name_meta)
         except:
-            self.cherry.response.status = 408
+            self.cherry.response.status = 400
             return b'{"error":"can\'t construct meta_file"}'
         fext = None
+        cdn_url_dht = None
         try:
             if not os.path.isfile(upload_file_meta):
                 print('META-FILE NOT FOUND')
-                self.cherry.response.status = 408
-                return b'{"error":"integrity error with metadata not found"}'
+                self.cherry.response.status = 400
+                # return b'{"error":"integrity error with metadata not found"}'
+                cdn_url_dht = self.try_get_meta(hkey=hkey)
 
             with open(upload_file_meta, 'rb') as u_f_m:
                 data = u_f_m.read()
@@ -173,17 +192,15 @@ class WebCDN(object):
                 ct = data_d["Content-Type"].strip()
                 cherrypy.response.headers["Content-Type"] = ct
                 if hkey != hk_meta or not fext or not ct:
-                    self.cherry.response.status = 408
-                    return b'{"error":"integrity error with metadata"}'
+                    return b'{"error":"integrity error with hkey diff metadata"}'
         except Exception as e:
-            self.cherry.response.status = 408
-            msg = '{"error":"general error with metadata %s"}' % str(e)
+            msg = '{"error":"exc %s}' % str(e)
+            self.cherry.response.status = 400
             return msg.encode()
-        # if 'range' in cherrypy.request.headers:
-        #     print(cherrypy.request.headers['range'], 'CT RANGE')
-        bts = b''
+
+        # bts = b''
         if not fext:
-            self.cherry.response.status = 408
+            self.cherry.response.status = 400
             return b'{"error":"unknown file extension"}'
 
         try:
@@ -194,10 +211,23 @@ class WebCDN(object):
             msg = '{"error":"general error with getting file name %s"}' % str(e)
             return msg.encode()
 
+        if not cdn_url_dht:
+            cdn_url_dht = self.try_get_meta(hkey=hkey)
+        print('CDN_URL_DHT', cdn_url_dht)
         if not os.path.isfile(upload_file):
-            self.cherry.response.status = 409
-            msg = '{"error":"% s not found" % s}' % upload_file
-            return msg.encode()
+            if cdn_url_dht:
+                try:
+                    bts = self.get_remote_data(cdn_url=cdn_url_dht, hkey=hkey)
+                    print('BTS,', len(bts))
+                    self.set_local_data(hkey=hkey, fext=fext, bts=bts)
+                except Exception as e:
+                    self.cherry.response.status = 400
+                    msg = '{"error":"on get remote set local data: %s"}' % str(e)
+                    return msg.encode()
+            else:
+                self.cherry.response.status = 400
+                msg = '{"error":"% s not found"}' % upload_file
+                return msg.encode()
 
         size = 0
         uf = io.BytesIO()
@@ -215,7 +245,7 @@ class WebCDN(object):
             self.cherry.response.status = 200
             return bts
         except Exception as e:
-            self.cherry.response.status = 409
+            self.cherry.response.status = 400
             err = '{"error":"%s"}' % str(e)
             return err.encode()
 
