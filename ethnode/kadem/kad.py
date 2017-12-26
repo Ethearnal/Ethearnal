@@ -42,6 +42,7 @@ class DHTFacade(object):
         self.dht.storage.dhf = self
         self._last_pushed_hk_hex = None
         self._last_pulled_hk_hex = None
+        self.cdn = None
 
         # self.dht.storage
 
@@ -92,11 +93,20 @@ class DHTFacade(object):
 
     def push(self, key, value,
              revision=cdx.DEFAULT_REVISION,
-             nearest_nodes=None, local_only=False, remote_only=False):
+             nearest_nodes=None, local_only=False, remote_only=False, hk_hex=None):
         guid = self.bin_guid
-        hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
+        # hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
         ev = cdx.encode_val_bson(value, revision)
         sg = self.ert.rsa_sign(ev)
+
+        if hk_hex:
+            hk = cdx.guid_bts_to_int(cdx.guid_hex_to_bin(hk_hex))
+            self._last_pulled_hk_hex = hk_hex
+        else:
+            hk = cdx.encode_key_hash(key, guid=guid, revision=revision)
+            self._last_pulled_hk_hex = cdx.guid_int_to_hex(hk)
+            # return cdx.guid_int_to_hex(hk)
+
         print('PUSH HK', hk)
 
         if not remote_only:

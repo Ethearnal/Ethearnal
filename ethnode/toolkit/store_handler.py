@@ -47,37 +47,54 @@ class DHTStoreHandlerOne(object):
     def dhf(self, val):
         self._dhf = val
 
-    # def on_push_request_peers(self, data):
-    #     if self.ON_PUSH_REQUEST_PEERS in data:
-    #         print('PUSHING RELAY PEERs')
-    #         print('DATA', data)
-    #         # from time import sleep
-    #         # self.dhf.push_peers()
-    #         # self.dhf.push_relay_peers()
-    #         print('\n\n\n *** ** !!! PUSH SELF HOST \n\n\n')
-
     def on_pushed_ip4_peer(self, data):
         # value = {'ert:boot_to': {'h': host, 'p': port}}
-        print("DATA ASDFASD FAS", data)
+        print("\n\nON PUSHED IP4 PEER DATA:", data)
         if 'ert:boot_to' in data:
             host = data['ert:boot_to']['h']
             port = data['ert:boot_to']['p']
-            print(' + + \n\n + + + -!@#!@#!@#!@# BOOT TO',  host, port)
+            print(' + + \n\nPEER DHT BOOT TO:',  host, port)
             self.dhf.direct_push_pubkey(host, port)
             self.dhf.boot_to(host, port)
-            # self.dhf.direct_push_pubkey(host, port)
+        # on cdn url post update
+        if 'cdn_url' in data and 'hk_hex' in data:
+            if self.dhf.cdn.cdn_url in data['cdn_url']:
+                print('CDN ITSELF')
+                return
+            print('PUSHED RESOURCE ON CDN %s?hkey=%s' % (data['cdn_url'], data['hk_hex']))
+            meta_bts = self.dhf.cdn.get_remote_meta_data(hkey=data['hk_hex'], cdn_url=data['cdn_url'])
+            import json
+            meta_dict = json.loads(meta_bts.decode())
+            try:
+                self.dhf.cdn.set_local_meta_data(hkey=meta_dict['hkey'], data=meta_dict)
+            except Exception as e:
+                print('meta err', e)
+            if 'fext' in meta_dict and self.dhf.cdn:
+                print('SETTING', meta_dict)
+                try:
+                    bts = self.dhf.cdn.get_remote_data(
+                        cdn_url=data['cdn_url'],
+                        hkey=meta_dict['hkey'])
+                    if bts:
+                        self.dhf.cdn.set_local_data(hkey=meta_dict['hkey'],
+                                                    fext=meta_dict['fext'],
+                                                    bts=bts)
+                    else:
+                        print('no BYTES from REMOTE')
+                        raise ValueError('no BYTES from REMOTE')
+                except Exception as e:
+                    raise e
 
     def on_pushed_ip4_ping(self, data):
         # value = {'ert:pong_to': {'h': host, 'p': port}}
-        print("DATA ASDFASD FAS", data)
+        print("ON PUSHED IP4 PING DATA:", data)
         if 'ert:boot_to' in data:
             val = data['ert:boot_to']
             host = val['h']
             port = val['p']
-            print(' + + \n\n + + + -!@#!@#!@#!@# BOOT TO',  host, port)
+            print(' + + \n\nPING DHT BOOT TO',  host, port)
             self.dhf.direct_push_pubkey(host, port)
             self.dhf.boot_to(host, port)
-            # self.dhf.direct_push_pubkey(host, port)
 
     # local push
     def push(self, key, val, signature, guid_owner):
