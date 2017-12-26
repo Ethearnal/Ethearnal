@@ -26,7 +26,7 @@ function collectGigData(form) {
     if(file != undefined) {
         if(!!file.type.match(/image.*/)) {
             $.ajax({
-                url: "/api/v1/cdn/resource",
+                url: "http://localhost:5678/api/cdn/v1/resource",
                 type: "POST",
                 data: file,
                 contentType: 'image/jpeg',
@@ -56,6 +56,8 @@ function collectGigData(form) {
                             { expire: $dateExpire, expiresIn: $expireDateDifference }
                         ]
                     }
+
+                    console.log($data);
 
                     $.ajax({
                         url: "/api/v1/dht/gigs/",

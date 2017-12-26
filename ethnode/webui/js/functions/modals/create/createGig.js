@@ -1,14 +1,14 @@
-function createGig(data) {
-    if (data == undefined) return false;
+function createGig(gigID) {
+    if (gigID == undefined) return false;
 
     $.ajax({
-        url: "api/v1/dht/hkey/?hkey=" + data,
+        url: "/api/v1/dht/hkey/?hkey=" + gigID,
         type: "GET",
         processData: false,
         success: function(gigData) {
             $data = JSON.parse(gigData);
-            createGigBox($data, data);
-            createGigToProfile($data, data);
+            createGigBox($data, gigID);
+            createGigToProfile($data, gigID);
         }
     });
 }

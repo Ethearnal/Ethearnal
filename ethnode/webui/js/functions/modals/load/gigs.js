@@ -32,5 +32,26 @@ function loadGigs() {
     });
 }
 
+function loadGigsToProfile() {
+    $.ajax({
+        type: 'GET',
+        url: '/api/v1/dht/gigs/',
+        dataType: 'text',
+        success: function(data) {
+            $data = JSON.parse(data);
+            $profileID = 'c5086e8bbf2fdd3a814e6aef565bb94f233ed14d862774cbccec2f196e347331';
+
+            $($data).each(function(i, gig) {
+
+                $(gig[$profileID]).each(function(x, gigID) {
+                    console.log(gigID);
+                    createGig(gigID);
+                })
+            })
+        }
+    });
+}
+
 // Initializing function on website load
 loadGigs();
+loadGigsToProfile();
