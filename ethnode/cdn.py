@@ -198,10 +198,20 @@ dht_node = WebDHTAboutNode(
 
 
 def cors():
-    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+  if cherrypy.request.method == 'OPTIONS':
+    # preflign request
+    # see http://www.w3.org/TR/cors/#cross-origin-request-with-preflight-0
+    cherrypy.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
+    cherrypy.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+    cherrypy.response.headers['Access-Control-Allow-Origin'] = '*'
+    # tell CherryPy no avoid normal handler
+    return True
+  else:
+    cherrypy.response.headers['Access-Control-Allow-Origin'] = '*'
 
+cherrypy.tools.cors = cherrypy._cptools.HandlerTool(cors)
 
-cherrypy.tools.CORS = cherrypy.Tool('before_handler', cors)
+# cherrypy.tools.CORS = cherrypy.Tool('before_handler', cors)
 
 cherrypy.engine.exit = on_hook(target=tear_down_udp,
                                target_args=(dht,),
