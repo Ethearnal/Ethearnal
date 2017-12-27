@@ -54,7 +54,7 @@ function collectProfileData(form) {
                         data: JSON.stringify($data),
                         contentType: 'application/json; charset=utf-8',
                         success: function(profileID) {
-                            console.log('success!, profileID: ' + profileID);
+                            console.log('success!');
                         }
                     });
                 }

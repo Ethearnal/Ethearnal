@@ -1,6 +1,5 @@
 function updateProfile(data) {
     $data = data;
-    console.log($data);
     $profile = $('.profile-information');
     $location = $profile.find('.profile-upper p.location');
 
