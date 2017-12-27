@@ -42,7 +42,7 @@ $('body').delegate('.gig', 'click', function(e) {
         var ownerInfo = '<div class="owner-info">' + ownerAvatar + ownerName + ownerReputation + '</div>';
 
         // .image DIV
-        var imageItem = '<div class="item"><img src="/api/v1/my/img/?q='+$data.imageHash+'" /></div>';
+        var imageItem = '<div class="item"><img src="http://localhost:5678/api/cdn/v1/resource?hkey='+$data.imageHash+'" /></div>';
         var buttonPrev = '<div class="button-prev"><i class="material-icons">keyboard_arrow_left</i></div>';
         var buttonNext = '<div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div>';
         var items = '<div class="items">' + imageItem + '</div>';

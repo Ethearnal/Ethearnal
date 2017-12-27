@@ -14,7 +14,7 @@ function createGigToProfile(gigData, gigID) {
 
 
     // image = '<div class="image"><img src="/api/v1/my/img/?q='+$data.imageHash+'" alt="Gig Image" /></div>';
-    image = '<div class="ui fluid image"><div class="ui black ribbon label">'+ $data.categoryName +'</div><div class="image-block"><img src="/api/v1/my/img/?q='+$data.imageHash+'" /></div></div>';
+    image = '<div class="ui fluid image"><div class="ui black ribbon label">'+ $data.categoryName +'</div><div class="image-block"><img src="http://localhost:5678/api/cdn/v1/resource?hkey='+$data.imageHash+'" /></div></div>';
 
     // dropdown button
     var dropdownButton = '<button id="dropdowngig'+ iGig +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button dropdown-gig"><i class="material-icons">more_vert</i></button>';
@@ -23,7 +23,7 @@ function createGigToProfile(gigData, gigID) {
     var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="dropdowngig'+ iGig +'"><li class="mdl-menu__item open-modal" open-modal="#edit-gig">Edit</li><li class="mdl-menu__item delete">Delete</li></ul>';
 
     // Other gig variables [owner-info div]
-    var ownerAvatar = '<img src="data:image/png;base64,'+$data.ownerAvatar+'" alt="Avatar" />';
+    var ownerAvatar = '<img src="'+$data.ownerAvatar+'" alt="Avatar" />';
     var ownerName = '<h5>' + $data.ownerName + '</h5>';
     var ownerReputation = '<h4><i class="material-icons">polymer</i> '+$data.ownerReputation+'</h4>'
     var ownerInfo = '<div class="owner-info">' + ownerAvatar + ownerName + ownerReputation + '</div>';

@@ -84,29 +84,3 @@ function getBase64Image(img) {
   var dataURL = canvas.toDataURL("image/png");
   return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
-
-
-
-
-// Collects PROFILE data.
-function collectProfileData(form) {
-    $form = form;
-
-    $firstname = $form.find('input#first-name').val();
-    $lastname = $form.find('input#last-name').val();
-    $country = $form.find('#country').dropdown('get text');
-    $city = $form.find('input#city').val();
-    $countryClass = $form.find('#country').dropdown('get value');
-    $description = $form.find('textarea#description').val();
-    $hourlyRate = $form.find('input#hourly-rate').val();
-    $title = $form.find('input#title').val();
-
-    $data = {
-        name: [{ first: $firstname, last: $lastname }],
-        location: [{ country: $country, city: $city, countryClass: $countryClass }],
-        description: $description,
-        hourlyRate: $hourlyRate,
-        title: $title
-    }
-    return $data;
-}

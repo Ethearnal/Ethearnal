@@ -1,3 +1,4 @@
+$profileID = null;
 $.ajax({
     url: "/api/v1/dht/node/",
     type: "GET",
@@ -6,6 +7,7 @@ $.ajax({
     success: function(nodeData) {
         $data = JSON.parse(nodeData);
         loadDefaultSettingsToProfile($data.guid);
+        $profileID = $data.guid;
     }
 });
 
@@ -22,10 +24,7 @@ function loadDefaultSettingsToProfile(profileID) {
         "description": "This is my description",
         "skills": [],
         "reputation": 0,
-        "hourlyRate": 0,
-        "profilePicture": "",
-        "workExperience": [],
-        "education": [],
+        "profilePicture": "https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png",
         "languages": []
     }
 
@@ -41,6 +40,7 @@ function loadDefaultSettingsToProfile(profileID) {
     });
 }
 
+$profilePictureURL = null;
 function loadProfile(profileID) {
 
     $.ajax({
@@ -49,6 +49,7 @@ function loadProfile(profileID) {
         dataType: 'text',
         success: function(data) {
             var profile = JSON.parse(data);
+            updateProfile(profile);
 
             $firstname = null; $lastname = null; $position = null; $company = null; $city = null; $country = null; $positionInfo = null; $i = 0;
 
@@ -77,16 +78,15 @@ function loadProfile(profileID) {
                 createLE(language, 'language');
             });
 
-            updateProfile(profile);
-
             // Adding profile reputation .navbar-collapse #alert-navbar
             $('li.asset#alert-navbar a .round-number span').text(profile.reputation);
 
 
             // Adding profile pictures to the page.
-            $('.profile-image img').attr('src', 'http://localhost:5678/api/cdn/v1/resource?hkey=be1c7fdd0d8603e787ca989b563741fac11334bbd76bc74c6576dd6e71f79d9c');
+            $profilePictureURL = profile.profilePicture;
+            $('.profile-image img').attr('src', profile.profilePicture);
             $('.profile-image img').attr('alt', $firstname + ' ' + $lastname);
-            // $('li.profile img.profile-picture').attr('src', '/api/v1/profile/?q=avatar');
+            $('li.profile img.profile-picture').attr('src', profile.profilePicture);
             $('li.profile img.profile-picture').attr('alt', $firstname + ' ' + $lastname);
 
             // Appends each SKILL.

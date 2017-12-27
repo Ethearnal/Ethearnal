@@ -484,6 +484,7 @@ require("js/functions/modals/load/loadGigsOnAjaxSuccess.js") // LOADS GIGS ON AJ
 // COLLECT DATA
 require("js/functions/modals/collectData/gig.js") // COLLECTS GIG DATA
 require("js/functions/modals/collectData/portfolio.js") // COLLECTS PORTFOLIO ELEMENT DATA
+require("js/functions/modals/collectData/profile.js") // COLLECTS PROFILE DATA
 
 
 // MODALS

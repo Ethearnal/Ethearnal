@@ -1,5 +1,6 @@
 function updateProfile(data) {
     $data = data;
+    console.log($data);
     $profile = $('.profile-information');
     $location = $profile.find('.profile-upper p.location');
 
@@ -28,8 +29,11 @@ function updateProfile(data) {
     $location.text($city + ', ' + $country);
     $location.removeAttr('class').addClass('location ' + $countryClass);
 
-    // PROFILE HIRE BUTTON
-    $profile.find('.profile-upper button.hire').text('Hire ($' + $data.hourlyRate + '/hr)');
+    // PROFILE PICTURE
+    $('.profile-image img').attr('src', 'http://localhost:5678/api/cdn/v1/resource?hkey=' + $data.profilePicture);
+    $('.profile-image img').attr('alt', $firstname + ' ' + $lastname);
+    $('li.profile img.profile-picture').attr('src', 'http://localhost:5678/api/cdn/v1/resource?hkey=' + $data.profilePicture);
+    $('li.profile img.profile-picture').attr('alt', $firstname + ' ' + $lastname);
 
     // PROFILE DESCRIPTION
     $profile.find('.profile-description p').text($data.description);

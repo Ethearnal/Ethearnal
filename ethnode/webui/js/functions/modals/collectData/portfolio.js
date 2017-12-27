@@ -9,17 +9,19 @@ function collectPortfolioData(form) {
     $tags = $form.find('.portfolio-tags').dropdown('get value');
 
     var avatarImage = getBase64Image(document.getElementById("avatar-img"));
-    var input = document.getElementById($imgInputID);
-    file = input.files[0];
+    var objFormData = new FormData();
+    var fileObj = document.getElementById($imgInputID).files[0];
 
-    if(file != undefined) {
-        if(!!file.type.match(/image.*/)) {
+    objFormData.append('ufile', fileObj);
+
+    if(fileObj != undefined) {
+        if(!!fileObj.type.match(/image.*/)) {
             $.ajax({
                 url: "http://localhost:5678/api/cdn/v1/resource",
                 type: "POST",
-                data: file,
-                contentType: 'image/jpeg',
+                data: objFormData,
                 processData: false,
+                contentType: false,
                 success: function(data){
 
                     $data = {
@@ -37,7 +39,7 @@ function collectPortfolioData(form) {
         }
 
     // IF YOU EDIT GIG
-    } else if (file == undefined) {
+    } else if (fileObj == undefined) {
         // do nothing
     }
     return;
