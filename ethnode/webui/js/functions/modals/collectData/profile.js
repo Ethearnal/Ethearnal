@@ -10,7 +10,7 @@ function collectProfileData(form) {
     $city = $form.find('input#city').val();
     $countryClass = $form.find('#country').dropdown('get value');
     $description = $form.find('textarea#description').val();
-    $hourlyRate = $form.find('input#hourly-rate').val();
+    // $hourlyRate = $form.find('input#hourly-rate').val();
     $title = $form.find('input#title').val();
 
     var objFormData = new FormData();
@@ -28,33 +28,27 @@ function collectProfileData(form) {
                 contentType: false,
                 success: function(avatarHash){
 
-                    $data = {
-                        name: [
-                            { first: $firstname, last: $lastname }
-                        ],
-                        location: [
-                            { country: $country, city: $city, countryClass: $countryClass }
-                        ],
-                        title: $title,
-                        description: $description,
-                        skills: [],
-                        reputation: 0,
-                        profilePicture: avatarHash,
-                        languages: []
-                    }
+                    $dataName = { first: $firstname, last: $lastname };
+                    $dataLocation = { country: $country, city: $city, countryClass: $countryClass }
+                    $skills = [];
+                    $languages = [];
 
-                    $dataStringify = JSON.stringify($data);
-
-                    updateProfile(JSON.parse($dataStringify));
+                    setProfileValue('name', $dataName);
+                    setProfileValue('location', $dataLocation);
+                    setProfileValue('title', $title);
+                    setProfileValue('description', $description);
+                    setProfileValue('skills', $skills);
+                    setProfileValue('reputation', 0);
+                    setProfileValue('profilePicture', avatarHash);
 
                     $.ajax({
-                        url: "/api/v1/dht/profile?profile_key=" + $profileID,
+                        url: '/api/v1/dht/profile?profile_key=languages',
                         type: "PUT",
                         processData: false,
-                        data: JSON.stringify($data),
+                        data: JSON.stringify($languages),
                         contentType: 'application/json; charset=utf-8',
-                        success: function(profileID) {
-                            console.log('success!');
+                        success: function(success) {
+                            updateProfile();
                         }
                     });
                 }
