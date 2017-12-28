@@ -64,10 +64,12 @@ section.documentation
                         h2
                             font-size: 32px
                             font-weight: 500
-                            line-height: 0.67
+                            line-height: 1
                             color: #5e6977
                             padding-top: 70px
                             margin-bottom: 17px
+                            padding-left: 10px
+                            padding-right: 10px
 
                         h5.profile-information-position
                             font-size: 18px
@@ -111,6 +113,58 @@ section.documentation
 
                                 &:hover, &:focus, &:active
                                     background-color: #ebedf1
+
+
+                        // SKILLS
+                        p.skills-text
+                            text-transform: uppercase
+                            font-size: 12px
+                            color: #5e6977
+                            letter-spacing: 1px
+                            font-weight: 500
+                            text-align: center
+                            margin-top: 26px
+
+                            i
+                                top: 8px
+                                position: relative
+                                cursor: pointer
+                                color: #afb4bb
+
+                                &:hover
+                                    color: #9ea2a9
+
+                        .skills, .languages
+                            margin-top: 18px
+                            padding: 0 15px
+                            transition: all 0.3s ease
+
+                            p
+                                line-height: 24px
+                                border-radius: 4px
+                                border: solid 1px #e1e8ee
+                                padding: 0px 10px
+                                color: #86939e
+                                margin-right: 5px
+                                display: inline-block
+
+                                &:hover,
+                                &:focus,
+                                &:active
+                                    background-color: #e1e8ee
+                                    cursor: pointer
+                                    color: #99a9b6
+
+                                span.experience
+                                    border: none
+                                    border-radius: 0
+                                    color: #5e6977
+                                    padding: 0 0 0 8px
+                                    margin-right: 0
+
+                            p.tool
+                                background-color: #f2f6f9
+
 
                 &.middle
                     margin-top: 35px
@@ -180,6 +234,7 @@ section.documentation
                                     color: #5e6977
                                     padding: 0 0 0 8px
                                     margin-right: 0
+
 
             .profile-footer
                 border-top: 1px solid #ebf0f5

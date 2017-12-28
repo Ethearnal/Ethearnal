@@ -1,5 +1,15 @@
 var iGig = 0;
 function createGigBox(gigData, gigID) {
+    // if ($('.gig').attr('gigID') == gigID) return false;
+
+    // if (gigID == undefined) {
+    //     console.log('undefined id');
+    // }
+
+    // $('.gigs-container .gig').each(function(i, gig) {
+    //     console.log(gig);
+    // })
+
     $data = gigData;
     $expiresIn = null;
     gigData = gigData || '';

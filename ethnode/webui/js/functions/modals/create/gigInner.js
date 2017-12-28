@@ -36,7 +36,7 @@ $('body').delegate('.gig', 'click', function(e) {
         var title = '<h2 class="title">' + $data.title + '</h2>';
 
         // OWNER INFO DIV
-        var ownerAvatar = '<img src="data:image/png;base64,'+$data.ownerAvatar+'" alt="Avatar" />';
+        var ownerAvatar = '<img src="'+$data.ownerAvatar+'" alt="Avatar" />';
         var ownerName = '<h5>' + $data.ownerName + '</h5>';
         var ownerReputation = '<h4><i class="material-icons">polymer</i> ' + $data.ownerReputation + ' <span>'+$expiresIn+'</span></h4>';
         var ownerInfo = '<div class="owner-info">' + ownerAvatar + ownerName + ownerReputation + '</div>';
@@ -55,14 +55,12 @@ $('body').delegate('.gig', 'click', function(e) {
         var extrasBox = '<div class="extras-box"><h3>BOX FOR EXTRAS</h3></div>';
 
         // FOOTER
-        var closeButton = '<button class="mdl-button mdl-js-button close-button">Close</button>';
+        var closeButton = '<button data-dismiss="modal" class="mdl-button mdl-js-button close-button">Close</button>';
         var orderButton = '<button class="mdl-button mdl-js-button buy"><span><i class="material-icons">polymer</i> ' + $reputationCost + '</span> Order</button>';
         var footer = '<div class="footer">' + closeButton + orderButton + '</div>';
 
 
-
-
-        $innerContent = $('<div class="modal-body gig" gigID='+gigID+'>' + dropdownButton + dropdownUL + title + ownerInfo + images + description + extrasBox + footer + '</div>');
+        $innerContent = $('<div class="modal-body">' + dropdownButton + dropdownUL + title + ownerInfo + images + description + extrasBox + footer + '</div>');
 
 
         // Rendering div
@@ -76,7 +74,7 @@ $('body').delegate('.gig', 'click', function(e) {
     }
 
     $.ajax({
-        url: "/api/v1/my/gig/" + gigID,
+        url: "/api/v1/dht/hkey/?hkey=" + gigID,
         type: "GET",
         processData: false,
         success: function(gigData) {

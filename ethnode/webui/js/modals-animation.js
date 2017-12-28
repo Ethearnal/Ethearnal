@@ -148,7 +148,6 @@ $('.modal-box button').click(function() {
             if($modalID == 'add-job') createLE($data, 'job');
             if($modalID == 'add-education') createLE($data, 'education');
             if($modalID == 'add-language') createLE($data, 'language', true);
-            if($modalID == 'edit-profile') updateProfile($data);
 
 
             if ($modalID == 'edit-education') {
@@ -183,9 +182,8 @@ $('.modal-box button').click(function() {
                 $contentBlock.find('.image img').attr('src', $data.image);
                 $contentBlock.find('.portfolio-title').text($data.title);
                 $contentBlock.find('.description').text($data.description);
+
             }
-
-
         }, 300);
 
 

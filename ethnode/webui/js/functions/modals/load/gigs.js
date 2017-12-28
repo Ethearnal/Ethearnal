@@ -1,33 +1,32 @@
 function loadGigs() {
     $.ajax({
         type: 'GET',
-        url: '/api/v1/dht/gigs/',
+        url: '/api/v1/dht/guids',
         dataType: 'text',
-        success: function(data) {
-            $data = JSON.parse(data);
+        success: function(guids) {
+            $profileIDS = JSON.parse(guids);
 
-            // $(data).each(function(key, value) {
-            //     console.log(key);
-            // })
+            $($profileIDS).each(function(i, profileID) {
 
-            // $data2 = JSON.stringify($data[0]);
+                // console.log(profileID);
 
-            // $data2Parsed = JSON.parse($data2);
+                // GETS GIGS ID BY OWNER PROFILE ID
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/v1/dht/gigs/?owner_guid=' + profileID,
+                    dataType: 'text',
+                    success: function(gigs) {
+                        $gigs = JSON.parse(gigs);
 
+                        console.log(gigs);
 
-            // $data3 = JSON.stringify($data2Parsed);
-
-            // console.log($data3)
-
-
-
-            // for (var key in $data) {
-            //     console.log("key " + key + " has value " + $data[key]);
-            // }
-
-            // console.log($data.toString());
-
-            // loadGigsOnAjaxSuccess($data[i], false);
+                        // GETS GIG DATA BY GIG ID
+                        $($gigs).each(function(i, gigID) {
+                            createGig(gigID);
+                        });
+                    }
+                });
+            });
         }
     });
 }

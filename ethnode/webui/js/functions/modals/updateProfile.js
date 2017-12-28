@@ -1,5 +1,4 @@
 function updateProfile() {
-    // $data = data;
     $profile = $('.profile-information');
     $firstname = null; $lastname = null; $city = null; $country = null; $countryClass = null;
     $locationParagraph = $profile.find('.profile-upper p.location');
@@ -90,9 +89,49 @@ function updateProfile() {
         contentType: 'application/json; charset=utf-8',
         success: function(profilePictureURL) {
 
-            // CHANGING PROFILE PICTURE
-            $('.profile-image img').attr('src', JSON.parse(profilePictureURL));
-            $('li.profile img.profile-picture').attr('src', JSON.parse(profilePictureURL));
+            if (profilePictureURL.indexOf('//') >= 0) {
+
+                // CHANGING PROFILE PICTURE
+                $('.profile-image img').attr('src', JSON.parse(profilePictureURL));
+                $('li.profile img.profile-picture').attr('src', JSON.parse(profilePictureURL));
+            } else {
+
+                // CHANGING PROFILE PICTURE
+                $('.profile-image img').attr('src', 'http://localhost:5678/api/cdn/v1/resource?hkey=' + JSON.parse(profilePictureURL));
+                $('li.profile img.profile-picture').attr('src', 'http://localhost:5678/api/cdn/v1/resource?hkey=' + JSON.parse(profilePictureURL));
+            }
+        }
+    });
+
+    // GETS PROFILE SKILLS
+    $.ajax({
+        url: "/api/v1/dht/profile?owner_guid=" + profileID + "&profile_key=skills",
+        type: "GET",
+        processData: false,
+        contentType: 'application/json; charset=utf-8',
+        success: function(skills) {
+
+            // Append skills to profile
+            $(JSON.parse(skills)).each(function(i, skill) {
+                var appendSkill = '<p>'+ skill +'</p>';
+                $('.profile-upper .skills').append(appendSkill);
+            });
+        }
+    });
+
+    // GETS PROFILE LANGUAGES
+    $.ajax({
+        url: "/api/v1/dht/profile?owner_guid=" + profileID + "&profile_key=languages",
+        type: "GET",
+        processData: false,
+        contentType: 'application/json; charset=utf-8',
+        success: function(languages) {
+
+            // Append languages to profile
+            $(JSON.parse(languages)).each(function(i, language) {
+                var appendLanguage = '<p>'+ language +'</p>';
+                $('.profile-upper .languages').append(appendLanguage);
+            });
         }
     });
 }

@@ -299,10 +299,12 @@ section.documentation .container .profile-information-container .profile-informa
 section.documentation .container .profile-information-container .profile-information.up .profile-upper h2 {
   font-size: 32px;
   font-weight: 500;
-  line-height: 0.67;
+  line-height: 1;
   color: #5e6977;
   padding-top: 70px;
   margin-bottom: 17px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 section.documentation .container .profile-information-container .profile-information.up .profile-upper h5.profile-information-position {
@@ -352,6 +354,61 @@ section.documentation .container .profile-information-container .profile-informa
 
 section.documentation .container .profile-information-container .profile-information.up .profile-upper button.leave-msg:hover, section.documentation .container .profile-information-container .profile-information.up .profile-upper button.leave-msg:focus, section.documentation .container .profile-information-container .profile-information.up .profile-upper button.leave-msg:active {
   background-color: #ebedf1;
+}
+
+section.documentation .container .profile-information-container .profile-information.up .profile-upper p.skills-text {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #5e6977;
+  letter-spacing: 1px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 26px;
+}
+
+section.documentation .container .profile-information-container .profile-information.up .profile-upper p.skills-text i {
+  top: 8px;
+  position: relative;
+  cursor: pointer;
+  color: #afb4bb;
+}
+
+section.documentation .container .profile-information-container .profile-information.up .profile-upper p.skills-text i:hover {
+  color: #9ea2a9;
+}
+
+section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages {
+  margin-top: 18px;
+  padding: 0 15px;
+  transition: all 0.3s ease;
+}
+
+section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills p, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages p {
+  line-height: 24px;
+  border-radius: 4px;
+  border: solid 1px #e1e8ee;
+  padding: 0px 10px;
+  color: #86939e;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills p:hover, section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills p:focus, section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills p:active, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages p:hover, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages p:focus, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages p:active {
+  background-color: #e1e8ee;
+  cursor: pointer;
+  color: #99a9b6;
+}
+
+section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills p span.experience, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages p span.experience {
+  border: none;
+  border-radius: 0;
+  color: #5e6977;
+  padding: 0 0 0 8px;
+  margin-right: 0;
+}
+
+section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills p.tool, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages p.tool {
+  background-color: #f2f6f9;
 }
 
 section.documentation .container .profile-information-container .profile-information.middle {
@@ -1461,6 +1518,7 @@ section.profiles-page-content .container .jobs .gigs-container:after {
 
 .gigs-container-profile, .gigs-container-orders {
   margin-top: 25px;
+  width: 815px;
 }
 
 .gig {

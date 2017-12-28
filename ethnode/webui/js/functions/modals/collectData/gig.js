@@ -70,6 +70,19 @@ function collectGigData(form) {
                         processData: false,
                         success: function(gigID){
                             createGig(gigID);
+
+                            $.ajax({
+                                url: "/api/v1/dht/hkey/?hkey=" + gigID,
+                                type: "GET",
+                                processData: false,
+                                success: function(gigData) {
+                                    $data = JSON.parse(gigData);
+                                    createGigToProfile($data, gigID);
+                                },
+                                error: function(error) {
+                                    return;
+                                }
+                            });
                         }
                     });
                 }
@@ -116,6 +129,19 @@ function collectGigData(form) {
                 processData: false,
                 success: function(gigID){
                     createGig(gigID);
+
+                    $.ajax({
+                        url: "/api/v1/dht/hkey/?hkey=" + gigID,
+                        type: "GET",
+                        processData: false,
+                        success: function(gigData) {
+                            $data = JSON.parse(gigData);
+                            createGigToProfile($data, gigID);
+                        },
+                        error: function(error) {
+                            return;
+                        }
+                    });
                 }
             });
         }

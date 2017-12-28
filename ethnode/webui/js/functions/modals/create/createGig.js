@@ -8,7 +8,6 @@ function createGig(gigID) {
         success: function(gigData) {
             $data = JSON.parse(gigData);
             createGigBox($data, gigID);
-            createGigToProfile($data, gigID);
         },
         error: function(error) {
             return;

@@ -60,27 +60,6 @@ function loadInputsText(form, div) {
         });
     }
 
-    // if($divToLoad.hasClass('education')) {
-    //     $imageSrc = $divToLoad.find('.image img').attr('src');
-
-    //     $content.find('input#input-image-education').attr('value', $imageSrc);
-    //     $content.find('img#input-image-education').attr('src', $imageSrc);
-    //     $content.find('img.img-education').removeClass('active');
-    //     $content.find('label[for="input-image-education"]').text('Click here to change image').removeClass('active');
-    // }
-
-
-    // // Adding value to dropdowns in portfolio element modals.
-    // if($divToLoad.hasClass('portfolio')) {
-    //     // $imageFlagClass = $divToLoad.find('.image span').attr('class').split(' ')[2];
-    //     // $languageLevel = $divToLoad.find('.image span').attr('level');
-
-    //     $form.find('')
-
-    //     // $form.find('#language-name').dropdown('set selected', $imageFlagClass);
-    //     // $form.find('#level').dropdown('set selected', $languageLevel);
-    // }
-
 
     if(!$divToLoad.hasClass('gig')) {
         // Going thru each INPUT field, and adding value to them.

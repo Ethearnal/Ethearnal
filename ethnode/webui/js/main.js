@@ -13,6 +13,27 @@
 // // Padaryti profile page, kad galetum skillus pridet (paimt is Aspire)
 // // Atskirti Education/Job/Language/Skills PROFILE TAB'e. Jeigu nera nieko toje skiltyje - centruotas tekstas "There's no jobs".
 
+$( "i.skills-down" ).click(function() {
+    $( ".profile-upper .skills" ).toggleClass('hidden');
+    $(this).toggleClass('open');
+
+    if( $(this).hasClass('open') ) {
+        $(this).css({ transition: "transform 0.3s", transform: "rotate(180deg)" })
+    } else {
+        $(this).css({ transition: "transform 0.3s", transform: "rotate(0deg)" })
+    }
+});
+
+$( "i.languages-down" ).click(function() {
+    $( ".profile-upper .languages" ).toggleClass('hidden');
+    $(this).toggleClass('open');
+
+    if( $(this).hasClass('open') ) {
+        $(this).css({ transition: "transform 0.3s", transform: "rotate(180deg)" })
+    } else {
+        $(this).css({ transition: "transform 0.3s", transform: "rotate(0deg)" })
+    }
+});
 
 
 // Changes .plusIcon based on what tab user opens
@@ -53,7 +74,7 @@ $('a.navbar-brand').click(function() {
     $('input#search-header, button#search-button').removeClass('wrong');
     $('input#search-header').val('');
 
-    $('.gig').remove();
+    // $('.gig').remove();
 
     $.ajax({
         type: 'GET',
