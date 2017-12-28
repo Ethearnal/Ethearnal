@@ -42,42 +42,28 @@ function loadGigsToProfile() {
         success: function(nodeData) {
             $data = JSON.parse(nodeData);
             $profileID = $data.guid;
-            console.log($profileID);
 
             $.ajax({
                 type: 'GET',
-                url: '/api/v1/dht/gigs/',
+                url: '/api/v1/dht/gigs/?owner_guid=' + $profileID,
                 dataType: 'text',
                 success: function(data) {
                     $data = JSON.parse(data);
 
-                    $($data).each(function(i, gig) {
+                    $($data).each(function(i, gigID) {
 
-                        $stringGig = JSON.stringify(gig).toString();
-                        console.log($stringGig);
-                        $stringGig.replace('"' $profileID + '"', '');
-                        console.log($stringGig)
-
-                        // console.log($stringGig.search($profileID));
-
-                        // console.log(JSON.stringify(gig));
-
-                        // console.log(data[$profileID]);
-
-
-
-                        $(gig).each(function(x, gigID) {
-                            console.log(gigID);
-                            $.ajax({
-                                url: "/api/v1/dht/hkey/?hkey=" + gigID,
-                                type: "GET",
-                                processData: false,
-                                success: function(gigData) {
-                                    $data = JSON.parse(gigData);
-                                    createGigToProfile($data, gigID);
-                                }
-                            });
-                        })
+                        $.ajax({
+                            url: "/api/v1/dht/hkey/?hkey=" + gigID,
+                            type: "GET",
+                            processData: false,
+                            success: function(gigData) {
+                                $data = JSON.parse(gigData);
+                                createGigToProfile($data, gigID);
+                            },
+                            error: function(error) {
+                                return;
+                            }
+                        });
                     })
                 }
             });
