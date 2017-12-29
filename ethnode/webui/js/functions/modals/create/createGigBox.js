@@ -1,5 +1,7 @@
 var iGig = 0;
 function createGigBox(gigData, gigID) {
+
+
     // if ($('.gig').attr('gigID') == gigID) return false;
 
     // if (gigID == undefined) {

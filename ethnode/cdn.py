@@ -112,7 +112,7 @@ from toolkit import store_handler
 from ert import tear_down_udp, punch_dht_udp_hole
 from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
 from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
-from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
+from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI, IndexOnPush
 from toolkit import upnp
 
 ert = EthearnalProfileController(data_dir=cdn_profile_dir, cdn_service_node=True)
@@ -155,6 +155,7 @@ dht = DHT(host=udp_host, port=int(udp_port), guid=ert.rsa_guid_int, seeds=seeds,
 dhf = DHTFacade(dht, ert)
 d = dhf
 
+idx = IndexOnPush(dhf=dhf)
 
 cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy)
 

@@ -44,22 +44,22 @@ function collectGigData(form) {
 
                     // AND CREATE A NEW ONE
                     $data = {
-                        imageHash: data,
-                        ownerAvatar: $avatarImage,
-                        ownerReputation: $reputation,
-                        ownerName: $ownerName,
-                        categoryName: $categoryName,
+                        image_hash: data,
+                        //ownerAvatar: $avatarImage,
+                        // ownerReputation: $reputation,
+                        // ownerName: $ownerName,
+                        // categoryName: $categoryName,
                         general_domain_of_expertise: $categoryName,
                         title: $title,
-                        category: $category,
+                        //category: $category,
                         required_ert: $reputationCost,
-                        reputationCost: $reputationCost,
+                        // reputationCost: $reputationCost,
                         description: $description,
                         price: $price,
                         tags: $tags,
-                        date: [
-                            { expire: $dateExpire, expiresIn: $expireDateDifference }
-                        ]
+//                        date: [
+//                            { expire: $dateExpire, expiresIn: $expireDateDifference }
+//                        ]
                     }
 
                     $.ajax({
@@ -70,15 +70,15 @@ function collectGigData(form) {
                         processData: false,
                         success: function(gigID){
 
-                            getDHTData(gigID, function(gigData) {
-                                $data = JSON.parse(gigData);
-                                createGigToProfile($data, gigID);
-                            });
+//                            getDHTData(gigID, function(gigData) {
+//                                $data = JSON.parse(gigData);
+//                                createGigToProfile($data, gigID);
+//                            });
 
-                            getDHTData(gigID, function(gigData) {
-                                $data = JSON.parse(gigData);
-                                createGigBox($data, gigID);
-                            });
+//                            getDHTData(gigID, function(gigData) {
+//                                $data = JSON.parse(gigData);
+//                                createGigBox($data, gigID);
+//                            });
                         }
                     });
                 }
@@ -91,6 +91,7 @@ function collectGigData(form) {
     } else if (fileObj == undefined) {
 
         // Checks if the GIG already has image and re-use image hash.
+        console.log('Are we here?');
         if($content.find('img.show-image').attr('src') != null) {
             $imageSrc = $content.find('img.show-image').attr('src');
             $imageHash = $imageSrc.split('/api/v1/my/img/?q=')[1];
@@ -125,15 +126,15 @@ function collectGigData(form) {
                 processData: false,
                 success: function(gigID){
 
-                    getDHTData(gigID, function(gigData) {
-                        $data = JSON.parse(gigData);
-                        createGigToProfile($data, gigID);
-                    });
-
-                    getDHTData(gigID, function(gigData) {
-                        $data = JSON.parse(gigData);
-                        createGigBox($data, gigID);
-                    });
+//                    getDHTData(gigID, function(gigData) {
+//                        $data = JSON.parse(gigData);
+//                        createGigToProfile($data, gigID);
+//                    });
+//
+//                    getDHTData(gigID, function(gigData) {
+//                        $data = JSON.parse(gigData);
+//                        createGigBox($data, gigID);
+//                    });
                 }
             });
         }

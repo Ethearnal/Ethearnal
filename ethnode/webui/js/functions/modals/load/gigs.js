@@ -1,5 +1,6 @@
 // LOADS ALL GIGS TO MAIN PAGE
 function loadGigs() {
+/*
     getGuidsData(function(guids) {
         $profileIDS = JSON.parse(guids);
 
@@ -22,6 +23,7 @@ function loadGigs() {
             });
         });
     });
+    */
 }
 
 // LOADS ALL GIGS TO PROFILE PAGE
@@ -46,5 +48,5 @@ function loadGigsToProfile() {
 }
 
 // Initializing function on website load
-loadGigs();
-loadGigsToProfile();
+// loadGigs();
+// loadGigsToProfile();

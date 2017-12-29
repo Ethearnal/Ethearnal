@@ -47,10 +47,15 @@ class DHTStoreHandlerOne(object):
     def dhf(self, val):
         self._dhf = val
 
-    def on_pushed_ip4_peer(self, data, hk=None):
+    def on_pushed_ip4_peer(self, data, hk_int=None):
         # value = {'ert:boot_to': {'h': host, 'p': port}}
-        print("\n\nON PUSHED IP4 PEER DATA:", data)
-        print('\n\nON PUSHED IP$ HK', hk)
+        print('\n ++++++++++ \n')
+        print("\n\n\nON PUSHED IP4 PEER DATA:", data)
+        #
+        self.dhf.indexer.index_on_push(cdx.guid_int_to_hex(hk_int), data)
+        #
+        print('\nON PUSHED IP$ HK', cdx.guid_int_to_hex(hk_int))
+        print('\n ++++++++++ \n')
 
         if 'ert:boot_to' in data:
             host = data['ert:boot_to']['h']
@@ -59,7 +64,8 @@ class DHTStoreHandlerOne(object):
             self.dhf.direct_push_pubkey(host, port)
             self.dhf.boot_to(host, port)
         # on cdn url post update
-        if 'cdn_url' in data and 'hk_hex' in data:
+
+        if 'cdn_url' in data and 'hk_hex' in data and self.dhf.cdn:
             if self.dhf.cdn.cdn_url in data['cdn_url']:
                 print('CDN ITSELF')
                 return
@@ -154,7 +160,7 @@ class DHTStoreHandlerOne(object):
                         # pk_rev, data = cdx.decode_bson_val(pk_value)
                         # if self.ON_PUSH_PEER_KEY in key:
                         print('\n\n\n +++')
-                        self.on_pushed_ip4_peer(data)
+                        self.on_pushed_ip4_peer(data,hk_int=key)
                         print('\n\n\n +++')
                         # event handler here
                         return self.store.__setitem__(key, owner_signature_value)

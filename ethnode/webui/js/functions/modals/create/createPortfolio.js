@@ -12,7 +12,7 @@ function createPortfolio(data, portfolioID) {
     // HERE WE ARE STARTING TO RENDER THE WHOLE CONTENT BLOCK DIV
 
     // Image's div rendering
-    imageDiv = '<div class="image"><img class="portfolio-image" src="http://localhost:5678/api/cdn/v1/resource?hkey='+$data.imageHash+'" alt="Logo Image"></div>';
+    imageDiv = '<div class="image"><img class="portfolio-image" src="http://localhost:5678/api/cdn/v1/resource?hkey='+$data.image_hash+'" alt="Logo Image"></div>';
 
     // Dropdown button rendering
     var dropdownButton = '<button id="dropdown' + $dropdownID + '" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>';

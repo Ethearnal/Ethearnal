@@ -56,3 +56,33 @@ function createGigToProfile(gigData, gigID) {
     // Incrementing iGig when the function is done.
     iGig++;
 }
+
+function createGigToProfile2(hk, gig_o) {
+
+    var image ='';
+    var gigID = hk;
+
+    image += '<div class="ui fluid image"><div class="ui black ribbon label">';
+    image += gig_o.general_domain_of_expertise +'</div><div class="image-block"><img src="http://localhost:5678/api/cdn/v1/resource?hkey=';
+    image += gig_o.image_hash+'" /></div></div>';
+    var title = '<p>' + gig_o.title + '</p>';
+    var desc = '<p>' + gig_o.description + '</p>';
+    var dropdownButton = '<button id="DDB'+ hk +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button dropdown-gig"><i class="material-icons">more_vert</i></button>';
+    var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB'+ hk +'"><li class="mdl-menu__item open-modal" open-modal="#edit-gig">Edit</li><li class="mdl-menu__item delete">Delete</li></ul>';
+    var footer = '<div class="footer"><h4>Starting at <span><i class="material-icons">polymer</i>' + gig_o.price + '</span></h4></div>';
+
+    //console.log('GIG TO PROFILE', gig_o);
+    $gig = $('<div id="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">' + dropdownButton + dropdownUL + image +  title + desc + footer + '</div>');
+    gig_ctx = 0 | $("#"+hk);
+    gig_ctx = document.getElementById(hk);
+
+    if(gig_ctx){
+        console.log('gig div', gig_ctx);
+        gig_ctx.outerHTML = $gig.get(0).outerHTML;
+    } else {
+     console.log('not found', gig_ctx);
+        $(".gigs-container-profile").append($gig.get(0).outerHTML);
+    }
+    componentHandler.upgradeDom();
+}
+

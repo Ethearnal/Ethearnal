@@ -43,7 +43,8 @@ class DHTFacade(object):
         self._last_pushed_hk_hex = None
         self._last_pulled_hk_hex = None
         self.cdn = None
-        self.events = None
+        # self.events = None
+        self.indexer = None
 
         # self.dht.storage
 

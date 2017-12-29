@@ -7,83 +7,73 @@ from toolkit.kadmini_codec import guid_bin_to_hex, guid_hex_to_bin, guid_int_to_
 # todo DRY it
 
 
-class DhtGlobalEventsHkeysWebAPI(object):
-    exposed = True
-
-    def __init__(self, cherry,
-                 dhf: DHTFacade,
-                 me_owner: HashIO,
-                 mount_point: str='/api/v1/dht/globalevents/',
-                 mount_it=True):
-        self.cherry = cherry
+class IndexOnPush(object):
+    def __init__(self, dhf):
         self.dhf = dhf
-        self.mount_point = mount_point
-        self.collection_name = '.global.evt'
-        self.me = me_owner
-        self.myevts = instance_dl(self.dhf, self.me.hex(), self.collection_name)
-        self.dhf.global_events_api=self
+        self.dhf.indexer = self
 
-        if mount_it:
-            self.mount()
-            print('MOUNT WEB:', self.mount_point)
-
-        # self.required_fields = ()
-
-    def get_per_guid(self, owner_guid):
-        dl = instance_dl(self.dhf, owner_guid, self.collection_name)
-        ll = list(dl.iter_hk(inverted=True))
-        return ll
-
-    def GET(self, owner_guid=None):
-        owner_guid = self.me.hex()
-        if owner_guid:
-            ll = self.get_per_guid(owner_guid)
-            d_js = json.dumps(ll, ensure_ascii=False)
-            d_sj_bin = d_js.encode()
-            return d_sj_bin
-        # else:
-        #     c = self.dhf.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
-        #     guid_list = [guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
-        #     ll = list()
-        #     for guid in guid_list:
-        #         ll.append({guid: self.get_per_guid(guid)})
-        #     d_js = json.dumps(ll, ensure_ascii=False)
-        #     d_sj_bin = d_js.encode()
-        #     return d_sj_bin
-
-    def create_event(self, event_kind, operation, event_data):
+    def index_on_push(self, *args, **kwargs):
+        print('INDEXING', args, kwargs)
+        pass
+        # try:
+        #     body = self.cherrypy.request.body.read()
+        #     if body:
+        #         pk_bin = self.api.create(body)
+        #         pk_hex = guid_bin_to_hex(pk_bin)
         #
-        data = dict({'event_kind': event_kind, 'operation': operation, 'event_data': event_data})
-        data['owner_guid'] = self.me.hex()
-        data['model'] = 'Event'
-        value = data
-        from datetime import datetime
-        key = data['event_kind']+';;'+data['operation']+datetime.now().isoformat()
-
-        try:
-            o_item_hk = self.myevts.insert(key=key, value=value)
-        except:
-            self.cherry.response.status = 409
-            return b'ERROR in insert'
-        self.cherry.response.status = 201
-        if o_item_hk:
-            try:
-                hex_str = guid_int_to_hex(o_item_hk)
-                return hex_str.encode()
-            except:
-                return b'ERROR converting hash key'
-        else:
-            return b'null'
-
-    def mount(self):
-        self.cherry.tree.mount(
-            self,
-            self.mount_point, {'/': {
-                    'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
-                    'tools.sessions.on': True,
-                }
-            }
-        )
+        #         # indexing
+        #
+        #         js = body.decode('utf-8')
+        #         d = json.loads(js)
+        #         title = d.get('title')
+        #         description = d.get('description')
+        #         category = d.get('categoryName')
+        #         experience_level = d.get('experienceName')
+        #         job_type = d.get('jobTypeName')
+        #
+        #         experience_level = None
+        #         # experience_level = '_'.join(experience_level.lower().split(' '))
+        #         category = '_'.join(category.lower().split(' '))
+        #         # job_type = '_'.join(job_type.lower().split(' '))
+        #
+        #         budget = None
+        #         price_st = d.get('price')
+        #         price = None
+        #         try:
+        #             price = int(price_st)
+        #         except:
+        #             print('ERR with price to int')
+        #         if price:
+        #             budget = calculate_price_range(price)
+        #
+        #         print('CAT LEV', category, experience_level)
+        #
+        #         price = d.get('price')
+        #
+        #         if title:
+        #             self.text_api.idx_engine.index_bag_of_spec_text(
+        #                 container_hash=pk_bin, specifier='title', text_data=title)
+        #         if description:
+        #             self.text_api.idx_engine.index_bag_of_spec_text(
+        #                 container_hash=pk_bin, specifier='description', text_data=description)
+        #
+        #         # if experience_level:
+        #         #     self.text_api.idx_engine.index_bag_of_spec_text(
+        #         #         container_hash=pk_bin, specifier='experience_level', text_data=experience_level)
+        #
+        #         if category:
+        #             self.text_api.idx_engine.index_bag_of_spec_text(
+        #                 container_hash=pk_bin, specifier='category', text_data=category)
+        #
+        #         # if job_type:
+        #         #     self.text_api.idx_engine.index_bag_of_spec_text(container_hash=pk_bin,
+        #         #                                                     specifier='job_type',
+        #         #                                                     text_data=job_type)
+        #
+        #         if budget:
+        #             self.text_api.idx_engine.index_bag_of_spec_text(
+        #                 container_hash=pk_bin, specifier='budget', text_data=budget
+        #             )
 
 
 class DhtEventsHkeysWebAPI(object):

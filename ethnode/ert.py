@@ -24,7 +24,7 @@ from ert_profile import EthearnalProfileController
 from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
 from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
 from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
-from webdht.wdht_ertapi import DhtEventsHkeysWebAPI, DhtGlobalEventsHkeysWebAPI
+from webdht.wdht_ertapi import DhtEventsHkeysWebAPI, IndexOnPush
 
 # #
 # from webdht.double_linked import DList, DLItemDict, OwnPulse, instance_dl
@@ -260,6 +260,8 @@ def main_http(http_webdir: str = config.http_webdir,
     #     me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
     # )
 
+    idx = IndexOnPush(dhf=dht_facade_)
+
     knownguids = WebDHTKnownGuids(
         cherry=cherrypy,
         dhtf=dht_facade_,
@@ -290,11 +292,11 @@ def main_http(http_webdir: str = config.http_webdir,
         me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
     )
 
-    global_events = DhtGlobalEventsHkeysWebAPI(
-        cherry=cherrypy,
-        dhf=dht_facade_,
-        me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
-    )
+    # global_events = DhtGlobalEventsHkeysWebAPI(
+    #     cherry=cherrypy,
+    #     dhf=dht_facade_,
+    #     me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    # )
 
 
     # dht_events_hk = DhtEventsHkeysWebAPI(
@@ -421,11 +423,6 @@ if __name__ == '__main__':
                        seed_host=seed_host,
                        seed_port=seed_port)
         d = DHTFacade(dht, ert_profile_ctl)
-
-        # gigs_cn = WebGuidCollectionListApi(cherry=cherrypy,
-        #                                    dhf=d,
-        #                                    collection_name='cngigs',
-        #                                    me_owner=OwnerGuidHashIO(ert.rsa_guid_hex))
 
         if dht.server_thread.is_alive():
             print('UDP server thread is alive')

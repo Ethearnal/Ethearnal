@@ -116,6 +116,48 @@ $('a[load]').click(function(e) {
     }
 
     if($load == 'profile') {
+        /*
+        */
+       // console.log('TEST');
+        getNodeData(function(node_data){
+        node = $.parseJSON(node_data);
+       // console.log('GUID:' + node.guid);
+        getProfileGigs(node.guid,  function(data){
+            console.log('GUID:' + data);
+            profile_gigs = JSON.parse(data);
+            for (var i = 0; i < profile_gigs.length; i++) {
+                $.ajax({
+                        url: "/api/v1/dht/hkey/?hkey=" + profile_gigs[i],
+                        hk: profile_gigs[i],
+                        type: "GET",
+                        processData: false,
+                        success: function(js_data){
+
+                                   //console.log('hkey',this.hk);
+                                   //console.log('data:',js_data);
+                                   gig_o = JSON.parse(js_data);
+                                   //console.log('data:',gig_o);
+                                   createGigToProfile2(this.hk, gig_o);
+
+                            },
+
+                        error: function(error) {
+                                console.log('ERR',error);
+
+                                return;
+                            }
+                    });
+
+                    //var gig_hk = profile_gigs[i];
+                    //console.log('GIG HK:',gig_hk);
+
+                    /**/
+                }
+            });
+        });
+
+        /*
+        */
         $('section.background-image').show();
         $('section.documentation').show();
         $('body').addClass('up');
