@@ -47,9 +47,11 @@ class DHTStoreHandlerOne(object):
     def dhf(self, val):
         self._dhf = val
 
-    def on_pushed_ip4_peer(self, data):
+    def on_pushed_ip4_peer(self, data, hk=None):
         # value = {'ert:boot_to': {'h': host, 'p': port}}
         print("\n\nON PUSHED IP4 PEER DATA:", data)
+        print('\n\nON PUSHED IP$ HK', hk)
+
         if 'ert:boot_to' in data:
             host = data['ert:boot_to']['h']
             port = data['ert:boot_to']['p']
@@ -154,9 +156,7 @@ class DHTStoreHandlerOne(object):
                         print('\n\n\n +++')
                         self.on_pushed_ip4_peer(data)
                         print('\n\n\n +++')
-
                         # event handler here
-
                         return self.store.__setitem__(key, owner_signature_value)
                     else:
                         print('VAL SIG FAILED')

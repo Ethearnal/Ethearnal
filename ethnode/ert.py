@@ -24,6 +24,7 @@ from ert_profile import EthearnalProfileController
 from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
 from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
 from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
+from webdht.wdht_ertapi import DhtEventsHkeysWebAPI, DhtGlobalEventsHkeysWebAPI
 
 # #
 # from webdht.double_linked import DList, DLItemDict, OwnPulse, instance_dl
@@ -277,11 +278,30 @@ def main_http(http_webdir: str = config.http_webdir,
         me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
     )
 
+    events = DhtEventsHkeysWebAPI(
+        cherry=cherrypy,
+        dhf=dht_facade_,
+        me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex),
+    )
+
     dht_portfolios_hk = DhtPortfoliosWebAPI(
         cherry=cherrypy,
         dhf=dht_facade_,
         me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
     )
+
+    global_events = DhtGlobalEventsHkeysWebAPI(
+        cherry=cherrypy,
+        dhf=dht_facade_,
+        me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    )
+
+
+    # dht_events_hk = DhtEventsHkeysWebAPI(
+    #     cherry=cherrypy,
+    #     dhf=dht_facade_,
+    #     me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    # )
 
     dht_ip4 = WebDHTKnownPeers(
         cherry=cherrypy,

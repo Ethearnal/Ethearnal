@@ -7,6 +7,164 @@ from toolkit.kadmini_codec import guid_bin_to_hex, guid_hex_to_bin, guid_int_to_
 # todo DRY it
 
 
+class DhtGlobalEventsHkeysWebAPI(object):
+    exposed = True
+
+    def __init__(self, cherry,
+                 dhf: DHTFacade,
+                 me_owner: HashIO,
+                 mount_point: str='/api/v1/dht/globalevents/',
+                 mount_it=True):
+        self.cherry = cherry
+        self.dhf = dhf
+        self.mount_point = mount_point
+        self.collection_name = '.global.evt'
+        self.me = me_owner
+        self.myevts = instance_dl(self.dhf, self.me.hex(), self.collection_name)
+        self.dhf.global_events_api=self
+
+        if mount_it:
+            self.mount()
+            print('MOUNT WEB:', self.mount_point)
+
+        # self.required_fields = ()
+
+    def get_per_guid(self, owner_guid):
+        dl = instance_dl(self.dhf, owner_guid, self.collection_name)
+        ll = list(dl.iter_hk(inverted=True))
+        return ll
+
+    def GET(self, owner_guid=None):
+        owner_guid = self.me.hex()
+        if owner_guid:
+            ll = self.get_per_guid(owner_guid)
+            d_js = json.dumps(ll, ensure_ascii=False)
+            d_sj_bin = d_js.encode()
+            return d_sj_bin
+        # else:
+        #     c = self.dhf.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
+        #     guid_list = [guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
+        #     ll = list()
+        #     for guid in guid_list:
+        #         ll.append({guid: self.get_per_guid(guid)})
+        #     d_js = json.dumps(ll, ensure_ascii=False)
+        #     d_sj_bin = d_js.encode()
+        #     return d_sj_bin
+
+    def create_event(self, event_kind, operation, event_data):
+        #
+        data = dict({'event_kind': event_kind, 'operation': operation, 'event_data': event_data})
+        data['owner_guid'] = self.me.hex()
+        data['model'] = 'Event'
+        value = data
+        from datetime import datetime
+        key = data['event_kind']+';;'+data['operation']+datetime.now().isoformat()
+
+        try:
+            o_item_hk = self.myevts.insert(key=key, value=value)
+        except:
+            self.cherry.response.status = 409
+            return b'ERROR in insert'
+        self.cherry.response.status = 201
+        if o_item_hk:
+            try:
+                hex_str = guid_int_to_hex(o_item_hk)
+                return hex_str.encode()
+            except:
+                return b'ERROR converting hash key'
+        else:
+            return b'null'
+
+    def mount(self):
+        self.cherry.tree.mount(
+            self,
+            self.mount_point, {'/': {
+                    'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
+
+
+class DhtEventsHkeysWebAPI(object):
+    exposed = True
+
+    def __init__(self, cherry,
+                 dhf: DHTFacade,
+                 me_owner: HashIO,
+                 mount_point: str='/api/v1/dht/events/',
+                 mount_it=True):
+        self.cherry = cherry
+        self.dhf = dhf
+        self.mount_point = mount_point
+        self.collection_name = '.evt'
+        self.me = me_owner
+        self.myevts = instance_dl(self.dhf, self.me.hex(), self.collection_name)
+        self.dhf.events = self
+
+        if mount_it:
+            self.mount()
+            print('MOUNT WEB:', self.mount_point)
+
+        # self.required_fields = ()
+
+    def get_per_guid(self, owner_guid):
+        dl = instance_dl(self.dhf, owner_guid, self.collection_name)
+        ll = list(dl.iter_hk(inverted=True))
+        return ll
+
+    def GET(self, owner_guid=None):
+        if owner_guid:
+            ll = self.get_per_guid(owner_guid)
+            d_js = json.dumps(ll, ensure_ascii=False)
+            d_sj_bin = d_js.encode()
+            return d_sj_bin
+        else:
+            c = self.dhf.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
+            guid_list = [guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
+            ll = list()
+            for guid in guid_list:
+                ll.append({guid: self.get_per_guid(guid)})
+            d_js = json.dumps(ll, ensure_ascii=False)
+            d_sj_bin = d_js.encode()
+            return d_sj_bin
+
+    def create_event(self, event_kind, operation, event_data):
+        #
+        data = dict({'event_kind': event_kind, 'operation': operation, 'event_data': event_data})
+        data['owner_guid'] = self.me.hex()
+        data['model'] = 'Event'
+        value = data
+        from datetime import datetime
+        key = data['event_kind']+';;'+data['operation']+datetime.now().isoformat()
+
+        try:
+            o_item_hk = self.myevts.insert(key=key, value=value)
+        except:
+            self.cherry.response.status = 409
+            return b'ERROR in insert'
+        self.cherry.response.status = 201
+        if o_item_hk:
+            try:
+                hex_str = guid_int_to_hex(o_item_hk)
+                return hex_str.encode()
+            except:
+                return b'ERROR converting hash key'
+        else:
+            return b'null'
+
+    def mount(self):
+        self.cherry.tree.mount(
+            self,
+            self.mount_point, {'/': {
+                    'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
+
+
+
 class DhtGetByHkeyWebAPI(object):
     exposed = True
 
@@ -71,6 +229,7 @@ class DhtGigsHkeysWebAPI(object):
         self.me = me_owner
         self.mygigs = instance_dl(self.dhf, self.me.hex(), self.collection_name)
         self.deleted_gigs = instance_dl(self.dhf, self.me.hex(), self.delete_collection_name)
+
 
         if mount_it:
             self.mount()
@@ -152,7 +311,9 @@ class DhtGigsHkeysWebAPI(object):
         except:
             self.cherry.response.status = 409
             return b'ERROR in insert'
+
         self.cherry.response.status = 201
+
         if o_item_hk:
             try:
                 hex_str = guid_int_to_hex(o_item_hk)
@@ -502,3 +663,5 @@ class WebDHTAboutNode(object):
                 }
             }
         )
+
+

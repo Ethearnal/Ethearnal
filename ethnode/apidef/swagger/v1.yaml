@@ -160,6 +160,34 @@ paths:
           description: "invalid input, object invalid"
         409:
           description: "an existing item already exists"
+
+  /dht/events/:
+    get:
+      tags:
+      - "DHT Events"
+      summary: "Events per guid"
+      description: "Post and retrieve self or foreign Portfolio"
+      operationId: "getEvents"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "owner_guid"
+        in: "query"
+        description: "Portfolios"
+        required: false
+        type: "string"
+        maxLength: 64
+        minLength: 64
+      responses:
+        200:
+          description: "retrieve Gigs listing via DHT"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        400:
+          description: "bad input parameter"
+
   /dht/hkey/:
     get:
       tags:
@@ -444,3 +472,23 @@ definitions:
     example:
       description: "Example Portfolio Description"
       title: "Test Portfolio Title"
+
+  Event:
+    type: "object"
+    properties:
+      event_kind:
+        type: "string"
+        minLength: 32
+        maxLength: 64
+      operation:
+        type: "string"
+        minLength: 32
+        maxLength: 160
+      owner_guid:
+        type: "string"
+        maxLength: 64
+      event_data:
+        type: "object"
+    example:
+      event_kind: "gig"
+      operation: "create"

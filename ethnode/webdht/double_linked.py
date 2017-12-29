@@ -168,6 +168,7 @@ class DList(object):
             self.first_key = key
             self.last_key = key
             o_item = DLItem(key, value, next_key=None, prev_key=None)
+            # o_item.hk =
             self.dlitem_dict.__setitem__(key, o_item)
             o_item_hk = self.dlitem_dict.last_set_hkey
             self.update_meta_item()
