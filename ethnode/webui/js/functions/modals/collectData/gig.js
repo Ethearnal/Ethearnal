@@ -69,19 +69,15 @@ function collectGigData(form) {
                         contentType: 'application/json; charset=utf-8',
                         processData: false,
                         success: function(gigID){
-                            createGig(gigID);
 
-                            $.ajax({
-                                url: "/api/v1/dht/hkey/?hkey=" + gigID,
-                                type: "GET",
-                                processData: false,
-                                success: function(gigData) {
-                                    $data = JSON.parse(gigData);
-                                    createGigToProfile($data, gigID);
-                                },
-                                error: function(error) {
-                                    return;
-                                }
+                            getDHTData(gigID, function(gigData) {
+                                $data = JSON.parse(gigData);
+                                createGigToProfile($data, gigID);
+                            });
+
+                            getDHTData(gigID, function(gigData) {
+                                $data = JSON.parse(gigData);
+                                createGigBox($data, gigID);
                             });
                         }
                     });
@@ -128,19 +124,15 @@ function collectGigData(form) {
                 contentType: 'application/json; charset=utf-8',
                 processData: false,
                 success: function(gigID){
-                    createGig(gigID);
 
-                    $.ajax({
-                        url: "/api/v1/dht/hkey/?hkey=" + gigID,
-                        type: "GET",
-                        processData: false,
-                        success: function(gigData) {
-                            $data = JSON.parse(gigData);
-                            createGigToProfile($data, gigID);
-                        },
-                        error: function(error) {
-                            return;
-                        }
+                    getDHTData(gigID, function(gigData) {
+                        $data = JSON.parse(gigData);
+                        createGigToProfile($data, gigID);
+                    });
+
+                    getDHTData(gigID, function(gigData) {
+                        $data = JSON.parse(gigData);
+                        createGigBox($data, gigID);
                     });
                 }
             });

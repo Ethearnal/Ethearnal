@@ -481,44 +481,48 @@ function require(script) {
 
 // FUNCTIONS
 
+// GET DATA
+require("js/functions/getData/gigData.js"); // GETS GIG DATA BY GIG ID
+require("js/functions/getData/guidsData.js"); // GETS ALL GUIDS (NODES) DATA
+require("js/functions/getData/profileGigs.js"); // GETS ALL GIGS RELATED TO PROFILE BY PROFILE ID
+require("js/functions/getData/nodeData.js"); // GETS NODE DATA
 
 // GIGS -- OTHER THINGS
 
 // CREATE
 // require("js/functions/modals/create/createLE.js"); // CREATES CONTENT BLOCK - NOT GIG
-require("js/functions/modals/create/createGig.js"); // GETS GIG DATA
-require("js/functions/modals/create/createGigBox.js") // CREATES GIG BOX
-require("js/functions/modals/create/createGigToProfile.js") // CREATES GIG BOX
-require("js/functions/modals/create/createPortfolio.js") // CREATES GIG BOX
-require("js/functions/modals/create/gigInner.js") // CREATES GIG INNER MODAL
+// require("js/functions/modals/create/createGig.js"); // GETS GIG DATA
+require("js/functions/modals/create/createGigBox.js"); // CREATES GIG BOX
+require("js/functions/modals/create/createGigToProfile.js"); // CREATES GIG BOX
+require("js/functions/modals/create/createPortfolio.js"); // CREATES GIG BOX
+require("js/functions/modals/create/gigInner.js"); // CREATES GIG INNER MODAL
 
 // DELETE
-require("js/functions/modals/delete/function.js") // DELETE FUNCTION
+require("js/functions/modals/delete/function.js"); // DELETE FUNCTION
 require("js/functions/modals/delete/gig.js"); // DELETES GIG
 
 // LOAD
 require("js/functions/modals/load/gigs.js"); // LOADS ALL GIGS
-require("js/functions/modals/load/searchGigs.js") // LOADS ALL GIGS BASED ON YOUR SEARCH
-require("js/functions/modals/load/moreGigsScrollDown.js") // LOADS MORE GIGS ON SCROLL DOWN
-require("js/functions/modals/load/loadGigsOnAjaxSuccess.js") // LOADS GIGS ON AJAX SUCCESS
+require("js/functions/modals/load/searchGigs.js"); // LOADS ALL GIGS BASED ON YOUR SEARCH
+require("js/functions/modals/load/moreGigsScrollDown.js"); // LOADS MORE GIGS ON SCROLL DOWN
+require("js/functions/modals/load/loadGigsOnAjaxSuccess.js"); // LOADS GIGS ON AJAX SUCCESS
 
 // COLLECT DATA
-require("js/functions/modals/collectData/gig.js") // COLLECTS GIG DATA
-require("js/functions/modals/collectData/portfolio.js") // COLLECTS PORTFOLIO ELEMENT DATA
-require("js/functions/modals/collectData/profile.js") // COLLECTS PROFILE DATA
-
+require("js/functions/modals/collectData/gig.js"); // COLLECTS GIG DATA
+require("js/functions/modals/collectData/portfolio.js"); // COLLECTS PORTFOLIO ELEMENT DATA
+require("js/functions/modals/collectData/profile.js"); // COLLECTS PROFILE DATA
 
 // MODALS
 
 // OPEN
-require("js/functions/modals/open/function.js") // OPEN MODAL MAIN FUNCTION
-require("js/functions/modals/open/modal.js") // OPEN --- CLOSE MODAL FUNCTIONS
+require("js/functions/modals/open/function.js"); // OPEN MODAL MAIN FUNCTION
+require("js/functions/modals/open/modal.js"); // OPEN --- CLOSE MODAL FUNCTIONS
 
 // INITIALIZING
-require("js/functions/modals/initializing/successMessage.js") // SHOWING SUCCESS MESSAGE FUNCTION
-require("js/functions/modals/initializing/datePickers.js") // INITIALIZING DATE PICKERS
-require("js/functions/modals/initializing/modalInputs.js") // ADDING TEXT TO INPUTS IN #EDIT MODALS
-require("js/functions/modals/initializing/profileModalInputs.js") // ADDING TEXT TO #EDIT PROFILE MODAL INPUTS
+require("js/functions/modals/initializing/successMessage.js"); // SHOWING SUCCESS MESSAGE FUNCTION
+require("js/functions/modals/initializing/datePickers.js"); // INITIALIZING DATE PICKERS
+require("js/functions/modals/initializing/modalInputs.js"); // ADDING TEXT TO INPUTS IN #EDIT MODALS
+require("js/functions/modals/initializing/profileModalInputs.js"); // ADDING TEXT TO #EDIT PROFILE MODAL INPUTS
 
 
 

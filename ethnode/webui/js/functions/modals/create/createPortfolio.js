@@ -1,4 +1,4 @@
-function createPortfolio(data) {
+function createPortfolio(data, portfolioID) {
     $data = data;
     var imageDiv = null;
     $timeFrom = null; $timeTo = null; $dateDifference = null; $dropdownID = null; $finalDiv = null; var twoLetters = null;
@@ -28,7 +28,7 @@ function createPortfolio(data) {
 
 
     // Creating a LIFE EXPERIENCE div variable so I can use it for HTML code creation.
-    $finalDiv = $('<div class="portfolio content-block col-xs-12">' + mainInformationDiv + descriptionDiv + '</div>');
+    $finalDiv = $('<div portfolioID="'+portfolioID+'" class="portfolio content-block col-xs-12">' + mainInformationDiv + descriptionDiv + '</div>');
 
     // Creating a variable to store HTML code for LIFE EXPERIENCE div.
     var divToRender = $finalDiv.get(0).outerHTML;

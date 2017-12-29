@@ -25,7 +25,8 @@ $('body').delegate('.open-modal', 'click', function(e) {
     openModal($modalID);
 
     // Functions for particular modals.
-    if($($modalID).hasClass('edit')) loadInputsText($form, $contentBlock);
+    if($($modalID).attr('id') == "edit-profile") loadProfileInputs();
+    if($($modalID).hasClass('edit') && $($modalID).attr('id') !== "edit-profile") loadInputsText($form, $contentBlock);
 
     if($($modalID).hasClass('add')) {
         if($modalID == "#add-gig") {

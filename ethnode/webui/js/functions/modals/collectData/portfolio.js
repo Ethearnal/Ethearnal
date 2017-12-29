@@ -8,7 +8,6 @@ function collectPortfolioData(form) {
     $description = $form.find('textarea#description').val();
     $tags = $form.find('.portfolio-tags').dropdown('get value');
 
-    var avatarImage = getBase64Image(document.getElementById("avatar-img"));
     var objFormData = new FormData();
     var fileObj = document.getElementById($imgInputID).files[0];
 
@@ -31,7 +30,16 @@ function collectPortfolioData(form) {
                         tags: $tags
                     }
 
-                    createPortfolio($data);
+                    $.ajax({
+                        url: "/api/v1/dht/portfolios/",
+                        type: "POST",
+                        data: JSON.stringify($data),
+                        contentType: 'application/json; charset=utf-8',
+                        processData: false,
+                        success: function(portfolioID){
+                            createPortfolio($data, portfolioID)
+                        }
+                    });
                 }
             });
         } else {
