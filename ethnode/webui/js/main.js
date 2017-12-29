@@ -485,6 +485,7 @@ function require(script) {
 require("js/functions/getData/gigData.js"); // GETS GIG DATA BY GIG ID
 require("js/functions/getData/guidsData.js"); // GETS ALL GUIDS (NODES) DATA
 require("js/functions/getData/profileGigs.js"); // GETS ALL GIGS RELATED TO PROFILE BY PROFILE ID
+require("js/functions/getData/profilePortfolios.js"); // GETS ALL PORTFOLIOS RELATED TO PROFILE BY PROFILE ID
 require("js/functions/getData/nodeData.js"); // GETS NODE DATA
 
 // GIGS -- OTHER THINGS
@@ -503,6 +504,7 @@ require("js/functions/modals/delete/gig.js"); // DELETES GIG
 
 // LOAD
 require("js/functions/modals/load/gigs.js"); // LOADS ALL GIGS
+require("js/functions/modals/load/portfolios.js"); // LOAD ALL PORTFOLIOS
 require("js/functions/modals/load/searchGigs.js"); // LOADS ALL GIGS BASED ON YOUR SEARCH
 require("js/functions/modals/load/moreGigsScrollDown.js"); // LOADS MORE GIGS ON SCROLL DOWN
 require("js/functions/modals/load/loadGigsOnAjaxSuccess.js"); // LOADS GIGS ON AJAX SUCCESS
