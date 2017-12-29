@@ -119,6 +119,11 @@ $('a[load]').click(function(e) {
         /*
         */
        // console.log('TEST');
+       var gig_ctx = $("[data-target='#gigModal'")
+       var el =gig_ctx.remove(0);
+
+       // console.log('TEST',gig_ctx);
+
         getNodeData(function(node_data){
         node = $.parseJSON(node_data);
        // console.log('GUID:' + node.guid);
