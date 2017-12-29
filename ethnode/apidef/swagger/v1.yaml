@@ -9,6 +9,31 @@ schemes:
 - "http"
 paths:
   /dht/portfolios/:
+    delete:
+      tags:
+      - "DHT Portfolios"
+      summary: "Del portfolio element"
+      description: ""
+      operationId: "deletePortfolio"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "hkey"
+        in: "query"
+        description: "Portfolios"
+        required: false
+        type: "string"
+        maxLength: 64
+        minLength: 64
+      responses:
+        200:
+          description: "delete own portfolio element by key"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Portfolio"
+        400:
+          description: "bad input parameter"
     get:
       tags:
       - "DHT Portfolios"
@@ -61,6 +86,31 @@ paths:
 
 
   /dht/gigs/:
+    delete:
+      tags:
+      - "DHT Gigs"
+      summary: "Gigs Listings by owner (if not provide own gigs)"
+      description: "Post and retrieve self or foreign Gigs"
+      operationId: "deleteGig"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "hkey"
+        in: "query"
+        description: "Gigs"
+        required: false
+        type: "string"
+        maxLength: 64
+        minLength: 64
+      responses:
+        200:
+          description: "delete own gig by key"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Gig"
+        400:
+          description: "bad input parameter"
     get:
       tags:
       - "DHT Gigs"

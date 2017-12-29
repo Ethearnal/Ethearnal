@@ -67,8 +67,11 @@ class DhtGigsHkeysWebAPI(object):
         self.dhf = dhf
         self.mount_point = mount_point
         self.collection_name = '.gigs'
+        self.delete_collection_name = '.deleted_gigs'
         self.me = me_owner
         self.mygigs = instance_dl(self.dhf, self.me.hex(), self.collection_name)
+        self.deleted_gigs = instance_dl(self.dhf, self.me.hex(), self.delete_collection_name)
+
         if mount_it:
             self.mount()
             print('MOUNT WEB:', self.mount_point)
@@ -77,10 +80,30 @@ class DhtGigsHkeysWebAPI(object):
 
     def get_per_guid(self, owner_guid):
         dl = instance_dl(self.dhf, owner_guid, self.collection_name)
-        ll = list(dl.iter_hk())
+        ll = list(dl.iter_hk(inverted=True))
         return ll
 
-    def GET(self, owner_guid=None):
+    def DELETE(self, hkey):
+        owner_guid = self.dhf.ert.rsa_guid_hex
+        dl = instance_dl(self.dhf, owner_guid, self.collection_name)
+
+        item = dl.delete(key='', hkey=hkey)
+        if item:
+            dl.dlitem_dict.__setitem__(item.key, item)
+            d = item.to_dict()
+            js = json.dumps(d, ensure_ascii=False)
+            return js.encode()
+        return b'null'
+
+    def GET(self, owner_guid=None, deleted=None):
+
+        if deleted and owner_guid:
+            dl = instance_dl(self.dhf, owner_guid, self.delete_collection_name)
+            ll = list(dl.iter_hk(inverted=False))
+            d_js = json.dumps(ll, ensure_ascii=False)
+            d_sj_bin = d_js.encode()
+            return d_sj_bin
+
         if owner_guid:
             ll = self.get_per_guid(owner_guid)
             d_js = json.dumps(ll, ensure_ascii=False)
@@ -114,10 +137,16 @@ class DhtGigsHkeysWebAPI(object):
                 s = 'ERROR %s field required!' % str(item)
                 return s.encode()
 
-        key = data['title']
         data['owner_guid'] = self.me.hex()
         data['model'] = 'Gig'
         value = data
+        from datetime import datetime
+        key = data['title'] + ';' + datetime.now().isoformat()
+
+        o_item = self.mygigs.dlitem_dict.get(key)
+        if o_item:
+            if o_item.deleted:
+                self.deleted_gigs.delete(key)
         try:
             o_item_hk = self.mygigs.insert(key=key, value=value)
         except:
@@ -257,6 +286,18 @@ class DhtPortfoliosWebAPI(object):
         ll = list(dl.iter_hk())
         return ll
 
+    def DELETE(self, hkey):
+        owner_guid = self.dhf.ert.rsa_guid_hex
+        dl = instance_dl(self.dhf, owner_guid, self.collection_name)
+
+        item = dl.delete(key='', hkey=hkey)
+        if item:
+            dl.dlitem_dict.__setitem__(item.key, item)
+            d = item.to_dict()
+            js = json.dumps(d, ensure_ascii=False)
+            return js.encode()
+        return b'null'
+
     def GET(self, owner_guid=None):
         if owner_guid:
             ll = self.get_per_guid(owner_guid)
@@ -289,10 +330,11 @@ class DhtPortfoliosWebAPI(object):
             if item not in data:
                 print('REQUIRED FIELD', item)
 
-        key = data['title']
         data['owner_guid'] = self.me.hex()
         data['model'] = 'Portfolio'
         value = data
+        from datetime import datetime
+        key = data['title'] + ';' + datetime.now().isoformat()
         try:
             o_item_hk = self.mygigs.insert(key=key, value=value)
         except:

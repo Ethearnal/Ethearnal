@@ -91,6 +91,13 @@ class DHTFacade(object):
     def bin_guid(self):
         return cdx.guid_int_to_bts(self.dht.peer.id)
 
+    @staticmethod
+    def calc_hk_hex(key, guid_hex, revision=1):
+        guid_bin = cdx.guid_hex_to_bin(guid_hex)
+        hk = cdx.encode_key_hash(key, guid=guid_bin, revision=revision)
+        hk_hex = cdx.guid_int_to_hex(hk)
+        return hk_hex, hk
+
     def push(self, key, value,
              revision=cdx.DEFAULT_REVISION,
              nearest_nodes=None, local_only=False, remote_only=False, hk_hex=None):

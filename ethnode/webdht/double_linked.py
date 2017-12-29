@@ -12,16 +12,16 @@ class OwnPulse(object):
     def push(self, k, v):
         return self.dhf.push(k, v)
 
-    def pull(self, k):
-        item = self.dhf.pull_local(k)
+    def pull(self, k, hkey=None):
+        item = self.dhf.pull_local(k, hk_hex=hkey)
         if not item:
-            item = self.dhf.pull_remote(k)
+            item = self.dhf.pull_remote(k, hk_hex=hkey)
         if item:
             print(item)
         guid_bin = self.owner.bin()
-        t = self.dhf.pull_remote(k, guid=guid_bin)
+        t = self.dhf.pull_remote(k, guid=guid_bin, hk_hex=hkey)
         if not t:
-            t = self.dhf.pull_local(k, guid=guid_bin)
+            t = self.dhf.pull_local(k, guid=guid_bin, hk_hex=hkey)
             if not t:
                 return dict()
 
@@ -72,12 +72,14 @@ class DLItem(object):
                  value,
                  prev_key,
                  next_key,
-                 hk=None):
+                 hk=None,
+                 deleted=False):
         self.key = key
         self.value = value
         self.prev_key = prev_key
         self.next_key = next_key
         self.hk = hk
+        self.deleted = deleted
 
     def to_dict(self):
         return {
@@ -85,7 +87,8 @@ class DLItem(object):
             'value': self.value,
             'next_key': self.next_key,
             'prev_key': self.prev_key,
-            'hk': self.hk
+            'hk': self.hk,
+            'deleted': self.deleted
         }
 
 
@@ -111,8 +114,8 @@ class DLItemDict(object):
         meta_item = DLMetaItemFromDict(d)
         return meta_item
 
-    def get(self, key) -> DLItem or None:
-        d_val = self.pulse.pull(key)
+    def get(self, key, hkey=None) -> DLItem or None:
+        d_val = self.pulse.pull(key, hkey=hkey)
         if not d_val:
             return None
         item_dl = DLFromDict(d_val)
@@ -152,6 +155,15 @@ class DList(object):
 
     def insert(self, key, value):
         o_item_hk = None
+        o_item = None
+        try:
+            o_item = self.dlitem_dict.get(key)
+            if o_item:
+                print('EXISTS, REJECT')
+
+        except Exception as e:
+            return None
+
         if not self.last_key:
             self.first_key = key
             self.last_key = key
@@ -161,25 +173,51 @@ class DList(object):
             self.update_meta_item()
 
         else:
-            o_item = self.dlitem_dict.get(key)
-            if o_item:
-                # update
-                o_item.value = value
-                self.dlitem_dict.__setitem__(o_item.key, o_item)
-                o_item_hk = self.dlitem_dict.last_set_hkey
-            else:
-                # insert
-                o_last_item = self.dlitem_dict.get(self.last_key)
-                self.last_key = key
-                o_last_item.next_key = key
-                self.dlitem_dict.__setitem__(o_last_item.key, o_last_item)
-                o_item = DLItem(key, value, prev_key=o_last_item.key, next_key=None)
-                o_item.prev_key = o_last_item.key
-                o_item.next_key = None
-                self.dlitem_dict.__setitem__(o_item.key, o_item)
-                o_item_hk = self.dlitem_dict.last_set_hkey
-                self.update_meta_item()
+            o_last_item = self.dlitem_dict.get(self.last_key)
+            self.last_key = key
+            o_last_item.next_key = key
+            self.dlitem_dict.__setitem__(o_last_item.key, o_last_item)
+            o_item = DLItem(key, value, prev_key=o_last_item.key, next_key=None)
+            o_item.prev_key = o_last_item.key
+            o_item.next_key = None
+            self.dlitem_dict.__setitem__(o_item.key, o_item)
+            o_item_hk = self.dlitem_dict.last_set_hkey
+            self.update_meta_item()
         return o_item_hk
+
+    def delete(self, key, hkey=None) -> DLItem or None:
+        if hkey:
+            o_item = self.dlitem_dict.get(key, hkey=hkey)
+        else:
+            o_item = self.dlitem_dict.get(key)
+
+        if o_item.prev_key and o_item.next_key:
+            nx_item = self.dlitem_dict.get(o_item.next_key)
+            pr_item = self.dlitem_dict.get(o_item.prev_key)
+            pr_item.next_key = nx_item.key
+            nx_item.prev_key = pr_item.key
+            self.dlitem_dict.__setitem__(pr_item.key, pr_item)
+            self.dlitem_dict.__setitem__(nx_item.key, nx_item)
+            return o_item
+        elif o_item.prev_key:
+            pr_item = self.dlitem_dict.get(o_item.prev_key)
+            pr_item.next_key = None
+            self.last_key = pr_item.key
+            self.dlitem_dict.__setitem__(pr_item.key, pr_item)
+            self.update_meta_item()
+            return o_item
+        elif o_item.next_key:
+            nx_item = self.dlitem_dict.get(o_item.next_key)
+            nx_item.prev_key = None
+            self.dlitem_dict.__setitem__(nx_item.key, nx_item)
+            self.first_key = nx_item.key
+            self.update_meta_item()
+            return o_item
+        else:
+            self.first_key = None
+            self.last_key = None
+            self.update_meta_item()
+            return o_item
 
     def iter_items(self):
         if self.first_key:
@@ -194,20 +232,47 @@ class DList(object):
         else:
             pass
 
-    def iter_hk(self):
-        for item in self.iter_items():
+    def iter_items_inverted(self):
+        if self.last_key:
+            nx_key = self.last_key
+            while nx_key:
+                item = self.dlitem_dict.get(nx_key)
+                if item:
+                    nx_key = item.prev_key
+                    yield  item
+                else:
+                    break
+        else:
+            pass
+
+    def iter_hk(self, inverted=False):
+        itr = self.iter_items
+        if inverted:
+            itr = self.iter_items_inverted
+        for item in itr():
             yield item.hk
 
-    def iter_keys(self):
-        for item in self.iter_items():
+    def iter_keys(self, inverted=False):
+        itr = self.iter_items
+        if inverted:
+            itr = self.iter_items_inverted
+        for item in itr():
             yield item.key
+        # for item in self.iter_items():
+        #     yield item.key
 
-    def iter_values(self):
-        for item in self.iter_items():
+    def iter_values(self, inverted=False):
+        itr = self.iter_items
+        if inverted:
+            itr = self.iter_items_inverted
+        for item in itr():
             yield item.value
 
-    def iter_kv(self):
-        for item in self.iter_items():
+    def iter_kv(self, inverted):
+        itr = self.iter_items
+        if inverted:
+            itr = self.iter_items_inverted
+        for item in itr():
             yield (item.key, item.value)
 
 
