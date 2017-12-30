@@ -89,6 +89,42 @@ $('a.navbar-brand').click(function() {
 })
 
 
+// func
+function getProfileGigsF(guid_id){
+            console.log(guid_id);
+
+
+                $.ajax({
+                        url: "/api/v1/dht/hkey/?hkey=" + guid_id,
+                        hk: guid_id,
+                        type: "GET",
+                        processData: true,
+                        success: function(gigs_dta){
+
+                                    console.log(gigs_dta);
+
+                                   //console.log('hkey',this.hk);
+                                   //console.log('data:',js_data);
+                                   // gig_o = JSON.parse(js_data);
+                                   //console.log('data:',gig_o);
+                                   //createGigToProfile2(this.hk, gig_o);
+
+                            },
+
+                        error: function(error) {
+                                console.log('ERR',error);
+
+                                return;
+                            }
+                    });
+
+                    //var gig_hk = profile_gigs[i];
+                    //console.log('GIG HK:',gig_hk);
+                    /**/
+
+        };
+
+
 // WHEN YOU CLICK ON HEADER PAGE BUTTONS (gigs/jobs/profiles/etc) IT WILL TURN THE PAGE INTO ANOTHER PAGE
 $('a[load]').click(function(e) {
     e.preventDefault();
@@ -104,6 +140,28 @@ $('a[load]').click(function(e) {
         $('section.gigs-page-content').show();
         $('input#search-header').focus().attr('placeholder', 'Search gigs...');
     }
+
+    if($load == 'gigs') {
+        console.log('GIGS');
+        $.ajax({
+            type: 'GET',
+            url: '/api/v1/dht/guids',
+            dataType: 'text',
+            processData: false,
+            success: function( guids_data ) {
+                console.log('GUIDS',guids_data);
+                guids =JSON.parse(guids_data);
+                for (var i = 0; i < guids.length; i++) {
+                     //console.log(guids[i]);
+                     getProfileGigsF(guids[i]);
+                }
+
+            }
+        });
+    }
+
+
+
 
     if($load == 'jobs') {
         $('section.jobs-page-content').show();
@@ -121,8 +179,6 @@ $('a[load]').click(function(e) {
        // console.log('TEST');
        var gig_ctx = $("[data-target='#gigModal'")
        var el =gig_ctx.remove(0);
-
-       // console.log('TEST',gig_ctx);
 
         getNodeData(function(node_data){
         node = $.parseJSON(node_data);

@@ -72,17 +72,14 @@ function createGigToProfile2(hk, gig_o) {
     var footer = '<div class="footer"><h4>Starting at <span><i class="material-icons">polymer</i>' + gig_o.price + '</span></h4></div>';
 
     //console.log('GIG TO PROFILE', gig_o);
-    $gig = $('<div id="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">' + dropdownButton + dropdownUL + image +  title + desc + footer + '</div>');
-    gig_ctx = 0 | $("#"+hk);
-    gig_ctx = document.getElementById(hk);
-
-    if(gig_ctx){
-        console.log('gig div', gig_ctx);
-        gig_ctx.outerHTML = $gig.get(0).outerHTML;
-    } else {
-     console.log('not found', gig_ctx);
-        $(".gigs-container-profile").append($gig.get(0).outerHTML);
-    }
+    // $gig = $('<div id="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">' + dropdownButton + dropdownUL + image +  title + desc + footer + '</div>');
+    //gig_ctx = 0 | $("#"+hk);
+    //gig_ctx = document.getElementById(hk);
+    gig_html = '<div id="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">' + dropdownButton + dropdownUL + image +  title + desc + footer + '</div>';
+    //
+    // console.log('RENDER GIG', gigID);
+    $(".gigs-container-profile").append(gig_html);
     componentHandler.upgradeDom();
+
 }
 
