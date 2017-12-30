@@ -52,6 +52,7 @@ function updateProfile() {
 
     // CHANGING PROFILE PICTURE
     getProfileValue(profileID, 'profilePicture', function(profilePictureURL) {
+        var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
 
         if (profilePictureURL.indexOf('//') >= 0) {
 
@@ -61,8 +62,8 @@ function updateProfile() {
         } else {
 
             // CHANGING PROFILE PICTURE
-            $('.profile-image img').attr('src', 'http://localhost:5678/api/cdn/v1/resource?hkey=' + JSON.parse(profilePictureURL));
-            $('li.profile img.profile-picture').attr('src', 'http://localhost:5678/api/cdn/v1/resource?hkey=' + JSON.parse(profilePictureURL));
+            $('.profile-image img').attr('src', api_cdn + JSON.parse(profilePictureURL));
+            $('li.profile img.profile-picture').attr('src', api_cdn + JSON.parse(profilePictureURL));
         }
     });
 

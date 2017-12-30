@@ -61,9 +61,10 @@ function createGigToProfile2(hk, gig_o) {
 
     var image ='';
     var gigID = hk;
+    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
 
     image += '<div class="ui fluid image"><div class="ui black ribbon label">';
-    image += gig_o.general_domain_of_expertise +'</div><div class="image-block"><img src="http://localhost:5678/api/cdn/v1/resource?hkey=';
+    image += gig_o.general_domain_of_expertise +'</div><div class="image-block"><img src="'+api_cdn+'';
     image += gig_o.image_hash+'" /></div></div>';
     var title = '<p>' + gig_o.title + '</p>';
     var desc = '<p>' + gig_o.description + '</p>';
