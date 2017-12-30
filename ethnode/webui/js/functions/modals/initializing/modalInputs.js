@@ -7,8 +7,8 @@ function loadInputsText(form, div) {
 
     // Resetting the form
     clearForm($form);
-    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
-    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
+    // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+    // var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
 
     if($divToLoad.hasClass('portfolio')) {
         $portfolioID = $divToLoad.attr('portfolioID');
@@ -17,7 +17,7 @@ function loadInputsText(form, div) {
             $portfolio = JSON.parse(portfolioData);
 
             // IMAGE
-            $content.find('img#input-image-portfolio').attr('src', api_cdn' + $portfolio.image_hash);
+            $content.find('img#input-image-portfolio').attr('src', $portfolio.image_hash);
             $content.find('img.img-portfolio').removeClass('active');
             $content.find('label[for="input-image-portfolio"]').text('Click here to change image').removeClass('active');
 
