@@ -1,4 +1,4 @@
-// Collects GIG /EDIT /CREATE data.
+// FCollects GIG /EDIT /CREATE data.
 function collectGigData(form) {
     $form = form;
     $content = $form.closest('.content');
