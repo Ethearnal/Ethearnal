@@ -3,6 +3,8 @@ function createGigToProfile(gigData, gigID) {
     $data = gigData;
     $expiresIn = null;
     gigData = gigData || '';
+    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
+    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
 
     $($data.date).each(function(i, dates) {
         if (dates.expiresIn == undefined || dates.expiresIn == null) {
@@ -14,7 +16,7 @@ function createGigToProfile(gigData, gigID) {
 
 
     // image = '<div class="image"><img src="/api/v1/my/img/?q='+$data.imageHash+'" alt="Gig Image" /></div>';
-    image = '<div class="ui fluid image"><div class="ui black ribbon label">'+ $data.categoryName +'</div><div class="image-block"><img src="http://localhost:5678/api/cdn/v1/resource?hkey='+$data.imageHash+'" /></div></div>';
+    image = '<div class="ui fluid image"><div class="ui black ribbon label">'+ $data.categoryName +'</div><div class="image-block"><img src="'+api_cdn+'"'+$data.image_hash+'" /></div></div>';
 
     // dropdown button
     var dropdownButton = '<button id="dropdowngig'+ iGig +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button dropdown-gig"><i class="material-icons">more_vert</i></button>';

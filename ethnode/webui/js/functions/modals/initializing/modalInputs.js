@@ -7,6 +7,8 @@ function loadInputsText(form, div) {
 
     // Resetting the form
     clearForm($form);
+    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
 
     if($divToLoad.hasClass('portfolio')) {
         $portfolioID = $divToLoad.attr('portfolioID');
@@ -15,7 +17,7 @@ function loadInputsText(form, div) {
             $portfolio = JSON.parse(portfolioData);
 
             // IMAGE
-            $content.find('img#input-image-portfolio').attr('src', 'http://localhost:5678/api/cdn/v1/resource?hkey=' + $portfolio.imageHash);
+            $content.find('img#input-image-portfolio').attr('src', api_cdn' + $portfolio.image_hash);
             $content.find('img.img-portfolio').removeClass('active');
             $content.find('label[for="input-image-portfolio"]').text('Click here to change image').removeClass('active');
 
@@ -42,7 +44,7 @@ function loadInputsText(form, div) {
             });
 
             // IMAGE
-            $content.find('img#input-image-gig-edit').attr('src', 'http://localhost:5678/api/cdn/v1/resource?hkey=' + $gig.imageHash);
+            $content.find('img#input-image-gig-edit').attr('src', api_cdn + $gig.image_hash);
             $content.find('img.img-gig-edit').removeClass('active');
             $content.find('label[for="input-image-gig-edit"]').text('Click here to change image').removeClass('active');
 

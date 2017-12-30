@@ -25,11 +25,13 @@ function collectGigData(form) {
     var fileObj = document.getElementById($imgInputID).files[0];
 
     objFormData.append('ufile', fileObj);
+    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
+    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
 
     if(fileObj != undefined) {
         if(!!fileObj.type.match(/image.*/)) {
             $.ajax({
-                url: "http://localhost:5678/api/cdn/v1/resource",
+                url: api_cdn_post,
                 type: "POST",
                 data: objFormData,
                 processData: false,
