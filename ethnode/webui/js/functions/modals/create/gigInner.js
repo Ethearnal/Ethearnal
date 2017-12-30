@@ -5,7 +5,7 @@ $('body').delegate('button.dropdown-gig, li.open-modal, ul.mdl-menu, .mdl-menu__
 });
 
 $('body').delegate('.gig', 'click', function(e) {
-    var gigID = $(this).attr('id');
+    var gigID = $(this).attr('gigID');
 
     function createGigInner(data) {
         // null everything
@@ -16,14 +16,13 @@ $('body').delegate('.gig', 'click', function(e) {
         $reputationCost = $data.reputationCost;
 
         // Get expire date
-        $expiresIn = 'ISO'
-        /*$($data.date).each(function(i, dates) {
+        $($data.date).each(function(i, dates) {
             if (dates.expiresIn == undefined || dates.expiresIn == null) {
                 $expiresIn = ''
             } else {
                $expiresIn = 'expires ' + dates.expiresIn;
             }
-        });*/
+        });
 
         if ($reputationCost == undefined || $reputationCost == null) $reputationCost = 0;
 
@@ -41,9 +40,9 @@ $('body').delegate('.gig', 'click', function(e) {
         var ownerName = '<h5>' + $data.ownerName + '</h5>';
         var ownerReputation = '<h4><i class="material-icons">polymer</i> ' + $data.ownerReputation + ' <span>'+$expiresIn+'</span></h4>';
         var ownerInfo = '<div class="owner-info">' + ownerAvatar + ownerName + ownerReputation + '</div>';
-        var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+
         // .image DIV
-        var imageItem = '<div class="item"><img src="'+api_cdn+$data.image_hash+'" /></div>';
+        var imageItem = '<div class="item"><img src="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey='+$data.imageHash+'" /></div>';
         var buttonPrev = '<div class="button-prev"><i class="material-icons">keyboard_arrow_left</i></div>';
         var buttonNext = '<div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div>';
         var items = '<div class="items">' + imageItem + '</div>';
@@ -53,8 +52,7 @@ $('body').delegate('.gig', 'click', function(e) {
         var description = '<p class="gig-description">' + $data.description + '</p>';
 
         // EXTRAS BOX
-        var extrasBox ='';
-        //var extrasBox = '<div class="extras-box"><h3>BOX FOR EXTRAS</h3></div>';
+        var extrasBox = '<div class="extras-box"><h3>BOX FOR EXTRAS</h3></div>';
 
         // FOOTER
         var closeButton = '<button data-dismiss="modal" class="mdl-button mdl-js-button close-button">Close</button>';

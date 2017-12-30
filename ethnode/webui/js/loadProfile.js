@@ -5,6 +5,26 @@ getNodeData(function(nodeData) {
     updateProfile();
 });
 
+function defaultProfileSettings() {
+    $dataName = { first: 'FirstName', last: 'LastName' };
+    $dataLocation = { country: 'country', city: 'city', countryClass: 'ax' }
+    $skills = ["angular", "css", "UX"];
+    $languages = ["bulgarian", "programian"];
+    $description = "This is my description";
+    $title = "This is my title";
+
+    setProfileValue('name', $dataName);
+    setProfileValue('location', $dataLocation);
+    setProfileValue('title', $title);
+    setProfileValue('description', $description);
+    setProfileValue('reputation', 0);
+    setProfileValue('profilePicture', 'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png');
+    setProfileValue('skills', $skills);
+    setProfileValue('languages', $languages);
+}
+
+defaultProfileSettings();
+
 
 // profileKey is for what thing you want to change.
 function getProfileValue(profileID, profileKey, callback) {

@@ -134,6 +134,7 @@ $('.modal-box button').click(function() {
         if($modalID == 'add-language' || $modalID == 'edit-language') $data = collectLanguageData($form);
         if($modalID == 'add-skill' || $modalID == 'edit-skill') $data = collectSkillData($form);
         if($modalID == "edit-profile") $data = collectProfileData($form);
+        if($modalID == "edit-background-images") $data = collectBackgroundImagesData($form);
         if($modalID == "add-gig" || $modalID == "edit-gig") collectGigData($form);
 
 

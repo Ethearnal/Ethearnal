@@ -1,6 +1,5 @@
 // LOADS ALL GIGS TO MAIN PAGE
 function loadGigs() {
-/*
     getGuidsData(function(guids) {
         $profileIDS = JSON.parse(guids);
 
@@ -8,8 +7,6 @@ function loadGigs() {
 
             getProfileGigs(profileID, function(gigs) {
                 $gigs = JSON.parse(gigs);
-
-                // console.log(gigs);
 
                 // GETS GIG DATA BY GIG ID
                 $($gigs).each(function(i, gigID) {
@@ -23,7 +20,6 @@ function loadGigs() {
             });
         });
     });
-    */
 }
 
 // LOADS ALL GIGS TO PROFILE PAGE
@@ -48,5 +44,5 @@ function loadGigsToProfile() {
 }
 
 // Initializing function on website load
-// loadGigs();
-// loadGigsToProfile();
+loadGigs();
+loadGigsToProfile();

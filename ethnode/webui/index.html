@@ -823,6 +823,41 @@
         </div>
       </div>
     </div>
+    <div id="edit-background-images" class="modal-box edit flex floating">
+      <div class="modal-box-content">
+        <div class="inner-modal">
+          <div class="content">
+            <div class="modal-header">
+              <h3>Edit background images</h3>
+            </div>
+            <div class="success-message">
+              <h1 class="title">Congratulations!</h1>
+              <div class="success-content">
+                <p>Your background images has been updated.</p>
+              </div>
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see them</button><span>OR</span>
+                <button class="mdl-button mdl-js-button create-new">Edit background images again</button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <input id="input-image-background" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                <label for="input-image-background" class="img-label">Add Background Image</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-background"><img id="input-image-background" src="#" alt="" class="show-image empty">
+              </div>
+              <div class="modal-inputs">
+                <form></form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button id="updateProfile" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+              <div data-mdl-for="updateProfile" class="mdl-tooltip">This text will be changed anyway.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Including header-->
     <header class="main-header">
       <div class="container">
@@ -884,10 +919,22 @@
     <section style="display: none" class="background-image">
       <div class="button-prev"><i class="material-icons">keyboard_arrow_left</i></div>
       <div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div>
-      <div class="items">
-        <div class="item"><img src="images/background-road-different.png" alt="Building"></div>
-        <div class="item"><img src="images/background-buildings.png" alt="Building"></div>
-        <div class="item"><img src="images/background-downtown.png" alt="Building"></div>
+      <div open-modal="#edit-background-images" class="items open-modal">
+        <div class="item first"><img src="images/background-road-different.png" alt="Building">
+          <div class="text-on-image">
+            <p>Change</p>
+          </div>
+        </div>
+        <div class="item"><img src="images/background-buildings.png" alt="Building">
+          <div class="text-on-image">
+            <p>Change</p>
+          </div>
+        </div>
+        <div class="item"><img src="images/background-downtown.png" alt="Building">
+          <div class="text-on-image">
+            <p>Change</p>
+          </div>
+        </div>
       </div>
     </section>
     <!-- This section is for your whole profile, including left and right sides, profile information and etc.-->

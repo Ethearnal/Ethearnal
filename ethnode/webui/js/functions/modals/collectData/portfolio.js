@@ -10,13 +10,13 @@ function collectPortfolioData(form) {
 
     var objFormData = new FormData();
     var fileObj = document.getElementById($imgInputID).files[0];
-    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
+
     objFormData.append('ufile', fileObj);
 
     if(fileObj != undefined) {
         if(!!fileObj.type.match(/image.*/)) {
             $.ajax({
-                url: api_cdn_post,
+                url: defaultIMGPostCDN,
                 type: "POST",
                 data: objFormData,
                 processData: false,

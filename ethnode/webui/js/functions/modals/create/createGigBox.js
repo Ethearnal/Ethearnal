@@ -1,18 +1,6 @@
 var iGig = 0;
 function createGigBox(gigData, gigID) {
-    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
-    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
-
-
     // if ($('.gig').attr('gigID') == gigID) return false;
-
-    // if (gigID == undefined) {
-    //     console.log('undefined id');
-    // }
-
-    // $('.gigs-container .gig').each(function(i, gig) {
-    //     console.log(gig);
-    // })
 
     $data = gigData;
     $expiresIn = null;
@@ -28,7 +16,7 @@ function createGigBox(gigData, gigID) {
 
 
     // image = '<div class="image"><img src="/api/v1/my/img/?q='+$data.imageHash+'" alt="Gig Image" /></div>';
-    image = '<div class="ui fluid image"><div class="ui black ribbon label">'+ $data.categoryName +'</div><div class="image-block"><img src="'+$data.image_hash+'" /></div></div>';
+    image = '<div class="ui fluid image"><div class="ui black ribbon label">'+ $data.categoryName +'</div><div class="image-block"><img src="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey='+$data.imageHash+'" /></div></div>';
 
     // dropdown button
     var dropdownButton = '<button id="dropdowngig'+ iGig +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button dropdown-gig"><i class="material-icons">more_vert</i></button>';

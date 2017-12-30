@@ -1,4 +1,4 @@
-// FCollects GIG /EDIT /CREATE data.
+// Collects GIG /EDIT /CREATE data.
 function collectGigData(form) {
     $form = form;
     $content = $form.closest('.content');
@@ -20,18 +20,15 @@ function collectGigData(form) {
     $expireDateDifference = moment($expireDateClear, "DDMMYYYY").fromNow();
 
     $avatarImage = $('#avatar-img').attr('src');
-    console.log($avatarImage);
     var objFormData = new FormData();
     var fileObj = document.getElementById($imgInputID).files[0];
 
     objFormData.append('ufile', fileObj);
-    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
-    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
 
     if(fileObj != undefined) {
         if(!!fileObj.type.match(/image.*/)) {
             $.ajax({
-                url: api_cdn_post,
+                url: defaultIMGPostCDN,
                 type: "POST",
                 data: objFormData,
                 processData: false,
@@ -46,22 +43,22 @@ function collectGigData(form) {
 
                     // AND CREATE A NEW ONE
                     $data = {
-                        image_hash: data,
-                        //ownerAvatar: $avatarImage,
-                        // ownerReputation: $reputation,
-                        // ownerName: $ownerName,
-                        // categoryName: $categoryName,
+                        imageHash: data,
+                        ownerAvatar: $avatarImage,
+                        ownerReputation: $reputation,
+                        ownerName: $ownerName,
+                        categoryName: $categoryName,
                         general_domain_of_expertise: $categoryName,
                         title: $title,
-                        //category: $category,
+                        category: $category,
                         required_ert: $reputationCost,
-                        // reputationCost: $reputationCost,
+                        reputationCost: $reputationCost,
                         description: $description,
                         price: $price,
                         tags: $tags,
-//                        date: [
-//                            { expire: $dateExpire, expiresIn: $expireDateDifference }
-//                        ]
+                        date: [
+                            { expire: $dateExpire, expiresIn: $expireDateDifference }
+                        ]
                     }
 
                     $.ajax({
@@ -72,15 +69,15 @@ function collectGigData(form) {
                         processData: false,
                         success: function(gigID){
 
-//                            getDHTData(gigID, function(gigData) {
-//                                $data = JSON.parse(gigData);
-//                                createGigToProfile($data, gigID);
-//                            });
+                            getDHTData(gigID, function(gigData) {
+                                $data = JSON.parse(gigData);
+                                createGigToProfile($data, gigID);
+                            });
 
-//                            getDHTData(gigID, function(gigData) {
-//                                $data = JSON.parse(gigData);
-//                                createGigBox($data, gigID);
-//                            });
+                            getDHTData(gigID, function(gigData) {
+                                $data = JSON.parse(gigData);
+                                createGigBox($data, gigID);
+                            });
                         }
                     });
                 }
@@ -93,7 +90,6 @@ function collectGigData(form) {
     } else if (fileObj == undefined) {
 
         // Checks if the GIG already has image and re-use image hash.
-        console.log('Are we here?');
         if($content.find('img.show-image').attr('src') != null) {
             $imageSrc = $content.find('img.show-image').attr('src');
             $imageHash = $imageSrc.split('/api/v1/my/img/?q=')[1];
@@ -128,15 +124,15 @@ function collectGigData(form) {
                 processData: false,
                 success: function(gigID){
 
-//                    getDHTData(gigID, function(gigData) {
-//                        $data = JSON.parse(gigData);
-//                        createGigToProfile($data, gigID);
-//                    });
-//
-//                    getDHTData(gigID, function(gigData) {
-//                        $data = JSON.parse(gigData);
-//                        createGigBox($data, gigID);
-//                    });
+                    getDHTData(gigID, function(gigData) {
+                        $data = JSON.parse(gigData);
+                        createGigToProfile($data, gigID);
+                    });
+
+                    getDHTData(gigID, function(gigData) {
+                        $data = JSON.parse(gigData);
+                        createGigBox($data, gigID);
+                    });
                 }
             });
         }

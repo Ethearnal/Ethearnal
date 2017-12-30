@@ -2,10 +2,18 @@
 section.background-image(style="display: none")
     .button-prev: i.material-icons keyboard_arrow_left
     .button-next: i.material-icons keyboard_arrow_right
-    .items
-        .item: img(src="images/background-road-different.png", alt="Building")
-        .item: img(src="images/background-buildings.png", alt="Building")
-        .item: img(src="images/background-downtown.png", alt="Building")
+    .items.open-modal(open-modal="#edit-background-images")
+        .item.first
+            img(src="images/background-road-different.png", alt="Building")
+            .text-on-image: p Change
+
+        .item
+            img(src="images/background-buildings.png", alt="Building")
+            .text-on-image: p Change
+
+        .item
+            img(src="images/background-downtown.png", alt="Building")
+            .text-on-image: p Change
 
 // This section is for your whole profile, including left and right sides, profile information and etc.
 section.documentation(style="display: none")

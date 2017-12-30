@@ -20,13 +20,11 @@ function collectProfileData(form) {
     var fileObj = document.getElementById($imgInputID).files[0];
 
     objFormData.append('ufile', fileObj);
-    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
-    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
 
     if(fileObj != undefined) {
         if(!!fileObj.type.match(/image.*/)) {
             $.ajax({
-                url: api_cdn_post,
+                url: defaultIMGPostCDN,
                 type: "POST",
                 data: objFormData,
                 processData: false,
@@ -39,7 +37,6 @@ function collectProfileData(form) {
                     setProfileValue('location', $dataLocation);
                     setProfileValue('title', $title);
                     setProfileValue('description', $description);
-                    // setProfileValue('reputation', 0);
                     setProfileValue('profilePicture', avatarHash);
                     setProfileValue('skills', $skills);
                     setProfileValue('languages', $languages);
@@ -69,8 +66,8 @@ function collectProfileData(form) {
                     $profile.find('.profile-description p').text($description);
 
                     // CHANGING PROFILE PICTURE
-                    $('.profile-image img').attr('src', api_cdn + avatarHash);
-                    $('li.profile img.profile-picture').attr('src', api_cdn + avatarHash);
+                    $('.profile-image img').attr('src', defaultIMGLoadCDN + avatarHash);
+                    $('li.profile img.profile-picture').attr('src', defaultIMGLoadCDN + avatarHash);
 
                     // PROFILE SKILLS
                     $('.profile-upper .skills p').remove();

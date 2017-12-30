@@ -1,0 +1,30 @@
+#edit-background-images.modal-box.edit.flex.floating
+
+    .modal-box-content: .inner-modal: .content
+
+        .modal-header: h3 Edit background images
+
+        .success-message
+            h1.title Congratulations!
+            .success-content: p Your background images has been updated.
+
+            .buttons
+                button.mdl-button.mdl-js-button.close-button.congrats-close Close the modal to see them
+                span OR
+                button.mdl-button.mdl-js-button.create-new Edit background images again
+
+
+        .modal-body
+
+            .form-group
+                input.input-file#input-image-background(type="file", accept="image/*", placeholder="Add image or video")
+                label.img-label(for="input-image-background") Add Background Image
+                img.file-input-first-image.img-background(src="images/image-video-image-file.png", alt="Add a file")
+                img#input-image-background.show-image.empty(src="#", alt="")
+
+            .modal-inputs: form
+
+        .modal-footer
+            button.mdl-button.mdl-js-button.close-button Close
+            button#updateProfile.mdl-button.mdl-js-button.finish-button(style="color: #5CAB7D") Update
+            .mdl-tooltip(data-mdl-for="updateProfile") This text will be changed anyway.

@@ -1,4 +1,5 @@
-
+var defaultIMGPostCDN = 'http://london.ethearnal.com:5678/api/cdn/v1/resource/';
+var defaultIMGLoadCDN = 'http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=';
 
 // TODO
 
@@ -89,42 +90,6 @@ $('a.navbar-brand').click(function() {
 })
 
 
-// func
-function getProfileGigsF(guid_id){
-            console.log(guid_id);
-
-
-                $.ajax({
-                        url: "/api/v1/dht/hkey/?hkey=" + guid_id,
-                        hk: guid_id,
-                        type: "GET",
-                        processData: true,
-                        success: function(gigs_dta){
-
-                                    console.log(gigs_dta);
-
-                                   //console.log('hkey',this.hk);
-                                   //console.log('data:',js_data);
-                                   // gig_o = JSON.parse(js_data);
-                                   //console.log('data:',gig_o);
-                                   //createGigToProfile2(this.hk, gig_o);
-
-                            },
-
-                        error: function(error) {
-                                console.log('ERR',error);
-
-                                return;
-                            }
-                    });
-
-                    //var gig_hk = profile_gigs[i];
-                    //console.log('GIG HK:',gig_hk);
-                    /**/
-
-        };
-
-
 // WHEN YOU CLICK ON HEADER PAGE BUTTONS (gigs/jobs/profiles/etc) IT WILL TURN THE PAGE INTO ANOTHER PAGE
 $('a[load]').click(function(e) {
     e.preventDefault();
@@ -141,28 +106,6 @@ $('a[load]').click(function(e) {
         $('input#search-header').focus().attr('placeholder', 'Search gigs...');
     }
 
-    if($load == 'gigs') {
-        console.log('GIGS');
-        $.ajax({
-            type: 'GET',
-            url: '/api/v1/dht/guids',
-            dataType: 'text',
-            processData: false,
-            success: function( guids_data ) {
-                console.log('GUIDS',guids_data);
-                guids =JSON.parse(guids_data);
-                for (var i = 0; i < guids.length; i++) {
-                     //console.log(guids[i]);
-                     getProfileGigsF(guids[i]);
-                }
-
-            }
-        });
-    }
-
-
-
-
     if($load == 'jobs') {
         $('section.jobs-page-content').show();
         $('input#search-header').focus().attr('placeholder', 'Search jobs...');
@@ -174,51 +117,6 @@ $('a[load]').click(function(e) {
     }
 
     if($load == 'profile') {
-        /*
-        */
-       // console.log('TEST');
-       var gig_ctx = $("[data-target='#gigModal'")
-       var el =gig_ctx.remove(0);
-
-        getNodeData(function(node_data){
-        node = $.parseJSON(node_data);
-       // console.log('GUID:' + node.guid);
-        getProfileGigs(node.guid,  function(data){
-            console.log('GUID:' + data);
-            profile_gigs = JSON.parse(data);
-            for (var i = 0; i < profile_gigs.length; i++) {
-                $.ajax({
-                        url: "/api/v1/dht/hkey/?hkey=" + profile_gigs[i],
-                        hk: profile_gigs[i],
-                        type: "GET",
-                        processData: false,
-                        success: function(js_data){
-
-                                   //console.log('hkey',this.hk);
-                                   //console.log('data:',js_data);
-                                   gig_o = JSON.parse(js_data);
-                                   //console.log('data:',gig_o);
-                                   createGigToProfile2(this.hk, gig_o);
-
-                            },
-
-                        error: function(error) {
-                                console.log('ERR',error);
-
-                                return;
-                            }
-                    });
-
-                    //var gig_hk = profile_gigs[i];
-                    //console.log('GIG HK:',gig_hk);
-
-                    /**/
-                }
-            });
-        });
-
-        /*
-        */
         $('section.background-image').show();
         $('section.documentation').show();
         $('body').addClass('up');
@@ -513,7 +411,7 @@ $( document ).ready(function() {
     });
 
     // When you hover on a profile image, the half-black background would appear with the text of "Change".
-    $( ".profile-image" ).hover(function() {
+    $(".profile-image, .item").hover(function() {
         $(this).find(".text-on-image").stop(true, true).fadeToggle(150);
     });
 
@@ -604,6 +502,7 @@ require("js/functions/modals/create/gigInner.js"); // CREATES GIG INNER MODAL
 // DELETE
 require("js/functions/modals/delete/function.js"); // DELETE FUNCTION
 require("js/functions/modals/delete/gig.js"); // DELETES GIG
+require("js/functions/modals/delete/portfolio.js"); // DELETES PORTFOLIO
 
 // LOAD
 require("js/functions/modals/load/gigs.js"); // LOADS ALL GIGS
@@ -616,6 +515,7 @@ require("js/functions/modals/load/loadGigsOnAjaxSuccess.js"); // LOADS GIGS ON A
 require("js/functions/modals/collectData/gig.js"); // COLLECTS GIG DATA
 require("js/functions/modals/collectData/portfolio.js"); // COLLECTS PORTFOLIO ELEMENT DATA
 require("js/functions/modals/collectData/profile.js"); // COLLECTS PROFILE DATA
+require("js/functions/modals/collectData/backgroundImages.js"); // COLLECTS BACKGROUND IMAGES
 
 // MODALS
 

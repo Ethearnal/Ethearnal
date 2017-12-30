@@ -10,7 +10,3 @@ function getDHTData(gigID, callback) {
         }
     });
 }
-
-
-
-
