@@ -1385,11 +1385,13 @@ section.background-image {
 
 section.background-image .owl-carousel .item {
   position: relative;
+  overflow: hidden;
+  max-height: 400px;
 }
 
 section.background-image .owl-carousel .item img {
   width: 100%;
-  height: 400px;
+  height: auto;
 }
 
 section.background-image .owl-carousel .item .text-on-image {
