@@ -85,4 +85,19 @@ function updateProfile() {
             $('.profile-upper .languages').append(appendLanguage);
         });
     });
+
+    // CHANGING BACKGROUND IMAGE - 1
+    getProfileValue(profileID, 'backgroundImage1', function(imageURL) {
+        $('section.background-image').find('.items .item.first img').attr('src', defaultIMGLoadCDN + JSON.parse(imageURL));
+    });
+
+    // CHANGING BACKGROUND IMAGE - 2
+    getProfileValue(profileID, 'backgroundImage2', function(imageURL) {
+        $('section.background-image').find('.items .item.second img').attr('src', defaultIMGLoadCDN + JSON.parse(imageURL));
+    });
+
+    // CHANGING BACKGROUND IMAGE - 3
+    getProfileValue(profileID, 'backgroundImage3', function(imageURL) {
+        $('section.background-image').find('.items .item.third img').attr('src', defaultIMGLoadCDN + JSON.parse(imageURL));
+    });
 }

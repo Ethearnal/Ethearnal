@@ -26,7 +26,8 @@ $('body').delegate('.open-modal', 'click', function(e) {
 
     // Functions for particular modals.
     if($($modalID).attr('id') == "edit-profile") loadProfileInputs();
-    if($($modalID).hasClass('edit') && $($modalID).attr('id') !== "edit-profile") loadInputsText($form, $contentBlock);
+    if($($modalID).attr('id') == "edit-background-images") loadBackgroundImagesInputs();
+    if($($modalID).hasClass('edit') && $($modalID).attr('id') !== "edit-profile" && $($modalID).attr('id') !== "edit-background-images") loadInputsText($form, $contentBlock);
 
     if($($modalID).hasClass('add')) {
         if($modalID == "#add-gig") {

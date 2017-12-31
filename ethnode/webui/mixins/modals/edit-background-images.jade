@@ -16,15 +16,31 @@
 
         .modal-body
 
+            h3 FIRST IMAGE
             .form-group
-                input.input-file#input-image-background(type="file", accept="image/*", placeholder="Add image or video")
+                input.input-file.input-file-1#input-image-background(type="file", accept="image/*", placeholder="Add image or video")
                 label.img-label(for="input-image-background") Add Background Image
                 img.file-input-first-image.img-background(src="images/image-video-image-file.png", alt="Add a file")
                 img#input-image-background.show-image.empty(src="#", alt="")
+
+            h3 SECOND IMAGE
+            .form-group
+                input.input-file.input-file-2#input-image-background-2(type="file", accept="image/*", placeholder="Add image or video")
+                label.img-label(for="input-image-background-2") Add Background Image (2 - Second)
+                img.file-input-first-image.img-background-2(src="images/image-video-image-file.png", alt="Add a file")
+                img#input-image-background-2.show-image.empty(src="#", alt="")
+
+            h3 THIRD IMAGE
+            .form-group
+                input.input-file.input-file-3#input-image-background-3(type="file", accept="image/*", placeholder="Add image or video")
+                label.img-label(for="input-image-background-3") Add Background Image (3 - Third)
+                img.file-input-first-image.img-background-3(src="images/image-video-image-file.png", alt="Add a file")
+                img#input-image-background-3.show-image.empty(src="#", alt="")
+
 
             .modal-inputs: form
 
         .modal-footer
             button.mdl-button.mdl-js-button.close-button Close
-            button#updateProfile.mdl-button.mdl-js-button.finish-button(style="color: #5CAB7D") Update
-            .mdl-tooltip(data-mdl-for="updateProfile") This text will be changed anyway.
+            button#updateBackgroundImages.mdl-button.mdl-js-button.finish-button(style="color: #5CAB7D") Update
+            .mdl-tooltip(data-mdl-for="updateBackgroundImages") This text will be changed anyway.

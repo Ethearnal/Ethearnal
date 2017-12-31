@@ -1860,6 +1860,19 @@ section.profiles-page-content .container .jobs .gigs-container:after {
   top: 0px !important;
 }
 
+.modal-box-content .inner-modal .content .modal-body h3 {
+  color: black;
+  font-size: 22px;
+  margin-bottom: 0;
+  text-align: center;
+  text-transform: lowercase;
+  margin-top: 40px;
+}
+
+.modal-box-content .inner-modal .content .modal-body h3:first-child {
+  margin-top: 0;
+}
+
 .modal-box-content .inner-modal .content .modal-body .form-group {
   position: relative;
   padding-left: 20px;

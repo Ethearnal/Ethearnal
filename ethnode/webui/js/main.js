@@ -528,6 +528,7 @@ require("js/functions/modals/initializing/successMessage.js"); // SHOWING SUCCES
 require("js/functions/modals/initializing/datePickers.js"); // INITIALIZING DATE PICKERS
 require("js/functions/modals/initializing/modalInputs.js"); // ADDING TEXT TO INPUTS IN #EDIT MODALS
 require("js/functions/modals/initializing/profileModalInputs.js"); // ADDING TEXT TO #EDIT PROFILE MODAL INPUTS
+require("js/functions/modals/initializing/backgroundImagesInputs.js"); // ADDING IMAGES TO BACKGROUND IMAGES MODAL
 
 
 

@@ -19,6 +19,9 @@ function defaultProfileSettings() {
     setProfileValue('description', $description);
     setProfileValue('reputation', 0);
     setProfileValue('profilePicture', 'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png');
+    setProfileValue('backgroundImage1', '9826d11ceeb98f93754743b663ec3b1ada1d553aa6c1ea2e414fc952fb62db1f');
+    setProfileValue('backgroundImage2', '898c548c1872f7d96068eee0a4a2e13a8a1d7e8ec8f22cc82dff13e36064fb16');
+    setProfileValue('backgroundImage3', '43b5587cad63d1d82f6f61d6f7901bc41d867f041e5b0f12c4fa4248fd634bc8');
     setProfileValue('skills', $skills);
     setProfileValue('languages', $languages);
 }
