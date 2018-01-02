@@ -70,12 +70,14 @@ class EthearnalProfileController(object):
     JOB_POSTS_JSON_FILE_NAME = 'job_posts.json'
     PROFILE_DHT_SQLITE = 'dht.db'
     PROFILE_DHT_REF_PUBKEYS = 'pubkeys.db'
-    PROFILE_PLAIN_UTF8_TEXTS = 'plain_text_utf8.db'
-    PROFILE_PREFIXES_IDX = 'plain_text_utf8_prefix_idx.db'
-    PROFILE_MY_GIGS_INDEX = 'my_gigs_idx.db'
+    DB_GIGS_IDX = 'gigs_idx.db'
 
-    PROFILE_GIGS_DB = 'gigs.db'
-    PROFILE_IMGS_DB = 'imgs.db'
+    # abs
+    # PROFILE_PREFIXES_IDX = 'plain_text_utf8_prefix_idx.db'
+    # PROFILE_PLAIN_UTF8_TEXTS = 'plain_text_utf8.db'
+    # PROFILE_MY_GIGS_INDEX = 'my_gigs_idx.db'
+    # PROFILE_GIGS_DB = 'gigs.db'
+    # PROFILE_IMGS_DB = 'imgs.db'
 
     RSA_PRV = 'rsa_id.prv'
     RSA_PUB = 'rsa_id.pub'
@@ -125,12 +127,14 @@ class EthearnalProfileController(object):
         self.profile_json_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_JSON_FILE_NAME)
         self.profile_html_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_HTML_FILE_NAME)
         self.profile_image_file_name = '%s/%s' % (self.personal_dir, self.PROFILE_IMAGE_FILE_NAME)
-        self.job_post_json_store_fn = '%s/%s' % (self.personal_dir, self.JOB_POSTS_JSON_FILE_NAME)
+
         self.rsa_prv_fn = '%s/%s' % (self.personal_dir, self.RSA_PRV)
         self.rsa_pub_fn = '%s/%s' % (self.personal_dir, self.RSA_PUB)
         self.dht_fb_fn = '%s/%s' % (self.personal_dir, self.PROFILE_DHT_SQLITE)
         self.dht_ref_pubkeys_fn = '%s/%s' % (self.personal_dir, self.PROFILE_DHT_REF_PUBKEYS)
+        self.db_gigs_index_fn = '%s/%s' % (self.personal_dir, self.DB_GIGS_IDX)
 
+        #  self.job_post_json_store_fn = '%s/%s' % (self.personal_dir, self.JOB_POSTS_JSON_FILE_NAME)
         # self.db_plain_text = '%s/%s' % (self.personal_dir, self.PROFILE_PLAIN_UTF8_TEXTS)
         # self.db_plain_text_inv = '%s/%s' % (self.personal_dir, self.PROFILE_PREFIXES_IDX)
         #

@@ -24,7 +24,7 @@ from ert_profile import EthearnalProfileController
 from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
 from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
 from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
-from webdht.wdht_ertapi import DhtEventsHkeysWebAPI, IndexOnPush
+from webdht.wdht_ertapi import DhtEventsHkeysWebAPI, Indexer
 
 # #
 # from webdht.double_linked import DList, DLItemDict, OwnPulse, instance_dl
@@ -260,7 +260,7 @@ def main_http(http_webdir: str = config.http_webdir,
     #     me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
     # )
 
-    idx = IndexOnPush(dhf=dht_facade_)
+    idx = Indexer(ert=ert, dhf=dht_facade_)
 
     knownguids = WebDHTKnownGuids(
         cherry=cherrypy,

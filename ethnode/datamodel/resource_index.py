@@ -63,16 +63,28 @@ class ResourceIndexingEngine(object):
                 prefix_set.add(word[:i])
         return list(prefix_set)
 
+    @staticmethod
+    def words_bag_set(text_data):
+        words = text_data.lower().split(' ')
+        words_set = set(words)
+        return list(words_set)
+
     def index_bag_of_spec_text(self,
                                container_hash: bytes,
                                specifier: str,
                                text_data: str,
                                q1: int = 0,
-                               q2: int = 0, ):
+                               q2: int = 0,
+                               prefixes=True
+                               ):
 
-        prefix_set = self.prfx_bag_set(text_data)
+        if prefixes:
+            prefix_set = self.prfx_bag_set(text_data)
+        else:
+            prefix_set = self.words_bag_set(text_data)
 
         for item in prefix_set:
+            print('INDEX ITEM', specifier, item)
             cmp_hash = self.component_hash(specifier, item)
             self.index_store.create(cmp_hash, container_hash, q1=q1, q2=q2)
         self.index_store.commit()
@@ -87,10 +99,14 @@ class ResourceIndexingEngine(object):
         else:
             return self.index_store.inner_join_on_component(*component_hashes)
 
-    def qry_terms(self, terms: dict):
+    def qry_terms(self, terms: dict, prefixes=True):
         component_hashes_set = set()
         for k, v in terms.items():
-            items = self.prfx_bag_set(v)
+            if prefixes:
+                items = self.prfx_bag_set(v)
+            else:
+                items = self.words_bag_set(v)
+
             for item in items:
                 component_hashes_set.add(self.component_hash(k, item))
         component_hashes = list(component_hashes_set)

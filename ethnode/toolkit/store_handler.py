@@ -48,14 +48,11 @@ class DHTStoreHandlerOne(object):
         self._dhf = val
 
     def on_pushed_ip4_peer(self, data, hk_int=None):
-        # value = {'ert:boot_to': {'h': host, 'p': port}}
-        print('\n ++++++++++ \n')
-        print("\n\n\nON PUSHED IP4 PEER DATA:", data)
-        #
-        self.dhf.indexer.index_on_push(cdx.guid_int_to_hex(hk_int), data)
-        #
-        print('\nON PUSHED IP$ HK', cdx.guid_int_to_hex(hk_int))
-        print('\n ++++++++++ \n')
+        if self.dhf.indexer:
+            try:
+                self.dhf.indexer.index_on(cdx.guid_int_to_hex(hk_int), data)
+            except Exception as e:
+                print('ERROR indexing', str(e))
 
         if 'ert:boot_to' in data:
             host = data['ert:boot_to']['h']

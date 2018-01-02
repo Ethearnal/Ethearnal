@@ -2,19 +2,74 @@ import json, bson
 from webdht.double_linked import DList, instance_dl
 from kadem.kad import DHTFacade
 from webdht.wdht import HashIO, OwnerGuidHashIO
+from datamodel.resource_index import ResourceIndexingEngine
+from datamodel.inv_norank_sqlite import InvIndexTimestampSQLite
 from toolkit.kadmini_codec import guid_bin_to_hex, guid_hex_to_bin, guid_int_to_hex
+from ert_profile import EthearnalProfileController
 
 # todo DRY it
 
 
-class IndexOnPush(object):
-    def __init__(self, dhf):
+class Indexer(object):
+    def __init__(self, dhf: DHTFacade, ert: EthearnalProfileController):
         self.dhf = dhf
+        self.ert = ert
         self.dhf.indexer = self
+        self.db_idx = InvIndexTimestampSQLite(
+            db_name=self.ert.db_gigs_index_fn,
+            table_name='gigs_index'
+        )
+        self.idx = ResourceIndexingEngine(self.db_idx)
 
-    def index_on_push(self, *args, **kwargs):
-        print('INDEXING', args, kwargs)
-        pass
+    def index_field(self, pk_bin, specifier, text_data, prefixes=True):
+        try:
+            self.idx.index_bag_of_spec_text(
+            container_hash=pk_bin,
+            specifier=specifier, text_data=text_data, prefixes=prefixes)
+        except Exception as e:
+            print('ERR IDX FAILED', specifier, text_data, str(e))
+
+    def query_terms(self, terms: dict, prefixes=True):
+        cur = self.idx.qry_terms(terms=terms, prefixes=prefixes)
+        if cur:
+            ll = [guid_bin_to_hex(t[2]) for t in cur.fetchall()]
+            return ll
+
+    def query_text(self, text):
+        return self.query_terms({'text': text})
+
+    def query_tags(self, tags):
+        return self.query_terms({'tags': tags}, prefixes=False)
+
+    def query_owner(self, guid_owner):
+        return self.query_terms({'owner_guid': guid_owner}, prefixes=False)
+
+    def index_gig_document(self, hk_hex: str, doc: dict):
+        text = ''
+        if 'title' in doc:
+            text += doc['title'] + ' '
+        if 'description' in doc:
+            text += doc['description']
+        if text.strip() != '':
+            # pass
+            self.index_field(guid_hex_to_bin(hk_hex), 'text', text_data=text)
+        if 'tags' in doc:
+            self.index_field(guid_hex_to_bin(hk_hex), 'tags', text_data=' '.join(doc['tags']), prefixes=False)
+        if 'owner_guid' in doc:
+            self.index_field(guid_hex_to_bin(hk_hex), 'owner_guid', text_data=doc['owner_guid'], prefixes=False)
+
+    def index_on(self, hk_hex: str, data: dict):
+        if hk_hex and data:
+            if 'value' in data:
+                doc = data['value']
+                if 'model' in doc:
+                    if doc['model'] == 'Gig':
+                        self.index_gig_document(hk_hex, doc)
+
+
+
+
+
         # try:
         #     body = self.cherrypy.request.body.read()
         #     if body:
