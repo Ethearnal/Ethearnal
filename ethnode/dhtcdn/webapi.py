@@ -305,6 +305,13 @@ class WebCDN(object):
         self.cherry.response.status = 201
         return hk.decode()
 
+    def OPTIONS(self):
+        cherrypy.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
+        cherrypy.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+        cherrypy.response.headers['Access-Control-Allow-Origin'] = '*'
+        # tell CherryPy no avoid normal handler
+        return True
+
     def mount(self):
         self.cherry.tree.mount(
             self,
