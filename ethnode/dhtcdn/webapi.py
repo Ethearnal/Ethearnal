@@ -188,7 +188,8 @@ class WebCDN(object):
                 print('META-FILE NOT FOUND')
                 self.cherry.response.status = 400
                 # return b'{"error":"integrity error with metadata not found"}'
-                cdn_url_dht = self.try_get_meta(hkey=hkey)
+                # cdn_url_dht = self.try_get_meta(hkey=hkey)
+                # cdn_url_dht = None
                 if not cdn_url_dht:
                     return b'{"error":"remote meta failed}'
 
@@ -224,21 +225,23 @@ class WebCDN(object):
             return msg.encode()
 
         if not os.path.isfile(upload_file):
-            if not cdn_url_dht:
-                cdn_url_dht = self.try_get_meta(hkey=hkey)
-            if cdn_url_dht:
-                try:
-                    bts = self.get_remote_data(cdn_url=cdn_url_dht, hkey=hkey)
-                    print('BTS,', len(bts))
-                    self.set_local_data(hkey=hkey, fext=fext, bts=bts)
-                except Exception as e:
-                    self.cherry.response.status = 400
-                    msg = '{"error":"on get remote set local data: %s"}' % str(e)
-                    return msg.encode()
-            else:
-                self.cherry.response.status = 400
-                msg = '{"error":"% s not found"}' % upload_file
-                return msg.encode()
+            # if not cdn_url_dht:
+            #    cdn_url_dht = self.try_get_meta(hkey=hkey)
+            # if cdn_url_dht:
+            #     try:
+            #         bts = self.get_remote_data(cdn_url=cdn_url_dht, hkey=hkey)
+            #         print('BTS,', len(bts))
+            #         self.set_local_data(hkey=hkey, fext=fext, bts=bts)
+            #     except Exception as e:
+            #         self.cherry.response.status = 400
+            #         msg = '{"error":"on get remote set local data: %s"}' % str(e)
+            #         return msg.encode()
+            # else:
+            #     self.cherry.response.status = 400
+            #     msg = '{"error":"% s not found"}' % upload_file
+            #     return msg.encode()
+            msg = '{"error":"% s not found"}' % upload_file
+            return msg.encode()
 
         size = 0
         uf = io.BytesIO()
