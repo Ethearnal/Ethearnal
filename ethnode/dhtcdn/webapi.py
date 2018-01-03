@@ -220,8 +220,8 @@ class WebCDN(object):
             msg = '{"error":"general error with getting file name %s"}' % str(e)
             return msg.encode()
 
-        # if not cdn_url_dht:
-        #     cdn_url_dht = self.try_get_meta(hkey=hkey)
+        if not cdn_url_dht:
+            cdn_url_dht = self.try_get_meta(hkey=hkey)
         print('CDN_URL_DHT', cdn_url_dht)
         if not os.path.isfile(upload_file):
             if cdn_url_dht:
