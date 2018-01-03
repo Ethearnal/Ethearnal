@@ -310,7 +310,7 @@ class WebCDN(object):
         cherrypy.response.headers['Access-Control-Allow-Headers'] = 'content-type'
         cherrypy.response.headers['Access-Control-Allow-Origin'] = '*'
         # tell CherryPy no avoid normal handler
-        return True
+        return b''
 
     def mount(self):
         self.cherry.tree.mount(
