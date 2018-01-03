@@ -36,6 +36,9 @@
     <!-- Main CSS file-->
     <link rel="stylesheet" href="styles/main.css">
     <!-- END of LINKS-->
+    <style>
+
+    </style>
   </head>
   <body>
     <div id="add-job" class="add modal-box flex floating">
@@ -844,25 +847,33 @@
             <ul class="nav navbar-nav navbar-right hidden-xs">
               <li class="asset text"><a href="" load="gigs">Gigs</a></li>
               <li class="asset text"><a href="" load="profiles">Profiles</a></li>
-              <li id="comment-navbar" class="asset"><a href=""><i class="icon-comment"></i>
+              <!--li id="comment-navbar" class="asset"><a href=""><i class="icon-comment"></i>
                   <div class="round-number"><span>1</span></div></a></li>
               <li id="alert-navbar" class="asset"><a id="reputation-dropdown" data-toggle="dropdown"><i class="material-icons">polymer</i>
                   <div class="round-number"><span></span></div></a>
                 <!-- Reputation dropdown-->
-                <ul data-labelledby="reputation-dropdown" class="dropdown-menu">
+                <!--ul data-labelledby="reputation-dropdown" class="dropdown-menu">
                   <li class="buy-rep"><a href=""><i class="bitcoin icon"></i> Buy reputation</a></li>
                   <li class="sell-rep"><a href=""><i class="dollar icon"></i> Sell reputation</a></li>
                 </ul>
+              </li-->
+
+              <li id="settings-dropdown"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="profile view-profile">
+                <img id="avatar-img" src="" alt="" class="profile-picture">
+                <!-- JSON DATA GOES HERE-->
+              <span></span>
               </li>
-              <li id="settings-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="profile"><img id="avatar-img" src="" alt="" class="profile-picture">
-                <!-- JSON DATA GOES HERE--><span></span>
-              </li>
+               <ul data-labelledby="settings-dropdown" class="dropdown-menu">
+               <li class="view-profile"><a href="" load="profile">My Profile<i class="material-icons">settings</i></a></li>
+                  <li class="view-profile"><a href="" load="profile">About Node<i class="material-icons">memory</i></a></li>
+               </ul>
+
               <!-- Settings dropdown-->
-              <ul data-labelledby="settings-dropdown" class="dropdown-menu">
+              <!--ul data-labelledby="settings-dropdown" class="dropdown-menu">
                 <li class="view-profile"><a href="" load="profile">View Profile<i class="material-icons">account_box</i></a></li>
                 <li class="settings"><a href="">Settings<i class="material-icons">settings</i></a></li>
                 <li class="logout"><a href="">Logout<i class="material-icons">power_settings_new</i></a></li>
-              </ul>
+              </ul-->
             </ul>
             <ul class="nav navbar-nav visible-xs">
               <li>
@@ -881,32 +892,38 @@
     </header>
     <!-- Including {PROFILE} PAGE content-->
     <!-- Background image section, including a button with lock and unlock icons.-->
-    <section style="display: none" class="background-image">
-      <div class="button-prev"><i class="material-icons">keyboard_arrow_left</i></div>
-      <div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div>
+    <section style="display: none" class="background-image" >
+      <div class="button-next" style="margin: auto;">
+        <i open-modal="#edit-profile" class="material-icons open-modal">add_a_photo</i>&nbsp;</div>
+      <!--div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div-->
       <div class="items">
-        <div class="item"><img src="images/background-road-different.png" alt="Building"></div>
-        <div class="item"><img src="images/background-buildings.png" alt="Building"></div>
-        <div class="item"><img src="images/background-downtown.png" alt="Building"></div>
+        <div  class="item">
+            <img src="images/background-downtown.png" alt="Building">
+        </div>
       </div>
     </section>
     <!-- This section is for your whole profile, including left and right sides, profile information and etc.-->
     <section style="display: none" class="documentation">
       <div class="container">
         <!-- Profile information including profile image, current work, current city and state, skills and etc.-->
-        <div class="profile-information-container col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="profile-information-container col-lg-4 col-md-4 col-sm-12 col-xs-12" s>
+
           <div class="profile-information up">
-            <!-- Profile header, including profile image, current work, city, state and two buttons.-->
+
             <div class="profile-upper">
+
               <div open-modal="#edit-profile" class="profile-image open-modal"><img src="" alt="">
                 <div class="text-on-image">
-                  <p>Change</p>
+                  <p><i style="font-size:42px;color:white;" class="material-icons">add_a_photo</i></p>
                 </div>
               </div>
+
               <h2></h2>
+
               <h5 class="profile-information-position"></h5>
               <p class="location"></p>
-              <button class="leave-msg">Send Message</button>
+
+              <!--button class="leave-msg">Send Message</button-->
               <!-- SKILLS-->
               <p class="skills-text">Skills <i class="skills-down material-icons">keyboard_arrow_down</i></p>
               <div class="skills hidden">
