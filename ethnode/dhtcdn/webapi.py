@@ -152,12 +152,16 @@ class WebCDN(object):
                 l = v['e']
                 d = l[1]
                 if 'cdn_url' in d:
-                    bts = self.get_remote_meta_data(cdn_url=d['cdn_url'], hkey=hkey)
+                    url = d['cdn_url']
+                    if '127.0.0.1' in url:
+                        print('LOOPBACK DETECTED IGNORE')
+                        return None
+                    bts = self.get_remote_meta_data(cdn_url=url, hkey=hkey)
                     meta_dict = json.loads(bts.decode())
                     self.set_local_meta_data(hkey, data=meta_dict)
                     print('METADATA SAVED')
                     # return meta_dict
-                    return d['cdn_url']
+                    return url
 
             # print('ON GET ', d)
         except Exception as e:

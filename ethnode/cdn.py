@@ -221,10 +221,13 @@ cherrypy.tools.cors = cherrypy._cptools.HandlerTool(cors)
 cherrypy.engine.exit = on_hook(target=tear_down_udp,
                                target_args=(dht,),
                                target_kwargs={})(cherrypy.engine.exit)
-
-ip = '127.0.0.1'
+ip = None
 if ert.my_lan_ip:
     ip = ert.my_lan_ip
+if ert.my_wan_ip:
+    ip = ert.my_wan_ip
+if not ip:
+    raise Exception('NO LAN OR WAN IP')
 ert.cdn_service_http_url = 'http://%s:%s' % (ip, port)
 
 if dht.server_thread.is_alive():
