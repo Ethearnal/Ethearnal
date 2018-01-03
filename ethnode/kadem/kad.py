@@ -189,11 +189,11 @@ class DHTFacade(object):
     def converge_peers(self):
         from time import sleep
         self.push_pubkey()
-        sleep(1)
+        sleep(3)
         self.push_peer_request()
-        sleep(1)
+        sleep(3)
         self.pull_peer_request()
-        sleep(300)
+        sleep(3)
 
     def pull_peer_request(self):
         key = {'ert': 'peer'}

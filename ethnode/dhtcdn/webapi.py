@@ -145,7 +145,7 @@ class WebCDN(object):
         try:
             t = self.dhf.pull_remote(key='', hk_hex=hkey)
             if not t:
-                return 
+                return
             v = bson.loads(t[-1])
             if 'e' in v:
                 l = v['e']
