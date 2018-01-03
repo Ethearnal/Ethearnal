@@ -147,6 +147,7 @@ class WebCDN(object):
             if not t:
                 return
             v = bson.loads(t[-1])
+            print('META V', v)
             if 'e' in v:
                 l = v['e']
                 d = l[1]
@@ -215,8 +216,8 @@ class WebCDN(object):
             msg = '{"error":"general error with getting file name %s"}' % str(e)
             return msg.encode()
 
-        if not cdn_url_dht:
-            cdn_url_dht = self.try_get_meta(hkey=hkey)
+        # if not cdn_url_dht:
+        #     cdn_url_dht = self.try_get_meta(hkey=hkey)
         print('CDN_URL_DHT', cdn_url_dht)
         if not os.path.isfile(upload_file):
             if cdn_url_dht:
