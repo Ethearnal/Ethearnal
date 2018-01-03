@@ -181,6 +181,8 @@ class WebCDN(object):
                 self.cherry.response.status = 400
                 # return b'{"error":"integrity error with metadata not found"}'
                 cdn_url_dht = self.try_get_meta(hkey=hkey)
+                if not cdn_url_dht:
+                    return b'{"error":"remote meta failed}'
 
             with open(upload_file_meta, 'rb') as u_f_m:
                 data = u_f_m.read()
