@@ -4,7 +4,7 @@ from kadem.kad import DHTFacade
 from webdht.wdht import HashIO, OwnerGuidHashIO
 from datamodel.resource_index import ResourceIndexingEngine
 from datamodel.inv_norank_sqlite import InvIndexTimestampSQLite
-from toolkit.kadmini_codec import guid_bin_to_hex2, guid_hex_to_bin, guid_int_to_hex
+from toolkit.kadmini_codec import guid_bin_to_hex, guid_bin_to_hex2, guid_hex_to_bin, guid_int_to_hex
 from ert_profile import EthearnalProfileController
 
 # todo DRY it
