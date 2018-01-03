@@ -141,9 +141,16 @@ class WebCDN(object):
                            }, hk_hex=hk_hex, remote_only=True)
 
     def try_get_meta(self, hkey):
+
         print('TRY GET META:', hkey)
         try:
             t = self.dhf.pull_remote(key='', hk_hex=hkey)
+            if not t:
+                print('TRY PULL AGAIN LOCAL')
+                from time import sleep
+                sleep(0.3)
+                t = self.dhf.pull_local(key='', hk_hex=hkey)
+
             if not t:
                 return
             v = bson.loads(t[-1])
