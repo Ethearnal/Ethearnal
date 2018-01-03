@@ -11,8 +11,9 @@ class BaseSQLite(object):
 
     @classmethod
     def get_dbid(cls, db_name):
-        th_id = '%s:%s:%s:%s' % (db_name, os.getpid(), str(cls), str(threading.current_thread()))
+        th_id = '%s:%s:%s:%s' % (db_name, os.getpid(), str(cls), str(threading.current_thread().ident))
         return th_id
+
 
     @classmethod
     def get_connection(cls, db_name):

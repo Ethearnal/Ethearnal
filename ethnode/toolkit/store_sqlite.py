@@ -3,6 +3,8 @@ import sqlite3
 import threading
 from toolkit.kadmini_codec import guid_int_to_bts
 
+# todo DRY another base
+
 
 class BaseSQLite(object):
     th_conn = dict()
@@ -12,7 +14,7 @@ class BaseSQLite(object):
 
     @classmethod
     def dbid(cls, db_name):
-        th_id = '%s:%s:%s:%s' % (db_name, os.getpid(), str(cls), str(threading.current_thread()))
+        th_id = '%s:%s:%s:%s' % (db_name, os.getpid(), str(cls), str(threading.current_thread().ident))
         return th_id
 
     @classmethod

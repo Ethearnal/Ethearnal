@@ -100,6 +100,10 @@ def guid_bin_to_hex(binguid: bytes):
     return binascii.hexlify(binguid)
 
 
+def guid_bin_to_hex2(binguid: bytes):
+    return binascii.hexlify(binguid).decode()
+
+
 def guid_hex_to_bin(hexguid: str):
     return binascii.unhexlify(hexguid)
 

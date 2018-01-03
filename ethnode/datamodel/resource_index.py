@@ -113,6 +113,15 @@ class ResourceIndexingEngine(object):
         if component_hashes:
             return self.qry_hashes(component_hashes)
 
+    def qry_terms_d(self, term_items: dict):
+        component_hashes_set = set()
+        for specifier, terms in term_items.items():
+            for item in terms:
+                component_hashes_set.add(self.component_hash(specifier, item))
+        component_hashes = list(component_hashes_set)
+        if component_hashes:
+            return self.qry_hashes(component_hashes)
+
 
 class TextIndexingApi(object):
     def __init__(self, idx_engine: ResourceIndexingEngine):

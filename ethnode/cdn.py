@@ -3,6 +3,7 @@ import os
 import config
 import argparse
 from dhtcdn.webapi import WebCDN, WebCDNSite
+from webdht.wdht_ertapi import IdxCdnQueryWebApi
 from toolkit.tools import mkdir, on_hook
 
 site_conf = {
@@ -159,6 +160,8 @@ idx = Indexer(ert=ert, dhf=dhf)
 # idx_engine =
 
 cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy)
+
+idx_web = IdxCdnQueryWebApi(cherrypy=cherrypy, idx=idx)
 
 knownguids = WebDHTKnownGuids(
     cherry=cherrypy,

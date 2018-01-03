@@ -4,7 +4,7 @@ from kadem.kad import DHTFacade
 from webdht.wdht import HashIO, OwnerGuidHashIO
 from datamodel.resource_index import ResourceIndexingEngine
 from datamodel.inv_norank_sqlite import InvIndexTimestampSQLite
-from toolkit.kadmini_codec import guid_bin_to_hex, guid_hex_to_bin, guid_int_to_hex
+from toolkit.kadmini_codec import guid_bin_to_hex2, guid_hex_to_bin, guid_int_to_hex
 from ert_profile import EthearnalProfileController
 
 # todo DRY it
@@ -32,7 +32,13 @@ class Indexer(object):
     def query_terms(self, terms: dict, prefixes=True):
         cur = self.idx.qry_terms(terms=terms, prefixes=prefixes)
         if cur:
-            ll = [guid_bin_to_hex(t[2]) for t in cur.fetchall()]
+            ll = [guid_bin_to_hex2(t[2]) for t in cur.fetchall()]
+            return ll
+
+    def query_terms_d(self, terms_d: dict):
+        cur = self.idx.qry_terms_d(terms_d)
+        if cur:
+            ll = [guid_bin_to_hex2(t[2]) for t in cur.fetchall()]
             return ll
 
     def query_text(self, text):
@@ -67,68 +73,44 @@ class Indexer(object):
                         self.index_gig_document(hk_hex, doc)
 
 
+class IdxCdnQueryWebApi(object):
+    exposed = True
 
+    def __init__(self, cherrypy, idx: Indexer, mount_path: str="/api/cdn/v1/idx/", mount=True):
+        self.idx = idx
+        self.cherrypy = cherrypy
+        self.mount_path = mount_path
+        if mount:
+            self.mount()
 
+    def GET(self, **kwargs):
+        try:
+            query_dict = {k.lower(): list(set(v.lower().split(' '))) for k, v in kwargs.items()}
+            print('QUERY_DICT', query_dict)
+            ll = self.idx.query_terms_d(query_dict)
+            if ll:
+                js = json.dumps(ll, ensure_ascii=False)
+                bts = js.encode(encoding='utf-8')
+                self.cherrypy.response.status = 200
+                return bts
+            else:
+                self.cherrypy.response.status = 400
+                return b'null'
+        except:
+            self.cherrypy.response.status = 404
+            # traceback.print_exc()
+            return b'null'
 
-        # try:
-        #     body = self.cherrypy.request.body.read()
-        #     if body:
-        #         pk_bin = self.api.create(body)
-        #         pk_hex = guid_bin_to_hex(pk_bin)
-        #
-        #         # indexing
-        #
-        #         js = body.decode('utf-8')
-        #         d = json.loads(js)
-        #         title = d.get('title')
-        #         description = d.get('description')
-        #         category = d.get('categoryName')
-        #         experience_level = d.get('experienceName')
-        #         job_type = d.get('jobTypeName')
-        #
-        #         experience_level = None
-        #         # experience_level = '_'.join(experience_level.lower().split(' '))
-        #         category = '_'.join(category.lower().split(' '))
-        #         # job_type = '_'.join(job_type.lower().split(' '))
-        #
-        #         budget = None
-        #         price_st = d.get('price')
-        #         price = None
-        #         try:
-        #             price = int(price_st)
-        #         except:
-        #             print('ERR with price to int')
-        #         if price:
-        #             budget = calculate_price_range(price)
-        #
-        #         print('CAT LEV', category, experience_level)
-        #
-        #         price = d.get('price')
-        #
-        #         if title:
-        #             self.text_api.idx_engine.index_bag_of_spec_text(
-        #                 container_hash=pk_bin, specifier='title', text_data=title)
-        #         if description:
-        #             self.text_api.idx_engine.index_bag_of_spec_text(
-        #                 container_hash=pk_bin, specifier='description', text_data=description)
-        #
-        #         # if experience_level:
-        #         #     self.text_api.idx_engine.index_bag_of_spec_text(
-        #         #         container_hash=pk_bin, specifier='experience_level', text_data=experience_level)
-        #
-        #         if category:
-        #             self.text_api.idx_engine.index_bag_of_spec_text(
-        #                 container_hash=pk_bin, specifier='category', text_data=category)
-        #
-        #         # if job_type:
-        #         #     self.text_api.idx_engine.index_bag_of_spec_text(container_hash=pk_bin,
-        #         #                                                     specifier='job_type',
-        #         #                                                     text_data=job_type)
-        #
-        #         if budget:
-        #             self.text_api.idx_engine.index_bag_of_spec_text(
-        #                 container_hash=pk_bin, specifier='budget', text_data=budget
-        #             )
+    def mount(self):
+        self.cherrypy.tree.mount(
+            self,
+            self.mount_path, {'/': {
+                    'request.dispatch': self.cherrypy.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
+
 
 
 class DhtEventsHkeysWebAPI(object):
@@ -708,5 +690,4 @@ class WebDHTAboutNode(object):
                 }
             }
         )
-
 
