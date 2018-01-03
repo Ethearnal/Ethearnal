@@ -144,6 +144,8 @@ class WebCDN(object):
         print('TRY GET META:', hkey)
         try:
             t = self.dhf.pull_remote(key='', hk_hex=hkey)
+            if not t:
+                return 
             v = bson.loads(t[-1])
             if 'e' in v:
                 l = v['e']
