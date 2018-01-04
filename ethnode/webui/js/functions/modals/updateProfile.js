@@ -68,6 +68,21 @@ console.log('UPDATE PROFILE')
         }
     });
 
+    // headline
+     getProfileValue(profileID, 'headlinePicture', function(profilePictureURL) {
+        var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+        //setProfileValue('headlinePicture', headline_hash);
+         //               console.log('headline_hash',headline_hash);
+          //              $('#profile-headline').attr('src', api_cdn + headline_hash);
+
+        if (profilePictureURL.indexOf('//') >= 0) {
+            $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
+        } else {
+            $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
+
+        }
+    });
+
     // CHANGING PROFILE SKILLS
     getProfileValue(profileID, 'skills', function(skills) {
 
