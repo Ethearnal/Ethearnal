@@ -40,8 +40,19 @@ function validateForm(form) {
 
 // Clears the form.
 function clearForm(form) {
+    console.log('FORM ', form)
+
     $form = form; $content = $form.closest('.content');
-    $form[0].reset();
+     console.log('FORM ', $form)
+     if (form.length > 0) {
+         $form[0].reset();
+     }
+
+//    if($form){
+//        if $form.length > 0:
+//
+//     }
+
 
     // REMOVING CLASSES
     $form.find('.is-dirty').removeClass('is-dirty');

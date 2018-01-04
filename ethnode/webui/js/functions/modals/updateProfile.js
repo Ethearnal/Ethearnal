@@ -3,6 +3,7 @@ function updateProfile() {
     $firstname = null; $lastname = null; $city = null; $country = null; $countryClass = null;
     $locationParagraph = $profile.find('.profile-upper p.location');
 
+console.log('UPDATE PROFILE')
 
     // CHANGES WITH FIRSTNAME AND LASTNAME
     getProfileValue(profileID, 'name', function(name) {
@@ -87,3 +88,42 @@ function updateProfile() {
         });
     });
 }
+
+function updateProfileHeadline() {
+
+    console.log('updateProfileHeadline');
+    var headline_form = document.getElementById('image-headline-form');
+    fd= $('#image-headline-form','#input-image-profile-he').prevObject;
+
+
+
+    console.log('upload HEADLINE image', fd);
+    var objFormData = new FormData();
+
+
+    var fileObj = fd[0].files[0];
+    objFormData.append('ufile', fileObj);
+    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
+    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+
+
+    if(fileObj != undefined) {
+            if(!!fileObj.type.match(/image.*/)) {
+                $.ajax({
+                    url: api_cdn_post,
+                    type: "POST",
+                    data: objFormData,
+                    processData: false,
+                    contentType: false,
+                    success: function(headline_hash){
+                        setProfileValue('headlinePicture', headline_hash);
+                        console.log('headline_hash',headline_hash);
+                        $('#profile-headline').attr('src', api_cdn + headline_hash);
+                    }
+                });
+            } else {
+                console.log('Not a valid image!');
+            }
+
+        }
+ }

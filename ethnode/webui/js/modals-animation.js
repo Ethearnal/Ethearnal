@@ -136,19 +136,38 @@ $('.modal-box button').click(function() {
         if($modalID == "edit-profile") $data = collectProfileData($form);
         if($modalID == "add-gig" || $modalID == "edit-gig") collectGigData($form);
 
+        if($modalID == "edit-profile-headline") {
+            console.log('EDIT HEADLINE')
+            $data_headline = updateProfileHeadline($form);
+        }
+
 
         // Fading out the initial modal and fading in success message.
         $modalContent.fadeOut(300);
 
         // DO SOMETHING MORE AFTER CLICKING THAT BUTTON AND WAITING FOR A TIMEOUT TO END
         setTimeout(function() {
-            appearSuccessMessage($content);
+
+            console.log('appear contentsuccess',$content);
             clearForm($form);
 
             if($modalID == 'add-job') createLE($data, 'job');
             if($modalID == 'add-education') createLE($data, 'education');
             if($modalID == 'add-language') createLE($data, 'language', true);
 
+            if($modalID == 'edit-profile-headline'){
+                appearSuccessMessageSvg($content);
+                closeModal($modalID);
+            } else if ($modalID == 'edit-gig' || $modalID == 'add-gig' ) {
+                    appearSuccessMessageSvg($content);
+                    closeModal($modalID);
+
+            }
+             else if($modalID == 'edit-profile'){
+                appearSuccessMessageSvg($content);
+                closeModal($modalID);
+            } else {
+            appearSuccessMessage($content); }
 
             if ($modalID == 'edit-education') {
                 $modalID = $currentlyOpenModalID;

@@ -3,6 +3,7 @@ function collectProfileData(form) {
     $form = form;
     $content = $form.closest('.content');
     $imgInputID = $content.find('input.input-file').attr('id');
+    console.log('input.input-file',$imgInputID);
     $profile = $('.profile-information');
     $locationParagraph = $profile.find('.profile-upper p.location');
 
@@ -146,4 +147,15 @@ function collectProfileData(form) {
         });
     }
     return;
+}
+
+//
+function collectProfileHeadlineData(form) {
+// CHANGING PROFILE PICTURE
+//    var objFormData = new FormData();
+//    var fileObj = document.getElementById("input-image-profile-headline").files[0];
+//    console.log('file_obje',fileObj)
+//    objFormData.append('ufile', fileObj);
+//    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
+
 }

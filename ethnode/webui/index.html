@@ -38,6 +38,47 @@
     <!-- END of LINKS-->
     <style>
 
+      /* The Modal (background) */
+.modal-hc {
+    display: none; /* Hidden by default */
+    position: absolute; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 59px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+}
+
+/* Modal Content */
+.modal-content-hc {
+    background-color: white;
+    margin: auto;
+    height: 341px;
+   border: 1px solid;
+   /* border: 1px solid #888; */
+    width:100%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
     </style>
   </head>
   <body>
@@ -755,17 +796,22 @@
               <h1 class="title">Congratulations!</h1>
               <div class="success-content">
                 <p>Your profile has been updated.</p>
-              </div>
-              <div class="buttons">
+                 <div class="buttons">
                 <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
                 <button class="mdl-button mdl-js-button create-new">Edit profile again</button>
               </div>
+              </div>
+
             </div>
             <div class="modal-body">
               <div class="form-group">
                 <input id="input-image-profile" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
                 <label for="input-image-profile" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-profile"><img id="input-image-profile" src="#" alt="" class="show-image empty">
               </div>
+               <!--div class="form-group">
+                <input id="input-image-profile-headline-a" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                <label for="input-image-profile-headline-a" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-profile"><img id="input-image-profile-headline-a" src="#" alt="" class="show-image empty">
+              </div-->
               <div class="modal-inputs">
                 <form id="form-update-education" action="POST">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
@@ -864,8 +910,8 @@
               <span></span>
               </li>
                <ul data-labelledby="settings-dropdown" class="dropdown-menu">
-               <li class="view-profile"><a href="" load="profile">My Profile<i class="material-icons">settings</i></a></li>
-                  <li class="view-profile"><a href="" load="profile">About Node<i class="material-icons">memory</i></a></li>
+               <li class="view-profile"><a href="" load="profile">My Profile<!--i class="material-icons">settings</i--></a></li>
+                  <li class="view-profile"><a href="" load="profile">About Node<!--i-- class="material-icons">memory</i--></a></li>
                </ul>
 
               <!-- Settings dropdown-->
@@ -894,11 +940,11 @@
     <!-- Background image section, including a button with lock and unlock icons.-->
     <section style="display: none" class="background-image" >
       <div class="button-next" style="margin: auto;">
-        <i open-modal="#edit-profile" class="material-icons open-modal">add_a_photo</i>&nbsp;</div>
+        <i id="myBtn--" open-modal="#edit-profile-headline" class="material-icons open-modal">add_a_photo</i>&nbsp;</div>
       <!--div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div-->
       <div class="items">
         <div  class="item">
-            <img src="images/background-downtown.png" alt="Building">
+            <img id="profile-headline" src="images/background-downtown.png" alt="Building">
         </div>
       </div>
     </section>
@@ -910,11 +956,12 @@
 
           <div class="profile-information up">
 
+
             <div class="profile-upper">
 
               <div open-modal="#edit-profile" class="profile-image open-modal"><img src="" alt="">
                 <div class="text-on-image">
-                  <p><i style="font-size:42px;color:white;" class="material-icons">add_a_photo</i></p>
+                  <p>Change<!--i style="font-size:42px;color:white;" class="material-icons">edit</i--></p>
                 </div>
               </div>
 
@@ -1147,5 +1194,90 @@
     <!-- Main JS file-->
     <script src="js/main.js"></script>
     <!-- PROFILE AVATAR CROPPING / CHANGING-->
+
+
+    <!-- Trigger/Open The Modal -->
+<!--button id="myBtn">Open Modal</button-->
+
+<!-- The Modal -->
+<div id="myModal" class="modal-hc">
+
+  <!-- Modal content -->
+  <div class="modal-content-hc">
+    <h3>Change Headline Image</h3>
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
+
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+
+  <div id="edit-profile-headline" class="modal-box edit flex floating">
+      <div class="modal-box-content">
+        <div class="inner-modal">
+          <div class="content">
+            <div class="modal-header">
+              <h3>Edit profile headline image</h3>
+            </div>
+            <div class="success-message">
+              <h1 class="title">Congratulations!</h1>
+              <div class="success-content">
+                <p>Your headline was added.</p>
+              </div>
+              <div class="buttons">
+                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                <button class="mdl-button mdl-js-button create-new">add new job</button>
+              </div>
+            </div>
+
+            <div class="modal-body">
+
+              <div class="form-group" id="image-headline-form">
+                <input id="input-image-profile-he" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                <label for="input-image-profile-he" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-profile"><img id="input-image-profile-he" src="#" alt="" class="show-image empty">
+              </div>
+
+
+            </div>
+            <div class="modal-footer">
+              <button class="mdl-button mdl-js-button close-button">Close</button>
+              <button id="updateProfileHeadline" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+              <div data-mdl-for="updateProfileHeadline" class="mdl-tooltip">This text will be changed anyway.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </body>
 </html>

@@ -26,7 +26,13 @@ $('body').delegate('.open-modal', 'click', function(e) {
 
     // Functions for particular modals.
     if($($modalID).attr('id') == "edit-profile") loadProfileInputs();
-    if($($modalID).hasClass('edit') && $($modalID).attr('id') !== "edit-profile") loadInputsText($form, $contentBlock);
+    //try
+
+    if (typeof variable !== 'undefined') {
+        if($($modalID).hasClass('edit') && $($modalID).attr('id') !== "edit-profile") loadInputsText($form, $contentBlock);
+    //except:
+     console.log('loadInputsText',loadInputsText);
+    }
 
     if($($modalID).hasClass('add')) {
         if($modalID == "#add-gig") {

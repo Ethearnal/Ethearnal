@@ -1,6 +1,6 @@
 // Load #EDIT modal's inputs with values.
 function loadInputsText(form, div) {
-
+    console.log('LOAD INPUTS',form)
     $form = form;
     $divToLoad = div;
     $content = $form.closest('.content');
