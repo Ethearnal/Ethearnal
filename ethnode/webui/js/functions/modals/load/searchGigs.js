@@ -31,7 +31,8 @@ function formatSearchQuery() {
     if ($budgetText !== '') $budget = '&budget=' + $budgetText;
 
     // FORMING SEARCH QUERY
-    var search = '/api/v1/my/idx/query/guids/?' + $search + $category + $jobType + $experienceLevel + $budget;
+    //var search = 'http://london.ethearnal.com:5678/api/cdn/v1/idx/?';
+    var search = 'http://london.ethearnal.com:5678/api/cdn/v1/idx/?' + $search + $category + $jobType + $experienceLevel + $budget;
     searchQuery = search.replace('/api/v1/my/idx/query/guids/?&', '/api/v1/my/idx/query/guids/?');
 
     // null every filter
@@ -45,7 +46,7 @@ function searchQueryDo() {
     // FORMATING SEARCH QUERY
     formatSearchQuery();
 
-    if (searchQuery == "/api/v1/my/idx/query/guids/?title=" || searchQuery == "/api/v1/my/idx/query/guids/?" || searchQuery == false) {
+    if (searchQuery == "http://london.ethearnal.com:5678/api/cdn/v1/idx/?text=" || searchQuery == "/api/v1/my/idx/query/guids/?" || searchQuery == false) {
         $('.gig').remove();
         $('input#search-header, button#search-button').removeClass('wrong');
         loadGigs();
