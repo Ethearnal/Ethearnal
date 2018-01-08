@@ -7,6 +7,7 @@ function loadGigsOnAjaxSuccess(data, remove) {
 
     $gigsLoaded = $('.gig').length;
 
+
     if (gigIDS.length > $gigsLoaded) {
         gigsToLoad = $gigsLoaded + gigsToLoad;
 

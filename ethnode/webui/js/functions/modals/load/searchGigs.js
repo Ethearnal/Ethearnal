@@ -10,7 +10,7 @@ function formatSearchQuery() {
 
     // Search variables
     $search = $('input#search-header').val().replace(/ /g,"%20").toLowerCase();
-    $search == '' ? $search = '' : $search = 'title=' + $search;
+    $search == '' ? $search = '' : $search = 'text=' + $search;
 
     // SEARCH QUERY VARIABLES
     $categoryParent = $filter.parent().find('.filter.category');
@@ -53,7 +53,7 @@ function searchQueryDo() {
         return false;
     }
 
-    $.ajax({
+    /*$.ajax({
         url: searchQuery,
         type: "GET",
         processData: false,
@@ -68,7 +68,55 @@ function searchQueryDo() {
             $filter.find('.is-checked').stop(true, true).addClass('is-wrong');
             $('input#search-header, button#search-button').addClass('wrong');
         }
+    });*/
+
+    console.log('searchQuery',searchQuery);
+    $.ajax({
+        url: searchQuery,
+        type: "GET",
+        processData: false,
+        success: function(data) {
+            //;
+            console.log('searchQuery SUC', data);
+            profile_gigs = JSON.parse(data);
+            for (var i = 0; i < profile_gigs.length; i++) {
+                console.log("profile_gig", profile_gigs[i])
+               $.ajax({
+                        url: "/api/v1/dht/hkey/?hkey=" + profile_gigs[i],
+                        hk: profile_gigs[i],
+                        type: "GET",
+                        processData: false,
+                        success: function(js_data){
+
+                                   console.log('hkey',this.hk);
+                                   console.log('data:',js_data);
+                                   gig_o = JSON.parse(js_data);
+                                   //console.log('data:',gig_o);
+                                   createGigToFound(this.hk, gig_o);
+                                   // $('.gig').remove();
+
+
+                            },
+
+                        error: function(error) {
+                                console.log('ERR',error);
+
+                                return;
+                            }
+                    });
+
+                    //var gig_hk = profile_gigs[i];
+                    //console.log('GIG HK:',gig_hk);
+
+                    /**/
+                }
+        },
+        error: function(error) {
+           //;
+           console.log("searchQuery ERR", error);
+        }
     });
+
 }
 
 
