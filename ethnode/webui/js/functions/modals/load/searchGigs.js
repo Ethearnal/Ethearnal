@@ -46,12 +46,14 @@ function searchQueryDo() {
     // FORMATING SEARCH QUERY
     formatSearchQuery();
 
-    if (searchQuery == "http://london.ethearnal.com:5678/api/cdn/v1/idx/?text=" || searchQuery == "/api/v1/my/idx/query/guids/?" || searchQuery == false) {
-        $('.gig').remove();
-        $('input#search-header, button#search-button').removeClass('wrong');
-        loadGigs();
-        return false;
-    }
+//    if (searchQuery == "http://london.ethearnal.com:5678/api/cdn/v1/idx/?text=" || searchQuery == "/api/v1/my/idx/query/guids/?" || searchQuery == false) {
+//        $('.gig').remove();
+//        //$('.gigs-container').empty();
+//        console.log('SEARCHING');
+//        $('input#search-header, button#search-button').removeClass('wrong');
+//        loadGigs();
+//        return false;
+//    }
 
     /*$.ajax({
         url: searchQuery,
@@ -71,6 +73,7 @@ function searchQueryDo() {
     });*/
 
     console.log('searchQuery',searchQuery);
+    $('.gigs-container').empty();
     $.ajax({
         url: searchQuery,
         type: "GET",

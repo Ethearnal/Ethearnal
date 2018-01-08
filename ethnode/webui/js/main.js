@@ -176,13 +176,13 @@ $('a[load]').click(function(e) {
     if($load == 'profile') {
         /*
         */
-       // console.log('TEST');
+       console.log('LOAD PROFILE GIGS:');
        var gig_ctx = $("[data-target='#gigModal'")
        var el =gig_ctx.remove(0);
 
         getNodeData(function(node_data){
         node = $.parseJSON(node_data);
-       // console.log('GUID:' + node.guid);
+        console.log('GUID:' + node.guid);
         getProfileGigs(node.guid,  function(data){
             console.log('GUID:' + data);
             profile_gigs = JSON.parse(data);

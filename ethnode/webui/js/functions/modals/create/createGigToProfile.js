@@ -111,6 +111,7 @@ function createGigToFound(hk, gig_o) {
     gig_html = '<div id="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">' + dropdownButton + dropdownUL + image +  title + desc + footer + '</div>';
     //
     // console.log('RENDER GIG', gigID);
+
     $(".gigs-container").append(gig_html);
     componentHandler.upgradeDom();
 
