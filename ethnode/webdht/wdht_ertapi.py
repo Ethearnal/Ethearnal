@@ -84,6 +84,7 @@ class IdxCdnQueryWebApi(object):
             self.mount()
 
     def GET(self, **kwargs):
+        self.cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
         try:
             query_dict = {k.lower(): list(set(v.lower().split(' '))) for k, v in kwargs.items()}
             print('QUERY_DICT', query_dict)
