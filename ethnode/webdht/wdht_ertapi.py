@@ -101,6 +101,13 @@ class IdxCdnQueryWebApi(object):
             # traceback.print_exc()
             return b'null'
 
+    def OPTIONS(self):
+        self.cherrypy.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
+        self.cherrypy.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+        self.cherrypy.response.headers['Access-Control-Allow-Origin'] = '*'
+        # tell CherryPy no avoid normal handler
+        return b''
+
     def mount(self):
         self.cherrypy.tree.mount(
             self,
