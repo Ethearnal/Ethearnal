@@ -111,6 +111,15 @@ class IdxCdnQueryWebApi(object):
                     self.cherrypy.response.status = 400
                     return b'null'
         except:
+            try:
+                ll = self.idx.query_all()
+                if ll:
+                    js = json.dumps(ll, ensure_ascii=False)
+                    bts = js.encode(encoding='utf-8')
+                    self.cherrypy.response.status = 200
+                    return bts
+            except:
+                pass
             self.cherrypy.response.status = 404
             # traceback.print_exc()
             return b'null'
