@@ -35,6 +35,12 @@ class Indexer(object):
             ll = [guid_bin_to_hex2(t[2]) for t in cur.fetchall()]
             return ll
 
+    def query_all(self):
+        cur = self.db_idx.no_component()
+        if cur:
+            ll = [guid_bin_to_hex2(t[2]) for t in cur.fetchall()]
+            return ll
+
     def query_terms_d(self, terms_d: dict):
         cur = self.idx.qry_terms_d(terms_d)
         if cur:
@@ -95,8 +101,15 @@ class IdxCdnQueryWebApi(object):
                 self.cherrypy.response.status = 200
                 return bts
             else:
-                self.cherrypy.response.status = 400
-                return b'null'
+                ll = self.idx.query_all()
+                if ll:
+                    js = json.dumps(ll, ensure_ascii=False)
+                    bts = js.encode(encoding='utf-8')
+                    self.cherrypy.response.status = 200
+                    return bts
+                else:
+                    self.cherrypy.response.status = 400
+                    return b'null'
         except:
             self.cherrypy.response.status = 404
             # traceback.print_exc()

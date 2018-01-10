@@ -86,6 +86,13 @@ class InvIndexTimestampSQLite(BaseSQLite):
         else:
             self.cursor.execute(qs, values)
 
+    def no_component(self, qs_only=False):
+        qs = 'SELECT * FROM %s a ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC;'
+        if qs_only:
+            return qs, (None, )
+        c = self.cursor.execute(qs)
+        return c
+
     def single_component(self, component_hash, asc=True, qs_only=False):
         if asc:
             order_st = ' ORDER BY a.ert_tokens_major, a.utc_timestamp; '
