@@ -2,16 +2,28 @@
 
 // TODO
 
+// JS DATA BUFFERS
 
-// Prideti croppinima nuotrauku
-// Patobulinti profile change avatar modal
+var V_GIGS_BUFFER = {};
 
-// PADARYTI KAD SUKURTU NAUJO LAYOUT GIG INNER MODAL ir ijungti vel CreateGigBox() funkcija kad veiktu
+var CdnHost = function() {
+  this.scheme = "http://";
+  this.host = "london.ethearnal.com";
+  this.port = "5678";
+  this.resource_endpoint = "api/cdn/v1/resource";
+  this.resource_query = "?hkey=";
+};
 
+var api_post_cdn_url = function() {
+     cdn = new CdnHost();
+     return cdn.scheme + cdn.host + ":" + cdn.port + '/' + cdn.resource_endpoint;
+};
 
-// Gigai turi buti atvaizduojami tavo profile page.
-// // Padaryti profile page, kad galetum skillus pridet (paimt is Aspire)
-// // Atskirti Education/Job/Language/Skills PROFILE TAB'e. Jeigu nera nieko toje skiltyje - centruotas tekstas "There's no jobs".
+var api_get_cdn_url = function() {
+    cdn = new CdnHost();
+    return cdn.scheme + cdn.host + ":" + cdn.port + '/' + cdn.resource_endpoint + cdn.resource_query;
+};
+
 
 $( "i.skills-down" ).click(function() {
     $( ".profile-upper .skills" ).toggleClass('hidden');

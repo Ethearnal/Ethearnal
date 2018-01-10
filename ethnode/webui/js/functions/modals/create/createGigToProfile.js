@@ -94,6 +94,9 @@ function createGigToFound(hk, gig_o) {
     var image ='';
     var gigID = hk;
     var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+
+    var api_cdn = api_get_cdn_url();
+
     var default_profile_image = '1540b3c47ada5fd9a4798d3cc780d6a6bd05baf94cc2fdaa53e90accb4162383';
     var profile_image = null;
     var owner_guid = null;
@@ -103,9 +106,11 @@ function createGigToFound(hk, gig_o) {
        owner_guid = gig_o.owner_guid;
     }
 
-
-
-
+    var img_txt = '<div class="owner-info">'
+                + '<img id="imgav' + gigID + '" src="' + img_src + '" alt="Avatar">'
+                + '<h5>owner_nickname</h5>'
+                + '<h4>Entry Level</h4>'
+                + '</div>' ;
 
     image += '<div class="ui fluid image"><div class="ui black ribbon label">';
     image += gig_o.general_domain_of_expertise +'</div><div class="image-block"><img src="'+api_cdn+'';
@@ -120,16 +125,13 @@ function createGigToFound(hk, gig_o) {
     console.log('IMG+SRC', img_src);
     // var img_src = '';
 
-    var img_txt = '<div class="owner-info">'
-                + '<img id="imgav' + gigID + '" src="' + img_src + '" alt="Avatar">'
-                + '<h5>owner_nickname</h5>'
-                + '<h4>Entry Level</h4>'
-                + '</div>' ;
+
+
 
     //img_txt = '"<img id="avatar-img'+gigID+'" src="' + img_src + '" alt="Bobby brown" class="profile-picture">';
 
     gig_html = '<div id="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">'
-               + dropdownButton + dropdownUL + image +  title + img_txt + desc + footer + '</div>';
+               + dropdownButton + dropdownUL + image + img_txt  + title + desc + footer + '</div>';
 
    $(".gigs-container").append(gig_html);
     componentHandler.upgradeDom();

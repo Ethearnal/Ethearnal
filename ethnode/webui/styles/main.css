@@ -103,8 +103,8 @@ header .container nav #navigation ul li.profile {
 }
 
 header .container nav #navigation ul li.profile img.profile-picture {
-  width: 36px;
-  height: 36px;
+  width: 49px;
+  height: 49px;
   border-radius: 100%;
   margin-left: 16px;
   margin-top: -5px;
@@ -1577,15 +1577,16 @@ section.profiles-page-content .container .jobs .gigs-container:after {
 
 .gig .owner-info img {
   float: left;
-  width: 24px;
-  height: 24px;
+  width: 49px;
+  height: 49px;
   border-radius: 100%;
   margin-top: 1px;
+  margin-right: 3px;
 }
 
 .gig .owner-info h5, .gig .owner-info h4 {
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1;
   color: black;
@@ -2530,7 +2531,7 @@ sup i.material-icons {
     background-color: white;
   }
   header.main-header .container .navbar {
-    min-height: 59px;
+    /*min-height: 59px;*/
   }
   #navigation form.navbar-left {
     display: none;
@@ -2863,10 +2864,18 @@ body.modal-open {
   overflow: auto;
 }
 
+img.aspecto-img {
+ width: auto;
+ height: 100 %;
+ overflow: hidden;
+}
+
+
 body header.main-header {
   position: fixed;
   width: 100%;
   background-color: white;
+  height: 69px;
   z-index: 20;
   box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
 }
