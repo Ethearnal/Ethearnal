@@ -106,32 +106,24 @@ function createGigToFound(hk, gig_o) {
        owner_guid = gig_o.owner_guid;
     }
 
-    var img_txt = '<div class="owner-info">'
+    var img_txt = '<br><div class="owner-info">'
                 + '<img id="imgav' + gigID + '" src="' + img_src + '" alt="Avatar">'
-                + '<h5>owner_nickname</h5>'
-                + '<h4>Entry Level</h4>'
+                + '<h4 id="nmown' + gigID + '" ></h4>'
                 + '</div>' ;
 
     image += '<div class="ui fluid image"><div class="ui black ribbon label">';
     image += gig_o.general_domain_of_expertise +'</div><div class="image-block"><img src="'+api_cdn+'';
     image += gig_o.image_hash+'" /></div></div>';
-    var title = '<p>' + gig_o.title + '</p>';
     var desc = '<p>' + gig_o.description + '</p>';
+    var title =   '<span class="gig-title">' + gig_o.title + "</span>";
     var dropdownButton = '<button id="DDB'+ hk +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button dropdown-gig"><i class="material-icons">more_vert</i></button>';
     var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB'+ hk +'"><li class="mdl-menu__item open-modal" open-modal="#edit-gig">Edit</li><li class="mdl-menu__item delete">Delete</li></ul>';
     var footer = '<div class="footer"><h4>Starting at <span><i class="material-icons">polymer</i>' + gig_o.price + '</span></h4></div>';
 
     var img_src = api_cdn + default_profile_image ;
-    console.log('IMG+SRC', img_src);
-    // var img_src = '';
-
-
-
-
-    //img_txt = '"<img id="avatar-img'+gigID+'" src="' + img_src + '" alt="Bobby brown" class="profile-picture">';
 
     gig_html = '<div id="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">'
-               + dropdownButton + dropdownUL + image + img_txt  + title + desc + footer + '</div>';
+               + dropdownButton + dropdownUL + image + img_txt  + title  + footer + '</div>';
 
    $(".gigs-container").append(gig_html);
     componentHandler.upgradeDom();
@@ -139,17 +131,18 @@ function createGigToFound(hk, gig_o) {
     if(gig_o.hasOwnProperty('owner_guid')) {
        //
        owner_guid = gig_o.owner_guid;
-       console.log('++ + ++ ', owner_guid);
+       //
        getProfileValue(owner_guid, 'profilePicture', function(profilePictureURL) {
             //
-            console.log('profileID', owner_guid);
-
-            console.log('profilePC', profilePictureURL);
             p_src = api_cdn + JSON.parse(profilePictureURL);
              console.log('ELEMENT', p_src);
-            el = $("#imgav"+gigID);
-            el.attr('src', p_src);
-            console.log('ELEMENT', el);
+            $('#imgav' + gigID).attr('src', p_src);
+            //
+            getProfileValue(owner_guid, 'name', function(name_jstr){
+                names_o = JSON.parse(name_jstr)
+                $('#nmown' + gigID).text(names_o.first + " " + names_o.last);
+            });
+            //
         });
 
     }
