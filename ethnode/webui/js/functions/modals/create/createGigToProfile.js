@@ -148,3 +148,98 @@ function createGigToFound(hk, gig_o) {
     }
 
 }
+
+
+function createProfileCard(owner_guid){
+    //
+    // api_cdn = '';
+    api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+    img_src = "";
+
+    var img_txt = '<div id="proowner' + owner_guid + '" class="owner-info">'
+            + '<div class="pro-title-class" id="protitle'+ owner_guid +'"></div>'
+            + '  <img id="proimgav' + owner_guid + '" src="' + img_src + '" alt="Avatar">'
+            + '<div class="pro-name-class" id="proname'+ owner_guid +'"></div>'
+            + '</div>' ;
+
+    var gig_html = '<div id="'+owner_guid+'" class="profile-card" data-toggle="modal" data-target="#profileModal">'
+             + img_txt
+             + '</div>';
+
+
+
+    // profile images
+    getProfileValue(owner_guid, 'profilePicture', function(profile_picture_url) {
+        // profile images
+        if(profile_picture_url == 'null') {
+            console.log('P NULL', profile_picture_url);
+        }
+        else{
+            var p_src = api_cdn + JSON.parse(profile_picture_url);
+            console.log('P OKKK', profile_picture_url);
+            console.log('PARSED', p_src);
+            $(".profiles-container").append(gig_html);
+
+
+            //p_src = api_cdn + JSON.parse(profile_picture_url);
+            var e = $('#proimgav' + owner_guid);
+            e.attr('src', p_src) ;
+
+             // name
+            getProfileValue(owner_guid, 'name', function(name_js) {
+                //
+                if(name_js == 'null') {
+                    console.log('P NULL', name_js);
+                }
+                else {
+                    var names_o = JSON.parse(name_js);
+                    console.log('name_o',names_o);
+                    var e0 = $('#proname' + owner_guid);
+                    // inner_html = '<i class="material-icons">perm_identity</i>'
+                    inner_html = '';
+                    e0.html( inner_html + names_o.first +" "+ names_o.last);
+                    console.log('EEE',e0);
+
+                }
+            });
+            // title
+            getProfileValue(owner_guid, 'title', function(title_js) {
+                //
+                if(title_js == 'null') {
+                    console.log('P NULL', title_js);
+                }
+                else {
+                    var title = JSON.parse(title_js);
+                    console.log('title',title);
+                    var e0 = $('#protitle' + owner_guid);
+                    // inner_html = '<i class="material-icons">code</i>'
+                    inner_html = '';
+                    e0.html(inner_html + title);
+                    console.log('EEE',e0);
+
+                }
+            });
+            // headline image
+            getProfileValue(owner_guid, 'headlinePicture', function(headline_hash){
+
+                if(headline_hash == 'null') {
+                    console.log('P headline_hash NULL', headline_hash);
+                } else {
+                    //console.log('P headline_hash', headline_hash);
+                    //
+                    var headline_url = api_cdn + JSON.parse(headline_hash);
+                    //var style_str = 'background: lightblue ;';
+                    var style_str = 'background: url("'+headline_url + '") no-repeat;'
+                                  + 'background-size: auto 106px;'
+                                  + 'background-position: 0 32px;'
+                                  + '';
+                    var e1 = $('#proowner' + owner_guid);
+                    console.log(headline_url);
+                    e1.attr('style', style_str);
+
+                }
+            });
+            //
+        }
+    });
+}

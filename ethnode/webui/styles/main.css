@@ -88,7 +88,8 @@ header .container nav .navbar-header a {
 }
 
 header .container nav .navbar-header a img {
-  max-width: 205px;
+  max-width: 245px;
+
 }
 
 header .container nav #navigation ul.navbar-right {
@@ -1520,6 +1521,71 @@ section.profiles-page-content .container .jobs .gigs-container:after {
   margin-top: 25px;
   width: 815px;
 }
+
+.profile-card {
+  width: 240px;
+  height: 290px;
+  max-width: 240px;
+  max-height: 290px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+  background-color: #FFFFFF;
+  position: relative;
+
+  float: left;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  transition: all 0.15s ease-in;
+}
+
+.profile-card .owner-info{
+  /* background-color: pink; */
+
+}
+
+.profile-card .owner-info img {
+  /* float: left; */
+  width: 96px;
+  height: 96px;
+  border: 3px solid #FFFFFF;
+  border-radius: 100%;
+  margin-top: 35px;
+  margin-right: 3px;
+  margin-left:23px;
+}
+
+.profile-card .pro-title-class {
+    color: #92A8D1;
+    width: 100%;
+    /* background: #ffecec; */
+
+    text-align: right;
+    padding-right: 10px;
+    font-size: 14px;
+    padding-top: 8px;
+
+}
+
+.profile-card .pro-name-class {
+   /* color: #92A8D1; */
+   color: #565656;
+    width: 100%;
+    /* background: #ffecec; */
+
+    text-align: left;
+    padding-left: 25px;
+    font-size: 18px;
+    padding-top: 0px;
+
+}
+
+.profile-card-headline-thumb {
+    width: 240px;
+    height: 100px;
+    background-color: pink;
+
+}
+
 
 .gig {
   width: 240px;

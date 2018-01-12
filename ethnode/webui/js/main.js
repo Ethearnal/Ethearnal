@@ -1,4 +1,37 @@
 
+// Paulius Require function
+//function require(script) {
+//    $.ajax({
+//      dataType: "jsonp",
+//      url: script,
+//      }).done(function ( data ) {
+//      // do my stuff
+//    });
+//}
+
+// TODO less require more secure, and do the fucking sanita on hundred places now
+
+// profile cards begin
+var main_profile_cards = function(){
+    $('.profiles-container').empty();
+    console.log('main_profile_cards()');
+    $.ajax({
+        url: '/api/v1/dht/guids',
+        type: 'GET',
+        processData: false,
+        success: function(data){
+            known_guids = JSON.parse(data);
+            known_guids.forEach(function(element){
+                //
+                createProfileCard(element);
+                console.log(element);
+            });
+        }
+    });
+
+
+};
+// profile cards end
 
 // TODO
 
@@ -183,6 +216,12 @@ $('a[load]').click(function(e) {
     if($load == 'profiles') {
         $('section.profiles-page-content').show();
         $('input#search-header').focus().attr('placeholder', 'Search profiles...');
+
+        console.log('SHOW PROFILES LISTING');
+
+        main_profile_cards();
+
+
     }
 
     if($load == 'profile') {
@@ -596,6 +635,8 @@ function require(script) {
 
 // FUNCTIONS
 
+
+
 // GET DATA
 require("js/functions/getData/gigData.js"); // GETS GIG DATA BY GIG ID
 require("js/functions/getData/guidsData.js"); // GETS ALL GUIDS (NODES) DATA
@@ -638,7 +679,10 @@ require("js/functions/modals/open/modal.js"); // OPEN --- CLOSE MODAL FUNCTIONS
 // INITIALIZING
 require("js/functions/modals/initializing/successMessage.js"); // SHOWING SUCCESS MESSAGE FUNCTION
 require("js/functions/modals/initializing/datePickers.js"); // INITIALIZING DATE PICKERS
-require("js/functions/modals/initializing/modalInputs.js"); // ADDING TEXT TO INPUTS IN #EDIT MODALS
+
+//TODO check this
+//require("js/functions/modals/initializing/modalInputs.js"); // ADDING TEXT TO INPUTS IN #EDIT MODALS
+
 require("js/functions/modals/initializing/profileModalInputs.js"); // ADDING TEXT TO #EDIT PROFILE MODAL INPUTS
 
 
@@ -659,10 +703,6 @@ require("js/functions/modals/resetImages.js");
 
 // Collects the data
 require("js/functions/modals/collectData.js");
-
-
-
-
 
 
 // OTHER FUNCTION
