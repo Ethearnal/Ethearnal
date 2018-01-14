@@ -109,6 +109,7 @@ $('body').delegate('.gig', 'click', function(e){
     var gig_hkey = $(this).attr('id');
     console.log('gig_hkey', gig_hkey);
     $modal = $(".modal#gigModal .modal-content");
+    //
     $modal.html('');
     // $innerContent = $('<div class="modal-body">' + '</div>');
     // $(".modal#gigModal .modal-content").html($innerContent);
@@ -118,9 +119,11 @@ $('body').delegate('.gig', 'click', function(e){
     $modal.height("640px");
     //
 
-    $innerContent = $('<div class="modal-body">' +$('#new-modal-thing').html() + '</div>');
-    console.log($('#new-modal-thing').html());
+    // $innerContent = $('<div class="modal-body">' +$('#new-modal-thing').html() + '</div>');
+    $innerContent = $($('#new-modal-thing').html());
+    //console.log($('#new-modal-thing').html());
     $modal.html($('#new-modal-thing').html());
+    //$modal.css('margin-left','10px;');
 
 
 
@@ -130,13 +133,63 @@ $('body').delegate('.gig', 'click', function(e){
         processData: false,
         success: function(gig_data_json) {
             gig_o = JSON.parse(gig_data_json);
-            console.log('--->', gig_o.image_hash);
+
+            console.log('--->', gig_o);
             $e = $('#new-modal-gig-image')
             $e.css(
                 'background', 'url("' + api_cdn + gig_o.image_hash+ '")'
                 + '0 0 no-repeat'
             );
             $e.css('background-size', '100% auto');
+
+            owner_guid = gig_o.owner_guid;
+
+            $('#new-modal-gig-title').html(gig_o.title);
+            $('#new-modal-description').html(gig_o.description);
+            $('#new-modal-gig-price-req').html(gig_o.required_ert);
+            $('#new-modal-gig-price').html(gig_o.price);
+
+            // profile image
+            getProfileValue(owner_guid, 'profilePicture', function(profile_picture_url) {
+                if(profile_picture_url == 'null') {
+                    //console.log('P NULL', profile_picture_url);
+
+                }
+                else {
+                    profile_image = JSON.parse(profile_picture_url);
+                    $('#new-modal-owner-avatar').css(
+                            'background-image',
+                            'url("'+ api_cdn + profile_image +'")'
+                            );
+                }
+            });
+
+            // profile name
+            getProfileValue(owner_guid, 'name', function(names_js) {
+                if(names_js == 'null') {
+                    //console.log('P NULL', profile_picture_url);
+
+                }
+                else {
+                    name_o = JSON.parse(names_js);
+                    //console.log('names', name_o);
+                    $('#new-modal-owner-name').html(name_o.first+' <b>'+name_o.last+'</b');
+                }
+            });
+
+            // profile title
+            getProfileValue(owner_guid, 'title', function(title_js) {
+                if(title_js == 'null') {
+                    //console.log('P NULL', profile_picture_url);
+
+                }
+                else {
+                    title = JSON.parse(title_js);
+                    $('#new-modal-owner-title').html('<i>'+title+'</i>');
+                    //console.log('title', title);
+                }
+            });
+
 
             //gig_o.image_hash
 

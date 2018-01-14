@@ -1284,28 +1284,38 @@ window.onclick = function(event) {
     </div>
 
     <div id="new-modal-thing">
-      <!-- header -->
-      <div class="new-modal-header">
-        <!-- profile info -->
-        <div class="new-modal-owner-info">
-          Owner data
+      <div id="new-modal-wrap">
+        <!-- header -->
+        <div class="new-modal-header">
+          <!-- profile info -->
+          <div id="new-modal-owner-avatar"></div>
+          <div class="new-modal-owner-info">
+            <div id="new-modal-owner-name">Owner Name</div>
+            <div id="new-modal-owner-title" >Owner Title</div>
+          </div>
+          <!-- other things -->
+          <div class="new-modal-others">
+            <button data-dismiss="modal" class="mdl-button mdl-js-button close-button">Close</button>
+          </div>
         </div>
-        <!-- other things -->
-        <div class="new-modal-others">
-          Other things
+        <!-- image -->
+        <div id="new-modal-gig-image">
+          <div id="new-modal-gig-title">
+            Title
+          </div>
+          <div id="new-modal-description">
+            Description
+          </div>
         </div>
-      </div>
-      <!-- image -->
-      <div id="new-modal-gig-image">
-        <div id="new-modal-gig-title">
-          Title
+        <div class="new-modal-footer">
+          <div class="new-modal-footer-buttons">
+              <button class="mdl-button mdl-js-button buy">
+                Hold &nbsp; <span id="new-modal-gig-price-req">0.00 </span> &nbsp;
+                <i class="material-icons">polymer</i> &nbsp;
+                Price &nbsp; <span id="new-modal-gig-price"> 0.00 </span> &nbsp; Order
+          </button>
+          </div>
         </div>
-        <div id="new-modal-description">
-          Description
-        </div>
-      </div>
-      <div class="new-modal-footer">
-        Footer
       </div>
     </div>
 

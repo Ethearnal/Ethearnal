@@ -3056,34 +3056,69 @@ div#new-modal-thing {
 }
 
 
+div#new-modal-wrap {
+
+  width: 100%;
+  height: 640px;
+
+}
+
+
 
 div.new-modal-header{
     width: 100%;
-    height: 80px;
-    background-color: white;
+    height: 99px;
 }
 
 
-div.new-modal-owner-info{
-    float: left;
-    width: 460px;
-    height: 80px;
-    background-color: green;
-}
+
 
 div.new-modal-others{
     float: right;
-    width: 160px;
-    height: 80px;
-    background-color: gray;
 }
 
 div#new-modal-gig-image{
     position: relative;
     width: 100%;
-    height: 480px;
+    height: 495px;
     background-size: 300px 100px;
 
+}
+
+
+div#new-modal-owner-avatar{
+    float: left;
+    background: #f7cac9;
+    border-radius: 100px;
+    width: 79px;
+    height: 79px;
+    margin-left: 9px;
+    margin-top: 9px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+div.new-modal-owner-info{
+    float: left;
+    width: 460px;
+    height: 80px;
+    margin-top: 9px;
+    margin-left: 9px;
+    background-color: white;
+}
+
+div#new-modal-owner-name {
+ font-size: 32px;
+ padding: 3px;
+ margin-bottom: 6px;
+}
+
+div#new-modal-owner-title {
+ color: #92a8d1;
+ padding: 3px;
+ font-size: 24px;
+ margin-left: 9px;
 }
 
 div#new-modal-gig-title {
@@ -3095,9 +3130,9 @@ div#new-modal-gig-title {
     margin-top: 69px;
     padding-left: 30px;
     padding-top: 18px;
-    padding-bottom: 8px;
+    padding-bottom: 18px;
     padding-right: 8px;
-    border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 3px 3px 0px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 
     background: #92a8d1;
@@ -3109,25 +3144,35 @@ div#new-modal-description{
     bottom: 0;
     right: 0;
 
-    min-width: 120px;
-    min-height: 120px;
+    min-width: 60px;
+    max-width: 95%
+    /*max-width: 120px;*/
+    min-height: 60px;
+    max-height: 320px;
+    padding-right: 18px;
     padding-top: 18px;
     padding-left: 8px;
+    padding-bottom: 8px;
     margin-bottom: 30px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    margin-left:19px;
 
     font-size: 18px;
-    border-radius: 5px 0px 0px 5px;
+    border-radius: 3px 0px 0px 3px;
     background: #ffecec;
     opacity: 0.95;
 }
 
 div.new-modal-footer{
 
-
     width: 100%;
-    height: 80px;
     background-color: gray;
+}
+
+div.new-modal-footer-buttons{
+   padding-top: 9px;
+   padding-right 1px;
+   float: right
 }
 
 /* end new modal styles */
