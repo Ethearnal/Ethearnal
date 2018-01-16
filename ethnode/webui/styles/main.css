@@ -1442,13 +1442,23 @@ section.background-image .button-prev, .modal-body .image .button-prev {
 section.gigs-page-content .container,
 section.jobs-page-content .container,
 section.profiles-page-content .container {
-  padding-top: 150px;
+  padding-top: 100px;
 }
 
 section.gigs-page-content .container .filters,
 section.jobs-page-content .container .filters,
 section.profiles-page-content .container .filters {
   position: fixed;
+  width: 269px;
+  background: #ffecec56;
+  padding-top: 9px;
+
+
+  /*-moz-box-shadow:    inset 0 0 15px #eaeaea;
+   -webkit-box-shadow: inset 0 0 15px #eaeaea;
+   box-shadow:         inset 0 0 15px #eaeaea;*/
+   border: solid 1px #eaeaea;
+
 }
 
 section.gigs-page-content .container .filters .filter,
@@ -1467,6 +1477,7 @@ section.profiles-page-content .container .filters .filter p {
   color: #4a4a4a;
   margin: 0;
   margin-bottom: 5px;
+
 }
 
 section.gigs-page-content .container .filters .filter label.mdl-checkbox,
@@ -1493,6 +1504,7 @@ section.jobs-page-content .container .jobs,
 section.profiles-page-content .container .gigs,
 section.profiles-page-content .container .jobs {
   float: right;
+
 }
 
 section.gigs-page-content .container .gigs .gigs-container, section.gigs-page-content .container .jobs .gigs-container,
@@ -1522,6 +1534,12 @@ section.profiles-page-content .container .jobs .gigs-container:after {
   width: 815px;
 }
 
+.profile-card :hover, .profile-card :focus, .profile-card :active {
+  background-color: #fbfafa;
+  cursor: pointer;
+}
+
+
 .profile-card {
   width: 240px;
   height: 290px;
@@ -1544,14 +1562,15 @@ section.profiles-page-content .container .jobs .gigs-container:after {
 }
 
 .profile-card .owner-info img {
-  /* float: left; */
+
   width: 96px;
   height: 96px;
-  border: 3px solid #FFFFFF;
+
+  border: 2px solid #FFFFFF;
   border-radius: 100%;
-  margin-top: 35px;
-  margin-right: 3px;
-  margin-left:23px;
+  margin-top: 24px;
+  margin-right: 0px;
+  margin-left: 66px;
 }
 
 .profile-card .pro-title-class {
@@ -1572,8 +1591,8 @@ section.profiles-page-content .container .jobs .gigs-container:after {
     width: 100%;
     /* background: #ffecec; */
 
-    text-align: left;
-    padding-left: 25px;
+    text-align: center;
+    /*padding-left: 25px;*/
     font-size: 18px;
     padding-top: 0px;
 
@@ -1581,7 +1600,7 @@ section.profiles-page-content .container .jobs .gigs-container:after {
 
 .profile-card-headline-thumb {
     width: 240px;
-    height: 100px;
+    height: 130px;
     background-color: pink;
 
 }
@@ -2927,9 +2946,11 @@ sup i.material-icons {
 
 body {
   background-color: #bfc0c121;
+  /* background-color: #e6eeff; */
   -webkit-overflow-scrolling: touch;
   overflow: auto;
   height: 100%;
+
 }
 
 body.up {

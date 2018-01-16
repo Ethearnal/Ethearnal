@@ -100,7 +100,10 @@
 //}
 //
 
-
+$('body').delegate('button.dropdown-gig, li.open-modal, ul.mdl-menu, .mdl-menu__container', 'click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+});
 
 
 $('body').delegate('.gig', 'click', function(e){
@@ -124,7 +127,6 @@ $('body').delegate('.gig', 'click', function(e){
     //console.log($('#new-modal-thing').html());
     $modal.html($('#new-modal-thing').html());
     //$modal.css('margin-left','10px;');
-
 
 
     $.ajax({

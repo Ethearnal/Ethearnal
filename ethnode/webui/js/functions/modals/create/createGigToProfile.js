@@ -156,13 +156,21 @@ function createProfileCard(owner_guid){
     api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
     img_src = "";
 
+    var ribbon = '<div id="protitle' + owner_guid + '" '
+              + 'class="ui ribbon medium label" style="left: -15px; top: 9px; opacity:0.9;">'
+              + 'TITLE'
+              + '</div>';
+
+
     var img_txt = '<div id="proowner' + owner_guid + '" class="owner-info">'
-            + '<div class="pro-title-class" id="protitle'+ owner_guid +'"></div>'
+           // + '<!--div class="pro-title-class" id="protitle'+ owner_guid +'"></div-->'
+           // + ''
             + '  <img id="proimgav' + owner_guid + '" src="' + img_src + '" alt="Avatar">'
             + '<div class="pro-name-class" id="proname'+ owner_guid +'"></div>'
             + '</div>' ;
 
     var gig_html = '<div id="'+owner_guid+'" class="profile-card" data-toggle="modal" data-target="#profileModal">'
+             + ribbon
              + img_txt
              + '</div>';
 
@@ -231,7 +239,7 @@ function createProfileCard(owner_guid){
                     //var style_str = 'background: lightblue ;';
                     var style_str = 'background: url("'+headline_url + '") no-repeat;'
                                   + 'background-size: auto 106px;'
-                                  + 'background-position: 0 32px;'
+                                  //+ 'background-position: '
                                   + '';
                     var e1 = $('#proowner' + owner_guid);
                     console.log(headline_url);
