@@ -2962,10 +2962,19 @@ body.modal-open {
   overflow: auto;
 }
 
-img.aspecto-img {
- width: auto;
- height: 100 %;
+/*img.aspecto-img {
+ height: auto;
+ width: 100%;
  overflow: hidden;
+}*/
+
+div.aspecto-img {
+ width: 100%;
+ height: 400px;
+ /*background-image: url("http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=99cc396f3f279bcfe06496a21e104c3e6d89ae07863de6276b9b1ab465b4cf72");*/
+ background-size: cover;
+ background-repeat: no-repeat;
+ background-color: 	#f7cac9;
 }
 
 

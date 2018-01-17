@@ -69,16 +69,24 @@ console.log('UPDATE PROFILE')
     });
 
     // headline
-     getProfileValue(profileID, 'headlinePicture', function(profilePictureURL) {
+     getProfileValue(profileID, 'headlinePicture', function(headline_hash) {
         var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
         //setProfileValue('headlinePicture', headline_hash);
          //               console.log('headline_hash',headline_hash);
           //              $('#profile-headline').attr('src', api_cdn + headline_hash);
-
-        if (profilePictureURL.indexOf('//') >= 0) {
-            $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
+        headline_hash = JSON.parse(headline_hash);
+        if (headline_hash.indexOf('//') >= 0) {
+           // $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
+             $('#profile-headline').css(
+                            'background-image',
+                            'url("'+ api_cdn + headline_hash +'")'
+                            );
         } else {
-            $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
+           // $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
+             $('#profile-headline').css(
+                            'background-image',
+                            'url("'+ api_cdn + headline_hash +'")'
+                            );
 
         }
     });
@@ -133,7 +141,11 @@ function updateProfileHeadline() {
                     success: function(headline_hash){
                         setProfileValue('headlinePicture', headline_hash);
                         console.log('headline_hash',headline_hash);
-                        $('#profile-headline').attr('src', api_cdn + headline_hash);
+                        //$('#profile-headline').attr('src', api_cdn + headline_hash);
+                        $('#profile-headline').css(
+                            'background-image',
+                            'url("'+ api_cdn + headline_hash +'")'
+                            );
                     }
                 });
             } else {
