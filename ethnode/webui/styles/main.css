@@ -1768,9 +1768,12 @@ span.gig-title {
   color: black;
   overflow: hidden;
   padding: 0 10px;
-  height: 50px;
+  height: 39px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   margin: 0;
-  margin-top: 10px;
+  margin-top: 1px;
+
 }
 
 .gig .lower-info {
@@ -1807,7 +1810,7 @@ span.gig-title {
 }
 
 .gig .footer {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px dotted #e5e5e5;
   position: absolute;
   bottom: 0;
   width: 100%;

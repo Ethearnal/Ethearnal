@@ -69,11 +69,11 @@ function createGigToProfile2(hk, gig_o) {
     image += '<div class="ui fluid image"><div class="ui black ribbon label">';
     image += gig_o.general_domain_of_expertise +'</div><div class="image-block"><img src="'+api_cdn+'';
     image += gig_o.image_hash+'" /></div></div>';
-    var title = '<p>' + gig_o.title + '</p>';
+    var title = '<p style="color: #92a8d1; font-size: 18px; border-bottom: solid 1px; margin: 4px; border-color: #e6eeff;">' + gig_o.title + '</p>';
     var desc = '<p>' + gig_o.description + '</p>';
     var dropdownButton = '<button id="DDB'+ hk +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button dropdown-gig"><i class="material-icons">more_vert</i></button>';
     var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB'+ hk +'"><li class="mdl-menu__item open-modal" open-modal="#edit-gig">Edit</li><li class="mdl-menu__item delete">Delete</li></ul>';
-    var footer = '<div class="footer"><h4>Starting at <span><i class="material-icons">polymer</i>' + gig_o.price + '</span></h4></div>';
+    var footer = '<div class="footer" style="margin: 4px;"><h4>Starting at <span><i class="material-icons">polymer</i>' + gig_o.price + '</span></h4></div>';
 
     //console.log('GIG TO PROFILE', gig_o);
     // $gig = $('<div id="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">' + dropdownButton + dropdownUL + image +  title + desc + footer + '</div>');
@@ -97,7 +97,7 @@ function createGigToOtherProfile(hk, gig_o) {
     image += '<div class="ui fluid image"><div class="ui black ribbon label">';
     image += gig_o.general_domain_of_expertise +'</div><div class="image-block"><img src="'+api_cdn+'';
     image += gig_o.image_hash+'" /></div></div>';
-    var title = '<p>' + gig_o.title + '</p>';
+    var title = '<p style="color: #92a8d1; font-size: 18px; border-bottom: solid 1px; margin: 4px; border-color: #e6eeff;">' + gig_o.title + '</p>';
     var desc = '<p>' + gig_o.description + '</p>';
     var dropdownButton = '<button id="DDB'+ hk +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button dropdown-gig"><i class="material-icons">more_vert</i></button>';
     var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB'+ hk +'"><li class="mdl-menu__item open-modal" open-modal="#edit-gig">Edit</li><li class="mdl-menu__item delete">Delete</li></ul>';
@@ -245,7 +245,7 @@ function createProfileCard(owner_guid){
     img_src = "";
 
     var ribbon = '<div id="protitle' + owner_guid + '" '
-              + 'class="ui ribbon medium label" style="left: -15px; top: 9px; opacity:0.9;">'
+              + 'class="ui ribbon medium label" style="left: -15px; top: 8px; opacity:0.9;">'
               + 'TITLE'
               + '</div>';
 
@@ -327,7 +327,7 @@ function createProfileCard(owner_guid){
                     //var style_str = 'background: lightblue ;';
                     var style_str = 'background: url("'+headline_url + '") no-repeat;'
                                   + 'background-size: auto 106px;'
-                                  //+ 'background-position: '
+                                  + 'background-position: center;'
                                   + '';
                     var e1 = $('#proowner' + owner_guid);
                     console.log(headline_url);
