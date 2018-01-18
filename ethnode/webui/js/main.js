@@ -1,15 +1,17 @@
 
-// Paulius Require function
-//function require(script) {
-//    $.ajax({
-//      dataType: "jsonp",
-//      url: script,
-//      }).done(function ( data ) {
-//      // do my stuff
-//    });
-//}
 
 // TODO less require more secure, and do the fucking sanita on hundred places now
+console.log('INIT')
+var $other_section = $('#other-profile-section');
+var $other_headline = $('#other-profile-headline');
+var $my_section = $('#my-profile-section');
+var $my_headline = $('#my-profile-headline');
+var load_segment_html =  $('#gigs-other').html()
+
+//$('#other-profile-section').remove('');
+//$('#other-profile-headline').remove('');
+
+
 
 // profile cards begin
 var main_profile_cards = function(){
@@ -34,6 +36,15 @@ var main_profile_cards = function(){
 // profile cards end
 
 // TODO
+// grrr
+
+//var V_MY_PROFILE_HTML = $('#my-profile-section').html();
+//var V_MY_PROFILE_HEADLINE =  $('#my-profile-headline').html();
+
+//var V_OTHER_PROFILE_HTML = $('#other-profile-section').html();
+//var V_OTHER_PROFILE_HEADLINE =  $('#other-profile-headline').html();
+
+
 
 // JS DATA BUFFERS
 
@@ -224,10 +235,32 @@ $('a[load]').click(function(e) {
 
     }
 
+    if($load == 'otherprofile') {
+        console.log('OTHER PROFILE LOAD');
+        //$('section.background-image').show();
+        $('#other-profile-headline').show();
+        $('#other-profile-section').show();
+
+        $('body').addClass('up');
+
+    }
+
     if($load == 'profile') {
         /*
         */
        console.log('LOAD PROFILE GIGS:');
+    $('#other-profile-headline').removeClass('background-image');
+    $('#other-profile-headline').addClass('background-image2');
+    $('#my-profile-headline').removeClass('background-image2');
+    $('#my-profile-headline').addClass('background-image');
+
+    $('#my-profile-section').removeClass('documentation2');
+    $('#other-profile-section').removeClass('documentation');
+    $('#other-profile-section').addClass('documentation2');
+     $('#my-profile-section').addClass('documentation');
+
+
+
        var gig_ctx = $("[data-target='#gigModal'")
        var el =gig_ctx.remove(0);
 

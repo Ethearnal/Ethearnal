@@ -912,6 +912,7 @@
                <ul data-labelledby="settings-dropdown" class="dropdown-menu">
                <li class="view-profile"><a href="" load="profile">My Profile<!--i class="material-icons">settings</i--></a></li>
                   <li class="view-profile"><a href="" load="profile">About Node<!--i-- class="material-icons">memory</i--></a></li>
+                 <li class="view-profile"><a href="" load="otherprofile">Other Profile<!--i-- class="material-icons">memory</i--></a></li>
                </ul>
 
               <!-- Settings dropdown-->
@@ -938,7 +939,7 @@
     </header>
     <!-- Including {PROFILE} PAGE content-->
     <!--  headline image HEADLINE IMAGE k:headline k:profile k:photo -->
-    <section style="display: none" class="background-image" >
+    <section id="my-profile-headline" style="display: none" class="background-image" >
       <div class="button-next" style="margin: auto;">
         <i id="myBtn--" open-modal="#edit-profile-headline" class="material-icons open-modal">add_a_photo</i>&nbsp;</div>
       <!--div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div-->
@@ -952,7 +953,7 @@
       </div>
     </section>
     <!-- This section is for your whole profile, including left and right sides, profile information and etc.-->
-    <section style="display: none" class="documentation">
+    <section id="my-profile-section" style="display: none" class="documentation">
       <div class="container">
         <!-- Profile information including profile image, current work, current city and state, skills and etc.-->
         <div class="profile-information-container col-lg-4 col-md-4 col-sm-12 col-xs-12" s>
@@ -981,9 +982,10 @@
               <!-- LANGUAGES-->
               <p class="skills-text">Languages <i class="languages-down material-icons">keyboard_arrow_down</i></p>
               <div class="languages hidden">
-                
-                
+
               </div>
+
+
             </div>
           </div>
           <div class="profile-information middle">
@@ -1249,6 +1251,160 @@
       </div>
     </section>
 
+
+    <!-- OTHER PROFILE other profile view -->
+    <section id="other-profile-headline" style="display: none" class="background-image2" >
+      <!--div class="button-next" style="margin: auto;">
+        <i id="myBtn--" open-modal="#edit-profile-headline" class="material-icons open-modal">add_a_photo</i>&nbsp;</div-->
+      <!--div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div-->
+      <div class="items">
+        <div  class="item">
+            <!--img style="" id="profile-headline" src="images/background-downtown.png" alt="Building"
+            class="aspecto-img"-->
+           <div id="other-profile-headline-img" class="aspecto-img"></div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="other-profile-section" style="display: none;" class="documentation2">
+      <div class="container" style="width: 1328px;">
+        <!-- Profile information including profile image, current work, current city and state, skills and etc.-->
+        <div class="profile-information-container col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+          <div class="profile-information up">
+
+
+            <div class="profile-upper">
+
+
+              <div class="profile-image"><img id="other-profile-picture" src="" alt="">
+                <!--div class="text-on-image">
+
+                </div-->
+              </div>
+
+              <div class="mdl-tooltip mdl-tooltip--large" for="o-p-message">
+                  Message
+              </div>
+              <div class="mdl-tooltip mdl-tooltip--large" for="o-p-follow">
+                  Follow
+              </div>
+              <div class="mdl-tooltip mdl-tooltip--large" for="o-p-settings">
+                  More actions...
+              </div>
+
+              <h2 id="other-profile-names"></h2>
+
+              <h5 id="other-profile-title" class="profile-information-position"></h5>
+
+
+              <button id="o-p-follow" data-dismiss="modal" class="mdl-button mdl-js-button close-button" data-upgraded=",MaterialButton">
+                <i class="material-icons">favorite_border</i>
+              </button>
+              <button id="o-p-message" data-dismiss="modal" class="mdl-button mdl-js-button close-button" data-upgraded=",MaterialButton">
+                <i class="material-icons">mail_outline</i>
+              </button>
+              <button id="o-p-settings" data-dismiss="modal" class="mdl-button mdl-js-button close-button" data-upgraded=",MaterialButton">
+                <i class="material-icons">settings</i>
+              </button>
+              <!-- languages and skills -->
+              <!-- langs-->
+              <p class="skills-text">Languages
+                <i class="languages-down material-icons">keyboard_arrow_down</i>
+              </p>
+              <div id="other-profile-languages" class="languages"> </div>
+
+               <p class="skills-text">Skills
+                 <i class="skills-down material-icons">keyboard_arrow_down</i>
+               </p>
+              <div id='other-profile-skills' class="skills"></div>
+              <!-- -->
+
+            </div>
+          </div>
+
+          <div class="profile-information middle">
+            <!-- Profile description including a description about you. (dark-gray section)-->
+            <div class="profile-description">
+              <p id="other-profile-description">Profile's description.</p>
+            </div>
+          </div>
+          <!-- Profile footer, including social media links.-->
+          <div class="profile-footer">
+            <ul class="list-inline">
+              <li><a href=""><i class="icon-facebook"></i></a></li>
+              <li><a href=""><i class="icon-twitter"></i></a></li>
+              <li><a href=""><i class="icon-r-s-s"></i></a></li>
+              <li><a href=""><i class="icon-instagram"></i></a></li>
+              <li><a href=""><i class="icon-google"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- Profile documentation including jobs and education, stories, shout-outs and questions with answers-->
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-documentation-full">
+          <div class="profile-documentation col-xs-12">
+            <ul role="tablist" class="nav nav-tabs">
+              <!--li role="presentation" class="active timeline-li"><a href="#stream-other" aria-controls="stream" role="tab" data-toggle="tab">Stream</a></li-->
+              <li role="presentation" class="active timeline-li"><a href="#gigs-other" aria-controls="gigs-other" role="tab" data-toggle="tab">Gigs</a></li>
+              <li role="presentation" class="timeline-li"><a href="#portfolio-other" aria-controls="portfolio-other" role="tab" data-toggle="tab">Portfolio</a></li>
+              <li role="presentation" class="timeline-li"><a href="#orders-completed-other" aria-controls="orders-other" role="tab" data-toggle="tab">Completed</a></li>
+              <li role="presentation" class="timeline-li"><a href="#reviews-other" aria-controls="reviews-other" role="tab" data-toggle="tab">Reviews</a></li>
+            </ul>
+            <!--div open-modal="#add-gig" class="plusIcon gigs active open-modal"><i class="material-icons">library_add</i></div-->
+            <!--div open-modal="#add-portfolio" class="plusIcon portfolio open-modal"><i class="material-icons">note_add</i></div-->
+            <!-- All the information about above listed tabs.-->
+            <div class="tab-content active col-xs-12" style="background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 3px 0px; padding-left: 24px;">
+              <br>
+
+              <div id="gigs-other"  class="tab-pane active in" style="display: block;">
+                <!-- other gigs goes here -->
+                  <br><br><br><br>
+                  <div class="ui active inverted dimmer">
+                    <div class="ui text loader">Loading</div>
+                  </div>
+                   <br><br><br><br>
+              </div>
+
+              <!-- Portfolio TAB-->
+              <div id="portfolio-other" role="tabpanel" class="tab-pane fade col-xs-12">
+                <div class="portfolio-container"></div>
+              </div>
+              <!-- Completed Orders TAB-->
+              <div id="completed-other" role="tabpanel" class="tab-pane fade col-xs-12">
+                <div class="gigs-container-orders">
+                  <div data-toggle="modal" data-target="#gigModal" class="gig content-block">
+                    <button id="dropdowngiga0" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>
+                    <ul for="dropdowngiga0" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
+                      <li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edit</li>
+                      <li class="mdl-menu__item delete">Delete</li>
+                    </ul>
+                    <div class="ui fluid image">
+                      <div class="ui black ribbon label">Category</div>
+                      <div class="image-block"><img src="images/paypal.jpg"></div>
+                    </div>
+                    <div class="owner-info"><img src="http://via.placeholder.com/24x24" alt="Avatar">
+                      <h5>owner_nickname</h5>
+                      <h4>Entry Level</h4>
+                    </div>
+                    <p>Gig Description</p>
+                    <div class="lower-info">
+                      <div class="reputation"><i class="material-icons">polymer</i><span>5k+</span></div>
+                      <h6 class="expire">expires in 5 mins</h6>
+                    </div>
+                    <div class="footer">
+                      <h4>Starting at <span><i class="material-icons">polymer</i>25</span></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- END OTHER PROFILE  -->
     <!-- jQuery 3.1.1-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- jQuery UI 1.11.2-->

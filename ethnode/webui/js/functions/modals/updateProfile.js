@@ -3,7 +3,35 @@ function updateProfile() {
     $firstname = null; $lastname = null; $city = null; $country = null; $countryClass = null;
     $locationParagraph = $profile.find('.profile-upper p.location');
 
-console.log('UPDATE PROFILE')
+    console.log('UPDATE PROFILE');
+    $('#other-profile-headline').removeClass('background-image');
+    $('#other-profile-headline').addClass('background-image2');
+    $('#my-profile-headline').removeClass('background-image2');
+    $('#my-profile-headline').addClass('background-image');
+
+    $('#my-profile-section').removeClass('documentation2');
+    $('#other-profile-section').removeClass('documentation');
+    $('#other-profile-section').addClass('documentation2');
+    $('#my-profile-section').addClass('documentation');
+
+
+
+
+
+
+
+//    $('#other-profile-section').html('');
+//    $('#other-profile-headline').html('');
+//    //.removeClass("documentation");
+//    $('#other-profile-section').removeClass('documentation');
+//    $('#other-profile-headline').removeClass('background-image');
+
+
+    //$("#my-profile-section").html(V_MY_PROFILE_HTML);
+    //$("#my-profile-headline").html(V_MY_PROFILE_HEADLINE);
+//    $('#my-profile-section').addClass('documentation');
+//    $('#my-profile-headline').addClass('background-image');
+
 
     // CHANGES WITH FIRSTNAME AND LASTNAME
     getProfileValue(profileID, 'name', function(name) {

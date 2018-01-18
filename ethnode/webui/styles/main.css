@@ -1,3 +1,49 @@
+/* some stuff ftom hc */
+
+a.skill_box:hover {
+    display: inline-block;
+
+    color: #ffecec;
+    border-color:   #f7cac9;
+    background-color: #92a8d1;
+
+    text-decoration: none;
+
+
+}
+
+
+a.skill_box {
+
+    display: inline-block;
+
+    color: #92a8d1;
+    border-color:   #f7cac9;
+   /* background-color: #ffecec;*/
+
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius:4px;
+
+
+    float: left;
+    margin-left: 6px;
+    margin-bottom: 6px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+
+    text-decoration: none;
+
+
+}
+
+
+
+/* stuff from paulius*/
+
 header .container nav {
   border: none;
   background-color: white;
@@ -322,6 +368,7 @@ section.documentation .container .profile-information-container .profile-informa
   color: #86939e;
   margin-top: 0;
   margin-bottom: 20px;
+
 }
 
 section.documentation .container .profile-information-container .profile-information.up .profile-upper button {
@@ -384,6 +431,13 @@ section.documentation .container .profile-information-container .profile-informa
   transition: all 0.3s ease;
 }
 
+
+section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills-other, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages {
+  margin-top: 18px;
+  padding: 0 15px;
+  transition: all 0.3s ease;
+}
+
 section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills p, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages p {
   line-height: 24px;
   border-radius: 4px;
@@ -392,6 +446,7 @@ section.documentation .container .profile-information-container .profile-informa
   color: #86939e;
   margin-right: 5px;
   display: inline-block;
+
 }
 
 section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills p:hover, section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills p:focus, section.documentation .container .profile-information-container .profile-information.up .profile-upper .skills p:active, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages p:hover, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages p:focus, section.documentation .container .profile-information-container .profile-information.up .profile-upper .languages p:active {
@@ -1383,6 +1438,7 @@ section.background-image {
   margin-top: 59px;
   position: relative;
 }
+
 
 section.background-image .owl-carousel .item img {
   width: 100%;
@@ -2968,13 +3024,20 @@ body.modal-open {
  overflow: hidden;
 }*/
 
+.documentation2{
+    display: none;
+}
+
+.background-image2{
+    display: none;
+}
+
 div.aspecto-img {
  width: 100%;
  height: 400px;
- /*background-image: url("http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=99cc396f3f279bcfe06496a21e104c3e6d89ae07863de6276b9b1ab465b4cf72");*/
  background-size: cover;
  background-repeat: no-repeat;
- background-color: 	#f7cac9;
+
 }
 
 
