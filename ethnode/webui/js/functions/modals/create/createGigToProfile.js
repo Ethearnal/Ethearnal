@@ -83,6 +83,9 @@ function createGigToProfile2(hk, gig_o) {
     //
     // console.log('RENDER GIG', gigID);
     $(".gigs-container-profile").append(gig_html);
+    //background-color: rgb(255, 255, 255);
+    //box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 3px 0px;
+
     componentHandler.upgradeDom();
 
 }
@@ -111,7 +114,7 @@ function createGigToOtherProfile(hk, gig_o) {
 
 
 
-function createGigToFound(hk, gig_o) {
+function createGigToFound2(hk, gig_o) {
     console.log("createGigToFound(hk,gig_o)",hk, gig_o);
 
     var image ='';

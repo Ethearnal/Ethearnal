@@ -11,6 +11,22 @@ var load_segment_html =  $('#gigs-other').html()
 //$('#other-profile-section').remove('');
 //$('#other-profile-headline').remove('');
 
+// catch tags to search gigs
+
+$(document).ready(function() {
+  $('#search-by-gig-tags').dropdown();
+});
+
+$("#search-by-gig-tags").on("change", function() {
+ var v = $('#search-by-gig-tags').dropdown('get value');
+  console.log("tags selected", v);
+});
+
+
+$("#search-by-gig-tags").on("keyup", function(e) {
+ var v = $('#search-tags').val();
+  console.log("tags selected", v);
+});
 
 
 // profile cards begin

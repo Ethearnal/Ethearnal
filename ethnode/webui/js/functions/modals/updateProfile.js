@@ -15,24 +15,6 @@ function updateProfile() {
     $('#my-profile-section').addClass('documentation');
 
 
-
-
-
-
-
-//    $('#other-profile-section').html('');
-//    $('#other-profile-headline').html('');
-//    //.removeClass("documentation");
-//    $('#other-profile-section').removeClass('documentation');
-//    $('#other-profile-headline').removeClass('background-image');
-
-
-    //$("#my-profile-section").html(V_MY_PROFILE_HTML);
-    //$("#my-profile-headline").html(V_MY_PROFILE_HEADLINE);
-//    $('#my-profile-section').addClass('documentation');
-//    $('#my-profile-headline').addClass('background-image');
-
-
     // CHANGES WITH FIRSTNAME AND LASTNAME
     getProfileValue(profileID, 'name', function(name) {
         $name = JSON.parse(name);

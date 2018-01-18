@@ -881,8 +881,14 @@
             <div class="button">
               <button type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" class="navbar-toggle collapsed"><span></span><span></span><span></span><span></span></button>
             </div><a href="" class="navbar-brand hidden-xs"><img src="images/logo.png" alt="Ethearnal Logo"></a>
+
+
+
+
+
+
             <div class="ui icon input search-styling">
-              <input id="search-header" type="text" placeholder="Search Gigs...">
+              <input id="search-header" type="text" placeholder="Search Gigs Texts...">
               <i class="circular search link icon"></i>
             </div>
 
@@ -1018,41 +1024,21 @@
         <!-- Profile documentation including jobs and education, stories, shout-outs and questions with answers-->
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-documentation-full">
           <div class="profile-documentation col-xs-12">
+
             <ul role="tablist" class="nav nav-tabs">
               <li role="presentation" class="active timeline-li"><a href="#gigs" aria-controls="gigs" role="tab" data-toggle="tab">Gigs</a></li>
               <li role="presentation" class="timeline-li"><a href="#portfolio" aria-controls="portfolio" role="tab" data-toggle="tab">Portfolio</a></li>
               <li role="presentation" class="timeline-li"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
+              <li role="presentation" class="timeline-li"><a href="#archived" aria-controls="orders" role="tab" data-toggle="tab">Completed</a></li>
+              <li role="presentation" class="timeline-li"><a href="#messages" aria-controls="orders" role="tab" data-toggle="tab">Messages</a></li>
             </ul>
             <div open-modal="#add-gig" class="plusIcon gigs active open-modal"><i class="material-icons">library_add</i></div>
             <div open-modal="#add-portfolio" class="plusIcon portfolio open-modal"><i class="material-icons">note_add</i></div>
             <!-- All the information about above listed tabs.-->
             <div class="tab-content col-xs-12">
               <!-- Gigs TAB-->
-              <div id="gigs" role="tabpanel" class="tab-pane fade in active col-xs-12">
+              <div id="gigs" role="tabpanel" class="tab-content active in col-xs-12">
                 <div class="gigs-container-profile">
-                  <!--<div data-toggle="modal" data-target="#gigModal" class="gig content-block">-->
-                    <!--<button id="dropdowngiga0" class="mdl-button mdl-js-button mdl-button&#45;&#45;icon dropdown-button"><i class="material-icons">more_vert</i></button>-->
-                    <!--<ul for="dropdowngiga0" class="mdl-menu mdl-menu&#45;&#45;bottom-right mdl-js-menu mdl-js-ripple-effect">-->
-                      <!--<li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edit</li>-->
-                      <!--<li class="mdl-menu__item delete">Delete</li>-->
-                    <!--</ul>-->
-                    <!--<div class="ui fluid image">-->
-                      <!--<div class="ui black ribbon label">Category</div>-->
-                      <!--<div class="image-block"><img src="images/paypal.jpg"></div>-->
-                    <!--</div>-->
-                    <!--<div class="owner-info"><img src="http://via.placeholder.com/24x24" alt="Avatar">-->
-                      <!--<h5>owner_nickname</h5>-->
-                      <!--<h4>Entry Level</h4>-->
-                    <!--</div>-->
-                    <!--<p>Gig Description</p>-->
-                    <!--<div class="lower-info">-->
-                      <!--<div class="reputation"><i class="material-icons">polymer</i><span>5k+</span></div>-->
-                      <!--<h6 class="expire">expires in 5 mins</h6>-->
-                    <!--</div>-->
-                    <!--<div class="footer">-->
-                      <!--<h4>Starting at <span><i class="material-icons">polymer</i>25</span></h4>-->
-                    <!--</div>-->
-                  <!--</div>-->
                 </div>
               </div>
               <!-- Portfolio TAB-->
@@ -1100,10 +1086,10 @@
            <div class="filter category">
 
 
-             <div id="search-by-gig-tags" class="ui fluid dropdown normal search skills-dropdown selection multiple search-tags">
-               <select name="skills" multiple="">
+             <div  id="search-by-gig-tags" class="ui fluid dropdown normal search skills-dropdown selection multiple search-tags">
+               <select name="skills" multiple="" >
                </select>
-               <input class="search" autocomplete="off" tabindex="0">
+               <input id="search-tags" class="search" autocomplete="off" tabindex="0">
                <span class="sizer"></span><span class="sizer"></span>
                <div class="default text">Filter by Gig tags ...</div>
              </div>

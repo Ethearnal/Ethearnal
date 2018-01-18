@@ -1,14 +1,17 @@
 .search-styling {
     margin-top: 18px;
-    width: 245px;
+    width: 300px;
     margin-left: 56px;
 }
 
 .search-tags {
-    float: left;
+
     margin-bottom: 13px;
+    margin-top: 13px;
 
 }
+
+
 
 #search-by-gig-tags.ui.multiple.dropdown>.label {
   text-transform: capitalize;
