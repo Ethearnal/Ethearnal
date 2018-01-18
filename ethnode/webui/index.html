@@ -881,12 +881,23 @@
             <div class="button">
               <button type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" class="navbar-toggle collapsed"><span></span><span></span><span></span><span></span></button>
             </div><a href="" class="navbar-brand hidden-xs"><img src="images/logo.png" alt="Ethearnal Logo"></a>
-            <form action="#" style="float: left; max-height: 62px;">
-              <div style="margin-left: 25px; margin-top: 10px" class="ui action input">
-                <input id="search-header" type="text" placeholder="Search gigs...">
-                <button id="search-button" class="ui button">Search</button>
-              </div>
-            </form>
+            <div class="ui icon input search-styling">
+              <input id="search-header" type="text" placeholder="Search Gigs...">
+              <i class="circular search link icon"></i>
+            </div>
+
+
+
+
+
+
+
+            <!--<form action="#" style="float: left; max-height: 62px;">-->
+              <!--<div style="margin-left: 25px; margin-top: 10px" class="ui action input">-->
+                <!--<input id="search-header" type="text" placeholder="Search gigs...">-->
+                <!--<button id="search-button" class="ui button">Search</button>-->
+              <!--</div>-->
+            <!--</form>-->
           </div>
           <!-- Navbar items ONLY for larger than mobile screens.-->
           <div id="navigation" class="collapse navbar-collapse">
@@ -907,12 +918,11 @@
               <li id="settings-dropdown"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="profile view-profile">
                 <img id="avatar-img" src="" alt="" class="profile-picture">
                 <!-- JSON DATA GOES HERE-->
-              <span></span>
+              <b></b>
               </li>
                <ul data-labelledby="settings-dropdown" class="dropdown-menu">
                <li class="view-profile"><a href="" load="profile">My Profile<!--i class="material-icons">settings</i--></a></li>
-                  <li class="view-profile"><a href="" load="profile">About Node<!--i-- class="material-icons">memory</i--></a></li>
-                 <li class="view-profile"><a href="" load="otherprofile">Other Profile<!--i-- class="material-icons">memory</i--></a></li>
+                  <li class="view-profile"><a href="" load="">About Node<!--i-- class="material-icons">memory</i--></a></li>
                </ul>
 
               <!-- Settings dropdown-->
@@ -922,17 +932,17 @@
                 <li class="logout"><a href="">Logout<i class="material-icons">power_settings_new</i></a></li>
               </ul-->
             </ul>
-            <ul class="nav navbar-nav visible-xs">
-              <li>
-                <!-- JSON DATA GOES HERE--><a href=""><img src="" alt="" class="profile-picture"></a>
-              </li>
-              <li><a href="#">Messages
-                  <div class="round-number"><span>1</span></div></a></li>
-              <li><a href="#">Alerts
-                  <div class="round-number"><span>1</span></div></a></li>
-              <li class="settings-mobile"><a href="#">Settings<i class="material-icons">settings</i></a></li>
-              <li class="logout-mobile"><a href="#">Logout<i class="material-icons">power_settings_new</i></a></li>
-            </ul>
+            <!--<ul class="nav navbar-nav visible-xs">-->
+              <!--<li>-->
+                <!--&lt;!&ndash; JSON DATA GOES HERE&ndash;&gt;<a href=""><img src="" alt="" class="profile-picture"></a>-->
+              <!--</li>-->
+              <!--<li><a href="#">Messages-->
+                  <!--<div class="round-number"><span>1</span></div></a></li>-->
+              <!--<li><a href="#">Alerts-->
+                  <!--<div class="round-number"><span>1</span></div></a></li>-->
+              <!--<li class="settings-mobile"><a href="#">Settings<i class="material-icons">settings</i></a></li>-->
+              <!--<li class="logout-mobile"><a href="#">Logout<i class="material-icons">power_settings_new</i></a></li>-->
+            <!--</ul>-->
           </div>
         </nav>
       </div>
@@ -1086,6 +1096,38 @@
     <section class="gigs-page-content">
       <div class="container">
         <div class="filters col-md-3">
+
+           <div class="filter category">
+
+
+             <div id="search-by-gig-tags" class="ui fluid dropdown normal search skills-dropdown selection multiple search-tags">
+               <select name="skills" multiple="">
+               </select>
+               <input class="search" autocomplete="off" tabindex="0">
+               <span class="sizer"></span><span class="sizer"></span>
+               <div class="default text">Filter by Gig tags ...</div>
+             </div>
+
+
+           </div>
+
+
+          <div class="filter category">
+
+
+             <!--div id="search-by-skill-tags" class="ui fluid dropdown normal search skills-dropdown selection multiple search-tags">
+               <select name="skills" multiple="">
+               </select>
+               <input class="search" autocomplete="off" tabindex="0">
+               <span class="sizer"></span><span class="sizer"></span>
+               <div class="default text">Filter by profile skill tags ...</div>
+             </div-->
+
+
+           </div>
+
+
+
           <div class="filter category">
             <p>Expertise Domains</p>
             <label for="checkbox-dm" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
@@ -1118,22 +1160,40 @@
             <br>
           </div>
 
+        <div class="filter category">
+          <div class="mdl-tooltip mdl-tooltip--large" for="gigs_ttl">
+            Filter profiles by amount holded and or amount of ERT transactions made.
+        </div>
+            <div style="float: right; opacity: 0.4; padding-top: 3px;" id="gigs_ttl" class="icon gray material-icons">info</div>
+            <p>Profile ERT Hold</p>
+            <label for="checkbox-ert-p1k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-ert-p1k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">0 - 100</span>
+            </label>
+            <label for="checkbox-ert-p5k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-ert-p5k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">101 - 500</span>
+            </label>
+            <label for="checkbox-ert-p10k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-ert-p10k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">501 - 1000</span>
+            </label>
+            <label for="checkbox-ert-p50k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-ert-p50k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">1001 - 2000</span>
+            </label>
+            <br>
+          </div>
           <div class="filter category">
-            <br>
-            <p>Profile Reputation ERT</p>
-            <label for="checkbox-ert-1k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-1k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">0 - 1K</span>
+            <p>Profile ERT Turnover </p>
+            <label for="checkbox-ert-pr1k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-ert-pr1k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">0 - 100</span>
             </label>
-            <label for="checkbox-ert-5k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-5k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">1K - 5K</span>
+            <label for="checkbox-ert-pr5k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-ert-pr5k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">101 - 500</span>
             </label>
-            <label for="checkbox-ert-10k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-10k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">5K - 10K</span>
+            <label for="checkbox-ert-pr10k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-ert-pr10k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">501 - 1000</span>
             </label>
-            <label for="checkbox-ert-50k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-50k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">10K - 50K</span>
+            <label for="checkbox-ert-pr50k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <input id="checkbox-ert-pr50k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">1001 - 2000</span>
             </label>
-            <br>
           </div>
           
           
@@ -1202,13 +1262,26 @@
 
     <section style="display: none" class="profiles-page-content">
       <div class="container">
-        <div class="mdl-tooltip mdl-tooltip--large" for="tt4">
-            Filter profiles by amount holded and or amount of ERT transactions made.
+
+         <div class="mdl-tooltip mdl-tooltip--large" for="profiles_info_ttl">
+            Filter profiles by amount holded and or amount of ERT transactions made2.
         </div>
 
         <div class="filters col-md-3">
           <div class="filter category">
-            <div style="float: right; opacity: 0.4; padding-top: 3px;" id="tt4" class="icon gray material-icons">info</div>
+
+             <div class="ui fluid dropdown normal search skills-dropdown selection multiple search-tags">
+               <select name="skills" multiple="">
+               </select>
+               <input class="search" autocomplete="off" tabindex="0">
+               <span class="sizer"></span><span class="sizer"></span>
+               <div class="default text">Filter by profile skill tags ...</div>
+             </div>
+
+
+           </div>
+          <div class="filter category">
+            <div style="float: right; opacity: 0.4; padding-top: 3px;" id="profiles_info_ttl" class="icon gray material-icons">info</div>
             <p>Profile ERT Hold</p>
             <label for="checkbox-ert-p1k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
               <input id="checkbox-ert-p1k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">0 - 100</span>
@@ -1225,7 +1298,6 @@
             <br>
           </div>
           <div class="filter category">
-
             <p>Profile ERT Turnover </p>
             <label for="checkbox-ert-pr1k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
               <input id="checkbox-ert-pr1k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">0 - 100</span>
@@ -1239,7 +1311,6 @@
             <label for="checkbox-ert-pr50k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
               <input id="checkbox-ert-pr50k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">1001 - 2000</span>
             </label>
-            <br>
           </div>
         </div>
 

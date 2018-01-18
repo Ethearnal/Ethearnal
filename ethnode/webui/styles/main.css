@@ -1,46 +1,26 @@
-/* some stuff ftom hc */
-
-a.skill_box:hover {
-    display: inline-block;
-
-    color: #ffecec;
-    border-color:   #f7cac9;
-    background-color: #92a8d1;
-
-    text-decoration: none;
-
-
+.search-styling {
+    margin-top: 18px;
+    width: 245px;
+    margin-left: 56px;
 }
 
-
-a.skill_box {
-
-    display: inline-block;
-
-    color: #92a8d1;
-    border-color:   #f7cac9;
-   /* background-color: #ffecec;*/
-
-
-    border-style: solid;
-    border-width: 1px;
-    border-radius:4px;
-
-
+.search-tags {
     float: left;
-    margin-left: 6px;
-    margin-bottom: 6px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 6px;
-    padding-right: 6px;
-
-    text-decoration: none;
-
+    margin-bottom: 13px;
 
 }
 
+#search-by-gig-tags.ui.multiple.dropdown>.label {
+  text-transform: capitalize;
+  background-color: #e6eeff;
 
+}
+
+#search-by-skill-tags.ui.multiple.dropdown>.label {
+  text-transform: capitalize;
+  background-color: #e6eeff;
+
+}
 
 /* stuff from paulius*/
 
@@ -154,7 +134,7 @@ header .container nav #navigation ul li.profile img.profile-picture {
   height: 49px;
   border-radius: 100%;
   margin-left: 16px;
-  margin-top: -5px;
+  margin-top: -12px;
   margin-right: 8px;
 }
 
