@@ -2300,6 +2300,7 @@ sup i.material-icons {
 
 .slider-wrapper .marker-50, .slider-wrapper-2 .marker-50 {
   left: 50%;
+  z-index: -10;
 }
 
 .slider-wrapper .marker-75, .slider-wrapper-2 .marker-75 {
@@ -2511,7 +2512,7 @@ sup i.material-icons {
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   border-radius: 100px;
-  z-index: 10;
+  z-index: 0;
   background: linear-gradient(#555, #454545);
   cursor: move;
   cursor: grab;

@@ -37,19 +37,7 @@ var api_get_cdn_url = function() {
     return c;
 };
 
-$(document).ready(function() {
-  $('#search-by-gig-tags').dropdown();
-});
 
-$("#search-by-gig-tags").on("change", function() {
- var v = $('#search-by-gig-tags').dropdown('get value');
-  console.log("tags selected", v);
-});
-
-$("#search-by-gig-tags").on("keyup", function(e) {
- var v = $('#search-tags').val();
-  console.log("tags selected", v);
-});
 
 // profile cards begin
 var main_profile_cards = function(){

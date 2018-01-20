@@ -64,7 +64,7 @@ function addImage(source) {
 
 //
 //
-//var Timer;
+var Timer;
 //
 //function Start() {
 //

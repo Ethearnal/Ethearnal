@@ -1083,107 +1083,86 @@
       <div class="container">
         <div class="filters col-md-3">
 
-           <div class="filter category">
-
-
-             <div  id="search-by-gig-tags" class="ui fluid dropdown normal search skills-dropdown selection multiple search-tags">
-               <select name="skills" multiple="" >
-               </select>
-               <input id="search-tags" class="search" autocomplete="off" tabindex="0">
-               <span class="sizer"></span><span class="sizer"></span>
-               <div class="default text">Filter by Gig tags ...</div>
-             </div>
-
-
-           </div>
-
-
           <div class="filter category">
-
-
-             <!--div id="search-by-skill-tags" class="ui fluid dropdown normal search skills-dropdown selection multiple search-tags">
-               <select name="skills" multiple="">
-               </select>
-               <input class="search" autocomplete="off" tabindex="0">
-               <span class="sizer"></span><span class="sizer"></span>
-               <div class="default text">Filter by profile skill tags ...</div>
-             </div-->
-
-
-           </div>
-
-
-
-          <div class="filter category">
-            <p>Expertise Domains</p>
-            <label for="checkbox-dm" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-dm" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Digital Marketing</span>
-            </label>
-            <label for="checkbox-sd" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-sd" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Software Development</span>
-            </label>
-            <label for="checkbox-fa" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-fa" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Finance & Accounting</span>
-            </label>
-            <label for="checkbox-ma" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ma" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Music & Audio</span>
-            </label>
-            <label for="checkbox-va" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-va" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Video & Animation</span>
-            </label>
-            <label for="checkbox-gd" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-gd" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Graphic & Design</span>
-            </label>
-            <label for="checkbox-tw" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-tw" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Text & Writing</span>
-            </label>
-            <label for="checkbox-cs" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-cs" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Consulting Services</span>
-            </label>
-            <label for="checkbox-os" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-os" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">Other Services</span>
-            </label>
+            <p> Domains </p>
+            <select class="ui fluid search dropdown">
+                <option value="ED">Expertise Domains</option>
+                <option value="SD">Software Development</option>
+                <option value="FA">Finance & Accounting</option>
+                <option value="MA">Music & Audio</option>
+                <option value="VA">Video & Animation</option>
+                <option value="GD">Graphic & Design</option>
+                <option value="TW">Text & Writing</option>
+                <option value="CS">Consulting Services</option>
+                <option value="OS">Other Services</option>
+            </select>
             <br>
+            <p> Skills </p>
+            <select class="ui fluid search dropdown" multiple="">
+              <option value="">Skill Tags</option>
+              <option value="TW">write</option>
+              <option value="CS">text</option>
+              <option value="OS">here</option>
+              <!-- tags goes here -->
+            </select>
+          <br>
+            <p>Budget</p>
+          <div class="filter budget">
+
+            <div class="slider-wrapper">
+              <div id="slider-range"></div>
+              <div class="range-wrapper">
+                <div class="range"></div>
+                <div class="range-alert"><span>+</span></div>
+                <div class="gear-wrapper">
+                  <div class="gear-large gear-one" >
+                    <div class="gear-tooth"></div>
+                    <div class="gear-tooth"></div>
+                    <div class="gear-tooth"></div>
+                    <div class="gear-tooth"></div>
+                  </div>
+                  <div class="gear-large gear-two">
+                    <div class="gear-tooth"></div>
+                    <div class="gear-tooth"></div>
+                    <div class="gear-tooth"></div>
+                    <div class="gear-tooth"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="marker marker-0"><sup><i class="material-icons">polymer</i></sup>0</div>
+              <div class="marker marker-50"><sup><i class="material-icons">polymer</i></sup>5,000</div>
+              <div class="marker marker-100"><sup><i class="material-icons">polymer</i></sup>10,000+</div>
+            </div>
+          </div>
+            <br>
+            <br>
+            <p>Ethearnal Rep. Tokens</p>
+            <select class="ui fluid search dropdown">
+                <option value="">Lock(x){eRt}</option>
+                <option value="SD">from 0% to 10% </option>
+                <option value="FA">from 10% to 15%</option>
+                <option value="MA">from 15% to 20%</option>
+                <option value="VA">from 20% to 40%</option>
+                <option value="RR">Reset</option>
+            </select>
+
+            <br>
+
+            <select class="ui fluid search dropdown">
+                <option value="">Hold(y){eRt}</option>
+
+                <option value="SD">from 0 to 100</option>
+                <option value="FA">from 100 to 500</option>
+                <option value="MA">from 500 to 1000</option>
+                <option value="VA">more than 1K</option>
+                <option value="RR">Reset</option>
+            </select>
+
+            <br>
+
           </div>
 
-        <div class="filter category">
-          <div class="mdl-tooltip mdl-tooltip--large" for="gigs_ttl">
-            Filter profiles by amount holded and or amount of ERT transactions made.
-        </div>
-            <div style="float: right; opacity: 0.4; padding-top: 3px;" id="gigs_ttl" class="icon gray material-icons">info</div>
-            <p>Profile ERT Hold</p>
-            <label for="checkbox-ert-p1k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-p1k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">0 - 100</span>
-            </label>
-            <label for="checkbox-ert-p5k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-p5k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">101 - 500</span>
-            </label>
-            <label for="checkbox-ert-p10k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-p10k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">501 - 1000</span>
-            </label>
-            <label for="checkbox-ert-p50k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-p50k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">1001 - 2000</span>
-            </label>
-            <br>
-          </div>
-          <div class="filter category">
-            <p>Profile ERT Turnover </p>
-            <label for="checkbox-ert-pr1k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-pr1k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">0 - 100</span>
-            </label>
-            <label for="checkbox-ert-pr5k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-pr5k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">101 - 500</span>
-            </label>
-            <label for="checkbox-ert-pr10k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-pr10k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">501 - 1000</span>
-            </label>
-            <label for="checkbox-ert-pr50k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-pr50k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">1001 - 2000</span>
-            </label>
-          </div>
-          
-          
-          
+
           <!--<div class="filter budget">-->
             <!--<p>Budget</p>-->
             <!--<div class="slider-wrapper">-->
