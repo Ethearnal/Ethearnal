@@ -108,7 +108,8 @@ $('body').delegate('button.dropdown-gig, li.open-modal, ul.mdl-menu, .mdl-menu__
 // OTHER PROFILE other profile
 
 $('body').delegate('.profile-card', 'click', function(e) {
-    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+    //var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+    var api_cdn = api_get_cdn_url();
     var owner_guid = $(this).attr('id');
     console.log('PROFILE-CARD clicked for GUID',owner_guid);
     var spinner = '<br><br><br><div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>';
@@ -313,7 +314,8 @@ $('body').delegate('.profile-card', 'click', function(e) {
 
 $('body').delegate('.gig', 'click', function(e){
 
-    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+    // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+    var api_cdn = api_get_cdn_url();
     var gig_hkey = $(this).attr('id');
     console.log('gig_hkey', gig_hkey);
     $modal = $(".modal#gigModal .modal-content");

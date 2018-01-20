@@ -63,7 +63,8 @@ function updateProfile() {
 
     // CHANGING PROFILE PICTURE
     getProfileValue(profileID, 'profilePicture', function(profilePictureURL) {
-        var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+        //var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+        var api_cdn=api_get_cdn_url();
 
         if (profilePictureURL.indexOf('//') >= 0) {
 
@@ -80,7 +81,10 @@ function updateProfile() {
 
     // headline
      getProfileValue(profileID, 'headlinePicture', function(headline_hash) {
-        var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+        //var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+        var api_cdn = api_get_cdn_url();
+
+
         //setProfileValue('headlinePicture', headline_hash);
          //               console.log('headline_hash',headline_hash);
           //              $('#profile-headline').attr('src', api_cdn + headline_hash);
@@ -136,9 +140,10 @@ function updateProfileHeadline() {
 
     var fileObj = fd[0].files[0];
     objFormData.append('ufile', fileObj);
-    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
-    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
-
+    // var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
+    // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+    var api_cdn = api_get_cdn_url();
+    var api_cdn_post = api_post_cdn_url();
 
     if(fileObj != undefined) {
             if(!!fileObj.type.match(/image.*/)) {

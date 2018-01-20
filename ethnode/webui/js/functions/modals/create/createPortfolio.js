@@ -9,8 +9,10 @@ function createPortfolio(data, portfolioID) {
         $tags += tag + ' ';
     });
 
-    var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
-    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
+    // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+    // var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
+    var api_cdn = api_get_cdn_url();
+    var api_cdn_post = api_post_cdn_url();
     // HERE WE ARE STARTING TO RENDER THE WHOLE CONTENT BLOCK DIV
 
     // Image's div rendering

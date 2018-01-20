@@ -1,17 +1,41 @@
 
 
 // TODO less require more secure, and do the fucking sanita on hundred places now
-console.log('INIT')
+console.log('INIT');
 var $other_section = $('#other-profile-section');
 var $other_headline = $('#other-profile-headline');
 var $my_section = $('#my-profile-section');
 var $my_headline = $('#my-profile-headline');
 var load_segment_html =  $('#gigs-other').html()
 
-//$('#other-profile-section').remove('');
-//$('#other-profile-headline').remove('');
+var CDN_HOST_PORT = '';
 
-// catch tags to search gigs
+// get CDN host por from node
+
+$.ajax({
+        type: 'GET',
+        url: '/api/v1/dht/node/',
+
+        success: function(data) {
+            data = JSON.parse(data);
+            console.log(' - - - data.cdn', data.cdn[0]);
+            CDN_HOST_PORT = data.cdn[0];
+        }
+});
+
+var api_post_cdn_url = function() {
+     console.log('using post cdn: ',CDN_HOST_PORT);
+     c =  'http://' + CDN_HOST_PORT + '/api/cdn/v1/resource';
+     console.log('using post cdn: ', c);
+     return c;
+};
+
+var api_get_cdn_url = function() {
+    console.log('using _get cdn', CDN_HOST_PORT);
+    c = 'http://' + CDN_HOST_PORT + '/api/cdn/v1/resource?hkey=';
+    console.log('using _get cdn', c);
+    return c;
+};
 
 $(document).ready(function() {
   $('#search-by-gig-tags').dropdown();
@@ -22,12 +46,10 @@ $("#search-by-gig-tags").on("change", function() {
   console.log("tags selected", v);
 });
 
-
 $("#search-by-gig-tags").on("keyup", function(e) {
  var v = $('#search-tags').val();
   console.log("tags selected", v);
 });
-
 
 // profile cards begin
 var main_profile_cards = function(){
@@ -47,42 +69,20 @@ var main_profile_cards = function(){
         }
     });
 
-
 };
 // profile cards end
 
 // TODO
 // grrr
 
-//var V_MY_PROFILE_HTML = $('#my-profile-section').html();
-//var V_MY_PROFILE_HEADLINE =  $('#my-profile-headline').html();
-
-//var V_OTHER_PROFILE_HTML = $('#other-profile-section').html();
-//var V_OTHER_PROFILE_HEADLINE =  $('#other-profile-headline').html();
-
-
 
 // JS DATA BUFFERS
 
 var V_GIGS_BUFFER = {};
 
-var CdnHost = function() {
-  this.scheme = "http://";
-  this.host = "london.ethearnal.com";
-  this.port = "5678";
-  this.resource_endpoint = "api/cdn/v1/resource";
-  this.resource_query = "?hkey=";
-};
 
-var api_post_cdn_url = function() {
-     cdn = new CdnHost();
-     return cdn.scheme + cdn.host + ":" + cdn.port + '/' + cdn.resource_endpoint;
-};
 
-var api_get_cdn_url = function() {
-    cdn = new CdnHost();
-    return cdn.scheme + cdn.host + ":" + cdn.port + '/' + cdn.resource_endpoint + cdn.resource_query;
-};
+
 
 
 $( "i.skills-down" ).click(function() {

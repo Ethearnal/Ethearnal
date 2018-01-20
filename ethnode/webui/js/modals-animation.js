@@ -62,33 +62,34 @@ function addImage(source) {
 }
 
 
-
-var Timer;
-
-function Start() {
-
-    $('input#search-header').keyup(function () {
-        clearTimeout(Timer);
-        Timer = setTimeout(SendRequest, 200);
-    });
-}
-
-
-function SendRequest() {
-    searchQueryDo();
-}
-
-$(Start);
-
-function SendRequestBudget() {
-    console.log('Budget: ' + budgetSliderFromValue + ' - ' + budgetSliderToValue);
-}
-
-function SendRequestReputation() {
-    console.log('Reputation: ' + reputationValue);
-}
-
-
+//
+//
+//var Timer;
+//
+//function Start() {
+//
+//    $('input#search-header').keyup(function () {
+//        clearTimeout(Timer);
+//        Timer = setTimeout(SendRequest, 200);
+//    });
+//}
+//
+//
+//function SendRequest() {
+//    searchQueryDo();
+//}
+//
+//$(Start);
+//
+//function SendRequestBudget() {
+//    console.log('Budget: ' + budgetSliderFromValue + ' - ' + budgetSliderToValue);
+//}
+//
+//function SendRequestReputation() {
+//    console.log('Reputation: ' + reputationValue);
+//}
+//
+//
 
 
 
