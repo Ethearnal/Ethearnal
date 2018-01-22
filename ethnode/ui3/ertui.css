@@ -45,7 +45,52 @@
 }
 
 
-#profle-headline {
-    margin-top: 200px;
-    height: 200px;
+#profile-headline{
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 300px;
+    background-color: pink;
+    z-index: -9;
+    top: 65px;
+    left: 0px;
+}
+
+#profile-avatar-ctx{
+    position: absolute;
+    padding: 0px;
+    width: 100%;
+    height: 150px;
+
+    top: -70px;
+    left: 0px;
+    z-index: 1;
+
+}
+
+#profile-avatar-img{
+ width: 164px;
+ height: 164px;
+ border: solid 4px white;
+ border-radius: 164px;
+ z-index: 10;
+ margin: 0 auto;
+  background-color: orange;
+}
+
+
+
+#profile-left-box {
+    float: left;
+    margin-top: 70px;
+    height: 400px;
+    background:gray;
+}
+
+#profile-right-box {
+    float: left;
+    margin-top: 70px;
+    height: 400px;
+    background:blue;
 }

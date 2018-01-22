@@ -52,7 +52,9 @@
   <div class="ui fixed borderless main menu overlay"
        style=" z-index: 10;  background-color: #e6eeff;">
       <div class="ui container">
-          <a id="nav-ert" href="#" class="ui right floated dropdown item">
+
+           <div class="left menu">
+          <a id="nav-ert" href="#" class="ui left floated dropdown item">
               <img class="ui mini image" src="assets/images/ethearnal.png">
               <i class="dropdown icon"></i>
               <div class="menu">
@@ -66,8 +68,12 @@
 
               </div>
           </a>
+
           <a id="nav-gigs" href="#nav-gigs" class="item">Gigs</a>
           <a id="nav-people" href="#nav-people" class="item">People</a>
+           </div>
+
+
           <a href="#" class="ui right floated dropdown item">
               <img class="ui mini circular image" src="https://semantic-ui.com/images/avatar2/small/eve.png">
               &nbsp; <b>Name</b>
@@ -81,17 +87,21 @@
       </div>
   </div>
 
-  <div id="top-search-sticky" class="ui fixed menu overlay"
-       style="margin-top: 62px; display: none; z-index: 9; background: #ffecec;">
-      <div class="ui fluid search"
-           style="padding-top: 9px; padding-bottom:10px;">
-          <div class="ui fluid icon input">
-              <input class="prompt" type="text" placeholder="Search gigs">
-              <i class="search icon"></i>
-          </div>
-          <!--div class="results"></div-->
-      </div>
-  </div>
+    <div id="top-search-sticky" class="ui fixed menu overlay"
+         style="
+         margin-top: 62px;
+          display: none; z-index: 9;
+           background: #ffecec;">
+        <div class="ui search"
+             style="padding-top: 9px; padding-bottom:10px;">
+            <div class="ui icon input">
+                &nbsp;&nbsp;&nbsp;
+                <input class="prompt" type="text" placeholder="Search gigs">
+                <i class="search icon"></i>
+            </div>
+            <!--div class="results"></div-->
+        </div>
+    </div>
 
   <div id="main-content" class="ui container" style="margin-top: 129px;">
 
@@ -109,19 +119,58 @@
 </body>
  <!-- hidden templates -->
 <div class="ert-display-none" id="view-profile-template">
-      <div class="profile-card">a</div>
-      <div class="profile-card">a</div>
-    <div class="profile-card">a</div>
-    <div class="profile-card">a</div>
-    <div class="profile-card">a</div>
-    <div div="profile-headline" class="ui fixed menu overlay gray"
-         style="top: 63px; height: 300px; background-color: pink;
-         z-index: -9;">
+
+    <div id="profile-headline" >
+
+    </div>
+
+    <div class="ui two column stackable grid fixed" style="margin-top: 290px;">
+        <div class="six wide column">
+            <div id="profile-avatar-ctx">
+                <div id="profile-avatar-img">
+
+                </div>
+            </div>
+            <div class="ui segment" style="z-index: -10;">
+                <br><br><br><br><br><br>
+            </div>
+        </div>
+        <div class="ten wide column">
+            <div class="ui segment">
+                <div class="ui secondary pointing menu">
+                    <a class="item">
+                        Home
+                    </a>
+                    <a class="item active">
+                        Messages
+                    </a>
+                    <a class="item">
+                        Friends
+                    </a>
+                    <div class="right menu">
+                        <!--a class="ui item">
+                            Logout
+                        </a-->
+                    </div>
+                </div>
+                <div class="">
+                    <p>Content goes here</p>
+                     <br><br><br><br><br><br><br><br><br><br><br>
+                     <br><br><br><br><br><br><br><br><br><br><br>
+                     <br><br><br><br><br><br><br><br><br><br><br>
+                </div>
+
+
+            </div>
+        </div>
     </div>
 
 </div>
 
 <div id="view-gigs-template" class="ert-display-none">
+
+
+
     <div class="gig-card">a</div>
      <div class="gig-card">a</div>
      <div class="gig-card">a</div>
