@@ -883,14 +883,21 @@
             </div><a href="" class="navbar-brand hidden-xs"><img src="images/logo.png" alt="Ethearnal Logo"></a>
 
 
+              <div style="float:left; margin-left: 19px; margin-top: 24px;">
+                  <div style="float:left; margin-left: 19px;">
+                     <i class="material-icons">settings_input_antenna</i>
+                  </div>
+                  <div style="float:left; margin-left: 19px;">
+                      <p>Something cool happens here!</p>
+                  </div>
+              </div>
 
 
 
 
-            <div class="ui icon input search-styling">
-              <input id="search-header" type="text" placeholder="Search Gigs Texts...">
-              <i class="circular search link icon"></i>
-            </div>
+
+
+
 
 
 
@@ -1082,11 +1089,18 @@
     <section class="gigs-page-content">
       <div class="container">
         <div class="filters col-md-3">
+            <h6 style="margin-top: 0px; padding-top: 0px;">Search Gigs</h6>
 
           <div class="filter category">
-            <p> Domains </p>
+              <p>Text</p>
+              <div class="ui icon fluid input">
+                  <input id="search-header" type="text" placeholder="Search Gigs Texts...">
+                  <i class="circular search link icon"></i>
+              </div>
+              <br>
+            <p> Expertise Domain</p>
             <select class="ui fluid search dropdown">
-                <option value="ED">Expertise Domains</option>
+                <option value="">Expertise Domains</option>
                 <option value="SD">Software Development</option>
                 <option value="FA">Finance & Accounting</option>
                 <option value="MA">Music & Audio</option>
@@ -1100,9 +1114,9 @@
             <p> Skills </p>
             <select class="ui fluid search dropdown" multiple="">
               <option value="">Skill Tags</option>
-              <option value="TW">write</option>
-              <option value="CS">text</option>
-              <option value="OS">here</option>
+              <option value="TW">Python</option>
+              <option value="CS">Javascript</option>
+              <option value="OS">CSS</option>
               <!-- tags goes here -->
             </select>
           <br>
@@ -1232,56 +1246,14 @@
             Filter profiles by amount holded and or amount of ERT transactions made2.
         </div>
 
-        <div class="filters col-md-3">
-          <div class="filter category">
-
-             <div class="ui fluid dropdown normal search skills-dropdown selection multiple search-tags">
-               <select name="skills" multiple="">
-               </select>
-               <input class="search" autocomplete="off" tabindex="0">
-               <span class="sizer"></span><span class="sizer"></span>
-               <div class="default text">Filter by profile skill tags ...</div>
-             </div>
-
-
-           </div>
-          <div class="filter category">
-            <div style="float: right; opacity: 0.4; padding-top: 3px;" id="profiles_info_ttl" class="icon gray material-icons">info</div>
-            <p>Profile ERT Hold</p>
-            <label for="checkbox-ert-p1k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-p1k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">0 - 100</span>
-            </label>
-            <label for="checkbox-ert-p5k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-p5k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">101 - 500</span>
-            </label>
-            <label for="checkbox-ert-p10k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-p10k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">501 - 1000</span>
-            </label>
-            <label for="checkbox-ert-p50k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-p50k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">1001 - 2000</span>
-            </label>
-            <br>
+          <div class="filters col-md-3">
+              <div class="filter category">
+                  <h6>Profile Filters</h6>
+              </div>
           </div>
-          <div class="filter category">
-            <p>Profile ERT Turnover </p>
-            <label for="checkbox-ert-pr1k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-pr1k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">0 - 100</span>
-            </label>
-            <label for="checkbox-ert-pr5k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-pr5k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">101 - 500</span>
-            </label>
-            <label for="checkbox-ert-pr10k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-pr10k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">501 - 1000</span>
-            </label>
-            <label for="checkbox-ert-pr50k" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-              <input id="checkbox-ert-pr50k" type="checkbox" class="mdl-checkbox__input"><span class="mdl-checkbox__label">1001 - 2000</span>
-            </label>
-          </div>
-        </div>
 
 
-
-        <div class="gigs col-md-9">
+          <div class="gigs col-md-9">
           <div class="profiles-container">Profiles</div>
         </div>
       </div>

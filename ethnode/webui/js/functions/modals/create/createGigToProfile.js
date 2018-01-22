@@ -275,6 +275,9 @@ function createProfileCard(owner_guid){
     getProfileValue(owner_guid, 'profilePicture', function(profile_picture_url) {
         // profile images
         if(profile_picture_url == 'null') {
+            profile_picture_url = '"abv"';
+        }
+        if(profile_picture_url == 'null') {
             console.log('P NULL', profile_picture_url);
         }
         else{

@@ -10,7 +10,7 @@ var load_segment_html =  $('#gigs-other').html()
 
 var CDN_HOST_PORT = '';
 
-// get CDN host por from node
+// get CDN host from node
 
 $.ajax({
         type: 'GET',
@@ -36,6 +36,150 @@ var api_get_cdn_url = function() {
     console.log('using _get cdn', c);
     return c;
 };
+
+var api_idx_cdn_url = function() {
+    console.log('using _search cdn', CDN_HOST_PORT);
+    c = 'http://' + CDN_HOST_PORT + '/api/cdn/v1/idx?';
+    console.log('using _search cdn', c);
+    return c;
+};
+
+// event handlers
+
+var event_on_gig_profile_key_data = function(guid,profile_key,data){
+    console.log('guid:' + guid);
+    console.log('profile_key:'+ profile_key , data);
+};
+
+var event_on_dht_data = function(hkey, data){
+
+     data = JSON.parse(data);
+     console.log('dht_data:',hkey, data);
+     owner = null;
+     owner = data.owner_guid;
+     if(owner != null){
+        //ajax_get_guid_profile_key(owner, 'skills');
+        //
+        createGigToFound(owner,data);
+     }
+};
+
+
+var event_on_search_gig_data = function(qry, data_js){
+     console.log('search qry:', qry);
+
+     data = null;
+     data = JSON.parse(data_js);
+     console.log('search result:', data);
+     if(data != null){
+         // todo spinner html;
+         $(".gigs-container").html('');
+         for(var i=0; i<data.length; i++){
+            ajax_get_gig_data(data[i]);
+         }
+     }
+};
+
+// end event handlers
+
+
+var ajax_get_gig_data = function(hkey){
+
+    qry_hk = '/api/v1/dht/hkey/?hkey='+hkey;
+    $.ajax({
+            type: 'GET',
+            url: qry_hk,
+            hkey: hkey,
+            success: function(data) {
+                //data = JSON.parse(data);
+                event_on_dht_data(this.hkey, data);
+
+            }
+    });
+};
+
+
+var ajax_get_guid_profile_key = function(guid, profile_key){
+    qry_url = "/api/v1/dht/profile?owner_guid=" + guid + "&profile_key=" + profile_key,
+    $.ajax({
+            type: 'GET',
+            url: qry_url,
+            guid: guid,
+            profile_key: profile_key,
+            success: function(data) {
+                event_on_gig_profile_key_data(this.guid,this.profile_key, data);
+
+            }
+    });
+};
+
+
+
+// searching
+
+var TIMEOUT_ON_SEARCH_QUERY = null
+
+//
+
+var ajax_get_cdn_search = function(q) {
+
+    var qry_url =  api_idx_cdn_url() + q;
+    console.log('searching query', qry_url);
+    $.ajax({
+            type: 'GET',
+            url: qry_url,
+            qry: q,
+            success: function(data) {
+                event_on_search_gig_data(this.qry, data);
+            }
+    });
+
+};
+
+
+var do_search_query = function () {
+    var search_text = $('input#search-header').val();
+    var search_tags = $('#search-tags').val();
+
+    console.log('DO SEARCH TEXT', search_text);
+    console.log('DO SEARCH TAGS', search_tags);
+
+    qry="text="+search_text;
+    ajax_get_cdn_search(encodeURI(qry));
+
+};
+
+var search_event = function(){
+    clearTimeout(TIMEOUT_ON_SEARCH_QUERY);
+    TIMEOUT_ON_SEARCH_QUERY = setTimeout(function(){
+        do_search_query();
+    },500);
+}
+
+
+$(document).ready(function() {
+  $('#search-by-gig-tags').dropdown();
+});
+
+$("#search-by-gig-tags").on("change", function() {
+ var v = $('#search-by-gig-tags').dropdown('get value');
+  console.log("tags selected", v);
+  search_event();
+});
+
+
+$("#search-by-gig-tags").on("keyup", function(e) {
+  //var v = $('#search-tags').val();
+  //console.log("tags selected", v);
+  //search_event();
+});
+
+
+$('input#search-header').keyup(function (e) {
+    search_event();
+});
+
+// end searching
 
 
 

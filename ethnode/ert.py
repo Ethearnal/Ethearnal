@@ -83,7 +83,6 @@ parser.add_argument('-c', '--cdn_bootstrap_host_port',
                     default=config.ertcdn_dev_bootstrap_host_port,
                     help='bootstrap to web service',
                     required=False,
-                    action='store_true'
                     )
 
 parser.add_argument('-n', '--no_upnp_attempts',
@@ -372,8 +371,10 @@ if __name__ == '__main__':
     seed_host = None
     seed_port = None
     no_upnp = args.no_upnp_attempts
-
+    # cdn_selected = args.cdn_bootstrap_host_port
     boot_cdn_host, boot_cdn_port = args.cdn_bootstrap_host_port.split(':')
+
+    print('boot-cdn', boot_cdn_host, boot_cdn_port)
 
     if args.udp_seed_host_port:
         seed_host, seed_port = args.udp_seed_host_port.split(':')
