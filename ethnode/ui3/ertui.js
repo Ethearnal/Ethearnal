@@ -1,9 +1,6 @@
 
 
 
-
-
-
 var load_content = function(target_id, template_id){
   var e = document.getElementById(template_id);
   var html = e.innerHTML;
@@ -43,6 +40,19 @@ var init_top_nav = function(){
         $('#top-search-sticky').css('display','block');
       });
 
+
+      $('#nav-create-gig').click(function(){
+        console.log('CREATE GIG');
+        $('#create-gig-modal').modal('show');
+
+      });
+
+      $('.ui.accordion').accordion();
+      $('.ui.selection.dropdown').dropdown();
+      $('.ui.accordion.accordion').accordion();
+      $('.ui.selection.accordion.dropdown').dropdown();
+
+//      $('.ui.accordion').accordion('behavior', argumentOne, argumentTwo...);
 
 
 };

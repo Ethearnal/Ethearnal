@@ -22,96 +22,116 @@
 <body>
 
 
-<!--<div class="ui fixed main pointing menu">-->
-
-    <!--<a id="nav-logo" href="#nav-gigs" class="item">-->
-        <!--<img class="ui mini image" src="assets/images/ethearnal.png">&nbsp; Ethearnal-->
-    <!--</a>-->
-
-    <!--<a id="nav-gigs" href="#nav-gigs" class="item active">-->
-        <!--Gigs-->
-    <!--</a>-->
-    <!--<a id="nav-people" href="#nav-people" class="item">-->
-        <!--People-->
-    <!--</a>-->
-
-    <!--<div class="right menu">-->
-        <!--<a href="#" class="ui right floated dropdown item">-->
-            <!--<img class="ui mini circular image" src="https://semantic-ui.com/images/avatar2/small/eve.png">-->
-            <!--&nbsp; <b>Name</b>-->
-            <!--<i class="dropdown icon"></i>-->
-            <!--<div class="menu">-->
-                <!--<div id="nav-my-profile" class="item">View Profile</div>-->
-                <!--<div class="divider"></div>-->
-                <!--<div class="item">Edit Profile</div>-->
-            <!--</div>-->
-        <!--</a>-->
-    <!--</div>-->
-<!--</div>-->
-
   <div class="ui fixed borderless main menu overlay"
        style=" z-index: 10;  background-color: #e6eeff;">
       <div class="ui container">
 
-           <div class="left menu">
-          <a id="nav-ert" href="#" class="ui left floated dropdown item">
-              <img class="ui mini image" src="assets/images/ethearnal.png">
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                  <div class="item">
-                      About
-                  </div>
-                  <div class="divider"></div>
-                  <div class="item">
-                      Settings
-                  </div>
+          <div class="left floated menu">
+              <a id="nav-ert" href="#" class="ui left floated dropdown item">
+                  <img class="ui mini image" src="assets/images/ethearnal.png">
+                  &nbsp;&nbsp;Ethearnal Alpha
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                      <div class="item">
+                          About
+                      </div>
+                      <div class="divider"></div>
+                      <div class="item">
+                          Settings
+                      </div>
 
-              </div>
-          </a>
+                  </div>
+              </a>
 
-          <a id="nav-gigs" href="#nav-gigs" class="item">Gigs</a>
-          <a id="nav-people" href="#nav-people" class="item">People</a>
-           </div>
+
+              <a id="nav-gigs" href="#nav-gigs" class="item">Gigs</a>
+              <a id="nav-people" href="#nav-people" class="item">People</a>
+
+          </div>
 
 
           <a href="#" class="ui right floated dropdown item">
               <img class="ui mini circular image" src="https://semantic-ui.com/images/avatar2/small/eve.png">
-              &nbsp; <b>Name</b>
+
               <i class="dropdown icon"></i>
               <div class="menu">
                   <div id="nav-my-profile" class="item">View Profile</div>
                   <div class="divider"></div>
+                  <div id="nav-create-gig" class="item">Create gig</div>
                   <div class="item">Edit Profile</div>
+
               </div>
           </a>
       </div>
   </div>
 
-    <div id="top-search-sticky" class="ui fixed menu overlay"
-         style="
-         margin-top: 62px;
-          display: none; z-index: 9;
-           background: #ffecec;">
-        <div class="ui search"
-             style="padding-top: 9px; padding-bottom:10px;">
-            <div class="ui icon input">
-                &nbsp;&nbsp;&nbsp;
-                <input class="prompt" type="text" placeholder="Search gigs">
-                <i class="search icon"></i>
+    <div id="top-search-sticky" class="ui fixed borderless menu overlay">
+         <!--style="-->
+         <!--margin-top: 63px;-->
+         <!--padding-top: 12px;-->
+         <!--padding-bottom: 12px;-->
+         <!--padding-left: 39px;-->
+         <!--display: none;-->
+         <!--z-index: 9;-->
+         <!--border: none;-->
+         <!--box-shadow: none;-->
+         <!--background: gray;">-->
+
+        <div id="top-search-bg">
+
+
+            <div class="ui accordion field">
+                <div class="active title">
+                    <i class="icon search"></i>
+                    <i class="icon dropdown"></i>
+                </div>
+
+                <div class=" active content field left floated">
+                    <div id="text-searh-box" class="ui icon input fluid left floated">
+                        <input type="text" placeholder="Search...">
+                        <i class="search icon"></i>
+                    </div>
+                    <div class="accordion">
+                        <div class="title">
+                            <i class="icon setting"></i>
+                            <i class="icon dropdown"></i>
+                        </div>
+
+                        <div class="content field left floated">
+
+                            <div class="ui fluid selection dropdown">
+                                <input type="hidden" name="gender">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">Gender</div>
+                                <div class="menu">
+                                    <div class="item" data-value="1">Male</div>
+                                    <div class="item" data-value="0">Female</div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+
             </div>
-            <!--div class="results"></div-->
         </div>
+
+
     </div>
 
-  <div id="main-content" class="ui container" style="margin-top: 129px;">
+  <div id="main-content" class="ui container" style="margin-top: 169px; width: 96%;">
 
 
   </div>
 
 
-  <!--div class="ui sidebar overlay vertical menu">
-      options
-  </div-->
+
 
   <script src="ertui.js"></script>
 
@@ -139,7 +159,7 @@
             <div class="ui segment">
                 <div class="ui secondary pointing menu">
                     <a class="item">
-                        Home
+                        Gigs
                     </a>
                     <a class="item active">
                         Messages
@@ -169,24 +189,35 @@
 
 <div id="view-gigs-template" class="ert-display-none">
 
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
+                 <div class="gig-card">a</div>
 
 
-    <div class="gig-card">a</div>
-     <div class="gig-card">a</div>
-     <div class="gig-card">a</div>
-     <div class="gig-card">a</div>
-     <div class="gig-card">a</div>
-
-     <div class="gig-card">a</div>
-     <div class="gig-card">a</div>
-     <div class="gig-card">a</div>
-     <div class="gig-card">a</div>
 </div>
 
 
 <div class="ert-display-none" id="view-people-template">
     <div class="profile-card">a</div>
-      <div class="profile-card">a</div>
+    <div class="profile-card">a</div>
     <div class="profile-card">a</div>
     <div class="profile-card">a</div>
     <div class="profile-card">a</div>
@@ -225,6 +256,25 @@
 </div>
 
     </div>
+</div>
+
+
+<div id="create-gig-modal" class="ui modal">
+  <div class="header">Header</div>
+  <div class="content">
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+  </div>
 </div>
 
 </html>

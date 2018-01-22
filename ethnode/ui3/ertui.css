@@ -22,20 +22,51 @@
     background:#92a8d1;
 }
 
+#top-search-sticky {
+         margin-top: 62px;
+
+         display: none;
+         z-index: 9;
+         border: none;
+         box-shadow: none;
+         background: none;
+}
+
+#text-search-box{
+
+
+
+}
+
+#top-search-bg{
+padding-top: 18px;
+ padding-bottom: 12px;
+ padding-left: 12px;
+ padding-right: 12px;
+ width: 256px;
+ background: orange;
+
+
+}
+
+
 .gig-card{
     float: left;
     background:pink;
-    width: 200px;
-    height: 200px;
-    margin:9px;
+    width: 240px;
+    height: 306px;
+    margin-left: 13px;
+    margin-right: 13px;
+    margin-bottom: 13px;
+
 
 }
 
 .profile-card{
     float: left;
     background:blue;
-    width: 200px;
-    height: 200px;
+   width: 240px;
+    height: 306px;
     margin:9px;
 
 }
