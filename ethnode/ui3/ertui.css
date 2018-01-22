@@ -1,0 +1,51 @@
+
+.ert-display-none {
+  display: none;
+}
+
+.ert-display-block {
+  display: block;
+}
+
+.ert-profile-main {
+   display: block;
+   background: pink;
+}
+
+.ert-gigs-main {
+   display: block;
+   width: 100%;
+   background: pink;
+}
+
+.ui.menu .blue {
+    background:#92a8d1;
+}
+
+.gig-card{
+    float: left;
+    background:pink;
+    width: 200px;
+    height: 200px;
+    margin:9px;
+
+}
+
+.profile-card{
+    float: left;
+    background:blue;
+    width: 200px;
+    height: 200px;
+    margin:9px;
+
+}
+
+.ui.menu .gray {
+    background:#gray;
+}
+
+
+#profle-headline {
+    margin-top: 200px;
+    height: 200px;
+}
