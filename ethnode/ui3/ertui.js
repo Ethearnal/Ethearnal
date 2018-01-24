@@ -1,6 +1,4 @@
 
-
-
 var load_content = function(target_id, template_id){
   var e = document.getElementById(template_id);
   var html = e.innerHTML;
@@ -47,17 +45,34 @@ var init_top_nav = function(){
 
       });
 
-      $('.ui.accordion').accordion();
+      $('.ui.accordion').accordion(
+            {
+                onClose: function(){
+
+                    console.log(this.id);
+                    if(this.id == 'search-wdg'){
+                        console.log('onclose sear-wdg');
+                    }
+                },
+                onOpen: function(){
+                    if(this.id == 'search-wdg'){
+                        console.log('onopen sear-wdg');
+                    }
+                }
+
+
+            }
+       );
+
       $('.ui.selection.dropdown').dropdown();
-      $('.ui.accordion.accordion').accordion();
+      //$('.ui.accordion.accordion').accordion();
       $('.ui.selection.accordion.dropdown').dropdown();
+
 
 //      $('.ui.accordion').accordion('behavior', argumentOne, argumentTwo...);
 
 
 };
-
-
 
 
 
