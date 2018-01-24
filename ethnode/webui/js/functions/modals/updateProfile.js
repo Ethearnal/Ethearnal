@@ -18,6 +18,10 @@ function updateProfile() {
     // CHANGES WITH FIRSTNAME AND LASTNAME
     getProfileValue(profileID, 'name', function(name) {
         $name = JSON.parse(name);
+        if(!$name){
+            console.log('PROFILE SET YOUR NAMES');
+            return;
+        }
 
         // PROFILE NAME AND LASTNAME
         $profile.find('.profile-upper h2').text($name.first + ' ' + $name.last);
@@ -41,7 +45,10 @@ function updateProfile() {
     // CHANGING LOCATION
     getProfileValue(profileID, 'location', function(location) {
         $location = JSON.parse(location);
-
+        if(!$location){
+            console.log('PROFILE LOCATION MISS');
+            return;
+        }
         // PROFILE LOCATION (+ adding country flag class)
         $locationParagraph.text($location.city + ', ' + $location.country);
         $locationParagraph.removeAttr('class').addClass('location ' + $location.countryClass);
@@ -66,6 +73,7 @@ function updateProfile() {
         //var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
         var api_cdn=api_get_cdn_url();
 
+
         if (profilePictureURL.indexOf('//') >= 0) {
 
             // CHANGING PROFILE PICTURE
@@ -88,21 +96,25 @@ function updateProfile() {
         //setProfileValue('headlinePicture', headline_hash);
          //               console.log('headline_hash',headline_hash);
           //              $('#profile-headline').attr('src', api_cdn + headline_hash);
-        headline_hash = JSON.parse(headline_hash);
-        if (headline_hash.indexOf('//') >= 0) {
-           // $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
-             $('#profile-headline').css(
-                            'background-image',
-                            'url("'+ api_cdn + headline_hash +'")'
-                            );
-        } else {
-           // $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
-             $('#profile-headline').css(
-                            'background-image',
-                            'url("'+ api_cdn + headline_hash +'")'
-                            );
 
-        }
+            headline_hash = JSON.parse(headline_hash);
+            if(!headline_hash) { return; }
+
+            if (headline_hash.indexOf('//') >= 0) {
+               // $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
+                 $('#profile-headline').css(
+                                'background-image',
+                                'url("'+ api_cdn + headline_hash +'")'
+                                );
+            } else {
+               // $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
+                 $('#profile-headline').css(
+                                'background-image',
+                                'url("'+ api_cdn + headline_hash +'")'
+                                );
+
+            }
+
     });
 
     // CHANGING PROFILE SKILLS

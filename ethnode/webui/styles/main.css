@@ -1808,6 +1808,7 @@ span.gig-title {
   font-weight: 300;
   font-size: 11px;
   text-transform: uppercase;
+  overflow: hidden;
 }
 
 .gig .footer h4 span {

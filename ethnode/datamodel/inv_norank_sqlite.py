@@ -63,8 +63,8 @@ class InvIndexTimestampSQLite(BaseSQLite):
                qs_only=False):
         qs = 'INSERT INTO %s VALUES (?,?,?,?,?,?,?,?);' % self.table_name
         utc_timestamp = int(datetime.utcnow().timestamp())
-        ert_tokens_major = randint(0, 10000)
-        ert_tokens_minor = randint(0, 10000)
+        ert_tokens_major = 1
+        ert_tokens_minor = 1
         pk_composite = self.pk_compose(component_hash, container_hash)
         cr = self.has_item(pk_composite)
 
@@ -87,7 +87,10 @@ class InvIndexTimestampSQLite(BaseSQLite):
             self.cursor.execute(qs, values)
 
     def no_component(self, qs_only=False):
-        qs = 'SELECT * FROM %s a ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC;'
+
+        qs = 'SELECT DISTINCT a.container_hash, a.ert_tokens_major, a.utc_timestamp  FROM %s a ' \
+             'ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC;' % self.table_name
+
         if qs_only:
             return qs, (None, )
         c = self.cursor.execute(qs)
@@ -98,7 +101,7 @@ class InvIndexTimestampSQLite(BaseSQLite):
             order_st = ' ORDER BY a.ert_tokens_major, a.utc_timestamp; '
         else:
             order_st = ' ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC; '
-        qs = 'SELECT * FROM %s a WHERE a.component_hash=? %s' % (
+        qs = 'SELECT DISTINCT * FROM %s a WHERE a.component_hash=? %s' % (
             self.table_name,
             order_st
         )

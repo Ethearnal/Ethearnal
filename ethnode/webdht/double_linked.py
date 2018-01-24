@@ -12,6 +12,9 @@ class OwnPulse(object):
     def push(self, k, v):
         return self.dhf.push(k, v)
 
+    def push_hkey(self, hkey, v):
+        return self.dhf.push(key='', hk_hex=hkey, value=v)
+
     def pull(self, k, hkey=None):
         item = self.dhf.pull_local(k, hk_hex=hkey)
         if not item:
@@ -126,11 +129,14 @@ class DLItemDict(object):
     def last_set_hkey(self):
         return self._hk
 
-    def __setitem__(self, key, value: DLItem):
+    def __setitem__(self, key, value: DLItem, hkey=None):
         if key == self.collection_name:
             raise ValueError('DLItemDict can not use collection name as a key')
         dict_value = value.to_dict()
-        self._hk = self.pulse.push(key, dict_value)
+        if hkey:
+            self._hk = self.pulse.push_hkey(hkey, dict_value)
+        else:
+            self._hk = self.pulse.push(key, dict_value)
 
     def __getitem__(self, key) -> DLItem:
         return self.get(key)
@@ -186,6 +192,15 @@ class DList(object):
             self.update_meta_item()
         return o_item_hk
 
+    def mark_o_item_deleted(self, key, o_item: DLItem, hkey=None):
+        if o_item.value:
+            if isinstance(o_item.value, dict):
+                o_item.value['meta_gig_deleted'] = True
+                if hkey:
+                    self.dlitem_dict.__setitem__('', o_item, hkey=hkey)
+                else:
+                    self.dlitem_dict.__setitem__(key,o_item)
+
     def delete(self, key, hkey=None) -> DLItem or None:
         if hkey:
             o_item = self.dlitem_dict.get(key, hkey=hkey)
@@ -199,6 +214,8 @@ class DList(object):
             nx_item.prev_key = pr_item.key
             self.dlitem_dict.__setitem__(pr_item.key, pr_item)
             self.dlitem_dict.__setitem__(nx_item.key, nx_item)
+            o_item.deleted = True
+            self.mark_o_item_deleted(key, o_item, hkey)
             return o_item
         elif o_item.prev_key:
             pr_item = self.dlitem_dict.get(o_item.prev_key)
@@ -206,6 +223,8 @@ class DList(object):
             self.last_key = pr_item.key
             self.dlitem_dict.__setitem__(pr_item.key, pr_item)
             self.update_meta_item()
+            o_item.deleted = True
+            self.mark_o_item_deleted(key, o_item, hkey)
             return o_item
         elif o_item.next_key:
             nx_item = self.dlitem_dict.get(o_item.next_key)
@@ -213,11 +232,15 @@ class DList(object):
             self.dlitem_dict.__setitem__(nx_item.key, nx_item)
             self.first_key = nx_item.key
             self.update_meta_item()
+            o_item.deleted = True
+            self.mark_o_item_deleted(key, o_item, hkey)
             return o_item
         else:
             self.first_key = None
             self.last_key = None
             self.update_meta_item()
+            o_item.deleted = True
+            self.mark_o_item_deleted(key, o_item, hkey)
             return o_item
 
     def iter_items(self):

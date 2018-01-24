@@ -61,8 +61,22 @@ function createGigToProfile(gigData, gigID) {
     iGig++;
 }
 
+function check_gig_marked_deleted(gig_o){
+        if(gig_o.hasOwnProperty('meta_gig_deleted')){
+            if(gig_o.meta_gig_deleted){
+                console.log('gig marked as deleted not showing it');
+                 return true;
+            }
+        }
+        return false;
+}
+
+
 function createGigToProfile2(hk, gig_o) {
     console.log("createGigToProfile2(hk,gig_o)",hk,gig_o);
+
+    if( check_gig_marked_deleted(gig_o)){ return }
+
 
     var image ='';
     var gigID = hk;
@@ -97,6 +111,8 @@ function createGigToProfile2(hk, gig_o) {
 function createGigToOtherProfile(hk, gig_o) {
     console.log("createGigToOtherProfile(hk,gig_o)",hk,gig_o);
 
+    if( check_gig_marked_deleted(gig_o)){ return }
+
     var image ='';
     var gigID = hk;
     // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
@@ -105,11 +121,14 @@ function createGigToOtherProfile(hk, gig_o) {
     image += '<div class="ui fluid image"><div class="ui black ribbon label">';
     image += gig_o.general_domain_of_expertise +'</div><div class="image-block"><img src="'+api_cdn+'';
     image += gig_o.image_hash+'" /></div></div>';
+
+    var round_price = Math.round(gig_o.price * 1000) / 1000;
+
     var title = '<p style="color: #92a8d1; font-size: 18px; border-bottom: solid 1px; margin: 4px; border-color: #e6eeff;">' + gig_o.title + '</p>';
     var desc = '<p>' + gig_o.description + '</p>';
     var dropdownButton = '<button id="DDB'+ hk +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button dropdown-gig"><i class="material-icons">more_vert</i></button>';
     var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB'+ hk +'"><li class="mdl-menu__item open-modal" open-modal="#edit-gig">Edit</li><li class="mdl-menu__item delete">Delete</li></ul>';
-    var footer = '<div class="footer"><h4>Starting at <span><i class="material-icons">polymer</i>' + gig_o.price + '</span></h4></div>';
+    var footer = '<div class="footer"><h4>Starting at <span><i class="material-icons">polymer</i>' + round_price+ '</span></h4></div>';
 
     gig_html = '<div id="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">' + dropdownButton + dropdownUL + image +  title + desc + footer + '</div>';
     return gig_html;
@@ -121,6 +140,8 @@ function createGigToOtherProfile(hk, gig_o) {
 
 function createGigToFound2(hk, gig_o) {
     console.log("createGigToFound(hk,gig_o)",hk, gig_o);
+
+    if( check_gig_marked_deleted(gig_o)){ return }
 
     var image ='';
     var gigID = hk;
@@ -185,6 +206,8 @@ function createGigToFound2(hk, gig_o) {
 function createGigToFound(hk, gig_o) {
     console.log("createGigToFound(hk,gig_o)",hk, gig_o);
 
+    if( check_gig_marked_deleted(gig_o)){ return }
+
     var image ='';
     var gigID = hk;
     // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
@@ -203,6 +226,8 @@ function createGigToFound(hk, gig_o) {
                 + '<img id="imgav' + gigID + '" src="' + img_src + '" alt="Avatar">'
                 + '<h4 id="nmown' + gigID + '" ></h4>'
                 + '</div>' ;
+    var round_price = Math.round(gig_o.price * 1000) / 1000;
+
 
     image += '<div class="ui fluid image"><div class="ui black ribbon label">';
     image += gig_o.general_domain_of_expertise +'</div><div class="image-block"><img src="'+api_cdn+'';
@@ -211,7 +236,7 @@ function createGigToFound(hk, gig_o) {
     var title =   '<span class="gig-title">' + gig_o.title + "</span>";
     var dropdownButton = '<button id="DDB'+ hk +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button dropdown-gig"><i class="material-icons">more_vert</i></button>';
     var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB'+ hk +'"><li class="mdl-menu__item open-modal" open-modal="#edit-gig">Edit</li><li class="mdl-menu__item delete">Delete</li></ul>';
-    var footer = '<div class="footer"><h4>Starting at <span><i class="material-icons">polymer</i>' + gig_o.price + '</span></h4></div>';
+    var footer = '<div class="footer"><h4>Starting at <span><i class="material-icons">polymer</i>' + round_price + '</span></h4></div>';
 
     var img_src = api_cdn + default_profile_image ;
 

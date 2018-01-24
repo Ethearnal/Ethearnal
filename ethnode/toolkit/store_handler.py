@@ -14,6 +14,7 @@ from kadem.kad import DHTFacade
 
 class DHTStoreHandlerOne(object):
     ON_PUSH_PEER_KEY = 'ert:peer'
+    ON_PUSH_GUID_KEY = 'ert:guid'
 
     # ON_PUSH_REQUEST_PEERS = 'ert:req:udp_ip4_peers'
     # ON_PULL_REQUEST_PEERS = 'ert:peer'
@@ -157,7 +158,7 @@ class DHTStoreHandlerOne(object):
                         # pk_rev, data = cdx.decode_bson_val(pk_value)
                         # if self.ON_PUSH_PEER_KEY in key:
                         print('\n\n\n +++')
-                        self.on_pushed_ip4_peer(data,hk_int=key)
+                        self.on_pushed_ip4_peer(data, hk_int=key)
                         print('\n\n\n +++')
                         # event handler here
                         return self.store.__setitem__(key, owner_signature_value)
@@ -178,6 +179,13 @@ class DHTStoreHandlerOne(object):
                 pk_owner, pk_signature, pk_value = self.store.get(hk)
                 revision, data = cdx.decode_bson_val(pk_value)
                 # print(data, data[self.ON_PUSH_PEER_KEY])
+
+                if self.ON_PUSH_GUID_KEY in data:
+                    print('\n\n\n GUIDS REQUESTED \n\n\n')
+                    v = data[self.ON_PUSH_GUID_KEY]
+                    print(v)
+                    return
+
                 if self.ON_PUSH_PEER_KEY in data:
                     # self.dhf.pus
                     v = data[self.ON_PUSH_PEER_KEY]
@@ -195,6 +203,8 @@ class DHTStoreHandlerOne(object):
                             # self.dhf.boot_to(peer_host, peer_port)
                         except Exception as e:
                             print('ERROR bootstaraping peers to requester', str(e))
+                    return
+                    #? todo return ?
             except Exception as e:
                 print('ON PULL DECODING FAIL', str(e))
         return self.store.get(hk)

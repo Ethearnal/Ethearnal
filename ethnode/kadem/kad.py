@@ -144,6 +144,20 @@ class DHTFacade(object):
         value = {'ert:pubkey': self.ert.rsa_pub_der}
         self.push(key, value, local_only=local_only)
 
+# todo fails because accept only own pubkeys
+    # def push_pubkeys(self):
+    #     key = {'ert': 'pubkey'}
+    #     pubkeys = self.dht.storage.pubkeys
+    #     for guid in self.known_guids():
+    #         guid_bin = cdx.guid_hex_to_bin(guid)
+    #         hk_from_store = pubkeys[guid_bin]
+    #         hk = hk_from_store
+    #         hk_hex = cdx.guid_bin_to_hex(hk_from_store)
+    #         pk_owner, pk_signature, pk_value = self.pull_local('', hk_hex=hk_hex)
+    #         pk_rev, pubkey_data = cdx.decode_bson_val(pk_value)
+    #         print('PK DATA', pubkey_data)
+    #         self.push(key, pubkey_data, remote_only=True)
+
     def known_guids(self):
         c = self.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
         guid_list = [cdx.guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
@@ -153,6 +167,9 @@ class DHTFacade(object):
         key = {'ert': 'udp_ip4_port'}
         value = {'ert:udp_ip4_port': {'h:p': host_port}}
         self.push(key,  value, local_only=local_only)
+
+
+
 
     def push_peer_request(self):
         ip_host = self.dht.peer.host
@@ -167,6 +184,27 @@ class DHTFacade(object):
         val = {'ert:peer': {'h': ip_host, 'p': self.dht.peer.port}}
         print('IP', ip_host, self.dht.peer.port)
         for item in self.dht.peers():
+            peer_host = item['host']
+            peer_port = item['port']
+            self.direct_push(key, val, peer_host, peer_port)
+
+    def push_guid_request(self):
+        ip_host = self.dht.peer.host
+        if ip_host == '0.0.0.0':
+            if self.ert.my_wan_ip:
+                ip_host = self.ert.my_wan_ip
+            elif self.ert.my_lan_ip:
+                ip_host = self.ert.my_lan_ip
+            else:
+                ip_host = '127.0.0.1'
+
+        for item in self.dht.peers():
+            key = {'ert': 'guid'}
+            # todo add from in value
+            val = {'ert:guid': {'guid': 'request',
+                                'ert:peer': {'h': ip_host, 'p': self.dht.peer.port}
+                                }
+                   }
             peer_host = item['host']
             peer_port = item['port']
             self.direct_push(key, val, peer_host, peer_port)
@@ -195,8 +233,15 @@ class DHTFacade(object):
         self.pull_peer_request()
         sleep(3)
 
+    def converge_guids(self):
+        pass
+
     def pull_peer_request(self):
         key = {'ert': 'peer'}
+        return self.pull_remote(key)
+
+    def pull_guid_request(self):
+        key = {'ert': 'guid'}
         return self.pull_remote(key)
 
     def pull_pubkey(self, guid=None, remote_only=False):

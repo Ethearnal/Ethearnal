@@ -1,7 +1,7 @@
 
 
 // TODO less require more secure, and do the fucking sanita on hundred places now
-console.log('INIT');
+console.log('BEGIN INIT');
 var $other_section = $('#other-profile-section');
 var $other_headline = $('#other-profile-headline');
 var $my_section = $('#my-profile-section');
@@ -143,13 +143,26 @@ var do_search_query = function () {
 
     console.log('DO SEARCH TEXT', search_text);
     console.log('DO SEARCH TAGS', search_tags);
+    // and domain expertise
+    // price range
+    qry="";
+    if(search_text) {
+      qry += "text="+search_text
+    }
+    //todo add another fields
+    if( qry != "" ) {
+         // ajax_get_cdn_search(encodeURI(qry));
+    } else {
 
-    qry="text="+search_text;
+        qry="all"
+    }
+
     ajax_get_cdn_search(encodeURI(qry));
 
 };
 
 var search_event = function(){
+    console.log('SEARCH EVENT');
     clearTimeout(TIMEOUT_ON_SEARCH_QUERY);
     TIMEOUT_ON_SEARCH_QUERY = setTimeout(function(){
         do_search_query();
@@ -159,6 +172,7 @@ var search_event = function(){
 
 $(document).ready(function() {
   $('#search-by-gig-tags').dropdown();
+
 });
 
 $("#search-by-gig-tags").on("change", function() {
@@ -213,7 +227,7 @@ var main_profile_cards = function(){
 var V_GIGS_BUFFER = {};
 
 
-
+do_search_query();
 
 
 
@@ -347,21 +361,22 @@ $('a[load]').click(function(e) {
 
     if($load == 'gigs') {
         console.log('GIGS');
-        $.ajax({
-            type: 'GET',
-            url: '/api/v1/dht/guids',
-            dataType: 'text',
-            processData: false,
-            success: function( guids_data ) {
-                console.log('GUIDS',guids_data);
-                guids =JSON.parse(guids_data);
-                for (var i = 0; i < guids.length; i++) {
-                     //console.log(guids[i]);
-                     getProfileGigsF(guids[i]);
-                }
-
-            }
-        });
+        do_search_query();
+//        $.ajax({
+//            type: 'GET',
+//            url: '/api/v1/dht/guids',
+//            dataType: 'text',
+//            processData: false,
+//            success: function( guids_data ) {
+//                console.log('GUIDS',guids_data);
+//                guids =JSON.parse(guids_data);
+//                for (var i = 0; i < guids.length; i++) {
+//                     //console.log(guids[i]);
+//                     getProfileGigsF(guids[i]);
+//                }
+//
+//            }
+//        });
     }
 
 

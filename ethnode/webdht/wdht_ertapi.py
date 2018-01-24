@@ -21,6 +21,13 @@ class Indexer(object):
         )
         self.idx = ResourceIndexingEngine(self.db_idx)
 
+    def unindex(self, hk_hex):
+        try:
+            pk_bin = guid_hex_to_bin(hk_hex)
+            self.idx.unindex(pk_bin)
+        except:
+            print('UNINDEX FAILED')
+
     def index_field(self, pk_bin, specifier, text_data, prefixes=True):
         try:
             self.idx.index_bag_of_spec_text(
@@ -37,8 +44,9 @@ class Indexer(object):
 
     def query_all(self):
         cur = self.db_idx.no_component()
+        # print(cur.fetchall())
         if cur:
-            ll = [guid_bin_to_hex2(t[2]) for t in cur.fetchall()]
+            ll = [guid_bin_to_hex2(t[0]) for t in cur.fetchall()]
             return ll
 
     def query_terms_d(self, terms_d: dict):
@@ -76,7 +84,19 @@ class Indexer(object):
                 doc = data['value']
                 if 'model' in doc:
                     if doc['model'] == 'Gig':
+                        if 'meta_gig_deleted' in doc:
+                            if doc['meta_gig_deleted']:
+                                # remove from index
+                                self.unindex(hk_hex)
+                                return
+                        # index it
                         self.index_gig_document(hk_hex, doc)
+
+    def unindex_on(self, hk_hex):
+        try:
+            self.unindex(guid_hex_to_bin(hk_hex))
+        except:
+            print('UNINDEX FAILED')
 
 
 class IdxCdnQueryWebApi(object):
@@ -86,43 +106,97 @@ class IdxCdnQueryWebApi(object):
         self.idx = idx
         self.cherrypy = cherrypy
         self.mount_path = mount_path
+        self.errs = list()
         if mount:
             self.mount()
 
+    def _serialize_result(self, ll):
+        if not ll:
+            return b'null'
+        try:
+            js = json.dumps(ll, ensure_ascii=False)
+            bts = js.encode(encoding='utf-8')
+            self.cherrypy.response.status = 200
+            return bts
+        except:
+            self.cherrypy.response.status = 400
+            self.errs.append('result list err')
+            return None
+
+    def _qry_dict(self, query_dict):
+        try:
+            ll = self.idx.query_terms_d(query_dict)
+            self.cherrypy.response.status = 200
+            return ll
+        except:
+            self.cherrypy.response.status = 400
+            self.errs.append('qry dict err')
+            return None
+
+    def _qry_all(self):
+        try:
+            ll = self.idx.query_all()
+            self.cherrypy.response.status = 200
+            return ll
+        except:
+            self.cherrypy.response.status = 400
+            self.errs.append('qry all err')
+            return None
+
+    def _make_qry_dict(self, kw):
+        try:
+            query_dict = {k.lower(): list(set(v.lower().split(' '))) for k, v in kw.items()}
+            return query_dict
+        except:
+            self.cherrypy.response.status = 400
+            self.errs.append('qry dict construct err')
+            return None
+
     def GET(self, **kwargs):
         self.cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
-        try:
-            query_dict = {k.lower(): list(set(v.lower().split(' '))) for k, v in kwargs.items()}
-            print('QUERY_DICT', query_dict)
-            ll = self.idx.query_terms_d(query_dict)
-            if ll:
-                js = json.dumps(ll, ensure_ascii=False)
-                bts = js.encode(encoding='utf-8')
-                self.cherrypy.response.status = 200
-                return bts
+        if 'all' in kwargs:
+            return self._serialize_result(self._qry_all())
+        else:
+            q_d = self._make_qry_dict(kwargs)
+            if not q_d:
+                return b'null'
             else:
-                ll = self.idx.query_all()
-                if ll:
-                    js = json.dumps(ll, ensure_ascii=False)
-                    bts = js.encode(encoding='utf-8')
-                    self.cherrypy.response.status = 200
-                    return bts
-                else:
-                    self.cherrypy.response.status = 400
-                    return b'null'
-        except:
-            try:
-                ll = self.idx.query_all()
-                if ll:
-                    js = json.dumps(ll, ensure_ascii=False)
-                    bts = js.encode(encoding='utf-8')
-                    self.cherrypy.response.status = 200
-                    return bts
-            except:
-                pass
-            self.cherrypy.response.status = 404
-            # traceback.print_exc()
-            return b'null'
+                return self._serialize_result(self._qry_dict(q_d))
+
+        # try:
+        #     query_dict = {k.lower(): list(set(v.lower().split(' '))) for k, v in kwargs.items()}
+        #     print('QUERY_DICT', query_dict)
+        #     ll = self.idx.query_terms_d(query_dict)
+        #     print('LLL', ll)
+        #     if ll:
+        #         js = json.dumps(ll, ensure_ascii=False)
+        #         bts = js.encode(encoding='utf-8')
+        #         self.cherrypy.response.status = 200
+        #         return bts
+        #     else:
+        #         ll = self.idx.query_all()
+        #         print('LL ?', ll)
+        #         if ll:
+        #             js = json.dumps(ll, ensure_ascii=False)
+        #             bts = js.encode(encoding='utf-8')
+        #             self.cherrypy.response.status = 200
+        #             return bts
+        #         else:
+        #             self.cherrypy.response.status = 400
+        #             return b'null'
+        # except:
+        #     try:
+        #         ll = self.idx.query_all()
+        #         if ll:
+        #             js = json.dumps(ll, ensure_ascii=False)
+        #             bts = js.encode(encoding='utf-8')
+        #             self.cherrypy.response.status = 200
+        #             return bts
+        #     except:
+        #         pass
+        #     self.cherrypy.response.status = 404
+        #     # traceback.print_exc()
+        #     return b'null'
 
     def OPTIONS(self):
         self.cherrypy.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
