@@ -54,6 +54,20 @@ div#intro-headline {
 
 }
 
+.ert-logo {
+
+ display: block;
+ width: 39px;
+ height: 39px;
+
+ background-image: url('assets/images/logo_ethearnal.png');
+
+ background-repeat:no-repeat;
+ background-position: center center;
+ background-size: 39px 39px;
+
+}
+
 
 .main-ctx-outer {
    width: 100%;
@@ -98,7 +112,7 @@ z-index: -1;
     float: left;
     width: 100%;
     background: #fff;
-    height: 109px;
+    /*height: 0px;*/
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 
@@ -145,6 +159,7 @@ av-sub-header-style {
 }
 
 .ert-middle {
+
   width: 50%;
 }
 
@@ -157,3 +172,11 @@ av-sub-header-style {
 
 /* </sticky-navbar> */
 
+/* typography */
+
+#sticky-navbar > div {
+font-family: 'Roboto', sans-serif;
+font-size: 14px;
+font-weight: 500;
+
+}

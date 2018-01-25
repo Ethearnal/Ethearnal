@@ -174,6 +174,7 @@ var ert = {
         render_proto: function (hash_id, inst_id) {
             return $($(hash_id).html()).attr('id', inst_id );
         },
+        nav_now_showing: null,
         nav_bar: null,
         nav_bar_offset: null,
         $nav_bar: null,
@@ -199,9 +200,13 @@ var ert = {
                   }
             },
         //
-        resize_handler: function(){
-             console.log('resize',$(window).width(),  $(window).height());
-             // tune main container
+        resize_handler: function(e){
+
+             if( e.data.ui.nav_now_showing == '#myprofile'){
+                console.log('not rsz',w);
+                return;
+             }
+
              $e = $('#main-container > div');
              var card_width = 358 + 8 + 8;
              var card_cnt = Math.ceil( $(window).width() / card_width )-1;
@@ -210,7 +215,7 @@ var ert = {
                 w = card_width;
              }
              $e.width(w);
-             console.log('inner',w);
+
         }
         // end ui obj
     },
@@ -219,9 +224,9 @@ var ert = {
     init:function(){
         console.log('app init');
 
-        $(window).on('resize', this.ui.resize_handler);
+        $(window).on('resize', {ui:this.ui}, this.ui.resize_handler);
+        // this.ui.resize_handler();
 
-        this.ui.resize_handler();
         this.ui.$nav_bar = this.ui.render_proto('#prototype-sticky-navbar','sticky-navbar');
         this.ui.$main_container = this.ui.render_proto('#prototype-main-container','main-container');
         this.ui.$intro_headline = this.ui.render_proto('#prototype-intro-headline','intro-headline');
@@ -231,6 +236,7 @@ var ert = {
         $('body').append(this.ui.$nav_bar);
         $('body').append(this.ui.$main_container);
 
+
         this.ui.$inner_container = $('#main-container > div');
         //   add 20 gigs
         for(var i=0; i<120; i++){
@@ -238,7 +244,7 @@ var ert = {
            // $('#main-container > div').append('<br>');
         }
         //
-        //this.ui.init_particles();
+        this.ui.init_particles();
         this.ui.nav_bar = document.getElementById("sticky-navbar");
         this.ui.nav_bar_offset = this.ui.nav_bar.offsetTop;
         console.log('ui.nav_bar ',this.ui.nav_bar.offsetTop);
@@ -247,6 +253,53 @@ var ert = {
         window.onscroll = function() {
                 ui.scrolling_handler(ui);
         };
+
+         $('a[href="#top"]').on('click',{ui:this.ui}, function(e){
+            e.data.ui.nav_now_showing = '#top';
+            //
+            $('#sticky-navbar').removeClass('ert-sticky')
+            $('html, body').animate({ scrollTop: 0 }, 'slow',
+            function() {
+                     ;
+                }
+            );
+
+         });
+
+        $('a[href="#gigs"]').on('click',{ui:this.ui}, function(e){
+              e.data.ui.nav_now_showing = '#gigs';
+                //
+              $('html, body').animate({ scrollTop: 340 }, 'slow');
+              //$('#sticky-navbar').addClass('ert-sticky');
+
+        });
+
+         $('a[href="#people"]').on('click',{ui:this.ui}, function(e){
+              // console.log('this.ui',e.data.ui);
+              e.data.ui.nav_now_showing = '#people';
+                //
+
+              //$('#sticky-navbar').animate({height: 230 },'slow');
+              $('html, body').animate(
+                { scrollTop: 340 },
+                'slow',
+                function() {
+                     //$('#sticky-navbar').addClass('ert-sticky');
+                }
+              );
+
+              //e.data.ui.$intro_headline.animate({height: 0 },'fast');
+
+        });
+
+        $('a[href="#myprofile"]').on('click',{ui:this.ui}, function(e){
+              console.log('this.ui',e.data.ui);
+              e.data.ui.nav_now_showing = '#myprofile';
+              $('html, body').animate({ scrollTop: 340 }, 'slow',
+
+              );
+
+        });
         /*
         $(window).on('scroll', function() {
             ui.scrolling_handler(ui);
