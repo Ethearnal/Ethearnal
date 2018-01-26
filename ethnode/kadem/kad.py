@@ -282,11 +282,38 @@ class DHTFacade(object):
             guid = cdx.guid_int_to_bts(peer['id'])
             self.pull_pubkey(guid)
 
+    def repush_remote(self, hk_hex):
+        try:
+            t = self.pull_local('', hk_hex=hk_hex)
+            if t:
+                d = cdx.decode_bson_val(t[2])
+                val = d[1]
+                self.push(key='', value=val, hk_hex=hk_hex, remote_only=True)
+        except:
+            print('repush hailed for hk', hk_hex)
+
+    def repush_own_gigs(self):
+        from webdht.double_linked import instance_dl
+        dl = instance_dl(self, cdx.guid_bin_to_hex(self.bin_guid), '.gigs')
+        for hk_hex in dl.iter_hk():
+            print(hk_hex)
+            self.repush_remote(hk_hex)
+
+    def repush_own_deleted_gigs(self):
+        from webdht.double_linked import instance_dl
+        dl = instance_dl(self, cdx.guid_bin_to_hex(self.bin_guid), '.deleted_gigs')
+        for hk_hex in dl.iter_hk():
+            self.repush_remote(hk_hex)
+
+
     def pull_local(self, key,
                    guid=None,
                    revision=cdx.DEFAULT_REVISION,
                    hk_hex=None
                    ):
+        # hk
+        # gigs = list(dl.iter_hk())
+
         if not guid:
             guid = self.bin_guid
         if hk_hex:
