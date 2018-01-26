@@ -49,8 +49,9 @@
 
 div#intro-headline {
     width: 100%;
-    height: 300px;
+    height: 200px;
     float: left;
+    background-color: #495568;
 
 }
 
@@ -84,6 +85,7 @@ div#intro-headline {
 }
 
 .intro-canvas {
+height: 200px;
 display: block;
 top: 0;
 left: 0;
@@ -108,11 +110,18 @@ z-index: -1;
 }
 
 */
+.intro-footer {
+     background: gray;
+     float: left;
+     width: 100%;
+     height: 4px;
+}
+
 .nav-header-style {
     float: left;
     width: 100%;
     background: #fff;
-    /*height: 0px;*/
+    height: 79px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 
@@ -124,16 +133,65 @@ av-sub-header-style {
 }
 
 /* <gig-box> */
-.gig-box {
+.gig-box-gr {
     float: left;
 
-    width: 358px;
-    height: 222px;
+    width: 222px;
+    height:  358px;
     margin: 3px;
 
     background: white;
     border: solid 1px gray;
     border-radius: 3px;
+}
+
+.gig-box {
+    float: left;
+
+    width: 272px;
+    height: 310px;
+    margin: 3px;
+    border: 1px solid #e5e5e5;
+    box-sizing: border-box;
+
+    background: white;
+    border: solid 1px gray;
+    border-radius: 3px;
+}
+
+
+#people-s-box{
+   float:left;
+   width: 30px;
+   height:20px;
+   background: blue;
+}
+
+#gigs-s-box{
+   float:left;
+   width: 30px;
+   height:20px;
+   background: pink;
+}
+
+
+.right-section {
+    float: right;
+    margin-right:30px;
+    margin-top: 12px;
+}
+
+
+#search-box-item {
+    padding-left: 13px;
+    padding-top: 13px;
+}
+
+.box-spacer {
+    width: 100%;
+    float: left;
+    height: 222px;
+    background-color: gray;
 }
 /* </gig-box> */
 

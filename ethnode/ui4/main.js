@@ -208,7 +208,7 @@ var ert = {
              }
 
              $e = $('#main-container > div');
-             var card_width = 358 + 8 + 8;
+             var card_width = 222 + 3 + 3;
              var card_cnt = Math.ceil( $(window).width() / card_width )-1;
              var w = card_width * card_cnt;
              if(w < card_width ) {
@@ -230,86 +230,60 @@ var ert = {
         this.ui.$nav_bar = this.ui.render_proto('#prototype-sticky-navbar','sticky-navbar');
         this.ui.$main_container = this.ui.render_proto('#prototype-main-container','main-container');
         this.ui.$intro_headline = this.ui.render_proto('#prototype-intro-headline','intro-headline');
+        this.ui.$box_spacer = this.ui.render_proto('#prototype-box-spacer','box-spacer');
+        //this.ui.$main_search = this.ui.render_proto('#prototype-main-search','main-search');
 
-
+        this.ui.$nav_bar.css('opacity',0.0);
+        this.ui.$main_container.css('opacity',0.0);
+        this.ui.$nav_bar.animate({ opacity: 1.0 }, 'slow');
+        this.ui.$main_container.animate({ opacity: 1.0 }, 'slow');
         $('body').append(this.ui.$intro_headline);
         $('body').append(this.ui.$nav_bar);
         $('body').append(this.ui.$main_container);
 
+        //this.ui.init_particles();
 
-        this.ui.$inner_container = $('#main-container > div');
-        //   add 20 gigs
-        for(var i=0; i<120; i++){
-            $('#main-container > div').append(this.ui.render_proto('#prototype-gig-box','gig-box'+i))
-           // $('#main-container > div').append('<br>');
-        }
-        //
-        this.ui.init_particles();
+
+
         this.ui.nav_bar = document.getElementById("sticky-navbar");
         this.ui.nav_bar_offset = this.ui.nav_bar.offsetTop;
-        console.log('ui.nav_bar ',this.ui.nav_bar.offsetTop);
         var ui = this.ui;
 
         window.onscroll = function() {
                 ui.scrolling_handler(ui);
         };
 
+         //this.ui.init_particles();
+
+
          $('a[href="#top"]').on('click',{ui:this.ui}, function(e){
             e.data.ui.nav_now_showing = '#top';
-            //
-            $('#sticky-navbar').removeClass('ert-sticky')
-            $('html, body').animate({ scrollTop: 0 }, 'slow',
-            function() {
-                     ;
-                }
-            );
-
          });
 
         $('a[href="#gigs"]').on('click',{ui:this.ui}, function(e){
               e.data.ui.nav_now_showing = '#gigs';
-                //
-              $('html, body').animate({ scrollTop: 340 }, 'slow');
-              //$('#sticky-navbar').addClass('ert-sticky');
-
         });
 
          $('a[href="#people"]').on('click',{ui:this.ui}, function(e){
-              // console.log('this.ui',e.data.ui);
               e.data.ui.nav_now_showing = '#people';
-                //
-
-              //$('#sticky-navbar').animate({height: 230 },'slow');
-              $('html, body').animate(
-                { scrollTop: 340 },
-                'slow',
-                function() {
-                     //$('#sticky-navbar').addClass('ert-sticky');
-                }
-              );
-
-              //e.data.ui.$intro_headline.animate({height: 0 },'fast');
-
         });
 
         $('a[href="#myprofile"]').on('click',{ui:this.ui}, function(e){
               console.log('this.ui',e.data.ui);
               e.data.ui.nav_now_showing = '#myprofile';
-              $('html, body').animate({ scrollTop: 340 }, 'slow',
-
-              );
-
+              //$('html, body').animate({ scrollTop: 340 }, 'slow',
         });
-        /*
-        $(window).on('scroll', function() {
-            ui.scrolling_handler(ui);
-        });*/
-
+        //
+        for(var i=0; i<120; i++){
+            $ee = this.ui.render_proto('#prototype-gig-box','gig-box'+i);
+            $ee.css('opacity',0.0);
+            $('#main-container > div').append(this.ui.render_proto('#prototype-gig-box','gig-box'+i))
+            $ee.animate({ opacity: 1.0 }, 'fast');
+        }
     },
     dummy_content(){
         for(var i=0;i<100;i++){
           //$('#main-segment').append('test<br>');
-
         }
     },
     //
