@@ -31,7 +31,7 @@ from ertcdn.resource_web_client import CdnBinResourceBsonApiClientRequests
 
 from crypto.signer import LocalRsaSigner
 
-from randomavatar.randomavatar import Avatar
+# from randomavatar.randomavatar import Avatar
 
 
 class EthearnalProfileModel(basemodel.BaseModel):
@@ -162,8 +162,8 @@ class EthearnalProfileController(object):
         #     pass
 
         # create generated avatar if not found
-        if not os.path.isfile(self.profile_image_file_name):
-            self.generate_random_avatar(filename=self.profile_image_file_name)
+        # if not os.path.isfile(self.profile_image_file_name):
+        #     self.generate_random_avatar(filename=self.profile_image_file_name)
 
         # create rsa keys if not present
         # todo win/ux chmod 400 secure keys
@@ -240,19 +240,19 @@ class EthearnalProfileController(object):
             fs.close()
         return bts
 
-    @staticmethod
-    def generate_random_avatar(filename=None, n=10):
-        if not filename:
-            raise ValueError('Please set a file path where to save generated avatar')
-        st = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(n))
-        avatar = Avatar(rows=13, columns=13)
-        image_byte_array = avatar.get_image(string=st,
-                                            width=89,
-                                            height=89,
-                                            pad=10)
-
-        return avatar.save(image_byte_array=image_byte_array,
-                           save_location=filename)
+    # @staticmethod
+    # def generate_random_avatar(filename=None, n=10):
+    #     if not filename:
+    #         raise ValueError('Please set a file path where to save generated avatar')
+    #     st = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(n))
+    #     avatar = Avatar(rows=13, columns=13)
+    #     image_byte_array = avatar.get_image(string=st,
+    #                                         width=89,
+    #                                         height=89,
+    #                                         pad=10)
+    #
+    #     return avatar.save(image_byte_array=image_byte_array,
+    #                        save_location=filename)
     @property
     def data(self):
         return self.model.from_json_file(self.profile_json_file_name).to_json()
