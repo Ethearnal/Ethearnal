@@ -137,12 +137,39 @@ var ajax_get_cdn_search = function(q) {
 };
 
 
+var do_tagschange_query = function() {
+    if($('.search.selection > .menu .item').hasClass("active")) {
+
+        var search_expertise = $('.search.selection > .menu .item.active.selected').data("value"),
+            search_tags = $('.search.selection > .label.transition.visible').data("value");
+            $skilltags = $("#skilltags select"),
+
+        console.log('DO SEARCH EXPERTISE', search_expertise);
+        console.log('DO SEARCH TAGS', search_tags);
+
+        $.ajax({
+            type: 'GET',
+            dataType : "json",
+            url: 'js/tags/' + search_expertise + '.json',
+            success: function(tags) {
+                console.log("success", tags);                
+                $skilltags.html("");
+                $.each(tags, function(i, tag) {
+                    $skilltags.append("<option value='" + tag.data +"'>" + tag.title + "</option>");
+                });
+            },
+            error: function() {
+                alert("error!");            
+            }
+        });
+    }
+};
+
 var do_search_query = function () {
     var search_text = $('input#search-header').val();
-    var search_tags = $('#search-tags').val();
 
     console.log('DO SEARCH TEXT', search_text);
-    console.log('DO SEARCH TAGS', search_tags);
+    do_tagschange_query();
     // and domain expertise
     // price range
     qry="";
@@ -161,6 +188,8 @@ var do_search_query = function () {
 
 };
 
+var expertise_item = $('.search.selection > .menu .item');
+
 var search_event = function(){
     console.log('SEARCH EVENT');
     clearTimeout(TIMEOUT_ON_SEARCH_QUERY);
@@ -172,7 +201,6 @@ var search_event = function(){
 
 $(document).ready(function() {
   $('#search-by-gig-tags').dropdown();
-
 });
 
 $("#search-by-gig-tags").on("change", function() {
@@ -192,6 +220,7 @@ $("#search-by-gig-tags").on("keyup", function(e) {
 $('input#search-header').keyup(function (e) {
     search_event();
 });
+
 
 // end searching
 
