@@ -137,16 +137,17 @@ var ajax_get_cdn_search = function(q) {
 };
 
 
-var do_tagschange_query = function() {
-    if($('.search.selection > .menu .item').hasClass("active")) {
 
-        var search_expertise = $('.search.selection > .menu .item.active.selected').data("value"),
-            search_tags = $('.search.selection > .label.transition.visible').data("value");
-            $skilltags = $("#skilltags select"),
+
+var do_tagschange_query = function() {
+    if($('#expertisedomain .item').hasClass("active")) {
+
+        var search_expertise = $('#expertisedomain .item.active.selected').data("value"),
+            search_tags = $('#skilltags .label.transition.visible').data("value");            
+            $skilltags = $("#skilltags select");
 
         console.log('DO SEARCH EXPERTISE', search_expertise);
         console.log('DO SEARCH TAGS', search_tags);
-
         $.ajax({
             type: 'GET',
             dataType : "json",
@@ -165,11 +166,14 @@ var do_tagschange_query = function() {
     }
 };
 
+$("#expertisedomain").mouseleave(function(){
+    do_tagschange_query();
+});
+
 var do_search_query = function () {
     var search_text = $('input#search-header').val();
 
     console.log('DO SEARCH TEXT', search_text);
-    do_tagschange_query();
     // and domain expertise
     // price range
     qry="";
@@ -188,8 +192,6 @@ var do_search_query = function () {
 
 };
 
-var expertise_item = $('.search.selection > .menu .item');
-
 var search_event = function(){
     console.log('SEARCH EVENT');
     clearTimeout(TIMEOUT_ON_SEARCH_QUERY);
@@ -201,6 +203,10 @@ var search_event = function(){
 
 $(document).ready(function() {
   $('#search-by-gig-tags').dropdown();
+
+  $("#expertisedomain .item").click(function(){
+    console.log("clicked!");
+  });
 });
 
 $("#search-by-gig-tags").on("change", function() {
@@ -257,8 +263,6 @@ var V_GIGS_BUFFER = {};
 
 
 do_search_query();
-
-
 
 $( "i.skills-down" ).click(function() {
     $( ".profile-upper .skills" ).toggleClass('hidden');
@@ -504,7 +508,6 @@ $('a[load]').click(function(e) {
 
 
 $( document ).ready(function() {
-
     // Global variables, defining how many tabs should appear on click and showing them.
     $showJobs = 2;
     $appearOnClick = 3;
@@ -840,13 +843,6 @@ function require(script) {
       // do my stuff
     });
 }
-
-
-
-
-
-
-
 
 // COLORS
 // Blue #1 = #92A8D1
