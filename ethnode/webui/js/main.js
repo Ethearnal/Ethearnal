@@ -139,43 +139,48 @@ var ajax_get_cdn_search = function(q) {
 
 
 
-var do_tagschange_query = function() {
-    if($('#expertisedomain .item').hasClass("active")) {
-
-        var search_expertise = $('#expertisedomain .item.active.selected').data("value").toLowerCase(),
-            search_tags = $('#skilltags .label.transition.visible').data("value");            
-            $skilltags = $("#skilltags select");
-
-        console.log('DO SEARCH EXPERTISE', search_expertise);
-        console.log('DO SEARCH TAGS', search_tags);
-        $.ajax({
-            type: 'GET',
-            dataType : "json",
-            url: 'js/tags/' + search_expertise + '.json',
-            success: function(tags) {
-                console.log("success", tags);                
-                $skilltags.html("");
-                $.each(tags, function(i, tag) {
-                    $skilltags.append("<option value='" + tag.data +"'>" + tag.title + "</option>");
-                });
-            },
-            error: function() {
-                console.log("seems like there is some error!");            
-            }
-        });
-    }
-};
-
-$("#expertisedomain").mouseleave(function(){
-    do_tagschange_query();
-});
-
 var do_search_query = function () {
     var search_text = $('input#search-header').val();
 
     console.log('DO SEARCH TEXT', search_text);
+
+    var tagschange = function() {
+        if($('#expertisedomain .item').hasClass("active")) {
+    
+            var search_expertise = $('#expertisedomain .item.active.selected').data("value").toLowerCase(),
+                search_tags = $('#skilltags .label.transition.visible').data("value");            
+                $skilltags = $("#skilltags select");
+    
+            console.log('DO SEARCH EXPERTISE', search_expertise);
+            console.log('DO SEARCH TAGS', search_tags);
+            $.ajax({
+                type: 'GET',
+                dataType : "json",
+                url: 'js/tags/' + search_expertise + '.json',
+                success: function(tags) {
+                    console.log("success", tags);                
+                    $skilltags.html("");
+                    $.each(tags, function(i, tag) {
+                        $skilltags.append("<option value='" + tag.data +"'>" + tag.title + "</option>");
+                    });
+                },
+                error: function() {
+                    console.log("seems like there is some error!");            
+                }
+            });
+
+            return(search_expertise, search_tags);
+        }
+    };
+    
+    $("#expertisedomain").mouseleave(function(){
+        tagschange();
+    });
+
+
     // and domain expertise
     // price range
+
     qry="";
     if(search_text) {
       qry += "text="+search_text
