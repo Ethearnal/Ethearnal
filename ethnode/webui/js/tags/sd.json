@@ -1,14 +1,14 @@
 [
     {
         "title": "Python",
-        "data": "PT"
+        "data": "pt"
     },    
     {
         "title": "C#",
-        "data": "C#"
+        "data": "c_sharp"
     },    
     {
         "title": "Java",
-        "data": "JV"            
+        "data": "js"            
     }    
 ]

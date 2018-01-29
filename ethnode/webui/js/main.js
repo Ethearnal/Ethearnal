@@ -147,12 +147,13 @@ var do_search_query = function () {
     var tagschange = function() {
         if($('#expertisedomain .item').hasClass("active")) {
     
-            var search_expertise = $('#expertisedomain .item.active.selected').data("value").toLowerCase(),
-                search_tags = $('#skilltags .label.transition.visible').data("value");            
-                $skilltags = $("#skilltags select");
+            var search_expertise = $('#expertisedomain .item.active').data("value"), 
+                search_tags = $("#tags_list .item.filtered").data("value");
+                $skilltags = $("#tags_list"),
                 $skilltagsActivelink = $("#skilltags a.label");
-            console.log('DO SEARCH EXPERTISE', search_expertise);
-            console.log('DO SEARCH TAGS', search_tags);
+
+                console.log('DO SEARCH EXPERTISE', search_expertise);
+                console.log('DO SEARCH TAGS', search_tags);
             $.ajax({
                 type: 'GET',
                 dataType : "json",
@@ -162,7 +163,7 @@ var do_search_query = function () {
                     $skilltags.html("");
                     $skilltagsActivelink.remove();
                     $.each(tags, function(i, tag) {
-                        $skilltags.append("<option value='" + tag.data +"'>" + tag.title + "</option>");
+                        $skilltags.append("<div class='item' data-value='" + tag.data +"'>" + tag.title + "</div>");
                     });
                 },
                 error: function() {
@@ -170,21 +171,32 @@ var do_search_query = function () {
                 }
             });
 
-            return(search_expertise, search_tags);
+            return search_expertise, search_tags;
         }
     };
     
-    $("#expertisedomain").mouseleave(function(){
+        
+    $("#expertisedomain").click(function(){
         tagschange();
     });
 
+    $("#tags_list").click(function(){
+        var search_tags = $("#tags_list .item.filtered").data("value");
+        console.log('DO SEARCH TAGS', search_tags);
+    });
+    
 
+    var search_expertise = $('#expertisedomain .item.active.selected').data("value"), 
+        search_tags = $("#tags_list .item.filtered").data("value");
     // and domain expertise
     // price range
 
     qry="";
     if(search_text) {
       qry += "text="+search_text
+      if(search_expertise){
+          qry += "?exp="+search_expertise
+      }
     }
     //todo add another fields
     if( qry != "" ) {

@@ -1112,30 +1112,42 @@
             <h6 style="margin-top: 0px; padding-top: 0px;">Search Gigs</h6>
 
           <div class="filter category">
-              <p>Text</p>
-              <div class="ui icon fluid input">
-                  <input id="search-header" type="text" placeholder="Search Gigs Texts...">
-                  <i class="circular search link icon"></i>
-              </div>
-              <br>
+            <p>Text</p>
+            <div class="ui icon fluid input">
+              <input id="search-header" type="text" placeholder="Search Gigs Texts...">
+              <i class="circular search link icon"></i>
+            </div>
+            <br>
             <div id="expertisedomain">
               <p> Expertise Domain</p>
-              <select class="ui fluid search dropdown">
-                  <option value="">Expertise Domains</option>
-                  <option value="SD">Software Development</option>
-                  <option value="FA">Finance & Accounting</option>
-                  <option value="MA">Music & Audio</option>
-                  <option value="VA">Video & Animation</option>
-                  <option value="GD">Graphic & Design</option>
-                  <option value="TW">Text & Writing</option>
-                  <option value="CS">Consulting Services</option>
-                  <option value="OS">Other Services</option>
-              </select>
+              <div class="ui fluid search select dropdown selection">                
+                <i class="dropdown icon"></i>
+                <input class="search" autocomplete="off" tabindex="0">
+                <div class="default text" id='expertise_text'>Expertise Domains</div>
+                <div class="menu transition hidden" id='domain_list' tabindex="-1">
+                  <div class="item active hidden" data-value="default">Expertise Domains</div>
+                  <div class="item" data-value="sd">Software Development</div>
+                  <div class="item" data-value="fa">Finance &amp; Accounting</div>
+                  <div class="item" data-value="ma">Music &amp; Audio</div>
+                  <div class="item" data-value="va">Video &amp; Animation</div>
+                  <div class="item" data-value="gd">Graphic &amp; Design</div>
+                  <div class="item" data-value="tw">Text &amp; Writing</div>
+                  <div class="item" data-value="cs">Consulting Services</div>
+                  <div class="item" data-value="os">Other Services</div>
+                </div>
+              </div>
             </div>
             <br>
             <div id="skilltags">
               <p> Skills </p>
-              <select class="ui fluid search dropdown" multiple=""></select>
+              <!--<select class="ui fluid search dropdown" multiple=""></select>-->
+              <div class="ui fluid search dropdown selection multiple">                
+                <i class="dropdown icon"></i>
+                <input class="search" autocomplete="off" tabindex="0"><span class="sizer" style=""></span>
+                <div class="default text"></div>
+                <div class="menu transition hidden" id='tags_list' tabindex="-1">
+                </div>
+              </div>
             </div>
             <!--<select class="ui fluid search dropdown" multiple="">
               <option value="">Skill Tags</option>

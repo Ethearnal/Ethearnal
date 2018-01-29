@@ -1,14 +1,14 @@
 [
     {
         "title": "Photoshop",
-        "data": "PS"
+        "data": "ps"
     },    
     {
         "title": "CorelDraw",
-        "data": "CD"
+        "data": "cd"
     },    
     {
         "title": "3D-Max",
-        "data": "3M"
+        "data": "3m"
     }
 ]
