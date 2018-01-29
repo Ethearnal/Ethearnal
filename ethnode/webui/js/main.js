@@ -136,67 +136,87 @@ var ajax_get_cdn_search = function(q) {
 
 };
 
-
-
+var search_expertise = "",
+    search_expertise_value = "",
+    search_tags = "",
+    search_tags_value = "",  
+    search_tags_array = [],
+    search_string_labels = "",
+    skilltags = "",
+    skilltagsActivelink = "";
 
 var do_search_query = function () {
     var search_text = $('input#search-header').val();
 
     console.log('DO SEARCH TEXT', search_text);
 
-    var tagschange = function() {
-        if($('#expertisedomain .item').hasClass("active")) {
     
-            var search_expertise = $('#expertisedomain .item.active').data("value"), 
-                search_tags = $("#tags_list .item.filtered").data("value");
-                $skilltags = $("#tags_list"),
-                $skilltagsActivelink = $("#skilltags a.label");
 
-                console.log('DO SEARCH EXPERTISE', search_expertise);
-                console.log('DO SEARCH TAGS', search_tags);
-            $.ajax({
-                type: 'GET',
-                dataType : "json",
-                url: 'js/tags/' + search_expertise + '.json',
-                success: function(tags) {
-                    console.log("success", tags);                
-                    $skilltags.html("");
-                    $skilltagsActivelink.remove();
-                    $.each(tags, function(i, tag) {
-                        $skilltags.append("<div class='item' data-value='" + tag.data +"'>" + tag.title + "</div>");
-                    });
-                },
-                error: function() {
-                    console.log("seems like there is some error!");            
-                }
-            });
+    function tagschange() {         
+        var skilltags = $("#tags_list"),
+            skilltagsActivelink = $("#skilltags a.label");
 
-            return search_expertise, search_tags;
+        console.log('DO SEARCH EXPERTISE', search_expertise_value);
+
+        $.ajax({
+            type: 'GET',
+            dataType : "json",
+            url: 'js/tags/' + search_expertise_value + '.json',
+            success: function(tags) {
+                $(skilltags).html("");
+                $(skilltagsActivelink).remove();
+                console.log("success", tags);     
+                $.each(tags, function(i, tag) {
+                    $(skilltags).append("<div class='item' id='" + tag.data +"'>" + tag.title + "</div>");
+                });
+            },
+            error: function() {
+                console.log("seems like there is some error!");            
+            }
+        });
+    }
+    
+    $("#expertisedomain .item").click(function(){
+        var search_expertise = $(this);
+            search_expertise_value = $(search_expertise).data("value");
+            
+        if ($(search_expertise).hasClass('active')) { 
+            tagschange()
+        } else {
+            $(search_expertise).addClass('active');
+            tagschange()
         }
-    };
-    
-        
-    $("#expertisedomain").click(function(){
-        tagschange();
     });
 
-    $("#tags_list").click(function(){
-        var search_tags = $("#tags_list .item.filtered").data("value");
-        console.log('DO SEARCH TAGS', search_tags);
+    function create_tags_array () {
+        search_tags_array.push(search_tags_value),
+        search_string_labels = search_tags_array.toString().replace(/,/g , "+");
+        console.log('DO SEARCH TAGS', search_tags_value);
+        console.log('DO SEARCH ARRAY', search_tags_array);
+        console.log('DO SEARCH ARRAY STRING', search_string_labels);
+    }
+    $("#tags_list").on("click", ".item", function(){
+        var search_tags = $(this);        
+        search_tags_value = $(search_tags).attr("id");
+
+        if($(this).hasClass('filtered')) {
+            create_tags_array()
+        } else {
+            $(this).addClass('filtered')
+            create_tags_array()
+        }
     });
     
-    $("#tags_list").mouseleave(function(){
-        var newarr = $("#skilltags a.label").map(function(){
-            return $(this).data("value");
-        }).get().join();
-        console.log(newarr);
-        return newarr;
-    });
+    var search_tags = $(this);
+        if($(this).hasClass('filtered')) {
+            search_tags_value = $(search_tags).attr("id");
+            console.log('DO SEARCH TAGS', search_tags_value);
+        } else {
+            $(this).addClass('filtered')
+            search_tags_value = $(search_tags).attr("id");
+            console.log('DO SEARCH TAGS', search_tags_value);
+        }
 
-    var search_expertise = $('#expertisedomain .item.active.selected').data("value"), 
-        newarr = $("#skilltags a.label").map(function(){
-            return $(this).data("value");
-        }).get().join().replace(",", "+"),
 
     // and domain expertise
     // price range
@@ -204,10 +224,10 @@ var do_search_query = function () {
     qry="";
     if(search_text) {
       qry += "text="+search_text
-      if(search_expertise){
-          qry += "?domain="+search_expertise
-          if(newarr){
-            qry += "?tags="+ newarr
+      if(search_expertise_value){
+          qry += "?domain="+search_expertise_value
+          if(search_string_labels){
+            qry += "?tags="+ search_string_labels
           }
       }
     }
