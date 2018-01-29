@@ -142,7 +142,7 @@ var ajax_get_cdn_search = function(q) {
 var do_tagschange_query = function() {
     if($('#expertisedomain .item').hasClass("active")) {
 
-        var search_expertise = $('#expertisedomain .item.active.selected').data("value"),
+        var search_expertise = $('#expertisedomain .item.active.selected').data("value").toLowerCase(),
             search_tags = $('#skilltags .label.transition.visible').data("value");            
             $skilltags = $("#skilltags select");
 
@@ -160,7 +160,7 @@ var do_tagschange_query = function() {
                 });
             },
             error: function() {
-                alert("error!");            
+                console.log("seems like there is some error!");            
             }
         });
     }
