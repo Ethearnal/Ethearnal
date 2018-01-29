@@ -150,7 +150,7 @@ var do_search_query = function () {
             var search_expertise = $('#expertisedomain .item.active.selected').data("value").toLowerCase(),
                 search_tags = $('#skilltags .label.transition.visible').data("value");            
                 $skilltags = $("#skilltags select");
-    
+                $skilltagsActivelink = $("#skilltags a.label");
             console.log('DO SEARCH EXPERTISE', search_expertise);
             console.log('DO SEARCH TAGS', search_tags);
             $.ajax({
@@ -160,6 +160,7 @@ var do_search_query = function () {
                 success: function(tags) {
                     console.log("success", tags);                
                     $skilltags.html("");
+                    $skilltagsActivelink.remove();
                     $.each(tags, function(i, tag) {
                         $skilltags.append("<option value='" + tag.data +"'>" + tag.title + "</option>");
                     });
