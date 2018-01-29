@@ -185,9 +185,19 @@ var do_search_query = function () {
         console.log('DO SEARCH TAGS', search_tags);
     });
     
+    $("#tags_list").mouseleave(function(){
+        var newarr = $("#skilltags a.label").map(function(){
+            return $(this).data("value");
+        }).get().join();
+        console.log(newarr);
+        return newarr;
+    });
 
     var search_expertise = $('#expertisedomain .item.active.selected').data("value"), 
-        search_tags = $("#tags_list .item.filtered").data("value");
+        newarr = $("#skilltags a.label").map(function(){
+            return $(this).data("value");
+        }).get().join().replace(",", "+"),
+
     // and domain expertise
     // price range
 
@@ -195,7 +205,10 @@ var do_search_query = function () {
     if(search_text) {
       qry += "text="+search_text
       if(search_expertise){
-          qry += "?exp="+search_expertise
+          qry += "?domain="+search_expertise
+          if(newarr){
+            qry += "?tags="+ newarr
+          }
       }
     }
     //todo add another fields
