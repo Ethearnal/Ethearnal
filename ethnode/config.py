@@ -14,18 +14,18 @@ interactive = False
 
 # upnp defaults
 
-udp_host = '0.0.0.0'
+udp_host = '127.0.0.1'
 udp_port = 34567
 udp_host_port = '%s:%d' % (udp_host, udp_port)
 
 # ertcdn service
 ertcdn_data_dir = 'cdn_profile_files'
 ertcdn_profile_data_dir = 'cdn_profile'
-ertcdn_socket_host = '0.0.0.0'
+ertcdn_socket_host = '127.0.0.1'
 ertcdn_socket_port = 5678
 ertcdn_host_port = '%s:%d' % (ertcdn_socket_host, ertcdn_socket_port)
 
-ertcdn_udp_host = '0.0.0.0'
+ertcdn_udp_host = '127.0.0.1'
 ertcdn_udp_port = 45678
 ertcdn_udp_host_port = '%s:%d' % (ertcdn_udp_host, ertcdn_udp_port)
 
