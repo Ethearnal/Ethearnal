@@ -317,7 +317,7 @@ $('body').delegate('.gig', 'click', function(e){
     // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
     var api_cdn = api_get_cdn_url();
     var gig_hkey = $(this).attr('id');
-    console.log('gig_hkey', gig_hkey);
+    console.log('++ + + + + +++ ++ gig_hkey', gig_hkey);
     $modal = $(".modal#gigModal .modal-content");
     //
     $modal.html('');
@@ -343,7 +343,7 @@ $('body').delegate('.gig', 'click', function(e){
         success: function(gig_data_json) {
             gig_o = JSON.parse(gig_data_json);
 
-            console.log('--->', gig_o);
+            console.log('--->', this.url);
             $e = $('#new-modal-gig-image')
             $e.css(
                 'background', 'url("' + api_cdn + gig_o.image_hash+ '")'

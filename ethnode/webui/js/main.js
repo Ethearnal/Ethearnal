@@ -60,7 +60,7 @@ var event_on_dht_data = function(hkey, data){
      if(owner != null){
         //ajax_get_guid_profile_key(owner, 'skills');
         //
-        createGigToFound(owner,data);
+        createGigToFound(hkey, data);
      }
 };
 
