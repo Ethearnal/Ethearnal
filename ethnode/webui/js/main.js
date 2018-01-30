@@ -193,6 +193,8 @@ var search_event = function(){
 $(document).ready(function(){
   $('#domain-expertise-select').dropdown();
   $('#skills-tags').dropdown();
+  do_search_query();
+
 });
 
 $("#skills-tags").on("change", function() {
