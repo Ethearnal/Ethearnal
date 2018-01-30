@@ -148,7 +148,7 @@ if args.udp_seed_host_port:
     seed_port = int(seed_port)
     seeds = [(seed_host, seed_port)]
 
-seeds = []
+# seeds = []
 
 dht = DHT(host=udp_host, port=int(udp_port), guid=ert.rsa_guid_int, seeds=seeds,
           storage=stor)
