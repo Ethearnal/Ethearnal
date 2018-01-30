@@ -5,6 +5,7 @@
 # default data dirs
 *_profile/
 *_profile_files/
+*_demo
 
 # playground sandbox
 *.play.py
