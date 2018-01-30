@@ -161,36 +161,54 @@ var do_search_query = function () {
 
 };
 
+
+var load_tags_per_domain =function(nm){
+  var fn = "tags/"+nm+".json";
+
+    $.ajax({
+            type: 'GET',
+            url: fn,
+            success: function(tags) {
+                //console$('#skills-tags').html('');
+                $('#skills-tags').html('');
+                $('#skills-tags').dropdown('restore defaults');
+                console.log('**',$('#skills-tags > search'));
+                for(var i=0; i<tags.length; i++){
+                   $('#skills-tags').append('<option value="'+tags[i]+'">'+tags[i]+'</option>');
+                }
+            }
+    });
+}
+
 var search_event = function(){
     console.log('SEARCH EVENT');
     clearTimeout(TIMEOUT_ON_SEARCH_QUERY);
     TIMEOUT_ON_SEARCH_QUERY = setTimeout(function(){
         do_search_query();
-    },500);
+    },100);
 }
 
-
-$(document).ready(function() {
-  $('#search-by-gig-tags').dropdown();
-
+$(document).ready(function(){
+  //$('#search-by-gig-tags').dropdown();
+  $('#domain-expertise-select').dropdown();
+  $('#skills-tags').dropdown();
 });
 
-$("#search-by-gig-tags").on("change", function() {
+$("#skills-tags").on("change", function() {
  var v = $('#search-by-gig-tags').dropdown('get value');
-  console.log("tags selected", v);
+  console.log("search tag selected", v);
   search_event();
 });
 
-
-$("#search-by-gig-tags").on("keyup", function(e) {
-  //var v = $('#search-tags').val();
-  //console.log("tags selected", v);
-  //search_event();
+$('#domain-expertise-select').on('change', function() {
+var v = $('#domain-expertise-select').dropdown('get value');
+  console.log("domain selected", v);
+  load_tags_per_domain(v);
+  search_event();
 });
 
-
 $('input#search-header').keyup(function (e) {
-    search_event();
+   search_event();
 });
 
 // end searching
