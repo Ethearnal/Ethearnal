@@ -170,8 +170,10 @@ var load_tags_per_domain =function(nm){
             url: fn,
             success: function(tags) {
                 //console$('#skills-tags').html('');
-                $('#skills-tags').html('');
-                $('#skills-tags').dropdown('restore defaults');
+                var $e = $('#skills-tags');
+                $e.html('');
+                $e.dropdown('restore defaults');
+                $e.removeClass('disabled');
                 console.log('**',$('#skills-tags > search'));
                 for(var i=0; i<tags.length; i++){
                    $('#skills-tags').append('<option value="'+tags[i]+'">'+tags[i]+'</option>');
@@ -189,7 +191,6 @@ var search_event = function(){
 }
 
 $(document).ready(function(){
-  //$('#search-by-gig-tags').dropdown();
   $('#domain-expertise-select').dropdown();
   $('#skills-tags').dropdown();
 });
