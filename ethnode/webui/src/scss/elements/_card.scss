@@ -1,0 +1,218 @@
+.card {
+	position: relative;
+	background-color: $default-white;
+	margin-bottom: 30px;
+	border: 1px solid $border-color;
+	border-radius: 5px;
+	@include transition(all 0.3s ease-in-out); 
+	
+	
+	&.bg-primary,
+	&.bg-success,
+	&.bg-info,
+	&.bg-warning,
+	&.bg-danger	{
+		color: darken($default-white, 10%);
+		
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			color: $default-white;
+		}
+		
+		p {
+			color: darken($default-white, 10%);
+		}
+	}
+	
+	.card-heading {
+		padding: 15px 20px;
+		position: relative;
+		
+		.card-title {
+			margin-bottom: 0px;
+		}
+	}
+	
+	.card-body {
+		padding: 15px 20px;
+	}
+	
+	.card-footer {
+		position: relative;
+		padding: 10px 15px 10px 15px;
+		min-height: 55px;
+		background-color: transparent;
+		
+		.btn {
+			margin: 0px;
+		}
+		
+		.btn-flat {
+			font-size: 13px;
+			text-transform: uppercase;
+		}
+	}
+	
+	.card-horizon {
+		padding: 0px;
+		position: relative;
+
+		.image-container {
+			overflow: hidden;
+			position: absolute;
+			height: 100%;
+			padding: 0px;
+			top: 0px;
+			
+			@include screen-mobile {
+				position: static;
+			}
+		}
+
+		.card-body {
+			position: relative;
+		}
+
+		.background-holder {
+			position: relative;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100%;
+			background-size: cover;
+			background-position: center center;
+			background-repeat: no-repeat;
+			z-index: 0;
+			
+			@include screen-mobile {
+				min-height: 350px;
+			}
+			
+			&.has-content {
+				display: table;
+				
+				.content {
+					display: table-cell;
+					vertical-align: middle;
+					padding: 0px 15px;
+				}
+			}
+		}
+	}
+
+	&:before {
+		content:"";
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		z-index: 2;
+		visibility: hidden;
+		opacity: 0;
+		@include background-opacity($default-white, 0.85); 	
+		@include transition(all 0.3s ease-in-out); 
+	}
+}
+
+.card-block {
+	padding: 30px;
+}
+
+.portlet {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	z-index: 1;
+	
+	.portlet-item {
+		list-style: none;
+		padding: 18px 20px;
+
+		> li {
+			display: inline-block;
+			margin-right: 3px;
+
+			> a {
+				margin-bottom: 0px;
+				margin-right: 0px; 
+				padding: 5px 6px;
+				font-size: 12px;
+				line-height: 1;
+			}
+		}
+	}
+
+	.dropdown-menu {
+		@include transform-origin(top right);
+		@include transform(scale(0,0));
+		@include transition(transform 150ms ease-out);
+		display: block;
+		margin: 0px;
+		border-radius: 0px;
+		left: auto;
+    	right: -10px;
+	}
+	
+	.show {
+	
+		.dropdown-menu {
+			@include transform(scale(1,1));
+		}
+	}
+}
+
+.card-title {
+	font-family: $font-secondary;
+	color: $default-dark;
+	margin-top: 0px;
+	margin-bottom: 15px;
+}
+
+.card-media {
+	position: relative;
+	
+	img {
+		width: 100%;
+	}
+}
+
+.card-refresh {
+
+	&:before {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	&:after {
+		content:"";
+		position: absolute;
+		top: calc(50% - 20px);
+		left: calc(50% - 20px);
+		border: 3px solid $border-color; /* Light grey */
+	    border-top: 3px solid $default-primary; /* Blue */
+	    border-radius: 50%;
+	    width: 40px;
+	    height: 40px;
+	    z-index:  3;		
+	    @include animation('spin 1.2s linear infinite') ;
+	    @include transform(translateX(-50%) translateY(-50%));
+	}
+}
+
+@include keyframes(spin) {0% { transform: rotate(0); } 100% { transform: rotate(360deg); }} 
+
+a {
+	&.card {
+		display: block;
+
+		&:hover,
+		&:focus {
+			@include box-shadow(0, 7px, 15px, rgba(0, 0, 0, 0.075)); 
+		}
+	}
+}

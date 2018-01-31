@@ -1,0 +1,335 @@
+.header {
+	display: block;
+    height: $header-height;
+    width: calc(100% - #{$offscreen-size});
+	position: fixed;
+    padding: 0px;
+    z-index: 800;
+    background-color: $default-white;
+	border-bottom: 1px solid $border-color;
+	margin-bottom: 0px;
+	@include transition(all 0.2s ease); 
+	@include print {
+		display: none;
+	}
+
+	@include screen-tablet {
+		width: 100%;
+	}
+	
+	@include screen-laptop-only {
+		width: calc(100% - #{$collapsed-size});
+	}
+
+	.header-container {
+		@include clearfix;
+		
+		.nav-left,
+		.nav-right {
+			position: relative;
+			list-style: none;
+			padding-left: 0;
+			margin-bottom: 0px;
+			
+			>li {
+				float: left;
+				
+				>a {
+					padding: 0 15px;
+					line-height: $header-height;
+					min-height: $header-height;
+					color: $default-text-color;
+					display: block;
+					@include transition(all 0.2s ease-in-out); 
+					
+					i {
+						font-size: 18px;
+					}
+					
+					&:hover,
+					&:focus {
+						text-decoration: none;
+						color: $default-dark;
+					}
+
+					@include screen-tablet {
+						padding: 0 15px;
+					}
+				}
+			}
+			
+			.user-profile {
+				border-right: 1px solid $border-color;
+
+				@include screen-tablet {
+					border-right: 0px;
+					border-left: 0px;
+				}	
+				
+				.profile-img {
+					display: inline-block;
+					width: 35px;
+					border-radius: 50%;
+					margin-top: 15px;
+					margin-right: 10px;
+					float: left;
+
+					@include screen-tablet {
+						width: 30px;
+						margin-right: 0px;
+					}
+				}
+				
+				.user-info {
+					display: inline-block;
+
+					@include screen-tablet {
+						display: none;
+					}
+				}
+
+				.dropdown-menu {
+					> li {
+						> a {
+							color: $default-dark;
+						}
+					}
+				}
+			}
+			
+			.notifications {
+				position: relative;
+
+				.counter {
+					position: absolute;
+					right: 6px;
+    				top: 12px;
+					background-color: $default-danger;
+					color: $default-white;
+					padding: 3px 5.5px;
+					border-radius: 50px;
+					line-height: 1;
+					font-size: 10px;
+				}
+				
+				.dropdown-menu {
+					min-width: 350px;
+					padding: 0px;
+
+					@include screen-mobile {
+						max-width: 300px
+					}
+
+					.list-info {
+						max-height: 248px;
+						overflow-y: auto;
+						position: relative;
+
+						> li {
+							
+							> a{
+								padding: 20px 15px;
+								font-size: 13px;
+								display: block;
+								border-bottom: 1px solid $border-color;
+								@include transition(all 0.15s ease-out);
+
+								&:hover,
+								&:focus {
+									color: $default-dark;
+									text-decoration: none;
+									background-color: $default-gray;
+								}
+
+								.sub-title {
+									padding-top: 3px;
+								}
+							}
+
+							&:last-child {
+								a {
+									border-bottom: 0px;
+								}
+							}
+						}
+					}
+
+					.notice-header {
+						padding: 15px 20px;
+						border-bottom: 1px solid $border-color;
+					}
+
+					.notice-footer {
+						text-align: center;
+						padding: 15px 20px;
+						border-top: 1px solid $border-color;
+
+						a {
+							display: block;
+						}
+					}
+
+					&.list-info {
+						position: absolute;
+					}
+				}
+			}
+		}
+		
+		.dropdown-menu {
+			@include transform-origin(top right);
+			@include transform(scale(0,0));
+			@include transition(transform 0.15s ease-out);
+			display: block;
+			margin: 0px;
+
+			.divider {
+				border-bottom: 1px solid $border-color;
+				height: 1px;
+			    overflow: hidden;
+			}
+
+			>li {
+
+				>a {
+					@include transition(all 0.2s ease-out);
+				}
+			}
+		}
+		
+		.show {
+		
+			.dropdown-menu {
+				@include transform(scale(1,1));
+			}
+		}
+		
+		.nav-left {
+			float: left;
+			margin-left: 15px;
+		}
+		
+		.nav-right {
+			float: right;
+			
+			.dropdown-menu {
+				left: auto;
+				right: 0;
+				
+				>li {
+					width: 100%;
+					
+					>a {
+						line-height: 1.5;
+						min-height: auto;
+						padding: 10px 15px;
+					}
+				}
+			}
+		}
+	}
+	.search-box {
+
+		.search-icon-close {
+			display: none;
+		}
+
+		&.active {
+			.search-icon {
+				display: none;
+			}
+
+			.search-icon-close {
+				display: inline-block;
+			}
+		}
+	}
+
+	.search-input {
+		display: none;
+
+		&.active {
+			display: inline-block;
+		}
+
+		input {
+			border: 0px;
+			box-shadow: none;
+			background-color: transparent;
+			outline: none;
+			height: 40px;
+			margin-top: 12px;
+			padding: 5px;
+			font-size: 18px;
+
+			@include screen-mobile {
+				width: 85px;
+			}
+			
+			@include placeholder {
+				font-style:italic;
+				color: lighten($default-text-color, 20%);
+			}
+		}
+		
+		.advanced-search {
+			display: none;
+			position: absolute;
+			top: 59px;
+			width: 380px;
+			min-height: 50px;
+			max-height: 500px;
+			background-color: $default-white;
+			border-radius: 4px;
+			@include box-shadow( 0px, 0px, 8px, 0px, rgba(0, 0, 0, 0.2));
+
+			@include screen-mobile {
+				left: 40px;
+			}
+			
+			&.active {
+				display: block;
+			}
+			
+			.search-wrapper {
+				position: relative;
+				
+				ul {
+					> li {
+						> a {
+							padding: 12px 20px;
+							
+							&:hover,
+							&:focus {
+								background-color: $default-gray;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		.search-footer {
+			border-top: 1px solid $border-color;
+			text-align: center;
+			padding: 15px;
+			border-bottom-left-radius: 4px;
+			border-bottom-right-radius: 4px;
+		}
+	}
+}
+
+.is-collapsed {
+
+	.header {
+		width: calc(100% - #{$collapsed-size});
+
+		@include screen-tablet {
+			width: 100%;	
+		}
+
+		@include screen-laptop-only {
+			width: calc(100% - #{$offscreen-size});
+		}
+	}
+}

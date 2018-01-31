@@ -1,6 +1,7 @@
 # please add your ide stuff here
 .idea
 .vscode
+webui/node_modules/
 
 # default data dirs
 *_profile/

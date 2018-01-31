@@ -1,33 +1,31 @@
-
-
 // TODO less require more secure, and do the fucking sanita on hundred places now
 console.log('BEGIN INIT');
 var $other_section = $('#other-profile-section');
 var $other_headline = $('#other-profile-headline');
 var $my_section = $('#my-profile-section');
 var $my_headline = $('#my-profile-headline');
-var load_segment_html =  $('#gigs-other').html()
+var load_segment_html = $('#gigs-other').html()
 
 var CDN_HOST_PORT = '';
 
 // get CDN host from node
 
 $.ajax({
-        type: 'GET',
-        url: '/api/v1/dht/node/',
+    type: 'GET',
+    url: '/api/v1/dht/node/',
 
-        success: function(data) {
-            data = JSON.parse(data);
-            console.log(' - - - data.cdn', data.cdn[0]);
-            CDN_HOST_PORT = data.cdn[0];
-        }
+    success: function(data) {
+        data = JSON.parse(data);
+        console.log(' - - - data.cdn', data.cdn[0]);
+        CDN_HOST_PORT = data.cdn[0];
+    }
 });
 
 var api_post_cdn_url = function() {
-     console.log('using post cdn: ',CDN_HOST_PORT);
-     c =  'http://' + CDN_HOST_PORT + '/api/cdn/v1/resource';
-     console.log('using post cdn: ', c);
-     return c;
+    console.log('using post cdn: ', CDN_HOST_PORT);
+    c = 'http://' + CDN_HOST_PORT + '/api/cdn/v1/resource';
+    console.log('using post cdn: ', c);
+    return c;
 };
 
 var api_get_cdn_url = function() {
@@ -46,76 +44,83 @@ var api_idx_cdn_url = function() {
 
 // event handlers
 
-var event_on_gig_profile_key_data = function(guid,profile_key,data){
+var event_on_gig_profile_key_data = function(guid, profile_key, data) {
     console.log('guid:' + guid);
-    console.log('profile_key:'+ profile_key , data);
+    console.log('profile_key:' + profile_key, data);
 };
 
-var event_on_dht_data = function(hkey, data){
+var event_on_dht_data = function(hkey, data) {
 
-     data = JSON.parse(data);
-     console.log('dht_data:',hkey, data);
-     owner = null;
-     owner = data.owner_guid;
-     if(owner != null){
+    data = JSON.parse(data);
+    console.log('dht_data:', hkey, data);
+    owner = null;
+    owner = data.owner_guid;
+    if (owner != null) {
         //ajax_get_guid_profile_key(owner, 'skills');
         //
         createGigToFound(hkey, data);
-     }
+    }
 };
 
 
-var event_on_search_gig_data = function(qry, data_js){
-     console.log('search qry:', qry);
+var event_on_search_gig_data = function(qry, data_js) {
+    console.log('search qry:', qry);
 
-     data = null;
-     data = JSON.parse(data_js);
-     console.log('search result:', data);
-     if(data != null){
-         // todo spinner html;
-         $(".gigs-container").html('');
-         for(var i=0; i<data.length; i++){
-            ajax_get_gig_data(data[i]);
-         }
-     }
+    data = null;
+    data = JSON.parse(data_js);
+    console.log('search result:', c);
+    if (data != null) {
+        // todo spinner html;
+        $(".gigs-container").html('');
+        console.log(data.result);
+        if (data.result != undefined) {
+            $(".gigs-container").html(data.result);
+        } else {
+            for (var i = 0; i < data.length; i++) {
+                ajax_get_gig_data(data[i]);
+            }
+        }
+
+    }
 };
 
 // end event handlers
 
 
-var ajax_get_gig_data = function(hkey){
+var ajax_get_gig_data = function(hkey) {
 
-    qry_hk = '/api/v1/dht/hkey/?hkey='+hkey;
+    qry_hk = '/api/v1/dht/hkey/?hkey=' + hkey;
     $.ajax({
-            type: 'GET',
-            url: qry_hk,
-            hkey: hkey,
-            success: function(data) {
-                //data = JSON.parse(data);
-                event_on_dht_data(this.hkey, data);
+        type: 'GET',
+        url: qry_hk,
+        hkey: hkey,
+        success: function(data) {
+            //data = JSON.parse(data);
+            event_on_dht_data(this.hkey, data);
 
-            }
+        }
     });
 };
 
 
-var ajax_get_guid_profile_key = function(guid, profile_key){
+var ajax_get_guid_profile_key = function(guid, profile_key) {
     qry_url = "/api/v1/dht/profile?owner_guid=" + guid + "&profile_key=" + profile_key,
-    $.ajax({
+        $.ajax({
             type: 'GET',
             url: qry_url,
             guid: guid,
             profile_key: profile_key,
             success: function(data) {
-                event_on_gig_profile_key_data(this.guid,this.profile_key, data);
+                event_on_gig_profile_key_data(this.guid, this.profile_key, data);
 
             }
-    });
+        });
 };
 
 
 
 // searching
+
 
 var TIMEOUT_ON_SEARCH_QUERY = null
 
@@ -123,21 +128,21 @@ var TIMEOUT_ON_SEARCH_QUERY = null
 
 var ajax_get_cdn_search = function(q) {
 
-    var qry_url =  api_idx_cdn_url() + q;
+    var qry_url = api_idx_cdn_url() + q;
     console.log('searching query', qry_url);
     $.ajax({
-            type: 'GET',
-            url: qry_url,
-            qry: q,
-            success: function(data) {
-                event_on_search_gig_data(this.qry, data);
-            }
+        type: 'GET',
+        url: qry_url,
+        qry: q,
+        success: function(data) {
+            event_on_search_gig_data(this.qry, data);
+        }
     });
 
 };
 
 
-var do_search_query = function () {
+var do_search_query = function() {
     var search_text = $('input#search-header').val();
     var search_tags = $('#search-tags').val();
 
@@ -145,16 +150,16 @@ var do_search_query = function () {
     console.log('DO SEARCH TAGS', search_tags);
     // and domain expertise
     // price range
-    qry="";
-    if(search_text) {
-      qry += "text="+search_text
+    qry = "";
+    if (search_text) {
+        qry += "text=" + search_text
     }
     //todo add another fields
-    if( qry != "" ) {
-         // ajax_get_cdn_search(encodeURI(qry));
+    if (qry != "") {
+        // ajax_get_cdn_search(encodeURI(qry));
     } else {
 
-        qry="all"
+        qry = "all"
     }
 
     ajax_get_cdn_search(encodeURI(qry));
@@ -162,56 +167,52 @@ var do_search_query = function () {
 };
 
 
-var load_tags_per_domain =function(nm){
-  var fn = "tags/"+nm+".json";
+var load_tags_per_domain = function(nm) {
+    var fn = "tags/" + nm + ".json";
 
     $.ajax({
-            type: 'GET',
-            url: fn,
-            success: function(tags) {
-                //console$('#skills-tags').html('');
-                var $e = $('#skills-tags');
-                $e.html('');
-                $e.dropdown('restore defaults');
-                $e.removeClass('disabled');
-                console.log('**',$('#skills-tags > search'));
-                for(var i=0; i<tags.length; i++){
-                   $('#skills-tags').append('<option value="'+tags[i]+'">'+tags[i]+'</option>');
-                }
+        type: 'GET',
+        url: fn,
+        success: function(tags) {
+            //console$('#skills-tags').html('');
+            var $e = $('#skills-tags');
+            $e.html('');
+            $e.dropdown('restore defaults');
+            $e.removeClass('disabled');
+            console.log('**', $('#skills-tags > search'));
+            for (var i = 0; i < tags.length; i++) {
+                $('#skills-tags').append('<option value="' + tags[i] + '">' + tags[i] + '</option>');
             }
+        }
     });
 }
 
-var search_event = function(){
+var search_event = function() {
     console.log('SEARCH EVENT');
     clearTimeout(TIMEOUT_ON_SEARCH_QUERY);
-    TIMEOUT_ON_SEARCH_QUERY = setTimeout(function(){
+    TIMEOUT_ON_SEARCH_QUERY = setTimeout(function() {
         do_search_query();
-    },100);
+    }, 100);
 }
 
-$(document).ready(function(){
-  $('#domain-expertise-select').dropdown();
-  $('#skills-tags').dropdown();
-  do_search_query();
+$(document).ready(function() {
+    $('#domain-expertise-select').dropdown();
+    $('#skills-tags').dropdown();
+    do_search_query();
 
 });
 
 $("#skills-tags").on("change", function() {
- var v = $('#search-by-gig-tags').dropdown('get value');
-  console.log("search tag selected", v);
-  search_event();
+    var v = $('#search-by-gig-tags').dropdown('get value');
+    console.log("search tag selected", v);
+    search_event();
 });
 
 $('#domain-expertise-select').on('change', function() {
-var v = $('#domain-expertise-select').dropdown('get value');
-  console.log("domain selected", v);
-  load_tags_per_domain(v);
-  search_event();
-});
-
-$('input#search-header').keyup(function (e) {
-   search_event();
+    var v = $('#domain-expertise-select').dropdown('get value');
+    console.log("domain selected", v);
+    load_tags_per_domain(v);
+    search_event();
 });
 
 // end searching
@@ -219,16 +220,16 @@ $('input#search-header').keyup(function (e) {
 
 
 // profile cards begin
-var main_profile_cards = function(){
+var main_profile_cards = function() {
     $('.profiles-container').empty();
     console.log('main_profile_cards()');
     $.ajax({
         url: '/api/v1/dht/guids',
         type: 'GET',
         processData: false,
-        success: function(data){
+        success: function(data) {
             known_guids = JSON.parse(data);
-            known_guids.forEach(function(element){
+            known_guids.forEach(function(element) {
                 //
                 createProfileCard(element);
                 console.log(element);
@@ -252,22 +253,22 @@ do_search_query();
 
 
 
-$( "i.skills-down" ).click(function() {
-    $( ".profile-upper .skills" ).toggleClass('hidden');
+$("i.skills-down").click(function() {
+    $(".profile-upper .skills").toggleClass('hidden');
     $(this).toggleClass('open');
 
-    if( $(this).hasClass('open') ) {
+    if ($(this).hasClass('open')) {
         $(this).css({ transition: "transform 0.3s", transform: "rotate(180deg)" })
     } else {
         $(this).css({ transition: "transform 0.3s", transform: "rotate(0deg)" })
     }
 });
 
-$( "i.languages-down" ).click(function() {
-    $( ".profile-upper .languages" ).toggleClass('hidden');
+$("i.languages-down").click(function() {
+    $(".profile-upper .languages").toggleClass('hidden');
     $(this).toggleClass('open');
 
-    if( $(this).hasClass('open') ) {
+    if ($(this).hasClass('open')) {
         $(this).css({ transition: "transform 0.3s", transform: "rotate(180deg)" })
     } else {
         $(this).css({ transition: "transform 0.3s", transform: "rotate(0deg)" })
@@ -276,7 +277,7 @@ $( "i.languages-down" ).click(function() {
 
 
 // Changes .plusIcon based on what tab user opens
-$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
     var target = $(e.target).attr("href"); // activated tab
     target = target.replace("#", "");
 
@@ -329,39 +330,39 @@ $('a.navbar-brand').click(function() {
 
 
 // func
-function getProfileGigsF(guid_id){
-            console.log(guid_id);
+function getProfileGigsF(guid_id) {
+    console.log(guid_id);
 
 
-                $.ajax({
-                        url: "/api/v1/dht/hkey/?hkey=" + guid_id,
-                        hk: guid_id,
-                        type: "GET",
-                        processData: true,
-                        success: function(gigs_dta){
+    $.ajax({
+        url: "/api/v1/dht/hkey/?hkey=" + guid_id,
+        hk: guid_id,
+        type: "GET",
+        processData: true,
+        success: function(gigs_dta) {
 
-                                    console.log(gigs_dta);
+            console.log(gigs_dta);
 
-                                   //console.log('hkey',this.hk);
-                                   //console.log('data:',js_data);
-                                   // gig_o = JSON.parse(js_data);
-                                   //console.log('data:',gig_o);
-                                   //createGigToProfile2(this.hk, gig_o);
+            //console.log('hkey',this.hk);
+            //console.log('data:',js_data);
+            // gig_o = JSON.parse(js_data);
+            //console.log('data:',gig_o);
+            //createGigToProfile2(this.hk, gig_o);
 
-                            },
+        },
 
-                        error: function(error) {
-                                console.log('ERR',error);
+        error: function(error) {
+            console.log('ERR', error);
 
-                                return;
-                            }
-                    });
+            return;
+        }
+    });
 
-                    //var gig_hk = profile_gigs[i];
-                    //console.log('GIG HK:',gig_hk);
-                    /**/
+    //var gig_hk = profile_gigs[i];
+    //console.log('GIG HK:',gig_hk);
+    /**/
 
-        };
+};
 
 
 // WHEN YOU CLICK ON HEADER PAGE BUTTONS (gigs/jobs/profiles/etc) IT WILL TURN THE PAGE INTO ANOTHER PAGE
@@ -375,40 +376,40 @@ $('a[load]').click(function(e) {
 
 
     // Showing content based on clicked button
-    if($load == 'gigs') {
+    if ($load == 'gigs') {
         $('section.gigs-page-content').show();
         $('input#search-header').focus().attr('placeholder', 'Search gigs...');
     }
 
-    if($load == 'gigs') {
+    if ($load == 'gigs') {
         console.log('GIGS');
         do_search_query();
-//        $.ajax({
-//            type: 'GET',
-//            url: '/api/v1/dht/guids',
-//            dataType: 'text',
-//            processData: false,
-//            success: function( guids_data ) {
-//                console.log('GUIDS',guids_data);
-//                guids =JSON.parse(guids_data);
-//                for (var i = 0; i < guids.length; i++) {
-//                     //console.log(guids[i]);
-//                     getProfileGigsF(guids[i]);
-//                }
-//
-//            }
-//        });
+        //        $.ajax({
+        //            type: 'GET',
+        //            url: '/api/v1/dht/guids',
+        //            dataType: 'text',
+        //            processData: false,
+        //            success: function( guids_data ) {
+        //                console.log('GUIDS',guids_data);
+        //                guids =JSON.parse(guids_data);
+        //                for (var i = 0; i < guids.length; i++) {
+        //                     //console.log(guids[i]);
+        //                     getProfileGigsF(guids[i]);
+        //                }
+        //
+        //            }
+        //        });
     }
 
 
 
 
-    if($load == 'jobs') {
+    if ($load == 'jobs') {
         $('section.jobs-page-content').show();
         $('input#search-header').focus().attr('placeholder', 'Search jobs...');
     }
 
-    if($load == 'profiles') {
+    if ($load == 'profiles') {
         $('section.profiles-page-content').show();
         $('input#search-header').focus().attr('placeholder', 'Search profiles...');
 
@@ -419,7 +420,7 @@ $('a[load]').click(function(e) {
 
     }
 
-    if($load == 'otherprofile') {
+    if ($load == 'otherprofile') {
         console.log('OTHER PROFILE LOAD');
         //$('section.background-image').show();
         $('#other-profile-headline').show();
@@ -429,52 +430,52 @@ $('a[load]').click(function(e) {
 
     }
 
-    if($load == 'profile') {
+    if ($load == 'profile') {
         /*
-        */
-       console.log('LOAD PROFILE GIGS:');
-    $('#other-profile-headline').removeClass('background-image');
-    $('#other-profile-headline').addClass('background-image2');
-    $('#my-profile-headline').removeClass('background-image2');
-    $('#my-profile-headline').addClass('background-image');
+         */
+        console.log('LOAD PROFILE GIGS:');
+        $('#other-profile-headline').removeClass('background-image');
+        $('#other-profile-headline').addClass('background-image2');
+        $('#my-profile-headline').removeClass('background-image2');
+        $('#my-profile-headline').addClass('background-image');
 
-    $('#my-profile-section').removeClass('documentation2');
-    $('#other-profile-section').removeClass('documentation');
-    $('#other-profile-section').addClass('documentation2');
-     $('#my-profile-section').addClass('documentation');
+        $('#my-profile-section').removeClass('documentation2');
+        $('#other-profile-section').removeClass('documentation');
+        $('#other-profile-section').addClass('documentation2');
+        $('#my-profile-section').addClass('documentation');
 
 
 
-       var gig_ctx = $("[data-target='#gigModal'")
-       var el =gig_ctx.remove(0);
+        var gig_ctx = $("[data-target='#gigModal'")
+        var el = gig_ctx.remove(0);
 
-        getNodeData(function(node_data){
-        node = $.parseJSON(node_data);
-        console.log('GUID:' + node.guid);
-        getProfileGigs(node.guid,  function(data){
-            console.log('GUID:' + data);
-            profile_gigs = JSON.parse(data);
-            for (var i = 0; i < profile_gigs.length; i++) {
-                $.ajax({
+        getNodeData(function(node_data) {
+            node = $.parseJSON(node_data);
+            console.log('GUID:' + node.guid);
+            getProfileGigs(node.guid, function(data) {
+                console.log('GUID:' + data);
+                profile_gigs = JSON.parse(data);
+                for (var i = 0; i < profile_gigs.length; i++) {
+                    $.ajax({
                         url: "/api/v1/dht/hkey/?hkey=" + profile_gigs[i],
                         hk: profile_gigs[i],
                         type: "GET",
                         processData: false,
-                        success: function(js_data){
+                        success: function(js_data) {
 
-                                   //console.log('hkey',this.hk);
-                                   //console.log('data:',js_data);
-                                   gig_o = JSON.parse(js_data);
-                                   //console.log('data:',gig_o);
-                                   createGigToProfile2(this.hk, gig_o);
+                            //console.log('hkey',this.hk);
+                            //console.log('data:',js_data);
+                            gig_o = JSON.parse(js_data);
+                            //console.log('data:',gig_o);
+                            createGigToProfile2(this.hk, gig_o);
 
-                            },
+                        },
 
                         error: function(error) {
-                                console.log('ERR',error);
+                            console.log('ERR', error);
 
-                                return;
-                            }
+                            return;
+                        }
                     });
 
                     //var gig_hk = profile_gigs[i];
@@ -486,7 +487,7 @@ $('a[load]').click(function(e) {
         });
 
         /*
-        */
+         */
         $('section.background-image').show();
         $('section.documentation').show();
         $('body').addClass('up');
@@ -495,7 +496,7 @@ $('a[load]').click(function(e) {
 
 
 
-$( document ).ready(function() {
+$(document).ready(function() {
 
     // Global variables, defining how many tabs should appear on click and showing them.
     $showJobs = 2;
@@ -511,12 +512,12 @@ $( document ).ready(function() {
         var imageItems = 0;
 
         function appearUploadedPhoto(photoID, uploadTo, imageSource) {
-            $divToAppear = $('<div class="photo-element photo-uploaded'+photoID+'"><a href="#" class="remove" title="Remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a><img src="'+imageSource+'"></div>')
+            $divToAppear = $('<div class="photo-element photo-uploaded' + photoID + '"><a href="#" class="remove" title="Remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a><img src="' + imageSource + '"></div>')
             $divToAppear.appendTo(uploadTo);
         }
 
         function appearPhoto(photoID, uploadTo) {
-            $divToAppear = $('<div class="photo-element photo'+photoID+'"><a href="#" class="remove" title="Remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a><div class="progress active"><div class="progress-bar" style="width:0%"></div></div></div>')
+            $divToAppear = $('<div class="photo-element photo' + photoID + '"><a href="#" class="remove" title="Remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a><div class="progress active"><div class="progress-bar" style="width:0%"></div></div></div>')
             $divToAppear.appendTo(uploadTo);
         }
 
@@ -525,7 +526,7 @@ $( document ).ready(function() {
             var $modalOpened = $(this).closest('.timeline').attr('id');
 
             $(modalClicked).on('shown.bs.modal', function() {
-                if ( $(modalClicked).find('.appearing-content .file-upload .photo-element').length != 0 ) return false;
+                if ($(modalClicked).find('.appearing-content .file-upload .photo-element').length != 0) return false;
 
                 var imageNumber = 50;
 
@@ -536,16 +537,16 @@ $( document ).ready(function() {
                     $imageSource = $(this).children().attr('src');
 
                     appearUploadedPhoto(imageNumber, $container, $imageSource);
-                    $photoUploadedElement = $(modalClicked + " .appearing-content .file-upload .photo-uploaded" + imageNumber );
+                    $photoUploadedElement = $(modalClicked + " .appearing-content .file-upload .photo-uploaded" + imageNumber);
                     imageNumber++;
                     $photoUploadedElement.find("a.remove").toggle();
 
                     $photoUploadedElement.hover(function() {
-                        $(this).has('img').css({"background-color": "#000", "border-color": "#f6f7f8"});
+                        $(this).has('img').css({ "background-color": "#000", "border-color": "#f6f7f8" });
                         $(this).has('img').find('img').css("opacity", ".7");
                         $(this).find('a.remove').toggle();
                     }, function() {
-                        $(this).has('img').css({"background-color": "#f6f7f8", "border-color": "rgba(0, 0, 0, 0.1)"});
+                        $(this).has('img').css({ "background-color": "#f6f7f8", "border-color": "rgba(0, 0, 0, 0.1)" });
                         $(this).has('img').find('img').css("opacity", "1");
                         $(this).find('a.remove').toggle();
                     });
@@ -563,26 +564,26 @@ $( document ).ready(function() {
 
         $(".add-photos-video-btn").on('click touchend', function(e) {
             e.preventDefault();
-            if( imagesUploaded >= imageLimit ) return false;
-            if( imageUploading ) return false;
-            var fileHolder  = $(this).parent().find(".file-upload");
-            var fileInput   = $(this).parent().find(".file-upload-input");
-            var postBtn     = $(this).parent().parent().find('.buttons button.btn.btn-post');
-            var cameraBtn   = $(this).find('a');
-            var videoIcon   = '<span class="glyphicon glyphicon-film file-icon" aria-hidden="true"></span>';
-            var audioIcon   = '<span class="glyphicon glyphicon-headphones file-icon" aria-hidden="true"></span>';
-            var fileIcon    = '<span class="glyphicon glyphicon-file file-icon" aria-hidden="true"></span>';
+            if (imagesUploaded >= imageLimit) return false;
+            if (imageUploading) return false;
+            var fileHolder = $(this).parent().find(".file-upload");
+            var fileInput = $(this).parent().find(".file-upload-input");
+            var postBtn = $(this).parent().parent().find('.buttons button.btn.btn-post');
+            var cameraBtn = $(this).find('a');
+            var videoIcon = '<span class="glyphicon glyphicon-film file-icon" aria-hidden="true"></span>';
+            var audioIcon = '<span class="glyphicon glyphicon-headphones file-icon" aria-hidden="true"></span>';
+            var fileIcon = '<span class="glyphicon glyphicon-file file-icon" aria-hidden="true"></span>';
             var statusAlert = $(this).parent().find('.status-alert');
 
             $(this).parent().find("input.file-upload-input").trigger('click');
             $(this).parent().find("input.file-upload-input").unbind('change');
             imageUploading = false;
             $(this).parent().find("input.file-upload-input:hidden").on('change', function() {
-                var isImage         = $(this).val().match(/(?:jpg|jpeg|bmp|png|gif|tiff)$/igm);
-                var isVideo         = $(this).val().match(/(?:3g2|3gp|3gpp|asf|avi|dat|divx|dv|f4v|flv|m2ts|m4v|mkv|mod|mov|mp4|mpe|mpeg|mpeg4|mpg|mts|nsv|ogm|ogv|qt|tod|ts|vob|wmv)$/igm);
-                var isAudio         = $(this).val().match(/(?:aif|iff|m3u|m4a|mid|mp3|mpa|ra|wav|wma)$/igm);
-                var isFile          = $(this).val().match(/(?:txt|doc|docx|pdf|csv|pps|ppt|pptx|ps|ai|svg|indd|psd|eps)$/igm);
-                var fileName        = $(this).val().split('\\').pop().replace(/.jpg|.jpeg|.bmp|.png|.gif|.tiff/i, '');
+                var isImage = $(this).val().match(/(?:jpg|jpeg|bmp|png|gif|tiff)$/igm);
+                var isVideo = $(this).val().match(/(?:3g2|3gp|3gpp|asf|avi|dat|divx|dv|f4v|flv|m2ts|m4v|mkv|mod|mov|mp4|mpe|mpeg|mpeg4|mpg|mts|nsv|ogm|ogv|qt|tod|ts|vob|wmv)$/igm);
+                var isAudio = $(this).val().match(/(?:aif|iff|m3u|m4a|mid|mp3|mpa|ra|wav|wma)$/igm);
+                var isFile = $(this).val().match(/(?:txt|doc|docx|pdf|csv|pps|ppt|pptx|ps|ai|svg|indd|psd|eps)$/igm);
+                var fileName = $(this).val().split('\\').pop().replace(/.jpg|.jpeg|.bmp|.png|.gif|.tiff/i, '');
 
                 postBtn.prop('disabled', true);
                 $(':focus').blur();
@@ -597,11 +598,11 @@ $( document ).ready(function() {
                 imageUploading = true;
 
                 $photoElement.hover(function() {
-                    $(this).has('img').css({"background-color": "#000", "border-color": "#f6f7f8"});
+                    $(this).has('img').css({ "background-color": "#000", "border-color": "#f6f7f8" });
                     $(this).has('img').find('img').css("opacity", ".7");
                     $(this).find('a.remove').toggle();
                 }, function() {
-                    $(this).has('img').css({"background-color": "#f6f7f8", "border-color": "rgba(0, 0, 0, 0.1)"});
+                    $(this).has('img').css({ "background-color": "#f6f7f8", "border-color": "rgba(0, 0, 0, 0.1)" });
                     $(this).has('img').find('img').css("opacity", "1");
                     $(this).find('a.remove').toggle();
                 });
@@ -612,42 +613,42 @@ $( document ).ready(function() {
                     }, 1500, function() {
                         setTimeout(function() {
                             $photoElement.find('.progress').remove();
-                                var reader = new FileReader();
-                                reader.onload = function(e) {
-                                    if ($photoElement.find('img').length) {
-                                        $photoElement.find('img').attr("src", e.target.result);
-                                    } else {
-                                        $photoElement.append(
-                                            $("<img />", {
-                                                "src": e.target.result,
-                                                "alt": fileName,
-                                                "class": "",
-                                            })
-                                        );
-                                    }
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+                                if ($photoElement.find('img').length) {
+                                    $photoElement.find('img').attr("src", e.target.result);
+                                } else {
+                                    $photoElement.append(
+                                        $("<img />", {
+                                            "src": e.target.result,
+                                            "alt": fileName,
+                                            "class": "",
+                                        })
+                                    );
+                                }
 
-                                    var imageUpload = $photoElement.find('img');
-                                    var img = new Image();
-                                    img.src = imageUpload[0].src;
-                                    img.onload = function() {
-                                        $photoElement.find(".loading-blocks").remove();
-                                        cameraBtn.css("color", "#B3B7BD");
-                                        imageUploading = false;
-                                        postBtn.prop('disabled', false);
-                                        $photoElement.find("a.remove").css({"-webkit-text-fill-color": "#dcdcdc", "-webkit-text-stroke-color": "#565a5e"});
-                                        $photoElement.find("a.remove").hover(function(){
-                                            $photoElement.css("-webkit-text-fill-color", "#fff");
-                                            }, function(){
-                                            $photoElement.css("-webkit-text-fill-color", "#dcdcdc");
-                                        });
-                                        if (img.width < $photoElement.width() || img.width < img.height) {
-                                            $photoElement.find("img").addClass('portrait');
-                                        } else {
-                                            $photoElement.find("img").removeClass('portrait');
-                                        }
+                                var imageUpload = $photoElement.find('img');
+                                var img = new Image();
+                                img.src = imageUpload[0].src;
+                                img.onload = function() {
+                                    $photoElement.find(".loading-blocks").remove();
+                                    cameraBtn.css("color", "#B3B7BD");
+                                    imageUploading = false;
+                                    postBtn.prop('disabled', false);
+                                    $photoElement.find("a.remove").css({ "-webkit-text-fill-color": "#dcdcdc", "-webkit-text-stroke-color": "#565a5e" });
+                                    $photoElement.find("a.remove").hover(function() {
+                                        $photoElement.css("-webkit-text-fill-color", "#fff");
+                                    }, function() {
+                                        $photoElement.css("-webkit-text-fill-color", "#dcdcdc");
+                                    });
+                                    if (img.width < $photoElement.width() || img.width < img.height) {
+                                        $photoElement.find("img").addClass('portrait');
+                                    } else {
+                                        $photoElement.find("img").removeClass('portrait');
                                     }
                                 }
-                                reader.readAsDataURL(fileInput[0].files[0]);
+                            }
+                            reader.readAsDataURL(fileInput[0].files[0]);
 
                         }, 300);
                     });
@@ -708,8 +709,8 @@ $( document ).ready(function() {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function (e) {
-                if( $inputID == "input-image-avatar" ) {
+            reader.onload = function(e) {
+                if ($inputID == "input-image-avatar") {
                     addImage(e.target.result);
                 }
                 $content.find('img#' + $inputID + '').attr('src', e.target.result).show();
@@ -718,14 +719,14 @@ $( document ).ready(function() {
         }
     }
 
-    $("input.input-file").change(function(){
+    $("input.input-file").change(function() {
         $content = $(this).closest('.content');
         readURL(this, $content);
         $inputID = $(this).attr("id");
     });
 
     // When you upload a file in an accomplishment modal, it would chance the text.
-    $("input[type=file]").on("change", function(){
+    $("input[type=file]").on("change", function() {
         $content = $(this).closest('.content');
 
         // Name of file and placeholder
@@ -734,7 +735,7 @@ $( document ).ready(function() {
         $labelID = $(this).attr("id");
         // $imgClass = $(this).parent().find('.file-input-first-image').attr('class');
 
-        if($(this).val()!=""){
+        if ($(this).val() != "") {
             $content.find("label[for=" + $labelID + "]").text(' ' + file + ' ').addClass('active');
             $content.find('img.file-input-first-image').addClass('active');
             $content.find('img.show-image').removeClass('empty');
@@ -749,39 +750,40 @@ $( document ).ready(function() {
     $('.panel-heading, .timeline-post').hover(
         function() {
             $(this).stop(true, true).animate({ backgroundColor: '#f7f7f7' }, 300);
-        }, function() {
+        },
+        function() {
             $(this).stop(true, true).animate({ backgroundColor: 'white' }, 300);
         }
     )
 
     // Owl Graphic Hero UI buttons and hover effect.
-    $(".button-prev").click(function () {
+    $(".button-prev").click(function() {
         $(this).parent().find('.items').trigger('owl.prev');
     });
-    $(".button-next").click(function () {
+    $(".button-next").click(function() {
         $(this).parent().find('.items').trigger('owl.next');
     });
-    $( "section.background-image, .modal-body .image" ).hover(function() {
+    $("section.background-image, .modal-body .image").hover(function() {
         $(this).find(".button-prev, .button-next").stop(true).fadeIn(300);
     });
-    $( "section.background-image, .modal-body .image" ).mouseleave(function() {
+    $("section.background-image, .modal-body .image").mouseleave(function() {
         $(this).find(".button-prev, .button-next").stop(true).fadeOut(300);
     });
 
     // When you click on Top skills and tools down icon, the skills will slide up or slide down.
-    $( ".profile-bottom i" ).click(function() {
-        $( ".profile-bottom .skills p.more" ).toggleClass('hidden');
+    $(".profile-bottom i").click(function() {
+        $(".profile-bottom .skills p.more").toggleClass('hidden');
         $(this).toggleClass('open');
 
-        if( $(this).hasClass('open') ) {
-            $(this).css( { transition: "transform 0.3s", transform: "rotate(180deg)" } )
+        if ($(this).hasClass('open')) {
+            $(this).css({ transition: "transform 0.3s", transform: "rotate(180deg)" })
         } else {
-            $(this).css( { transition: "transform 0.3s", transform: "rotate(0deg)" } )
+            $(this).css({ transition: "transform 0.3s", transform: "rotate(0deg)" })
         }
     });
 
     // When you hover on a profile image, the half-black background would appear with the text of "Change".
-    $( ".profile-image" ).hover(function() {
+    $(".profile-image").hover(function() {
         $(this).find(".text-on-image").stop(true, true).fadeToggle(150);
     });
 
@@ -789,11 +791,11 @@ $( document ).ready(function() {
 
     // Semantic UI, Perfect Scrollbar plugins initializations and many others functions related to dropdowns.
     $(function() {
-        if( $(window).width() < 768 ) {
+        if ($(window).width() < 768) {
             var myApp = new Framework7();
             var $$ = Dom7;
 
-            $$('.swipeout').on('open', function (e) {
+            $$('.swipeout').on('open', function(e) {
                 e.preventDefault();
                 $(this).fadeOut();
             });
@@ -826,10 +828,10 @@ $( document ).ready(function() {
 // Require function
 function require(script) {
     $.ajax({
-      dataType: "jsonp",
-      url: script,
-      }).done(function ( data ) {
-      // do my stuff
+        dataType: "jsonp",
+        url: script,
+    }).done(function(data) {
+        // do my stuff
     });
 }
 
@@ -852,8 +854,8 @@ function require(script) {
 
 // FUNCTIONS
 
-
-
+// SMART SEARCH
+require("js/modules/smartSearch.js"); // MODULE FOR SEARCHING
 // GET DATA
 require("js/functions/getData/gigData.js"); // GETS GIG DATA BY GIG ID
 require("js/functions/getData/guidsData.js"); // GETS ALL GUIDS (NODES) DATA

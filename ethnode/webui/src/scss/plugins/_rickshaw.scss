@@ -1,0 +1,10 @@
+
+.rickshaw_graph {
+	.x_ticks_d3,
+	.y_ticks {
+
+		path {
+			stroke: darken($border-color, 10%);
+		}
+	}
+}
