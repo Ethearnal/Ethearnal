@@ -1,0 +1,265 @@
+.rtl {
+	text-align: right;
+
+	.side-nav {
+		right: 0px;
+		left: auto;
+
+		@include screen-tablet {
+			right: -280px;
+		}
+
+		@include screen-laptop-only {
+			&:hover {
+				.side-nav-inner .side-nav-menu > li > a .icon-holder {
+					float: right;
+					margin-left: 14px;
+				}
+			}
+		}	
+
+		.side-nav-inner {
+
+			.side-nav-menu {
+				border-right:0px;
+				border-left: 1px solid $border-color;
+
+				> li {
+					> a {    
+	   					line-height: 2.5;
+
+	   					.icon-holder {
+	   						float: right;
+		    				margin-right: 0px;
+		   					margin-left: 14px;
+
+		   					@include screen-laptop-only {
+		   						float: none;
+		   						margin-left: 0px;
+		   					}
+	   					}
+					}
+
+					&.dropdown {
+
+						.arrow {
+							line-height: 28px;
+							right: auto;
+							left: 30px;
+
+							i {
+								&:before {
+									content: "\e64a";
+								}
+							}
+						}
+
+						&.open {
+							.arrow {
+								@include transform(rotate(-90deg));
+							}
+						}
+
+						ul {
+							&.dropdown-menu {
+								padding-left: 0px;
+								padding-right: 30px;
+
+								> li {
+									> a {
+										text-align: right;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.side-nav-logo {
+				border-right: 0px;
+				border-left: 1px solid $border-color;
+
+				.mobile-toggle {
+					float: left;
+					@include transform(rotate(180deg));
+				}
+			}
+		}
+	}
+
+	&.is-collapsed {
+		.side-nav {
+
+			@include screen-tablet {
+				left: auto;
+				right: 0px;
+			}
+
+			@include screen-laptop-above {
+				&:hover {
+					.side-nav-inner .side-nav-menu > li > a .icon-holder {
+						float: right;
+						margin-left: 14px;
+					}
+				}
+
+				.side-nav-inner .side-nav-menu > li > a .icon-holder {
+					float: none;
+					margin-left: 4px;
+				}
+			} 
+
+			@include screen-laptop-only {
+				.side-nav-inner .side-nav-menu > li > a .icon-holder {
+					float: right;
+					margin-left: 14px;
+				}	
+			}	
+		}
+
+		.page-container {
+			@include screen-laptop-above{
+				padding-right: $collapsed-size;
+			}
+		}
+	}
+
+	.page-container {
+		padding-left: 0px;
+
+		@include screen-laptop-above {
+			padding-right: $offscreen-size;
+		}
+
+		@include screen-laptop-only {
+			padding-right: $collapsed-size;
+		}	
+
+	}	
+
+	.header {
+		.header-container {
+
+			.nav-left {
+				float: right;
+				margin-right: 15px;
+
+				> li {
+					float: right;
+				}
+			}
+
+			.nav-right {
+				float: left;
+
+				> li {
+					float: right;
+				}
+
+				.user-profile {
+					border-right: 0px;
+				}
+
+				.dropdown-menu {
+					left: 0px;
+   					right: auto;
+   					@include transform-origin(top left);
+				}
+			}
+		}
+		.search-input {
+			.advanced-search {
+				left: -120px;
+			}
+		}	
+	}
+
+	.side-panel {
+
+		.side-panel-wrapper {
+			border-left: 0px;
+			border-right: 1px solid $border-color;
+			left: calc(0px - 600px); 
+
+			.nav-tabs {
+
+				.panel-close {
+					border-left: 0px;
+				}
+			}	
+		}	
+
+		&.side-panel-open  {
+			.side-panel-wrapper {
+			    left: 0px; 
+			}	
+		}
+	}
+
+	.pull-right {
+		float: left !important;
+	}
+
+	.list-info {
+		.info {
+			padding-left: 0px;
+			padding-right: 55px;
+
+			.sub-title {
+				max-width: 100%;
+			}
+
+			.float-object {
+				right: auto;
+				left: 15px;
+			}
+		}
+
+		.thumb-img {
+			float: right;
+		}
+	}
+
+	.progress-bar {
+		margin-left: auto;
+	}
+
+	.chat {
+
+		.chat-user-list {
+
+			.chat-user {
+
+				.user-info {
+					padding-left: 0px;
+					padding-right: 55px;
+				}
+
+				.status {
+					right: auto;
+					left: 20px;
+				}
+
+				.thumb-img {
+					float: right;
+				}
+			}
+		}
+
+		.conversation {
+			text-align: left;
+		}
+	} 
+
+	.status {
+		right: 0px;
+		left: auto;
+	}
+
+	
+	.pdd-left-20 {
+		padding-right: 20px !important;
+	}
+
+}

@@ -1,0 +1,110 @@
+section.documentation .container .profile-information-after-fixed .container-fluid
+    width: 1170px
+
+.profile-documentation-full
+    background: none
+    margin-top: -60px
+    margin-bottom: 30px
+
+    .profile-documentation
+        position: relative
+        margin-left: 15px
+        background-color: transparent
+        box-shadow: none
+        padding-right: 0
+        padding-left: 0
+        border-top-left-radius: 6px
+        border-top-right-radius: 6px
+
+        .plusIcon, .shoutoutIcon
+            position: absolute
+            width: 52px
+            height: 50px
+            box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2)
+            background-color: #92A8D1
+            border-radius: 100%
+            right: 28px
+            top: 32px
+            z-index: 11
+            text-align: center
+            display: none
+            transition: all 0.3s ease-in
+
+            &.active
+                display: initial
+
+
+            &:hover,
+            &:focus,
+            &:active
+                background-color: #8194b7
+                box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2)
+                cursor: pointer
+
+            i
+                line-height: 50px
+                font-size: 24px
+                color: white
+
+        .shoutoutIcon
+            background-color: #127fff
+            text-align: center
+
+            i
+                line-height: 50px
+                font-size: 18px
+                color: white
+                margin-left: 5px
+
+            &:hover,
+            &:focus,
+            &:active
+                background-color: #1174e7
+
+        ul.nav
+            background-color: white
+
+            li:not(.mdl-menu__item)
+
+                &:hover, &:focus, &:active
+                    border-bottom: 2px solid #89ABE3
+
+                a
+                    color: #4a4a4a
+                    line-height: 1
+                    font-size: 18px
+                    font-weight: 500
+                    border: none
+                    padding: 20px 30px 20px 30px
+                    border-radius: 6px 6px 0 0
+
+                    &:hover, &:focus, &:active
+                        background-color: white
+                        border: none
+                        color: #89ABE3
+
+            li.active:not(.mdl-menu__item)
+                border-bottom: 2px solid #89ABE3
+
+                a
+                    color: #89ABE3
+
+
+            li.dropdownButton
+                float: right
+                width: 60px
+                height: 60px
+                border-bottom: none
+                background-color: rgba(242, 221, 222, 0.30)
+                transition: background-color 0.3s ease-in
+
+                &:hover, &:focus, &:active
+                    border-bottom: none
+                    background-color: rgba(242, 221, 222, 0.70)
+
+                button#addThings
+                    margin: 0 auto
+                    height: 60px
+                    width: 60px
+                    display: block
+                    background: none

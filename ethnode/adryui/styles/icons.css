@@ -1,0 +1,122 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?v3t1df');
+  src:  url('fonts/icomoon.eot?v3t1df#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?v3t1df') format('truetype'),
+    url('fonts/icomoon.woff?v3t1df') format('woff'),
+    url('fonts/icomoon.svg?v3t1df#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-Logo-2 .path1:before {
+  content: "\e919";
+  color: rgb(94, 105, 119);
+}
+.icon-Logo-2 .path2:before {
+  content: "\e91a";
+  margin-left: -4.2080078125em;
+  color: rgb(18, 127, 255);
+}
+.icon-Logo-2 .path3:before {
+  content: "\e91b";
+  margin-left: -4.2080078125em;
+  color: rgb(255, 255, 255);
+  opacity: 0.5;
+}
+.icon-Logo-2 .path4:before {
+  content: "\e91c";
+  margin-left: -4.2080078125em;
+  color: rgb(0, 0, 0);
+}
+.icon-add:before {
+  content: "\e900";
+}
+.icon-arrow-down:before {
+  content: "\e901";
+}
+.icon-arrow-left:before {
+  content: "\e902";
+}
+.icon-arrow-right:before {
+  content: "\e903";
+}
+.icon-arrow-up:before {
+  content: "\e904";
+}
+.icon-bell:before {
+  content: "\e905";
+}
+.icon-bell-filled:before {
+  content: "\e906";
+}
+.icon-calendar-2:before {
+  content: "\e907";
+}
+.icon-calendar-1:before {
+  content: "\e908";
+}
+.icon-chat-bubble:before {
+  content: "\e909";
+}
+.icon-check-box:before {
+  content: "\e90a";
+}
+.icon-close:before {
+  content: "\e90b";
+}
+.icon-comment:before {
+  content: "\e90c";
+}
+.icon-comment-filled:before {
+  content: "\e90d";
+}
+.icon-facebook:before {
+  content: "\e90e";
+}
+.icon-file-images-add:before {
+  content: "\e90f";
+}
+.icon-google:before {
+  content: "\e910";
+}
+.icon-icon:before {
+  content: "\e911";
+}
+.icon-instagram:before {
+  content: "\e912";
+}
+.icon-like:before {
+  content: "\e913";
+}
+.icon-more:before {
+  content: "\e914";
+}
+.icon-r-s-s:before {
+  content: "\e915";
+}
+.icon-search:before {
+  content: "\e916";
+}
+.icon-story:before {
+  content: "\e917";
+}
+.icon-twitter:before {
+  content: "\e918";
+}
+
