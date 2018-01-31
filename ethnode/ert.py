@@ -441,9 +441,16 @@ if __name__ == '__main__':
 
         pro = DHTProfile(d)
         if json_data_to_profile:
+            from time import sleep
             jsd = ProfileJsonData(json_file_name=json_data_to_profile,
                                   pro=pro,
                                   )
+            sleep(3)
+            d.converge_peers()
+            sleep(3)
+            jsd.update()
+            sleep(3)
+            sys.exit(0)
 
         if not args.dht_only:
             main_http(http_webdir=http_webdir,

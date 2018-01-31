@@ -81,6 +81,15 @@ parser.add_argument('-n', '--no_upnp_attempts',
                     action='store_true'
                     )
 
+
+parser.add_argument('-r', '--http_relay_get_url',
+                    default=None,
+                    help='http://frankfurt.ethearnal.com:5678/api/cdn/v1/resource',
+                    required=False,
+                    type=str)
+
+
+
 args = parser.parse_args()
 host, port = args.http_host_port.split(':')
 udp_host, udp_port = args.udp_host_port.split(':')
@@ -128,7 +137,7 @@ if not args.no_upnp_attempts:
             print('\n\n\n\ PUNCH UDP HOLE FAILED \n\n\n')
     ert.my_lan_ip = local_ip
 
-
+http_relay_get_url = args.http_relay_get_url
 
 stor = store_handler.DHTStoreHandlerOne(
     dht_sqlite_file=ert.dht_fb_fn,
@@ -160,7 +169,7 @@ d = dhf
 idx = Indexer(ert=ert, dhf=dhf)
 # idx_engine =
 
-cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy)
+cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy, http_relay_get_url=http_relay_get_url)
 
 idx_web = IdxCdnQueryWebApi(cherrypy=cherrypy, idx=idx)
 
