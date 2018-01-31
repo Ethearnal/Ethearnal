@@ -219,6 +219,15 @@ cherrypy.tools.cors = cherrypy._cptools.HandlerTool(cors)
 
 # cherrypy.tools.CORS = cherrypy.Tool('before_handler', cors)
 
+cherrypy.config.update({
+    'global': {
+        'engine.autoreload.on': False
+    }
+})
+
+#
+
+
 cherrypy.engine.exit = on_hook(target=tear_down_udp,
                                target_args=(dht,),
                                target_kwargs={})(cherrypy.engine.exit)

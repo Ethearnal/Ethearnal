@@ -12,6 +12,8 @@ from toolkit.tools import mkdir, on_hook
 from toolkit import kadmini_codec
 from toolkit import store_handler
 from toolkit import upnp
+from toolkit.profile_from_json import DHTProfile, ProfileJsonData
+
 from ert_profile import EthearnalProfileController
 # from ert_profile import EthearnalProfileView, EthearnalProfileController
 # from ert_profile import EthearnalJobView, EthearnalJobPostController
@@ -60,6 +62,12 @@ parser.add_argument('-u', '--udp_host_port',
 
 
 parser.add_argument('-s', '--udp_seed_host_port',
+                    default=None,
+                    help='E,g 127.0.0.1:3000',
+                    required=False,
+                    type=str)
+
+parser.add_argument('-j', '--json_data_to_profile',
                     default=None,
                     help='E,g 127.0.0.1:3000',
                     required=False,
@@ -373,6 +381,7 @@ if __name__ == '__main__':
     no_upnp = args.no_upnp_attempts
     # cdn_selected = args.cdn_bootstrap_host_port
     boot_cdn_host, boot_cdn_port = args.cdn_bootstrap_host_port.split(':')
+    json_data_to_profile = args.json_data_to_profile
 
     print('boot-cdn', boot_cdn_host, boot_cdn_port)
 
@@ -429,6 +438,12 @@ if __name__ == '__main__':
             print('UDP server thread is alive')
         else:
             print('UDP server thread id dead')
+
+        pro = DHTProfile(d)
+        if json_data_to_profile:
+            jsd = ProfileJsonData(json_file_name=json_data_to_profile,
+                                  pro=pro,
+                                  )
 
         if not args.dht_only:
             main_http(http_webdir=http_webdir,
