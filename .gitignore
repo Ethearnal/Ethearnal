@@ -1,6 +1,9 @@
 # please add your ide stuff here
 .idea
 .vscode
+.DS_Store
+
+
 
 # default data dirs
 *_profile/
