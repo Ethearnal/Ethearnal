@@ -56,14 +56,17 @@ class Indexer(object):
 
     def query_terms_d(self, terms_d: dict, limit=30):
         print("\n\nQUERY_TERMS_D", terms_d)
-        cur = self.idx.qry_terms_d(terms_d, limit)
+        cur = self.idx.qry_terms_d(terms_d, limit=limit)
         if cur:
-            print(list(cur.fetchone()))
-            ll = [guid_bin_to_hex2(t[0]) for t in cur.fetchall()]
+            # print(list(cur.fetchall()))
+            # ll = None
+            l1 = list(cur.fetchall())
+            print('---->', l1)
+            ll = [guid_bin_to_hex2(t[0]) for t in l1]
             return ll
 
     def query_text(self, text, limit=30):
-        return self.query_terms({'text': text}, limit)
+        return self.query_terms({'text': text}, limit=limit)
 
     def query_tags(self, tags, limit=30):
         return self.query_terms({'tags': tags}, prefixes=False, limit=limit)
@@ -181,7 +184,12 @@ class IdxCdnQueryWebApi(object):
         if 'q1range' in kwargs:
             q1range = kwargs.pop('q1range')
             p_t = q1range.split(' ')
+            print('Q1_range', p_t)
             self.idx_store.analog_range_q1 = p_t
+        else:
+            self.idx_store.analog_range_q1 = None
+
+        print('Q1_range', self.idx_store.analog_range_q1)
 
         if 'allquanta' in kwargs:
             ll = self._qry_all(limit, ret_t=True)

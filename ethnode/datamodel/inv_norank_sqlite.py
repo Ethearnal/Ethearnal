@@ -263,12 +263,14 @@ class InvIndexTimestampSQLite(BaseSQLite):
     #     return self.cursor.execute(qs, values)
 
     def inner_join_on_component(self, *args, asc=True, qs_only=False, limit=30):
+        # print('inner join on comp')
         if len(args) < 2:
             raise ValueError('two or more args required')
 
         analog_range_q1 = ''
         if self.analog_range_q1:
-            analog_range_q1 = 'AND (q1 BETWEEN %d AND %d) ' % self.analog_range_q1
+            analog_range_q1 = 'AND (a.q1 BETWEEN %d AND %d) ' % self.analog_range_q1
+        # print('ANALOG RANGE', analog_range_q1)
 
         selects = 'a.container_hash, a.ert_tokens_major, a.utc_timestamp, a.q1, a.q2 '
         first = 'SELECT DISTINCT %s FROM %s a ' % (selects, self.table_name)
@@ -287,6 +289,7 @@ class InvIndexTimestampSQLite(BaseSQLite):
         order = 'ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC, a.q1 ASC, a.q2 ASC LIMIT %d' % limit
         qs = first+inners+andst+ands_st+order
         values = args
+        # print('QS',qs)
         if qs_only:
             return qs, values
         return self.cursor.execute(qs, values)

@@ -94,11 +94,12 @@ class ResourceIndexingEngine(object):
         self.index_store.commit()
 
     def qry_hashes(self, component_hashes: list, limit=30):
-        print('\n\nLIMIT', limit)
+        # print('\n\n qry_hashes LIMIT', limit)
         if len(component_hashes) == 1:
             print('\n\n\ + + + + + QRY SINGLE COMPONENT', component_hashes[0])
             return self.index_store.single_component(component_hashes[0], limit=limit)
         else:
+
             return self.index_store.inner_join_on_component(*component_hashes, limit=limit)
 
     def qry_terms(self, terms: dict, prefixes=True, limit=30):
@@ -117,7 +118,7 @@ class ResourceIndexingEngine(object):
             return self.qry_hashes(component_hashes, limit=limit)
 
     def qry_terms_d(self, term_items: dict, limit=30):
-        print('\n\nLIMIT', limit)
+        # print('\n\n qry_terms_d LIMIT', limit)
         component_hashes_set = set()
         for specifier, terms in term_items.items():
             for item in terms:
