@@ -88,6 +88,13 @@ parser.add_argument('-r', '--http_relay_get_url',
                     required=False,
                     type=str)
 
+parser.add_argument('-g', '--converge_pk_and_peers',
+                    help='exchange pk keys and peers with boot peer',
+                    required=False,
+                    action='store_true'
+                    )
+
+
 
 
 args = parser.parse_args()
@@ -179,22 +186,23 @@ knownguids = WebDHTKnownGuids(
     mount_point='/api/v1/dht/guids'
 )
 
-dht_get_hk = DhtGetByHkeyWebAPI(
-    cherry=cherrypy,
-    dhf=dhf,
-)
-
-dht_gigs_hk = DhtGigsHkeysWebAPI(
-    cherry=cherrypy,
-    dhf=dhf,
-    me_owner=OwnerGuidHashIO(ert.rsa_guid_hex)
-)
-
-dht_portfolios_hk = DhtPortfoliosWebAPI(
-    cherry=cherrypy,
-    dhf=dhf,
-    me_owner=OwnerGuidHashIO(ert.rsa_guid_hex)
-)
+#
+# dht_get_hk = DhtGetByHkeyWebAPI(
+#     cherry=cherrypy,
+#     dhf=dhf,
+# )
+#
+# dht_gigs_hk = DhtGigsHkeysWebAPI(
+#     cherry=cherrypy,
+#     dhf=dhf,
+#     me_owner=OwnerGuidHashIO(ert.rsa_guid_hex)
+# )
+#
+# dht_portfolios_hk = DhtPortfoliosWebAPI(
+#     cherry=cherrypy,
+#     dhf=dhf,
+#     me_owner=OwnerGuidHashIO(ert.rsa_guid_hex)
+# )
 
 dht_ip4 = WebDHTKnownPeers(
     cherry=cherrypy,
@@ -253,6 +261,10 @@ if dht.server_thread.is_alive():
     print('UDP server thread is alive')
 else:
     print('UDP server thread id dead')
+
+if args.converge_pk_and_peers:
+    print('CONVERGE PEERS')
+    d.converge_peers()
 
 cherrypy.engine.start()
 

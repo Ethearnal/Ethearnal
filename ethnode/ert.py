@@ -28,6 +28,8 @@ from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAbou
 from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
 from webdht.wdht_ertapi import DhtEventsHkeysWebAPI, Indexer
 
+from toolkit.profile_from_json import DHTProfileCollection
+
 # #
 # from webdht.double_linked import DList, DLItemDict, OwnPulse, instance_dl
 # from webdht.wdht_listing import WebGuidCollectionListApi
@@ -95,6 +97,12 @@ parser.add_argument('-c', '--cdn_bootstrap_host_port',
 
 parser.add_argument('-n', '--no_upnp_attempts',
                     help='bootstrap to web service',
+                    required=False,
+                    action='store_true'
+                    )
+
+parser.add_argument('-g', '--converge_pk_and_peers',
+                    help='exchange pk keys and peers with boot peer',
                     required=False,
                     action='store_true'
                     )
@@ -440,6 +448,12 @@ if __name__ == '__main__':
             print('UDP server thread id dead')
 
         pro = DHTProfile(d)
+        gigs = DHTProfileCollection(dhf=d, collection_name='gig')
+        verbs_src = 'data_demo/txt_wordnet/data.verb'
+        cdn_data_dir = 'data_demo/cdn1_d'
+        from helpers.wordnet_parser import WordnetParser, ImagesFromCdnData, GigGeneratorWordnet
+
+        gen = GigGeneratorWordnet(WordnetParser(verbs_src), ImagesFromCdnData(cdn_data_dir))
         if json_data_to_profile:
             from time import sleep
             jsd = ProfileJsonData(json_file_name=json_data_to_profile,
@@ -450,7 +464,17 @@ if __name__ == '__main__':
             sleep(3)
             jsd.update()
             sleep(3)
+            gen.gen_a()
+            sleep(3)
+            for i in range(0, 10):
+                gig_data = gen.gigs.pop()
+
+                gigs.post(gig_data['title'], gig_data)
             sys.exit(0)
+
+        if args.converge_pk_and_peers:
+            print('CONVERGE PEERS')
+            d.converge_peers()
 
         if not args.dht_only:
             main_http(http_webdir=http_webdir,
