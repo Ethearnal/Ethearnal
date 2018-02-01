@@ -837,12 +837,6 @@ function require(script) {
 }
 
 
-
-
-
-
-
-
 // COLORS
 // Blue #1 = #92A8D1
 // Blue #2 = #89ABE3
@@ -859,6 +853,7 @@ function require(script) {
 require("js/modules/generateGigs.js"); // MODULE FOR SEARCHING
 require("js/modules/smartSearch.js"); // MODULE FOR SEARCHING
 require("js/modules/globalEvents.js"); // MODULE with GLOBAL EVENTS 
+require("js/modules/imageCrop.js"); // MODULE with GLOBAL EVENTS 
 // GET DATA
 require("js/functions/getData/gigData.js"); // GETS GIG DATA BY GIG ID
 require("js/functions/getData/guidsData.js"); // GETS ALL GUIDS (NODES) DATA

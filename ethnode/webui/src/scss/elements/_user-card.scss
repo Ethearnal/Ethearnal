@@ -10,12 +10,13 @@
     margin-right: 30px;
     margin-bottom: 30px;
     transition: all 0.15s ease-in;
+    z-index: 1;
     .card-label {
         padding: 5px 15px;
-        background-color: rgba(137, 137, 137, 0.43);
+        background-color: rgba(71, 156, 255, 0.74);
         position: absolute;
         top: 20px;
-        left: -15px;
+        left: -17px;
         line-height: 1;
         color: #fff;
         font-weight: 600;
@@ -28,7 +29,7 @@
             border-style: solid;
             border-width: 0 1.2em 1.2em 0;
             border-color: transparent;
-            border-right-color: #805031;
+            border-right-color: #c2d7f1;
             width: 0;
             height: 0;
         }
