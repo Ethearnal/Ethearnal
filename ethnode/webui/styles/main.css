@@ -2114,7 +2114,7 @@ span.gig-title {
 .modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label:hover,
 .modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label:focus,
 .modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label:active {
-    background: #dfe0e4;
+    background: #dde4ff;
     color: #8b8f94;
 }
 
