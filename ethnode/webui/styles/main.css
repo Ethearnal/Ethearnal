@@ -291,7 +291,7 @@ section.documentation .container .profile-information-container .profile-informa
     margin: 0 auto;
     display: block;
     position: absolute;
-    top: -134px;
+    top: -100px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -334,7 +334,7 @@ section.documentation .container .profile-information-container .profile-informa
     font-weight: 500;
     line-height: 1;
     color: #5e6977;
-    padding-top: 70px;
+    padding-top: 100px;
     margin-bottom: 17px;
     padding-left: 10px;
     padding-right: 10px;
@@ -400,7 +400,7 @@ section.documentation .container .profile-information-container .profile-informa
     letter-spacing: 1px;
     font-weight: 500;
     text-align: center;
-    margin-top: 26px;
+    /* margin-top: 26px; */
 }
 
 section.documentation .container .profile-information-container .profile-information.up .profile-upper p.skills-text i {
@@ -474,7 +474,7 @@ section.documentation .container .profile-information-container .profile-informa
 }
 
 section.documentation .container .profile-information-container .profile-information.middle .profile-description {
-    background-color: #92A8D1;
+    background-color: #3f51b5;
 }
 
 section.documentation .container .profile-information-container .profile-information.middle .profile-description p {
@@ -482,7 +482,7 @@ section.documentation .container .profile-information-container .profile-informa
     line-height: 1.44;
     color: white;
     text-align: center;
-    padding: 40px 38px 25px 35px;
+    padding: 40px 20px;
     margin-top: -17px;
 }
 
@@ -569,7 +569,7 @@ section.documentation .container .profile-information-container .profile-footer 
 }
 
 section.documentation .container .profile-information-container .profile-footer ul li a i:hover {
-    color: #9ea2a9;
+    color: #3c3e42;
 }
 
 section.documentation .container .profile-information-container .profile-footer ul li:first-child {
@@ -603,7 +603,8 @@ section.documentation .container .profile-information-after-fixed .container-flu
     width: 52px;
     height: 50px;
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2);
-    background-color: #92A8D1;
+    /* background-color: #92A8D1; */
+    background-color: #3f51b5;
     border-radius: 100%;
     right: 28px;
     top: 32px;
@@ -2083,7 +2084,7 @@ span.gig-title {
     padding-left: 20px;
     padding-right: 15px;
     margin: 0 auto;
-    max-width: 440px;
+    max-width: 250px;
     margin-top: 20px;
 }
 
@@ -2095,11 +2096,11 @@ span.gig-title {
 
 .modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label {
     border: 4px dashed #CCC;
-    border-radius: 3px;
+    border-radius: 50%;
     text-align: left;
-    padding: 155px 0 0 0;
+    padding: 210px 0 0 0;
     width: 440px;
-    height: 155px;
+    height: 215px;
     font-weight: 300;
     position: relative;
     text-align: center;
@@ -2115,15 +2116,15 @@ span.gig-title {
 .modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label:hover,
 .modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label:focus,
 .modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label:active {
-    background: #dfe0e4;
+    background: #dde4ff;
     color: #8b8f94;
 }
 
 .modal-box-content .inner-modal .content .modal-body .form-group img.file-input-first-image {
     position: absolute;
     z-index: 100;
-    top: -15px;
-    left: 0;
+    top: -25px;
+    left: 15px;
     right: 0;
     bottom: 0;
     margin: auto;
@@ -3621,4 +3622,9 @@ div.new-modal-footer-buttons {
 
 .add-photo-label {
     padding-top: 10px;
+}
+
+.ui.multiple.dropdown>.label {
+    background-color: transparent;
+    color: #6863ff;
 }
