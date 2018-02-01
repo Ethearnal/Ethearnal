@@ -309,6 +309,7 @@
         -ms-transition: transform 0.15s ease-out;
         display: block;
         margin: 0px;
+        top: calc(100% + 24px);
     }
     .dropdown .dropdown-menu {
         border: 0px;

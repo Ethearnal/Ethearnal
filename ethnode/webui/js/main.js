@@ -58,7 +58,8 @@ var event_on_dht_data = function(hkey, data) {
     if (owner != null) {
         //ajax_get_guid_profile_key(owner, 'skills');
         //
-        createGigToFound(hkey, data);
+        // createGigToFound(hkey, data);
+        generateGigsFromData(hkey, data);
     }
 };
 
@@ -855,6 +856,7 @@ function require(script) {
 // FUNCTIONS
 
 // SMART SEARCH
+require("js/modules/generateGigs.js"); // MODULE FOR SEARCHING
 require("js/modules/smartSearch.js"); // MODULE FOR SEARCHING
 require("js/modules/globalEvents.js"); // MODULE with GLOBAL EVENTS 
 // GET DATA

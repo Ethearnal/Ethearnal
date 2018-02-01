@@ -1743,6 +1743,8 @@ section.profiles-page-content .container .jobs .gigs-container:after {
     background-color: pink;
 }
 
+
+/*  
 .gig {
     width: 240px;
     height: 290px;
@@ -1775,7 +1777,6 @@ section.profiles-page-content .container .jobs .gigs-container:after {
 
 .gig .ui.label {
     z-index: 1;
-    /*background-color: #bfc0c1ad !important;*/
     background-color: #898989ad !important;
     border-color: #bfc0c1bd !important;
 }
@@ -1926,6 +1927,7 @@ span.gig-title {
     right: 2px;
     color: #111;
 }
+*/
 
 .modal-box-content .inner-modal {
     background: white !important;

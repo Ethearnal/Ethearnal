@@ -1,6 +1,8 @@
 // Global Events
 
 // Dropdown show in header
-$(document).on('keypress', '#settings-dropdown', function(e) {
+$(document).on('click', '#settings-dropdown', function(e) {
     e.preventDefault();
+    $(this).parents('.dropdown').toggleClass('show');
+    // .siblings('[data-labelledby=settings-dropdown]').
 });
