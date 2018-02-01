@@ -322,10 +322,9 @@
     <div id="add-portfolio" class="add modal-box flex floating">
         <div class="modal-box-content">
             <div class="inner-modal">
+                    <h3 class="page-card-name">Add portfolio</h3>
                 <div class="content">
-                    <div class="modal-header">
-                        <h3>Add portfolio</h3>
-                    </div>
+                        
                     <div class="success-message">
                         <h1 class="title">Congratulations!</h1>
                         <div class="success-content">
@@ -339,19 +338,19 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <input id="input-image-portfolio" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
-                            <label for="input-image-portfolio" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-portfolio"><img id="input-image-portfolio" src="#" alt=""
+                            <label for="input-image-portfolio" class="img-label"><p class="add-photo-label">Add photo</p></label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-portfolio"><img id="input-image-portfolio" src="#" alt=""
                                 class="show-image empty">
                         </div>
                         <div class="modal-inputs">
                             <form action="POST">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
-                                    <input id="title" name="title" type="text" class="mdl-textfield__input">
-                                    <label for="title" class="mdl-textfield__label">Title</label>
-                                </div>
-                                <div class="mdl-textfield mdl-js-textfield whole-line">
-                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
-                                    <label for="description" class="mdl-textfield__label">Description (what have you accomplished with this?)</label>
-                                </div>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                            <label for="title" class="label-control gig-title-label">Title</label>
+                                        <input id="title" name="title" type="text" class="form-control">
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield whole-line">
+                                            <label for="description" class="label-control gig-title-label">Description (what have you accomplished with this?)</label>
+                                        <textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
+                                    </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
                                     <select name="skills" multiple="" class="ui fluid dropdown normal search portfolio-tags">
                       <option value="">Add gig tags (limit: 10)...</option>
@@ -364,8 +363,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="mdl-button mdl-js-button close-button">Close</button>
-                        <button id="publish5" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
+                        <button class="btn btn-default close-btn lh-normal mdl-button mdl-js-button close-button">Close</button>
+                        <button id="publish5" style="" class="btn btn-info lh-normal mdl-button mdl-js-button finish-button">Publish</button>
                         <div data-mdl-for="publish5" class="mdl-tooltip">This text will be changed anyway.</div>
                     </div>
                 </div>
@@ -610,10 +609,8 @@
     <div id="add-gig" class="add modal-box flex floating">
         <div class="modal-box-content">
             <div class="inner-modal">
+                    <h3 class="page-card-name">Add gig</h3>
                 <div class="content">
-                    <div class="modal-header">
-                        <h3>Add gig</h3>
-                    </div>
                     <div class="success-message">
                         <h1 class="title">Congratulations!</h1>
                         <div class="success-content">
@@ -627,14 +624,14 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <input id="input-image-gig" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
-                            <label for="input-image-gig" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-gig"><img id="input-image-gig" src="#" alt="" class="show-image empty">
+                            <label for="input-image-gig" class="img-label"><p class="add-photo-label">Add photo</p></label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-gig"><img id="input-image-gig" src="#" alt="" class="show-image empty">
                         </div>
                         <div class="modal-inputs">
                             <form action="POST">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
-                                    <input id="gig-title" name="gig-title" type="text" class="mdl-textfield__input">
-                                    <label for="gig-title" class="mdl-textfield__label">Gig Title</label>
-                                </div>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                            <label for="gig-title" class="label-control gig-title-label">Gig Titles</label>
+                                           <input id="gig-title" name="gig-title" type="text" placeholder="Gig Title" class="form-control "><!--  class mdl-textfield__input  and mdl-textfield__label  for label-->
+                                     </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
                                     <select id="category" class="ui dropdown">
                       <option value="">Select Category</option>
@@ -661,9 +658,9 @@
                     </select>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield whole-line">
-                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
-                                    <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
-                                </div>
+                                        <label for="description" class="label-control gig-title-label">Description (what have you done or currently do?)</label>
+                                         <textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
+                                 </div>
                                 <div class="ui right labeled input">
                                     <label for="amount" class="ui label"><i class="material-icons">polymer</i></label>
                                     <input id="amount" type="text" placeholder="Amount">
@@ -677,8 +674,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="mdl-button mdl-js-button close-button">Close</button>
-                        <button id="publish4" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
+                        <button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button">Close</button>
+                        <button id="publish4" style="" class="btn btn-info lh-normal mdl-button mdl-js-button finish-button">Publish</button>
                         <div data-mdl-for="publish4" class="mdl-tooltip">This text will be changed anyway.</div>
                     </div>
                 </div>
