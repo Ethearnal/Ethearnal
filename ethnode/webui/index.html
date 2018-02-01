@@ -322,9 +322,9 @@
     <div id="add-portfolio" class="add modal-box flex floating">
         <div class="modal-box-content">
             <div class="inner-modal">
-                    <h3 class="page-card-name">Add portfolio</h3>
+                <h3 class="page-card-name">Add portfolio</h3>
                 <div class="content">
-                        
+
                     <div class="success-message">
                         <h1 class="title">Congratulations!</h1>
                         <div class="success-content">
@@ -338,19 +338,19 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <input id="input-image-portfolio" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
-                            <label for="input-image-portfolio" class="img-label"><p class="add-photo-label">Add photo</p></label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-portfolio"><img id="input-image-portfolio" src="#" alt=""
-                                class="show-image empty">
+                            <label for="input-image-portfolio" class="img-label"><p class="add-photo-label">Add photo</p></label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-portfolio"><img id="input-image-portfolio"
+                                src="#" alt="" class="show-image empty">
                         </div>
                         <div class="modal-inputs">
                             <form action="POST">
-                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
-                                            <label for="title" class="label-control gig-title-label">Title</label>
-                                        <input id="title" name="title" type="text" class="form-control">
-                                    </div>
-                                    <div class="mdl-textfield mdl-js-textfield whole-line">
-                                            <label for="description" class="label-control gig-title-label">Description (what have you accomplished with this?)</label>
-                                        <textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
-                                    </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <label for="title" class="label-control gig-title-label">Title</label>
+                                    <input id="title" name="title" type="text" class="form-control">
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <label for="description" class="label-control gig-title-label">Description (what have you accomplished with this?)</label>
+                                    <textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
+                                </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
                                     <select name="skills" multiple="" class="ui fluid dropdown normal search portfolio-tags">
                       <option value="">Add gig tags (limit: 10)...</option>
@@ -609,7 +609,7 @@
     <div id="add-gig" class="add modal-box flex floating">
         <div class="modal-box-content">
             <div class="inner-modal">
-                    <h3 class="page-card-name">Add gig</h3>
+                <h3 class="page-card-name">Add gig</h3>
                 <div class="content">
                     <div class="success-message">
                         <h1 class="title">Congratulations!</h1>
@@ -624,14 +624,16 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <input id="input-image-gig" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
-                            <label for="input-image-gig" class="img-label"><p class="add-photo-label">Add photo</p></label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-gig"><img id="input-image-gig" src="#" alt="" class="show-image empty">
+                            <label for="input-image-gig" class="img-label"><p class="add-photo-label">Add photo</p></label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-gig"><img id="input-image-gig" src="#"
+                                alt="" class="show-image empty">
                         </div>
                         <div class="modal-inputs">
                             <form action="POST">
-                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
-                                            <label for="gig-title" class="label-control gig-title-label">Gig Titles</label>
-                                           <input id="gig-title" name="gig-title" type="text" placeholder="Gig Title" class="form-control "><!--  class mdl-textfield__input  and mdl-textfield__label  for label-->
-                                     </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <label for="gig-title" class="label-control gig-title-label">Gig Titles</label>
+                                    <input id="gig-title" name="gig-title" type="text" placeholder="Gig Title" class="form-control ">
+                                    <!--  class mdl-textfield__input  and mdl-textfield__label  for label-->
+                                </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
                                     <select id="category" class="ui dropdown">
                       <option value="">Select Category</option>
@@ -658,9 +660,9 @@
                     </select>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield whole-line">
-                                        <label for="description" class="label-control gig-title-label">Description (what have you done or currently do?)</label>
-                                         <textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
-                                 </div>
+                                    <label for="description" class="label-control gig-title-label">Description (what have you done or currently do?)</label>
+                                    <textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
+                                </div>
                                 <div class="ui right labeled input">
                                     <label for="amount" class="ui label"><i class="material-icons">polymer</i></label>
                                     <input id="amount" type="text" placeholder="Amount">
@@ -1121,24 +1123,26 @@
                                 <label>Seacrh by Text</label>
                                 <input id="search-header" type="text" placeholder="Search by text..." class="form-control">
                             </div>
-                            <p> Expertise Domain</p>
-                            <select id='domain-expertise-select' class="ui fluid search dropdown">
-									<option value="">Expertise Domains</option>
-									<option value="sd">Software Development</option>
-									<option value="fa">Finance & Accounting</option>
-									<option value="ma">Music & Audio</option>
-									<option value="va">Video & Animation</option>
-									<option value="gd">Graphic & Design</option>
-									<option value="tw">Text & Writing</option>
-									<option value="cs">Consulting Services</option>
-									<option value="os">Other Services</option>
-								</select>
-                            <br>
-                            <p> Skills </p>
-                            <select id='skills-tags' class="ui fluid search dropdown" multiple="">
-								<option value="">Select Expertise domain</option>
-							</select>
-                            <br>
+                            <div class="form-group">
+                                <label>Expertise Domain</label>
+                                <select id='domain-expertise-select' class="ui fluid search dropdown ui-element-style form-control flex-center">
+                                    <option value="">Expertise Domains</option>
+                                    <option value="sd">Software Development</option>
+                                    <option value="fa">Finance & Accounting</option>
+                                    <option value="ma">Music & Audio</option>
+                                    <option value="va">Video & Animation</option>
+                                    <option value="gd">Graphic & Design</option>
+                                    <option value="tw">Text & Writing</option>
+                                    <option value="cs">Consulting Services</option>
+                                    <option value="os">Other Services</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Skills</label>
+                                <select id='skills-tags' class="ui fluid search dropdown ui-element-style form-control flex-center">
+                                    <option value="">Select Skills</option>
+                                </select>
+                            </div>
                             <p>Budget</p>
                             <div class="filter budget">
 
@@ -1454,71 +1458,71 @@
     <script>
         /*
 
-                                                                                                                                                                                                                                                                                                                                                                // Get the modal
-                                                                                                                                                                                                                                                                                                                                                                var modal = document.getElementById('myModal');
+                                                                                                                                                                                                                                                                                                                                                                                                                // Get the modal
+                                                                                                                                                                                                                                                                                                                                                                                                                var modal = document.getElementById('myModal');
 
 
-                                                                                                                                                                                                                                                                                                                                                                // Get the button that opens the modal
-                                                                                                                                                                                                                                                                                                                                                                var btn = document.getElementById("beep-btn");
+                                                                                                                                                                                                                                                                                                                                                                                                                // Get the button that opens the modal
+                                                                                                                                                                                                                                                                                                                                                                                                                var btn = document.getElementById("beep-btn");
 
-                                                                                                                                                                                                                                                                                                                                                                // Get the <span> element that closes the modal
-                                                                                                                                                                                                                                                                                                                                                                // var span = document.getElementsByClassName("close")[0];
+                                                                                                                                                                                                                                                                                                                                                                                                                // Get the <span> element that closes the modal
+                                                                                                                                                                                                                                                                                                                                                                                                                // var span = document.getElementsByClassName("close")[0];
 
-                                                                                                                                                                                                                                                                                                                                                                // When the user clicks the button, open the modal
+                                                                                                                                                                                                                                                                                                                                                                                                                // When the user clicks the button, open the modal
 
-                                                                                                                                                                                                                                                                                                                                                                    btn['op_i']=1;
-                                                                                                                                                                                                                                                                                                                                                                    var k = 0;
-                                                                                                                                                                                                                                                                                                                                                                    var tno = null;
-
-
-
-                                                                                                                                                                                                                                                                                                                                                                var fade_in = function() {
-                                                                                                                                                                                                                                                                                                                                                                    k = 0
-                                                                                                                                                                                                                                                                                                                                                                    modal.style.opacity = "0.0";
-                                                                                                                                                                                                                                                                                                                                                                    modal.style.display = "block";
-                                                                                                                                                                                                                                                                                                                                                                    tno = setInterval( function(){
-                                                                                                                                                                                                                                                                                                                                                                       k += 0.1;
-                                                                                                                                                                                                                                                                                                                                                                       //console.log('k',k);
-                                                                                                                                                                                                                                                                                                                                                                       modal.style.opacity = ""+k;
-                                                                                                                                                                                                                                                                                                                                                                       if(k>=1){
-                                                                                                                                                                                                                                                                                                                                                                         clearInterval(tno);
-                                                                                                                                                                                                                                                                                                                                                                       }
-
-                                                                                                                                                                                                                                                                                                                                                                    },30);
-
-                                                                                                                                                                                                                                                                                                                                                                };
+                                                                                                                                                                                                                                                                                                                                                                                                                    btn['op_i']=1;
+                                                                                                                                                                                                                                                                                                                                                                                                                    var k = 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                    var tno = null;
 
 
 
-                                                                                                                                                                                                                                                                                                                                                                var fade_out = function() {
-                                                                                                                                                                                                                                                                                                                                                                    console.log('fade_out');
+                                                                                                                                                                                                                                                                                                                                                                                                                var fade_in = function() {
+                                                                                                                                                                                                                                                                                                                                                                                                                    k = 0
+                                                                                                                                                                                                                                                                                                                                                                                                                    modal.style.opacity = "0.0";
+                                                                                                                                                                                                                                                                                                                                                                                                                    modal.style.display = "block";
+                                                                                                                                                                                                                                                                                                                                                                                                                    tno = setInterval( function(){
+                                                                                                                                                                                                                                                                                                                                                                                                                       k += 0.1;
+                                                                                                                                                                                                                                                                                                                                                                                                                       //console.log('k',k);
+                                                                                                                                                                                                                                                                                                                                                                                                                       modal.style.opacity = ""+k;
+                                                                                                                                                                                                                                                                                                                                                                                                                       if(k>=1){
+                                                                                                                                                                                                                                                                                                                                                                                                                         clearInterval(tno);
+                                                                                                                                                                                                                                                                                                                                                                                                                       }
 
-                                                                                                                                                                                                                                                                                                                                                                    k = 1;
-                                                                                                                                                                                                                                                                                                                                                                    tno = setInterval( function(){
-                                                                                                                                                                                                                                                                                                                                                                       k -= 0.1;
-                                                                                                                                                                                                                                                                                                                                                                      // console.log('k',k);
-                                                                                                                                                                                                                                                                                                                                                                       modal.style.opacity = ""+k;
-                                                                                                                                                                                                                                                                                                                                                                       if(k<=0.1){
-                                                                                                                                                                                                                                                                                                                                                                         modal.style.display = "none";
-                                                                                                                                                                                                                                                                                                                                                                         clearInterval(tno);
-                                                                                                                                                                                                                                                                                                                                                                       }
+                                                                                                                                                                                                                                                                                                                                                                                                                    },30);
 
-                                                                                                                                                                                                                                                                                                                                                                    },30);
-
-                                                                                                                                                                                                                                                                                                                                                                };
-
-                                                                                                                                                                                                                                                                                                                                                                btn.onclick = fade_in;
+                                                                                                                                                                                                                                                                                                                                                                                                                };
 
 
 
-                                                                                                                                                                                                                                                                                                                                                                // When the user clicks anywhere outside of the modal, close it
-                                                                                                                                                                                                                                                                                                                                                                window.onclick = function(event) {
-                                                                                                                                                                                                                                                                                                                                                                    if (event.target == modal) {
-                                                                                                                                                                                                                                                                                                                                                                        fade_out();
-                                                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                                                                var fade_out = function() {
+                                                                                                                                                                                                                                                                                                                                                                                                                    console.log('fade_out');
 
-                                                                                                                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                                                                                                                                                                    k = 1;
+                                                                                                                                                                                                                                                                                                                                                                                                                    tno = setInterval( function(){
+                                                                                                                                                                                                                                                                                                                                                                                                                       k -= 0.1;
+                                                                                                                                                                                                                                                                                                                                                                                                                      // console.log('k',k);
+                                                                                                                                                                                                                                                                                                                                                                                                                       modal.style.opacity = ""+k;
+                                                                                                                                                                                                                                                                                                                                                                                                                       if(k<=0.1){
+                                                                                                                                                                                                                                                                                                                                                                                                                         modal.style.display = "none";
+                                                                                                                                                                                                                                                                                                                                                                                                                         clearInterval(tno);
+                                                                                                                                                                                                                                                                                                                                                                                                                       }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                    },30);
+
+                                                                                                                                                                                                                                                                                                                                                                                                                };
+
+                                                                                                                                                                                                                                                                                                                                                                                                                btn.onclick = fade_in;
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                // When the user clicks anywhere outside of the modal, close it
+                                                                                                                                                                                                                                                                                                                                                                                                                window.onclick = function(event) {
+                                                                                                                                                                                                                                                                                                                                                                                                                    if (event.target == modal) {
+                                                                                                                                                                                                                                                                                                                                                                                                                        fade_out();
+                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                */
     </script>
 
 
