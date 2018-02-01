@@ -270,7 +270,8 @@ class InvIndexTimestampSQLite(BaseSQLite):
         if self.analog_range_q1:
             analog_range_q1 = 'AND (q1 BETWEEN %d AND %d) ' % self.analog_range_q1
 
-        first = 'SELECT DISTINCT * FROM %s a ' % self.table_name
+        selects = 'a.container_hash, a.ert_tokens_major, a.utc_timestamp, a.q1, a.q2 '
+        first = 'SELECT DISTINCT %s FROM %s a ' % (selects, self.table_name)
         inner = 'INNER JOIN {t} {p} ON a.container_hash={p}.container_hash '
         andst = 'WHERE a.component_hash=? AND '
         and_l = list()

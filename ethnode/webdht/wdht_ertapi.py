@@ -40,7 +40,6 @@ class Indexer(object):
     def query_terms(self, terms: dict, prefixes=True, limit=30):
         cur = self.idx.qry_terms(terms=terms, prefixes=prefixes, limit=limit)
         if cur:
-            print(list(cur.fetchall()))
             ll = [guid_bin_to_hex2(t[0]) for t in cur.fetchall()]
             return ll
 
@@ -56,8 +55,10 @@ class Indexer(object):
                 return ll
 
     def query_terms_d(self, terms_d: dict, limit=30):
+        print("\n\nQUERY_TERMS_D", terms_d)
         cur = self.idx.qry_terms_d(terms_d, limit)
         if cur:
+            print(list(cur.fetchone()))
             ll = [guid_bin_to_hex2(t[0]) for t in cur.fetchall()]
             return ll
 
