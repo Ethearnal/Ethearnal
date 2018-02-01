@@ -466,9 +466,10 @@ if __name__ == '__main__':
             sleep(3)
             gen.gen_a()
             sleep(3)
-            for i in range(0, 10):
+            gen_range = jsd.data['wordnet_gen_range']
+            cnt = gen.gen_from_range(gen_range[0], gen_range[1])
+            for g_data in range(cnt):
                 gig_data = gen.gigs.pop()
-
                 gigs.post(gig_data['title'], gig_data)
             sys.exit(0)
 

@@ -102,3 +102,7 @@ class GigGeneratorWordnet(object):
     def gen_a(self):
         self.wdn.load(1000, 2000)
 
+    def gen_from_range(self, s, e):
+        self.wdn.load(s, e)
+        return e-s
+
