@@ -7,9 +7,9 @@
     <title>Ethearnal p2p</title>
 
     <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="stylesheet" type="text/css" href="logo.css">
-    <link rel="stylesheet" type="text/css" href="topnav.css">
-    <link rel="stylesheet" type="text/css" href="profile.css">
+
+
+
 
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
@@ -19,6 +19,7 @@
     <script src="layoutjs/layout.js"></script>
     <script src="visjs/vis.js"></script>
     <script type="text/javascript" src="purifyjs/purify.js"></script>
+    <script type="text/javascript" src="main.js"></script>
     <link rel="stylesheet" type="text/css" href="visjs/vis-network.min.css">
 
 </head>
@@ -27,58 +28,43 @@
 </div>
 <div class="outer-content">
     <div class="inner-content box_shadow font font_light color_gray">
-        <div id="main-content"  class="box_shadow_b" style="min-height:400px; width: 666px; padding: 10px;">
+        <div id="main-content"  class="box_shadow_b">
 
         </div>
     </div>
 </div>
 
+
 <script>
+(function() {
+    main();
+})();
+</script>
+<!--script>
   /* init layout s*/
+
+  /*
   l = new Layoutjs(DOMPurify.sanitize);
-
   i = l.bind(l.include,l);
+  */
 
-  /* data object */
-    var ethdata = {
-    'my':{
-      'guid':'GUID',
-      'skills':[],
-      'first':'',
-      'last':'',
-      'nick':'tr1n1ty',
-      'title':'',
-      'first_last_nick':'',
-      'resume':'',
-    }
-  };
-  /* api functions*/
-  var ethapi = {
-      'render_skills_html':function(skills_array){
-      s ='';
-      for (var i = 0; i < skills_array.length; i++){
-        /* sanitize tags yes */
-        s+='<a class="skill_box" href="#">'+DOMPurify.sanitize(skills_array[i])+'</a>';
-      }
-      return s;
-    }
-  };
 
   /*events*/
-
+  /*
   var ethevt = {
     'on_profile_data':function(profile_data){
     ethdata.my = profile_data;
 
-   
+   */
     /**/
 
+    /*
     l.html_content('ethdata.my.render_skills_html', ethapi.render_skills_html( ethdata.my.skills));
     l.text_content('ethdata.my.first', ethdata.my.first);
     l.text_content('ethdata.my.last', ethdata.my.last);
     l.text_content('ethdata.my.nick', ethdata.my.nick);
     l.text_content('ethdata.my.title', ethdata.my.title);
-
+    */
     /**/
 
     },
@@ -94,6 +80,7 @@
     /* post job */
     'post_job':{
       'on_click_post': function(arg) {
+
          console.log(arg);
       }
     }
@@ -101,11 +88,10 @@
   };
 
   /* top navigation ajax router */
-  l.include_eval('GET','topnav.html','topnav.js','topnav',false);
+  /* l.include_eval('GET','topnav.html','topnav.js','topnav',false); */
 
-
-     window.onscroll = function() {myFunction()};
-
+   /*
+    window.onscroll = function() {myFunction()};
     var header = document.getElementById("topnav");
     var sticky = header.offsetTop;
 
@@ -115,9 +101,7 @@
       } else {
         header.classList.remove("sticky");
       }
-    }
-
-
-</script>
+    }*/
+</script-->
 </body>
 </html>

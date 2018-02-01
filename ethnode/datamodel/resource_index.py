@@ -102,6 +102,7 @@ class ResourceIndexingEngine(object):
             return self.index_store.inner_join_on_component(*component_hashes, limit=limit)
 
     def qry_terms(self, terms: dict, prefixes=True, limit=30):
+        print('\n\n\n QRY TERMS')
         component_hashes_set = set()
         for k, v in terms.items():
             if prefixes:
