@@ -90,7 +90,7 @@ scheduleNextTimeout = function(){
             scheduleNextTimeout();
         } else { return; }
 
-    }, 100);
+    }, 30);
 };
 
 
@@ -537,6 +537,8 @@ $( document ).ready(function() {
     $showJobs = 2;
     $appearOnClick = 3;
     $inputID = 0;
+
+    do_search_query();
 
     $(function() {
         var imagesUploaded = 0;
