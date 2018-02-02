@@ -1,0 +1,169 @@
+.todo-wrapper {
+	position: relative;
+	
+	&.open {
+		.todo-category-wrapper {
+			left: -300px;
+		}
+
+		.todolist-wrapper {
+			right: 0px;
+		}
+	}
+
+	.todo-category-wrapper {
+		position: relative;
+		height: 100%;
+		padding: 30px 15px;
+		left: 0px;
+		@include transition(all 0.2s ease-out); 
+		
+		a {
+			width: 50%;
+			float: left;
+			margin-bottom: 15px;
+			@include transition(all 0.3s ease-in-out); 
+			
+			.todo-category,
+			.create-category {
+				text-align: center;
+				background-color: $default-gray;
+				padding: 30px 5px;
+				line-height: 1;
+				display: block;
+				border-radius: 4px;
+
+				.amount {
+					display: block;
+					font-size: 25px;
+					margin-bottom: 10px;
+					color: $default-info;
+				}
+				
+				.category {	
+					display: block;
+					color: $default-text-color;
+				}
+			}
+			
+			.create-category {
+				background-color: transparent;
+				border: 4px dashed $default-gray;
+			}
+			
+			&:nth-child(even) {
+				padding-right: 7.5px;
+			}
+			
+			&:nth-child(odd) {
+				padding-left: 7.5px;
+			}
+			
+			&:hover,
+			&:focus {
+				text-decoration: none;
+				opacity: 0.6;
+			}
+		}
+	}
+
+	.todolist-wrapper {
+		position: absolute;
+		top: 0px;
+		height: 100%;
+		width: 100%;
+		right: -300px;
+		@include transition(all 0.2s ease-out); 
+		
+		.todolist-header {
+			position: relative;
+			line-height: 60px;
+			height: 60px;
+			padding: 0px 15px;
+			
+			.back,
+			.add {
+				position: absolute;
+				line-height: 60px;
+				left: 15px;
+				top: 2px;
+				font-size: 18px;
+				color: $default-text-color;
+				
+				&:hover,
+				&:focus {
+					text-decoration: none;
+					color: $default-dark;
+				}
+			}
+			
+			.category {
+				line-height: 60px;
+				margin: 0px;
+				text-align: center;
+				font-size: 16px;
+			}
+			
+			.add {
+				right: 15px;
+				left: auto;
+				font-size: 12px;
+				
+				&:hover,
+				&:focus {
+					color: $default-info;
+				}
+			}
+		}
+		
+		.todolist-body {
+			padding: 15px;
+		}
+	}
+	
+	.checkbox {
+		padding-right: 30px;
+		position: relative;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		
+		input[type=checkbox]{
+			
+			+label {
+				white-space: nowrap;
+			}
+			
+			&:checked {
+		
+				+label {
+					text-decoration: line-through;
+					color: lighten($default-text-color,15%)
+				}
+			}
+		}
+		
+		.delete {
+			position: absolute;
+			right: 0;
+			border: 0px;
+			background-color: transparent;
+			font-size: 12px;
+			top: 10px;
+			outline: none;
+			opacity: 0;
+			visibility: hidden;
+			
+			&:hover,
+			&:focus {
+				color: $default-danger;
+			}
+		}
+		
+		&:hover {
+			.delete {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	}
+}

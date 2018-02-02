@@ -292,6 +292,17 @@ class DHTFacade(object):
         except:
             print('repush hailed for hk', hk_hex)
 
+    def repush(self, hk_hex):
+        try:
+            t = self.pull_local('', hk_hex=hk_hex)
+            if t:
+                d = cdx.decode_bson_val(t[2])
+                val = d[1]
+                self.push(key='', value=val, hk_hex=hk_hex)
+        except:
+            print('repush hailed for hk', hk_hex)
+
+
     def repush_own_gigs(self):
         from webdht.double_linked import instance_dl
         dl = instance_dl(self, cdx.guid_bin_to_hex(self.bin_guid), '.gigs')

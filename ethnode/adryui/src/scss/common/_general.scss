@@ -1,0 +1,310 @@
+/*----------------------------
+--------- 1. General ---------
+----------------------------*/
+
+
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700|Roboto:300,400,500,700');
+
+html, html a, body {
+   -webkit-font-smoothing: antialiased;
+}
+
+body {
+   font-family: $font-primary;
+   font-size: 14px;
+   background-color: $default-gray;
+   color: $default-text-color;
+   line-height: 1.5;
+   letter-spacing: 0.2px;
+   overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: $default-dark;
+	font-family: $font-secondary;
+	letter-spacing: 0.5px;
+	font-weight: normal;
+	line-height: 1.5;
+	
+	a {
+		font-family: $font-secondary;
+	}
+	
+	small {
+		font-weight: 300;
+		color: lighten($default-dark,5%);
+	}
+}
+
+h1 {
+	font-size: 26px;
+}
+
+h2 {
+	font-size: 22px;
+}
+
+h3 {
+	font-size: 20px;
+}
+
+h4 {
+	font-size: 18px;
+}
+
+h5 {
+	font-size: 16px;
+}
+
+h6 {
+	font-size: 12px;
+}
+
+p {
+	font-family: $font-primary;
+	color: $default-text-color;
+	line-height: 1.9;
+}
+
+.lead {
+	font-size: 18px;
+}
+
+ul {
+	margin-bottom: 0px;
+}
+
+a {
+	color: $default-info;
+	
+	&:hover,
+	&:focus {
+		text-decoration: none;
+		color: darken($default-info,10%);
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&.text-gray {
+
+		&:hover,
+		&:focus,
+		&.active {
+			color: $default-dark !important;
+		}
+	}
+}
+
+:focus {
+	outline: none;
+}
+
+hr {
+    border-top: 1px solid $border-color;
+}
+
+.font-primary {
+	font-family: $font-primary;
+}
+
+.font-secondary {
+	font-family: $font-secondary;
+}
+
+.text-link {
+	
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
+}
+
+.text-opacity {
+	opacity: 0.85;
+}
+
+.text-white {
+	color: $default-white !important;
+}
+
+.text-dark {
+	color: $default-dark !important;
+}
+
+.text-gray {
+	color: $default-text-color !important;
+}
+
+.text-primary {
+	color: $default-primary !important;
+}
+
+.text-success {
+	color: $default-success !important;
+}
+
+.text-info {
+	color: $default-info !important;
+}
+
+.text-warning {
+	color: $default-warning !important;
+}
+
+.text-danger {
+	color: $default-danger !important;
+}
+
+.bg-white {
+	background-color: $default-white !important;
+}
+
+.bg-dark {
+	background-color: $default-dark !important;
+}
+
+.bg-gray {
+	background-color: darken($default-gray, 3%) !important;
+}
+
+.bg-primary {
+	background-color: $default-primary !important;
+}
+
+.bg-info {
+	background-color: $default-info !important;
+}
+
+.bg-success {
+	background-color: $default-success !important;
+}
+
+.bg-warning {
+	background-color: $default-warning !important;
+}
+
+.bg-danger {
+	background-color: $default-danger !important;
+}
+
+.bg-primary-inverse {
+	@include background-opacity($default-primary, 0.1);
+}
+
+.bg-success-inverse {
+	@include background-opacity($default-success, 0.1);
+}
+
+.bg-info-inverse {
+	@include background-opacity($default-info, 0.1);
+}
+
+.bg-warning-inverse {
+	@include background-opacity($default-warning, 0.1);
+}
+
+.bg-danger-inverse {
+	@include background-opacity($default-danger, 0.1);
+}
+
+.bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.overlay-dark {
+	position: relative;
+	overflow: hidden;	
+	color: darken($default-white, 20%);
+	
+	
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		color: $default-white;
+	}
+	
+	p {
+		color: darken($default-white, 20%);
+	}
+	
+	&:before {
+		content:"";
+		background-color: $default-dark;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		opacity: 0.5;
+		top: 0px;
+		left: 0px;
+		z-index: 2
+	}
+	
+	>div {
+		position: relative;
+		z-index: 3;
+	}
+}
+
+blockquote {
+    border-left: 0px;
+	padding-left: 30px;
+	position: relative;
+	
+	&:before {
+		font-family: 'themify';
+		content: "\e67f";
+		position: absolute;
+		left: 0px;
+		color: $default-dark;
+	}
+}
+	
+.fade {
+	&.in {
+		opacity: 1;
+	}
+}	
+
+.collapse {
+	&.in {
+		display: block;
+	}
+}
+
+iframe {
+	border: 0;
+
+	@include screen-mobile {
+		min-height: 175px !important;
+		height: auto;
+	}
+}
+
+@include print {
+	body {
+		font-size: 10px;
+	}	
+
+	.mrg-top-30,
+	.mrg-top-20 {
+		margin-top: 15px !important;
+	}
+
+	.print-invisible {
+		display: none;
+	}
+}
+
+

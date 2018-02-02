@@ -1,0 +1,357 @@
+.nav-tabs {
+	border-bottom: 1px solid $border-color;
+	
+	>li {
+		margin-bottom: -2px;
+		
+		>a {
+			margin-right: 0px;
+			line-height: 2;
+			border-radius: 0;
+			color: $default-dark;
+			opacity: 0.75;
+			border: 0px;
+			border-bottom: 2px solid transparent;
+			display: block;
+    		padding: 10px 15px;
+    		@include transition(all 0.3s ease-in-out); 
+			
+			&:hover {
+				border-color: transparent;
+			}
+			
+			&:hover,
+			&:focus {
+				background-color: transparent;
+				opacity: 1;
+			}
+		}
+		
+		
+		
+		> a {
+
+			&.active {
+				border: 0px;
+				background-color: transparent;
+				border-bottom: 2px solid $default-primary;
+				opacity: 1;
+				
+				&:hover,
+				&:focus {
+					border: 0px;
+					background-color: transparent;
+					border-bottom: 2px solid $default-primary;
+					opacity: 1;
+				}
+
+				&.nav-link {
+					border-bottom: 2px solid $default-primary;
+					color: $default-dark;
+					background-color: transparent;
+				}
+			}
+		}
+		
+	}	
+
+	.nav-link {
+		border-top: 0px;
+		border-right: 0px;
+		border-left: 0px;
+
+		&:hover,
+		&:focus,
+		&:active {
+			border-color: transparent;
+		}
+	}
+}
+
+.tab-success {
+
+	.nav-tabs {
+		>li {
+			>a {
+
+				&.active {
+					border-bottom: 2px solid $default-success;
+				
+					&:hover,
+					&:focus {
+						border-bottom: 2px solid $default-success;
+					}
+				}
+			}
+		}
+	}
+}
+
+.tab-info {
+
+	.nav-tabs {
+		>li {
+			>a {
+
+				&.active {
+					border-bottom: 2px solid $default-info;
+				
+					&:hover,
+					&:focus {
+						border-bottom: 2px solid $default-info;
+					}
+				}
+			}
+		}
+	}
+}
+
+.tab-warning {
+
+	.nav-tabs {
+		>li {
+			>a {
+
+				&.active {
+					border-bottom: 2px solid $default-warning;
+				
+					&:hover,
+					&:focus {
+						border-bottom: 2px solid $default-warning;
+					}
+				}
+			}
+		}
+	}
+}
+
+.tab-danger {
+
+	.nav-tabs {
+		>li {
+			>a {
+
+				&.active {
+					border-bottom: 2px solid $default-danger;
+				
+					&:hover,
+					&:focus {
+						border-bottom: 2px solid $default-danger;
+					}
+				}
+			}
+		}
+	}
+}
+
+.center-tabs {
+
+	.nav-tabs {
+		text-align: center;
+		-webkit-box-pack: center!important;
+	    -webkit-justify-content: center!important;
+	    -ms-flex-pack: center!important;
+	    justify-content: center!important;
+		
+		>li {
+			float: none;
+			display: inline-block;
+		}
+	}
+}
+
+.justified-tabs {
+
+	.nav-tabs {
+		width: 100%;
+		
+		>li {
+			display: table-cell;
+			width: 1%;
+			text-align: center;
+			float: none;
+		}
+	}
+}
+
+.nav-pills {
+	
+	>li {
+		
+		+li {
+			margin-left: 5px;
+		}
+		
+		>a {
+			border-radius: 3px;
+			opacity: 0.75;
+			font-size: 14px;
+			font-weight: 500;
+			background-color: transparent;
+			color: $default-dark;
+			border: 1px solid transparent;
+			padding: 5px 15px;
+			
+			&:hover,
+			&:focus {
+				background-color: transparent;
+				opacity: 1;
+			}
+		}
+		
+		
+		
+		>a {
+			&.active {
+				color: $default-white;
+				border-color: $default-primary;
+				background-color: $default-primary;
+				border: 1px solid $default-primary;
+				opacity: 1;
+				
+				&:hover,
+				&:focus {
+					color: $default-white;
+					border-color: $default-primary;
+					background-color: $default-primary;
+					border: 1px solid $default-primary;
+					opacity: 1;
+				}
+
+				&.nav-link {
+					color: $default-white;
+					background-color: $default-primary;
+					border-color: $default-primary;
+				}
+			}
+		}
+		
+	}
+}
+
+.nav-vertical {
+	
+	.nav-pills {
+		float: left;
+		width: 160px;
+		padding: 0px 15px;
+		display: block;
+
+		>li {
+			margin-bottom: 15px;
+
+			+ li {
+				margin-left: 0px;
+			}
+		}
+	}
+	
+	.tab-content {
+		float: left;
+		width: 70%;
+	}
+}
+
+.pill-success {
+	.nav-pills {
+		>li {
+			>a {
+				&.active {
+					border-color: $default-success;
+					background-color: $default-success;
+					border: 1px solid $default-success;
+					
+					&:hover,
+					&:focus {
+						border-color: $default-success;
+						background-color: $default-success;
+						border: 1px solid $default-success;
+					}
+
+					&.nav-link {
+						color: $default-white;
+						border-color: $default-success;
+					}
+				}
+			}
+		}
+	}	
+}
+
+.pill-info {
+	.nav-pills {
+		>li {
+			>a {
+				&.active {
+					border-color: $default-info;
+					background-color: $default-info;
+					border: 1px solid $default-info;
+					
+					&:hover,
+					&:focus {
+						border-color: $default-info;
+						background-color: $default-info;
+						border: 1px solid $default-info;
+					}
+
+					&.nav-link {
+						color: $default-white;
+						border-color: $default-info;
+					}
+				}
+			}
+		}
+	}
+}
+
+.pill-warning {
+	.nav-pills {
+		>li {
+			>a {
+				&.active {
+					border-color: $default-warning;
+					background-color: $default-warning;
+					border: 1px solid $default-warning;
+					
+					&:hover,
+					&:focus {
+						border-color: $default-warning;
+						background-color: $default-warning;
+						border: 1px solid $default-warning;
+					}
+
+					&.nav-link {
+						color: $default-white;
+						border-color: $default-warning;
+					}
+				}
+			}
+		}
+	}
+}
+
+.pill-danger {
+	.nav-pills {
+		>li {
+			>a {
+				&.active {
+					border-color: $default-danger;
+					background-color: $default-danger;
+					border: 1px solid $default-danger;
+					
+					&:hover,
+					&:focus {
+						border-color: $default-danger;
+						background-color: $default-danger;
+						border: 1px solid $default-danger;
+					}
+
+					&.nav-link {
+						color: $default-white;
+						border-color: $default-danger;
+					}
+				}
+			}
+		}
+	}	
+}

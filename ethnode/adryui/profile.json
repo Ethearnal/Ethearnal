@@ -1,0 +1,70 @@
+{
+    "name": [
+        { "first": "Dobri", "last": "Stoilov" }
+    ],
+    "location": [
+        { "country": "Bulgaria", "city": "Sofia", "countryClass": "bg" }
+    ],
+    "title": "This is my title",
+    "description": "I love to code and make impossible things possible.",
+    "skills": [
+        { "name": "css", "experience": "5y" },
+        { "name": "html", "experience": "5y" },
+        { "name": "python", "experience": "3y" }
+    ],
+    "reputation": 50,
+    "hourlyRate": 60,
+    "profilePicture": "https://media.licdn.com/media/AAIA_wDGAAAAAQAAAAAAAAoXAAAAJGMxMTJmNThjLTRhZTEtNDQ4Yy04NGMyLWQ5ZGI5ZTc1NGM0Mg.jpg",
+    "workExperience": [
+        {
+            "image": "https://www.paypalobjects.com/webstatic/icon/pp258.png",
+            "company": "PayPal",
+            "position": "Back-End Developer",
+            "description": "I have worked on PayPal and loved it! Elon Mush was my boss until he sold the company and I left along with him.",
+            "time": [
+                { "from": "06/2010", "to": "08/2013" }
+            ]
+        },
+        {
+            "image": "http://www.midimums.lt/wp-content/uploads/2017/07/paysera_logo.png",
+            "company": "Paysera",
+            "position": "Back-End Developer",
+            "description": "Paysera is really cool payment processing company, I did fell in love with how helpful their team members were.",
+            "time": [
+                { "from": "09/2013", "to": "Present" }
+            ]
+        }
+    ],
+    "education": [
+        {
+            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Harvard_Wreath_Logo_1.svg/1200px-Harvard_Wreath_Logo_1.svg.png",
+            "institution": "Harvard University",
+            "course": "Public Policy",
+            "description": "Designed and built Aspire, a platform that lets you tell your professional story in a whole new way. Aspire is built on the principle that users and user experience are always #1.",
+            "time": [
+                { "from": "08/2012", "to": "10/2014" }
+            ]
+        },
+        {
+            "image": "https://pbs.twimg.com/profile_images/905811548521758720/VgBgd9GZ_400x400.jpg",
+            "institution": "Kingston University London",
+            "course": "Accounting and Finance",
+            "description": "",
+            "time": [
+                { "from": "09/2005", "to": "06/2009" }
+            ]
+        }
+    ],
+    "languages": [
+        {
+            "language": "Afghanistan",
+            "level": "Native or bilingual",
+            "levelValue": 3,
+            "iconClass": "af",
+            "description": "I'm a native speaker of Bulgarian language and can speak fluently.",
+            "time": [
+                { "from": "09/2005", "to": "06/2009" }
+            ]
+        }
+    ]
+}

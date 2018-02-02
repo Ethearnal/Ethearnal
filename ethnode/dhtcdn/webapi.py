@@ -22,12 +22,14 @@ class WebCDN(object):
                  dhf=None,
                  mount_point: str='/api/cdn/v1/resource',
                  store_dir: str='cdn_profile/',
-                 mount_it=True):
+                 mount_it=True,
+                 http_relay_get_url=None):
         self.cherry = cherry
         self.mount_point = mount_point
         self.store_dir = os.path.abspath(store_dir)
         self.dhf = dhf
         self.dhf.cdn = self
+        self.http_relay_get_url = http_relay_get_url
 
         if mount_it:
             self.mount()
@@ -187,11 +189,16 @@ class WebCDN(object):
             if not os.path.isfile(upload_file_meta):
                 print('META-FILE NOT FOUND')
                 self.cherry.response.status = 400
-                # return b'{"error":"integrity error with metadata not found"}'
-                # cdn_url_dht = self.try_get_meta(hkey=hkey)
-                # cdn_url_dht = None
-                if not cdn_url_dht:
-                    return b'{"error":"remote meta failed}'
+                if self.http_relay_get_url:
+                    print('RELAY URL', self.http_relay_get_url)
+                    bts = self.get_remote_meta_data(
+                        self.http_relay_get_url,
+                        hkey
+                    )
+                    data = json.loads(bts.decode('utf-8'))
+                    print('\n\n\n RELAY METADATA', data)
+                    self.set_local_meta_data(hkey, data)
+                    print('\n\n\n RELAY DATA SAVED', data)
 
             with open(upload_file_meta, 'rb') as u_f_m:
                 data = u_f_m.read()
@@ -225,23 +232,19 @@ class WebCDN(object):
             return msg.encode()
 
         if not os.path.isfile(upload_file):
-            # if not cdn_url_dht:
-            #    cdn_url_dht = self.try_get_meta(hkey=hkey)
-            # if cdn_url_dht:
-            #     try:
-            #         bts = self.get_remote_data(cdn_url=cdn_url_dht, hkey=hkey)
-            #         print('BTS,', len(bts))
-            #         self.set_local_data(hkey=hkey, fext=fext, bts=bts)
-            #     except Exception as e:
-            #         self.cherry.response.status = 400
-            #         msg = '{"error":"on get remote set local data: %s"}' % str(e)
-            #         return msg.encode()
-            # else:
-            #     self.cherry.response.status = 400
-            #     msg = '{"error":"% s not found"}' % upload_file
-            #     return msg.encode()
-            msg = '{"error":"% s not found"}' % upload_file
-            return msg.encode()
+            #
+            print('DATA FILE MISSING TRY RELAY')
+            if self.http_relay_get_url:
+                print('RELAY URL', self.http_relay_get_url)
+                bts = self.get_remote_data(
+                    self.http_relay_get_url,
+                    hkey
+                )
+                self.set_local_data(hkey, fext, bts)
+                print('\n\n\n RELAY DATA SAVED')
+            else:
+                msg = '{"error":"% s not found"}' % upload_file
+                return msg.encode()
 
         size = 0
         uf = io.BytesIO()

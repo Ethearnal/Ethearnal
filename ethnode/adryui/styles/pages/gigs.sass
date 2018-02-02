@@ -1,0 +1,198 @@
+section.gigs-page-content,
+section.jobs-page-content,
+section.profiles-page-content
+
+    .container
+        padding-top: 150px
+
+        // FILTERS --- LEFT
+        .filters
+            position: fixed
+
+            .filter
+                margin-bottom: 20px
+
+                p
+                    font-family: 'Roboto', sans-serif
+                    font-size: 16px
+                    font-weight: 500
+                    line-height: 1.29
+                    color: #4a4a4a
+                    margin: 0
+                    margin-bottom: 5px
+
+                label.mdl-checkbox
+                    margin-left: 15px
+
+                    &.is-wrong
+
+                        .mdl-checkbox__box-outline
+                            border: 2px solid #d50000
+
+                            .mdl-checkbox__tick-outline
+                                background-color: #d50000
+
+
+        // GIGS --- RIGHT
+        .gigs, .jobs
+            float: right
+
+            .gigs-container
+                width: calc(100% - 15px)
+                margin: 0 auto
+
+                &:after
+                    clear: both
+                    content: '.'
+                    display: block
+                    height: 0
+                    line-height: 0
+                    visibility: hidden
+
+.gigs-container-profile, .gigs-container-orders
+    margin-top: 25px
+    width: 815px
+
+.gig
+    width: 240px
+    height: 306px
+    border: 1px solid #e5e5e5
+    box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
+    background-color: white
+    position: relative
+    max-width: 240px
+    max-height: 306px
+    float: left
+    margin-right: 30px
+    margin-bottom: 30px
+    transition: all 0.15s ease-in
+
+    &:hover, &:focus, &:active
+        background-color: #fbfafa
+        cursor: pointer
+
+    button.mdl-button--icon
+        position: absolute
+        right: 0
+        top: 5px
+        color: #c1c1c1
+        z-index: 1
+
+    .ui.label
+        z-index: 1
+        background-color: #bfc0c1bd !important
+        border-color: #bfc0c1bd !important
+
+    .image-block, .image
+        position: relative
+        width: 100%
+        height: 142px
+
+        img
+            width: 100%
+            height: auto
+
+    .image-block
+        overflow: hidden
+
+    .owner-info
+        margin-left: 10px
+        margin-top: 10px
+
+        img
+            float: left
+            width: 24px
+            height: 24px
+            border-radius: 100%
+            margin-top: 1px
+
+
+        h5, h4
+            margin: 0
+            font-size: 12px
+            font-weight: 400
+            line-height: 1
+            color: black
+            margin-left: 32px
+            transition: all 0.15s ease-in
+
+        h5:hover, h5:active, h5:focus
+            cursor: pointer
+            text-decoration: underline
+
+        h4
+            color: #92A8D1
+            font-size: 12px
+            margin-top: 2px
+
+            i
+                font-size: 12px
+                position: relative
+                top: 1px
+
+    p
+        font-size: 16px
+        color: black
+        overflow: hidden
+        padding: 0 10px
+        height: 50px
+        margin: 0
+        margin-top: 10px
+
+    .lower-info
+        position: absolute
+        bottom: 38px
+        width: 100%
+
+        .reputation
+            float: left
+            height: 24px
+            margin-left: 10px
+
+            i
+                color: #92A8D1
+                font-size: 20px
+
+            span
+                color: #92A8D1
+                position: relative
+                top: -4.5px
+                left: 4px
+                font-weight: 500
+
+        h6.expire
+            float: right
+            font-size: 12px
+            color: #86939e
+            margin: 0
+            margin-right: 10px
+
+    .footer
+        border-top: 1px solid #e5e5e5
+        position: absolute
+        bottom: 0
+        width: 100%
+        height: 38px
+
+        h4
+            text-align: right
+            color: black
+            margin-right: 10px
+            line-height: 35px
+            font-weight: 300
+            font-size: 11px
+            text-transform: uppercase
+
+            span
+                font-size: 18px
+                font-weight: 400
+                margin-left: 5px
+                position: relative
+                top: 2px
+
+                i
+                    font-size: 18px
+                    position: relative
+                    top: 2px
+                    right: 2px
+                    color: #111

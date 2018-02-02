@@ -84,7 +84,7 @@ class ResourceIndexingEngine(object):
             prefix_set = self.words_bag_set(text_data)
 
         for item in prefix_set:
-            print('INDEX ITEM', specifier, item)
+            print('INDEX ITEM', specifier, item, 'Q1=%d' % q1, 'Q2=%d' % q2)
             cmp_hash = self.component_hash(specifier, item)
             self.index_store.create(cmp_hash, container_hash, q1=q1, q2=q2)
         self.index_store.commit()
@@ -93,13 +93,15 @@ class ResourceIndexingEngine(object):
         self.index_store.delete_components_by_container(container_hash)
         self.index_store.commit()
 
-    def qry_hashes(self, component_hashes: list):
+    def qry_hashes(self, component_hashes: list, limit=30):
+        print('\n\nLIMIT', limit)
         if len(component_hashes) == 1:
-            return self.index_store.single_component(component_hashes[0])
+            print('\n\n\ + + + + + QRY SINGLE COMPONENT', component_hashes[0])
+            return self.index_store.single_component(component_hashes[0], limit=limit)
         else:
-            return self.index_store.inner_join_on_component(*component_hashes)
+            return self.index_store.inner_join_on_component(*component_hashes, limit=limit)
 
-    def qry_terms(self, terms: dict, prefixes=True):
+    def qry_terms(self, terms: dict, prefixes=True, limit=30):
         component_hashes_set = set()
         for k, v in terms.items():
             if prefixes:
@@ -111,16 +113,17 @@ class ResourceIndexingEngine(object):
                 component_hashes_set.add(self.component_hash(k, item))
         component_hashes = list(component_hashes_set)
         if component_hashes:
-            return self.qry_hashes(component_hashes)
+            return self.qry_hashes(component_hashes, limit=limit)
 
-    def qry_terms_d(self, term_items: dict):
+    def qry_terms_d(self, term_items: dict, limit=30):
+        print('\n\nLIMIT', limit)
         component_hashes_set = set()
         for specifier, terms in term_items.items():
             for item in terms:
                 component_hashes_set.add(self.component_hash(specifier, item))
         component_hashes = list(component_hashes_set)
         if component_hashes:
-            return self.qry_hashes(component_hashes)
+            return self.qry_hashes(component_hashes, limit=limit)
 
 
 class TextIndexingApi(object):
@@ -207,13 +210,16 @@ class IndexQueryGenericApi(object):
             self.repr_f = lambda x: x
 
     def query(self, **kwargs):
+        print("\n\n GENERIC QRY", kwargs)
+        limit = 30
+        if 'limit' in kwargs:
+            limit = int(kwargs.pop('limit'))
         for key_spec, val in kwargs.items():
             print('SEARCH QUERY: %s' % key_spec, val)
-        c = self.engine.qry_terms(terms=kwargs)
+        c = self.engine.qry_terms(terms=kwargs, limit=limit)
         rs_ls = list()
         if c:
             for item in c:
-
                 if item:
                     ctx_hash = item[2]
                     rep_maj = item[4]

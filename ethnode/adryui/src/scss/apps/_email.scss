@@ -1,0 +1,477 @@
+.email-app {
+
+	.sec-side-nav {
+		background: $default-white;
+    	position: fixed;
+    	border-right: 1px solid $border-color;
+    	height: 100%;
+    	float: left;
+    	width: 250px;
+		@include transition(all 0.3s ease-in-out); 
+
+    	@include screen-tablet {
+    		z-index: 1;
+    		left: -250px;
+    	}
+
+	    .side-nav-inner {
+	    	position: relative;
+	    	padding: 30px 20px;
+
+	    	ul {
+	    		list-style: none;
+			    margin: 0;
+			    padding: 0;
+			    overflow: auto;
+
+	    		li {
+	    			position: relative;
+    				display: block;
+
+	    			>a {
+	    				position: relative;
+					    display: block;
+					    padding: 15px;
+					    color: $default-text-color;
+					    font-size: 16px;
+
+					    i {
+					    	padding-right: 10px;
+					    }
+
+					    &:hover {
+					    	color: darken($default-dark ,10%);
+					    }
+
+					    .label {
+					    	float: right;
+					    	margin-top: 4px;
+					    }
+	    			}
+
+	    			&.active {
+	    				> a{
+	    					color: $default-primary;
+	    				}
+	    			}
+	    		}
+	    	}
+	    }
+	}
+
+	.email-wrapper {
+    	margin-top: 0px;
+	    padding: 0px;
+	    margin:0px;
+	    overflow: auto;
+	    min-height: 100%;
+	    @include transition(all 0.3s ease-in-out); 
+
+	    @include screen-tablet {
+	    	position: absolute;
+		    left: 0px;
+		    width: 100%;
+		    overflow-x: hidden;
+	    }
+
+	    @include screen-tablet-above {
+	    	margin-left: 250px;
+	    }
+
+	    .email-list {
+			position: relative;
+			padding: 0px;
+			width: 100%;
+			overflow-y: hidden;
+			background-color: $default-white;
+			height: calc(100vh - #{$header-height});
+			
+			@include screen-tablet {
+				max-height: calc(100vh - 65px);
+			}	
+
+			@include screen-tablet-above {
+				width: 25%;
+				border-right: 1px solid $border-color;
+				float: left;
+			}
+
+			@include screen-laptop-only {
+				width: 30%;
+			}
+
+			.email-list-tools {
+				padding: 5px 15px;
+				border-bottom: 1px solid $border-color;
+				text-align: right;
+				display: block;
+				background-color: $default-gray;
+
+				.tools {
+					list-style: none;
+			   		padding: 0;
+
+			   		> li {
+			   			display: inline-block;
+			   			padding: 3px 5px;
+
+			   			> a {
+			   				font-size: 16px;
+			   				color: $default-text-color;
+			   				display: block;
+			   				@include transition(all 0.2s ease-in-out); 
+
+			   				&:hover,
+			   				&:focus {
+			   					color: $default-info;
+			   				}
+			   			}
+			   		}
+				}
+			}
+
+			.email-list-wrapper {
+				position: relative;
+				min-height: calc(100vh - 101px);
+				overflow-y: scroll;
+				max-height: calc(100vh - 101px);
+				
+
+				.email-list-item {
+					padding-left: 0px;
+					list-style: none;
+
+					.email-item {
+						position: relative;
+						display: table;
+						width: 100%;
+						padding: 15px;
+						border-bottom: 1px solid $border-color;
+						cursor: pointer;
+						@include transition(all 0.3s ease-in-out); 
+
+						&:hover,
+						&:focus {
+							background-color: lighten($default-info, 48%);
+						}
+
+						a {
+							color: $default-text-color;
+						}
+
+						.email-tick {
+							position: absolute;
+						}
+
+						.email-detail {
+							vertical-align: top;
+							display: table-cell;
+							width: 100%;
+							padding-left: 40px;
+
+							p {
+								margin-bottom: 0px;
+							}
+
+							.from {
+								font-size: 16px;
+								color: $default-dark;
+							}
+
+							.subject {
+								color: $default-dark;
+								font-weight: 500;
+								margin-bottom: 5px;
+							}
+
+							.datetime {
+								position: absolute;
+							    top: 20px;
+							    right: 15px;
+							    font-size: 11px;
+							}
+						}
+					}
+				}
+			}
+	    }
+
+	    .email-content {
+	    	float: left;
+			width: 75%;
+			position: relative;
+			padding: 0px;
+			background-color: $default-white;
+			min-height: calc(100vh - #{$header-height});
+
+			&.no-inbox-view {
+				width: 100%;
+			}
+
+			@include screen-laptop-only {
+				width: 70%;
+			}
+
+			@include screen-tablet {
+				position: absolute;
+	    		top: 0px;
+	    		left: 100%;
+	    		width: 100%;
+	    		height: 100%;
+	    		@include transition(all 0.3s ease-in-out); 
+	    		max-height: calc(100vh - #{$header-height});
+	    		overflow-y: scroll;
+
+	    		&.open {
+	    			left: 0px;
+	    		}
+			}
+
+			.email-content-tools {
+				background-color: $default-gray;
+				padding: 10px 15px;
+				border-bottom: 1px solid $border-color;
+
+				@include screen-tablet-above {
+					display: none;
+				}
+
+				ul {
+					list-style: none;
+			   		padding: 0;
+			   		display: inline-block;
+
+			   		li {
+			   			display: inline-block;
+
+			   			 a {
+			   			 	font-size: 16px;
+			   			 	padding: 0px 10px;
+			   			 	color: $default-text-color;
+
+			   			 	&:hover,
+			   			 	&:focus {
+			   			 		color: $default-info;
+			   			 	}
+			   			}
+			   		}
+				}
+			}
+
+			.email-content-detail {
+				position: relative;
+				padding: 30px;
+				max-height: calc(100vh - #{$header-height});
+   				overflow-y: auto;
+
+				 @include screen-tablet {
+				 	padding: 15px;
+				 }
+
+				.detail-head {
+					position: relative;
+
+					.list-info {
+						display:  inline-block;
+
+						.thumb-img {
+							width: 50px;
+							height: 50px;
+						}	
+
+						.info {
+							height: 50px;
+							padding-left: 65px;
+
+							.title {
+								padding-top: 5px;
+							}
+
+							.sub-title {
+								max-width: 100%;
+							}
+						}
+					}
+
+					.tools {
+						padding: 0px;
+						list-style: none;
+						float: right;
+						margin-top: 15px;
+
+						>li {
+							display: inline-block;
+							padding: 10px;
+
+							a {
+								color: $default-text-color;
+
+								&:hover,
+								&:focus {
+									color: $default-dark;
+								}
+							}
+						}
+					}
+				}
+
+				.detail-body {
+					padding: 15px 30px;
+					position: relative;
+				}
+
+				.detail-foot {
+					padding: 15px 30px;
+
+					.attachments {
+						list-style: none;
+						padding-left: 0px;
+
+						>li {
+							display: inline-block;
+							border: 1px solid $border-color;
+							margin-right: 10px;
+							margin-bottom: 10px;
+							border-radius: 6px;
+
+							>a {
+								display: block;
+								color: $default-text-color;
+
+								.file-icon {
+									float: left;
+									padding: 8px 15px;
+    								font-size: 28px;
+    								border-right: 1px solid $border-color;
+								}
+
+								.file-info {
+									display: inline-block;
+									padding: 8px 15px 8px 10px;
+
+									.file-name,
+									.file-size {
+										display: block;
+									}
+								}
+
+								&:hover,
+								&:focus {
+									color: $default-dark;
+
+									.file-icon {
+										color: $default-primary;
+									}
+								}
+							}
+						}
+					}
+				}	
+			}
+	    }
+
+	    .email-compose {
+	    	position: relative;
+
+	    	.email-compose-tools {
+				background-color: $default-gray;
+				padding: 10px 15px;
+				border-bottom: 1px solid $border-color;
+
+				@include screen-tablet-above {
+					display: none;
+				}
+
+				ul {
+					list-style: none;
+			   		padding: 0;
+			   		display: inline-block;
+
+			   		li {
+			   			display: inline-block;
+
+			   			 a {
+			   			 	font-size: 16px;
+			   			 	padding: 0px 10px;
+			   			 	color: $default-text-color;
+
+			   			 	&:hover,
+			   			 	&:focus {
+			   			 		color: $default-info;
+			   			 	}
+			   			}
+			   		}
+				}
+			}
+			.email-compose-body {
+				padding: 30px 20px;
+
+				.send-header {
+
+		    		.selectize-input {
+		    			box-shadow: none;
+		    			border: 0px;
+		    			border-bottom: 1px solid $border-color;
+		    			font-size: 14px;
+		    			padding: 12px;
+
+		    			input{
+			    			@include placeholder {
+								font-size: 14px;
+								color: lighten($default-text-color, 20%);
+							}
+						}
+		    		}
+
+		    		.subject {
+		    			border: 0px;
+		    			padding: 12px;
+
+		    			@include placeholder {
+							font-size: 14px;
+							color: lighten($default-text-color, 20%);
+						}
+		    		}
+		    	}
+
+		    	.note-editor {
+		    		margin-top: 5px;
+
+		    		&.note-frame {
+
+		    			.note-statusbar {
+		    				display: none;
+		    			}
+		    		}
+
+		    		.panel-heading {
+
+		    			&.note-toolbar {
+		    				position: absolute;
+						    z-index: 9;
+						    width: 100%;
+						    bottom: 0px;
+						    border-bottom: 0px;
+						    border-top: 1px solid $border-color;
+		    			}
+		    		}
+		    	}
+			}
+	    }
+    }
+
+
+    &.mail-nav-active {
+    	.sec-side-nav {
+    		@include screen-tablet{
+    			left: 0px;	
+    		}
+    	}
+
+    	.email-wrapper {
+    		@include screen-tablet{
+    			left: 250px;
+    		}
+    	}
+    }
+}

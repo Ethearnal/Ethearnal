@@ -1,9 +1,13 @@
 import json
 import bson
+import datetime
 
 from kadem.kad import DHTFacade
 from kadem.kad import DHT
 from ert_profile import EthearnalProfileController
+from helpers.wordnet_parser import WordnetParser, GigGeneratorWordnet, ImagesFromCdnData
+from webdht.double_linked import DList, instance_dl
+from webdht.wdht import HashIO, OwnerGuidHashIO
 
 
 class DHTProfile(object):
@@ -94,6 +98,62 @@ class DHTProfile(object):
         self.push('profilePicture', data)
 
 
+class DHTValueProtocol(object):
+    def __call__(self, t=None):
+        if not t:
+            return None
+        d = bson.loads(t[-1])
+        if 'e' in d:
+            l = d['e']
+            if len(l) >= 2:
+                v = l[1]
+                if 'value' in v:
+                    return v['value']
+        return None
+
+
+class DHTProfileCollection(object):
+
+    def __init__(self, dhf: DHTFacade, collection_name: str):
+        self.collection_name = '.' + collection_name + 's'  # '.gigs'
+        self.dhf = dhf
+        self.me = OwnerGuidHashIO(dhf.ert.rsa_guid_hex)
+        self.delete_collection_name = '.deleted_' + collection_name  # '.deleted_gigs'
+        self.my_items = instance_dl(self.dhf, self.me.hex(), self.collection_name)
+        self.my_deleted_items = instance_dl(self.dhf, self.me.hex(), self.delete_collection_name)
+        self.item_model = collection_name.title()
+        self.value_protocol = DHTValueProtocol()
+
+    def post(self, key, data):
+        k = {self.collection_name: key + datetime.datetime.now().isoformat()}
+        v = data
+        data['model'] = self.item_model
+        data['owner_guid'] = self.me.hex()
+        o_item_hk = self.my_items.insert(key=k, value=v)
+        return self.dhf.cdx.guid_int_to_hex(o_item_hk)
+
+    def update(self, key, data):
+        k = {self.collection_name: key}
+        v = data
+        o_item_hk = self.dhf.push(k, v)
+        return self.dhf.cdx.guid_int_to_hex(o_item_hk)
+
+    def get(self, key):
+        k = {self.collection_name: key}
+        raw = self.dhf.pull_local(k)
+        v = self.value_protocol(raw)
+        return v
+
+    def repush(self, hkey):
+        self.dhf.repush(hk_hex=hkey)
+
+    def get_hk(self, hkey):
+        raw = self.dhf.pull_local('', hk_hex=hkey)
+        # print(raw)
+        v = self.value_protocol(raw)
+        return v
+
+
 class ProfileJsonData(object):
     # ('description', 'title', 'skills', 'languages', 'name', 'headlinePicture', 'profilePicture')
     mapping = {
@@ -138,3 +198,12 @@ class ProfileJsonData(object):
                 d = {'first': spl[0], 'last': " ".join(spl[1:])}
                 self.pro.push('name', d)
 
+
+
+class GigsGenerator(object):
+    def __init__(self):
+        verbs_src = 'data_demo/txt_wordnet/data.verb'
+        cdn_data_dir = 'data_demo/cdn1_d'
+        wdn = WordnetParser(verbs_src)
+        img = ImagesFromCdnData(cdn_data_dir)
+        gen = GigGeneratorWordnet(wdn, img)

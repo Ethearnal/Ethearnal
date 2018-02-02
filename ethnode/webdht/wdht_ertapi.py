@@ -28,55 +28,72 @@ class Indexer(object):
         except:
             print('UNINDEX FAILED')
 
-    def index_field(self, pk_bin, specifier, text_data, prefixes=True):
+    def index_field(self, pk_bin, specifier, text_data, prefixes=True, q1: int = 0, q2: int = 0,):
+        print('\n\n INDEX FIELD q1,q2', q1,q2)
         try:
             self.idx.index_bag_of_spec_text(
             container_hash=pk_bin,
-            specifier=specifier, text_data=text_data, prefixes=prefixes)
+            specifier=specifier, text_data=text_data, prefixes=prefixes, q1=q1, q2=q2)
         except Exception as e:
             print('ERR IDX FAILED', specifier, text_data, str(e))
 
-    def query_terms(self, terms: dict, prefixes=True):
-        cur = self.idx.qry_terms(terms=terms, prefixes=prefixes)
-        if cur:
-            ll = [guid_bin_to_hex2(t[2]) for t in cur.fetchall()]
-            return ll
-
-    def query_all(self):
-        cur = self.db_idx.no_component()
-        # print(cur.fetchall())
+    def query_terms(self, terms: dict, prefixes=True, limit=30):
+        cur = self.idx.qry_terms(terms=terms, prefixes=prefixes, limit=limit)
         if cur:
             ll = [guid_bin_to_hex2(t[0]) for t in cur.fetchall()]
             return ll
 
-    def query_terms_d(self, terms_d: dict):
-        cur = self.idx.qry_terms_d(terms_d)
+    def query_all(self, limit=10, ret_t=False):
+        cur = self.db_idx.no_component(limit=limit)
         if cur:
-            ll = [guid_bin_to_hex2(t[2]) for t in cur.fetchall()]
+            if ret_t:
+                ll = [(guid_bin_to_hex2(t[0]), t[1], t[2], t[3], t[4]) for t in cur.fetchall()]
+                return ll
+
+            else:
+                ll = [guid_bin_to_hex2(t[0]) for t in cur.fetchall()]
+                return ll
+
+    def query_terms_d(self, terms_d: dict, limit=30):
+        print("\n\nQUERY_TERMS_D", terms_d)
+        cur = self.idx.qry_terms_d(terms_d, limit)
+        if cur:
+            print(list(cur.fetchone()))
+            ll = [guid_bin_to_hex2(t[0]) for t in cur.fetchall()]
             return ll
 
-    def query_text(self, text):
-        return self.query_terms({'text': text})
+    def query_text(self, text, limit=30):
+        return self.query_terms({'text': text}, limit)
 
-    def query_tags(self, tags):
-        return self.query_terms({'tags': tags}, prefixes=False)
+    def query_tags(self, tags, limit=30):
+        return self.query_terms({'tags': tags}, prefixes=False, limit=limit)
 
-    def query_owner(self, guid_owner):
-        return self.query_terms({'owner_guid': guid_owner}, prefixes=False)
+    def query_owner(self, guid_owner, limit=30):
+        return self.query_terms({'owner_guid': guid_owner}, prefixes=False, limit=limit)
 
     def index_gig_document(self, hk_hex: str, doc: dict):
         text = ''
+        q1 = 0
+        q2 = 0
+
+        if 'price' in doc:
+            q1 = int(doc['price'])
         if 'title' in doc:
             text += doc['title'] + ' '
         if 'description' in doc:
             text += doc['description']
         if text.strip() != '':
             # pass
-            self.index_field(guid_hex_to_bin(hk_hex), 'text', text_data=text)
+            self.index_field(guid_hex_to_bin(hk_hex), 'text', text_data=text, q1=q1, q2=q2)
         if 'tags' in doc:
-            self.index_field(guid_hex_to_bin(hk_hex), 'tags', text_data=' '.join(doc['tags']), prefixes=False)
+            self.index_field(guid_hex_to_bin(hk_hex), 'tags', text_data=' '.join(doc['tags']), prefixes=False,
+                             q1=q1, q2=q2)
         if 'owner_guid' in doc:
-            self.index_field(guid_hex_to_bin(hk_hex), 'owner_guid', text_data=doc['owner_guid'], prefixes=False)
+            self.index_field(guid_hex_to_bin(hk_hex), 'owner_guid',
+                             text_data=doc['owner_guid'], prefixes=False, q1=q1, q2=q2)
+        if 'category' in doc:
+            self.index_field(guid_hex_to_bin(hk_hex), 'category',
+                             text_data=doc['category'], prefixes=False, q1=q1, q2=q2)
 
     def index_on(self, hk_hex: str, data: dict):
         if hk_hex and data:
@@ -104,6 +121,7 @@ class IdxCdnQueryWebApi(object):
 
     def __init__(self, cherrypy, idx: Indexer, mount_path: str="/api/cdn/v1/idx/", mount=True):
         self.idx = idx
+        self.idx_store = self.idx.idx.index_store
         self.cherrypy = cherrypy
         self.mount_path = mount_path
         self.errs = list()
@@ -123,9 +141,10 @@ class IdxCdnQueryWebApi(object):
             self.errs.append('result list err')
             return None
 
-    def _qry_dict(self, query_dict):
+    def _qry_dict(self, query_dict, limit=30):
+
         try:
-            ll = self.idx.query_terms_d(query_dict)
+            ll = self.idx.query_terms_d(query_dict, limit=limit)
             self.cherrypy.response.status = 200
             return ll
         except:
@@ -133,9 +152,9 @@ class IdxCdnQueryWebApi(object):
             self.errs.append('qry dict err')
             return None
 
-    def _qry_all(self):
+    def _qry_all(self, limit=30, ret_t=False):
         try:
-            ll = self.idx.query_all()
+            ll = self.idx.query_all(limit, ret_t=ret_t)
             self.cherrypy.response.status = 200
             return ll
         except:
@@ -154,49 +173,30 @@ class IdxCdnQueryWebApi(object):
 
     def GET(self, **kwargs):
         self.cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+        limit = 30
+        pricerange = None
+        if 'limit' in kwargs:
+            limit = int(kwargs.pop('limit'))
+
+        if 'q1range' in kwargs:
+            q1range = kwargs.pop('q1range')
+            p_t = q1range.split(' ')
+            self.idx_store.analog_range_q1 = p_t
+
+        if 'allquanta' in kwargs:
+            ll = self._qry_all(limit, ret_t=True)
+            # print(list(c.fetchall()))
+            return self._serialize_result(ll)
+
         if 'all' in kwargs:
-            return self._serialize_result(self._qry_all())
+            return self._serialize_result(self._qry_all(limit))
         else:
             q_d = self._make_qry_dict(kwargs)
+
             if not q_d:
                 return b'null'
             else:
-                return self._serialize_result(self._qry_dict(q_d))
-
-        # try:
-        #     query_dict = {k.lower(): list(set(v.lower().split(' '))) for k, v in kwargs.items()}
-        #     print('QUERY_DICT', query_dict)
-        #     ll = self.idx.query_terms_d(query_dict)
-        #     print('LLL', ll)
-        #     if ll:
-        #         js = json.dumps(ll, ensure_ascii=False)
-        #         bts = js.encode(encoding='utf-8')
-        #         self.cherrypy.response.status = 200
-        #         return bts
-        #     else:
-        #         ll = self.idx.query_all()
-        #         print('LL ?', ll)
-        #         if ll:
-        #             js = json.dumps(ll, ensure_ascii=False)
-        #             bts = js.encode(encoding='utf-8')
-        #             self.cherrypy.response.status = 200
-        #             return bts
-        #         else:
-        #             self.cherrypy.response.status = 400
-        #             return b'null'
-        # except:
-        #     try:
-        #         ll = self.idx.query_all()
-        #         if ll:
-        #             js = json.dumps(ll, ensure_ascii=False)
-        #             bts = js.encode(encoding='utf-8')
-        #             self.cherrypy.response.status = 200
-        #             return bts
-        #     except:
-        #         pass
-        #     self.cherrypy.response.status = 404
-        #     # traceback.print_exc()
-        #     return b'null'
+                return self._serialize_result(self._qry_dict(q_d, limit=limit))
 
     def OPTIONS(self):
         self.cherrypy.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
@@ -214,8 +214,6 @@ class IdxCdnQueryWebApi(object):
                 }
             }
         )
-
-
 
 class DhtEventsHkeysWebAPI(object):
     exposed = True
@@ -361,7 +359,6 @@ class DhtGigsHkeysWebAPI(object):
         self.mygigs = instance_dl(self.dhf, self.me.hex(), self.collection_name)
         self.deleted_gigs = instance_dl(self.dhf, self.me.hex(), self.delete_collection_name)
 
-
         if mount_it:
             self.mount()
             print('MOUNT WEB:', self.mount_point)
@@ -431,7 +428,7 @@ class DhtGigsHkeysWebAPI(object):
         data['model'] = 'Gig'
         value = data
         from datetime import datetime
-        key = data['title'] + ';' + datetime.now().isoformat()
+        key = {self.collection_name: data['title'] + ';' + datetime.now().isoformat()}
 
         o_item = self.mygigs.dlitem_dict.get(key)
         if o_item:
