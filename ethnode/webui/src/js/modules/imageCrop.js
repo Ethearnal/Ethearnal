@@ -1,4 +1,4 @@
-$uploadCrop = $('#cropie').croppie({
+window.$uploadCrop = $('#cropie').croppie({
     enableExif: true,
     viewport: {
         width: 200,
