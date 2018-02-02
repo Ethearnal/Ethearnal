@@ -720,9 +720,9 @@ function require(script) {
 
 // SMART SEARCH
 require("js/modules/generateGigs.js"); // MODULE FOR SEARCHING
-require("js/modules/smartSearch.js"); // MODULE FOR SEARCHING
-require("js/modules/globalEvents.js"); // MODULE with GLOBAL EVENTS 
-require("js/modules/imageCrop.js"); // MODULE with GLOBAL EVENTS 
+// CUSTOM ANDREW K JS:
+require("dist/js/main.js");
+
 // GET DATA
 require("js/functions/getData/gigData.js"); // GETS GIG DATA BY GIG ID
 require("js/functions/getData/guidsData.js"); // GETS ALL GUIDS (NODES) DATA
