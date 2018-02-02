@@ -259,7 +259,7 @@ header .container nav #navigation ul ul.dropdown-menu li:active i {
 } */
 
 section.documentation {
-    background-color: #f2f2f2;
+    /* background-color: #f2f2f2; */
 }
 
 section.documentation .container .profile-information-container {
@@ -604,7 +604,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
     height: 50px;
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2);
     /* background-color: #92A8D1; */
-    background-color: #3f51b5;
+    background-color: #92a8d2;
     border-radius: 100%;
     right: 28px;
     top: 32px;
@@ -634,7 +634,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
 .profile-documentation-full .profile-documentation .shoutoutIcon i {
     line-height: 50px;
     font-size: 24px;
-    color: white;
+    color: #e5eeff;
 }
 
 .profile-documentation-full .profile-documentation .shoutoutIcon {
@@ -680,15 +680,15 @@ section.documentation .container .profile-information-after-fixed .container-flu
 .profile-documentation-full .profile-documentation ul.nav li:not(.mdl-menu__item) a:active {
     background-color: white;
     border: none;
-    color: #89ABE3;
+    color: #92a8d1;
 }
 
 .profile-documentation-full .profile-documentation ul.nav li.active:not(.mdl-menu__item) {
-    border-bottom: 2px solid #89ABE3;
+    border-bottom: 2px solid #92a8d1;
 }
 
 .profile-documentation-full .profile-documentation ul.nav li.active:not(.mdl-menu__item) a {
-    color: #89ABE3;
+    color: 	#92a8d1;
 }
 
 .profile-documentation-full .profile-documentation ul.nav li.dropdownButton {
