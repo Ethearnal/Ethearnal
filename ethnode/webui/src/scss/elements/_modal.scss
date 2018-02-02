@@ -1,48 +1,48 @@
 .modal {
 	&.fade {
 		.modal-dialog {
-			@include transition(all 0.2s ease-out); 
+			@include transition(all 0.2s ease-out);
 			 @include transform(translateX(0%) translateY(0%));
 		}
-		
+
 		&.slide-in-right {
-			
+
 			.modal-dialog {
-				@include transform(translateX(100%));	
+				@include transform(translateX(100%));
 			}
-			
+
 			&.show {
 				.modal-dialog {
 					@include transform(translateX(0%));
 				}
-				
+
 			}
 		}
-		
+
 		&.slide-in-left {
-			
+
 			.modal-dialog {
-				@include transform(translateX(-100%));	
+				@include transform(translateX(-100%));
 			}
-			
+
 			&.show {
 				.modal-dialog {
 					@include transform(translateX(0%));
 				}
-				
+
 			}
 		}
-		
+
 		&.modal-fs {
 			.modal-dialog {
 				@include transform(translateY(0%));
 			}
-			
+
 			&.show {
 				.modal-dialog {
 					@include transform(translateY(0%));
 				}
-				
+
 			}
 		}
 	}
@@ -52,7 +52,7 @@
 	padding: 15px 20px;
 	padding-bottom: 5px;
     border-bottom: 0px;
-	
+
 	h1,
 	h2,
 	h3,
@@ -71,10 +71,10 @@
 	padding: 15px 20px;
 	border-top: 1px solid $border-color;
 	text-align: left;
-	
+
 	.btn {
 		margin-bottom: 0px;
-		
+
 		+.btn {
 			margin-left: 0px;
 		}
@@ -98,22 +98,22 @@
 		width: 400px;
 		height: 100%;
 		margin: 0px auto 0px 0px ;
-		
+
 		@include screen-mobile {
 			width: 260px;
-		} 
-		
+		}
+
 		.modal-content {
 			height: 100%;
 			border-radius: 0px;
-			
+
 			.side-modal-wrapper {
 				height: 100%;
 				padding-left: 15px;
 				padding-right: 15px;
 				position: relative;
 			}
-			
+
 			.modal-footer {
 				position: absolute;
 				bottom: 0px;
@@ -125,7 +125,7 @@
 }
 
 .modal-close {
-	
+
 }
 
 .modal-right {
@@ -137,13 +137,16 @@
 .modal-backdrop {
 	z-index: 1040;
 	background-color: $default-dark;
+	&.fade.in {
+		opacity: 0.9;
+	}
 }
 
 @include screen-mobile-above {
 	.modal-sm {
 		width: 350px;
 	}
-} 
+}
 
 .modal-fs {
 	.modal-dialog {
@@ -151,14 +154,14 @@
 		margin: 0px auto;
 		height: 100%;
 		max-width: none;
-		
+
 		.modal-content {
 			height: 100%;
 			border-radius: 0px;
-			@include background-opacity($default-white, 0.9); 
+			@include background-opacity($default-white, 0.9);
 		}
 	}
-	
+
 	.modal-close {
 		position: absolute;
 		top: 20px;
@@ -167,13 +170,12 @@
 		border: 1px solid lighten($default-dark, 30%);
 		border-radius: 50px;
 		color: lighten($default-dark, 30%);
-		
+
 		&:hover,
 		&:focus {
 			color: $default-dark;
 			text-decoration: none;
 			border: 1px solid $default-dark;
-		} 
+		}
 	}
 }
-
