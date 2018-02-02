@@ -102,10 +102,11 @@ class InvIndexTimestampSQLite(BaseSQLite):
     def analog_range_q1(self, ll):
         if ll is None:
             self.analog_range_q1_pair = None
-        try:
-            self.analog_range_q1_pair = tuple([int(k) for k in ll[0:2]])
-        except Exception as e:
-            print('WARN settings of q1 range failed', e)
+        else:
+            try:
+                self.analog_range_q1_pair = tuple([int(k) for k in ll[0:2]])
+            except Exception as e:
+                print('WARN settings of q1 range failed', e)
 
     def create(self, component_hash: bytes,
                container_hash: bytes,
@@ -169,12 +170,12 @@ class InvIndexTimestampSQLite(BaseSQLite):
 
         if limit:
             qs = 'SELECT DISTINCT a.container_hash, a.ert_tokens_major, a.utc_timestamp, a.q1, a.q2 ' \
-                 '  FROM %s a {analog_range} ' \
+                 '  FROM %s a {analog_range} GROUP BY a.container_hash ' \
                  'ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC, a.q1 ASC, a.q2 ASC LIMIT %d;' % (
                     self.table_name, limit)
         else:
             qs = 'SELECT DISTINCT a.container_hash, a.ert_tokens_major, a.utc_timestamp, a.q1, a.q2 '\
-                 'FROM %s a {analog_range} ' \
+                 'FROM %s a {analog_range} GROUP BY a.container_hash ' \
                  'ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC, a.q1 ASC, a.q2 ASC %d;' % (self.table_name, limit)
         qs = qs.format(analog_range=analog_range_q1)
 

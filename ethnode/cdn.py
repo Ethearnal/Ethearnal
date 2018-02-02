@@ -238,7 +238,8 @@ cherrypy.tools.cors = cherrypy._cptools.HandlerTool(cors)
 
 cherrypy.config.update({
     'global': {
-        'engine.autoreload.on': False
+        'engine.autoreload.on': False,
+        'server.thread_pool': 120,
     }
 })
 

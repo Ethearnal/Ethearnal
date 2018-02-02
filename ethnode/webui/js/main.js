@@ -64,6 +64,35 @@ var event_on_dht_data = function(hkey, data){
      }
 };
 
+var searched_gigs=[];
+
+var render_gig_slice=function(b,e){
+    for(var i=b;i<e;i++){
+        if(i>searched_gigs.length-1){break;}
+        ajax_get_gig_data(data[i]);
+    }
+};
+
+var clear_container_gig = function(){
+     $(".gigs-container").html('');
+};
+
+
+var cnt_ii = 0;
+var scheduleNextTimeout;
+scheduleNextTimeout = function(){
+    setTimeout(function() {
+        ajax_get_gig_data(searched_gigs[cnt_ii]);
+        if(cnt_ii < 29){
+            // ajax_get_gig_data(searched_gigs[cnt_ii]);
+            console.log('TICK');
+            cnt_ii++;
+            scheduleNextTimeout();
+        } else { return; }
+
+    }, 100);
+};
+
 
 var event_on_search_gig_data = function(qry, data_js){
      console.log('search qry:', qry);
@@ -72,12 +101,15 @@ var event_on_search_gig_data = function(qry, data_js){
      data = JSON.parse(data_js);
      console.log('search result:', data);
      if(data != null){
-         // todo spinner html;
-         $(".gigs-container").html('');
-         for(var i=0; i<data.length; i++){
-            ajax_get_gig_data(data[i]);
+         searched_gigs = [];
+         for(var i=0;i<data.length;i++){
+             searched_gigs.push(data[i]);
          }
+         cnt_ii = 0;
+         clear_container_gig();
+         scheduleNextTimeout();
      }
+
 };
 
 // end event handlers
@@ -154,7 +186,7 @@ var do_search_query = function () {
          // ajax_get_cdn_search(encodeURI(qry));
     } else {
 
-        qry="all"
+        qry="all&limit=100"
     }
 
     ajax_get_cdn_search(encodeURI(qry));
@@ -493,7 +525,11 @@ $('a[load]').click(function(e) {
     }
 });
 
+var ertdata = {
+    guids:{},
 
+    __end:null
+};
 
 $( document ).ready(function() {
 

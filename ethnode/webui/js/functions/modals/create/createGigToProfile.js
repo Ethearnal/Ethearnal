@@ -210,7 +210,7 @@ function createGigToFound(hk, gig_o) {
 
     var image ='';
     var gigID = hk;
-    // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
+
     var api_cdn = api_get_cdn_url();
 
     var default_profile_image = '1540b3c47ada5fd9a4798d3cc780d6a6bd05baf94cc2fdaa53e90accb4162383';
@@ -302,7 +302,7 @@ function createProfileCard(owner_guid){
     getProfileValue(owner_guid, 'profilePicture', function(profile_picture_url) {
         // profile images
         if(profile_picture_url == 'null') {
-            profile_picture_url = '"abv"';
+            return;
         }
         if(profile_picture_url == 'null') {
             console.log('P NULL', profile_picture_url);

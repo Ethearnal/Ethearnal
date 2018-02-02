@@ -232,7 +232,8 @@ def main_http(http_webdir: str = config.http_webdir,
 
     cherrypy.config.update({
         'global': {
-            'engine.autoreload.on': False
+            'engine.autoreload.on': False,
+            'server.thread_pool': 120,
         }
     })
     #
