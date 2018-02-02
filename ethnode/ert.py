@@ -28,6 +28,8 @@ from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAbou
 from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
 from webdht.wdht_ertapi import DhtEventsHkeysWebAPI, Indexer
 
+from toolkit.profile_from_json import DHTProfileCollection
+
 # #
 # from webdht.double_linked import DList, DLItemDict, OwnPulse, instance_dl
 # from webdht.wdht_listing import WebGuidCollectionListApi
@@ -99,6 +101,12 @@ parser.add_argument('-n', '--no_upnp_attempts',
                     action='store_true'
                     )
 
+parser.add_argument('-g', '--converge_pk_and_peers',
+                    help='exchange pk keys and peers with boot peer',
+                    required=False,
+                    action='store_true'
+                    )
+
 
 class EthearnalSite(object):
     @cherrypy.expose
@@ -166,6 +174,11 @@ def main_http(http_webdir: str = config.http_webdir,
             'tools.staticdir.on': True,
             'tools.staticdir.dir': http_webdir,
             'tools.staticdir.index': 'index.html',
+        },
+        '/ui/profile': {
+            'tools.staticdir.on': True,
+            'tools.staticdir.dir': http_webdir,
+            'tools.staticdir.index': 'profile.html',
         },
         '/ui/files': {
             'tools.staticdir.on': True,
@@ -440,10 +453,34 @@ if __name__ == '__main__':
             print('UDP server thread id dead')
 
         pro = DHTProfile(d)
+        gigs = DHTProfileCollection(dhf=d, collection_name='gig')
+        verbs_src = 'data_demo/txt_wordnet/data.verb'
+        cdn_data_dir = 'data_demo/cdn1_d'
+        from helpers.wordnet_parser import WordnetParser, ImagesFromCdnData, GigGeneratorWordnet
+
+        gen = GigGeneratorWordnet(WordnetParser(verbs_src), ImagesFromCdnData(cdn_data_dir))
         if json_data_to_profile:
+            from time import sleep
             jsd = ProfileJsonData(json_file_name=json_data_to_profile,
                                   pro=pro,
                                   )
+            sleep(3)
+            d.converge_peers()
+            sleep(3)
+            jsd.update()
+            sleep(3)
+            gen.gen_a()
+            sleep(3)
+            gen_range = jsd.data['wordnet_gen_range']
+            cnt = gen.gen_from_range(gen_range[0], gen_range[1])
+            for g_data in range(cnt):
+                gig_data = gen.gigs.pop()
+                gigs.post(gig_data['title'], gig_data)
+            sys.exit(0)
+
+        if args.converge_pk_and_peers:
+            print('CONVERGE PEERS')
+            d.converge_peers()
 
         if not args.dht_only:
             main_http(http_webdir=http_webdir,

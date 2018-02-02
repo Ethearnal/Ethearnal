@@ -294,9 +294,9 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 
 
 // PREVENTING DEFAULT (redirecting) WHEN YOU CLICK ON a(href="")
-$('a').click(function(e) {
-    e.preventDefault();
-});
+// $('a').click(function(e) {
+//     e.preventDefault();
+// });
 
 
 // WHEN YOU CLICK ON ETHEARNAL LOGO IT WILL REDIRECT YOU TO GIGS PAGE
@@ -364,137 +364,6 @@ function getProfileGigsF(guid_id) {
     /**/
 
 };
-
-
-// WHEN YOU CLICK ON HEADER PAGE BUTTONS (gigs/jobs/profiles/etc) IT WILL TURN THE PAGE INTO ANOTHER PAGE
-$('a[load]').click(function(e) {
-    e.preventDefault();
-    $load = $(this).attr('load');
-
-    // Removing all set classes and nulling everything.
-    $('section.background-image, section.documentation, section.gigs-page-content, section.jobs-page-content, section.profiles-page-content').hide();
-    $('body').removeClass('up');
-
-
-    // Showing content based on clicked button
-    if ($load == 'gigs') {
-        $('section.gigs-page-content').show();
-        $('input#search-header').focus().attr('placeholder', 'Search gigs...');
-    }
-
-    if ($load == 'gigs') {
-        console.log('GIGS');
-        do_search_query();
-        //        $.ajax({
-        //            type: 'GET',
-        //            url: '/api/v1/dht/guids',
-        //            dataType: 'text',
-        //            processData: false,
-        //            success: function( guids_data ) {
-        //                console.log('GUIDS',guids_data);
-        //                guids =JSON.parse(guids_data);
-        //                for (var i = 0; i < guids.length; i++) {
-        //                     //console.log(guids[i]);
-        //                     getProfileGigsF(guids[i]);
-        //                }
-        //
-        //            }
-        //        });
-    }
-
-
-
-
-    if ($load == 'jobs') {
-        $('section.jobs-page-content').show();
-        $('input#search-header').focus().attr('placeholder', 'Search jobs...');
-    }
-
-    if ($load == 'profiles') {
-        $('section.profiles-page-content').show();
-        $('input#search-header').focus().attr('placeholder', 'Search profiles...');
-
-        console.log('SHOW PROFILES LISTING');
-
-        main_profile_cards();
-
-
-    }
-
-    if ($load == 'otherprofile') {
-        console.log('OTHER PROFILE LOAD');
-        //$('section.background-image').show();
-        $('#other-profile-headline').show();
-        $('#other-profile-section').show();
-
-        $('body').addClass('up');
-
-    }
-
-    if ($load == 'profile') {
-        /*
-         */
-        console.log('LOAD PROFILE GIGS:');
-        $('#other-profile-headline').removeClass('background-image');
-        $('#other-profile-headline').addClass('background-image2');
-        $('#my-profile-headline').removeClass('background-image2');
-        $('#my-profile-headline').addClass('background-image');
-
-        $('#my-profile-section').removeClass('documentation2');
-        $('#other-profile-section').removeClass('documentation');
-        $('#other-profile-section').addClass('documentation2');
-        $('#my-profile-section').addClass('documentation');
-
-
-
-        var gig_ctx = $("[data-target='#gigModal'")
-        var el = gig_ctx.remove(0);
-
-        getNodeData(function(node_data) {
-            node = $.parseJSON(node_data);
-            console.log('GUID:' + node.guid);
-            getProfileGigs(node.guid, function(data) {
-                console.log('GUID:' + data);
-                profile_gigs = JSON.parse(data);
-                for (var i = 0; i < profile_gigs.length; i++) {
-                    $.ajax({
-                        url: "/api/v1/dht/hkey/?hkey=" + profile_gigs[i],
-                        hk: profile_gigs[i],
-                        type: "GET",
-                        processData: false,
-                        success: function(js_data) {
-
-                            //console.log('hkey',this.hk);
-                            //console.log('data:',js_data);
-                            gig_o = JSON.parse(js_data);
-                            //console.log('data:',gig_o);
-                            createGigToProfile2(this.hk, gig_o);
-
-                        },
-
-                        error: function(error) {
-                            console.log('ERR', error);
-
-                            return;
-                        }
-                    });
-
-                    //var gig_hk = profile_gigs[i];
-                    //console.log('GIG HK:',gig_hk);
-
-                    /**/
-                }
-            });
-        });
-
-        /*
-         */
-        $('section.background-image').show();
-        $('section.documentation').show();
-        $('body').addClass('up');
-    }
-});
-
 
 
 $(document).ready(function() {

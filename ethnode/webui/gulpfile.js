@@ -59,7 +59,7 @@ var config = {
 gulp.task('html:build', function() {
     gulp.src(path.src.html)
         .pipe(rigger())
-        .pipe(gulp.dest(path.build.html))
+        .pipe(gulp.dest('./'))
         .pipe(browserSync.reload({ stream: true }))
 });
 

@@ -1520,7 +1520,6 @@ section.documentation .container .content-block:not(.gig) .main-description span
 
 section.background-image {
     min-height: 400px;
-    margin-top: 59px;
     position: relative;
 }
 

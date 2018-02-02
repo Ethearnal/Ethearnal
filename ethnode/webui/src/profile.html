@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethearnal</title>
+    <link rel="stylesheet" href="styles/hcmodals.css">
+    <!-- FAVICON-->
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <!-- START of LINKS-->
+    <!-- Normalize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
+    <!-- BootstrapCSS 3.3.7-->
+    <link rel="stylesheet" href="./node_modules/croppie/croppie.css" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Semantic UI CSS-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.css">
+    <!-- Owl Carousel CSS-->
+    <link rel="stylesheet" href="https://bbcdn.githack.com/shahzadns/owlfonk-owlcarousel/raw/31413692812896e19db89baee9be30b9d36d1e64/owl-carousel/owl.carousel.css">
+    <!-- Bootstrap Material Date and Time Picker-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/css/bootstrap-material-datetimepicker.css">
+    <!-- Icons-->
+    <link rel="stylesheet" href="styles/icons.css">
+    <link rel="stylesheet" href="./assets/icons/themify-icons.css">
+    <!-- Flag icons-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/lipis/flag-icon-css/master/css/flag-icon.min.css">
+    <!-- START of FONTS-->
+    <!-- Google Material Icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Material Design Bootstrap-->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Roboto-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i">
+    <!-- Montserrat-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800,900">
+    <!-- END of FONTS-->
+    <!-- Main CSS file-->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="./dist/css/main.css">
+    <!-- END of LINKS-->
+</head>
+
+<body>
+
+    //= templates/header-global.html
+
+    <section id="my-profile-headline" class="background-image">
+        <div class="button-next" style="margin: auto;">
+            <i id="myBtn--" open-modal="#edit-profile-headline" class="material-icons open-modal">add_a_photo</i>&nbsp;</div>
+        <!--div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div-->
+        <div class="items">
+            <div class="item">
+                <!--img style="" id="profile-headline" src="images/background-downtown.png" alt="Building"
+            class="aspecto-img"-->
+                <div id="profile-headline" class="aspecto-img"></div>
+
+            </div>
+        </div>
+    </section>
+    <!-- This section is for your whole profile, including left and right sides, profile information and etc.-->
+    <section id="my-profile-section" class="documentation">
+        <div class="container">
+            <!-- Profile information including profile image, current work, current city and state, skills and etc.-->
+            <div class="profile-information-container col-lg-4 col-md-4 col-sm-12 col-xs-12" s>
+
+                <div class="profile-information up">
+
+
+                    <div class="profile-upper">
+
+                        <div open-modal="#edit-profile" class="profile-image open-modal"><img src="" alt="">
+                            <div class="text-on-image">
+                                <p>Change
+                                    <i class="material-icons">edit</i>
+                                </p>
+                            </div>
+                        </div>
+
+                        <h2></h2>
+
+                        <h5 class="profile-information-position"></h5>
+                        <p class="location"></p>
+
+                        <!--button class="leave-msg">Send Message</button-->
+                        <!-- SKILLS-->
+                        <p class="skills-text">Skills <i class="skills-down material-icons">keyboard_arrow_down</i></p>
+                        <div class="skills hidden">
+                        </div>
+                        <!-- LANGUAGES-->
+                        <p class="skills-text">Languages <i class="languages-down material-icons">keyboard_arrow_down</i></p>
+                        <div class="languages hidden">
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="profile-information middle">
+                    <!-- Profile description including a description about you. (dark-gray section)-->
+                    <div class="profile-description">
+                        <p>Profile's description.</p>
+                    </div>
+                </div>
+                <!-- Profile footer, including social media links.-->
+                <div class="profile-footer">
+                    <ul class="list-inline">
+                        <li><a href=""><i class="icon-facebook"></i></a></li>
+                        <li><a href=""><i class="icon-twitter"></i></a></li>
+                        <li><a href=""><i class="icon-r-s-s"></i></a></li>
+                        <li><a href=""><i class="icon-instagram"></i></a></li>
+                        <li><a href=""><i class="icon-google"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Profile documentation including jobs and education, stories, shout-outs and questions with answers-->
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-documentation-full">
+                <div class="profile-documentation col-xs-12">
+
+                    <ul role="tablist" class="nav nav-tabs">
+                        <li role="presentation" class="active timeline-li"><a href="#gigs" aria-controls="gigs" role="tab" data-toggle="tab">Gigs</a></li>
+                        <li role="presentation" class="timeline-li"><a href="#portfolio" aria-controls="portfolio" role="tab" data-toggle="tab">Portfolio</a></li>
+                        <li role="presentation" class="timeline-li"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
+                        <li role="presentation" class="timeline-li"><a href="#archived" aria-controls="orders" role="tab" data-toggle="tab">Completed</a></li>
+                        <li role="presentation" class="timeline-li"><a href="#messages" aria-controls="orders" role="tab" data-toggle="tab">Messages</a></li>
+                    </ul>
+                    <div open-modal="#add-gig" class="plusIcon gigs active open-modal"><i class="material-icons">library_add</i></div>
+                    <div open-modal="#add-portfolio" class="plusIcon portfolio open-modal"><i class="material-icons">note_add</i></div>
+                    <!-- All the information about above listed tabs.-->
+                    <div class="tab-content col-xs-12">
+                        <!-- Gigs TAB-->
+                        <div id="gigs" role="tabpanel" class="tab-content active in col-xs-12">
+                            <div class="gigs-container-profile">
+                            </div>
+                        </div>
+                        <!-- Portfolio TAB-->
+                        <div id="portfolio" role="tabpanel" class="tab-pane fade col-xs-12">
+                            <div class="portfolio-container"></div>
+                        </div>
+                        <!-- Portfolio TAB-->
+                        <div id="orders" role="tabpanel" class="tab-pane fade col-xs-12">
+                            <div class="gigs-container-orders">
+                                <!--<div data-toggle="modal" data-target="#gigModal" class="gig content-block">-->
+                                <!--<button id="dropdowngiga0" class="mdl-button mdl-js-button mdl-button&#45;&#45;icon dropdown-button"><i class="material-icons">more_vert</i></button>-->
+                                <!--<ul for="dropdowngiga0" class="mdl-menu mdl-menu&#45;&#45;bottom-right mdl-js-menu mdl-js-ripple-effect">-->
+                                <!--<li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edit</li>-->
+                                <!--<li class="mdl-menu__item delete">Delete</li>-->
+                                <!--</ul>-->
+                                <!--<div class="ui fluid image">-->
+                                <!--<div class="ui black ribbon label">Category</div>-->
+                                <!--<div class="image-block"><img src="images/paypal.jpg"></div>-->
+                                <!--</div>-->
+                                <!--<div class="owner-info"><img src="http://via.placeholder.com/24x24" alt="Avatar">-->
+                                <!--<h5>owner_nickname</h5>-->
+                                <!--<h4>Entry Level</h4>-->
+                                <!--</div>-->
+                                <!--<p>Gig Description</p>-->
+                                <!--<div class="lower-info">-->
+                                <!--<div class="reputation"><i class="material-icons">polymer</i><span>5k+</span></div>-->
+                                <!--<h6 class="expire">expires in 5 mins</h6>-->
+                                <!--</div>-->
+                                <!--<div class="footer">-->
+                                <!--<h4>Starting at <span><i class="material-icons">polymer</i>25</span></h4>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- jQuery 3.1.1-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.2-->
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <!-- BootstrapJS 3.3.7-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Semantic UI JS-->
+    <script src="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.js"></script>
+    <!-- Owl Carousel JS-->
+    <script src="https://bbcdn.githack.com/shahzadns/owlfonk-owlcarousel/raw/31413692812896e19db89baee9be30b9d36d1e64/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Moment.JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <!-- Bootstrap Date Time Picker-->
+    <script src="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Moment JS-->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.19.1/moment.min.js"></script>
+    <!-- Material Design Bootstrap-->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Jquery Easing-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <!-- Main JS file-->
+    <script src="./node_modules/croppie/croppie.js"></script>
+    <script src="js/main.js"></script>
+    <!-- PROFILE AVATAR CROPPING / CHANGING-->
+
+
+    <!-- Trigger/Open The Modal -->
+    <!--button id="myBtn">Open Modal</button-->
+
+    <!-- The Modal -->
+    <div id="myModal" class="beep-modal-hc">
+
+        <!-- Modal content -->
+        <div class="beep-modal-content-hc">
+            <!--
+    <h3>Change Headline Image</h3>
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p> -->
+            <!-- hc modal content -->
+        </div>
+
+    </div>
+
+
+    <script>
+        /*
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // Get the modal
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                var modal = document.getElementById('myModal');
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // Get the button that opens the modal
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                var btn = document.getElementById("beep-btn");
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // Get the <span> element that closes the modal
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // var span = document.getElementsByClassName("close")[0];
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // When the user clicks the button, open the modal
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    btn['op_i']=1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    var k = 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    var tno = null;
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                var fade_in = function() {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    k = 0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    modal.style.opacity = "0.0";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    modal.style.display = "block";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    tno = setInterval( function(){
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       k += 0.1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       //console.log('k',k);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       modal.style.opacity = ""+k;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       if(k>=1){
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         clearInterval(tno);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    },30);
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                };
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                var fade_out = function() {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    console.log('fade_out');
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    k = 1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    tno = setInterval( function(){
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       k -= 0.1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      // console.log('k',k);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       modal.style.opacity = ""+k;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       if(k<=0.1){
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         modal.style.display = "none";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         clearInterval(tno);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    },30);
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                };
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                btn.onclick = fade_in;
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // When the user clicks anywhere outside of the modal, close it
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                window.onclick = function(event) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    if (event.target == modal) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        fade_out();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+    </script>
+
+
+    <div id="edit-profile-headline" class="modal-box edit flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Edit profile headline image</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your headline was added.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">add new job</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="form-group" id="image-headline-form">
+                            <input id="input-image-profile-he" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-profile-he" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-profile"><img id="input-image-profile-he" src="#" alt=""
+                                class="show-image empty">
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="updateProfileHeadline" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+                        <div data-mdl-for="updateProfileHeadline" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="new-modal-thing">
+        <div id="new-modal-wrap">
+            <!-- header -->
+            <div class="new-modal-header">
+                <!-- profile info -->
+                <div id="new-modal-owner-avatar"></div>
+                <div class="new-modal-owner-info">
+                    <div id="new-modal-owner-name">Owner Name</div>
+                    <div id="new-modal-owner-title">Owner Title</div>
+                </div>
+                <!-- other things -->
+                <div class="new-modal-others">
+                    <button data-dismiss="modal" class="mdl-button mdl-js-button close-button">Close</button>
+                </div>
+            </div>
+            <!-- image -->
+            <div id="new-modal-gig-image">
+                <div id="new-modal-gig-title">
+                    Title
+                </div>
+                <div id="new-modal-description">
+                    Description
+                </div>
+            </div>
+            <div class="new-modal-footer">
+                <div class="new-modal-footer-buttons">
+                    <button class="mdl-button mdl-js-button buy">
+                Hold &nbsp; <span id="new-modal-gig-price-req">0.00 </span> &nbsp;
+                <i class="material-icons">polymer</i> &nbsp;
+                Price &nbsp; <span id="new-modal-gig-price"> 0.00 </span> &nbsp; Order
+          </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
