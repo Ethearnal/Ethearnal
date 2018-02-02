@@ -1,0 +1,108 @@
+.profile-headline {
+        background: linear-gradient(to right, #92a8d1 30%, #e6eeff 100%);
+        width: 100%;
+        min-height: 400px;
+        height: auto;
+        padding-top: 84px;
+        padding-bottom: 60px;
+        // background-image: url(http://127.0.0.1:5678/api/cdn/v1/resource?hkey=99cc396f3f279bcfe06496a21e104c3e6d89ae07863de6276b9b1ab465b4cf72);
+        background-size: cover;
+        background-repeat: no-repeat;
+    .user-info-wrap {
+        display: flex;
+        padding-top: 40px;
+        .user-avatar {
+            width: 150px;
+            height: 150px;
+            display: inline-block;
+            border: 3px solid #eee;
+            box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            background-image: url(http://127.0.0.1:5678/api/cdn/v1/resource?hkey=1194084ed34ed008353809a6c9fa6dd2ce3f0f561c10d5399123cd34622d0172);
+            background-position: center;
+            background-size: cover;
+        }
+        .user-info {
+            padding-left: 20px;
+            max-width: 750px;
+            .user-name {
+                font-weight: bold;
+                line-height: 1.2;
+                margin: 0;
+                margin-bottom: 12px;
+                color: #fff;
+            }
+            .user-role {
+                line-height: 1.2;
+                margin: 0;
+                color: #fff;
+            }
+            .user-item {
+                margin: 15px 0px;
+                .item-title {
+                    margin-right: 15px;
+                }
+                .item {
+                    line-height: 24px;
+                    border-radius: 4px;
+                    border: solid 1px #fff;
+                    padding: 0px 10px;
+                    color: #fff;
+                    margin-right: 5px;
+                    display: inline-block;
+                    transition: .3s;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: #e4ecfe;
+                        color: #92a8d2;
+                    }
+                }
+            }
+            .user-description {
+                color: #fff;
+            }
+            .profile-social {
+                .list-inline {
+                    li {
+                        margin-right: 25px;
+                        
+                        a {
+                            color: #e6eeff;
+                            transition: .3s;
+                        }
+                        &:hover {
+                            a {
+                                color: #4a4a4a;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.inner-profile {
+    background-color: #f6f7fb;
+    .profile-documentation {
+        margin-left: 0px;
+        .nav {
+            box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            li {
+                a {
+                    
+                }
+            }
+        }
+    }
+    .profile-documentation-full {
+        margin-top: -30px;
+    }
+    .tab-pane {
+        background-color: #fff;
+        margin-top: 8px;
+        box-shadow: 5px 5px 22px rgba(0, 0, 0, 0.21), 0 5px 10px rgba(0, 0, 0, 0);
+        border-radius: 15px;
+    }
+}

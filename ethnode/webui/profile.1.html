@@ -46,7 +46,33 @@
 
 <body>
 
-    //= templates/header-global.html
+    <header class="main-header">
+        <div class="container">
+            <nav class="flex-block flex-between">
+                <div class="navbar-header">
+                    <div class="button">
+                        <button type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" class="navbar-toggle collapsed"></button>
+                    </div>
+                    <a href="/ui" class=" hidden-xs"><img src="images/logo.png" alt="Ethearnal Logo"></a>
+                </div>
+                <div id="navigation" class="collapse navbar-collapse tab-info">
+                    <ul class="nav nav-tabs navbar-right hidden-xs relative dropdown">
+                        <li class="nav-item"><a href="/ui" class="nav-link active">Gigs</a></li>
+                        <li class="nav-item"><a href="" class="nav-link" load="profiles">Profiles</a></li>
+                        <li class="nav-item"><a href="" open-modal="#add-gig" class="nav-link open-modal">New Gig</a></li>
+                        <li id="settings-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="profile view-profile">
+                            <img id="avatar-img" src="" alt="" class="profile-picture">
+                            <i class="ti-angle-down font-size-14 mrg-left-5"></i>
+                            <!-- JSON DATA GOES HERE-->
+                        </li>
+                        <ul data-labelledby="settings-dropdown" class="dropdown-menu absolute">
+                            <li><a href="/ui/profile" class="flex-block flex-center"><i class="ti-user pdd-right-10 font-size-18"></i>My Profile</a></li>
+                            <li><a href="" class="flex-block flex-center"><i class="ti-info pdd-right-10 font-size-18"></i>About Node</a></li>
+                        </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
 
     <section id="my-profile-headline" class="background-image">
         <div class="button-next" style="margin: auto;">

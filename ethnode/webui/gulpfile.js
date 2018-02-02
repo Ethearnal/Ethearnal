@@ -11,21 +11,26 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
     rimraf = require('rimraf'),
-    browserSync = require("browser-sync"),
     concat = require('gulp-concat'),
     sequence = require('gulp-run-sequence'),
-    cache = require('gulp-cache')
+    cache = require('gulp-cache'),
+    babelify = require('babelify'),
+    browserify = require('browserify'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer');
 
 var path = {
     build: {
         html: 'dist/',
         css: 'dist/css/',
         img: 'dist/img/',
-        fonts: 'dist/fonts/'
+        fonts: 'dist/fonts/',
+        js: 'dist/js/'
     },
     src: {
         html: 'src/*.html',
         scss: 'src/scss/main.scss',
+        js: 'src/js/main.js',
         img: 'src/img/**/*.*',
         fonts: 'src/fonts/**/*.*',
         libsStyles: [
@@ -43,24 +48,12 @@ var path = {
 var argv = require('yargs').argv;
 var isProduction = (argv.prod === undefined) ? false : true;
 
-/* BrowserSync server config -------------------------
- ----------------------------------------------------- */
-var config = {
-    server: {
-        baseDir: "./dist"
-    },
-    //tunnel: true,
-    host: 'localhost',
-    port: 9090
-};
-
 /* Html compiler with rigger tool --------------------
  ----------------------------------------------------- */
 gulp.task('html:build', function() {
     gulp.src(path.src.html)
         .pipe(rigger())
         .pipe(gulp.dest('./'))
-        .pipe(browserSync.reload({ stream: true }))
 });
 
 gulp.task('style:build', function() {
@@ -88,19 +81,19 @@ gulp.task('styleLib:build', function() {
         .pipe(gulp.dest(path.build.css))
 });
 
-gulp.task('js:build', function() {
-    gulp.src(path.src.js)
-        .pipe(rigger())
-        .pipe(sourcemaps.init())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest(path.build.js))
-        .pipe(browserSync.reload({ stream: true }))
-});
+gulp.task('js:build', function () {
+  var b = browserify({
+    entries: 'src/js/main.js',
+    debug: true,
+    transform: [babelify.configure({
+      presets: ['es2015']
+    })]
+  });
 
-gulp.task('jsLib:build', function() {
-    gulp.src(path.src.libsJS)
-        .pipe(concat('vendor.min.js'))
-        .pipe(gulp.dest(path.build.js))
+  return b.bundle()
+    .pipe(source('main.js'))
+    .pipe(buffer())
+    .pipe(gulp.dest('dist/js/'));
 });
 
 gulp.task('image:build', function() {
@@ -126,6 +119,7 @@ gulp.task('build', (cb) => {
         'html:build',
         'style:build',
         'styleLib:build',
+        'js:build',
         'fonts:build',
         'image:build'
     ], () => cb());
@@ -134,12 +128,9 @@ gulp.task('build', (cb) => {
 gulp.task('watch', () => {
     gulp.watch('src/**/*.html', ['html:build']);
     gulp.watch('src/scss/**/*.scss', ['style:build']);
+    gulp.watch('src/js/**/*.js', ['js:build']);
     gulp.watch(path.src.img, ['image:build']);
     gulp.watch(path.src.fonts, ['fonts:build']);
-});
-
-gulp.task('webserver', function() {
-    browserSync(config);
 });
 
 gulp.task('clean', function(cb) {

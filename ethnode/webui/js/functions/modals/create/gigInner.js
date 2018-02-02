@@ -317,24 +317,10 @@ $('body').delegate('.gig', 'click', function(e){
     // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
     var api_cdn = api_get_cdn_url();
     var gig_hkey = $(this).attr('id');
-    console.log('++ + + + + +++ ++ gig_hkey', gig_hkey);
-    $modal = $(".modal#gigModal .modal-content");
+    $modal = $(".modal#gigModal .modal-dialog");
     //
     $modal.html('');
-    // $innerContent = $('<div class="modal-body">' + '</div>');
-    // $(".modal#gigModal .modal-content").html($innerContent);
-    // $modal.center();
-
-    $modal.width("100%");
-    $modal.height("640px");
-    //
-
-    // $innerContent = $('<div class="modal-body">' +$('#new-modal-thing').html() + '</div>');
-    $innerContent = $($('#new-modal-thing').html());
-    //console.log($('#new-modal-thing').html());
-    $modal.html($('#new-modal-thing').html());
-    //$modal.css('margin-left','10px;');
-
+    $modal.html($('#redesigned-modal').html());
 
     $.ajax({
         url: "/api/v1/dht/hkey/?hkey=" + gig_hkey,
@@ -344,17 +330,21 @@ $('body').delegate('.gig', 'click', function(e){
             gig_o = JSON.parse(gig_data_json);
 
             console.log('--->', this.url);
-            $e = $('#new-modal-gig-image')
+            $e = $('#redesigned-modal-gig-image')
             $e.css(
                 'background', 'url("' + api_cdn + gig_o.image_hash+ '")'
-                + '0 0 no-repeat'
+                + 'center center no-repeat'
             );
             $e.css('background-size', '100% auto');
 
             owner_guid = gig_o.owner_guid;
 
-            $('#new-modal-gig-title').html(gig_o.title);
-            $('#new-modal-description').html(gig_o.description);
+            $('#redesigned-modal-gig-title').html(gig_o.title);
+            $('#redesigned-modal-description').html(gig_o.description);
+
+            return true;
+            /* TEMPORATY COMMIT */
+
             $('#new-modal-gig-price-req').html(gig_o.required_ert);
             $('#new-modal-gig-price').html(gig_o.price);
 
@@ -398,15 +388,6 @@ $('body').delegate('.gig', 'click', function(e){
                     //console.log('title', title);
                 }
             });
-
-
-            //gig_o.image_hash
-
-
-
-
-
         }
     });
 });
-
