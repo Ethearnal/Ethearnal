@@ -24,10 +24,15 @@
         }
         .user-info {
             padding-left: 20px;
-            max-width: 750px;
+            width: 750px;
+            max-width: calc(100% - 150px);
+            * {
+              letter-spacing: 0.5px !important;
+            }
             .user-name {
-                font-weight: bold;
+                font-weight: 500;
                 line-height: 1.2;
+                letter-spacing: 0.5px;
                 margin: 0;
                 margin-bottom: 12px;
                 color: #fff;
@@ -60,12 +65,13 @@
             }
             .user-description {
                 color: #fff;
+                line-height: 1.7;
             }
             .profile-social {
                 .list-inline {
                     li {
                         margin-right: 25px;
-                        
+
                         a {
                             color: #e6eeff;
                             transition: .3s;
@@ -91,7 +97,7 @@
             border-radius: 15px;
             li {
                 a {
-                    
+
                 }
             }
         }
