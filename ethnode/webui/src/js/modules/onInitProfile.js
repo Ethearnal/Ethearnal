@@ -18,6 +18,7 @@ window.profilePageModule = (function() {
                         success: function(js_data) {
                             var gig_o = JSON.parse(js_data);
                             generateGigsModule.generate(this.hk, data);
+                            // createGigToProfile2(this.hk, gig_o);
                         },
 
                         error: function(error) {
