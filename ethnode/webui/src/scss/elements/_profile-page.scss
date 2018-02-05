@@ -105,7 +105,6 @@
     background-color: #f6f7fb;
     .profile-documentation {
         margin-left: 0px;
-        box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
         border-radius: 15px;
         .nav { 
             li {
@@ -124,4 +123,12 @@
         box-shadow: 5px 5px 22px rgba(0, 0, 0, 0.21), 0 5px 10px rgba(0, 0, 0, 0);
         border-radius: 15px;
     }
+}
+
+
+.gigs-profile-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding-left: 30px;
 }

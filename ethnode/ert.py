@@ -180,6 +180,11 @@ def main_http(http_webdir: str = config.http_webdir,
             'tools.staticdir.dir': http_webdir,
             'tools.staticdir.index': 'profile.html',
         },
+         '/ui/profiles': {
+            'tools.staticdir.on': True,
+            'tools.staticdir.dir': http_webdir,
+            'tools.staticdir.index': 'profiles.html',
+        },
         '/ui/files': {
             'tools.staticdir.on': True,
             'tools.staticdir.root': ert_profile_ctl.data_dir,
