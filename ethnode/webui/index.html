@@ -41,58 +41,6 @@
     <!-- Main CSS file-->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="./dist/css/main.css">
-    <!-- END of LINKS-->
-    <style>
-        /* The Modal (background) */
-
-        .modal-hc {
-            display: none;
-            /* Hidden by default */
-            position: absolute;
-            /* Stay in place */
-            z-index: 100;
-            /* Sit on top */
-            padding-top: 59px;
-            /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-        }
-        /* Modal Content */
-
-        .modal-content-hc {
-            background-color: white;
-            margin: auto;
-            height: 341px;
-            border: 1px solid;
-            /* border: 1px solid #888; */
-            width: 100%;
-        }
-        /* The Close Button */
-
-        .close {
-            color: #aaaaaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
@@ -1372,7 +1320,9 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <!-- Main JS file-->
     <script src="./node_modules/croppie/croppie.js"></script>
+    <script src="./dist/js/main.js"></script>
     <script src="js/main.js"></script>
+
     <!-- PROFILE AVATAR CROPPING / CHANGING-->
 
 
@@ -1381,89 +1331,9 @@
 
     <!-- The Modal -->
     <div id="myModal" class="beep-modal-hc">
-
-        <!-- Modal content -->
-        <div class="beep-modal-content-hc">
-            <!--
-    <h3>Change Headline Image</h3>
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p> -->
-            <!-- hc modal content -->
-        </div>
+        <div class="beep-modal-content-hc"></div>
 
     </div>
-
-
-    <script>
-        /*
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        // Get the modal
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        var modal = document.getElementById('myModal');
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        // Get the button that opens the modal
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        var btn = document.getElementById("beep-btn");
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        // Get the <span> element that closes the modal
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        // var span = document.getElementsByClassName("close")[0];
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        // When the user clicks the button, open the modal
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            btn['op_i']=1;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            var k = 0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            var tno = null;
-
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        var fade_in = function() {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            k = 0
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            modal.style.opacity = "0.0";
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            modal.style.display = "block";
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            tno = setInterval( function(){
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               k += 0.1;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               //console.log('k',k);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               modal.style.opacity = ""+k;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               if(k>=1){
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 clearInterval(tno);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            },30);
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        };
-
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        var fade_out = function() {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            console.log('fade_out');
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            k = 1;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            tno = setInterval( function(){
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               k -= 0.1;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              // console.log('k',k);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               modal.style.opacity = ""+k;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               if(k<=0.1){
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 modal.style.display = "none";
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 clearInterval(tno);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            },30);
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        };
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        btn.onclick = fade_in;
-
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        // When the user clicks anywhere outside of the modal, close it
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        window.onclick = function(event) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            if (event.target == modal) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                fade_out();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
-    </script>
-
 
     <div id="edit-profile-headline" class="modal-box edit flex floating">
         <div class="modal-box-content">
@@ -1540,40 +1410,40 @@
     </div>
 
     <div id="redesigned-modal" class="hidden">
-      <div class="modal-content border-radius-6">
-        <div class="modal-header pdd-horizon-30">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title flex-block flex-center">
-            <div id="new-modal-owner-avatar" class="mrg-right-15"></div>
-            <div>
-              <span id="new-modal-owner-name">Owner Name</span> <br>
-              <span id="new-modal-owner-title">Owner Title</span>
+        <div class="modal-content border-radius-6">
+            <div class="modal-header pdd-horizon-30">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title flex-block flex-center">
+                    <div id="new-modal-owner-avatar" class="mrg-right-15"></div>
+                    <div>
+                        <span id="new-modal-owner-name">Owner Name</span> <br>
+                        <span id="new-modal-owner-title">Owner Title</span>
+                    </div>
+                </h4>
             </div>
-          </h4>
-        </div>
-        <div class="modal-body border-radius-6" style="overflow: hidden;">
-          <div class="pdd-horizon-30">
-            <div class="row">
-                <div class="ml-auto col-xs-12">
-                  <h3 class="font-size-24 color-blue" id="redesigned-modal-gig-title">I'll design a smart contracts for ethereum platform</h3>
+            <div class="modal-body border-radius-6" style="overflow: hidden;">
+                <div class="pdd-horizon-30">
+                    <div class="row">
+                        <div class="ml-auto col-xs-12">
+                            <h3 class="font-size-24 color-blue" id="redesigned-modal-gig-title">I'll design a smart contracts for ethereum platform</h3>
+                        </div>
+                        <div class="col-xs-12 text-center mrg-vertical-10">
+                            <div id="redesigned-modal-gig-image" style="height: 200px;"></div>
+                        </div>
+                        <p id="redesigned-modal-description" class="col-md-12 font-size-16">Let me see your identification. You don't need to see his identification. We don't need to see his identification. These are not the droids.</p>
+                    </div>
                 </div>
-                <div class="col-xs-12 text-center mrg-vertical-10">
-                  <div id="redesigned-modal-gig-image" style="height: 200px;"></div>
-                </div>
-                <p id="redesigned-modal-description" class="col-md-12 font-size-16">Let me see your identification. You don't need to see his identification. We don't need to see his identification. These are not the droids.</p>
             </div>
-          </div>
-        </div>
-        <div class="modal-footer pdd-horizon-30">
-            <div class="text-right">
-                <button class="btn btn-default btn-sm no-mrg" data-dismiss="modal">
+            <div class="modal-footer pdd-horizon-30">
+                <div class="text-right">
+                    <button class="btn btn-default btn-sm no-mrg" data-dismiss="modal">
                   Hold &nbsp; <span id="redesigned-modal-gig-price-req">0.00 </span> &nbsp;
                   <i class="material-icons font-size-18" style="vertical-align: text-bottom;">polymer</i> &nbsp;
                   Price &nbsp; <span id="redesigned-modal-gig-price"> 0.00 </span> &nbsp; Order
                 </button>
+                </div>
             </div>
         </div>
-      </div>
     </div>
 </body>
 
