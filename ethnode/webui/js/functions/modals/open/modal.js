@@ -8,6 +8,7 @@ function openModal(modal) {
 
 // Function to close modal
 function closeModal(modalID) {
+    $('body').removeClass('modal-open');
     $modalBox = $('#' + modalID);
     $modalBox.find('.modal-box-content .inner-modal .content').css({ transitionDelay: '0s' });
 

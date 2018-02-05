@@ -10,7 +10,6 @@ window.profilePageModule = (function() {
             getProfileGigs(node.guid, function(data) {
                 var profile_gigs = JSON.parse(data);
                 for (var i = 0; i < profile_gigs.length; i++) {
-                    var id = profile_gigs[i];
                     $.ajax({
                         url: "/api/v1/dht/hkey/?hkey=" + profile_gigs[i],
                         hk: profile_gigs[i],
@@ -18,10 +17,7 @@ window.profilePageModule = (function() {
                         processData: false,
                         success: function(js_data) {
                             var gig_o = JSON.parse(js_data);
-                            console.log("SOSO")
-                            console.log(id);
-                            console.log(this.hk);
-                            generateGigsModule.generate(this.hk, gig_o);
+                            generateGigsModule.generate(this.hk, data);
                         },
 
                         error: function(error) {

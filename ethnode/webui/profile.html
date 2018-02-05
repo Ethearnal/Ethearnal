@@ -204,15 +204,15 @@
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
                                     <select id="category" class="ui dropdown">
-                      <option value="">Select Category</option>
-                      <option value="1">Software Development</option>
-                      <option value="2">Entertainment</option>
-                      <option value="3">Graphic Design</option>
-                      <option value="4">Content Writing</option>
-                      <option value="5">Accountants</option>
-                      <option value="6">Consultants</option>
-                      <option value="7">Assistants</option>
-                    </select>
+                                        <option value="">Select Category</option>
+                                        <option value="1">Software Development</option>
+                                        <option value="2">Entertainment</option>
+                                        <option value="3">Graphic Design</option>
+                                        <option value="4">Content Writing</option>
+                                        <option value="5">Accountants</option>
+                                        <option value="6">Consultants</option>
+                                        <option value="7">Assistants</option>
+                                    </select>
                                 </div>
                                 <div style="height: 38px; float: right; margin-top: 20px" class="ui right labeled input">
                                     <label for="reputationCost" class="ui label"><i style="font-size: 17px" class="material-icons">polymer</i></label>
@@ -221,11 +221,11 @@
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
                                     <select name="gig-tags" multiple="" class="ui fluid dropdown normal search gig-tags">
-                      <option value="">Add gig tags (limit: 10)...</option>
-                      <option value="programming">Programming</option>
-                      <option value="copywriting">Copywriting</option>
-                      <option value="userexperience">User Experience</option>
-                    </select>
+                                        <option value="">Add gig tags (limit: 10)...</option>
+                                        <option value="programming">Programming</option>
+                                        <option value="copywriting">Copywriting</option>
+                                        <option value="userexperience">User Experience</option>
+                                    </select>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield whole-line">
                                     <label for="description" class="label-control gig-title-label">Description (what have you done or currently do?)</label>
@@ -244,7 +244,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button">Close</button>
+                        <button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button" id="modal-close">Close</button>
                         <button id="publish4" style="" class="btn btn-info lh-normal mdl-button mdl-js-button finish-button">Publish</button>
                         <div data-mdl-for="publish4" class="mdl-tooltip">This text will be changed anyway.</div>
                     </div>
@@ -258,37 +258,35 @@
     <!-- Modals  Temaplates -->
 
     <div id="redesigned-modal" class="hidden">
-        <div class="modal-content border-radius-6">
-            <div class="modal-header pdd-horizon-30">
+        <div class="modal-content border-radius-6 redesigned-gig-modal">
+            <div class="modal-header pdd-horizon-30" id="redesigned-modal-gig-image" style="height: 200px;">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title flex-block flex-center">
-                    <div id="new-modal-owner-avatar" class="mrg-right-15"></div>
-                    <div>
-                        <span id="new-modal-owner-name">Owner Name</span> <br>
-                        <span id="new-modal-owner-title">Owner Title</span>
-                    </div>
-                </h4>
             </div>
-            <div class="modal-body border-radius-6" style="overflow: hidden;">
+            <div class="modal-body pdd-vertical-10 no-mrg">
                 <div class="pdd-horizon-30">
                     <div class="row">
-                        <div class="ml-auto col-xs-12">
-                            <h3 class="font-size-24 color-blue" id="redesigned-modal-gig-title">I'll design a smart contracts for ethereum platform</h3>
+                        <div class="col-xs-12">
+                            <h4 class="modal-title flex-block flex-center">
+                                <div id="new-modal-owner-avatar" class="mrg-right-15"></div>
+                                <div class="mrg-top-20">
+                                    <span id="new-modal-owner-name">Owner Name</span> -
+                                    <span id="new-modal-owner-title">Owner Title</span>
+                                </div>
+                            </h4>
+                            <h3 class="font-size-24 color-blue mrg-top-50 mrg-btm-10" id="redesigned-modal-gig-title">I'll design a smart contracts for ethereum platform</h3>
+                            <p id="redesigned-modal-description" class="font-size-16 mrg-btm-10">Let me see your identification. You don't need to see his identification. We don't need to see his identification. These are not the droids.</p>
+                            <p class="font-size-16 mrg-btm-10" id="redesigned-modal-gig-tags"></p>
                         </div>
-                        <div class="col-xs-12 text-center mrg-vertical-10">
-                            <div id="redesigned-modal-gig-image" style="height: 200px;"></div>
-                        </div>
-                        <p id="redesigned-modal-description" class="col-md-12 font-size-16">Let me see your identification. You don't need to see his identification. We don't need to see his identification. These are not the droids.</p>
                     </div>
-                </div>
-            </div>
-            <div class="modal-footer pdd-horizon-30">
-                <div class="text-right">
-                    <button class="btn btn-default btn-sm no-mrg" data-dismiss="modal">
-                  Hold &nbsp; <span id="redesigned-modal-gig-price-req">0.00 </span> &nbsp;
-                  <i class="material-icons font-size-18" style="vertical-align: text-bottom;">polymer</i> &nbsp;
-                  Price &nbsp; <span id="redesigned-modal-gig-price"> 0.00 </span> &nbsp; Order
-                </button>
+                    <div class="modal-footer pdd-horizon-30">
+                        <div class="text-right">
+                            <button class="btn btn-default btn-sm no-mrg" data-dismiss="modal">
+                    Hold &nbsp; <span id="redesigned-modal-gig-price-req">0.00 </span> &nbsp;
+                    <i class="material-icons font-size-18" style="vertical-align: text-bottom;">polymer</i> &nbsp;
+                    Price &nbsp; <span id="redesigned-modal-gig-price"> 0.00 </span> &nbsp; Order
+                  </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
