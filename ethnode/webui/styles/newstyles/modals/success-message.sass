@@ -1,0 +1,50 @@
+.success-message
+    text-align: center
+    max-width: 800px
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+    h1.title
+        color: #3dc480
+        transform: translateY(25px)
+        opacity: 0
+        transition: all 200ms ease
+
+        &.active
+            transform: translateY(0)
+            opacity: 1
+            margin-bottom: 15px
+
+    .buttons
+        opacity: 0
+        transition: all 200ms ease
+        margin-top: 15px
+
+        span
+            color: #b8babb
+
+        button
+            background: none
+
+        button:not(.close-button)
+            color: #5CAB7D
+
+        &.active
+            opacity: 1
+
+
+    .success-content
+        color: #b8babb
+        transform: translateY(25px)
+        opacity: 0
+        transition: all 200ms ease
+        transition-delay: 50ms
+
+        p
+            font-size: 18px
+
+        &.active
+            transform: translateY(0)
+            opacity: 1

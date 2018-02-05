@@ -1,0 +1,153 @@
+.selectize-control {
+
+	&.single {
+
+		.selectize-input {
+			border-color: $border-color;
+			box-shadow: none;
+			background-color: $default-white;
+			background-image: none;
+
+			
+
+			&:after {   
+				content: "\e64b";
+			    font-family: 'themify';
+			    border-style: none; 
+			    border-width: 0px; 
+			    top: 40%;
+			    right: 25px;
+			    font-size: 10px;
+			    border-color: transparent;
+			}
+
+			&.dropdown-active {
+				&:after {
+					content: "\e648";
+				}	
+			}
+		}	
+	}
+}
+
+.selectize-dropdown {
+	color: $default-text-color;
+
+	.single {
+		border-color: $border-color;
+	}
+
+	&.single {
+		border-color: $border-color;
+	}
+
+	.active {
+		background-color: $default-gray;
+		color: $default-text-color;
+	}
+}	
+
+.selectize-input { 
+	color: $default-text-color;
+	border-radius: 2px;
+	box-shadow: none;
+	border: 1px solid $border-color;
+
+	input {
+		color: $default-text-color;
+		@include placeholder {
+			color: lighten($default-text-color, 30%);
+		}
+	}
+
+	> input {
+		line-height:  1.8 !important;
+	}
+
+	>* {
+		line-height:  1.8 !important;	
+	}
+}
+
+
+
+.selectize-control.multi .selectize-input [data-value] {
+	background-color: $inverse-info;
+	color: $default-info;
+	background-image: none;
+	border: 0px;
+	border-radius: 50px;
+	margin-right: 8px;
+	margin-bottom: 6px;
+	padding: 0px 10px;
+	box-shadow: none;
+	text-shadow: none;
+	font-weight: 500;
+
+	&.active {
+		border: 0px;
+		background-color: $inverse-info;
+		color: $default-info;
+		background-image: none;
+	}
+}
+
+.item-primary {
+
+	&.selectize-control.multi .selectize-input [data-value] {
+		background-color: $inverse-primary;
+		color: $default-primary;
+		background-image: none;
+
+		&.active {
+			background-color: $inverse-primary;
+			color: $default-primary;
+			background-image: none;
+		}
+	}
+}
+
+.item-success {
+
+	&.selectize-control.multi .selectize-input [data-value] {
+		background-color: $inverse-success;
+		color: $default-success;
+		background-image: none;
+
+		&.active {
+			background-color: $inverse-success;
+			color: $default-success;
+			background-image: none;
+		}
+	}
+}
+
+.item-warning {
+
+	&.selectize-control.multi .selectize-input [data-value] {
+		background-color: $inverse-success;
+		color: $default-success;
+		background-image: none;
+
+		&.active {
+			background-color: $inverse-warning;
+			color: $default-success;
+			background-image: none;
+		}
+	}
+}
+
+.item-danger {
+
+	&.selectize-control.multi .selectize-input [data-value] {
+		background-color: $inverse-danger;
+		color: $default-danger;
+		background-image: none;
+
+		&.active {
+			background-color: $inverse-danger;
+			color: $default-danger;
+			background-image: none;
+		}
+	}
+}

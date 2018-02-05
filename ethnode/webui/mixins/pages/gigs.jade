@@ -1,0 +1,146 @@
+section.gigs-page-content
+
+    .container
+
+        .filters.col-md-3
+
+            .filter.category
+                p Category
+
+                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-1")
+                    input#checkbox-1.mdl-checkbox__input(type="checkbox")
+                    span.mdl-checkbox__label Software Development
+
+                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-2")
+                    input#checkbox-2.mdl-checkbox__input(type="checkbox")
+                    span.mdl-checkbox__label Entertainment
+
+                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-3")
+                    input#checkbox-3.mdl-checkbox__input(type="checkbox")
+                    span.mdl-checkbox__label Graphic Design
+
+                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-4")
+                    input#checkbox-4.mdl-checkbox__input(type="checkbox")
+                    span.mdl-checkbox__label Content Writing
+
+                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-5")
+                    input#checkbox-5.mdl-checkbox__input(type="checkbox")
+                    span.mdl-checkbox__label Accountants
+
+                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-6")
+                    input#checkbox-6.mdl-checkbox__input(type="checkbox")
+                    span.mdl-checkbox__label Consultants
+
+                label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-7")
+                    input#checkbox-7.mdl-checkbox__input(type="checkbox")
+                    span.mdl-checkbox__label Assistants
+
+
+            //- .filter.job-type
+            //-     p Job Type
+
+            //-     label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-8")
+            //-         input#checkbox-8.mdl-checkbox__input(type="checkbox")
+            //-         span.mdl-checkbox__label Hourly
+
+            //-     label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-9")
+            //-         input#checkbox-9.mdl-checkbox__input(type="checkbox")
+            //-         span.mdl-checkbox__label Fixed Price
+
+
+            //- .filter.experience-level
+            //-     p Experience Level
+
+            //-     label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-10")
+            //-         input#checkbox-10.mdl-checkbox__input(type="checkbox")
+            //-         span.mdl-checkbox__label Entry Level
+
+            //-     label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-11")
+            //-         input#checkbox-11.mdl-checkbox__input(type="checkbox")
+            //-         span.mdl-checkbox__label Intermediate
+
+            //-     label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for="checkbox-12")
+            //-         input#checkbox-12.mdl-checkbox__input(type="checkbox")
+            //-         span.mdl-checkbox__label Expert
+
+
+            //- .filter.reputation(style="margin-bottom: 55px")
+            //-     p Reputation
+
+            //-     .slider-wrapper-2
+            //-         #slider-range-2
+
+            //-         .range-wrapper-2
+            //-             .range-2
+
+            //-             .gear-wrapper-2
+
+            //-                 .gear-large-2.gear-two-2
+            //-                     .gear-tooth-2
+            //-                     .gear-tooth-2
+            //-                     .gear-tooth-2
+            //-                     .gear-tooth-2
+
+            //-         .marker.marker-0: <sup>☦</sup>0
+            //-         .marker.marker-50: <sup>☦</sup>2,500
+            //-         .marker.marker-100: <sup>☦</sup>5,000
+
+
+            .filter.budget
+                p Budget
+
+                .slider-wrapper
+                    #slider-range
+
+                    .range-wrapper
+                        .range
+                        .range-alert: span +
+
+                        .gear-wrapper
+
+                            .gear-large.gear-one
+                                .gear-tooth
+                                .gear-tooth
+                                .gear-tooth
+                                .gear-tooth
+
+                            .gear-large.gear-two
+                                .gear-tooth
+                                .gear-tooth
+                                .gear-tooth
+                                .gear-tooth
+
+                    .marker.marker-0: <sup><i class="material-icons">polymer</i></sup>0
+                    .marker.marker-50: <sup><i class="material-icons">polymer</i></sup>5,000
+                    .marker.marker-100: <sup><i class="material-icons">polymer</i></sup>10,000+
+
+        .gigs.col-md-9
+
+            .gigs-container
+
+                .gig.content-block(data-toggle="modal", data-target="#gigModal")
+                    button#dropdowngiga0.mdl-button.mdl-js-button.mdl-button--icon.dropdown-button: i.material-icons more_vert
+                    ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for="dropdowngiga0")
+                        li.mdl-menu__item.open-modal(open-modal="#edit-gig") Edit
+                        li.mdl-menu__item.delete Delete
+
+                    .ui.fluid.image
+                        .ui.black.ribbon.label Category
+                        .image-block: img(src="images/pasypal.jpg")
+
+                    .owner-info
+                        img(src="http://via.placeholder.com/24x24", alt="Avatar")
+                        h5 owner_nickname
+                        h4 Entry Level
+
+                    p Gig Description
+
+                    .lower-info
+                        .reputation
+                            i.material-icons polymer
+                            span 5k+
+
+                        h6.expire expires in 5 mins
+
+                    .footer
+                        h4 Starting at <span><i class="material-icons">polymer</i>25</span>

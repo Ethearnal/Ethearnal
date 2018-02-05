@@ -1,0 +1,75 @@
+//==================================
+// 	Fonts
+//==================================
+
+
+$font-primary:            Roboto, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif !default;         // Primary font: Roboto
+$font-secondary:          Roboto, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif !default;         // Secondary font: Montserrat
+
+
+//==================================
+// 	Default color
+//==================================
+
+$default-dark:            #515365;
+$default-white:           #ffffff;
+$default-gray:            #f6f7fb;
+$default-text-color:      #888da8;
+$default-primary:         #7774e7;
+$default-success:         #37c936;
+$default-info :           #0f9aee;
+$default-warning:         #ffcc00;
+$default-danger:          #ff3c7e;
+
+//==================================
+// 	Inverse color
+//==================================
+$inverse-primary :        lighten($default-primary, 30%);
+$inverse-success :        lighten($default-success, 45%); 	   
+$inverse-info :           lighten($default-info, 45%);         
+$inverse-warning :        lighten($default-warning, 45%);	   
+$inverse-danger :         lighten($default-danger, 35%);	   
+
+//==================================
+// 	Misc
+//==================================
+$border-color:            #e6ecf5;
+$header-height:           65px;
+$offscreen-size:          280px;
+$collapsed-size:          70px;
+$side-nav-dark:           #313644;
+$side-nav-dark-font:      #99abb4;
+$side-nav-dark-border:    rgba(120,130,140,0.3);
+
+//==================================
+// 	Header Themes
+//==================================
+$theme-primary:    $default-primary;
+$theme-info:       $default-info;
+$theme-success:    desaturate($default-success, 5%);
+$theme-danger:     #f53f61;
+$theme-dark:       lighten($side-nav-dark, 10%);
+
+//==================================
+// 	Social media color
+//==================================
+
+$facebook :               #3B579D;
+$twitter :                #2CAAE1;
+$instagram :              #5d4a3b;
+$google-plus :            #dc4a38;
+$pinterest :              #c9181f;
+$skype :                  #00AAF1;
+$linkedin :               #0177b5;
+$youtube :                #DE2825;
+$yahoo :                  #7b0099;
+$rss :                    #f58432;
+$dropbox :                #007EE6;
+$sound-cloud :            #FF6A22;
+$vimeo :                  #1BB6EC;
+$bing :                   #ffb900;
+$dribbble :               #ea4c89;
+$html5 :                  #f16528;
+$sharethis :              #50b948;
+$tumblr :                 #36465d;
+$wordpress :              #0087be;

@@ -1,0 +1,265 @@
+sup
+    font-size: 80%
+    position: relative
+    top: -1px
+
+    i.material-icons
+        font-size: 11px
+        position: relative
+        top: 2px
+        right: 2px
+
+.slider-wrapper, .slider-wrapper-2
+    width: 200px
+    display: inline-block
+    position: relative
+    font-family: arial
+    margin-top: 65px
+    margin-left: 13px
+
+    &.slider-wrapper-2 .ui-slider .ui-slider-range
+        border-bottom-left-radius: 100px
+        border-top-left-radius: 100px
+
+    .marker, .marker-2
+        position: absolute
+        top: 100%
+        padding-top: 16px
+        font-size: 13px
+        color: #555
+        letter-spacing: 0.05em
+        transform: translateX(-50%)
+
+        &:after
+            content: ''
+            width: 1px
+            height: 8px
+            background: #d2d2d2
+            position: absolute
+            top: 0
+            left: 50%
+            transform: translateX(-50%)
+
+    .marker-0:after
+        display: none
+
+    .marker-25
+        left: 25%
+
+    .marker-50
+        left: 50%
+
+    .marker-75
+        left: 75%
+
+    .marker-100
+        right: 0
+        transform: translateX(50%)
+
+        &:after
+            display: none
+
+    .ui-slider, .ui-slider-2
+        background: #efefef
+        border: 1px solid #d2d2d2
+        height: 20px
+        position: relative
+        border-radius: 100px
+
+        .ui-slider-range, .ui-slider-range-2
+            background: #89ABE3
+            height: 20px
+            position: absolute
+            border-top: 1px solid #89ABE3
+            border-bottom: 1px solid #89ABE3
+            transform: translateY(-1px)
+
+            &:after
+                content: ''
+                width: 100%
+                height: 1px
+                background: #fff
+                position: absolute
+                top: 0
+                left: 0
+                opacity: 0.3
+
+    .range-wrapper, .range-wrapper-2
+        position: absolute
+        top: -50px
+        left: 50%
+        transform: translateX(-50%)
+
+        .range, .range-2
+            // background: #fff
+            white-space: nowrap
+            // border: 1px solid #d2d2d2
+            border-radius: 2px
+            font-size: 13px
+            letter-spacing: 0.02em
+            color: #555
+            width: 150px
+            z-index: 10
+            position: relative
+
+            &.range-2
+                width: 75px
+
+                &:after
+                    border-left: 33px solid transparent
+                    border-right: 33px solid transparent
+                    border-top: 3px solid #d2d2d2
+
+            &:after
+                content: ''
+                position: absolute
+                top: 100%
+                left: 50%
+                transform: translateX(-50%)
+                border-left: 67px solid transparent
+                border-right: 67px solid transparent
+                border-top: 6px solid #d2d2d2
+
+
+            .range-value:nth-child(1)
+                border-right: none
+
+            .range-value, .range-value-2
+                width: 74px
+                padding: 8px 0
+                text-align: center
+                display: inline-block
+                transition: background 0.1s
+                background-color: white
+                border: 1px solid #d2d2d2
+
+                &.range-value-2 sup i
+                    position: relative
+                    top: 3px
+                    left: -3px
+                    font-size: 12px
+
+        .range-alert, .range-alert-2
+            width: 16px
+            height: 16px
+            position: absolute
+            top: 50%
+            right: 2px
+            transform: translateY(-51%)
+            background: #fff
+            border-top-right-radius: 2px
+            border-bottom-right-radius: 2px
+            border: 1px solid #d2d2d2
+            color: #0E0E0E
+            line-height: 15px
+            transition: right 0.2s
+
+            span
+                position: relative
+                left: 2.5px
+                top: -1px
+
+            &.active
+                right: -14px
+
+
+        .gear-wrapper, .gear-wrapper-2
+            position: absolute
+            top: -14px
+            left: 50%
+            transform: translateX(-50%)
+            z-index: 5
+            backface-visibility: hidden
+            width: 150px
+            height: 20px
+            overflow: hidden
+
+            &.gear-wrapper-2
+                display: none
+
+            .gear-large, .gear-large-2
+                width: 40px
+                height: 40px
+                background: #d2d2d2
+                border-radius: 100px
+                position: absolute
+                top: 18px
+                left: 18px
+                transform-origin: 50% 50%
+                transition: top 0.15s
+
+                &:after
+                    position: absolute
+                    content: ''
+                    width: 28px
+                    height: 28px
+                    top: 50%
+                    left: 50%
+                    transform: translate(-50%, -50%)
+                    background: #e8e8e8
+                    border-radius: 100px
+
+                &:nth-child(2)
+                    background: #d2d2d2
+                    left: auto
+                    right: 18px
+
+                    .gear-tooth
+                        background: #d2d2d2
+
+                &.active
+                    top: 4px
+
+
+.ui-slider-handle, .ui-slider-handle-2
+    background: #555
+    position: absolute
+    width: 32px
+    height: 32px
+    top: 50%
+    display: block
+    transform: translate(-50%, -50%)
+    border-radius: 100px
+    z-index: 10
+    background: linear-gradient(#555, #454545)
+    cursor: move
+
+    // fallback if grab cursor is unsupported
+    cursor: grab
+    cursor: -moz-grab
+    cursor: -webkit-grab
+    box-shadow: inset -2px -2px 6px 2px rgba(0, 0, 0, 0.1)
+    transition: width 0.1s
+
+    &:focus
+        outline: none
+
+    &:active
+        cursor: grabbing
+        cursor: -moz-grabbing
+        cursor: -webkit-grabbing
+
+.ui-state-active, .ui-status-active-2
+    width: 22px
+
+
+
+.gear-tooth, .gear-tooth-2
+    width: 22%
+    height: 114%
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    transform-origin: 0 0
+    background: #d2d2d2
+    border-radius: 2px
+
+    &:nth-child(2)
+        transform: rotate(90deg) translate(-50%, -50%)
+
+    &:nth-child(3)
+        transform: rotate(45deg) translate(-50%, -50%)
+
+    &:nth-child(4)
+        transform: rotate(-45deg) translate(-50%, -50%)

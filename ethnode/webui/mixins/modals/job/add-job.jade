@@ -1,0 +1,51 @@
+#add-job.add.modal-box.flex.floating
+
+    .modal-box-content: .inner-modal: .content
+
+        .modal-header: h3 Add job
+
+        .success-message
+            h1.title Congratulations!
+            .success-content: p Your job was added.
+
+            .buttons
+                button.mdl-button.mdl-js-button.close-button.congrats-close Close the modal to see it
+                span OR
+                button.mdl-button.mdl-js-button.create-new add new job
+
+
+        .modal-body
+
+            .form-group
+                input.input-file#input-image-job(type="file", accept="image/*", placeholder="Add image or video")
+                label(for="input-image-job") Add Company's Logo
+                img.file-input-first-image.img-job(src="images/image-video-image-file.png", alt="Add a file")
+                img#input-image-job(src="#", alt="")
+
+            .modal-inputs
+
+                form#form-add-job(action="POST")
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                        input#company-name.mdl-textfield__input(name="company", type="text")
+                        label.mdl-textfield__label(for="company-name") Company name
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                        input#position-name.mdl-textfield__input(type="text", name="position")
+                        label.mdl-textfield__label(for="position") Position
+
+                    .mdl-textfield.mdl-js-textfield.whole-line
+                        textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
+                        label.mdl-textfield__label(for="description") Description (what have you done or currently do?)
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                        input.date-started.mdl-textfield__input(type="text", name="startDate")
+                        label.mdl-textfield__label(for="date-from") Start Date
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                        input.date-ended.mdl-textfield__input(type="text", name="endDate")
+                        label.mdl-textfield__label(for="date-from") End Date (leave blank if ongoing)
+
+        .modal-footer
+            button.mdl-button.mdl-js-button.close-button Close
+            button#publish.mdl-button.mdl-js-button.finish-button(style="color: #5CAB7D") Publish
+            .mdl-tooltip(data-mdl-for="publish") This text will be changed anyway.

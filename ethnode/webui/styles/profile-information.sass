@@ -1,0 +1,258 @@
+section.documentation
+    background-color: #f2f2f2
+
+    .container
+
+        .profile-information-container
+            padding: 0
+
+            .profile-information
+                background-color: white
+                box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1)
+
+                &.up
+                    margin-top: -23px
+                    padding-bottom: 35px
+
+                    &:last-child
+                        border-bottom-right-radius: 6px
+                        border-bottom-left-radius: 6px
+
+                    .profile-upper
+                        text-align: center
+
+                        .profile-image
+                            border-radius: 100%
+                            border: 5px solid #ebebeb
+                            margin: 0 auto
+                            display: block
+                            position: absolute
+                            top: -134px
+                            left: 0
+                            right: 0
+                            bottom: 0
+                            width: 184px
+                            height: 184px
+
+                            img
+                                width: 174px
+                                height: 174px
+                                border-radius: 100%
+
+                            .text-on-image
+                                position: absolute
+                                left: 0
+                                right: 0
+                                bottom: 0
+                                top: 0
+                                opacity: 0.5
+                                background-color: rgba(0, 0, 0, 1)
+                                border-radius: 100%
+                                width: 174px
+                                height: 174px
+                                border: 5px solid rgba(0, 0, 0, 1)
+                                cursor: pointer
+                                display: none
+
+                                p
+                                    color: white
+                                    font-size: 16px
+                                    font-weight: 500
+                                    line-height: 164px
+                                    opacity: 1
+
+                        h2
+                            font-size: 32px
+                            font-weight: 500
+                            line-height: 1
+                            color: #5e6977
+                            padding-top: 70px
+                            margin-bottom: 17px
+                            padding-left: 10px
+                            padding-right: 10px
+
+                        h5.profile-information-position
+                            font-size: 18px
+                            line-height: 1.29
+                            color: #5e6977
+                            margin-top: 0
+                            margin-bottom: 10px
+
+                        p
+                            font-size: 14px
+                            line-height: 1.64
+                            color: #86939e
+                            margin-top: 0
+                            margin-bottom: 20px
+
+                        button
+                            // width: 126.3px
+                            padding: 0 15px
+                            height: 42px
+                            border-radius: 3px
+                            font-size: 16px
+                            font-weight: 500
+                            margin-top: 0
+                            white-space: nowrap
+                            transition: all 0.15s ease-in
+
+                            &.hire
+                                background-color: #92A8D1
+                                color: white
+                                border: solid 1px #798eb5
+                                margin-right: 15px
+
+                                &:hover, &:focus, &:active
+                                    background-color: #6883b5
+                                    border-color: #798eb5
+
+                            &.leave-msg
+                                background-color: white
+                                color: #43484d
+                                border: solid 1px #d0d6e0
+
+                                &:hover, &:focus, &:active
+                                    background-color: #ebedf1
+
+
+                        // SKILLS
+                        p.skills-text
+                            text-transform: uppercase
+                            font-size: 12px
+                            color: #5e6977
+                            letter-spacing: 1px
+                            font-weight: 500
+                            text-align: center
+                            margin-top: 26px
+
+                            i
+                                top: 8px
+                                position: relative
+                                cursor: pointer
+                                color: #afb4bb
+
+                                &:hover
+                                    color: #9ea2a9
+
+                        .skills, .languages
+                            margin-top: 18px
+                            padding: 0 15px
+                            transition: all 0.3s ease
+
+                            p
+                                line-height: 24px
+                                border-radius: 4px
+                                border: solid 1px #e1e8ee
+                                padding: 0px 10px
+                                color: #86939e
+                                margin-right: 5px
+                                display: inline-block
+
+                                &:hover,
+                                &:focus,
+                                &:active
+                                    background-color: #e1e8ee
+                                    cursor: pointer
+                                    color: #99a9b6
+
+                                span.experience
+                                    border: none
+                                    border-radius: 0
+                                    color: #5e6977
+                                    padding: 0 0 0 8px
+                                    margin-right: 0
+
+                            p.tool
+                                background-color: #f2f6f9
+
+
+                &.middle
+                    margin-top: 35px
+
+                    .profile-description
+                        background-color: #92A8D1
+
+                        p
+                            font-size: 16px
+                            line-height: 1.44
+                            color: white
+                            text-align: center
+                            padding: 40px 38px 25px 35px
+                            margin-top: -17px
+
+                &.down
+                    margin-top: 17px
+                    background-color: transparent
+
+                    .profile-bottom
+                        background-color: white
+                        padding-bottom: 30px
+
+                        p.skills-text
+                            text-transform: uppercase
+                            font-size: 12px
+                            color: #5e6977
+                            letter-spacing: 1px
+                            font-weight: 500
+                            text-align: center
+                            padding-top: 20px
+
+                            i
+
+                                position: relative
+                                top: 8px
+                                margin-left: 10px
+                                cursor: pointer
+                                color: #afb4bb
+
+                                &:hover
+                                    color: #9ea2a9
+
+                        .skills
+                            margin-top: 18px
+                            padding: 0 35px
+
+                            p
+                                line-height: 32px
+                                border-radius: 4px
+                                border: solid 1px #e1e8ee
+                                padding: 3px 10px
+                                color: #86939e
+                                margin-right: 5px
+                                display: inline
+
+                                &:hover,
+                                &:focus,
+                                &:active
+                                    background-color: #e1e8ee
+                                    cursor: pointer
+                                    color: #99a9b6
+
+                                span.experience
+                                    border: none
+                                    border-radius: 0
+                                    color: #5e6977
+                                    padding: 0 0 0 8px
+                                    margin-right: 0
+
+
+            .profile-footer
+                border-top: 1px solid #ebf0f5
+
+                ul
+                    text-align: center
+                    margin-top: 20px
+                    margin-bottom: 25px
+
+                    li
+                        margin-right: 25px
+                        padding: 0
+
+                        a i
+                            color: #afb4bb
+
+                            &:hover
+                                color: #9ea2a9
+
+                    li:first-child
+                        margin-left: 25px
