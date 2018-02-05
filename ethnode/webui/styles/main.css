@@ -603,8 +603,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
     width: 52px;
     height: 50px;
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2);
-    /* background-color: #92A8D1; */
-    background-color: #3f51b5;
+    background-color: #92a8d2;
     border-radius: 100%;
     right: 28px;
     top: 32px;
@@ -634,7 +633,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
 .profile-documentation-full .profile-documentation .shoutoutIcon i {
     line-height: 50px;
     font-size: 24px;
-    color: #e5eeff;
+    color: #eef2f8;
 }
 
 .profile-documentation-full .profile-documentation .shoutoutIcon {
