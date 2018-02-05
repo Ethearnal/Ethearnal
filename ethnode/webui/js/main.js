@@ -222,7 +222,6 @@ $('#domain-expertise-select').on('change', function() {
 // profile cards begin
 var main_profile_cards = function() {
     $('.profiles-container').empty();
-    console.log('main_profile_cards()');
     $.ajax({
         url: '/api/v1/dht/guids',
         type: 'GET',
@@ -249,7 +248,7 @@ var main_profile_cards = function() {
 var V_GIGS_BUFFER = {};
 
 
-do_search_query();
+// do_search_query();
 
 
 

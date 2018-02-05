@@ -44,6 +44,6 @@ window.profilePageModule = (function() {
 
 $(document).ready(function() {
     if ($('body').hasClass('profile-page')) {
-        profilePageModule.oninit();
+        // profilePageModule.oninit();
     }
 });
