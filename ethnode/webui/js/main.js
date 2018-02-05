@@ -59,7 +59,7 @@ var event_on_dht_data = function(hkey, data) {
         //ajax_get_guid_profile_key(owner, 'skills');
         //
         // createGigToFound(hkey, data);
-        generateGigsFromData(hkey, data);
+        generateGigsModule.generate(hkey, data);
     }
 };
 
@@ -717,11 +717,6 @@ function require(script) {
 
 
 // FUNCTIONS
-
-// SMART SEARCH
-require("js/modules/generateGigs.js"); // MODULE FOR SEARCHING
-// CUSTOM ANDREW K JS:
-require("dist/js/main.js");
 
 // GET DATA
 require("js/functions/getData/gigData.js"); // GETS GIG DATA BY GIG ID
