@@ -11,6 +11,9 @@
     margin-bottom: 30px;
     transition: all 0.15s ease-in;
     z-index: 1;
+    &.gig {
+      cursor: pointer;
+    }
     .card-label {
         padding: 5px 15px;
         background-color: rgba(71, 156, 255, 0.74);

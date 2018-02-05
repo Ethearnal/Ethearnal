@@ -26,16 +26,16 @@
 ------------ plugins -------------
 ---------------------------------*/
 
-@import 'plugins/slick'; // 
-@import 'plugins/nouislider'; // 
-@import 'plugins/selectize'; // 
-@import 'plugins/noty'; // 
-@import 'plugins/datatables'; // 
+@import 'plugins/slick'; //
+@import 'plugins/nouislider'; //
+@import 'plugins/selectize'; //
+@import 'plugins/noty'; //
+@import 'plugins/datatables'; //
 @import 'plugins/datepicker'; //
 @import 'plugins/summernote'; //
-@import 'plugins/nvd3'; // 
-@import 'plugins/rickshaw'; // 
-@import 'plugins/sparkline'; // 
+@import 'plugins/nvd3'; //
+@import 'plugins/rickshaw'; //
+@import 'plugins/sparkline'; //
 
 /*---------------------------------
 ------------ elements -------------
@@ -72,3 +72,9 @@
 @import 'apps/email'; //                     email
 @import 'apps/social'; //                    social
 @import 'apps/gallery'; //                   gallery
+
+/*---------------------------------
+-------------- custom-components ---------------
+---------------------------------*/
+
+@import 'custom-components/redesigned-gig-modal';
