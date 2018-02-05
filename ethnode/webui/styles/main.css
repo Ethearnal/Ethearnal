@@ -1715,6 +1715,8 @@ section.profiles-page-content .container .jobs .gigs-container:after {
     margin-right: 30px;
     margin-bottom: 30px;
     transition: all 0.15s ease-in;
+    display: flex;
+    flex-direction: column;
 }
 
 .profile-card .owner-info {
@@ -2106,7 +2108,7 @@ span.gig-title {
 
 .modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label {
     border: 4px dashed #CCC;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     text-align: left;
     padding: 210px 0 0 0;
     width: 440px;
