@@ -1,0 +1,49 @@
+.nvd3  {
+	.nv-axis line {
+    	stroke: $border-color;
+	}
+
+	.nv-axis path {
+		stroke: $border-color;
+	}
+
+	text {
+		font-family: $font-primary;
+		fill: $default-text-color;
+	}
+}
+
+.nvtooltip {
+	color: $default-text-color;
+	border-color: $border-color;
+	background: $default-white;
+	border-radius: 0px;
+	@include box-shadow(0, 0px, 6px, rgba(0, 0, 0, 0.1)); 
+
+	table {
+		margin: 15px;
+
+		td {
+			&.legend-color-guide {
+				div {
+					border: 0px;
+    				border-radius: 50px;
+				}
+			}
+		}
+
+		tr {
+			
+			td {
+				padding: 7px 10px;
+			}
+
+			&.highlight {
+
+				td {
+					padding: 7px 10px;
+				}
+			}
+		}
+	}
+}

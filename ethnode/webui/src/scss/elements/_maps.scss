@@ -1,0 +1,59 @@
+.maps {
+	width: 100%;
+    height: 100%;
+    display: inline-block;
+
+    &.map-fs {
+        .jvectormap-container {
+            min-height: calc(100vh - #{$header-height});
+        }
+    } 
+
+    &.map-300 {
+        .jvectormap-container {
+            min-height: 300px;
+            max-height: 300px;
+
+            @include screen-mobile {
+                min-height: 250px;
+            } 
+        }
+    } 
+
+    &.map-500 {
+        .jvectormap-container {
+            min-height: 500px;
+            max-height: 500px;
+
+            @include screen-mobile {
+                min-height: 250px;
+            } 
+        }
+    }  
+}
+
+#google-container {
+    width: 100%;
+    height: 100%!important;
+    min-height: calc(100vh - #{$header-height});
+}
+
+.jvectormap-zoomin,
+.jvectormap-zoomout {
+	width: 25px;
+    height: 25px;
+    line-height: 1.2;
+    color: $default-text-color;
+    background-color:  $default-white;
+    border: 1px solid $border-color;
+
+    &:hover {
+    	background-color: $default-dark;
+    	color: $default-white;
+    }
+}
+
+.jvectormap-zoomout {
+	top: 40px;
+}
+

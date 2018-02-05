@@ -1,0 +1,134 @@
+table {
+	&.dataTable {
+		&.no-footer {
+			border-bottom: 1px solid $border-color;
+			margin-bottom: 20px;
+		}
+	}
+}
+
+.sorting_asc {
+	&:focus {
+		outline: none;		
+	}
+}
+
+.dataTables_wrapper {
+
+	.dataTables_length{
+		color: $default-dark;
+
+		@include screen-mobile {
+			text-align: left;
+		}
+
+		select {
+			border: 1px solid $border-color;
+			border-radius: 2px;
+			box-shadow: none;
+			height: 35px;
+			font-size: 14px;
+			padding: 5px;
+			margin-left: 5px;
+			margin-right: 5px;
+			color: $default-text-color;
+			@include transition(all 0.2s ease-in); 
+			@include placeholder {
+				color: lighten($default-text-color, 30%);
+			}
+		}
+	}
+
+	.dataTables_filter {
+		color: $default-dark;
+
+		@include screen-mobile {
+			text-align: left;
+		}
+
+		input {
+			border: 1px solid $border-color;
+			border-radius: 2px;
+			box-shadow: none;
+			height: 35px;
+			font-size: 14px;
+			margin-left: 15px;
+			padding: 5px;
+			color: $default-text-color;
+			@include transition(all 0.2s ease-in); 
+			@include placeholder {
+				color: lighten($default-text-color, 30%);
+			}
+		}
+	}
+
+	.dataTables_info {
+		color: $default-text-color;
+	}
+
+	.dataTables_processing {
+		color: $default-dark;
+	}
+
+	.dataTables_paginate {
+		color: $default-text-color;
+
+		.paginate_button {
+			color: $default-text-color !important;
+			padding: 6px 12px;
+			border-radius: 50%;
+			margin-right: 10px; 
+			@include transition(all 0.2s ease-in-out); 
+
+			&.next,
+			&.previous,
+			&.first,
+			&.last {
+				border-radius: 4px;
+
+				&:hover,
+				&:focus {
+					color: $default-text-color !important;
+					@include background-opacity($default-text-color, 0.15); 
+					border-color: lighten($default-text-color, 45%);
+				}
+
+				&.disabled {
+					opacity: 0.4;
+
+					&:hover,
+					&:focus {
+						color: $default-text-color !important;
+						background: transparent;
+						border-color: transparent;
+					}
+				}
+			}
+
+			&:hover {
+				color: $default-white !important;
+				
+				background: lighten($default-primary,15%);
+				border: 1px solid lighten($default-primary,15%);
+			}
+
+			&.current {
+				color: $default-white !important;
+				background: $default-primary;
+				border: 1px solid $default-primary;
+
+				&:hover {
+					color: $default-white !important;
+					background: $default-primary;
+					border: 1px solid $default-primary;
+				}
+			}
+		}
+	}
+
+	.status {
+		width: 5px;
+		height: 5px;
+	}
+}
+

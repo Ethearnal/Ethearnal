@@ -1,13 +1,14 @@
 // Function to open modal
 function openModal(modal) {
     $(modal).css({ display: 'flex' });
-    $(modal).find('.modal-box-content .inner-modal').animate({ width: '200vw', height: '200vw' }, 400, "easeInSine");
+    $(modal).find('.modal-box-content .inner-modal').animate({ height: '100vh' }, 400, "easeInSine");
     $(modal).find('.modal-box-content .inner-modal .content').css({ opacity: 1, transitionDelay: '.5s' });
 }
 
 
 // Function to close modal
 function closeModal(modalID) {
+    $('body').removeClass('modal-open');
     $modalBox = $('#' + modalID);
     $modalBox.find('.modal-box-content .inner-modal .content').css({ transitionDelay: '0s' });
 

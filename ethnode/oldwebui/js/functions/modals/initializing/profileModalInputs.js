@@ -55,7 +55,7 @@ function loadProfileInputs() {
     $form.find('#country').dropdown('set value', $countryClass);
 
     // SKILLS
-    $form.find('.skills-dropdown').dropdown('set selected', $skills);
+    // $form.find('.skills-dropdown').dropdown('set selected', $skills);
 
     // LANGUAGES
     $form.find('.languages-dropdown').dropdown('set selected', $languages);

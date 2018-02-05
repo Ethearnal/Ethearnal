@@ -20,7 +20,7 @@ function loadInputsText(form, div) {
             $portfolio = JSON.parse(portfolioData);
 
             // IMAGE
-            $content.find('img#input-image-portfolio').attr('src', api_cdn' + $portfolio.image_hash);
+            $content.find('img#input-image-portfolio').attr('src', api_cdn + $portfolio.image_hash);
             $content.find('img.img-portfolio').removeClass('active');
             $content.find('label[for="input-image-portfolio"]').text('Click here to change image').removeClass('active');
 

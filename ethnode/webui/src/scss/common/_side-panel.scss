@@ -1,0 +1,114 @@
+.side-panel {
+	
+	&.side-panel-open {
+		.side-panel-wrapper {
+			@include transform(translateX(0px));	
+		}
+	}
+	
+	.side-panel-wrapper {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		background-color: $default-white;
+		width: 300px;
+		border-left: 1px solid $border-color;
+		margin: 0px;
+		overflow: hidden;
+		z-index: 1030;
+		@include transform(translateX(300px));	
+		@include transition(all 0.2s ease-out); 
+		
+		@include screen-mobile {
+			width: 270px;
+		}
+
+		> div {
+			height: 100%;
+		}
+
+		.nav-tabs {
+			border-bottom: 1px solid $border-color;
+			
+			>li {
+				
+				&.active {
+					
+					>a {
+						color: $default-dark;
+						background-color: transparent;
+						border: 0px;
+						border-bottom-color: transparent;
+					
+						&:hover,
+						&:focus {
+							color: $default-dark;
+							background-color: transparent;
+							border: 0px;
+							border-bottom-color: transparent;
+						}
+					}
+
+					.nav-link {
+						border-bottom: 0px;
+					}
+				}
+				
+				>a {
+					margin-right: 2px;
+					line-height: 1.42857143;
+					border: 0px;
+					border-radius: 4px 4px 0 0;
+					color: $default-text-color;
+					padding:0px 20px;
+					line-height: $header-height;
+					min-height: $header-height;
+					font-weight: bold;
+
+					@include screen-mobile {
+						padding:0px 15px;
+					}	
+					
+					&:hover, 
+					&:focus {
+						background-color: transparent;
+						color: $default-dark;
+					}
+				}
+			}
+			
+			.panel-close {
+				position: absolute;
+			    right: 0;
+			    top: 0px;
+			    line-height: $header-height;
+				border-left: 1px solid $border-color;
+
+				>a {
+					color: $default-text-color;
+					padding: 0px 20px;
+					display: block;
+
+					&:hover, 
+					&:focus {
+						color: $default-dark;
+					}
+				}
+			}
+		}
+		
+		.tab-content {
+			height: 100%;
+			
+			.tab-pane {
+				height: 100%;
+			}
+		}
+	}
+
+	.profile {
+		height: calc(100vh - #{$header-height});
+		position: relative;
+	}
+}

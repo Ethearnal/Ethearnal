@@ -12,6 +12,6 @@ $('body').delegate('li.delete', 'click', function(e) {
         console.log('gig')
         $gigID = $gig.attr('id');
         console.log('gigID',$gigID)
-        deleteGig($gigID);
+        deleteGig($gigID, $gig);
     }
 });

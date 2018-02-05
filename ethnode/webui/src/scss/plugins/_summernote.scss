@@ -1,0 +1,45 @@
+
+.note-editor {
+	
+	box-shadow: none;
+
+	&.note-frame {
+		border: 1px solid $border-color;
+		border-radius: 0px;
+		
+		.note-statusbar {
+			background-color: lighten($border-color,5%);
+		}
+	}
+
+	.btn-default {
+		margin-bottom: 0px;
+	}
+
+	.modal.in {
+		z-index: 99999;
+	}
+
+	.panel-heading {
+		background-color: transparent;
+		border-bottom: 1px solid $border-color;
+	}
+	
+	&.fullscreen {
+		.note-toolbar {
+			background-color: $default-white;
+		}
+	}
+	
+	.note-btn {
+		&.active {
+			background-color: lighten($border-color, 2%);
+		}
+	}
+}	
+
+.note-popover { 
+	&.popover {
+		display:none;
+	}
+}	

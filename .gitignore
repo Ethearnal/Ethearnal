@@ -1,9 +1,9 @@
 # please add your ide stuff here
 .idea
 .vscode
-.DS_Store
-
-
+node_modules
+ethnode/webui/node_modules/
+ethnode/webui/node_modules
 
 # default data dirs
 *_profile/
@@ -28,7 +28,6 @@ __pycache__/
 packages/
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
