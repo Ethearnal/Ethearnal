@@ -194,87 +194,12 @@ def main_http(http_webdir: str = config.http_webdir,
     cherrypy.response.headers['Cache-Control'] = 'public, max-age=5'
 
     cherrypy.tree.mount(EthearnalSite(), '/', site_conf)
-    #
-    # cherrypy.tree.mount(ert_profile_view,
-    #                     '/api/v1/profile',
-    #                     {'/': {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}}
-    #                     )
-    # #
-    # cherrypy.tree.mount(EthearnalJobView(EthearnalJobPostController(ert_profile_ctl)),
-    #                     '/api/v1/job', {'/': {
-    #                         'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-    #                         'tools.sessions.on': True,
-    #                         'tools.response_headers.on': True,
-    #                         'tools.response_headers.headers': [('Content-Type', 'text/plain')],
-    #                         }
-    #                      }
-    #                     )
-    #
-    # cherrypy.tree.mount(EthearnalUploadFileView(ert_profile_ctl),
-    #                     '/api/v1/upload', {'/': {
-    #                         'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-    #                         'tools.sessions.on': True,
-    #                         'tools.response_headers.on': True,
-    #                         'tools.response_headers.headers': [('Content-Type', 'text/plain')],
-    #                         }
-    #                      }
-    #                     )
-    #
-    # cherrypy.tree.mount(EthearnalUploadJsonView(ert_profile_ctl),
-    #                     '/api/v1/uploadjson', {'/': {
-    #                         'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-    #                         'tools.sessions.on': True,
-    #                         'tools.response_headers.on': True,
-    #                         'tools.response_headers.headers': [('Content-Type', 'text/plain')],
-    #                         }
-    #                      }
-    #                     )
-
     cherrypy.config.update({
         'global': {
             'engine.autoreload.on': False,
             'server.thread_pool': 120,
         }
     })
-    #
-
-    # webdht = WebDHTPulse(
-    #     cherry=cherrypy,
-    #     dht_pulse=DHTPulse(dht_facade_),
-    #     mount_point='/api/v1/dhtpulse',
-    #     mount_it=True,
-    # )
-    # websys = WebSysGuidApi(
-    #     cherry=cherrypy,
-    #     dht_pulse=DHTPulse(dht_facade_),
-    #     owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
-    # )
-    #
-    # webself = WebSelfPredicateApi(
-    #     cherry=cherrypy,
-    #     dht_pulse=DHTPulse(dht_facade_),
-    #     owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex),
-    # )
-    # webguid = WebGuidPredicateApi(
-    #     cherry=cherrypy,
-    #     dht_pulse=DHTPulse(dht_facade_),
-    # )
-    #
-    # knownguids = WebDHTKnownGuids(
-    #     cherry=cherrypy,
-    #     dhtf=dht_facade_,
-    #     mount_point='/api/v1/dht/guids'
-    # )
-
-
-
-    # from webdht.wdht_ertapi import DhtGigsWebAPI
-
-    # dht_gigs = DhtGigsWebAPI(
-    #     cherry=cherrypy,
-    #     dhf=dht_facade_,
-    #     me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
-    # )
 
     idx = Indexer(ert=ert, dhf=dht_facade_)
 
@@ -295,27 +220,14 @@ def main_http(http_webdir: str = config.http_webdir,
         dhf=dht_facade_,
         me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
     )
-
-    events = DhtEventsHkeysWebAPI(
-        cherry=cherrypy,
-        dhf=dht_facade_,
-        me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex),
-    )
-
-    dht_portfolios_hk = DhtPortfoliosWebAPI(
-        cherry=cherrypy,
-        dhf=dht_facade_,
-        me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
-    )
-
-    # global_events = DhtGlobalEventsHkeysWebAPI(
+    # don't delete this
+    # events = DhtEventsHkeysWebAPI(
     #     cherry=cherrypy,
     #     dhf=dht_facade_,
-    #     me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)
+    #     me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex),
     # )
-
-
-    # dht_events_hk = DhtEventsHkeysWebAPI(
+    #
+    # dht_portfolios_hk = DhtPortfoliosWebAPI(
     #     cherry=cherrypy,
     #     dhf=dht_facade_,
     #     me_owner=OwnerGuidHashIO(ert_profile_ctl.rsa_guid_hex)

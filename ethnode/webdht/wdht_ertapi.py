@@ -1,4 +1,5 @@
-import json, bson
+import json
+import bson
 from webdht.double_linked import DList, instance_dl
 from kadem.kad import DHTFacade
 from webdht.wdht import HashIO, OwnerGuidHashIO
@@ -6,6 +7,7 @@ from datamodel.resource_index import ResourceIndexingEngine
 from datamodel.inv_norank_sqlite import InvIndexTimestampSQLite
 from toolkit.kadmini_codec import guid_bin_to_hex, guid_bin_to_hex2, guid_hex_to_bin, guid_int_to_hex
 from ert_profile import EthearnalProfileController
+import bleach
 
 # todo DRY it
 
@@ -333,7 +335,9 @@ class DhtGetByHkeyWebAPI(object):
                 v = l[1]
                 if 'value' in v:
                     try:
-                        js = json.dumps(v['value']).encode()
+                        vvv = v['value']
+                        # vvv = bleach.clean(vvv)
+                        js = json.dumps(vvv).encode()
                         return js
                     except:
                         pass
@@ -420,6 +424,9 @@ class DhtGigsHkeysWebAPI(object):
         try:
             # decode the body
             body = body.decode()
+            # sanitize
+            # body = bleach.clean(body)
+
             data = json.loads(body)
         except:
             # todo improve whole-site err handling
@@ -557,7 +564,7 @@ class DhtGigsWebAPI(object):
             }
         )
 
-
+# todo sanitize
 class DhtPortfoliosWebAPI(object):
     exposed = True
 
@@ -708,6 +715,8 @@ class WebDHTProfileKeyVal(object):
     def post(self, profile_key):
         body = self.cherry.request.body.read()
         data = json.loads(body.decode())
+        # sanitize
+        # data = bleach.clean(data)
         key = {'profile:key': profile_key}
         value = {'k': key, 'v': data}
         self.dhtf.push(key, value)
@@ -732,8 +741,11 @@ class WebDHTProfileKeyVal(object):
                 if len(ll) >= 1:
                     dd = ll[1]
                     if 'v' in dd:
-                        js = json.dumps(dd['v'])
-                        js_b = js.encode()
+                        # sanitize
+                        vvv = dd['v']
+                        js = json.dumps(vvv)
+                        js_cl = bleach.clean(js)
+                        js_b = js_cl.encode()
                         return js_b
         return b'null'
 
