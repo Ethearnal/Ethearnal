@@ -17,14 +17,13 @@ window.profilePageModule = (function() {
                         type: "GET",
                         processData: false,
                         success: function(js_data) {
-                            var gig_o = JSON.parse(js_data);
-                            generateGigsModule.generate(this.hk, data);
-                            // createGigToProfile2(this.hk, gig_o);
+                            if (js_data != 'null') {
+                                var gig_o = JSON.parse(js_data);
+                                generateGigsModule.generate(this.hk, gig_o);
+                            }
                         },
-
                         error: function(error) {
                             console.log('ERR', error);
-
                             return;
                         }
                     });
@@ -44,6 +43,6 @@ window.profilePageModule = (function() {
 
 $(document).ready(function() {
     if ($('body').hasClass('profile-page')) {
-        // profilePageModule.oninit();
+        profilePageModule.oninit();
     }
 });

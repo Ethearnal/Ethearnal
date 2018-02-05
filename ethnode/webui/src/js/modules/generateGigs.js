@@ -33,7 +33,11 @@ window.generateGigsModule = (function() {
                         <div class="user-price">STARTING AT: <span><i class="material-icons">polymer</i>${round_price}</span></div>
                     </div>`;
 
-        $(".gigs-container").append(gigLayout);
+        var preloader = `<div class="preloader-card"><img src="./dist/img/preloader.gif" alt=""></div>`;
+        if ($(".gigs-container").children().length == 0) {
+            $(".gigs-container").append(preloader);
+        }
+        $(".gigs-container").prepend(gigLayout);
         componentHandler.upgradeDom();
 
         if (gigObject.hasOwnProperty('owner_guid')) {

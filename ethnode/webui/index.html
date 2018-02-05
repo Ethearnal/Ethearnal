@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="./dist/css/main.css">
 </head>
 
-<body>
+<body class="gigs-page">
     <div id="add-job" class="add modal-box flex floating">
         <div class="modal-box-content">
             <div class="inner-modal">
@@ -852,7 +852,7 @@
                 </div>
                 <div id="navigation" class="collapse navbar-collapse tab-info">
                     <ul class="nav nav-tabs navbar-right hidden-xs relative dropdown">
-                        <li class="nav-item"><a href="/ui" class="nav-link active">Gigs</a></li>
+                        <li class="nav-item"><a href="/ui" class="nav-link gigs">Gigs</a></li>
                         <li class="nav-item"><a href="/ui/profiles" class="nav-link profiles">Profiles</a></li>
                         <li class="nav-item"><a href="" open-modal="#add-gig" class="nav-link open-modal">New Gig</a></li>
                         <li id="settings-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="profile view-profile">
@@ -884,95 +884,7 @@
             </div>
         </div>
     </section>
-    <!-- This section is for your whole profile, including left and right sides, profile information and etc.-->
-    <section id="my-profile-section" style="display: none" class="documentation">
-        <div class="container">
-            <!-- Profile information including profile image, current work, current city and state, skills and etc.-->
-            <div class="profile-information-container col-lg-4 col-md-4 col-sm-12 col-xs-12" s>
 
-                <div class="profile-information up">
-
-
-                    <div class="profile-upper">
-
-                        <div open-modal="#edit-profile" class="profile-image open-modal"><img src="" alt="">
-                            <div class="text-on-image">
-                                <p>Change
-                                    <i class="material-icons">edit</i>
-                                </p>
-                            </div>
-                        </div>
-
-                        <h2></h2>
-
-                        <h5 class="profile-information-position"></h5>
-                        <p class="location"></p>
-
-                        <!--button class="leave-msg">Send Message</button-->
-                        <!-- SKILLS-->
-                        <p class="skills-text">Skills <i class="skills-down material-icons">keyboard_arrow_down</i></p>
-                        <div class="skills hidden">
-                        </div>
-                        <!-- LANGUAGES-->
-                        <p class="skills-text">Languages <i class="languages-down material-icons">keyboard_arrow_down</i></p>
-                        <div class="languages hidden">
-
-                        </div>
-
-
-                    </div>
-                </div>
-                <div class="profile-information middle">
-                    <!-- Profile description including a description about you. (dark-gray section)-->
-                    <div class="profile-description">
-                        <p>Profile's description.</p>
-                    </div>
-                </div>
-                <!-- Profile footer, including social media links.-->
-                <div class="profile-footer">
-                    <ul class="list-inline">
-                        <li><a href=""><i class="icon-facebook"></i></a></li>
-                        <li><a href=""><i class="icon-twitter"></i></a></li>
-                        <li><a href=""><i class="icon-r-s-s"></i></a></li>
-                        <li><a href=""><i class="icon-instagram"></i></a></li>
-                        <li><a href=""><i class="icon-google"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Profile documentation including jobs and education, stories, shout-outs and questions with answers-->
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-documentation-full">
-                <div class="profile-documentation col-xs-12">
-
-                    <ul role="tablist" class="nav nav-tabs">
-                        <li role="presentation" class="active timeline-li"><a href="#gigs" aria-controls="gigs" role="tab" data-toggle="tab">Gigs</a></li>
-                        <li role="presentation" class="timeline-li"><a href="#portfolio" aria-controls="portfolio" role="tab" data-toggle="tab">Portfolio</a></li>
-                        <li role="presentation" class="timeline-li"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
-                        <li role="presentation" class="timeline-li"><a href="#archived" aria-controls="orders" role="tab" data-toggle="tab">Completed</a></li>
-                        <li role="presentation" class="timeline-li"><a href="#messages" aria-controls="orders" role="tab" data-toggle="tab">Messages</a></li>
-                    </ul>
-                    <div open-modal="#add-gig" class="plusIcon gigs active open-modal"><i class="material-icons">library_add</i></div>
-                    <div open-modal="#add-portfolio" class="plusIcon portfolio open-modal"><i class="material-icons">note_add</i></div>
-                    <!-- All the information about above listed tabs.-->
-                    <div class="tab-content col-xs-12">
-                        <!-- Gigs TAB-->
-                        <div id="gigs" role="tabpanel" class="tab-content active in col-xs-12">
-                            <div class="gigs-container-profile">
-                            </div>
-                        </div>
-                        <!-- Portfolio TAB-->
-                        <div id="portfolio" role="tabpanel" class="tab-pane fade col-xs-12">
-                            <div class="portfolio-container"></div>
-                        </div>
-                        <!-- Portfolio TAB-->
-                        <div id="orders" role="tabpanel" class="tab-pane fade col-xs-12">
-                            <div class="gigs-container-orders">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- Including {GIGS} page content-->
     <section class="gigs-page-content home-page">
         <div class="container">
@@ -984,7 +896,7 @@
                         </div>
                         <div class="filter card-body">
                             <div class="form-group">
-                                <label>Seacrh by Text</label>
+                                <label>Search by Text</label>
                                 <input id="search-header" type="text" placeholder="Search by text..." class="form-control">
                             </div>
                             <div class="form-group">
@@ -1069,29 +981,6 @@
                 <div class="gigs col-md-9">
                     <div class="gigs-container">
 
-                        <!--<div data-toggle="modal" data-target="#gigModal" class="gig content-block">-->
-                        <!--<button id="dropdowngiga0" class="mdl-button mdl-js-button mdl-button&#45;&#45;icon dropdown-button"><i class="material-icons">more_vert</i></button>-->
-                        <!--<ul for="dropdowngiga0" class="mdl-menu mdl-menu&#45;&#45;bottom-right mdl-js-menu mdl-js-ripple-effect">-->
-                        <!--<li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edit</li>-->
-                        <!--<li class="mdl-menu__item delete">Delete</li>-->
-                        <!--</ul>-->
-                        <!--<div class="ui fluid image">-->
-                        <!--<div class="ui black ribbon label">Category</div>-->
-                        <!--<div class="image-block"><img src="images/paypal.jpg"></div>-->
-                        <!--</div>-->
-                        <!--<div class="owner-info"><img src="http://via.placeholder.com/24x24" alt="Avatar">-->
-                        <!--<h5>owner_nickname</h5>-->
-                        <!--<h4>Entry Level</h4>-->
-                        <!--</div>-->
-                        <!--<p>Gig Description</p>-->
-                        <!--<div class="lower-info">-->
-                        <!--<div class="reputation"><i class="material-icons">polymer</i><span>5k+</span></div>-->
-                        <!--<h6 class="expire">expires in 5 mins</h6>-->
-                        <!--</div>-->
-                        <!--<div class="footer">-->
-                        <!--<h4>Starting at <span><i class="material-icons">polymer</i>25</span></h4>-->
-                        <!--</div>-->
-                        <!--</div>-->
                     </div>
                 </div>
             </div>

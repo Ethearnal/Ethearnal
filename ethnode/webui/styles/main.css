@@ -1664,6 +1664,10 @@ section.profiles-page-content .container .gigs .gigs-container,
 section.profiles-page-content .container .jobs .gigs-container {
     width: calc(100% - 15px);
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 section.gigs-page-content .container .gigs .gigs-container:after,
@@ -1680,13 +1684,16 @@ section.profiles-page-content .container .jobs .gigs-container:after {
     visibility: hidden;
 }
 
-/* .gigs-container-profile, */
-/* .gigs-container-orders { */
-    .gig-container-tab {
-        margin-top: 25px;
-        width: 100%;
-    }
 
+/* .gigs-container-profile, */
+
+
+/* .gigs-container-orders { */
+
+.gig-container-tab {
+    margin-top: 25px;
+    width: 100%;
+}
 
 .profile-card :hover,
 .profile-card :focus,
@@ -3398,7 +3405,6 @@ body header.main-header {
     padding-top: 20px;
     margin-top: 40px;
     background-color: #fff;
-    
 }
 
 .main-tab-content {

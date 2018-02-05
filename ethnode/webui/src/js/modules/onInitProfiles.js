@@ -11,7 +11,7 @@ window.profilesPageModule = (function() {
     }
 
     return {
-        oninit: function() {
+        oninitprofiles: function() {
             return initProfiles();
         }
     }
@@ -21,6 +21,6 @@ window.profilesPageModule = (function() {
 
 $(document).ready(function() {
     if ($('body').hasClass('profiles-page')) {
-        profilesPageModule.oninit();
+        profilesPageModule.oninitprofiles();
     }
 });

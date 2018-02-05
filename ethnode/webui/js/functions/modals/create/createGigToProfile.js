@@ -279,24 +279,23 @@ function createProfileCard(owner_guid) {
     var api_cdn = api_get_cdn_url();
     img_src = "";
 
-    var ribbon = '<div id="protitle' + owner_guid + '" ' +
-        'class="ui ribbon medium label" style="left: -15px; top: 8px; opacity:0.9;">' +
-        'TITLE' +
-        '</div>';
-
-
-    var img_txt = '<div id="proowner' + owner_guid + '" class="owner-info">'
-        // + '<!--div class="pro-title-class" id="protitle'+ owner_guid +'"></div-->'
-        // + ''
-        +
-        '  <img id="proimgav' + owner_guid + '" src="' + img_src + '" alt="Avatar">' +
-        '<div class="pro-name-class" id="proname' + owner_guid + '"></div>' +
-        '</div>';
-
-    var gig_html = '<div id="' + owner_guid + '" class="profile-card" data-toggle="modal" data-target="#profileModal">' +
-        ribbon +
-        img_txt +
-        '</div>';
+    var profilecard = `
+        <div class="user-card profile-user-card" id="${owner_guid}">
+            <div class="img-card">
+                <button id="dropdowngiga0" class="mdl-button mdl-js-button mdl-button&#45;&#45;icon dropdown-button btn-info-edit"><i class="material-icons">more_vert</i></button>
+                <ul for="dropdowngiga0" class="mdl-menu mdl-menu&#45;&#45;bottom-right mdl-js-menu mdl-js-ripple-effect">
+                    <li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edit</li>
+                    <li class="mdl-menu__item delete">Delete</li>
+                </ul>
+                <img id="proowner${owner_guid}" src="">
+                <div class="card-label" id="protitle${owner_guid}"></div>
+            </div>
+            <div class="user-profile-img">
+                <img id="proimgav${owner_guid}" src="${img_src}" alt="Avatar">
+            </div>
+            <p class="user-name" id="proname${owner_guid}"></p>
+            <p class="user-role">Graphic Design</p>
+        </div>`;
 
 
 
@@ -312,7 +311,7 @@ function createProfileCard(owner_guid) {
             var p_src = api_cdn + JSON.parse(profile_picture_url);
             console.log('P OKKK', profile_picture_url);
             console.log('PARSED', p_src);
-            $(".profiles-container").append(gig_html);
+            $(".profiles-container").append(profilecard);
 
 
             //p_src = api_cdn + JSON.parse(profile_picture_url);
