@@ -1678,11 +1678,13 @@ section.profiles-page-content .container .jobs .gigs-container:after {
     visibility: hidden;
 }
 
-.gigs-container-profile,
-.gigs-container-orders {
-    margin-top: 25px;
-    width: 815px;
-}
+/* .gigs-container-profile, */
+/* .gigs-container-orders { */
+    .gig-container-tab {
+        margin-top: 25px;
+        width: 100%;
+    }
+    
 
 .profile-card :hover,
 .profile-card :focus,

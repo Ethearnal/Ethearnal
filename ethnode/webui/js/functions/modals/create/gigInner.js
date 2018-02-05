@@ -241,6 +241,12 @@ $('body').delegate('.gig', 'click', function(e){
             $('#redesigned-modal-gig-title').html(gig_o.title);
             $('#redesigned-modal-description').html(gig_o.description);
 
+            var _tagsString = '';
+            gig_o.tags.forEach(function(item){
+              _tagsString += '<span class="simple-gig-tag">'+ item + '</span>';
+            });
+            $('#redesigned-modal-gig-tags').html(_tagsString);
+
             /* TEMPORATY COMMIT */
 
             $('#redesigned-modal-gig-price-req').html(gig_o.required_ert);
