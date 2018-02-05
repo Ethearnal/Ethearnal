@@ -16,7 +16,7 @@ function generateGigsFromData(gigID, gigObject) {
                     <div class="img-card">
                         ${dropdownButton}
                         ${dropdownUL}
-                        <img src="${api_cdn + gigObject.image_hash}">
+                        <img src="${api_cdn + gigObject.image_hash}&thumb=1">
                         <div class="card-label">${gigObject.general_domain_of_expertise}</div>
                     </div>
                     <div class="user-profile-img">

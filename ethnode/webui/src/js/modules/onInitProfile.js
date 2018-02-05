@@ -7,6 +7,7 @@ window.profilePageModule = (function() {
     function initProfile() {
         $('.nav-tabs .nav-link').removeClass('active');
         getNodeData(function(node_data) {
+            console.log(node_data);
             var node = $.parseJSON(node_data);
             getProfileGigs(node.guid, function(data) {
                 var profile_gigs = JSON.parse(data);
