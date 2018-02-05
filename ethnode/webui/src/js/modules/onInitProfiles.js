@@ -1,11 +1,12 @@
 // Smart Search Declarating
-window.profilePageModule = (function() {
+window.profilesPageModule = (function() {
 
     var gig_ctx = $("[data-target='#gigModal'")
     var el = gig_ctx.remove(0);
 
-    function initProfile() {
+    function initProfiles() {
         $('.nav-tabs .nav-link').siblings().removeClass('active');
+        $('.nav-tabs .nav-link .profiles').addClass('active');
         getNodeData(function(node_data) {
             var node = $.parseJSON(node_data);
             getProfileGigs(node.guid, function(data) {
@@ -35,7 +36,7 @@ window.profilePageModule = (function() {
 
     return {
         oninit: function() {
-            return initProfile();
+            return initProfiles();
         }
     }
 
@@ -43,7 +44,7 @@ window.profilePageModule = (function() {
 
 
 $(document).ready(function() {
-    if ($('body').hasClass('profile-page')) {
-        profilePageModule.oninit();
+    if ($('body').hasClass('profiles-page')) {
+        profilesPageModule.oninit();
     }
 });
