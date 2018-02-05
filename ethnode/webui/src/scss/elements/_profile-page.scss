@@ -126,8 +126,9 @@
 }
 
 
-.gigs-container {
+.gigs-profile-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
+    padding-left: 30px;
 }
