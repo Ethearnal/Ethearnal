@@ -5,7 +5,7 @@ window.profilePageModule = (function() {
     var el = gig_ctx.remove(0);
 
     function initProfile() {
-        $('.nav-tabs .nav-link').siblings().removeClass('active');
+        $('.nav-tabs .nav-link').removeClass('active');
         getNodeData(function(node_data) {
             var node = $.parseJSON(node_data);
             getProfileGigs(node.guid, function(data) {

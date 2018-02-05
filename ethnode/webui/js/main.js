@@ -55,10 +55,9 @@ var event_on_dht_data = function(hkey, data) {
     console.log('dht_data:', hkey, data);
     owner = null;
     owner = data.owner_guid;
+    console.log("owner");
+    console.log(owner);
     if (owner != null) {
-        //ajax_get_guid_profile_key(owner, 'skills');
-        //
-        // createGigToFound(hkey, data);
         generateGigsModule.generate(hkey, data);
     }
 };
