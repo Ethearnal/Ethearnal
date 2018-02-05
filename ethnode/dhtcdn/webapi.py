@@ -5,6 +5,7 @@ import cherrypy
 import json
 import requests
 from toolkit.kadmini_codec import sha256_bin_digest, guid_bin_to_hex
+from toolkit.thumb import ImgThumbnail
 
 
 class WebCDNSite(object):
@@ -30,6 +31,7 @@ class WebCDN(object):
         self.dhf = dhf
         self.dhf.cdn = self
         self.http_relay_get_url = http_relay_get_url
+        self.thumbnail = ImgThumbnail()
 
         if mount_it:
             self.mount()
@@ -172,9 +174,31 @@ class WebCDN(object):
             print('e e e ', str(e))
         # print("T", t, len(t))
 
-    def GET(self, hkey, meta=None):
+    def read_from_file_response(self, fn):
+        size = 0
+        uf = io.BytesIO()
+        try:
+            with open(fn, 'rb') as u_f:
+                while True:
+                    data = u_f.read(8192)
+                    if not data:
+                        break
+                    uf.write(data)
+                    size += len(data)
+            u_f.close()
+            uf.seek(0)
+            bts = uf.read()
+            self.cherry.response.status = 200
+            return bts
+        except Exception as e:
+            self.cherry.response.status = 400
+            err = '{"error with thumb":"%s"}' % str(e)
+            return err.encode()
+
+    def GET(self, hkey, thumb=None, meta=None):
         cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
         ct = None
+
 
         try:
             f_name_meta = '%s.%s' % (hkey, 'json')
@@ -230,6 +254,7 @@ class WebCDN(object):
         except Exception as e:
             msg = '{"error":"general error with getting file name %s"}' % str(e)
             return msg.encode()
+        print('+ ++ +', upload_file)
 
         if not os.path.isfile(upload_file):
             #
@@ -246,25 +271,13 @@ class WebCDN(object):
                 msg = '{"error":"% s not found"}' % upload_file
                 return msg.encode()
 
-        size = 0
-        uf = io.BytesIO()
-        try:
-            with open(upload_file, 'rb') as u_f:
-                while True:
-                    data = u_f.read(8192)
-                    if not data:
-                        break
-                    uf.write(data)
-                    size += len(data)
-            u_f.close()
-            uf.seek(0)
-            bts = uf.read()
-            self.cherry.response.status = 200
-            return bts
-        except Exception as e:
-            self.cherry.response.status = 400
-            err = '{"error":"%s"}' % str(e)
-            return err.encode()
+        if thumb:
+            thumb_name = self.thumbnail.get_file_name(upload_file)
+            if not os.path.isfile(thumb_name):
+                self.thumbnail.resize(upload_file, 400, 400)
+            return self.read_from_file_response(self.thumbnail.get_file_name(upload_file))
+        else:
+            return self.read_from_file_response(upload_file)
 
     def POST(self, ufile):
         cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
@@ -300,6 +313,12 @@ class WebCDN(object):
             uf.seek(0)
             u_f.write(uf.read())
         u_f.close()
+        # resize for thumbnails
+
+        try:
+            self.thumbnail.resize(fn=upload_file, max_w=400, max_h=400)
+        except Exception as e:
+            print('WARNING THUMBNAIL FAILED', e)  # todo
 
         with open(upload_meta_file, 'wb') as u_m_f:
             u_m_f.write(json.dumps({'fext': fext, 'hkey': st_hk, "Content-Type": ct}, ensure_ascii=False).encode())
@@ -332,7 +351,5 @@ class WebCDN(object):
 
             }
         )
-
-
 
 

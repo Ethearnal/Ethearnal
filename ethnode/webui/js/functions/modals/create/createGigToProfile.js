@@ -231,14 +231,14 @@ function createGigToFound(hk, gig_o) {
 
     image += '<div class="ui fluid image"><div class="ui black ribbon label">';
     image += gig_o.general_domain_of_expertise +'</div><div class="image-block"><img src="'+api_cdn+'';
-    image += gig_o.image_hash+'" /></div></div>';
+    image += gig_o.image_hash+'&thumb=1" /></div></div>';
     var desc = '<p>' + gig_o.description + '</p>';
     var title =   '<span class="gig-title">' + gig_o.title + "</span>";
     var dropdownButton = '<button id="DDB'+ hk +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button dropdown-gig"><i class="material-icons">more_vert</i></button>';
     var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB'+ hk +'"><li class="mdl-menu__item open-modal" open-modal="#edit-gig">Edit</li><li class="mdl-menu__item delete">Delete</li></ul>';
     var footer = '<div class="footer"><h4>Starting at <span><i class="material-icons">polymer</i>' + round_price + '</span></h4></div>';
 
-    var img_src = api_cdn + default_profile_image ;
+    var img_src = api_cdn + default_profile_image + '&thumb=1' ;
 
     gig_html = '<div id="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">'
                + dropdownButton + dropdownUL + image + img_txt  + title  + footer + '</div>';
@@ -308,13 +308,10 @@ function createProfileCard(owner_guid){
             console.log('P NULL', profile_picture_url);
         }
         else{
-            var p_src = api_cdn + JSON.parse(profile_picture_url);
-            console.log('P OKKK', profile_picture_url);
-            console.log('PARSED', p_src);
+            var p_src = api_cdn + JSON.parse(profile_picture_url) + '&thumb=1';
+
             $(".profiles-container").append(gig_html);
 
-
-            //p_src = api_cdn + JSON.parse(profile_picture_url);
             var e = $('#proimgav' + owner_guid);
             e.attr('src', p_src) ;
 
@@ -360,7 +357,7 @@ function createProfileCard(owner_guid){
                 } else {
                     //console.log('P headline_hash', headline_hash);
                     //
-                    var headline_url = api_cdn + JSON.parse(headline_hash);
+                    var headline_url = api_cdn + JSON.parse(headline_hash) + '&thumb=1';
                     //var style_str = 'background: lightblue ;';
                     var style_str = 'background: url("'+headline_url + '") no-repeat;'
                                   + 'background-size: auto 106px;'
