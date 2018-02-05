@@ -52,9 +52,7 @@ var event_on_gig_profile_key_data = function(guid, profile_key, data) {
 var event_on_dht_data = function(hkey, data) {
 
     data = JSON.parse(data);
-    console.log('dht_data:', hkey, data);
-    owner = null;
-    owner = data.owner_guid;
+    var owner = data.owner_guid;
     if (owner != null) {
         generateGigsModule.generate(hkey, data);
     }
@@ -73,13 +71,18 @@ var event_on_search_gig_data = function(data_js) {
             $(".gigs-container").html(data.result);
         } else {
             function recursiveBuildGigs(index) {
+                if (index >= data.length) {
+                    $('.preloader-card').remove();
+                    return;
+                }
                 ajaxGetGigData(data[index], function(result) {
+                    console.log("Index:" + index);
                     if (index < data.length) {
                         setTimeout(function() {
                             index++;
                             recursiveBuildGigs(index);
                         }, 400);
-                    } else { return; }
+                    }
                 });
             }
             recursiveBuildGigs(0);
@@ -90,17 +93,15 @@ var event_on_search_gig_data = function(data_js) {
 
 // end event handlers
 var ajaxGetGigData = function(hkey, callback) {
-    console.log(hkey);
+    console.log("hkey" + hkey);
     qry_hk = '/api/v1/dht/hkey/?hkey=' + hkey;
     $.ajax({
         type: 'GET',
         url: qry_hk,
         hkey: hkey,
         success: function(data) {
-            //data = JSON.parse(data);
             callback(true);
             event_on_dht_data(this.hkey, data);
-
         }
     });
 };
@@ -145,7 +146,6 @@ var TIMEOUT_ON_SEARCH_QUERY = null
 
 
 var getListOfGigs = function() {
-
     var qry_url = api_idx_cdn_url() + 'all&limit=30';
     $.ajax({
         type: 'GET',
@@ -154,7 +154,6 @@ var getListOfGigs = function() {
             event_on_search_gig_data(data)
         }
     });
-
 }
 
 var ajax_get_cdn_search = function(q) {
@@ -261,17 +260,11 @@ var main_profile_cards = function() {
             known_guids = JSON.parse(data);
             known_guids.forEach(function(element) {
                 createProfileCard(element);
-                console.log(element);
             });
         }
     });
 
 };
-// profile cards end
-
-// TODO
-// grrr
-
 
 // JS DATA BUFFERS
 

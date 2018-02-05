@@ -20,6 +20,8 @@ window.profilePageModule = (function() {
                             if (js_data != 'null') {
                                 var gig_o = JSON.parse(js_data);
                                 generateGigsModule.generate(this.hk, gig_o);
+                            } else {
+                                $('.preloader-card').remove();
                             }
                         },
                         error: function(error) {
@@ -28,6 +30,7 @@ window.profilePageModule = (function() {
                         }
                     });
                 }
+                $('.preloader-card').remove();
             });
         });
     }

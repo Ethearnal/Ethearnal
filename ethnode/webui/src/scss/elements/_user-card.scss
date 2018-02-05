@@ -126,14 +126,13 @@
         transform: scale(1.01);
         box-shadow: 4px 6px 10px 0 rgba(0, 0, 0, 0.2);
     }
+    &.profile-user-card {
+        padding-bottom: 20px;
+    }
 }
 
 .fz-15 {
     font-size: 15px;
-}
-
-&.profile-user-card {
-    padding-bottom: 20px;
 }
 
 .preloader-card {
