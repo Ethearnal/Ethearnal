@@ -657,6 +657,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
 .profile-documentation-full .profile-documentation ul.nav {
     background-color: white;
     box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
 }
 
 .profile-documentation-full .profile-documentation ul.nav li:not(.mdl-menu__item):hover,
@@ -3399,6 +3400,7 @@ body header.main-header {
 
 .main-tab-content {
     box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
 }
 
 .tab-content .tab-pane {

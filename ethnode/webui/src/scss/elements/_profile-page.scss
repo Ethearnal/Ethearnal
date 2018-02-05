@@ -124,3 +124,10 @@
         border-radius: 15px;
     }
 }
+
+
+.gigs-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
