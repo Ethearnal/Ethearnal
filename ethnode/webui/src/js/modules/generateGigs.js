@@ -5,10 +5,9 @@ window.generateGigsModule = (function() {
         if (check_gig_marked_deleted(gigObject)) { return }
 
         var api_cdn = api_get_cdn_url();
-        var default_profile_image = '1540b3c47ada5fd9a4798d3cc780d6a6bd05baf94cc2fdaa53e90accb4162383';
         var profile_image = null;
         var owner_guid = null;
-        var img_src = api_cdn + default_profile_image;
+        var img_src = '';
 
 
         var round_price = Math.round(gigObject.price * 1000) / 1000;
@@ -33,24 +32,22 @@ window.generateGigsModule = (function() {
                         <div class="user-price">STARTING AT: <span><i class="material-icons">polymer</i>${round_price}</span></div>
                     </div>`;
 
-        $(".gigs-container").append(gigLayout);
+        var preloader = `<div class="preloader-card"><img src="./dist/img/preloader.gif" alt=""></div>`;
+        if ($(".gigs-container").children().length == 0) {
+            $(".gigs-container").append(preloader);
+        }
+        $(".gigs-container").prepend(gigLayout);
         componentHandler.upgradeDom();
 
         if (gigObject.hasOwnProperty('owner_guid')) {
-            //
             owner_guid = gigObject.owner_guid;
-            //
             getProfileValue(owner_guid, 'profilePicture', function(profilePictureURL) {
-                //
                 var p_src = api_cdn + JSON.parse(profilePictureURL);
-                console.log('ELEMENT', p_src);
                 $('#imgav' + gigID).attr('src', p_src);
-                //
                 getProfileValue(owner_guid, 'name', function(name_jstr) {
                     var names_o = JSON.parse(name_jstr)
                     $('#nmown' + gigID).text(names_o.first + " " + names_o.last);
                 });
-                //
             });
 
         }

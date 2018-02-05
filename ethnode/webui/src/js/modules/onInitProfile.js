@@ -5,7 +5,7 @@ window.profilePageModule = (function() {
     var el = gig_ctx.remove(0);
 
     function initProfile() {
-        $('.nav-tabs .nav-link').siblings().removeClass('active');
+        $('.nav-tabs .nav-link').removeClass('active');
         getNodeData(function(node_data) {
             var node = $.parseJSON(node_data);
             getProfileGigs(node.guid, function(data) {
@@ -17,18 +17,20 @@ window.profilePageModule = (function() {
                         type: "GET",
                         processData: false,
                         success: function(js_data) {
-                            var gig_o = JSON.parse(js_data);
-                            generateGigsModule.generate(this.hk, data);
-                            // createGigToProfile2(this.hk, gig_o);
+                            if (js_data != 'null') {
+                                var gig_o = JSON.parse(js_data);
+                                generateGigsModule.generate(this.hk, gig_o);
+                            } else {
+                                $('.preloader-card').remove();
+                            }
                         },
-
                         error: function(error) {
                             console.log('ERR', error);
-
                             return;
                         }
                     });
                 }
+                $('.preloader-card').remove();
             });
         });
     }

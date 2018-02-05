@@ -52,20 +52,14 @@ var event_on_gig_profile_key_data = function(guid, profile_key, data) {
 var event_on_dht_data = function(hkey, data) {
 
     data = JSON.parse(data);
-    console.log('dht_data:', hkey, data);
-    owner = null;
-    owner = data.owner_guid;
+    var owner = data.owner_guid;
     if (owner != null) {
-        //ajax_get_guid_profile_key(owner, 'skills');
-        //
-        // createGigToFound(hkey, data);
         generateGigsModule.generate(hkey, data);
     }
 };
 
 
-var event_on_search_gig_data = function(qry, data_js) {
-    console.log('search qry:', qry);
+var event_on_search_gig_data = function(data_js) {
 
     data = null;
     data = JSON.parse(data_js);
@@ -73,19 +67,44 @@ var event_on_search_gig_data = function(qry, data_js) {
     if (data != null) {
         // todo spinner html;
         $(".gigs-container").html('');
-        console.log(data.result);
         if (data.result != undefined) {
             $(".gigs-container").html(data.result);
         } else {
-            for (var i = 0; i < data.length; i++) {
-                ajax_get_gig_data(data[i]);
+            function recursiveBuildGigs(index) {
+                if (index >= data.length) {
+                    $('.preloader-card').remove();
+                    return;
+                }
+                ajaxGetGigData(data[index], function(result) {
+                    console.log("Index:" + index);
+                    if (index < data.length) {
+                        setTimeout(function() {
+                            index++;
+                            recursiveBuildGigs(index);
+                        }, 400);
+                    }
+                });
             }
+            recursiveBuildGigs(0);
         }
 
     }
 };
 
 // end event handlers
+var ajaxGetGigData = function(hkey, callback) {
+    console.log("hkey" + hkey);
+    qry_hk = '/api/v1/dht/hkey/?hkey=' + hkey;
+    $.ajax({
+        type: 'GET',
+        url: qry_hk,
+        hkey: hkey,
+        success: function(data) {
+            callback(true);
+            event_on_dht_data(this.hkey, data);
+        }
+    });
+};
 
 
 var ajax_get_gig_data = function(hkey) {
@@ -125,7 +144,17 @@ var ajax_get_guid_profile_key = function(guid, profile_key) {
 
 var TIMEOUT_ON_SEARCH_QUERY = null
 
-//
+
+var getListOfGigs = function() {
+    var qry_url = api_idx_cdn_url() + 'all&limit=30';
+    $.ajax({
+        type: 'GET',
+        url: qry_url,
+        success: function(data) {
+            event_on_search_gig_data(data)
+        }
+    });
+}
 
 var ajax_get_cdn_search = function(q) {
 
@@ -136,7 +165,7 @@ var ajax_get_cdn_search = function(q) {
         url: qry_url,
         qry: q,
         success: function(data) {
-            event_on_search_gig_data(this.qry, data);
+            event_on_search_gig_data(data);
         }
     });
 
@@ -196,12 +225,12 @@ var search_event = function() {
     }, 100);
 }
 
-$(document).ready(function() {
-    $('#domain-expertise-select').dropdown();
-    $('#skills-tags').dropdown();
-    do_search_query();
+// $(document).ready(function() {
+//     $('#domain-expertise-select').dropdown();
+//     $('#skills-tags').dropdown();
+//     // do_search_query();
 
-});
+// });
 
 $("#skills-tags").on("change", function() {
     var v = $('#search-by-gig-tags').dropdown('get value');
@@ -223,7 +252,6 @@ $('#domain-expertise-select').on('change', function() {
 // profile cards begin
 var main_profile_cards = function() {
     $('.profiles-container').empty();
-    console.log('main_profile_cards()');
     $.ajax({
         url: '/api/v1/dht/guids',
         type: 'GET',
@@ -231,26 +259,19 @@ var main_profile_cards = function() {
         success: function(data) {
             known_guids = JSON.parse(data);
             known_guids.forEach(function(element) {
-                //
                 createProfileCard(element);
-                console.log(element);
             });
         }
     });
 
 };
-// profile cards end
-
-// TODO
-// grrr
-
 
 // JS DATA BUFFERS
 
 var V_GIGS_BUFFER = {};
 
 
-do_search_query();
+// do_search_query();
 
 
 

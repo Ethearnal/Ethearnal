@@ -1664,6 +1664,10 @@ section.profiles-page-content .container .gigs .gigs-container,
 section.profiles-page-content .container .jobs .gigs-container {
     width: calc(100% - 15px);
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 section.gigs-page-content .container .gigs .gigs-container:after,
@@ -1680,13 +1684,16 @@ section.profiles-page-content .container .jobs .gigs-container:after {
     visibility: hidden;
 }
 
-/* .gigs-container-profile, */
-/* .gigs-container-orders { */
-    .gig-container-tab {
-        margin-top: 25px;
-        width: 100%;
-    }
 
+/* .gigs-container-profile, */
+
+
+/* .gigs-container-orders { */
+
+.gig-container-tab {
+    margin-top: 25px;
+    width: 100%;
+}
 
 .profile-card :hover,
 .profile-card :focus,
@@ -1708,6 +1715,8 @@ section.profiles-page-content .container .jobs .gigs-container:after {
     margin-right: 30px;
     margin-bottom: 30px;
     transition: all 0.15s ease-in;
+    display: flex;
+    flex-direction: column;
 }
 
 .profile-card .owner-info {
@@ -2099,7 +2108,7 @@ span.gig-title {
 
 .modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label {
     border: 4px dashed #CCC;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     text-align: left;
     padding: 210px 0 0 0;
     width: 440px;
@@ -3398,7 +3407,6 @@ body header.main-header {
     padding-top: 20px;
     margin-top: 40px;
     background-color: #fff;
-    
 }
 
 .main-tab-content {

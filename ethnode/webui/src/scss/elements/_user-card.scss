@@ -1,6 +1,6 @@
 .user-card {
     width: 240px;
-    height: auto;
+    height: 441px;
     border: 1px solid #e5e5e5;
     box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
     background-color: #FFFFFF;
@@ -11,8 +11,9 @@
     margin-bottom: 30px;
     transition: all 0.15s ease-in;
     z-index: 1;
+    min-height: 441px;
     &.gig {
-      cursor: pointer;
+        cursor: pointer;
     }
     .card-label {
         padding: 5px 15px;
@@ -125,8 +126,19 @@
         // lags with blue transform: scale(1.02);
         box-shadow: 3px 5px 9px 0 rgba(0, 0, 0, 0.1);
     }
+    &.profile-user-card {
+        padding-bottom: 20px;
+    }
 }
 
 .fz-15 {
-  font-size: 15px;
+    font-size: 15px;
+}
+
+.preloader-card {
+    width: 240px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
