@@ -2101,7 +2101,7 @@ span.gig-title {
 
 .modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label {
     border: 4px dashed #CCC;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     text-align: left;
     padding: 210px 0 0 0;
     width: 440px;
