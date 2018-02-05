@@ -122,11 +122,10 @@
         }
     }
     &:hover {
-        transform: scale(1.05);
+        transform: scale(1.01);
         box-shadow: 4px 6px 10px 0 rgba(0, 0, 0, 0.2);
     }
-}
-
-.fz-15 {
-  font-size: 15px;
+    &.profile-user-card {
+        padding-bottom: 20px;
+    }
 }
