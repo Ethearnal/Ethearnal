@@ -1,5 +1,6 @@
 // FCollects GIG /EDIT /CREATE data.
 function collectGigData(form) {
+    alert('hurra');
     $form = form;
     $content = $form.closest('.content');
     $imgInputID = $content.find('input.input-file').attr('id');

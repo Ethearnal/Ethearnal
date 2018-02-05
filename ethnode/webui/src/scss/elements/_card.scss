@@ -4,16 +4,24 @@
 	margin-bottom: 30px;
 	border: 1px solid $border-color;
 	border-radius: 5px;
-	@include transition(all 0.3s ease-in-out); 
-	
-	
+	@include transition(all 0.3s ease-in-out);
+
+	&.sidebar-fixed {
+		position: fixed;
+		width: 262px;
+		@media (max-width: 991px) {
+			position: static;
+			width: 100%;
+		}
+	}
+
 	&.bg-primary,
 	&.bg-success,
 	&.bg-info,
 	&.bg-warning,
 	&.bg-danger	{
 		color: darken($default-white, 10%);
-		
+
 		h1,
 		h2,
 		h3,
@@ -22,41 +30,41 @@
 		h6 {
 			color: $default-white;
 		}
-		
+
 		p {
 			color: darken($default-white, 10%);
 		}
 	}
-	
+
 	.card-heading {
 		padding: 15px 20px;
 		position: relative;
-		
+
 		.card-title {
 			margin-bottom: 0px;
 		}
 	}
-	
+
 	.card-body {
 		padding: 15px 20px;
 	}
-	
+
 	.card-footer {
 		position: relative;
 		padding: 10px 15px 10px 15px;
 		min-height: 55px;
 		background-color: transparent;
-		
+
 		.btn {
 			margin: 0px;
 		}
-		
+
 		.btn-flat {
 			font-size: 13px;
 			text-transform: uppercase;
 		}
 	}
-	
+
 	.card-horizon {
 		padding: 0px;
 		position: relative;
@@ -67,7 +75,7 @@
 			height: 100%;
 			padding: 0px;
 			top: 0px;
-			
+
 			@include screen-mobile {
 				position: static;
 			}
@@ -87,14 +95,14 @@
 			background-position: center center;
 			background-repeat: no-repeat;
 			z-index: 0;
-			
+
 			@include screen-mobile {
 				min-height: 350px;
 			}
-			
+
 			&.has-content {
 				display: table;
-				
+
 				.content {
 					display: table-cell;
 					vertical-align: middle;
@@ -114,8 +122,8 @@
 		z-index: 2;
 		visibility: hidden;
 		opacity: 0;
-		@include background-opacity($default-white, 0.85); 	
-		@include transition(all 0.3s ease-in-out); 
+		@include background-opacity($default-white, 0.85);
+		@include transition(all 0.3s ease-in-out);
 	}
 }
 
@@ -128,7 +136,7 @@
 	top: 0px;
 	right: 0px;
 	z-index: 1;
-	
+
 	.portlet-item {
 		list-style: none;
 		padding: 18px 20px;
@@ -139,7 +147,7 @@
 
 			> a {
 				margin-bottom: 0px;
-				margin-right: 0px; 
+				margin-right: 0px;
 				padding: 5px 6px;
 				font-size: 12px;
 				line-height: 1;
@@ -157,9 +165,9 @@
 		left: auto;
     	right: -10px;
 	}
-	
+
 	.show {
-	
+
 		.dropdown-menu {
 			@include transform(scale(1,1));
 		}
@@ -175,7 +183,7 @@
 
 .card-media {
 	position: relative;
-	
+
 	img {
 		width: 100%;
 	}
@@ -198,13 +206,13 @@
 	    border-radius: 50%;
 	    width: 40px;
 	    height: 40px;
-	    z-index:  3;		
+	    z-index:  3;
 	    @include animation('spin 1.2s linear infinite') ;
 	    @include transform(translateX(-50%) translateY(-50%));
 	}
 }
 
-@include keyframes(spin) {0% { transform: rotate(0); } 100% { transform: rotate(360deg); }} 
+@include keyframes(spin) {0% { transform: rotate(0); } 100% { transform: rotate(360deg); }}
 
 a {
 	&.card {
@@ -212,7 +220,7 @@ a {
 
 		&:hover,
 		&:focus {
-			@include box-shadow(0, 7px, 15px, rgba(0, 0, 0, 0.075)); 
+			@include box-shadow(0, 7px, 15px, rgba(0, 0, 0, 0.075));
 		}
 	}
 }
