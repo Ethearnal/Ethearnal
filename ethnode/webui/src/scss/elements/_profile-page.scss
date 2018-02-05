@@ -41,11 +41,15 @@
                 line-height: 1.2;
                 margin: 0;
                 color: #fff;
+                margin-bottom: 15px;
             }
             .user-item {
-                margin: 15px 0px;
+                margin-bottom: 5px;
+               
+            
                 .item-title {
                     margin-right: 15px;
+                    
                 }
                 .item {
                     line-height: 24px;
@@ -54,6 +58,7 @@
                     padding: 0px 10px;
                     color: #fff;
                     margin-right: 5px;
+                    margin-bottom: 10px;
                     display: inline-block;
                     transition: .3s;
                     cursor: pointer;
@@ -75,10 +80,15 @@
                         a {
                             color: #e6eeff;
                             transition: .3s;
+                            padding: 10px;
+                            border: 1px solid transparent;
                         }
                         &:hover {
                             a {
-                                color: #4a4a4a;
+                                color: #ffffff;
+                                border: 1px solid #e6eeff;
+                                padding: 10px;
+                                border-radius: 1px;
                             }
                         }
                     }
