@@ -2,8 +2,11 @@
 $currentlyOpenModalID = null;
 $currentlyClosestLEdiv = null;
 
-$('body').delegate('.open-modal', 'click', function(e) {
+$(document).on('click', '.open-modal', function(e) {
     e.preventDefault();
+
+    $('body').addClass('modal-open'); // body background block
+
     $contentBlock = $(this).closest('.content-block, .modal-body');
     $modalID = $(this).attr('open-modal');
 
@@ -25,22 +28,22 @@ $('body').delegate('.open-modal', 'click', function(e) {
     openModal($modalID);
 
     // Functions for particular modals.
-    if($($modalID).attr('id') == "edit-profile") loadProfileInputs();
+    if ($($modalID).attr('id') == "edit-profile") loadProfileInputs();
     //try
 
     if (typeof variable !== 'undefined') {
-        if($($modalID).hasClass('edit') && $($modalID).attr('id') !== "edit-profile") loadInputsText($form, $contentBlock);
-    //except:
-     console.log('loadInputsText',loadInputsText);
+        if ($($modalID).hasClass('edit') && $($modalID).attr('id') !== "edit-profile") loadInputsText($form, $contentBlock);
+        //except:
+        console.log('loadInputsText', loadInputsText);
     }
 
-    if($($modalID).hasClass('add')) {
-        if($modalID == "#add-gig") {
+    if ($($modalID).hasClass('add')) {
+        if ($modalID == "#add-gig") {
             datePickerInitGig($inputDateFrom, $inputDateTo);
         } else {
             datePickerInit($inputDateFrom, $inputDateTo);
         }
     }
 
-    if($modalID == "#edit-profile") loadProfileInputs();
+    if ($modalID == "#edit-profile") loadProfileInputs();
 });

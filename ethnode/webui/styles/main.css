@@ -687,7 +687,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
 }
 
 .profile-documentation-full .profile-documentation ul.nav li.active:not(.mdl-menu__item) a {
-    color: 	#92a8d1;
+    color: #92a8d1;
 }
 
 .profile-documentation-full .profile-documentation ul.nav li.dropdownButton {
@@ -3346,15 +3346,6 @@ body {
     -webkit-overflow-scrolling: touch;
     overflow: auto;
     height: 100%;
-}
-
-body.up {
-    margin-top: -59px;
-    background-color: #f2f2f2;
-}
-
-body.modal-open {
-    overflow: auto;
 }
 
 

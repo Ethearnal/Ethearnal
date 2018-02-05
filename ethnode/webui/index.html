@@ -714,40 +714,41 @@
     </div>
     <div id="gigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
         <div role="document" class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button id="dropdowngig606" class="mdl-button mdl-js-button mdl-button--icon dropdown-button"><i class="material-icons">more_vert</i></button>
-                    <ul for="dropdowngig606" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect">
-                        <li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edit</li>
-                        <li class="mdl-menu__item delete">Delete</li>
-                    </ul>
-                    <h2 class="title">Title goes here</h2>
-                    <div class="owner-info"><img src="http://via.placeholder.com/24x24" alt="Avatar">
-                        <h5>owner_nickname</h5>
-                        <h4><i class="material-icons">polymer</i> 306 <span>expires in a day</span></h4>
+            <div id="redesigned-modal" class="hidden">
+                <div class="modal-content border-radius-6">
+                    <div class="modal-header pdd-horizon-30">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title flex-block flex-center">
+                            <div id="new-modal-owner-avatar" class="mrg-right-15"></div>
+                            <div>
+                                <span id="new-modal-owner-name">Owner Name</span> <br>
+                                <span id="new-modal-owner-title">Owner Title</span>
+                            </div>
+                        </h4>
                     </div>
-                    <div class="image">
-                        <div class="button-prev"><i class="material-icons">keyboard_arrow_left</i></div>
-                        <div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div>
-                        <div class="items">
-                            <div class="item"><img src="http://puu.sh/uyh0h/248cb32eca.png" alt="Building"></div>
-                            <div class="item"><img src="http://puu.sh/uyh1c/2b0d7529eb.png" alt="Building"></div>
-                            <div class="item"><img src="http://puu.sh/uyh1r/b8a98339c7.png" alt="Building"></div>
+                    <div class="modal-body border-radius-6" style="overflow: hidden;">
+                        <div class="pdd-horizon-30">
+                            <div class="row">
+                                <div class="ml-auto col-xs-12">
+                                    <h3 class="font-size-24 color-blue" id="redesigned-modal-gig-title">I'll design a smart contracts for ethereum platform</h3>
+                                </div>
+                                <div class="col-xs-12 text-center mrg-vertical-10">
+                                    <div id="redesigned-modal-gig-image" style="height: 200px;"></div>
+                                </div>
+                                <p id="redesigned-modal-description" class="col-md-12 font-size-16">Let me see your identification. You don't need to see his identification. We don't need to see his identification. These are not the droids.</p>
+                            </div>
                         </div>
                     </div>
-                    <p class="gig-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis atque, iure eligendi illo quam expedita vero ipsum similique, esse ratione debitis aperiam provident excepturi rerum saepe, praesentium maiores asperiores totam. Lorem
-                        ipsum dolor sit amet, consectetur adipisicing elit. Enim, soluta modi esse accusantium sit velit cupiditate minima ipsam ex, sunt eaque quas dignissimos fugiat itaque fuga unde minus totam sequi? Lorem ipsum dolor sit amet, consectetur
-                        adipisicing elit. Reiciendis illum magnam aliquam, deserunt quisquam excepturi assumenda odit! Deserunt illo, atque repellat voluptates adipisci et, nihil blanditiis! Amet reiciendis repudiandae, iste.</p>
-                    <div class="extras-box">
-                        <h3>BOX FOR EXTRAS</h3>
-                    </div>
-                    <div class="footer">
-                        <button class="mdl-button mdl-js-button close-button">Close</button>
-                        <button id="publish4" class="mdl-button mdl-js-button buy"><span><i class="material-icons">polymer</i> 30</span> Order</button>
-                        <div data-mdl-for="publish4" class="mdl-tooltip">This text will be changed anyway.</div>
+                    <div class="modal-footer pdd-horizon-30">
+                        <div class="text-right">
+                            <button class="btn btn-default btn-sm no-mrg" data-dismiss="modal">
+                          Hold &nbsp; <span id="redesigned-modal-gig-price-req">0.00 </span> &nbsp;
+                          <i class="material-icons font-size-18" style="vertical-align: text-bottom;">polymer</i> &nbsp;
+                          Price &nbsp; <span id="redesigned-modal-gig-price"> 0.00 </span> &nbsp; Order
+                        </button>
+                        </div>
                     </div>
                 </div>
-                <!-- JSON AJAX DATA GOES HERE-->
             </div>
         </div>
     </div>
