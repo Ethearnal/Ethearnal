@@ -1,4 +1,4 @@
-function generateGigsFromData(gigID, gigObject) {
+/* function generateGigsFromData(gigID, gigObject) {
     if (check_gig_marked_deleted(gigObject)) { return }
 
     var api_cdn = api_get_cdn_url();
@@ -10,7 +10,7 @@ function generateGigsFromData(gigID, gigObject) {
 
     var round_price = Math.round(gigObject.price * 1000) / 1000;
     var dropdownButton = '<button id="DDB' + gigID + '" class="dropdown-gig mdl-button mdl-js-button mdl-button--icon dropdown-button btn-info-edit"><i class="material-icons">more_vert</i></button>';
-    var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB' + gigID + '"><li class="mdl-menu__item open-modal" open-modal="#edit-gig">Edit</li><li class="mdl-menu__item delete">Delete</li></ul>';
+    var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB' + gigID + '"><li class="mdl-menu__item" data-toggle="modal" data-target="#gigModal">Open</li></ul>';
 
     var gigLayout = `<div class="user-card gig"  id="${gigID}" data-toggle="modal" data-target="#gigModal">
                     <div class="img-card">
@@ -61,3 +61,5 @@ function generateGigsFromData(gigID, gigObject) {
         }
     }
 }())
+
+*/
