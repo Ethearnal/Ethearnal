@@ -2482,11 +2482,11 @@ sup i.material-icons {
 .slider-wrapper-2 .ui-slider .ui-slider-range-2,
 .slider-wrapper-2 .ui-slider-2 .ui-slider-range,
 .slider-wrapper-2 .ui-slider-2 .ui-slider-range-2 {
-    background: #f7cac9;
+    background: #89ABE3;
     height: 20px;
     position: absolute;
-    border-top: 1px solid #f7cac9;
-    border-bottom: 1px solid #f7cac9;
+    border-top: 1px solid #89ABE3;
+    border-bottom: 1px solid #89ABE3;
     /* border-bottom: 1px solid #89ABE3; */
     -webkit-transform: translateY(-1px);
     -ms-transform: translateY(-1px);
