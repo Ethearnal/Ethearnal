@@ -1,6 +1,5 @@
 // FCollects GIG /EDIT /CREATE data.
 function collectGigData(form) {
-    alert('hurra');
     $form = form;
     $content = $form.closest('.content');
     $imgInputID = $content.find('input.input-file').attr('id');
@@ -23,7 +22,14 @@ function collectGigData(form) {
     $avatarImage = $('#avatar-img').attr('src');
     console.log($avatarImage);
     var objFormData = new FormData();
-    var fileObj = document.getElementById($imgInputID).files[0];
+    var fileObj = undefined
+    if ($imgInputID == 'input-image-gig') {
+      if (window.$uploadCropBlob) {
+        fileObj = window.$uploadCropBlob;
+      }
+    } else {
+      fileObj = document.getElementById($imgInputID).files[0];
+    }
 
     objFormData.append('ufile', fileObj);
     //var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
@@ -33,6 +39,7 @@ function collectGigData(form) {
 
     if(fileObj != undefined) {
         if(!!fileObj.type.match(/image.*/)) {
+            alert('hurra1')
             $.ajax({
                 url: api_cdn_post,
                 type: "POST",
@@ -40,6 +47,7 @@ function collectGigData(form) {
                 processData: false,
                 contentType: false,
                 success: function(data){
+                    alert('hurra2')
 
                     // Deletes GIG if not EDIT modal
                     if( $content.closest('.modal-box').hasClass('edit') ) {
@@ -66,7 +74,8 @@ function collectGigData(form) {
 //                            { expire: $dateExpire, expiresIn: $expireDateDifference }
 //                        ]
                     }
-
+                    console.log($data);
+                    
                     $.ajax({
                         url: "/api/v1/dht/gigs/",
                         type: "POST",
