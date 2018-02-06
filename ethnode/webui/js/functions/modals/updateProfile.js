@@ -59,17 +59,13 @@ function updateProfile() {
     getProfileValue(profileID, 'profilePicture', function(profilePictureURL) {
         //var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
         var api_cdn = api_get_cdn_url();
-
         if (profilePictureURL.indexOf('//') >= 0) {
-
             // CHANGING PROFILE PICTURE
             $('.profile-image img').attr('src', JSON.parse(profilePictureURL) + '&thumb=1');
             $('li.profile img.profile-picture').attr('src', JSON.parse(profilePictureURL) + '&thumb=1');
         } else {
-
             // CHANGING PROFILE PICTURE
-            $('.profile-image img').attr('src', api_cdn + JSON.parse(profilePictureURL) + '&thumb=1');
-            $('li.profile img.profile-picture').attr('src', api_cdn + JSON.parse(profilePictureURL) + '&thumb=1');
+            $('.user-avatar').css('background-image', 'url(' + api_cdn + JSON.parse(profilePictureURL) + '&thumb=1)');
         }
     });
 
