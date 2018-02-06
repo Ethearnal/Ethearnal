@@ -164,7 +164,7 @@
         }
     }
     &:hover {
-        // lags with blue transform: scale(1.02);
+        transform: scale(1.02);
         box-shadow: 3px 5px 9px 0 rgba(0, 0, 0, 0.1);
     }
     &.profile-user-card {
@@ -178,8 +178,11 @@
 
 .preloader-card {
     width: 240px;
-    height: auto;
+    height: 441px;
     display: flex;
     align-items: center;
     justify-content: center;
+    img {
+        width: 35px;
+    }
 }

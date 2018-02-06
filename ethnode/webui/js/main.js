@@ -69,19 +69,24 @@ var event_on_search_gig_data = function(data_js) {
             $(".gigs-container").html(data.result);
         } else {
             function recursiveBuildGigs(index) {
+                var preloader = `<div class="preloader-card"><img src="./dist/img/preloader.gif" alt=""></div>`;
+                $(".gigs-container").append(preloader);
                 if (index >= data.length) {
                     $('.preloader-card').remove();
                     return;
+                } else {
+                    ajaxGetGigData(data[index], function(result) {
+                        if (index < data.length) {
+                            setTimeout(function() {
+                                index++;
+                                recursiveBuildGigs(index);
+                            }, 150);
+                        } else {
+                            return;
+                            $('.preloader-card').remove();
+                        }
+                    });
                 }
-                ajaxGetGigData(data[index], function(result) {
-                    console.log("Index:" + index);
-                    if (index < data.length) {
-                        setTimeout(function() {
-                            index++;
-                            recursiveBuildGigs(index);
-                        }, 400);
-                    }
-                });
             }
             recursiveBuildGigs(0);
         }
@@ -98,8 +103,8 @@ var ajaxGetGigData = function(hkey, callback) {
         url: qry_hk,
         hkey: hkey,
         success: function(data) {
-            callback(true);
             event_on_dht_data(this.hkey, data);
+            callback(true);
         }
     });
 };
@@ -260,17 +265,18 @@ function main_profile_cards() {
             var counter = 0;
 
             function chain() {
-              createProfileCard(known_guids[counter],function(){
-                counter++;
-                if (counter == known_guids.length) return
-                setTimeout(function(){
-                  'Chain Started';
-                  startChain();
-                },150)
-              });
+                createProfileCard(known_guids[counter], function() {
+                    counter++;
+                    if (counter == known_guids.length) return
+                    setTimeout(function() {
+                        'Chain Started';
+                        startChain();
+                    }, 150)
+                });
             }
+
             function startChain() {
-              chain();
+                chain();
             }
             startChain();
 
@@ -626,13 +632,13 @@ $(document).ready(function() {
                     window.$uploadCrop.croppie('bind', {
                         url: e.target.result
                     });
-                    $content.find('.img-label').css('display','none');
-                    $content.find('#cropper-wrap-gig').css('display','block');
+                    $content.find('.img-label').css('display', 'none');
+                    $content.find('#cropper-wrap-gig').css('display', 'block');
                     $content.find('img#input-image-gig').addClass('empty');
                     $content.find('.jsCropResult').show();
                     //$content.find('.img-label').css('background-image','url("'+ e.target.result +'")');
                 } else {
-                  $content.find('img#' + $inputID + '').attr('src', e.target.result).show();
+                    $content.find('img#' + $inputID + '').attr('src', e.target.result).show();
                 }
             }
             reader.readAsDataURL(input.files[0]);
@@ -849,3 +855,4 @@ require("js/sliders.js");
 
 // Includes Load Profile function with AJAX GET.
 require("js/loadProfile.js");
+require("./dist/js/main.js");
