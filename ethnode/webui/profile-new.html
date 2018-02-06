@@ -57,6 +57,7 @@
                 </div>
                 <div id="navigation" class="collapse navbar-collapse tab-info">
                     <ul class="nav nav-tabs navbar-right hidden-xs relative dropdown">
+                        <li><a href="" open-modal="#edit-profile" class="nav-link open-modal">Test</a></li>
                         <li class="nav-item"><a href="/ui" class="nav-link gigs">Gigs</a></li>
                         <li class="nav-item"><a href="/ui/profiles" class="nav-link profiles">Profiles</a></li>
                         <li class="nav-item"><a href="" open-modal="#add-gig" class="nav-link open-modal">New Gig</a></li>
@@ -67,12 +68,30 @@
                         </li>
                         <ul data-labelledby="settings-dropdown" class="dropdown-menu absolute">
                             <li><a href="/ui/profile" class="flex-block flex-center"><i class="ti-user pdd-right-10 font-size-18"></i>My Profile</a></li>
-                            <li><a href="" class="flex-block flex-center"><i class="ti-info pdd-right-10 font-size-18"></i>About Node</a></li>
+                            <li><a href="" data-toggle="modal" data-target="#modal-sm" class="flex-block flex-center"><i class="ti-info pdd-right-10 font-size-18"></i>About Node</a></li>
                         </ul>
                 </div>
             </nav>
         </div>
     </header>
+    
+    
+    <div class="modal fade" id="modal-sm">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content about-head-modal">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img class="img-responsive mrg-horizon-auto mrg-vertical-5" src="images/logo.png" alt="">
+                        <h3>Ethearnal</h3>
+                        <p>Version:Alpha 0.0.1</p>
+                    </div>
+                </div>
+                <button data-dismiss="modal" class="btn btn-primary btn-block no-mrg no-border pdd-vertical-15 ng-scope">
+                    <span class="text-uppercase">Close</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <section class="profile-headline">
         <div class="container">
@@ -83,7 +102,7 @@
                         <div class="user-info color-white">
                             <p class="user-name font-size-28 mrg-btm-20">Letice Ivans</p>
                             <p class="user-role font-size-14">Creative Designer</p>
-                            <div class="user-item"><span class="item-title font-size-14">Skills:</span><span class="item">Adobe Photoshop</span><span class="item">Adobe Illustrator</span></div>
+                            <div class="user-item"><span class="item-title font-size-14">Skills:</span><span class="item">Adobe Photoshop</span><span class="item"></span></div>
                             <div class="user-item"><span class="item-title font-size-14">Language:</span><span class="item">English</span><span class="item">Italian</span></div>
                             <p class="user-description font-size-16 mrg-vertical-20">Hello I'm letice, I love to make creative designs and illustrations. Would like to work on interesting projects and meet people.</p>
                             <div class="profile-social">
