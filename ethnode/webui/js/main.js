@@ -69,19 +69,24 @@ var event_on_search_gig_data = function(data_js) {
             $(".gigs-container").html(data.result);
         } else {
             function recursiveBuildGigs(index) {
+                var preloader = `<div class="preloader-card"><img src="./dist/img/preloader.gif" alt=""></div>`;
+                $(".gigs-container").append(preloader);
                 if (index >= data.length) {
                     $('.preloader-card').remove();
                     return;
+                } else {
+                    ajaxGetGigData(data[index], function(result) {
+                        if (index < data.length) {
+                            setTimeout(function() {
+                                index++;
+                                recursiveBuildGigs(index);
+                            }, 150);
+                        } else {
+                            return;
+                            $('.preloader-card').remove();
+                        }
+                    });
                 }
-                ajaxGetGigData(data[index], function(result) {
-                    console.log("Index:" + index);
-                    if (index < data.length) {
-                        setTimeout(function() {
-                            index++;
-                            recursiveBuildGigs(index);
-                        }, 400);
-                    }
-                });
             }
             recursiveBuildGigs(0);
         }
@@ -98,8 +103,8 @@ var ajaxGetGigData = function(hkey, callback) {
         url: qry_hk,
         hkey: hkey,
         success: function(data) {
-            callback(true);
             event_on_dht_data(this.hkey, data);
+            callback(true);
         }
     });
 };

@@ -660,6 +660,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
     border-radius: 6px;
 }
 
+
 /* .profile-documentation-full .profile-documentation ul.nav li:not(.mdl-menu__item):hover,
 .profile-documentation-full .profile-documentation ul.nav li:not(.mdl-menu__item):focus,
 .profile-documentation-full .profile-documentation ul.nav li:not(.mdl-menu__item):active {
@@ -675,6 +676,7 @@ section.documentation .container .profile-information-after-fixed .container-flu
     padding: 20px 30px 20px 30px;
     border-radius: 6px 6px 0 0;
 }
+
 
 /* .profile-documentation-full .profile-documentation ul.nav li:not(.mdl-menu__item) a:hover,
 .profile-documentation-full .profile-documentation ul.nav li:not(.mdl-menu__item) a:focus,
@@ -1665,7 +1667,7 @@ section.profiles-page-content .container .jobs .gigs-container {
     width: calc(100% - 15px);
     margin: 0 auto;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     flex-wrap: wrap;
 }
