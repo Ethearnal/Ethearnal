@@ -31,8 +31,8 @@ window.profilePageModule = (function() {
                         }
                     });
                 }
-                $('.preloader-card').remove();
             });
+            $('.preloader-card').remove();
         });
     }
 

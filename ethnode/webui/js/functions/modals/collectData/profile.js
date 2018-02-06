@@ -3,7 +3,7 @@ function collectProfileData(form) {
     $form = form;
     $content = $form.closest('.content');
     $imgInputID = $content.find('input.input-file').attr('id');
-    console.log('input.input-file',$imgInputID);
+    console.log('input.input-file', $imgInputID);
     $profile = $('.profile-information');
     $locationParagraph = $profile.find('.profile-upper p.location');
 
@@ -27,15 +27,15 @@ function collectProfileData(form) {
     var api_cdn = api_get_cdn_url();
     var api_cdn_post = api_post_cdn_url();
 
-    if(fileObj != undefined) {
-        if(!!fileObj.type.match(/image.*/)) {
+    if (fileObj != undefined) {
+        if (!!fileObj.type.match(/image.*/)) {
             $.ajax({
                 url: api_cdn_post,
                 type: "POST",
                 data: objFormData,
                 processData: false,
                 contentType: false,
-                success: function(avatarHash){
+                success: function(avatarHash) {
                     $dataName = { first: $firstname, last: $lastname };
                     $dataLocation = { country: $country, city: $city, countryClass: $countryClass }
 
@@ -74,19 +74,19 @@ function collectProfileData(form) {
 
                     // CHANGING PROFILE PICTURE
                     $('.profile-image img').attr('src', api_cdn + avatarHash);
-                    $('li.profile img.profile-picture').attr('src', api_cdn + avatarHash);
+                    $('li.profile img.profile-picture').attr('src', api_cdn + avatarHash + '&thumb=1');
 
                     // PROFILE SKILLS
                     $('.profile-upper .skills p').remove();
                     $($skills).each(function(i, skill) {
-                        var appendSkill = '<p>'+ skill +'</p>';
+                        var appendSkill = '<p>' + skill + '</p>';
                         $('.profile-upper .skills').append(appendSkill);
                     });
 
                     // PROFILE LANGUAGES
                     $('.profile-upper .languages p').remove();
                     $($languages).each(function(i, language) {
-                        var appendLanguage = '<p>'+ language +'</p>';
+                        var appendLanguage = '<p>' + language + '</p>';
                         $('.profile-upper .languages').append(appendLanguage);
                     });
                 }
@@ -95,7 +95,7 @@ function collectProfileData(form) {
             console.log('Not a valid image!');
         }
 
-    // IF YOU EDIT GIG
+        // IF YOU EDIT GIG
     } else if (fileObj == undefined) {
         $dataName = { first: $firstname, last: $lastname };
         $dataLocation = { country: $country, city: $city, countryClass: $countryClass }
@@ -138,14 +138,14 @@ function collectProfileData(form) {
         // PROFILE SKILLS
         $('.profile-upper .skills p').remove();
         $($skills).each(function(i, skill) {
-            var appendSkill = '<p>'+ skill +'</p>';
+            var appendSkill = '<p>' + skill + '</p>';
             $('.profile-upper .skills').append(appendSkill);
         });
 
         // PROFILE LANGUAGES
         $('.profile-upper .languages p').remove();
         $($languages).each(function(i, language) {
-            var appendLanguage = '<p>'+ language +'</p>';
+            var appendLanguage = '<p>' + language + '</p>';
             $('.profile-upper .languages').append(appendLanguage);
         });
     }
@@ -154,11 +154,11 @@ function collectProfileData(form) {
 
 //
 function collectProfileHeadlineData(form) {
-// CHANGING PROFILE PICTURE
-//    var objFormData = new FormData();
-//    var fileObj = document.getElementById("input-image-profile-headline").files[0];
-//    console.log('file_obje',fileObj)
-//    objFormData.append('ufile', fileObj);
-//    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
+    // CHANGING PROFILE PICTURE
+    //    var objFormData = new FormData();
+    //    var fileObj = document.getElementById("input-image-profile-headline").files[0];
+    //    console.log('file_obje',fileObj)
+    //    objFormData.append('ufile', fileObj);
+    //    var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
 
 }

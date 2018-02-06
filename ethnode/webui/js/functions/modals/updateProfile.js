@@ -63,13 +63,13 @@ function updateProfile() {
         if (profilePictureURL.indexOf('//') >= 0) {
 
             // CHANGING PROFILE PICTURE
-            $('.profile-image img').attr('src', JSON.parse(profilePictureURL));
-            $('li.profile img.profile-picture').attr('src', JSON.parse(profilePictureURL));
+            $('.profile-image img').attr('src', JSON.parse(profilePictureURL) + '&thumb=1');
+            $('li.profile img.profile-picture').attr('src', JSON.parse(profilePictureURL) + '&thumb=1');
         } else {
 
             // CHANGING PROFILE PICTURE
-            $('.profile-image img').attr('src', api_cdn + JSON.parse(profilePictureURL));
-            $('li.profile img.profile-picture').attr('src', api_cdn + JSON.parse(profilePictureURL));
+            $('.profile-image img').attr('src', api_cdn + JSON.parse(profilePictureURL) + '&thumb=1');
+            $('li.profile img.profile-picture').attr('src', api_cdn + JSON.parse(profilePictureURL) + '&thumb=1');
         }
     });
 
@@ -90,13 +90,13 @@ function updateProfile() {
             // $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
             $('#profile-headline').css(
                 'background-image',
-                'url("' + api_cdn + headline_hash + '")'
+                'url("' + api_cdn + headline_hash + '&thumb=1")'
             );
         } else {
             // $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
             $('#profile-headline').css(
                 'background-image',
-                'url("' + api_cdn + headline_hash + '")'
+                'url("' + api_cdn + headline_hash + '&thumb=1")'
             );
 
         }
@@ -155,7 +155,7 @@ function updateProfileHeadline() {
                     //$('#profile-headline').attr('src', api_cdn + headline_hash);
                     $('#profile-headline').css(
                         'background-image',
-                        'url("' + api_cdn + headline_hash + '")'
+                        'url("' + api_cdn + headline_hash + '&thumb=1")'
                     );
                 }
             });

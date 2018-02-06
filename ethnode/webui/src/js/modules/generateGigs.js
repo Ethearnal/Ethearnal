@@ -18,7 +18,7 @@ window.generateGigsModule = (function() {
                         <div class="img-card">
                             ${dropdownButton}
                             ${dropdownUL}
-                            <img src="${api_cdn + gigObject.image_hash}">
+                            <img src="${api_cdn + gigObject.image_hash}&thumb=1">
                             <div class="card-label">${gigObject.general_domain_of_expertise}</div>
                         </div>
                         <div class="user-profile-img">
@@ -42,7 +42,7 @@ window.generateGigsModule = (function() {
         if (gigObject.hasOwnProperty('owner_guid')) {
             owner_guid = gigObject.owner_guid;
             getProfileValue(owner_guid, 'profilePicture', function(profilePictureURL) {
-                var p_src = api_cdn + JSON.parse(profilePictureURL);
+                var p_src = api_cdn + JSON.parse(profilePictureURL) + '&thumb=1';
                 $('#imgav' + gigID).attr('src', p_src);
                 getProfileValue(owner_guid, 'name', function(name_jstr) {
                     var names_o = JSON.parse(name_jstr)

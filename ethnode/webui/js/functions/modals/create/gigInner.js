@@ -1,7 +1,7 @@
 // Making sure that #gigModal won't appear if you click on a edit gig dropdown.
 $('body').delegate('button.dropdown-gig, li.open-modal, ul.mdl-menu, .mdl-menu__container', 'click', function(e) {
-   e.preventDefault();
-   e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 });
 
 // OTHER PROFILE other profile
@@ -10,7 +10,7 @@ $('body').delegate('.profile-card', 'click', function(e) {
     //var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
     var api_cdn = api_get_cdn_url();
     var owner_guid = $(this).attr('id');
-    console.log('PROFILE-CARD clicked for GUID',owner_guid);
+    console.log('PROFILE-CARD clicked for GUID', owner_guid);
     var spinner = '<br><br><br><div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>';
 
 
@@ -43,38 +43,38 @@ $('body').delegate('.profile-card', 'click', function(e) {
     // other-profile-languages
     // other-profile-skills
     getProfileValue(owner_guid, 'profilePicture', function(profile_picture_url) {
-        if(profile_picture_url == 'null') {
+        if (profile_picture_url == 'null') {
             //console.log('P NULL', profile_picture_url);
 
-        }
-        else {
+        } else {
             profile_image = JSON.parse(profile_picture_url);
-            img_url = api_cdn + profile_image
-            $('#other-profile-picture').attr('src', img_url )
+            img_url = api_cdn + profile_image + '&thumb=1'
+            $('#other-profile-picture').attr('src', img_url)
 
-//            $('#new-modal-owner-avatar').css(
-//                    'background-image',
-//                    'url("'+ api_cdn + profile_image +'")'
-//                    );
+            //            $('#new-modal-owner-avatar').css(
+            //                    'background-image',
+            //                    'url("'+ api_cdn + profile_image +'")'
+            //                    );
         }
     });
 
     // headline image
-    getProfileValue(owner_guid, 'headlinePicture', function(headline_hash){
+    getProfileValue(owner_guid, 'headlinePicture', function(headline_hash) {
 
-        if(headline_hash == 'null') {
+        if (headline_hash == 'null') {
             console.log('P headline_hash NULL', headline_hash);
         } else {
             //console.log('P headline_hash', headline_hash);
             //
-            var headline_url = api_cdn + JSON.parse(headline_hash);
+            var headline_url = api_cdn + JSON.parse(headline_hash) + '&thumb=1';
             //var style_str = 'background: lightblue ;';
-            var style_str = 'background-image: url("'+headline_url + '");'
-                          // + 'background-size: auto 106px;'
-                          //+ 'background-position: '
-                          + '';
+            var style_str = 'background-image: url("' + headline_url + '");'
+                // + 'background-size: auto 106px;'
+                //+ 'background-position: '
+                +
+                '';
             var e1 = $("#other-profile-headline-img");
-            console.log('HEADLINE',headline_url);
+            console.log('HEADLINE', headline_url);
             e1.attr('style', style_str);
 
         }
@@ -84,38 +84,35 @@ $('body').delegate('.profile-card', 'click', function(e) {
 
     // profile name
     getProfileValue(owner_guid, 'name', function(names_js) {
-        if(names_js == 'null') {
+        if (names_js == 'null') {
             //console.log('P NULL', profile_picture_url);
 
-        }
-        else {
+        } else {
             name_o = JSON.parse(names_js);
             //console.log('names', name_o);
-            $('#other-profile-names').html(name_o.first+' <b>'+name_o.last+'</b');
+            $('#other-profile-names').html(name_o.first + ' <b>' + name_o.last + '</b');
         }
     });
 
     // profile title
     getProfileValue(owner_guid, 'title', function(title_js) {
-        if(title_js == 'null') {
+        if (title_js == 'null') {
             //console.log('P NULL', profile_picture_url);
 
-        }
-        else {
+        } else {
             title = JSON.parse(title_js);
-            $('#other-profile-title').html('<i>'+title+'</i>');
+            $('#other-profile-title').html('<i>' + title + '</i>');
             //$('#new-modal-owner-title').html('<i>'+title+'</i>');
             //console.log('title', title);
         }
     });
 
-     // profile description
+    // profile description
     getProfileValue(owner_guid, 'description', function(description_js) {
-        if(description_js == 'null') {
+        if (description_js == 'null') {
             //console.log('P NULL', profile_picture_url);
 
-        }
-        else {
+        } else {
             description = JSON.parse(description_js);
             $('#other-profile-description').html(description);
             //$('#new-modal-owner-title').html('<i>'+title+'</i>');
@@ -123,16 +120,15 @@ $('body').delegate('.profile-card', 'click', function(e) {
         }
     });
 
-     // skills
+    // skills
     getProfileValue(owner_guid, 'skills', function(skills_js) {
-        if(skills_js == 'null') {
+        if (skills_js == 'null') {
             //console.log('P NULL', profile_picture_url);
 
-        }
-        else {
+        } else {
             skills_list = JSON.parse(skills_js);
             var skills_html = '';
-            for(var i=0; i<skills_list.length; i++){
+            for (var i = 0; i < skills_list.length; i++) {
                 skills_html += '<p>' + skills_list[i] + '</p>';
             }
             $('#other-profile-skills').html(skills_html);
@@ -141,13 +137,11 @@ $('body').delegate('.profile-card', 'click', function(e) {
 
     // languages
     getProfileValue(owner_guid, 'languages', function(languages_js) {
-        if(languages_js == 'null') {
-            ;
-        }
-        else {
+        if (languages_js == 'null') {;
+        } else {
             languages_list = JSON.parse(languages_js);
             var languages_html = '';
-            for(var i=0; i<languages_list.length; i++){
+            for (var i = 0; i < languages_list.length; i++) {
                 languages_html += '<p>' + languages_list[i] + '</p>';
             }
             $('#other-profile-languages').html(languages_html);
@@ -156,47 +150,47 @@ $('body').delegate('.profile-card', 'click', function(e) {
 
     $('#other-profile-section').show();
     // gigs for
-     //getNodeData(function(node_data){
-      //  node = $.parseJSON(node_data);
-      //  console.log('GUID:' + node.guid);
+    //getNodeData(function(node_data){
+    //  node = $.parseJSON(node_data);
+    //  console.log('GUID:' + node.guid);
 
-        //
-        getProfileGigs(owner_guid,  function(data){
-            console.log('GUID:' + data);
-            profile_gigs = JSON.parse(data);
-            $('#gigs-other').html('');
-            for (var i = 0; i < profile_gigs.length; i++) {
-                $.ajax({
-                        url: "/api/v1/dht/hkey/?hkey=" + profile_gigs[i],
-                        hk: profile_gigs[i],
-                        type: "GET",
-                        processData: false,
-                        success: function(js_data){
+    //
+    getProfileGigs(owner_guid, function(data) {
+        console.log('GUID:' + data);
+        profile_gigs = JSON.parse(data);
+        $('#gigs-other').html('');
+        for (var i = 0; i < profile_gigs.length; i++) {
+            $.ajax({
+                url: "/api/v1/dht/hkey/?hkey=" + profile_gigs[i],
+                hk: profile_gigs[i],
+                type: "GET",
+                processData: false,
+                success: function(js_data) {
 
-                                   //console.log('hkey',this.hk);
-                                   //console.log('data:',js_data);
-                                   gig_o = JSON.parse(js_data);
-                                   //console.log('data:',gig_o);
-                                   var gig_html = createGigToOtherProfile(this.hk, gig_o);
-                                   $("#gigs-other").append(gig_html);
-                                   componentHandler.upgradeDom();
+                    //console.log('hkey',this.hk);
+                    //console.log('data:',js_data);
+                    gig_o = JSON.parse(js_data);
+                    //console.log('data:',gig_o);
+                    var gig_html = createGigToOtherProfile(this.hk, gig_o);
+                    $("#gigs-other").append(gig_html);
+                    componentHandler.upgradeDom();
 
-                            },
+                },
 
-                        error: function(error) {
-                                console.log('ERR',error);
+                error: function(error) {
+                    console.log('ERR', error);
 
-                                return;
-                            }
-                    });
-
-                    //var gig_hk = profile_gigs[i];
-                    //console.log('GIG HK:',gig_hk);
-
-                    /**/
+                    return;
                 }
             });
-       // });
+
+            //var gig_hk = profile_gigs[i];
+            //console.log('GIG HK:',gig_hk);
+
+            /**/
+        }
+    });
+    // });
 
 
     //show content
@@ -211,7 +205,7 @@ $('body').delegate('.profile-card', 'click', function(e) {
 });
 
 
-$('body').delegate('.gig', 'click', function(e){
+$('body').delegate('.gig', 'click', function(e) {
 
     // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
     var api_cdn = api_get_cdn_url();
@@ -231,8 +225,8 @@ $('body').delegate('.gig', 'click', function(e){
             console.log('--->', this.url);
             $e = $('#redesigned-modal-gig-image')
             $e.css(
-                'background', 'url("' + api_cdn + gig_o.image_hash+ '")'
-                + 'center center no-repeat'
+                'background', 'url("' + api_cdn + gig_o.image_hash + '")' +
+                'center center no-repeat'
             );
             $e.css('background-size', '100% auto');
 
@@ -242,8 +236,8 @@ $('body').delegate('.gig', 'click', function(e){
             $('#redesigned-modal-description').html(gig_o.description);
 
             var _tagsString = '';
-            gig_o.tags.forEach(function(item){
-              _tagsString += '<span class="simple-gig-tag">'+ item + '</span>';
+            gig_o.tags.forEach(function(item) {
+                _tagsString += '<span class="simple-gig-tag">' + item + '</span>';
             });
             $('#redesigned-modal-gig-tags').html(_tagsString);
 
@@ -254,40 +248,37 @@ $('body').delegate('.gig', 'click', function(e){
 
             // profile image
             getProfileValue(owner_guid, 'profilePicture', function(profile_picture_url) {
-                if(profile_picture_url == 'null') {
+                if (profile_picture_url == 'null') {
                     //console.log('P NULL', profile_picture_url);
-                }
-                else {
+                } else {
                     profile_image = JSON.parse(profile_picture_url);
                     $('#new-modal-owner-avatar').css(
-                      'background-image',
-                      'url("'+ api_cdn + profile_image +'")'
+                        'background-image',
+                        'url("' + api_cdn + profile_image + '")'
                     );
                 }
             });
 
             // profile name
             getProfileValue(owner_guid, 'name', function(names_js) {
-                if(names_js == 'null') {
+                if (names_js == 'null') {
                     //console.log('P NULL', profile_picture_url);
 
-                }
-                else {
+                } else {
                     name_o = JSON.parse(names_js);
                     //console.log('names', name_o);
-                    $('#new-modal-owner-name').html(name_o.first+' <b>'+name_o.last+'</b');
+                    $('#new-modal-owner-name').html(name_o.first + ' <b>' + name_o.last + '</b');
                 }
             });
 
             // profile title
             getProfileValue(owner_guid, 'title', function(title_js) {
-                if(title_js == 'null') {
+                if (title_js == 'null') {
                     //console.log('P NULL', profile_picture_url);
 
-                }
-                else {
+                } else {
                     title = JSON.parse(title_js);
-                    $('#new-modal-owner-title').html('<i>'+title+'</i>');
+                    $('#new-modal-owner-title').html('<i>' + title + '</i>');
                     //console.log('title', title);
                 }
             });
