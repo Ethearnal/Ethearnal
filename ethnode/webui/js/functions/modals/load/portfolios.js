@@ -19,4 +19,4 @@ function loadPortfoliosToProfile() {
     });
 }
 
-loadPortfoliosToProfile();
+// loadPortfoliosToProfile();
