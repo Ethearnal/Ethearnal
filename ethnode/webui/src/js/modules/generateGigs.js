@@ -14,8 +14,6 @@ window.generateGigsModule = (function() {
         var dropdownButton = '<button id="DDB' + gigID + '" class="dropdown-gig mdl-button mdl-js-button mdl-button--icon dropdown-button btn-info-edit"><i class="material-icons">more_vert</i></button>';
         var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB' + gigID + '"><li class="mdl-menu__item js-open-gig-modal">Open</li></ul>';
 
-        // componentHandler.upgradeDom();
-
         if (gigObject.hasOwnProperty('owner_guid')) {
             owner_guid = gigObject.owner_guid;
 
@@ -44,6 +42,7 @@ window.generateGigsModule = (function() {
                     </div>`;
                     $('.preloader-card').remove();
                     $(".gigs-container").append(gigLayout);
+                    componentHandler.upgradeDom();
                 });
             });
         }
