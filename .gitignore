@@ -1,18 +1,8 @@
 # please add your ide stuff here
 .idea
 .vscode
-<<<<<<< HEAD
-=======
 .DS_Store
-<<<<<<< HEAD
->>>>>>> production/UI-build
-node_modules
-ethnode/webui/node_modules/
-ethnode/webui/node_modules
-=======
->>>>>>> production/UI-build
 
-ethnode/wasui
 
 # default data dirs
 *_profile/
