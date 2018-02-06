@@ -240,6 +240,132 @@
         </div>
       </div>
 
+    <div id="edit-profile-headline" class="modal-box edit flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Edit profile headline image</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your headline was added.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">add new job</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="form-group" id="image-headline-form">
+                            <input id="input-image-profile-he" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-profile-he" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-profile"><img id="input-image-profile-he" src="#" alt=""
+                                class="show-image empty">
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="updateProfileHeadline" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+                        <div data-mdl-for="updateProfileHeadline" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-profile" class="modal-box edit flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Edit profile</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your profile has been updated.</p>
+                            <div class="buttons">
+                                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                                <button class="mdl-button mdl-js-button create-new">Edit profile again</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="input-image-profile" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-profile" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-profile"><img id="input-image-profile" src="#" alt="" class="show-image empty">
+                        </div>
+                        <!--div class="form-group">
+                        <input id="input-image-profile-headline-a" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                        <label for="input-image-profile-headline-a" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-profile"><img id="input-image-profile-headline-a" src="#" alt="" class="show-image empty">
+                      </div-->
+                        <div class="modal-inputs">
+                            <form id="form-update-education" action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input id="first-name" name="first-name" type="text" class="mdl-textfield__input">
+                                    <label for="first-name" class="mdl-textfield__label">First Name</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input id="last-name" name="last-name" type="text" class="mdl-textfield__input">
+                                    <label for="last-name" class="mdl-textfield__label">Last Name</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <input id="title" type="text" name="title" class="mdl-textfield__input">
+                                    <label for="title" class="mdl-textfield__label">Title</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <select name="skills" multiple="" class="ui fluid dropdown normal search skills-dropdown">
+                              <option value="">Add skills tags (limit: 10)...</option>
+                              <option value="angular">Angular</option>
+                              <option value="python">Python</option>
+                              <option value="userexperience">User Experience</option>
+                            </select>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <select name="skills" multiple="" class="ui fluid dropdown normal search languages-dropdown">
+                              <option value="">Add languages you know (limit: 10)...</option>
+                              <option value="bulgarian">Bulgarian</option>
+                              <option value="lithuanian">Lithuanian</option>
+                            </select>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <div id="country" style="float: left" class="ui search selection dropdown">
+                                        <input type="hidden" name="country"><i class="dropdown icon"></i>
+                                        <div class="default text">Select Country</div>
+                                        <div class="menu">
+                                            <div data-value="af" class="item"><i class="af flag"></i> Afghanistan</div>
+                                            <div data-value="ax" class="item"><i class="ax flag"></i> Aland Islands</div>
+                                            <div data-value="bg" class="item"><i class="bg flag"></i> Bulgaria</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input id="city" type="text" name="city" class="mdl-textfield__input">
+                                    <label for="city" class="mdl-textfield__label">City</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                                    <label for="description" class="mdl-textfield__label">Summary</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="updateProfile" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+                        <div data-mdl-for="updateProfile" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- Modals  Temaplates -->

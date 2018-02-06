@@ -14,7 +14,7 @@ function loadProfileInputs() {
     $lastname = $fullname.split(' ')[1]; // LAST NAME
     $hourlyRate = $buttonHire.match(/\d+/); // HOURLY RATE
     $country = $location.split(', ')[1]; // COUNTRY
-    $countryClass = $profile.find('.profile-upper p.location').attr('class');
+    // $countryClass = $profile.find('.profile-upper p.location').attr('class');
     $countryClass = $countryClass.split(' ')[1];
     $skills = [];
     $languages = [];

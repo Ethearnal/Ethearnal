@@ -12,6 +12,7 @@
     transition: all 0.15s ease-in;
     z-index: 1;
     min-height: 441px;
+    position: relative;
     &.gig {
         cursor: pointer;
     }
@@ -101,15 +102,14 @@
         .info {
             text-align: center;
             line-height: 1.4;
-            display: block;
-        display: -webkit-box;
-        max-width: 400px;
-        height: 110px;
-        margin: 0 auto;
-        -webkit-line-clamp: 6;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
+            display: -webkit-box;
+            max-width: 400px;
+            height: 110px;
+            margin: 0 auto;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
     .user-price {
@@ -125,9 +125,10 @@
         padding-bottom: 5px;
         border-top: 1px solid #eee;
         background-color: #ffecec;
+        position: absolute;
+        bottom: 0;
         width: 100%;
         top: calc(100% - 35px);
-        // background: rgba(149, 205, 248, 0.12941176470588237);
         span {
             display: flex;
             align-items: center;
