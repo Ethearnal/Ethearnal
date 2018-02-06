@@ -167,3 +167,13 @@
         }
     }
 }
+
+.btn-pink {
+    background-color: #f7cac9;
+    border-color: #f7cac9;
+    &:hover {
+        background-color: #fddcdb;
+        border-color: #f7cac9;
+        color: #fff;
+    }
+}
