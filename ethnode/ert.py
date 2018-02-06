@@ -24,7 +24,7 @@ from ert_profile import EthearnalProfileController
 # from webdht.wdht import WebSelfPredicateApi, WebGuidPredicateApi, WebDHTKnownGuids
 
 from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
-from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
+from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode, WebProfileStatic
 from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
 from webdht.wdht_ertapi import DhtEventsHkeysWebAPI, Indexer
 
@@ -257,6 +257,13 @@ def main_http(http_webdir: str = config.http_webdir,
         cherry=cherrypy,
         dhf=dht_facade_,
     )
+
+    # web_profile_static = WebProfileStatic(
+    #     cherry=cherrypy,
+    #     web_root_dir=http_webdir,
+    #     web_route_name='profilex',
+    #     file_name='profile.html',
+    # )
 
     # WebGuidPredicateApi
     # WebSelfPredicateApi

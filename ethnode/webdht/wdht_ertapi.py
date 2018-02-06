@@ -1,5 +1,7 @@
+import os
 import json
 import bson
+import bleach
 from webdht.double_linked import DList, instance_dl
 from kadem.kad import DHTFacade
 from webdht.wdht import HashIO, OwnerGuidHashIO
@@ -7,7 +9,7 @@ from datamodel.resource_index import ResourceIndexingEngine
 from datamodel.inv_norank_sqlite import InvIndexTimestampSQLite
 from toolkit.kadmini_codec import guid_bin_to_hex, guid_bin_to_hex2, guid_hex_to_bin, guid_int_to_hex
 from ert_profile import EthearnalProfileController
-import bleach
+
 
 # todo DRY it
 
@@ -811,4 +813,40 @@ class WebDHTAboutNode(object):
                 }
             }
         )
+
+
+class WebProfileStatic(object):
+    exposed = True
+
+    def __init__(self,
+                 cherry,
+                 web_root_dir,
+                 web_route_name,
+                 file_name,
+
+                 mount_it=True):
+        self.cherry = cherry
+        self.web_root_dir = os.path.abspath(web_root_dir)
+        self.file_to_serv = '%s/%s' % (self.web_root_dir, file_name)
+        if not os.path.isfile(self.file_to_serv):
+            raise IOError('file not found %s' % self.file_to_serv)
+        self.mount_point = '/ui/%s/' % web_route_name
+
+        if mount_it:
+            self.mount()
+            print('MOUNT UI %s' % self.mount_point)
+
+    def mount(self):
+        self.cherry.tree.mount(
+            self,
+            self.mount_point, {'/': {
+                    'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
+
+    def GET(self):
+        st = '%s' % self.file_to_serv
+        return st.encode('utf-8')
 
