@@ -1,0 +1,212 @@
+.theme-toggle {
+	position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px !important;
+    z-index: 1001;
+    font-size: 15px !important;
+    color: $default-white;
+    background-color: $default-info;
+
+    &:hover {
+    	opacity: 0.85;
+    } 
+}
+
+.theme-configurator {
+
+	&.theme-config-open {
+		.configurator-wrapper {
+			@include transform(translateX(0px));	
+		}
+	}
+
+	.configurator-wrapper {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: 300px;
+		border-left: 1px solid $border-color;
+		margin: 0px;
+		overflow: hidden;
+		z-index: 1030;
+		background-color: $default-white;
+		@include transform(translateX(300px));	
+		@include transition(all 0.2s ease-out); 
+
+		.config-header {
+			position: relative;
+			padding: 0px 15px;
+			text-align: left;
+			border-bottom: 1px solid $border-color;
+
+			.config-title {
+				line-height: $header-height;
+				margin-bottom: 0px;
+			}
+
+			.config-close {
+				position: absolute;
+				right: 0px;
+				top: 0px;
+				border: 0px;
+				padding: 0px 20px;
+				background-color: $default-white;
+				line-height: $header-height;
+				border-left: 1px solid $border-color;
+			}
+		}
+
+		.config-body {
+			padding: 30px 40px;
+
+			.theme-colors {
+				padding: 7px 0;
+			    min-height: auto;
+			    display: inline-block;
+				
+				input {
+					margin: 0;
+					display: none;
+					width: 22px;
+					
+					+label {
+						padding-left: 0;
+						
+						&:before {
+							content: "";
+							width: 55px;
+							height: 55px;
+							display: inline-block;
+							border: 2px solid $border-color;
+							margin-right: 15px;
+							font-size: 14px;
+							font-family: 'themify';
+							font-weight: 400;
+							line-height: 19px;
+							vertical-align: bottom;
+							text-align: center;
+							background-color: $default-white;
+							cursor: pointer;
+							font-size: 18px;
+   							line-height: 50px;
+						}
+					}
+					
+					&:checked {
+						
+						+label {
+							&:before {
+								content: "\e64c";
+								color: $default-text-color;
+							}
+						}
+					}
+				}
+
+				&.header-primary {
+					input {
+						+label {
+							&:before {
+								background-color: $theme-primary;
+							}	
+						}			
+						&:checked {
+							+label {
+								&:before {
+									color: $default-white;
+								}
+							}
+						}
+					}	
+				}
+
+				&.header-info {
+					input {
+						+label {
+							&:before {
+								background-color: $theme-info;
+							}	
+						}			
+						&:checked {
+							+label {
+								&:before {
+									color: $default-white;
+								}
+							}
+						}
+					}	
+				}
+
+				&.header-success {
+					input {
+						+label {
+							&:before {
+								background-color: $theme-success;
+							}	
+						}			
+						&:checked {
+							+label {
+								&:before {
+									color: $default-white;
+								}
+							}
+						}
+					}	
+				}
+
+				&.header-danger {
+					input {
+						+label {
+							&:before {
+								background-color: $theme-danger;
+							}	
+						}			
+						&:checked {
+							+label {
+								&:before {
+									color: $default-white;
+								}
+							}
+						}
+					}	
+				}
+
+				&.header-dark {
+					input {
+						+label {
+							&:before {
+								background-color: $theme-dark;
+							}	
+						}			
+						&:checked {
+							+label {
+								&:before {
+									color: $default-white;
+								}
+							}
+						}
+					}	
+				}
+
+				&.side-nav-dark {
+					input {
+						+label {
+							&:before {
+								background-color: $side-nav-dark;
+							}	
+						}			
+						&:checked {
+							+label {
+								&:before {
+									color: $default-white;
+								}
+							}
+						}
+					}	
+				}
+			}
+		}
+	}
+}

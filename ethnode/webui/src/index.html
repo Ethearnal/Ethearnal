@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethearnal - Home page</title>
+    <link rel="stylesheet" href="styles/hcmodals.css">
+    <!-- FAVICON-->
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <!-- START of LINKS-->
+    <!-- Normalize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
+    <!-- BootstrapCSS 3.3.7-->
+    <link rel="stylesheet" href="./node_modules/croppie/croppie.css" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Semantic UI CSS-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.css">
+    <!-- Owl Carousel CSS-->
+    <link rel="stylesheet" href="https://bbcdn.githack.com/shahzadns/owlfonk-owlcarousel/raw/31413692812896e19db89baee9be30b9d36d1e64/owl-carousel/owl.carousel.css">
+    <!-- Bootstrap Material Date and Time Picker-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/css/bootstrap-material-datetimepicker.css">
+    <!-- Icons-->
+    <link rel="stylesheet" href="styles/icons.css">
+    <link rel="stylesheet" href="./assets/icons/themify-icons.css">
+    <!-- Flag icons-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/lipis/flag-icon-css/master/css/flag-icon.min.css">
+    <!-- START of FONTS-->
+    <!-- Google Material Icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Material Design Bootstrap-->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Roboto-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i">
+    <!-- Montserrat-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800,900">
+    <!-- END of FONTS-->
+    <!-- Main CSS file-->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="./dist/css/main.css">
+</head>
+
+<body class="gigs-page">
+    <div id="add-job" class="add modal-box flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Add job</h3>
+                    </div>
+
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your job was added.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">add new job</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="input-image-job" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-job">Add Company's Logo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-job"><img id="input-image-job" src="#" alt="">
+                        </div>
+                        <div class="modal-inputs">
+                            <form id="form-add-job" action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input id="company-name" name="company" type="text" class="mdl-textfield__input">
+                                    <label for="company-name" class="mdl-textfield__label">Company name</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input id="position-name" type="text" name="position" class="mdl-textfield__input">
+                                    <label for="position" class="mdl-textfield__label">Position</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                                    <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">Start Date</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input type="text" name="endDate" class="date-ended mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">End Date (leave blank if ongoing)</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="publish" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
+                        <div data-mdl-for="publish" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="edit-job" class="edit modal-box flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Edit job</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your job was updated.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">Edit job again</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="input-image-job" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-job">Add Company's Logo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-job"><img id="input-image-job" src="#" alt="">
+                        </div>
+                        <div class="modal-inputs">
+                            <form id="form-update-job" action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input id="company-name" name="company" type="text" class="mdl-textfield__input">
+                                    <label for="company-name" class="mdl-textfield__label">Company name</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input id="position-name" type="text" name="position" class="mdl-textfield__input">
+                                    <label for="position" class="mdl-textfield__label">Position</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                                    <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input id="date-from1" type="text" name="startDate" class="date-started mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">Start Date</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input id="date-to1" type="text" name="endDate" class="date-ended mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">End Date (leave blank if ongoing)</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="update" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+                        <div data-mdl-for="update" class="mdl-tooltip">Yo dude.. I think you should fill the form first..</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="add-education" class="add modal-box flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Add education</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your education was added.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">Add new education</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="input-image-education" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-education">Add Educational Institution Logo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-education"><img id="input-image-education" src="#" alt="">
+                        </div>
+                        <div class="modal-inputs">
+                            <form id="form-update-education" action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input id="education-name" name="education-name" type="text" class="mdl-textfield__input">
+                                    <label for="education-name" class="mdl-textfield__label">Educational Institution name</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input id="study-field" type="text" name="study-field" class="mdl-textfield__input">
+                                    <label for="study-field" class="mdl-textfield__label">Field of Study</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                                    <label for="description" class="mdl-textfield__label">Description (what did you study or still studying?)</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">Start Date</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input type="text" name="endDate" class="date-ended mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">End Date (leave blank if ongoing)</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="publish1" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
+                        <div data-mdl-for="publish1" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="edit-education" class="edit modal-box flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Edit education</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your education was updated.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">Edit education again</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="input-image-education" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-education">Add Educational Institution Logo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-education"><img id="input-image-education" src="#" alt="">
+                        </div>
+                        <div class="modal-inputs">
+                            <form id="form-update-education" action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input id="education-name" name="education-name" type="text" class="mdl-textfield__input">
+                                    <label for="education-name" class="mdl-textfield__label">Educational Institution name</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input id="study-field" type="text" name="study-field" class="mdl-textfield__input">
+                                    <label for="study-field" class="mdl-textfield__label">Field of Study</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                                    <label for="description" class="mdl-textfield__label">Description (what did you study or still studying?)</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">Start Date</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input type="text" name="endDate" class="date-ended mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">End Date (leave blank if ongoing)</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="update1" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+                        <div data-mdl-for="update1" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="add-portfolio" class="add modal-box flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <h3 class="page-card-name">Add portfolio</h3>
+                <div class="content">
+
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your portfolio was added.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">create new portfolio</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="input-image-portfolio" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-portfolio" class="img-label"><p class="add-photo-label">Add photo</p></label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-portfolio"><img id="input-image-portfolio"
+                                src="#" alt="" class="show-image empty">
+                        </div>
+                        <div class="modal-inputs">
+                            <form action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <label for="title" class="label-control gig-title-label">Title</label>
+                                    <input id="title" name="title" type="text" class="form-control">
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <label for="description" class="label-control gig-title-label">Description (what have you accomplished with this?)</label>
+                                    <textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <select name="skills" multiple="" class="ui fluid dropdown normal search portfolio-tags">
+                      <option value="">Add gig tags (limit: 10)...</option>
+                      <option value="programming">Programming</option>
+                      <option value="copywriting">Copywriting</option>
+                      <option value="userexperience">User Experience</option>
+                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default close-btn lh-normal mdl-button mdl-js-button close-button">Close</button>
+                        <button id="publish5" style="" class="btn btn-info lh-normal mdl-button mdl-js-button finish-button">Publish</button>
+                        <div data-mdl-for="publish5" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="edit-portfolio" class="edit modal-box flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Edit portfolio</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your portfolio was updated.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">edit portfolio again</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="input-image-portfolio" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-portfolio" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-portfolio"><img id="input-image-portfolio" src="#" alt=""
+                                class="show-image empty">
+                        </div>
+                        <div class="modal-inputs">
+                            <form action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <input id="portfolio-title" name="portfolio-title" type="text" class="mdl-textfield__input">
+                                    <label for="portfolio-title" class="mdl-textfield__label">Portfolio title</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                                    <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <select name="skills" multiple="" class="ui fluid dropdown normal search portfolio-tags">
+                      <option value="">Add gig tags (limit: 10)...</option>
+                      <option value="programming">Programming</option>
+                      <option value="copywriting">Copywriting</option>
+                      <option value="userexperience">User Experience</option>
+                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="update5" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+                        <div data-mdl-for="update5" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="add-language" class="add modal-box flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Add language</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your language has been added.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">Add new language</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-inputs">
+                            <form id="form-update-education" action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <div id="language-name" style="float: left" class="ui search selection dropdown">
+                                        <input type="hidden" name="language"><i class="dropdown icon"></i>
+                                        <div class="default text">Select Language</div>
+                                        <div class="menu">
+                                            <div data-value="af" class="item"><i class="af flag"></i> Afghanistan</div>
+                                            <div data-value="ax" class="item"><i class="ax flag"></i> Aland Islands</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <select id="level" style="float: right" class="ui dropdown">
+                      <option value="">Skill Level</option>
+                      <option value="1">Beginner</option>
+                      <option value="2">Limited knowledge</option>
+                      <option value="3">Professional</option>
+                      <option value="4">Native or bilingual</option>
+                    </select>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                                    <label for="description" class="mdl-textfield__label">Tell us more about it. Why and how did you started learning it, what's your plan for the future with this language?</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">When did you start learning it?</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input type="text" name="endDate" class="date-ended mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">When did you feel like you picked it up?</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="publish2" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
+                        <div data-mdl-for="publish2" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="edit-language" class="edit modal-box flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Edit language</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your language has been updated.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">Edit language again</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-inputs">
+                            <form id="form-update-education" action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <div id="language-name" style="float: left" class="ui search selection dropdown">
+                                        <input type="hidden" name="language"><i class="dropdown icon"></i>
+                                        <div class="default text">Select Language</div>
+                                        <div class="menu">
+                                            <div data-value="af" class="item"><i class="af flag"></i> Afghanistan</div>
+                                            <div data-value="ax" class="item"><i class="ax flag"></i> Aland Islands</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <select id="level" style="float: right" class="ui dropdown">
+                      <option value="">Skill Level</option>
+                      <option value="1">Beginner</option>
+                      <option value="2">Limited knowledge</option>
+                      <option value="3">Professional</option>
+                      <option value="4">Native or bilingual</option>
+                    </select>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                                    <label for="description" class="mdl-textfield__label">Tell us more about it. Why and how did you started learning it, what's your plan for the future with this language?</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">When did you start learning it?</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input type="text" name="endDate" class="date-ended mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">When did you feel like you picked it up?</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="update2" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+                        <div data-mdl-for="update2" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="add-skill" class="add modal-box flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Add skill</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your skill has been added.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">Add new skill</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-inputs">
+                            <form id="form-update-education" action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input id="skill-name" name="skill-name" type="text" class="mdl-textfield__input">
+                                    <label for="skill-name" class="mdl-textfield__label">Skill name</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <select class="ui dropdown">
+                      <option value="">Skill Level</option>
+                      <option value="1">Beginner</option>
+                      <option value="2">Limited knowledge</option>
+                      <option value="3">Professional</option>
+                    </select>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                                    <label for="description" class="mdl-textfield__label">Tell us more about it. Why and how did you started learning it, what's your plan for the future with this skill?</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">When did you start learning it?</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input type="text" name="endDate" class="date-ended mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">When did you feel like you picked it up?</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="publish3" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Publish</button>
+                        <div data-mdl-for="publish3" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="add-gig" class="add modal-box flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <h3 class="page-card-name">Add gig</h3>
+                <div class="content">
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your gig was created.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">create new gig</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="input-image-gig" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-gig" class="img-label"><p class="add-photo-label">Add photo</p></label><img src="images/image-video-image-file.png" alt="Add a file" id="croppie" class="file-input-first-image img-gig"><img id="input-image-gig"
+                                src="#" alt="" class="show-image empty">
+                        </div>
+                        <div class="modal-inputs">
+                            <form action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <label for="gig-title" class="label-control gig-title-label">Gig Titles</label>
+                                    <input id="gig-title" name="gig-title" type="text" placeholder="Gig Title" class="form-control ">
+                                    <!--  class mdl-textfield__input  and mdl-textfield__label  for label-->
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <select id="category" class="ui dropdown">
+                      <option value="">Select Category</option>
+                      <option value="1">Software Development</option>
+                      <option value="2">Entertainment</option>
+                      <option value="3">Graphic Design</option>
+                      <option value="4">Content Writing</option>
+                      <option value="5">Accountants</option>
+                      <option value="6">Consultants</option>
+                      <option value="7">Assistants</option>
+                    </select>
+                                </div>
+                                <div style="height: 38px; float: right; margin-top: 20px" class="ui right labeled input">
+                                    <label for="reputationCost" class="ui label"><i style="font-size: 17px" class="material-icons">polymer</i></label>
+                                    <input id="reputationCost" type="text" placeholder="Cost of reputation">
+                                    <div class="ui basic label">.00</div>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <select name="gig-tags" multiple="" class="ui fluid dropdown normal search gig-tags">
+                      <option value="">Add gig tags (limit: 10)...</option>
+                      <option value="programming">Programming</option>
+                      <option value="copywriting">Copywriting</option>
+                      <option value="userexperience">User Experience</option>
+                    </select>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <label for="description" class="label-control gig-title-label">Description (what have you done or currently do?)</label>
+                                    <textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
+                                </div>
+                                <div class="ui right labeled input">
+                                    <label for="amount" class="ui label"><i class="material-icons">polymer</i></label>
+                                    <input id="amount" type="text" placeholder="Amount">
+                                    <div class="ui basic label">.00</div>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">Expire Date</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button">Close</button>
+                        <button id="publish4" style="" class="btn btn-info lh-normal mdl-button mdl-js-button finish-button">Publish</button>
+                        <div data-mdl-for="publish4" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="edit-gig" class="edit modal-box flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Edit gig</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your gig was updated.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">edit gig again</button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="input-image-gig-edit" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-gig-edit">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-gig-edit"><img id="input-image-gig-edit" src="#" alt="" class="show-image">
+                        </div>
+                        <div class="modal-inputs">
+                            <form action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <input id="gig-title" name="gig-title" type="text" class="mdl-textfield__input">
+                                    <label for="gig-title" class="mdl-textfield__label">Gig Title</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <select id="category" class="ui dropdown">
+                      <option value="">Select Category</option>
+                      <option value="1">Software Development</option>
+                      <option value="2">Entertainment</option>
+                      <option value="3">Graphic Design</option>
+                      <option value="4">Content Writing</option>
+                      <option value="5">Accountants</option>
+                      <option value="6">Consultants</option>
+                      <option value="7">Assistants</option>
+                    </select>
+                                </div>
+                                <div style="height: 38px; float: right; margin-top: 20px" class="ui right labeled input">
+                                    <label for="reputationCost" class="ui label"><i style="font-size: 17px" class="material-icons">polymer</i></label>
+                                    <input id="reputationCost" type="text" placeholder="Cost of reputation">
+                                    <div class="ui basic label">.00</div>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <select name="gig-tags" multiple="" class="ui fluid dropdown normal search gig-tags">
+                      <option value="">Add gig tags (limit: 10)...</option>
+                      <option value="programming">Programming</option>
+                      <option value="copywriting">Copywriting</option>
+                      <option value="userexperience">User Experience</option>
+                    </select>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                                    <label for="description" class="mdl-textfield__label">Description (what have you done or currently do?)</label>
+                                </div>
+                                <div class="ui right labeled input">
+                                    <label for="amount" class="ui label">$</label>
+                                    <input id="amount" type="text" placeholder="Amount">
+                                    <div class="ui basic label">.00</div>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                                    <label for="date-from" class="mdl-textfield__label">Expire Date</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="update4" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+                        <div data-mdl-for="update4" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="gigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+        <div role="document" class="modal-dialog modal-md">
+            <div id="redesigned-modal" class="hidden">
+                <div class="modal-content border-radius-6">
+                    <div class="modal-header pdd-horizon-30">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title flex-block flex-center">
+                            <div id="new-modal-owner-avatar" class="mrg-right-15"></div>
+                            <div>
+                                <span id="new-modal-owner-name">Owner Name</span> <br>
+                                <span id="new-modal-owner-title">Owner Title</span>
+                            </div>
+                        </h4>
+                    </div>
+                    <div class="modal-body border-radius-6" style="overflow: hidden;">
+                        <div class="pdd-horizon-30">
+                            <div class="row">
+                                <div class="ml-auto col-xs-12">
+                                    <h3 class="font-size-24 color-blue" id="redesigned-modal-gig-title">I'll design a smart contracts for ethereum platform</h3>
+                                </div>
+                                <div class="col-xs-12 text-center mrg-vertical-10">
+                                    <div id="redesigned-modal-gig-image" style="height: 200px;"></div>
+                                </div>
+                                <p id="redesigned-modal-description" class="col-md-12 font-size-16">Let me see your identification. You don't need to see his identification. We don't need to see his identification. These are not the droids.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer pdd-horizon-30">
+                        <div class="text-right">
+                            <button class="btn btn-default btn-sm no-mrg" data-dismiss="modal">
+                          Hold &nbsp; <span id="redesigned-modal-gig-price-req">0.00 </span> &nbsp;
+                          <i class="material-icons font-size-18" style="vertical-align: text-bottom;">polymer</i> &nbsp;
+                          Price &nbsp; <span id="redesigned-modal-gig-price"> 0.00 </span> &nbsp; Order
+                        </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="edit-profile" class="modal-box edit flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Edit profile</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your profile has been updated.</p>
+                            <div class="buttons">
+                                <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                                <button class="mdl-button mdl-js-button create-new">Edit profile again</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="input-image-profile" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-profile" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-profile"><img id="input-image-profile" src="#" alt="" class="show-image empty">
+                        </div>
+                        <!--div class="form-group">
+                <input id="input-image-profile-headline-a" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                <label for="input-image-profile-headline-a" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-profile"><img id="input-image-profile-headline-a" src="#" alt="" class="show-image empty">
+              </div-->
+                        <div class="modal-inputs">
+                            <form id="form-update-education" action="POST">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <input id="first-name" name="first-name" type="text" class="mdl-textfield__input">
+                                    <label for="first-name" class="mdl-textfield__label">First Name</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input id="last-name" name="last-name" type="text" class="mdl-textfield__input">
+                                    <label for="last-name" class="mdl-textfield__label">Last Name</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <input id="title" type="text" name="title" class="mdl-textfield__input">
+                                    <label for="title" class="mdl-textfield__label">Title</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <select name="skills" multiple="" class="ui fluid dropdown normal search skills-dropdown">
+                      <option value="">Add skills tags (limit: 10)...</option>
+                      <option value="angular">Angular</option>
+                      <option value="python">Python</option>
+                      <option value="userexperience">User Experience</option>
+                    </select>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                                    <select name="skills" multiple="" class="ui fluid dropdown normal search languages-dropdown">
+                      <option value="">Add languages you know (limit: 10)...</option>
+                      <option value="bulgarian">Bulgarian</option>
+                      <option value="lithuanian">Lithuanian</option>
+                    </select>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                                    <div id="country" style="float: left" class="ui search selection dropdown">
+                                        <input type="hidden" name="country"><i class="dropdown icon"></i>
+                                        <div class="default text">Select Country</div>
+                                        <div class="menu">
+                                            <div data-value="af" class="item"><i class="af flag"></i> Afghanistan</div>
+                                            <div data-value="ax" class="item"><i class="ax flag"></i> Aland Islands</div>
+                                            <div data-value="bg" class="item"><i class="bg flag"></i> Bulgaria</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                                    <input id="city" type="text" name="city" class="mdl-textfield__input">
+                                    <label for="city" class="mdl-textfield__label">City</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield whole-line">
+                                    <textarea id="description" type="text" rows="3" name="description" class="mdl-textfield__input"></textarea>
+                                    <label for="description" class="mdl-textfield__label">Summary</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="updateProfile" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+                        <div data-mdl-for="updateProfile" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Including header-->
+
+    //= templates/header-global.html
+
+    <!-- Including {PROFILE} PAGE content-->
+    <!--  headline image HEADLINE IMAGE k:headline k:profile k:photo -->
+    <section id="my-profile-headline" style="display: none" class="background-image">
+        <div class="button-next" style="margin: auto;">
+            <i id="myBtn--" open-modal="#edit-profile-headline" class="material-icons open-modal">add_a_photo</i>&nbsp;</div>
+        <!--div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div-->
+        <div class="items">
+            <div class="item">
+                <!--img style="" id="profile-headline" src="images/background-downtown.png" alt="Building"
+            class="aspecto-img"-->
+                <div id="profile-headline" class="aspecto-img"></div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Including {GIGS} page content-->
+    <section class="gigs-page-content home-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6 col-md-4 col-lg-3 col-xs-12 col-sm-6">
+                    <div class="card sidebar-fixed">
+                        <div class="card-heading border bottom">
+                            <h4 class="card-title">Search Gigs</h4>
+                        </div>
+                        <div class="filter card-body">
+                            <div class="form-group">
+                                <label>Search by Text</label>
+                                <input id="search-header" type="text" placeholder="Search by text..." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Expertise Domain</label>
+                                <select id='domain-expertise-select' class="ui fluid search dropdown ui-element-style form-control flex-center">
+                                    <option value="">Expertise Domains</option>
+                                    <option value="sd">Software Development</option>
+                                    <option value="fa">Finance & Accounting</option>
+                                    <option value="ma">Music & Audio</option>
+                                    <option value="va">Video & Animation</option>
+                                    <option value="gd">Graphic & Design</option>
+                                    <option value="tw">Text & Writing</option>
+                                    <option value="cs">Consulting Services</option>
+                                    <option value="os">Other Services</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Skills</label>
+                                <select id='skills-tags' class="ui fluid search dropdown ui-element-style form-control flex-center">
+                                    <option value="">Select Skills</option>
+                                </select>
+                            </div>
+                            <p>Budget</p>
+                            <div class="filter budget">
+
+                                <div class="slider-wrapper">
+                                    <div id="slider-range"></div>
+                                    <div class="range-wrapper">
+                                        <div class="range"></div>
+                                        <div class="range-alert"><span>+</span></div>
+                                        <div class="gear-wrapper">
+                                            <div class="gear-large gear-one">
+                                                <div class="gear-tooth"></div>
+                                                <div class="gear-tooth"></div>
+                                                <div class="gear-tooth"></div>
+                                                <div class="gear-tooth"></div>
+                                            </div>
+                                            <div class="gear-large gear-two">
+                                                <div class="gear-tooth"></div>
+                                                <div class="gear-tooth"></div>
+                                                <div class="gear-tooth"></div>
+                                                <div class="gear-tooth"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="marker marker-0"><sup><i class="material-icons">polymer</i></sup>0</div>
+                                    <div class="marker marker-50"><sup><i class="material-icons">polymer</i></sup>5,000</div>
+                                    <div class="marker marker-100"><sup><i class="material-icons">polymer</i></sup>10,000+</div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <p>Ethearnal Rep. Tokens</p>
+                            <select class="ui fluid search dropdown">
+							<option value="">Lock(x){eRt}</option>
+							<option value="SD">from 0% to 10% </option>
+							<option value="FA">from 10% to 15%</option>
+							<option value="MA">from 15% to 20%</option>
+							<option value="VA">from 20% to 40%</option>
+							<option value="RR">Reset</option>
+						</select>
+
+                            <br>
+
+                            <select class="ui fluid search dropdown">
+							<option value="">Hold(y){eRt}</option>
+
+							<option value="SD">from 0 to 100</option>
+							<option value="FA">from 100 to 500</option>
+							<option value="MA">from 500 to 1000</option>
+							<option value="VA">more than 1K</option>
+							<option value="RR">Reset</option>
+						</select>
+
+                            <br>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="gigs col-md-8 col-lg-9 col-xs-12 col-sm-6">
+                    <div class="gigs-container">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Including {PROFILES} page content-->
+
+    <section style="display: none" class="profiles-page-content">
+        <div class="container">
+
+            <div class="mdl-tooltip mdl-tooltip--large" for="profiles_info_ttl">
+                Filter profiles by amount holded and or amount of ERT transactions made2.
+            </div>
+
+            <div class="filters col-md-3">
+                <div class="filter category">
+                    <h6 style="margin-top: 0px; padding-top: 0px;">Search People</h6>
+
+                </div>
+            </div>
+
+
+            <div class="gigs col-md-9">
+                <div class="profiles-container">Profiles</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- OTHER PROFILE other profile view -->
+    <section id="other-profile-headline" style="display: none" class="background-image2">
+        <!--div class="button-next" style="margin: auto;">
+        <i id="myBtn--" open-modal="#edit-profile-headline" class="material-icons open-modal">add_a_photo</i>&nbsp;</div-->
+        <!--div class="button-next"><i class="material-icons">keyboard_arrow_right</i></div-->
+        <div class="items">
+            <div class="item">
+                <!--img style="" id="profile-headline" src="images/background-downtown.png" alt="Building"
+            class="aspecto-img"-->
+                <div id="other-profile-headline-img" class="aspecto-img"></div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="other-profile-section" style="display: none;" class="documentation2">
+        <div class="container" style="width: 1328px;">
+            <!-- Profile information including profile image, current work, current city and state, skills and etc.-->
+            <div class="profile-information-container col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                <div class="profile-information up">
+
+
+                    <div class="profile-upper">
+
+
+                        <div class="profile-image"><img id="other-profile-picture" src="" alt="">
+                            <!--div class="text-on-image">
+
+                </div-->
+                        </div>
+
+                        <div class="mdl-tooltip mdl-tooltip--large" for="o-p-message">
+                            Message
+                        </div>
+                        <div class="mdl-tooltip mdl-tooltip--large" for="o-p-follow">
+                            Follow
+                        </div>
+                        <div class="mdl-tooltip mdl-tooltip--large" for="o-p-settings">
+                            More actions...
+                        </div>
+
+                        <h2 id="other-profile-names"></h2>
+
+                        <h5 id="other-profile-title" class="profile-information-position"></h5>
+
+
+                        <button id="o-p-follow" data-dismiss="modal" class="mdl-button mdl-js-button close-button" data-upgraded=",MaterialButton">
+                <i class="material-icons">favorite_border</i>
+              </button>
+                        <button id="o-p-message" data-dismiss="modal" class="mdl-button mdl-js-button close-button" data-upgraded=",MaterialButton">
+                <i class="material-icons">mail_outline</i>
+              </button>
+                        <button id="o-p-settings" data-dismiss="modal" class="mdl-button mdl-js-button close-button" data-upgraded=",MaterialButton">
+                <i class="material-icons">settings</i>
+              </button>
+                        <!-- languages and skills -->
+                        <!-- langs-->
+                        <p class="skills-text">Languages
+                            <i class="languages-down material-icons">keyboard_arrow_down</i>
+                        </p>
+                        <div id="other-profile-languages" class="languages"> </div>
+
+                        <p class="skills-text">Skills
+                            <i class="skills-down material-icons">keyboard_arrow_down</i>
+                        </p>
+                        <div id='other-profile-skills' class="skills"></div>
+                        <!-- -->
+
+                    </div>
+                </div>
+
+                <div class="profile-information middle">
+                    <!-- Profile description including a description about you. (dark-gray section)-->
+                    <div class="profile-description">
+                        <p id="other-profile-description">Profile's description.</p>
+                    </div>
+                </div>
+                <!-- Profile footer, including social media links.-->
+                <div class="profile-footer">
+                    <ul class="list-inline">
+                        <li><a href=""><i class="icon-facebook"></i></a></li>
+                        <li><a href=""><i class="icon-twitter"></i></a></li>
+                        <li><a href=""><i class="icon-r-s-s"></i></a></li>
+                        <li><a href=""><i class="icon-instagram"></i></a></li>
+                        <li><a href=""><i class="icon-google"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Profile documentation including jobs and education, stories, shout-outs and questions with answers-->
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 profile-documentation-full">
+                <div class="profile-documentation col-xs-12">
+                    <ul role="tablist" class="nav nav-tabs">
+                        <!--li role="presentation" class="active timeline-li"><a href="#stream-other" aria-controls="stream" role="tab" data-toggle="tab">Stream</a></li-->
+                        <li role="presentation" class="active timeline-li"><a href="#gigs-other" aria-controls="gigs-other" role="tab" data-toggle="tab">Gigs</a></li>
+                        <li role="presentation" class="timeline-li"><a href="#portfolio-other" aria-controls="portfolio-other" role="tab" data-toggle="tab">Portfolio</a></li>
+                        <li role="presentation" class="timeline-li"><a href="#orders-completed-other" aria-controls="orders-other" role="tab" data-toggle="tab">Completed</a></li>
+                        <li role="presentation" class="timeline-li"><a href="#reviews-other" aria-controls="reviews-other" role="tab" data-toggle="tab">Reviews</a></li>
+                    </ul>
+                    <!--div open-modal="#add-gig" class="plusIcon gigs active open-modal"><i class="material-icons">library_add</i></div-->
+                    <!--div open-modal="#add-portfolio" class="plusIcon portfolio open-modal"><i class="material-icons">note_add</i></div-->
+                    <!-- All the information about above listed tabs.-->
+                    <div class="tab-content active col-xs-12" style="background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 3px 0px; padding-left: 24px;">
+                        <br>
+
+                        <div id="gigs-other" class="tab-pane active in" style="display: block;">
+                            <!-- other gigs goes here -->
+                            <br><br><br><br>
+                            <div class="ui active inverted dimmer">
+                                <div class="ui text loader">Loading</div>
+                            </div>
+                            <br><br><br><br>
+                        </div>
+
+                        <!-- Portfolio TAB-->
+                        <div id="portfolio-other" role="tabpanel" class="tab-pane fade col-xs-12">
+                            <div class="portfolio-container"></div>
+                        </div>
+                        <!-- Completed Orders TAB-->
+                        <div id="completed-other" role="tabpanel" class="tab-pane fade col-xs-12">
+                            <div class="gigs-container-orders">
+                                <!--<div data-toggle="modal" data-target="#gigModal" class="gig content-block">-->
+                                <!--<button id="dropdowngiga0" class="mdl-button mdl-js-button mdl-button&#45;&#45;icon dropdown-button"><i class="material-icons">more_vert</i></button>-->
+                                <!--<ul for="dropdowngiga0" class="mdl-menu mdl-menu&#45;&#45;bottom-right mdl-js-menu mdl-js-ripple-effect">-->
+                                <!--<li open-modal="#edit-gig" class="mdl-menu__item open-modal">Edits</li>-->
+                                <!--<li class="mdl-menu__item delete">Delete</li>-->
+                                <!--</ul>-->
+                                <!--<div class="ui fluid image">-->
+                                <!--<div class="ui black ribbon label">Category</div>-->
+                                <!--<div class="image-block"><img src="images/paypal.jpg"></div>-->
+                                <!--</div>-->
+                                <!--<div class="owner-info"><img src="http://via.placeholder.com/24x24" alt="Avatar">-->
+                                <!--<h5>owner_nickname</h5>-->
+                                <!--<h4>Entry Level</h4>-->
+                                <!--</div>-->
+                                <!--<p>Gig Description</p>-->
+                                <!--<div class="lower-info">-->
+                                <!--<div class="reputation"><i class="material-icons">polymer</i><span>5k+</span></div>-->
+                                <!--<h6 class="expire">expires in 5 mins</h6>-->
+                                <!--</div>-->
+                                <!--<div class="footer">-->
+                                <!--<h4>Starting at <span><i class="material-icons">polymer</i>25</span></h4>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- END OTHER PROFILE  -->
+
+
+    <!-- jQuery 3.1.1-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.2-->
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <!-- BootstrapJS 3.3.7-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Semantic UI JS-->
+    <script src="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.js"></script>
+    <!-- Owl Carousel JS-->
+    <script src="https://bbcdn.githack.com/shahzadns/owlfonk-owlcarousel/raw/31413692812896e19db89baee9be30b9d36d1e64/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Moment.JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <!-- Bootstrap Date Time Picker-->
+    <script src="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- Moment JS-->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.19.1/moment.min.js"></script>
+    <!-- Material Design Bootstrap-->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Jquery Easing-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <!-- Main JS file-->
+    <script src="./node_modules/croppie/croppie.js"></script>
+    <script src="./dist/js/main.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- PROFILE AVATAR CROPPING / CHANGING-->
+
+
+    <!-- Trigger/Open The Modal -->
+    <!--button id="myBtn">Open Modal</button-->
+
+    <!-- The Modal -->
+    <div id="myModal" class="beep-modal-hc">
+        <div class="beep-modal-content-hc"></div>
+
+    </div>
+
+    <div id="edit-profile-headline" class="modal-box edit flex floating">
+        <div class="modal-box-content">
+            <div class="inner-modal">
+                <div class="content">
+                    <div class="modal-header">
+                        <h3>Edit profile headline image</h3>
+                    </div>
+                    <div class="success-message">
+                        <h1 class="title">Congratulations!</h1>
+                        <div class="success-content">
+                            <p>Your headline was added.</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                            <button class="mdl-button mdl-js-button create-new">add new job</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="form-group" id="image-headline-form">
+                            <input id="input-image-profile-he" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                            <label for="input-image-profile-he" class="img-label">Add Photo</label><img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-profile"><img id="input-image-profile-he" src="#" alt=""
+                                class="show-image empty">
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="mdl-button mdl-js-button close-button">Close</button>
+                        <button id="updateProfileHeadline" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
+                        <div data-mdl-for="updateProfileHeadline" class="mdl-tooltip">This text will be changed anyway.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="new-modal-thing">
+        <div id="new-modal-wrap">
+            <!-- header -->
+            <div class="new-modal-header">
+                <!-- profile info -->
+                <div id="new-modal-owner-avatar"></div>
+                <div class="new-modal-owner-info">
+                    <div id="new-modal-owner-name">Owner Name</div>
+                    <div id="new-modal-owner-title">Owner Title</div>
+                </div>
+                <!-- other things -->
+                <div class="new-modal-others">
+                    <button data-dismiss="modal" class="mdl-button mdl-js-button close-button">Close</button>
+                </div>
+            </div>
+            <!-- image -->
+            <div id="new-modal-gig-image">
+                <div id="new-modal-gig-title">
+                    Title
+                </div>
+                <div id="new-modal-description">
+                    Description
+                </div>
+            </div>
+            <div class="new-modal-footer">
+                <div class="new-modal-footer-buttons">
+                    <button class="mdl-button mdl-js-button buy">
+                Hold &nbsp; <span id="new-modal-gig-price-req">0.00 </span> &nbsp;
+                <i class="material-icons">polymer</i> &nbsp;
+                Price &nbsp; <span id="new-modal-gig-price"> 0.00 </span> &nbsp; Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="redesigned-modal" class="hidden">
+        <div class="modal-content border-radius-6 redesigned-gig-modal">
+            <div class="modal-header pdd-horizon-30" id="redesigned-modal-gig-image" style="height: 200px;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body pdd-vertical-10 no-mrg">
+                <div class="pdd-horizon-30">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h4 class="modal-title flex-block flex-center">
+                                <div id="new-modal-owner-avatar" class="mrg-right-15"></div>
+                                <div class="mrg-top-20">
+                                    <span id="new-modal-owner-name">Owner Name</span> -
+                                    <span id="new-modal-owner-title">Owner Title</span>
+                                </div>
+                            </h4>
+                            <h3 class="font-size-24 color-blue mrg-top-50 mrg-btm-10" id="redesigned-modal-gig-title">I'll design a smart contracts for ethereum platform</h3>
+                            <p id="redesigned-modal-description" class="font-size-16 mrg-btm-10">Let me see your identification. You don't need to see his identification. We don't need to see his identification. These are not the droids.</p>
+                            <p class="font-size-16 mrg-btm-10" id="redesigned-modal-gig-tags"></p>
+                        </div>
+                    </div>
+                    <div class="modal-footer no-pdd-horizon">
+                        <div class="text-right">
+                            <button class="btn btn-default btn-sm no-mrg" data-dismiss="modal">
+                              Hold &nbsp; <span id="redesigned-modal-gig-price-req">0.00 </span> &nbsp;
+                              <i class="material-icons font-size-18" style="vertical-align: text-bottom;">polymer</i> &nbsp;
+                              Price &nbsp; <span id="redesigned-modal-gig-price"> 0.00 </span> &nbsp; Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

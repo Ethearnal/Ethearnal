@@ -1,0 +1,233 @@
+.header-primary {
+
+	.header {
+		background-color: $theme-primary;
+		color: $default-white;
+		border-color: $theme-primary;
+
+		.header-container {
+			ul{
+				>li {
+					>a {
+						color: darken($default-white, 7%);
+
+						&:hover,
+						&:focus {
+							color: $default-white;
+						}
+					}
+				}
+
+				.user-profile {
+					border-color: $theme-primary;
+				}
+			}
+		}
+	}
+
+	.side-nav {
+		.side-nav-inner {
+			.side-nav-logo {
+				background-color: $theme-primary;
+				border-color: $theme-primary;
+
+				a {
+					.logo-dark {
+						display: none;
+					}
+
+					.logo-white {
+						display: block;
+					} 
+				}
+			}
+		}
+	}
+} 
+
+.header-info {
+
+	.header {
+		background-color: $theme-info;
+		color: $default-white;
+		border-color: $theme-info;
+
+		.header-container {
+			ul{
+				>li {
+					>a {
+						color: darken($default-white, 7%);
+
+						&:hover,
+						&:focus {
+							color: $default-white;
+						}
+					}
+				}
+
+				.user-profile {
+					border-color: $theme-info;
+				}
+			}
+		}
+	}
+
+	.side-nav {
+		.side-nav-inner {
+			.side-nav-logo {
+				background-color: $theme-info;
+				border-color: $theme-info;
+
+				a {
+					.logo-dark {
+						display: none;
+					}
+
+					.logo-white {
+						display: block;
+					} 
+				}
+			}
+		}
+	}
+} 
+
+.header-success {
+
+	.header {
+		background-color: $theme-success;
+		color: $default-white;
+		border-color: $theme-success;
+
+		.header-container {
+			ul{
+				>li {
+					>a {
+						color: darken($default-white, 7%);
+
+						&:hover,
+						&:focus {
+							color: $default-white;
+						}
+					}
+				}
+
+				.user-profile {
+					border-color: $theme-success;
+				}
+			}
+		}
+	}
+
+	.side-nav {
+		.side-nav-inner {
+			.side-nav-logo {
+				background-color: $theme-success;
+				border-color: $theme-success;
+
+				a {
+					.logo-dark {
+						display: none;
+					}
+
+					.logo-white {
+						display: block;
+					} 
+				}
+			}
+		}
+	}
+} 
+
+.header-danger {
+
+	.header {
+		background-color: $theme-danger;
+		color: $default-white;
+		border-color: $theme-danger;
+
+		.header-container {
+			ul{
+				>li {
+					>a {
+						color: darken($default-white, 7%);
+
+						&:hover,
+						&:focus {
+							color: $default-white;
+						}
+					}
+				}
+
+				.user-profile {
+					border-color: $theme-danger;
+				}
+			}
+		}
+	}
+
+	.side-nav {
+		.side-nav-inner {
+			.side-nav-logo {
+				background-color: $theme-danger;
+				border-color: $theme-danger;
+
+				a {
+					.logo-dark {
+						display: none;
+					}
+
+					.logo-white {
+						display: block;
+					} 
+				}
+			}
+		}
+	}
+} 
+
+.header-dark {
+	.header {
+		background-color: $theme-dark;
+		color: $default-white;
+		border-color: $theme-dark;
+
+		.header-container {
+			ul{
+				>li {
+					>a {
+						color: darken($default-white, 7%);
+
+						&:hover,
+						&:focus {
+							color: $default-white;
+						}
+					}
+				}
+
+				.user-profile {
+					border-color: $theme-dark;
+				}
+			}
+		}
+	}
+
+	.side-nav {
+		.side-nav-inner {
+			.side-nav-logo {
+				background-color: $theme-dark;
+				border-color: $theme-dark;
+
+				a {
+					.logo-dark {
+						display: none;
+					}
+
+					.logo-white {
+						display: block;
+					} 
+				}
+			}
+		}
+	}
+} 

@@ -1,0 +1,85 @@
+.label,
+.tag {
+	padding: 4px 10px;
+	border-radius: 50px;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;    
+}
+
+.label-lg,
+.tag-lg {
+	font-size: 16px;
+    padding: 6px 12px;
+}
+
+label {
+
+	&.error {
+		color: $default-danger;
+	}
+
+	&.success {
+		color: $default-success;
+	}
+}
+
+.label-primary {
+	background-color: $inverse-primary;
+	color: $default-primary;
+}
+
+.label-success {
+	background-color: $inverse-success;
+	color: $default-success;
+}
+
+.label-info {
+	background-color: $inverse-info;
+	color: $default-info;
+}
+
+.label-warning {
+	background-color: $inverse-warning;
+	color: $default-warning;
+}
+
+.label-danger {
+	background-color: $inverse-danger;
+	color: $default-danger;
+}
+
+.tag {
+	display: inline;
+	font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+	text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.tag-primary {
+	background-color: $default-primary;
+	color: $default-white;
+}
+
+.tag-success {
+	background-color: $default-success;
+	color: $default-white;
+}
+
+.tag-info {
+	background-color: $default-info;
+	color: $default-white;
+}
+
+.tag-warning {
+	background-color: $default-warning;
+	color: $default-white;
+}
+
+.tag-danger {
+	background-color: $default-danger;
+	color: $default-white;
+}

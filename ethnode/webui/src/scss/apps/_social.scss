@@ -1,0 +1,56 @@
+.social {
+
+	.social-cover {
+		position: relative;
+
+		.cover-img {
+			min-height: 400px;
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+			position: relative;
+
+			.cover-content {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				@include transform(translateX(-50%) translateY(-50%));
+			}
+		}
+
+		.cover-footer {
+			padding: 15px;
+			background-color: $default-white;
+
+			ul {
+				display: inline-block;
+
+				>li {
+					display: inline-block;
+
+					>a {
+						display: block;
+						font-weight: bold;
+						color:$default-text-color;
+						padding: 10px 20px;
+
+						&:hover,
+						&:focus {
+							color: $default-dark;
+						}
+					}
+
+					&.active {
+						a {
+							color: $default-dark;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.social-feeds {
+		
+	}
+}

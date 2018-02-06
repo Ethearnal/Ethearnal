@@ -1,0 +1,54 @@
+.slick-prev, 
+.slick-next {
+	z-index: 10;
+	@include transform(translateY(-50%));
+	
+	&:before {
+		font-family: 'themify';
+		font-size: 25px;
+		line-height: 1;
+		opacity: .75;
+		color: $default-white;
+	}
+}
+
+.slick-next {
+	right: 15px;
+	
+	&:before {
+		content: "\e649";
+	}
+}
+
+.slick-prev {
+	left: 15px;
+	
+	&:before {
+		content: "\e64a";
+	}
+}
+
+.slick-dots {
+	bottom: 10px;
+	
+	li {
+		button {
+			&:before {
+				font-family: 'themify';
+				content: "\e724";
+				font-size: 16px;
+				opacity: 0.5;
+				color: $default-white;
+			}
+		}
+		
+		&.slick-active {
+			button {
+				&:before {
+					color: $default-white;
+					opacity: 1;
+				}
+			}
+		}
+	} 
+}
