@@ -2,7 +2,8 @@
 .idea
 .vscode
 .DS_Store
-
+node_modules
+ethnode/webui/ethnode
 
 
 # default data dirs

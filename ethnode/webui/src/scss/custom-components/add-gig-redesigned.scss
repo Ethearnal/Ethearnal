@@ -1,0 +1,30 @@
+.add-gig-redesigned {
+  .cropper-wrap {
+    width: 600px;
+    height: 200px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+  }
+
+  .modal-body .form-group {
+    max-width: 600px !important;
+
+    .img-label {
+      border: 2px dashed #CCC !important;
+      background-color: #f1f6ff !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+      transition: all 0.3s ease;
+      &:hover {
+        background-color: #dae7ff !important;
+      }
+    }
+
+    img#input-image-gig {
+      max-width: none;
+      max-height: none;
+      position: static;
+      border: 3px solid #ebebeb;
+    }
+  }
+}
