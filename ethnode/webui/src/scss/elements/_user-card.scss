@@ -89,7 +89,7 @@
     .user-info {
         margin: 15px 20px;
         padding-top: 15px;
-        border-top: 1px solid #0f9aef;
+        border-top: 1px solid #f7cac9;
         min-height: 120px;
         max-height: 120px;
         .about {
@@ -101,6 +101,15 @@
         .info {
             text-align: center;
             line-height: 1.4;
+            display: block;
+        display: -webkit-box;
+        max-width: 400px;
+        height: 110px;
+        margin: 0 auto;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical; 
+        overflow: hidden;
+        text-overflow: ellipsis;
         }
     }
     .user-price {
@@ -113,7 +122,8 @@
         padding-top: 5px;
         padding-bottom: 5px;
         border-top: 1px solid #eee;
-        background: rgba(149, 205, 248, 0.12941176470588237);
+        background-color: #ffecec;
+        // background: rgba(149, 205, 248, 0.12941176470588237);
         span {
             display: flex;
             align-items: center;

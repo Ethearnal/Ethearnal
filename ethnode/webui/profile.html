@@ -66,7 +66,7 @@
                         </li>
                         <ul data-labelledby="settings-dropdown" class="dropdown-menu absolute">
                             <li><a href="/ui/profile" class="flex-block flex-center"><i class="ti-user pdd-right-10 font-size-18"></i>My Profile</a></li>
-                            <li><a href="" class="flex-block flex-center"><i class="ti-info pdd-right-10 font-size-18"></i>About Node</a></li>
+                            <!-- <li><a href="" class="flex-block flex-center"><i class="ti-info pdd-right-10 font-size-18"></i>About Node</a></li> -->
                         </ul>
                 </div>
             </nav>
@@ -105,13 +105,17 @@
 
                     <ul role="tablist" class="nav nav-tabs">
                         <li role="presentation" class="active timeline-li"><a href="#gigs" aria-controls="gigs" role="tab" data-toggle="tab">Gigs</a></li>
-                        <li role="presentation" class="timeline-li"><a href="#portfolio" aria-controls="portfolio" role="tab" data-toggle="tab">Portfolio</a></li>
-                        <li role="presentation" class="timeline-li"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
-                        <li role="presentation" class="timeline-li"><a href="#archived" aria-controls="orders" role="tab" data-toggle="tab">Completed</a></li>
-                        <li role="presentation" class="timeline-li"><a href="#messages" aria-controls="orders" role="tab" data-toggle="tab">Messages</a></li>
+                        <li role="presentation" class="timeline-li disable-state"><a href="#portfolio" aria-controls="portfolio" role="tab" data-toggle="tab">Portfolio</a></li>
+                        <li role="presentation" class="timeline-li disable-state"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
+                        <li role="presentation" class="timeline-li disable-state"><a href="#archived" aria-controls="orders" role="tab" data-toggle="tab">Completed</a></li>
+                        <li role="presentation" class="timeline-li disable-state"><a href="#messages" aria-controls="orders" role="tab" data-toggle="tab">Messages</a></li>
                     </ul>
-                    <div open-modal="#add-gig" class="plusIcon gigs active open-modal"><i class="material-icons">library_add</i></div>
-                    <div open-modal="#add-portfolio" class="plusIcon portfolio open-modal"><i class="material-icons">note_add</i></div>
+                    
+                    <!-- ADD GIG ROUND BUTTON-->
+                    <!-- <div open-modal="#add-gig" class="plusIcon gigs active open-modal"><i class="material-icons">library_add</i></div>
+                    <div open-modal="#add-portfolio" class="plusIcon portfolio open-modal"><i class="material-icons">note_add</i></div> -->
+                    <!-- ADD GIG ROUND BUTTON END-->
+
                     <!-- All the information about above listed tabs.-->
                     <div class="tab-content main-tab-content col-xs-12">
                         <!-- Gigs TAB-->

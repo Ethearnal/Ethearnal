@@ -132,3 +132,13 @@
     flex-wrap: wrap;
     padding-left: 30px;
 }
+
+.disable-state {
+    cursor: not-allowed;
+    a {
+        color: #eee; 
+        user-select: none; 
+        cursor: not-allowed; 
+        pointer-events: none;
+    }
+}
