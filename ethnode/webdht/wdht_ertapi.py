@@ -846,7 +846,31 @@ class WebProfileStatic(object):
             }
         )
 
-    def GET(self):
+    def GET(self, *args, **kwargs):
+        self.cherry.response.headers['Content-Type'] = 'text/html; charset=utf-8'
+        print('args', args)
+        print('----')
+        print('kwargs', kwargs)
+        print('----')
+        print('path', self.cherry.url())
+        path = self.cherry.url()
+        if '.js' in path:
+            self.cherry.response.headers['Content-Type'] = 'application/javascript; charset=utf-8'
+        if '.css' in path:
+            self.cherry.response.headers['Content-Type'] = 'text/css; charset=utf-8'
+
         st = '%s' % self.file_to_serv
-        return st.encode('utf-8')
+        if not os.path.isfile(self.file_to_serv):
+            self.cherry.response.status = 201
+            return 'NOT FOUND: %s' % self.file_to_serv
+        data = b'none'
+        with open(self.file_to_serv, 'rb') as u_f:
+            data = u_f.read()
+        return data
+
+
+
+
+
+
 

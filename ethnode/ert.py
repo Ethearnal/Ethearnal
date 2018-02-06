@@ -258,12 +258,12 @@ def main_http(http_webdir: str = config.http_webdir,
         dhf=dht_facade_,
     )
 
-    # web_profile_static = WebProfileStatic(
-    #     cherry=cherrypy,
-    #     web_root_dir=http_webdir,
-    #     web_route_name='profilex',
-    #     file_name='profile.html',
-    # )
+    web_profile_static = WebProfileStatic(
+        cherry=cherrypy,
+        web_root_dir=http_webdir,
+        web_route_name='profilexxx',
+        file_name='profile.html',
+    )
 
     # WebGuidPredicateApi
     # WebSelfPredicateApi
