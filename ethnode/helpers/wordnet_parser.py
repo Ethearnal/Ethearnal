@@ -1,6 +1,10 @@
 import sys
 from random import randint
 
+
+CATEGORIES = ('sd', 'fa', 'ma', 'va', 'gd', 'tw', 'os')
+
+
 class WordnetParser(object):
 
     def __init__(self, file_name,
@@ -86,7 +90,7 @@ class GigGeneratorWordnet(object):
     def on_interest(self, tags=None, title=None, description=None):
         price = randint(1, 7000)
         lock = randint(1, 99)
-
+        category = CATEGORIES[randint(0, 6)]
         if not self.images_hashes:
             self.images_hashes = self.img()
         self.gigs.append(
@@ -94,6 +98,8 @@ class GigGeneratorWordnet(object):
              'model': 'Gig',
              'image_hash': self.images_hashes.pop(),
              'description': description,
+             'category': category,
+             'general_domain_of_expertise': category,
              'tags': tags[0],
              'price': price,
              'lock': lock,
