@@ -87,16 +87,14 @@ function updateProfile() {
         if (!headline_hash) { return; }
 
         if (headline_hash.indexOf('//') >= 0) {
-            // $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
-            $('#profile-headline').css(
+            $('.profile-headline').css(
                 'background-image',
-                'url("' + api_cdn + headline_hash + '&thumb=1")'
+                'url("' + api_cdn + headline_hash + '")'
             );
         } else {
-            // $('#profile-headline').attr('src', api_cdn + JSON.parse(profilePictureURL));
-            $('#profile-headline').css(
+            $('.profile-headline').css(
                 'background-image',
-                'url("' + api_cdn + headline_hash + '&thumb=1")'
+                'url("' + api_cdn + headline_hash + '")'
             );
 
         }
