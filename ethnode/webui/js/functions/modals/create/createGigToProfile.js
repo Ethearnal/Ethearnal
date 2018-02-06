@@ -198,17 +198,11 @@ function createGigToFound(hk, gig_o) {
             });
             //
         });
-
     }
-
 }
 
 
-
-
-
-function createProfileCard(owner_guid) {
-    console.log(owner_guid);
+function createProfileCard(owner_guid, callback) {
     var api_cdn = api_get_cdn_url();
     img_src = "";
 
@@ -247,16 +241,18 @@ function createProfileCard(owner_guid) {
               ${profileCardRenderData.skillsTemplate}
             </div>
         </div>`;
-
-      if (!profileCardRenderData.isWrongData) $(".profiles-container").append(profilecard);
+      callback();
+      if (!profileCardRenderData.isWrongData) {
+        $(".profiles-container").append(profilecard);
+      }
     });
 
     // profile images
     getProfileValue(owner_guid, 'profilePicture', function(profile_picture_url) {
       if (profile_picture_url != 'null') {
         profileCardRenderData.userProfileImage = api_cdn + JSON.parse(profile_picture_url) + '&thumb=1';
-        d1.resolve( "Fish" );
       }
+      d1.resolve( "Fish" );
     });
 
     // name
@@ -268,8 +264,8 @@ function createProfileCard(owner_guid) {
         } else {
             var names_o = JSON.parse(name_js);
             profileCardRenderData.userName = names_o.first + " " + names_o.last;
-            d2.resolve( "Fish" );
         }
+        d2.resolve( "Fish" );
     });
     // title
     getProfileValue(owner_guid, 'title', function(title_js) {
@@ -277,8 +273,8 @@ function createProfileCard(owner_guid) {
             console.log('P NULL', title_js);
         } else {
             profileCardRenderData.title = JSON.parse(title_js);
-            d3.resolve( "Fish" );
         }
+        d3.resolve( "Fish" );
     });
     // desc
     getProfileValue(owner_guid, 'description', function(title_js) {
@@ -287,8 +283,8 @@ function createProfileCard(owner_guid) {
             console.log('P NULL', title_js);
         } else {
             profileCardRenderData.description = JSON.parse(title_js);
-            d4.resolve( "Fish" );
         }
+        d4.resolve( "Fish" );
     });
     // headline image
     getProfileValue(owner_guid, 'headlinePicture', function(headline_hash) {
@@ -296,13 +292,12 @@ function createProfileCard(owner_guid) {
             console.log('P headline_hash NULL', headline_hash);
         } else {
             profileCardRenderData.headlineImage = api_cdn + JSON.parse(headline_hash) + '&thumb=1';
-            d5.resolve( "Pizza" );
         }
+        d5.resolve( "Pizza" );
     });
 
     // CHANGING PROFILE SKILLS
     getProfileValue(owner_guid, 'skills', function(skills) {
-
         // Append skills to profile
         profileCardRenderData.skillsTemplate = '';
         $(JSON.parse(skills)).each(function(i, skill) {
@@ -310,5 +305,4 @@ function createProfileCard(owner_guid) {
         });
         d6.resolve();
     });
-
 }

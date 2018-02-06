@@ -41,12 +41,11 @@ window.profilePageModule = (function() {
             return initProfile();
         }
     }
-
 })();
 
 
 $(document).ready(function() {
     if ($('body').hasClass('profile-page')) {
-        profilePageModule.oninit();
+      profilePageModule.oninit();
     }
 });

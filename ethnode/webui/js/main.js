@@ -248,7 +248,7 @@ $('#domain-expertise-select').on('change', function() {
 
 
 // profile cards begin
-var main_profile_cards = function() {
+function main_profile_cards() {
     $('.profiles-container').empty();
     $.ajax({
         url: '/api/v1/dht/guids',
@@ -256,12 +256,32 @@ var main_profile_cards = function() {
         processData: false,
         success: function(data) {
             known_guids = JSON.parse(data);
-            known_guids.forEach(function(element) {
-                createProfileCard(element);
-            });
+            var d1 = $.deferred;
+            var counter = 0;
+
+            function chain() {
+              createProfileCard(known_guids[counter],function(){
+                counter++;
+                if (counter == known_guids.length) return
+                setTimeout(function(){
+                  'Chain Started';
+                  startChain();
+                },150)
+              });
+            }
+            function startChain() {
+              chain();
+            }
+            startChain();
+
+            // known_guids.forEach(function(element) {
+            //     createProfileCard(element);
+            // });
+            // known_guids.forEach(function(element) {
+            //     createProfileCard(element);
+            // });
         }
     });
-
 };
 
 // JS DATA BUFFERS
