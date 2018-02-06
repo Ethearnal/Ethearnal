@@ -20,9 +20,27 @@
                     </li>
                     <ul data-labelledby="settings-dropdown" class="dropdown-menu absolute">
                         <li><a href="/ui/profile" class="flex-block flex-center"><i class="ti-user pdd-right-10 font-size-18"></i>My Profile</a></li>
-                        <!-- <li><a href="" class="flex-block flex-center"><i class="ti-info pdd-right-10 font-size-18"></i>About Node</a></li> -->
+                        <li><a href="" data-toggle="modal" data-target="#modal-sm" class="flex-block flex-center"><i class="ti-info pdd-right-10 font-size-18"></i>About Node</a></li>
                     </ul>
             </div>
         </nav>
     </div>
 </header>
+
+
+<div class="modal fade" id="modal-sm">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content about-head-modal">
+            <div class="modal-body">
+                <div class="text-center">
+                    <img class="img-responsive mrg-horizon-auto mrg-vertical-5" src="images/logo.png" alt="">
+                    <h3>Ethearnal</h3>
+                    <p>Version:Alpha 0.0.1</p>
+                </div>
+            </div>
+            <button data-dismiss="modal" class="btn btn-primary btn-block no-mrg no-border pdd-vertical-15 ng-scope">
+                <span class="text-uppercase">Close</span>
+            </button>
+        </div>
+    </div>
+</div>

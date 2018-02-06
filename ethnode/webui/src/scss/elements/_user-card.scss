@@ -41,7 +41,7 @@
     }
     .img-card {
         overflow: hidden;
-        height: 142px;
+        height: 130px;
         border-bottom: 1px solid #cecece;
         .btn-info-edit {
             position: absolute;
@@ -102,7 +102,6 @@
         .info {
             text-align: center;
             line-height: 1.4;
-            display: block;
             display: -webkit-box;
             max-width: 400px;
             height: 110px;
@@ -114,6 +113,8 @@
         }
     }
     .user-price {
+        position: absolute;
+        top: calc(100% - 35px);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -127,7 +128,7 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        // background: rgba(149, 205, 248, 0.12941176470588237);
+        top: calc(100% - 35px);
         span {
             display: flex;
             align-items: center;

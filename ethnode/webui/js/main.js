@@ -16,13 +16,11 @@ $.ajax({
 
     success: function(data) {
         data = JSON.parse(data);
-        console.log(' - - - data.cdn', data.cdn[0]);
         CDN_HOST_PORT = data.cdn[0];
     }
 });
 
 var api_post_cdn_url = function() {
-    console.log('using post cdn: ', CDN_HOST_PORT);
     c = 'http://' + CDN_HOST_PORT + '/api/cdn/v1/resource';
     console.log('using post cdn: ', c);
     return c;

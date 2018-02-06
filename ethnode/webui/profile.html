@@ -44,7 +44,7 @@
     <!-- END of LINKS-->
 </head>
 
-<body class="profile-page">
+<body class="">
     <header class="main-header">
         <div class="container">
             <nav class="flex-block flex-between">
@@ -66,12 +66,31 @@
                         </li>
                         <ul data-labelledby="settings-dropdown" class="dropdown-menu absolute">
                             <li><a href="/ui/profile" class="flex-block flex-center"><i class="ti-user pdd-right-10 font-size-18"></i>My Profile</a></li>
-                            <!-- <li><a href="" class="flex-block flex-center"><i class="ti-info pdd-right-10 font-size-18"></i>About Node</a></li> -->
+                            <li><a href="" data-toggle="modal" data-target="#modal-sm" class="flex-block flex-center"><i class="ti-info pdd-right-10 font-size-18"></i>About Node</a></li>
                         </ul>
                 </div>
             </nav>
         </div>
     </header>
+    
+    
+    <div class="modal fade" id="modal-sm">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content about-head-modal">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img class="img-responsive mrg-horizon-auto mrg-vertical-5" src="images/logo.png" alt="">
+                        <h3>Ethearnal</h3>
+                        <p>Version:Alpha 0.0.1</p>
+                    </div>
+                </div>
+                <button data-dismiss="modal" class="btn btn-primary btn-block no-mrg no-border pdd-vertical-15 ng-scope">
+                    <span class="text-uppercase">Close</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="profile-page">
     <section class="profile-headline">
         <div class="container">
             <div class="row">
@@ -110,7 +129,7 @@
                         <li role="presentation" class="timeline-li disable-state"><a href="#archived" aria-controls="orders" role="tab" data-toggle="tab">Completed</a></li>
                         <li role="presentation" class="timeline-li disable-state"><a href="#messages" aria-controls="orders" role="tab" data-toggle="tab">Messages</a></li>
                     </ul>
-                    
+
                     <!-- ADD GIG ROUND BUTTON-->
                     <!-- <div open-modal="#add-gig" class="plusIcon gigs active open-modal"><i class="material-icons">library_add</i></div>
                     <div open-modal="#add-portfolio" class="plusIcon portfolio open-modal"><i class="material-icons">note_add</i></div> -->
@@ -178,84 +197,92 @@
     </div>
 
 
-    <div id="add-gig" class="add modal-box flex floating">
+    <div id="add-gig" class="add modal-box flex floating add-gig-redesigned">
         <div class="modal-box-content">
-            <div class="inner-modal">
-                <h3 class="page-card-name">Add gig</h3>
-                <div class="content">
-                    <div class="success-message">
-                        <h1 class="title">Congratulations!</h1>
-                        <div class="success-content">
-                            <p>Your gig was created.</p>
-                        </div>
-                        <div class="buttons">
-                            <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
-                            <button class="mdl-button mdl-js-button create-new">create new gig</button>
-                        </div>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input id="input-image-gig" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
-                            <label for="input-image-gig" class="img-label"><p class="add-photo-label">Add photo</p></label><img src="images/image-video-image-file.png" alt="Add a file" id="croppie" class="file-input-first-image img-gig"><img id="input-image-gig"
-                                src="#" alt="" class="show-image empty">
-                        </div>
-                        <div class="modal-inputs">
-                            <form action="POST">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
-                                    <label for="gig-title" class="label-control gig-title-label">Gig Titles</label>
-                                    <input id="gig-title" name="gig-title" type="text" placeholder="Gig Title" class="form-control ">
-                                    <!--  class mdl-textfield__input  and mdl-textfield__label  for label-->
-                                </div>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
-                                    <select id="category" class="ui dropdown">
-                                        <option value="">Select Category</option>
-                                        <option value="1">Software Development</option>
-                                        <option value="2">Entertainment</option>
-                                        <option value="3">Graphic Design</option>
-                                        <option value="4">Content Writing</option>
-                                        <option value="5">Accountants</option>
-                                        <option value="6">Consultants</option>
-                                        <option value="7">Assistants</option>
-                                    </select>
-                                </div>
-                                <div style="height: 38px; float: right; margin-top: 20px" class="ui right labeled input">
-                                    <label for="reputationCost" class="ui label"><i style="font-size: 17px" class="material-icons">polymer</i></label>
-                                    <input id="reputationCost" type="text" placeholder="Cost of reputation">
-                                    <div class="ui basic label">.00</div>
-                                </div>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
-                                    <select name="gig-tags" multiple="" class="ui fluid dropdown normal search gig-tags">
-                                        <option value="">Add gig tags (limit: 10)...</option>
-                                        <option value="programming">Programming</option>
-                                        <option value="copywriting">Copywriting</option>
-                                        <option value="userexperience">User Experience</option>
-                                    </select>
-                                </div>
-                                <div class="mdl-textfield mdl-js-textfield whole-line">
-                                    <label for="description" class="label-control gig-title-label">Description (what have you done or currently do?)</label>
-                                    <textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
-                                </div>
-                                <div class="ui right labeled input">
-                                    <label for="amount" class="ui label"><i class="material-icons">polymer</i></label>
-                                    <input id="amount" type="text" placeholder="Amount">
-                                    <div class="ui basic label">.00</div>
-                                </div>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
-                                    <input type="text" name="startDate" class="date-started mdl-textfield__input">
-                                    <label for="date-from" class="mdl-textfield__label">Expire Date</label>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button" id="modal-close">Close</button>
-                        <button id="publish4" style="" class="btn btn-info lh-normal mdl-button mdl-js-button finish-button">Publish</button>
-                        <div data-mdl-for="publish4" class="mdl-tooltip">This text will be changed anyway.</div>
-                    </div>
+          <div class="inner-modal">
+            <h3 class="page-card-name">Add gig</h3>
+            <div class="content">
+              <div class="success-message">
+                <h1 class="title">Congratulations!</h1>
+                <div class="success-content">
+                  <p>Your gig was created.</p>
                 </div>
+                <div class="buttons">
+                  <button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+                  <button class="mdl-button mdl-js-button create-new">create new gig</button>
+                </div>
+              </div>
+              <div class="modal-body">
+                <div id="cropper-wrap-gig" class="cropper-wrap" style="display: none;">
+    
+                </div>
+                <div class="form-group">
+                  <input id="input-image-gig" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+                  <label for="input-image-gig" class="img-label" style="background-image: url('images/image-video-image-file.png');"><p class="add-photo-label"></p></label>
+                  <div class="btns-wrap">
+                    <button style="" class="btn btn-pink jsCropUpload">Upload photo</button>
+                    <button style="display: none;" class="btn btn-success jsCropResult">Confirm result</button>
+                  </div>
+                  <img id="input-image-gig" src="#"
+                    alt="" class="show-image empty" style="display:none;">
+                </div>
+                <div class="modal-inputs">
+                  <form action="POST">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                      <label for="gig-title" class="label-control gig-title-label">Gig Titles</label>
+                      <input id="gig-title" name="gig-title" type="text" placeholder="Gig Title" class="form-control ">
+                      <!--  class mdl-textfield__input  and mdl-textfield__label  for label-->
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
+                      <select id="category" class="ui dropdown">
+                          <option value="">Select Category</option>
+                          <option value="1">Software Development</option>
+                          <option value="2">Entertainment</option>
+                          <option value="3">Graphic Design</option>
+                          <option value="4">Content Writing</option>
+                          <option value="5">Accountants</option>
+                          <option value="6">Consultants</option>
+                          <option value="7">Assistants</option>
+                        </select>
+                    </div>
+                    <div style="height: 38px; float: right; margin-top: 20px" class="ui right labeled input">
+                      <label for="reputationCost" class="ui label"><i style="font-size: 17px" class="material-icons">polymer</i></label>
+                      <input id="reputationCost" type="text" placeholder="Cost of reputation">
+                      <div class="ui basic label">.00</div>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+                      <select name="gig-tags" multiple="" class="ui fluid dropdown normal search gig-tags">
+                          <option value="">Add gig tags (limit: 10)...</option>
+                          <option value="programming">Programming</option>
+                          <option value="copywriting">Copywriting</option>
+                          <option value="userexperience">User Experience</option>
+                        </select>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield whole-line">
+                      <label for="description" class="label-control gig-title-label">Description (what have you done or currently do?)</label>
+                      <textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
+                    </div>
+                    <div class="ui right labeled input">
+                      <label for="amount" class="ui label"><i class="material-icons">polymer</i></label>
+                      <input id="amount" type="text" placeholder="Amount">
+                      <div class="ui basic label">.00</div>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
+                      <input type="text" name="startDate" class="date-started mdl-textfield__input">
+                      <label for="date-from" class="mdl-textfield__label">Expire Date</label>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button">Close</button>
+                <button id="publish4" style="" class="btn btn-pink lh-normal mdl-button mdl-js-button finish-button">Publish</button>
+                <div data-mdl-for="publish4" class="mdl-tooltip">This text will be changed anyway.</div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
 
 
 
@@ -284,7 +311,7 @@
                     </div>
                     <div class="modal-footer pdd-horizon-30">
                         <div class="text-right">
-                            <button class="btn btn-default btn-sm no-mrg" data-dismiss="modal">
+                            <button class="btn btn-default btn-sm no-mrg modal-btn-order" data-dismiss="modal">
                     Hold &nbsp; <span id="redesigned-modal-gig-price-req">0.00 </span> &nbsp;
                     <i class="material-icons font-size-18" style="vertical-align: text-bottom;">polymer</i> &nbsp;
                     Price &nbsp; <span id="redesigned-modal-gig-price"> 0.00 </span> &nbsp; Order
@@ -295,6 +322,7 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 
 </html>
