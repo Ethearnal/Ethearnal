@@ -1,0 +1,46 @@
+#edit-portfolio.edit.modal-box.flex.floating
+
+    .modal-box-content: .inner-modal: .content
+
+        .modal-header: h3 Edit portfolio
+
+        .success-message
+            h1.title Congratulations!
+            .success-content: p Your portfolio was updated.
+
+            .buttons
+                button.mdl-button.mdl-js-button.close-button.congrats-close Close the modal to see it
+                span OR
+                button.mdl-button.mdl-js-button.create-new edit portfolio again
+
+
+        .modal-body
+
+            .form-group
+                input.input-file#input-image-portfolio(type="file", accept="image/*", placeholder="Add image or video")
+                label.img-label(for="input-image-portfolio") Add Photo
+                img.file-input-first-image.img-portfolio(src="images/image-video-image-file.png", alt="Add a file")
+                img#input-image-portfolio.show-image.empty(src="#", alt="")
+
+            .modal-inputs
+
+                form(action="POST")
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.whole-line
+                        input#portfolio-title.mdl-textfield__input(name="portfolio-title", type="text")
+                        label.mdl-textfield__label(for="portfolio-title") Portfolio title
+
+                    .mdl-textfield.mdl-js-textfield.whole-line
+                        textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
+                        label.mdl-textfield__label(for="description") Description (what have you done or currently do?)
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.whole-line
+                        select.ui.fluid.dropdown.normal.search.portfolio-tags(name="skills", multiple="")
+                            option(value="") Add gig tags (limit: 10)...
+                            option(value="programming") Programming
+                            option(value="copywriting") Copywriting
+                            option(value="userexperience") User Experience
+
+        .modal-footer
+            button.mdl-button.mdl-js-button.close-button Close
+            button#update5.mdl-button.mdl-js-button.finish-button(style="color: #5CAB7D") Update
+            .mdl-tooltip(data-mdl-for="update5") This text will be changed anyway.

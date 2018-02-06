@@ -31,8 +31,13 @@ window.profilePageModule = (function() {
                         }
                     });
                 }
+<<<<<<< HEAD
                 $('.preloader-card').remove();
             });
+=======
+            });
+            $('.preloader-card').remove();
+>>>>>>> production/UI-build
         });
     }
 

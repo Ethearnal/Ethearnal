@@ -1,0 +1,199 @@
+header .container nav
+    border: none
+    background-color: white
+    margin-bottom: 0
+
+    .navbar-header
+
+        input#search-header
+            border-color: #89ABE3
+            transition: all .15s linear
+
+            &.wrong
+                border-color: #d50000
+
+        button#search-button
+            background-color: #89ABE3
+            color: white
+            transition: all .15s linear
+
+            &.wrong
+                background-color: #d50000
+
+        .button
+            button.navbar-toggle
+                position: relative
+                width: 60px
+                transform: rotate(0deg)
+                transition: 0.5s ease-in-out
+                cursor: pointer
+                left: 20px
+                top: 8px
+
+                span
+                    display: block
+                    position: absolute
+                    height: 2px
+                    background-color: #abb4bb
+                    border-radius: 9px
+                    opacity: 1
+                    width: 25px
+                    left: 0
+                    top: 0
+                    transform: rotate(0deg)
+                    transition: 0.25s ease-in-out
+
+                span:nth-child(1)
+                    top: 0
+
+                span:nth-child(2), span:nth-child(3)
+                    top: 7px
+
+                span:nth-child(4)
+                    top: 14px
+
+
+            button:not(.collapsed)
+
+                span:nth-child(1), span:nth-child(4)
+                    top: 7px
+                    width: 0%
+                    left: 50%
+
+                span:nth-child(2)
+                    transform: rotate(45deg)
+
+                span:nth-child(3)
+                    transform: rotate(-45deg)
+
+
+    .navbar-header a
+        padding: 0
+        position: relative
+        top: -3px
+
+        img
+            max-width: 205px
+
+
+    #navigation
+
+        ul.navbar-right
+            margin: 18px 0
+
+        ul
+
+            li.profile
+                border-left: 2px solid #e1e8ee
+                height: 23px
+                cursor: pointer
+                margin-left: 10px
+
+                img.profile-picture
+                    width: 36px
+                    height: 36px
+                    border-radius: 100%
+                    margin-left: 16px
+                    margin-top: -5px
+                    margin-right: 8px
+
+                span
+                    margin-top: -5px
+
+            li.asset
+                margin-top: -5px
+
+                &.text
+                    margin-right: 25px
+                    margin-top: 2px
+
+                ul.dropdown-menu
+                    min-width: 155px
+                    padding: 0
+                    top: 35px
+
+                    li
+                        padding: 0 10px
+
+                        a i
+                            line-height: 37px
+
+                a
+                    padding: 0
+                    background-color: transparent !important
+
+                    i:not(.icon)
+                        margin-right: 18px
+                        cursor: pointer
+                        font-size: 20px
+                        color: #afb4bb
+
+
+                    .round-number
+                        background-color: #ffb230
+                        // height: 17px
+                        // width: 100%
+                        text-align: center
+                        display: table
+                        border-radius: 100%
+                        margin-top: -23px
+                        margin-left: 13px
+                        z-index: 1000
+                        position: relative
+                        cursor: pointer
+
+                        span
+                            color: white
+                            font-size: 10px
+                            padding: 0 5px
+                            line-height: 17px
+                            font-weight: 500
+                            display: table-cell
+
+            li
+
+                span
+                    font-size: 16px
+                    color: #5e6977
+
+                i:not(.icon)
+                    color: #5e6977
+                    position: relative
+                    top: 8px
+                    left: 5px
+
+            li.settings-mobile, li.logout-mobile
+                margin-top: -10px
+
+
+            ul.dropdown-menu
+                margin-top: -5px
+                border-radius: 0
+                min-width: 115px
+                border: 1px solid #e1e8ee
+                padding: 0
+
+                li
+                    font-weight: 500
+                    padding: 0 15px
+
+                    a
+                        font-size: 16px
+                        color: #86939e
+                        line-height: 40px
+                        padding: 0
+
+                        i
+                            font-size: 22px
+                            position: relative
+                            color: #86939e
+                            float: left
+                            left: -5px
+                            line-height: 25px
+
+                    &:hover, &:focus, &:active
+                        background-color: #edf3fa
+                        cursor: pointer
+
+                        a, i
+                            color: #127fff

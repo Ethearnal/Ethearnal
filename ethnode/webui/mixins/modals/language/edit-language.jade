@@ -1,0 +1,54 @@
+#edit-language.edit.modal-box.flex.floating
+
+    .modal-box-content: .inner-modal: .content
+
+        .modal-header: h3 Edit language
+
+        .success-message
+            h1.title Congratulations!
+            .success-content: p Your language has been updated.
+
+            .buttons
+                button.mdl-button.mdl-js-button.close-button.congrats-close Close the modal to see it
+                span OR
+                button.mdl-button.mdl-js-button.create-new Edit language again
+
+
+        .modal-body
+
+            .modal-inputs
+
+                form#form-update-education(action="POST")
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                        .ui.search.selection.dropdown#language-name(style="float: left")
+                            input(type="hidden", name="language")
+                            i.dropdown.icon
+                            .default.text Select Language
+                            .menu
+                                .item(data-value="af") <i class="af flag"></i> Afghanistan
+                                .item(data-value="ax") <i class="ax flag"></i> Aland Islands
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                        select.ui.dropdown#level(style="float: right")
+                            option(value="") Skill Level
+                            option(value="1") Beginner
+                            option(value="2") Limited knowledge
+                            option(value="3") Professional
+                            option(value="4") Native or bilingual
+
+                    .mdl-textfield.mdl-js-textfield.whole-line
+                        textarea#description.mdl-textfield__input(type="text" rows="3", name="description")
+                        label.mdl-textfield__label(for="description") Tell us more about it. Why and how did you started learning it, what's your plan for the future with this language?
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.left-side
+                        input.date-started.mdl-textfield__input(type="text", name="startDate")
+                        label.mdl-textfield__label(for="date-from") When did you start learning it?
+
+                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.right-side
+                        input.date-ended.mdl-textfield__input(type="text", name="endDate")
+                        label.mdl-textfield__label(for="date-from") When did you feel like you picked it up?
+
+        .modal-footer
+            button.mdl-button.mdl-js-button.close-button Close
+            button#update2.mdl-button.mdl-js-button.finish-button(style="color: #5CAB7D") Update
+            .mdl-tooltip(data-mdl-for="update2") This text will be changed anyway.
