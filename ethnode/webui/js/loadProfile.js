@@ -1,11 +1,3 @@
-var profileID = null;
-getNodeData(function(nodeData) {
-    $data = JSON.parse(nodeData);
-    profileID = $data.guid;
-    updateProfile();
-});
-
-
 // profileKey is for what thing you want to change.
 function getProfileValue(profileID, profileKey, callback) {
     $.ajax({
