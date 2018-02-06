@@ -137,73 +137,6 @@ function createGigToOtherProfile(hk, gig_o) {
 
 }
 
-
-
-//function createGigToFound2(hk, gig_o) {
-//    console.log("createGigToFound(hk,gig_o)",hk, gig_o);
-//
-//    if( check_gig_marked_deleted(gig_o)){ return }
-//
-//    var image ='';
-//    var gigID = hk;
-//    // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
-//    var api_cdn = api_get_cdn_url();
-//
-//    var api_cdn = api_get_cdn_url();
-//
-//    var default_profile_image = '1540b3c47ada5fd9a4798d3cc780d6a6bd05baf94cc2fdaa53e90accb4162383';
-//    var profile_image = null;
-//    var owner_guid = null;
-//
-//    console.log('gig_o',gig_o);
-//    if(gig_o.hasOwnProperty('owner_guid')) {
-//       owner_guid = gig_o.owner_guid;
-//    }
-//
-//    var img_txt = '<br><div class="owner-info">'
-//                + '<img id="imgav' + gigID + '" src="' + img_src + '" alt="Avatar">'
-//                + '<h4 id="nmown' + gigID + '" ></h4>'
-//                + '</div>' ;
-//
-//    image += '<div class="ui fluid image"><div class="ui black ribbon label">';
-//    image += gig_o.general_domain_of_expertise +'</div><div class="image-block"><img src="'+api_cdn+'';
-//    image += gig_o.image_hash+'" /></div></div>';
-//    var desc = '<p>' + gig_o.description + '</p>';
-//    var title =   '<span class="gig-title">' + gig_o.title + "</span>";
-//    var dropdownButton = '<button id="DDB'+ hk +'" class="mdl-button mdl-js-button mdl-button--icon dropdown-button dropdown-gig"><i class="material-icons">more_vert</i></button>';
-//    var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB'+ hk +'"><li class="mdl-menu__item open-modal" open-modal="#edit-gig">Edit</li><li class="mdl-menu__item delete">Delete</li></ul>';
-//    var footer = '<div class="footer"><h4>Starting at <span><i class="material-icons">polymer</i>' + gig_o.price + '</span></h4></div>';
-//
-//    var img_src = api_cdn + default_profile_image ;
-//
-//    gig_html = '<div id="'+gigID+'" class="gig content-block" data-toggle="modal" data-target="#gigModal">'
-//               + dropdownButton + dropdownUL + image + img_txt  + title  + footer + '</div>';
-//
-//   $(".gigs-container").append(gig_html);
-//    componentHandler.upgradeDom();
-//
-//    if(gig_o.hasOwnProperty('owner_guid')) {
-//       //
-//       owner_guid = gig_o.owner_guid;
-//       //
-//       getProfileValue(owner_guid, 'profilePicture', function(profilePictureURL) {
-//            //
-//            p_src = api_cdn + JSON.parse(profilePictureURL);
-//             console.log('ELEMENT', p_src);
-//            $('#imgav' + gigID).attr('src', p_src);
-//            //
-//            getProfileValue(owner_guid, 'name', function(name_jstr){
-//                names_o = JSON.parse(name_jstr)
-//                $('#nmown' + gigID).text(names_o.first + " " + names_o.last);
-//            });
-//            //
-//        });
-//
-//    }
-//
-//}
-
-
 function createGigToFound(hk, gig_o) {
     console.log("createGigToFound(hk,gig_o)", hk, gig_o);
 
@@ -297,7 +230,7 @@ function createProfileCard(owner_guid) {
         if (profile_picture_url == 'null') {
             return;
         } else {
-            var p_src = api_cdn + JSON.parse(profile_picture_url);
+            var p_src = api_cdn + JSON.parse(profile_picture_url) + '&thumb=1';
             $(".profiles-container").append(profilecard);
             var e = $('#proimgav' + owner_guid);
             e.attr('src', p_src);
@@ -351,7 +284,7 @@ function createProfileCard(owner_guid) {
                     console.log('P headline_hash NULL', headline_hash);
                 } else {
                     var headline_url = api_cdn + JSON.parse(headline_hash);
-                    var style_str = 'background: url("' + headline_url + '") no-repeat;' +
+                    var style_str = 'background: url(' + headline_url + '&thumb=1) no-repeat;' +
                         'background-size: cover;' +
                         'background-position: center;' +
                         '';

@@ -3,7 +3,10 @@
 .vscode
 .DS_Store
 node_modules
-ethnode/webui/ethnode
+ethnode/webui/node_modules/
+ethnode/webui/dist/
+ethnode/webui/node_modules
+ethnode/webui/dist
 
 
 # default data dirs
