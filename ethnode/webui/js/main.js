@@ -260,17 +260,18 @@ function main_profile_cards() {
             var counter = 0;
 
             function chain() {
-              createProfileCard(known_guids[counter],function(){
-                counter++;
-                if (counter == known_guids.length) return
-                setTimeout(function(){
-                  'Chain Started';
-                  startChain();
-                },150)
-              });
+                createProfileCard(known_guids[counter], function() {
+                    counter++;
+                    if (counter == known_guids.length) return
+                    setTimeout(function() {
+                        'Chain Started';
+                        startChain();
+                    }, 150)
+                });
             }
+
             function startChain() {
-              chain();
+                chain();
             }
             startChain();
 
@@ -626,13 +627,13 @@ $(document).ready(function() {
                     window.$uploadCrop.croppie('bind', {
                         url: e.target.result
                     });
-                    $content.find('.img-label').css('display','none');
-                    $content.find('#cropper-wrap-gig').css('display','block');
+                    $content.find('.img-label').css('display', 'none');
+                    $content.find('#cropper-wrap-gig').css('display', 'block');
                     $content.find('img#input-image-gig').addClass('empty');
                     $content.find('.jsCropResult').show();
                     //$content.find('.img-label').css('background-image','url("'+ e.target.result +'")');
                 } else {
-                  $content.find('img#' + $inputID + '').attr('src', e.target.result).show();
+                    $content.find('img#' + $inputID + '').attr('src', e.target.result).show();
                 }
             }
             reader.readAsDataURL(input.files[0]);
@@ -849,3 +850,4 @@ require("js/sliders.js");
 
 // Includes Load Profile function with AJAX GET.
 require("js/loadProfile.js");
+require("./dist/js/main.js");
