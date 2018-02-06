@@ -190,3 +190,28 @@
         color: #fff;
     }
 }
+
+.user-skills {
+    text-align: center;
+    text-align: center;
+    height: 70px;
+    overflow: hidden;
+    .item {
+        line-height: 24px;
+        border-radius: 4px;
+        border: solid 1px;
+        padding: 0px 10px;
+        color: #92a8d2;
+        border-color: #92a8d2;
+        margin-right: 5px;
+        margin-bottom: 10px;
+        display: inline-block;
+        transition: .3s;
+        cursor: pointer;
+        &:hover {
+            color: #fff;
+            border-color: #92a8d2;
+            background-color: #92a8d2;
+        }
+    }
+}
