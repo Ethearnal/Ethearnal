@@ -14,11 +14,11 @@ window.generateGigsModule = (function() {
         var dropdownButton = '<button id="DDB' + gigID + '" class="dropdown-gig mdl-button mdl-js-button mdl-button--icon dropdown-button btn-info-edit"><i class="material-icons">more_vert</i></button>';
         var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB' + gigID + '"><li class="mdl-menu__item js-open-gig-modal">Open</li></ul>';
 
-        var gigLayout = `<div class="user-card gig"  id="${gigID}" data-toggle="modal" data-target="#gigModal">
-                        <div class="img-card">
+        var gigLayout =
+                  `<div class="user-card gig"  id="${gigID}" data-toggle="modal" data-target="#gigModal">
+                        <div class="img-card" style="background: url(${api_cdn + gigObject.image_hash}) center no-repeat; background-size: cover;" >
                             ${dropdownButton}
                             ${dropdownUL}
-                            <img src="${api_cdn + gigObject.image_hash}&thumb=1">
                             <div class="card-label">${gigObject.general_domain_of_expertise}</div>
                         </div>
                         <div class="user-profile-img">

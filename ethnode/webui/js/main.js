@@ -16,13 +16,11 @@ $.ajax({
 
     success: function(data) {
         data = JSON.parse(data);
-        console.log(' - - - data.cdn', data.cdn[0]);
         CDN_HOST_PORT = data.cdn[0];
     }
 });
 
 var api_post_cdn_url = function() {
-    console.log('using post cdn: ', CDN_HOST_PORT);
     c = 'http://' + CDN_HOST_PORT + '/api/cdn/v1/resource';
     console.log('using post cdn: ', c);
     return c;
@@ -250,7 +248,7 @@ $('#domain-expertise-select').on('change', function() {
 
 
 // profile cards begin
-var main_profile_cards = function() {
+function main_profile_cards() {
     $('.profiles-container').empty();
     $.ajax({
         url: '/api/v1/dht/guids',
@@ -258,12 +256,32 @@ var main_profile_cards = function() {
         processData: false,
         success: function(data) {
             known_guids = JSON.parse(data);
-            known_guids.forEach(function(element) {
-                createProfileCard(element);
-            });
+            var d1 = $.deferred;
+            var counter = 0;
+
+            function chain() {
+              createProfileCard(known_guids[counter],function(){
+                counter++;
+                if (counter == known_guids.length) return
+                setTimeout(function(){
+                  'Chain Started';
+                  startChain();
+                },150)
+              });
+            }
+            function startChain() {
+              chain();
+            }
+            startChain();
+
+            // known_guids.forEach(function(element) {
+            //     createProfileCard(element);
+            // });
+            // known_guids.forEach(function(element) {
+            //     createProfileCard(element);
+            // });
         }
     });
-
 };
 
 // JS DATA BUFFERS
@@ -604,7 +622,18 @@ $(document).ready(function() {
                 if ($inputID == "input-image-avatar") {
                     addImage(e.target.result);
                 }
-                $content.find('img#' + $inputID + '').attr('src', e.target.result).show();
+                if ($inputID == "input-image-gig") {
+                    window.$uploadCrop.croppie('bind', {
+                        url: e.target.result
+                    });
+                    $content.find('.img-label').css('display','none');
+                    $content.find('#cropper-wrap-gig').css('display','block');
+                    $content.find('img#input-image-gig').addClass('empty');
+                    $content.find('.jsCropResult').show();
+                    //$content.find('.img-label').css('background-image','url("'+ e.target.result +'")');
+                } else {
+                  $content.find('img#' + $inputID + '').attr('src', e.target.result).show();
+                }
             }
             reader.readAsDataURL(input.files[0]);
         }
