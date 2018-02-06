@@ -123,7 +123,6 @@ function updateProfile() {
 }
 
 function updateProfileHeadline() {
-
     console.log('updateProfileHeadline');
     var headline_form = document.getElementById('image-headline-form');
     fd = $('#image-headline-form', '#input-image-profile-he').prevObject;
