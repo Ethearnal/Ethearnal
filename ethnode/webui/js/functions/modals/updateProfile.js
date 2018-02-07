@@ -66,6 +66,7 @@ function updateProfile() {
         } else {
             // CHANGING PROFILE PICTURE
             $('.user-avatar').css('background-image', 'url(' + api_cdn + JSON.parse(profilePictureURL) + '&thumb=1)');
+            $('.user-avatar').attr('data-image-url', api_cdn + JSON.parse(profilePictureURL) + '&thumb=1');
         }
     });
 

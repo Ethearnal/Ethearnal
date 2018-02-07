@@ -42,9 +42,7 @@ $(document).ready(function(){
   }
 
   // REDIRECT TO PROFILE PAGE ON CLICK ON USERS PROFILE
-  if ( $('body').hasClass('gigs-page') ) {
-    $(document).on('click','.jsOpenGigOwnerProfile',function(){
-      window.location.href = '/ui/profile/#' + $(this).attr('data-id');
-    });
-  }
+  $(document).on('click','.jsOpenGigOwnerProfile',function() {
+    window.location.href = '/ui/profile/#' + $(this).attr('data-id');
+  });
 })

@@ -44,6 +44,4 @@ $(document).on('click', '.open-modal', function(e) {
             datePickerInit($inputDateFrom, $inputDateTo);
         }
     }
-
-    if ($modalID == "#edit-profile") loadProfileInputs();
 });
