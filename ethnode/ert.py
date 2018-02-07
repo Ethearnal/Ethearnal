@@ -394,13 +394,24 @@ if __name__ == '__main__':
             sleep(3)
             jsd.update()
             sleep(3)
-            gen.gen_a()
-            sleep(3)
-            gen_range = jsd.data['wordnet_gen_range']
-            cnt = gen.gen_from_range(gen_range[0], gen_range[1])
-            for g_data in range(cnt):
-                gig_data = gen.gigs.pop()
-                gigs.post(gig_data['title'], gig_data)
+            category_domain = jsd.data['domain']
+            gigs_data = jsd.data['gigs']
+            for gig_entry in gigs_data:
+                gig_entry['category'] = category_domain
+                gig_entry['general_domain_of_expertise'] = category_domain
+                gigs.post(gig_entry['title'], gig_entry)
+
+            #
+            # wordnet gig generator
+            # gen.gen_a()
+            # sleep(3)
+            # gen_range = jsd.data['wordnet_gen_range']
+            # cnt = gen.gen_from_range(gen_range[0], gen_range[1])
+            # for g_data in range(cnt):
+            #     gig_data = gen.gigs.pop()
+            #     gigs.post(gig_data['title'], gig_data)
+            #
+
             sys.exit(0)
 
         if args.converge_pk_and_peers:

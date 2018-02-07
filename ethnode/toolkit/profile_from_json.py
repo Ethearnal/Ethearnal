@@ -166,6 +166,9 @@ class ProfileJsonData(object):
         'domain': 'category'
     }
 
+    # description:str, title:str, skills:[str,str,str], languages:[str,str,str], headlinePicture:str, profilePicture:str, category:str
+
+
     def reload(self):
         with open(self.jsfn, 'r') as fp:
             self._data = json.load(fp)
@@ -197,7 +200,10 @@ class ProfileJsonData(object):
             elif len(spl) > 1:
                 d = {'first': spl[0], 'last': " ".join(spl[1:])}
                 self.pro.push('name', d)
+            self.pro.push('name', self._data['names'])
 
+    def push_gigs(self):
+        pass
 
 
 class GigsGenerator(object):
