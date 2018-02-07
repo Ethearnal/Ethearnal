@@ -2,6 +2,8 @@ import json
 import bson
 import datetime
 
+
+
 from kadem.kad import DHTFacade
 from kadem.kad import DHT
 from ert_profile import EthearnalProfileController
@@ -200,7 +202,7 @@ class ProfileJsonData(object):
             elif len(spl) > 1:
                 d = {'first': spl[0], 'last': " ".join(spl[1:])}
                 self.pro.push('name', d)
-            self.pro.push('name', self._data['names'])
+            self.pro.push('names', self._data['names'])
 
     def push_gigs(self):
         pass
@@ -213,3 +215,34 @@ class GigsGenerator(object):
         wdn = WordnetParser(verbs_src)
         img = ImagesFromCdnData(cdn_data_dir)
         gen = GigGeneratorWordnet(wdn, img)
+
+
+class GigsTagExtractor(object):
+    def __init__(self, json_dir):
+        from glob import glob
+        import json
+        self.data_dir = json_dir
+        self.json_list = glob('%s/*.json' % self.data_dir)
+        # print(self.json_list)
+        self.domains = dict()
+
+    def process(self):
+        for file in self.json_list:
+            with open(file) as fp:
+                data = json.load(fp)
+                domain = data['domain']
+                if domain not in self.domains:
+                    self.domains[domain] = set()
+                for gig in data['gigs']:
+                    for tag in gig['tags']:
+                        self.domains[domain].add(tag)
+
+    def save(self):
+        target_dir='webui/tags'
+        for domain in self.domains:
+            fn = '%s/%s.json' % (target_dir, domain)
+            print(fn)
+            with open(fn, 'w') as fp:
+                json.dump(list(self.domains[domain]), fp, ensure_ascii=False)
+
+
