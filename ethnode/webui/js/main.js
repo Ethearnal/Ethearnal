@@ -7,27 +7,7 @@ var $my_headline = $('#my-profile-headline');
 var load_segment_html = $('#gigs-other').html()
 
 var CDN_HOST_PORT = '';
-// $.xhrPool = [];
-
-// function abortAllAjax() {
-//     if ($.xhrPool.length != 0) {
-//         $.xhrPool.forEach(function(idx, jqXHR) {
-//             jqXHR.abort();
-//         });
-//         $.xhrPool = [];
-//     }
-// };
-// $.ajaxSetup({
-//     beforeSend: function(jqXHR) {
-//         $.xhrPool.push(jqXHR);
-//     },
-//     complete: function(jqXHR) {
-//         var index = $.xhrPool.indexOf(jqXHR);
-//         if (index > -1) {
-//             $.xhrPool.splice(index, 1);
-//         }
-//     }
-// });
+var limit = 9;
 
 // get CDN host from node
 
@@ -79,20 +59,24 @@ var event_on_dht_data = function(hkey, data) {
 
 
 var event_on_search_gig_data = function(data_js) {
-    console.log(limit);
     var data = JSON.parse(data_js);
     if (data != null) {
-        $(".gigs-container").html('');
+        // $(".gigs-container").html('');
+        $('.load-more').remove();
         if (data.result != undefined) {
-            $(".gigs-container").html(data.result);
+            var noresult = `<div class="no-results lead"><h2 class="text-dark">${data.result}</h2></div>`;
+            $(".gigs-container").html(noresult);
         } else {
             function recursiveBuildGigs(index) {
                 var preloader = `<div class="preloader-card"><img src="./dist/img/preloader.gif" alt=""></div>`;
                 $(".gigs-container").append(preloader);
+                console.log(data.length + ' ? ' + limit)
                 if (index >= data.length) {
+                    if (data.length >= limit) {
+                        var loadmore = `<div class="load-more"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+                        setTimeout(function(){$(".gigs-container").append(loadmore)},500);
+                    }
                     $('.preloader-card').remove();
-                    var loadmore = `<div class="load-more"><a href="" class="btn btn-default btn-rounded">Load More</a></div>`;
-                    $(".gigs-container").append(loadmore);
                     return;
                 } else {
                     ajaxGetGigData(data[index], function(result) {
@@ -100,12 +84,14 @@ var event_on_search_gig_data = function(data_js) {
                             setTimeout(function() {
                                 index++;
                                 recursiveBuildGigs(index);
-                            }, 50);
+                            }, 10);
                         }
                     });
                 }
             }
-            recursiveBuildGigs(0);
+           
+            recursiveBuildGigs(limit - 9);
+            
         }
     }
 };
@@ -228,7 +214,7 @@ var load_tags_per_domain = function(nm) {
             $e.html('');
             $e.dropdown('restore defaults');
             $e.removeClass('disabled');
-            console.log('**', $('#skills-tags > search'));
+            $('#skills-tags').append('<option value="select">Select</option>');
             for (var i = 0; i < tags.length; i++) {
                 $('#skills-tags').append('<option value="' + tags[i] + '">' + tags[i] + '</option>');
             }
@@ -244,25 +230,6 @@ var search_event = function() {
     }, 100);
 }
 
-// $(document).ready(function() {
-//     $('#domain-expertise-select').dropdown();
-//     $('#skills-tags').dropdown();
-//     // do_search_query();
-
-// });
-
-$("#skills-tags").on("change", function() {
-    var v = $('#search-by-gig-tags').dropdown('get value');
-    console.log("search tag selected", v);
-    search_event();
-});
-
-$('#domain-expertise-select').on('change', function() {
-    var v = $('#domain-expertise-select').dropdown('get value');
-    console.log("domain selected", v);
-    load_tags_per_domain(v);
-    search_event();
-});
 
 // end searching
 
@@ -765,6 +732,14 @@ $(document).ready(function() {
         })
     });
 });
+
+var delay = (function(){
+    var timer = 0;
+    return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
 
 
 // Require function
