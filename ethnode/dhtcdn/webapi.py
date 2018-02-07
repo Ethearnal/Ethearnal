@@ -273,6 +273,8 @@ class WebCDN(object):
 
         if thumb:
             thumb_name = self.thumbnail.get_file_name(upload_file)
+            if 'svg' in thumb_name:
+                return self.read_from_file_response(upload_file)
             if not os.path.isfile(thumb_name):
                 self.thumbnail.resize(upload_file, 400, 400)
             return self.read_from_file_response(self.thumbnail.get_file_name(upload_file))
