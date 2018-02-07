@@ -15,6 +15,7 @@ window.profilePageModule = (function() {
           updateProfile();
           getGigs(window.profileID);
         } else {
+          $('.editBtnProfile').removeClass('hidden');
           getNodeData(function(nodeData) {
               $data = JSON.parse(nodeData);
               window.profileID = $data.guid;

@@ -22,8 +22,6 @@ function loadProfileInputs() {
     $title = $profile.find('.user-role').text(); // TITLE
     $summary = $profile.find('.user-description').text(); // SUMMARY / DESCRIPTION
     $profilePictureURL = $('.user-avatar').attr('data-image-url');
-    alert($profilePictureURL);
-
 
     // GETTING SKILLS
     $($profile.find('.user-item.skills .item')).each(function(i, skill) {
