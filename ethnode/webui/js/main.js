@@ -89,9 +89,9 @@ var event_on_search_gig_data = function(data_js) {
                     });
                 }
             }
-           
+
             recursiveBuildGigs(limit - 9);
-            
+
         }
     }
 };
@@ -359,39 +359,39 @@ $('a.navbar-brand').click(function() {
 
 
 // func
-function getProfileGigsF(guid_id) {
-    console.log(guid_id);
-
-
-    $.ajax({
-        url: "/api/v1/dht/hkey/?hkey=" + guid_id,
-        hk: guid_id,
-        type: "GET",
-        processData: true,
-        success: function(gigs_dta) {
-
-            console.log(gigs_dta);
-
-            //console.log('hkey',this.hk);
-            //console.log('data:',js_data);
-            // gig_o = JSON.parse(js_data);
-            //console.log('data:',gig_o);
-            //createGigToProfile2(this.hk, gig_o);
-
-        },
-
-        error: function(error) {
-            console.log('ERR', error);
-
-            return;
-        }
-    });
-
-    //var gig_hk = profile_gigs[i];
-    //console.log('GIG HK:',gig_hk);
-    /**/
-
-};
+// function getProfileGigsF(guid_id) {
+//     console.log(guid_id);
+//
+//
+//     $.ajax({
+//         url: "/api/v1/dht/hkey/?hkey=" + guid_id,
+//         hk: guid_id,
+//         type: "GET",
+//         processData: true,
+//         success: function(gigs_dta) {
+//
+//             console.log(gigs_dta);
+//
+//             //console.log('hkey',this.hk);
+//             //console.log('data:',js_data);
+//             // gig_o = JSON.parse(js_data);
+//             //console.log('data:',gig_o);
+//             //createGigToProfile2(this.hk, gig_o);
+//
+//         },
+//
+//         error: function(error) {
+//             console.log('ERR', error);
+//
+//             return;
+//         }
+//     });
+//
+//     //var gig_hk = profile_gigs[i];
+//     //console.log('GIG HK:',gig_hk);
+//     /**/
+//
+// };
 
 
 $(document).ready(function() {
