@@ -9,6 +9,16 @@ window.generateGigsModule = (function() {
         var owner_guid = null;
         var img_src = '';
         var fullname = '';
+        var categoryObj = {
+            "sd": "Software Development",
+            "fa": "Finance & Accounting",
+            "ma": "Music & Audio",
+            "gd": "Graphic & Design",
+            "va": "Video & Animation",
+            "tw": "Text & Writing",
+            "cs": "Consulting Services",
+            "os": "Other Services"
+        }
 
         var round_price = Math.round(gigObject.price * 1000) / 1000;
         var dropdownButton = '<button id="DDB' + gigID + '" class="dropdown-gig mdl-button mdl-js-button mdl-button--icon dropdown-button btn-info-edit"><i class="material-icons">more_vert</i></button>';
@@ -28,13 +38,13 @@ window.generateGigsModule = (function() {
                         <div class="img-card" style="background: url(${api_cdn + gigObject.image_hash}&thumb=1) center no-repeat; background-size: cover;" >
                             ${dropdownButton}
                             ${dropdownUL}
-                            <div class="card-label">${gigObject.general_domain_of_expertise}</div>
+                            <div class="card-label">${categoryObj[gigObject.category]}</div>
                         </div>
                         <div class="user-profile-img">
                             <img id="imgav${gigID}" src="${img_src}" alt="Avatar">
                         </div>
                         <p class="user-name" id="nmown${gigID}">${fullname}</p>
-                        <p class="user-role">${gigObject.general_domain_of_expertise}</p>
+                        <p class="user-role">${categoryObj[gigObject.category]}</p>
                         <div class="user-info">
                             <p class="info">${gigObject.title}</p>
                         </div>
