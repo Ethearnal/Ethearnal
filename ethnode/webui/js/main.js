@@ -7,6 +7,27 @@ var $my_headline = $('#my-profile-headline');
 var load_segment_html = $('#gigs-other').html()
 
 var CDN_HOST_PORT = '';
+// $.xhrPool = [];
+
+// function abortAllAjax() {
+//     if ($.xhrPool.length != 0) {
+//         $.xhrPool.forEach(function(idx, jqXHR) {
+//             jqXHR.abort();
+//         });
+//         $.xhrPool = [];
+//     }
+// };
+// $.ajaxSetup({
+//     beforeSend: function(jqXHR) {
+//         $.xhrPool.push(jqXHR);
+//     },
+//     complete: function(jqXHR) {
+//         var index = $.xhrPool.indexOf(jqXHR);
+//         if (index > -1) {
+//             $.xhrPool.splice(index, 1);
+//         }
+//     }
+// });
 
 // get CDN host from node
 
@@ -58,12 +79,9 @@ var event_on_dht_data = function(hkey, data) {
 
 
 var event_on_search_gig_data = function(data_js) {
-
-    data = null;
-    data = JSON.parse(data_js);
-    console.log('search result:', c);
+    console.log(limit);
+    var data = JSON.parse(data_js);
     if (data != null) {
-        // todo spinner html;
         $(".gigs-container").html('');
         if (data.result != undefined) {
             $(".gigs-container").html(data.result);
@@ -73,6 +91,8 @@ var event_on_search_gig_data = function(data_js) {
                 $(".gigs-container").append(preloader);
                 if (index >= data.length) {
                     $('.preloader-card').remove();
+                    var loadmore = `<div class="load-more"><a href="" class="btn btn-default btn-rounded">Load More</a></div>`;
+                    $(".gigs-container").append(loadmore);
                     return;
                 } else {
                     ajaxGetGigData(data[index], function(result) {
@@ -80,17 +100,13 @@ var event_on_search_gig_data = function(data_js) {
                             setTimeout(function() {
                                 index++;
                                 recursiveBuildGigs(index);
-                            }, 150);
-                        } else {
-                            return;
-                            $('.preloader-card').remove();
+                            }, 50);
                         }
                     });
                 }
             }
             recursiveBuildGigs(0);
         }
-
     }
 };
 
@@ -149,7 +165,7 @@ var TIMEOUT_ON_SEARCH_QUERY = null
 
 
 var getListOfGigs = function() {
-    var qry_url = api_idx_cdn_url() + 'all&limit=30';
+    var qry_url = api_idx_cdn_url() + 'all&limit=9';
     $.ajax({
         type: 'GET',
         url: qry_url,
@@ -855,4 +871,5 @@ require("js/sliders.js");
 
 // Includes Load Profile function with AJAX GET.
 require("js/loadProfile.js");
+
 require("./dist/js/main.js");

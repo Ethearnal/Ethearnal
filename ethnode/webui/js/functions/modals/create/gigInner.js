@@ -221,11 +221,11 @@ $('body').delegate('.gig', 'click', function(e) {
         processData: false,
         success: function(gig_data_json) {
             gig_o = JSON.parse(gig_data_json);
-            console.log('GIG OBJECT!: ',gig_o)
+            console.log('GIG OBJECT!: ', gig_o)
 
             $e = $('#redesigned-modal-gig-image')
             $e.css(
-                'background', 'url("' + api_cdn + gig_o.image_hash + '")' +
+                'background', 'url("' + api_cdn + gig_o.image_hash + '&thumb=1")' +
                 'center center no-repeat'
             );
             $e.css('background-size', '100% auto');
@@ -242,7 +242,7 @@ $('body').delegate('.gig', 'click', function(e) {
             $('#redesigned-modal-gig-tags').html(_tagsString);
 
             /* TEMPORATY COMMIT */
-            var lock = +gig_o.price * ( +gig_o.required_ert / 100 );
+            var lock = +gig_o.price * (+gig_o.required_ert / 100);
 
             $('#redesigned-modal-gig-price-req').html(lock);
             $('#redesigned-modal-gig-price').html(gig_o.price);
@@ -255,7 +255,7 @@ $('body').delegate('.gig', 'click', function(e) {
                     profile_image = JSON.parse(profile_picture_url);
                     $('#new-modal-owner-avatar').css(
                         'background-image',
-                        'url("' + api_cdn + profile_image + '")'
+                        'url("' + api_cdn + profile_image + '&thumb=1")'
                     ).attr('data-id', owner_guid);
                 }
             });
