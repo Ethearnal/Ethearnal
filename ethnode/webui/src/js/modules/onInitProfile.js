@@ -9,13 +9,20 @@ window.profilePageModule = (function() {
 
         /* RESET AND GET NEW PROFILE ID HASH */
         window.profileID = null;
-        getNodeData(function(nodeData) {
-            $data = JSON.parse(nodeData);
-            window.profileID = $data.guid;
-            $('.preloader-card').remove();
-            updateProfile();
-            getGigs($data.guid);
-        });
+
+        if ( window.location.hash ) {
+          window.profileID = window.location.hash.slice(1);
+          updateProfile();
+          getGigs(window.profileID);
+        } else {
+          getNodeData(function(nodeData) {
+              $data = JSON.parse(nodeData);
+              window.profileID = $data.guid;
+              $('.preloader-card').remove();
+              updateProfile();
+              getGigs($data.guid);
+          });
+        }
     };
 
     function getGigs(guid) {

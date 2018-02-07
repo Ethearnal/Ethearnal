@@ -1,3 +1,14 @@
+/* SETUP USER AVATAR IN HEADER */
+$(document).ready(function() {
+  getNodeData(function(nodeData) {
+      $data = JSON.parse(nodeData);
+      getProfileValue($data.guid, 'profilePicture', function(profilePictureURL) {
+          var api_cdn = api_get_cdn_url();
+          $('li.profile img.profile-picture').attr('src', api_cdn + JSON.parse(profilePictureURL) + '&thumb=1');
+      });
+  });
+})
+
 // profileKey is for what thing you want to change.
 function getProfileValue(profileID, profileKey, callback) {
     $.ajax({

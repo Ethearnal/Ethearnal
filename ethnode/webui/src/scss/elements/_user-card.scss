@@ -164,11 +164,12 @@
         }
     }
     &:hover {
-        transform: scale(1.02);
+        // transform: scale(1.02);
         box-shadow: 3px 5px 9px 0 rgba(0, 0, 0, 0.1);
     }
     &.profile-user-card {
-        padding-bottom: 20px;
+      cursor: pointer;
+      padding-bottom: 20px;
     }
 }
 

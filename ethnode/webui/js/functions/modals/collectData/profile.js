@@ -73,7 +73,9 @@ function collectProfileData(form) {
                     $profile.find('.profile-description p').text($description);
 
                     // CHANGING PROFILE PICTURE
+
                     $('.profile-image img').attr('src', api_cdn + avatarHash);
+                    alert(api_cdn + avatarHash);
                     $('li.profile img.profile-picture').attr('src', api_cdn + avatarHash + '&thumb=1');
 
                     // PROFILE SKILLS

@@ -30,8 +30,14 @@ $(document).ready(function(){
 
   /* FILTER PROFILE CARDS */
   if ( $('body').hasClass('profiles-page') ) {
+    /* FILTER PROFILE CARDS */
     $(document).on('input', '.profiles-page #search-header', function() {
       filterProfileCards( $(this).val(), $(this) );
+    });
+
+    /* OPEN INTERNAL PROFILE PAGE */
+    $(document).on('click','.profile-user-card',function(){
+      window.location.href = '/ui/profile/#' + $(this).attr('id');
     });
   }
 })
