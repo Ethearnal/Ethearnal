@@ -166,6 +166,9 @@ class ProfileJsonData(object):
         'domain': 'category'
     }
 
+    # description:str, title:str, skills:[str,str,str], languages:[str,str,str], headlinePicture:str, profilePicture:str, category:str
+
+
     def reload(self):
         with open(self.jsfn, 'r') as fp:
             self._data = json.load(fp)
