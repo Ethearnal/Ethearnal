@@ -25,7 +25,7 @@ window.generateGigsModule = (function() {
                     fullname = names_o.first + " " + names_o.last;
                     // $('#nmown' + gigID).text(names_o.first + " " + names_o.last);
                     var gigLayout = `<div class="user-card gig"  id="${gigID}" data-toggle="modal" data-target="#gigModal">
-                        <div class="img-card" style="background: url(${api_cdn + gigObject.image_hash}) center no-repeat; background-size: cover;" >
+                        <div class="img-card" style="background: url(${api_cdn + gigObject.image_hash}&thumb=1) center no-repeat; background-size: cover;" >
                             ${dropdownButton}
                             ${dropdownUL}
                             <div class="card-label">${gigObject.general_domain_of_expertise}</div>
