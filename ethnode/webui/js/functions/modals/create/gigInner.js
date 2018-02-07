@@ -221,8 +221,8 @@ $('body').delegate('.gig', 'click', function(e) {
         processData: false,
         success: function(gig_data_json) {
             gig_o = JSON.parse(gig_data_json);
+            console.log('GIG OBJECT!: ',gig_o)
 
-            console.log('--->', this.url);
             $e = $('#redesigned-modal-gig-image')
             $e.css(
                 'background', 'url("' + api_cdn + gig_o.image_hash + '")' +
@@ -256,7 +256,7 @@ $('body').delegate('.gig', 'click', function(e) {
                     $('#new-modal-owner-avatar').css(
                         'background-image',
                         'url("' + api_cdn + profile_image + '")'
-                    );
+                    ).attr('data-id', owner_guid);
                 }
             });
 

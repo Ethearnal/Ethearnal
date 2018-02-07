@@ -231,7 +231,7 @@ function createProfileCard(owner_guid, callback) {
                 <div class="card-label" id="protitle${owner_guid}">${profileCardRenderData.title}</div>
             </div>
             <div class="user-profile-img">
-                <img id="proimgav${owner_guid}" src="${profileCardRenderData.userProfileImage}" alt="Avatar">
+                <div id="proimgav${owner_guid}" class="div-img-wrap" style="background: url(${profileCardRenderData.userProfileImage}) center no-repeat;"></div>
             </div>
             <p class="user-name" id="proname${owner_guid}">${profileCardRenderData.userName}</p>
             <div class="user-info">

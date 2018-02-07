@@ -39,7 +39,6 @@ function collectGigData(form) {
 
     if(fileObj != undefined) {
         if(!!fileObj.type.match(/image.*/)) {
-            alert('hurra1')
             $.ajax({
                 url: api_cdn_post,
                 type: "POST",
@@ -47,7 +46,6 @@ function collectGigData(form) {
                 processData: false,
                 contentType: false,
                 success: function(data){
-                    alert('hurra2')
 
                     // Deletes GIG if not EDIT modal
                     if( $content.closest('.modal-box').hasClass('edit') ) {
@@ -75,7 +73,7 @@ function collectGigData(form) {
 //                        ]
                     }
                     console.log($data);
-                    
+
                     $.ajax({
                         url: "/api/v1/dht/gigs/",
                         type: "POST",

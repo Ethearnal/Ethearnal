@@ -40,4 +40,11 @@ $(document).ready(function(){
       window.location.href = '/ui/profile/#' + $(this).attr('id');
     });
   }
+
+  // REDIRECT TO PROFILE PAGE ON CLICK ON USERS PROFILE
+  if ( $('body').hasClass('gigs-page') ) {
+    $(document).on('click','.jsOpenGigOwnerProfile',function(){
+      window.location.href = '/ui/profile/#' + $(this).attr('data-id');
+    });
+  }
 })

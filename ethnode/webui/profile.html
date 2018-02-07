@@ -93,29 +93,31 @@
     </div>
     <div class="profile-page-wrap-module">
         <section class="profile-headline">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="user-info-wrap">
-                            <div class="user-avatar"></div>
-                            <div class="user-info color-white">
-                                <p class="user-name font-size-28 mrg-btm-20"></p>
-                                <p class="user-role font-size-14">Creative Designer</p>
-                                <div class="user-item skills"><span class="item-title font-size-14">Skills:</span></div>
-                                <div class="user-item languages"><span class="item-title font-size-14">Languages:</span></div>
-                                <p class="user-description font-size-16 mrg-vertical-20"></p>
-                                <div class="profile-social">
-                                    <ul class="list-inline">
-                                        <li><a href=""><i class="icon-facebook"></i></a></li>
-                                        <li><a href=""><i class="icon-twitter"></i></a></li>
-                                        <li><a href=""><i class="icon-r-s-s"></i></a></li>
-                                        <li><a href=""><i class="icon-instagram"></i></a></li>
-                                        <li><a href=""><i class="icon-google"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="user-info-wrap">
+                          <div class="user-avatar"></div>
+                          <div class="user-info color-white">
+                              <p class="user-name font-size-28 mrg-btm-20"></p>
+                              <p class="user-role font-size-14">Creative Designer</p>
+                              <div class="user-item skills"><span class="item-title font-size-14">Skills:</span></div>
+                              <div class="user-item languages"><span class="item-title font-size-14">Languages:</span></div>
+                              <p class="user-description font-size-16 mrg-vertical-20"></p>
+                              <div class="profile-social">
+                                  <ul class="list-inline">
+                                      <li><a href=""><i class="icon-facebook"></i></a></li>
+                                      <li><a href=""><i class="icon-twitter"></i></a></li>
+                                      <li><a href=""><i class="icon-r-s-s"></i></a></li>
+                                      <li><a href=""><i class="icon-instagram"></i></a></li>
+                                      <li><a href=""><i class="icon-google"></i></a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
         </section>
         <!-- This section is for your whole profile, including left and right sides, profile information and etc.-->
         <section id="my-profile-section" class="inner-profile documentation">
@@ -187,12 +189,6 @@
         <!-- All modals -->
         <div id="myModal" class="beep-modal-hc">
             <div class="beep-modal-content-hc">
-            </div>
-        </div>
-
-
-        <div id="gigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
-            <div role="document" class="modal-dialog modal-md">
             </div>
         </div>
 
@@ -409,10 +405,47 @@
             </div>
         </div>
 
-
-
-        <!-- Modals  Temaplates -->
-
+        <div id="gigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+            <div role="document" class="modal-dialog modal-md">
+                <div id="redesigned-modal" class="hidden">
+                    <div class="modal-content border-radius-6">
+                        <div class="modal-header pdd-horizon-30">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title flex-block flex-center">
+                                <div id="new-modal-owner-avatar" class="mrg-right-15"></div>
+                                <div>
+                                    <span id="new-modal-owner-name">Owner Name</span> <br>
+                                    <span id="new-modal-owner-title">Owner Title</span>
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="modal-body border-radius-6" style="overflow: hidden;">
+                            <div class="pdd-horizon-30">
+                                <div class="row">
+                                    <div class="ml-auto col-xs-12">
+                                        <h3 class="font-size-24 color-blue" id="redesigned-modal-gig-title">I'll design a smart contracts for ethereum platform</h3>
+                                    </div>
+                                    <div class="col-xs-12 text-center mrg-vertical-10">
+                                        <div id="redesigned-modal-gig-image" style="height: 200px;"></div>
+                                    </div>
+                                    <p id="redesigned-modal-description" class="col-md-12 font-size-16">Let me see your identification. You don't need to see his identification. We don't need to see his identification. These are not the droids.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer pdd-horizon-30">
+                            <div class="text-right">
+                                <button class="btn btn-default btn-sm no-mrg" data-dismiss="modal">
+                              Hold &nbsp; <span id="redesigned-modal-gig-price-req">0.00 </span> &nbsp;
+                              <i class="material-icons font-size-18" style="vertical-align: text-bottom;">polymer</i> &nbsp;
+                              Price &nbsp; <span id="redesigned-modal-gig-price"> 0.00 </span> &nbsp; Order
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div id="redesigned-modal" class="hidden">
             <div class="modal-content border-radius-6 redesigned-gig-modal">
                 <div class="modal-header pdd-horizon-30" id="redesigned-modal-gig-image" style="height: 200px;">
@@ -423,7 +456,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <h4 class="modal-title flex-block flex-center">
-                                    <div id="new-modal-owner-avatar" class="mrg-right-15"></div>
+                                    <div id="new-modal-owner-avatar" class="mrg-right-15 pointer jsOpenGigOwnerProfile"></div>
                                     <div class="mrg-top-20">
                                         <span id="new-modal-owner-name">Owner Name</span> -
                                         <span id="new-modal-owner-title">Owner Title</span>
@@ -434,20 +467,21 @@
                                 <p class="font-size-16 mrg-btm-10" id="redesigned-modal-gig-tags"></p>
                             </div>
                         </div>
-                        <div class="modal-footer pdd-horizon-30">
-                            <div class="text-right">
-                                <button class="btn btn-default btn-sm no-mrg modal-btn-order" data-dismiss="modal">
-                    Hold &nbsp; <span id="redesigned-modal-gig-price-req">0.00 </span> &nbsp;
-                    <i class="material-icons font-size-18" style="vertical-align: text-bottom;">polymer</i> &nbsp;
-                    Price &nbsp; <span id="redesigned-modal-gig-price"> 0.00 </span> &nbsp; Order
-                  </button>
+                        <div class="modal-footer no-pdd-horizon">
+                            <div class="text-right clearfix">
+                                <p class="pull-left font-size-14">
+                                    Price: <span id="redesigned-modal-gig-price"> 0.00 </span> <i class="material-icons font-size-18" style="vertical-align: text-bottom;">polymer</i> &nbsp;&nbsp; Lock: <span id="redesigned-modal-gig-price-req">0.00 </span>
+                                </p>
+                                <button class="btn btn-default btn-sm no-mrg btn-pink" data-dismiss="modal">
+                                  Order
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </body>
 
 </html>
