@@ -41,7 +41,7 @@ window.generateGigsModule = (function() {
                             <div class="card-label">${categoryObj[gigObject.category]}</div>
                         </div>
                         <div class="user-profile-img">
-                            <img id="imgav${gigID}" src="${img_src}" alt="Avatar">
+                            <div class="div-img-wrap" style="background: url('${img_src}')"></div>
                         </div>
                         <p class="user-name" id="nmown${gigID}">${fullname}</p>
                         <p class="user-role">${categoryObj[gigObject.category]}</p>

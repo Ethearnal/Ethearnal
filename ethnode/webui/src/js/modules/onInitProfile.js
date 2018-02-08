@@ -15,6 +15,7 @@ window.profilePageModule = (function() {
           updateProfile();
           getGigs(window.profileID);
         } else {
+          $('.redesigned-gig-modal').addClass('no-button-order');
           $('.editBtnProfile').removeClass('hidden');
           getNodeData(function(nodeData) {
               $data = JSON.parse(nodeData);
