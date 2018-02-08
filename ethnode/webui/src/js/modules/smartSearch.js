@@ -7,6 +7,7 @@ window.smartSearchModule = (function() {
     var dataLength = 0
 
     var searchA = '';
+
     function smartSearch() {
         var url = api_idx_cdn_url();
         // build url for searching
@@ -16,33 +17,29 @@ window.smartSearchModule = (function() {
                 if (item.type == 'text' && item.value == '' && searchArray.length == 1) {
                     searchQ += 'all';
                     url += 'all';
-                }
-                else if (item.type == 'text' && item.value == '' && searchArray.length != 1) {
+                } else if (item.type == 'text' && item.value == '' && searchArray.length != 1) {
                     url += '';
-                }
-                else if (item.type == 'tags' && item.value == 'select') {
+                } else if (item.type == 'tags' && item.value == 'select') {
                     url += '';
-                }
-                else if (item.type == 'tags' && item.value == '') {
+                } else if (item.type == 'tags' && item.value == '') {
                     url += '';
-                }
-                else if (item.type == 'q1range' && searchArray.length == 1) {
+                } else if (item.type == 'category' && item.value == 'all') {
+                    url += 'all';
+                } else if (item.type == 'q1range' && searchArray.length == 1) {
                     searchQ += 'all&' + item.type + '=' + item.value;
                     url += searchQ;
-                }
-                else {
+                } else {
                     searchQ += '&' + item.type + '=' + item.value;
                     url += searchQ;
                 }
             });
-        }
-        else {
+        } else {
             url += 'all';
         }
 
         $.ajax({
             type: 'GET',
-            url: url + '&limit=' + limit,
+            url: url + '&limit=1000',
             qry: searchA,
             success: function(data) {
                 dataLength = data.length;
@@ -61,7 +58,7 @@ window.smartSearchModule = (function() {
         if( this.value.length < 2 && this.value.length > 0) return;
         limit = 9;
         $('.gigs-container').empty();
-        delay(function(){
+        delay(function() {
             var outputString = $(e.target).val().split(" ").join("%20");
             if (searchArray.length) {
                 var text = false;
@@ -75,13 +72,12 @@ window.smartSearchModule = (function() {
                 if (text == false) {
                     searchArray.push({ type: 'text', value: outputString });
                 }
-            }
-            else {
+            } else {
                 searchArray.push({ type: 'text', value: outputString });
             }
             console.log(searchArray);
             smartSearchModule.search();
-        }, 1500 );
+        }, 500);
     });
 
     // Submit search for dropdown expertise
@@ -89,7 +85,7 @@ window.smartSearchModule = (function() {
         var el = $(this).dropdown('get value');
         limit = 9;
         $('.gigs-container').empty();
-        delay(function(){
+        delay(function() {
             if (searchArray.length) {
                 searchArray.filter(function(item) {
                     if (item.type == 'tags') {
@@ -108,13 +104,12 @@ window.smartSearchModule = (function() {
                 if (category == false) {
                     searchArray.push({ type: 'category', value: el });
                 }
-            }
-            else {
+            } else {
                 searchArray.push({ type: 'category', value: el });
             }
             smartSearchModule.search();
-            load_tags_per_domain(el);
-        }, 1500 );
+            if (el != 'all') load_tags_per_domain(el);
+        }, 200);
     });
 
     $(document).on('change', '#skills-tags', function() {
@@ -123,7 +118,7 @@ window.smartSearchModule = (function() {
         if (el == null) return;
         limit = 9;
         $('.gigs-container').empty();
-        delay(function(){
+        delay(function() {
             $('.gigs-container').empty();
             var outputString = el.join("%20");
             console.log(outputString)
@@ -139,17 +134,16 @@ window.smartSearchModule = (function() {
                 if (tags == false) {
                     searchArray.push({ type: 'tags', value: outputString });
                 }
-            }
-            else {
+            } else {
                 searchArray.push({ type: 'tags', value: outputString });
             }
             smartSearchModule.search();
-        }, 1000 );
+        }, 200);
     });
 
     $(document).on('mouseup', '#slider-range', function() {
         var values = $(this).slider("values");
-        if (values[0] == 0 && values[1] == 10000) {
+        if (values[0] == 0 && values[1] == 2000) {
             searchArray.filter(function(item) {
                 if (item.type == 'q1range') {
                     searchArray.splice(searchArray.indexOf(item), 1);
@@ -159,25 +153,24 @@ window.smartSearchModule = (function() {
         }
         limit = 9;
         $('.gigs-container').empty();
-        delay(function(){
+        delay(function() {
             if (searchArray.length) {
                 var q1range = false;
                 searchArray.filter(function(item) {
                     if (item.type == 'q1range') {
                         q1range = true;
                         searchArray.splice(searchArray.indexOf(item), 1);
-                        searchArray.push({ type: 'q1range', value: values[0]+'%20'+values[1] });
+                        searchArray.push({ type: 'q1range', value: values[0] + '%20' + values[1] });
                     }
                 });
                 if (q1range == false) {
-                    searchArray.push({ type: 'q1range', value: values[0]+'%20'+values[1] });
+                    searchArray.push({ type: 'q1range', value: values[0] + '%20' + values[1] });
                 }
-            }
-            else {
-                searchArray.push({ type: 'q1range', value: values[0]+'%20'+values[1] });
+            } else {
+                searchArray.push({ type: 'q1range', value: values[0] + '%20' + values[1] });
             }
             smartSearchModule.search();
-        }, 1500);
+        }, 200);
     });
 
 
