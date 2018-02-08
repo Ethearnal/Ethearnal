@@ -67,14 +67,24 @@ var event_on_search_gig_data = function(data_js) {
             var noresult = `<div class="no-results lead"><h2 class="text-dark">${data.result}</h2></div>`;
             $(".gigs-container").html(noresult);
         } else {
+            var loaderindex = 0;
+
             function recursiveBuildGigs(index) {
+                if (loaderindex == 9) {
+                    if (data.length >= limit) {
+                        var loadmore = `<div class="load-more"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+                        setTimeout(function() { $(".gigs-container").append(loadmore) }, 500);
+                    }
+                    return;
+                }
+                loaderindex++;
                 var preloader = `<div class="preloader-card"><img src="./dist/img/preloader.gif" alt=""></div>`;
                 $(".gigs-container").append(preloader);
                 console.log(data.length + ' ? ' + limit)
                 if (index >= data.length) {
                     if (data.length >= limit) {
                         var loadmore = `<div class="load-more"><span class="btn btn-default btn-rounded">Load More</span></div>`;
-                        setTimeout(function(){$(".gigs-container").append(loadmore)},500);
+                        setTimeout(function() { $(".gigs-container").append(loadmore) }, 500);
                     }
                     $('.preloader-card').remove();
                     return;
@@ -89,9 +99,7 @@ var event_on_search_gig_data = function(data_js) {
                     });
                 }
             }
-           
             recursiveBuildGigs(limit - 9);
-            
         }
     }
 };
@@ -359,39 +367,39 @@ $('a.navbar-brand').click(function() {
 
 
 // func
-function getProfileGigsF(guid_id) {
-    console.log(guid_id);
-
-
-    $.ajax({
-        url: "/api/v1/dht/hkey/?hkey=" + guid_id,
-        hk: guid_id,
-        type: "GET",
-        processData: true,
-        success: function(gigs_dta) {
-
-            console.log(gigs_dta);
-
-            //console.log('hkey',this.hk);
-            //console.log('data:',js_data);
-            // gig_o = JSON.parse(js_data);
-            //console.log('data:',gig_o);
-            //createGigToProfile2(this.hk, gig_o);
-
-        },
-
-        error: function(error) {
-            console.log('ERR', error);
-
-            return;
-        }
-    });
-
-    //var gig_hk = profile_gigs[i];
-    //console.log('GIG HK:',gig_hk);
-    /**/
-
-};
+// function getProfileGigsF(guid_id) {
+//     console.log(guid_id);
+//
+//
+//     $.ajax({
+//         url: "/api/v1/dht/hkey/?hkey=" + guid_id,
+//         hk: guid_id,
+//         type: "GET",
+//         processData: true,
+//         success: function(gigs_dta) {
+//
+//             console.log(gigs_dta);
+//
+//             //console.log('hkey',this.hk);
+//             //console.log('data:',js_data);
+//             // gig_o = JSON.parse(js_data);
+//             //console.log('data:',gig_o);
+//             //createGigToProfile2(this.hk, gig_o);
+//
+//         },
+//
+//         error: function(error) {
+//             console.log('ERR', error);
+//
+//             return;
+//         }
+//     });
+//
+//     //var gig_hk = profile_gigs[i];
+//     //console.log('GIG HK:',gig_hk);
+//     /**/
+//
+// };
 
 
 $(document).ready(function() {
@@ -733,10 +741,10 @@ $(document).ready(function() {
     });
 });
 
-var delay = (function(){
+var delay = (function() {
     var timer = 0;
-    return function(callback, ms){
-        clearTimeout (timer);
+    return function(callback, ms) {
+        clearTimeout(timer);
         timer = setTimeout(callback, ms);
     };
 })();

@@ -242,8 +242,8 @@ $('body').delegate('.gig', 'click', function(e) {
             $('#redesigned-modal-gig-tags').html(_tagsString);
 
             /* TEMPORATY COMMIT */
+            console.log(gig_o);
             var lock = +gig_o.price * (+gig_o.lock / 100);
-
             $('#redesigned-modal-gig-price-req').html(parseInt(lock));
             $('#redesigned-modal-gig-price').html(gig_o.price);
 
