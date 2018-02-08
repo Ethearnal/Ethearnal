@@ -168,15 +168,18 @@ class InvIndexTimestampSQLite(BaseSQLite):
         if self.analog_range_q1:
             analog_range_q1 = ' WHERE(q1 BETWEEN %d AND %d) ' % self.analog_range_q1
 
+        # order_st = 'a.ert_tokens_major ASC, a.utc_timestamp ASC, a.q1 ASC, a.q2 ASC '
+        order_st = 'a.ert_tokens_major ASC, a.q1 ASC, a.utc_timestamp ASC, a.q2 ASC'
+
         if limit:
             qs = 'SELECT DISTINCT a.container_hash, a.ert_tokens_major, a.utc_timestamp, a.q1, a.q2 ' \
                  '  FROM %s a {analog_range} GROUP BY a.container_hash ' \
-                 'ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC, a.q1 ASC, a.q2 ASC LIMIT %d;' % (
-                    self.table_name, limit)
+                 'ORDER BY %s LIMIT %d;' % (
+                    self.table_name,order_st, limit)
         else:
             qs = 'SELECT DISTINCT a.container_hash, a.ert_tokens_major, a.utc_timestamp, a.q1, a.q2 '\
                  'FROM %s a {analog_range} GROUP BY a.container_hash ' \
-                 'ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC, a.q1 ASC, a.q2 ASC %d;' % (self.table_name, limit)
+                 'ORDER BY %s %d;' % (self.table_name, order_st, limit)
         qs = qs.format(analog_range=analog_range_q1)
 
         if qs_only:
@@ -208,8 +211,8 @@ class InvIndexTimestampSQLite(BaseSQLite):
         # print('\n\nLIMIT', limit)
         select_st = 'SELECT DISTINCT a.container_hash, a.ert_tokens_major, a.utc_timestamp, a.q1, a.q2 '
         from_st = 'FROM %s a ' % self.table_name
-        order_st = 'ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC, a.q1 ASC, a.q2 ASC '
-
+        # order_st = 'ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC, a.q1 ASC, a.q2 ASC '
+        order_st = 'ORDER BY a.ert_tokens_major ASC,  a.q1 ASC, a.utc_timestamp ASC, a.q2 ASC '
         analog_range_q1 = ''
         if self.analog_range_q1:
             analog_range_q1 = 'AND (q1 BETWEEN %d AND %d) ' % self.analog_range_q1
@@ -287,7 +290,8 @@ class InvIndexTimestampSQLite(BaseSQLite):
             and_l.append(and_st)
         ands_st = ' AND '.join(and_l)
         ands_st += analog_range_q1
-        order = 'ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC, a.q1 ASC, a.q2 ASC LIMIT %d' % limit
+        # order = 'ORDER BY a.ert_tokens_major ASC, a.utc_timestamp ASC, a.q1 ASC, a.q2 ASC LIMIT %d' % limit
+        order = 'ORDER BY a.ert_tokens_major ASC, a.q1 ASC, a.utc_timestamp ASC, a.q2 ASC LIMIT %d' % limit
         qs = first+inners+andst+ands_st+order
         values = args
         # print('QS',qs)
