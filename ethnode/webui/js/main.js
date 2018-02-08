@@ -244,17 +244,21 @@ function main_profile_cards() {
         processData: false,
         success: function(data) {
             known_guids = JSON.parse(data);
-            var d1 = $.deferred;
             var counter = 0;
+            window.postLoadCounter = 0;
 
             function chain() {
                 createProfileCard(known_guids[counter], function() {
                     counter++;
-                    if (counter == known_guids.length) return
+                    if (counter == known_guids.length) {
+                      if ($('.postLoad').length) $('.jsProfilesLoadMore').show()
+                      $('#search-header').removeAttr('disabled');
+                      return
+                    }
                     setTimeout(function() {
                         'Chain Started';
                         startChain();
-                    }, 150)
+                    }, 10)
                 });
             }
 

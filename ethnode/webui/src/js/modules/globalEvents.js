@@ -6,6 +6,16 @@ function filterProfileCards(query, $input) {
   });
   /* ADD RED BORDER TO INPUT IF NO SEARCH MATCHED */
   $('.profile-user-card').length == $('.profile-user-card.hidden').length ? $input.addClass('error') : $input.removeClass('error');
+  /* REMOVE LOAD MORE */
+  if ( query.length > 0 ) {
+    $('.jsProfilesLoadMore').hide();
+    $('.postLoad').toggleClass('removedLoad postLoad')
+  } else {
+    if ( $('.removedLoad').length ) {
+      $('.removedLoad').toggleClass('removedLoad postLoad')
+      $('.jsProfilesLoadMore').show();
+    }
+  }
 }
 
 $(document).ready(function(){
@@ -38,6 +48,14 @@ $(document).ready(function(){
     /* OPEN INTERNAL PROFILE PAGE */
     $(document).on('click','.profile-user-card',function(){
       window.location.href = '/ui/profile/#' + $(this).attr('id');
+    });
+
+    // CLICK ON LOAD-MORE COUNTER:
+    $(document).on('click','.jsProfilesLoadMore',function() {
+      if ( $('.postLoad').length ) {
+        $('.postLoad').prev().nextAll().slice(0,6).removeClass('postLoad');
+      }
+      if ( $('.postLoad').length == 0 ) $('.jsProfilesLoadMore').hide();
     });
   }
 

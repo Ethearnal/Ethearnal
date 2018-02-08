@@ -58,13 +58,16 @@
                     <div class="filter card-body">
                         <div class="form-group">
                             <label>Search by name</label>
-                            <input id="search-header" type="text" placeholder="Search by name..." class="form-control">
+                            <input id="search-header" disabled type="text" placeholder="Search by name..." class="form-control">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="gigs col-md-9">
-                <div class="profiles-container"></div>
+                <div class="profiles-container clearfix"></div>
+                <div class="text-center">
+                  <span class="btn btn-default btn-rounded jsProfilesLoadMore" style="display: none;">Load More</span>
+                </div>
             </div>
         </div>
     </section>

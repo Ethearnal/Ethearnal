@@ -224,27 +224,34 @@ function createProfileCard(owner_guid, callback) {
     var d5 = $.Deferred();
     var d6 = $.Deferred();
 
+    var loadMoreClass = '';
+    if ( window.postLoadCounter > 5 ) {
+      loadMoreClass = 'postLoad'
+    }
+
     $.when( d1, d2, d3, d4, d5, d6 ).done(function () {
-      var profilecard = `
-        <div class="user-card profile-user-card" id="${owner_guid}">
-            <div class="img-card" id="proowner${owner_guid}" style="background: url(${profileCardRenderData.headlineImage}) no-repeat; background-size: cover; background-position: center;">
-                <div class="card-label" id="protitle${owner_guid}">${profileCardRenderData.title}</div>
-            </div>
-            <div class="user-profile-img">
-                <div id="proimgav${owner_guid}" class="div-img-wrap" style="background: url(${profileCardRenderData.userProfileImage}) center no-repeat;"></div>
-            </div>
-            <p class="user-name" id="proname${owner_guid}">${profileCardRenderData.userName}</p>
-            <div class="user-info">
-                <p class="info" id="prodesc${owner_guid}">${profileCardRenderData.description}</p>
-            </div>
-            <div class="user-skills">
-              ${profileCardRenderData.skillsTemplate}
-            </div>
-        </div>`;
-      callback();
+
       if (!profileCardRenderData.isWrongData) {
+        window.postLoadCounter++;
+        var profilecard = `
+          <div class="user-card profile-user-card ${loadMoreClass}" id="${owner_guid}">
+              <div class="img-card" id="proowner${owner_guid}" style="background: url(${profileCardRenderData.headlineImage}) no-repeat; background-size: cover; background-position: center;">
+                  <div class="card-label" id="protitle${owner_guid}">${profileCardRenderData.title}</div>
+              </div>
+              <div class="user-profile-img">
+                  <div id="proimgav${owner_guid}" class="div-img-wrap" style="background: url(${profileCardRenderData.userProfileImage}) center no-repeat;"></div>
+              </div>
+              <p class="user-name" id="proname${owner_guid}">${profileCardRenderData.userName}</p>
+              <div class="user-info">
+                  <p class="info" id="prodesc${owner_guid}">${profileCardRenderData.description}</p>
+              </div>
+              <div class="user-skills">
+                ${profileCardRenderData.skillsTemplate}
+              </div>
+          </div>`;
         $(".profiles-container").append(profilecard);
       }
+      callback();
     });
 
     // profile images

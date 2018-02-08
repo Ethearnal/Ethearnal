@@ -82,13 +82,19 @@
         }
     }
     .user-name {
-        text-align: center;
-        color: #000;
-        font-size: 26px;
-        padding-top: 55px;
-        margin-bottom: 0px;
-        line-height: 1;
-        border-top: 1px solid #e2e2e2;
+      text-align: center;
+      color: #000;
+      font-size: 26px;
+      padding-top: 55px;
+      padding-left: 5px;
+      margin-bottom: 0px;
+      padding-right: 5px;
+      line-height: 1;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      border-top: 1px solid #e2e2e2;
+      white-space: nowrap;
+      overflow: hidden;
     }
     .user-role {
         color: #b1b1b1;

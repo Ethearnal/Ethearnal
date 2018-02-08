@@ -5,7 +5,7 @@ window.smartSearchModule = (function() {
     var searchArray = new Array();
     var keyupTimeout = null;
     var dataLength = 0
-    
+
     var searchA = '';
     function smartSearch() {
         var url = api_idx_cdn_url();
@@ -57,7 +57,7 @@ window.smartSearchModule = (function() {
     // Search Events
 
     // Submit search for text field
-    $(document).on('keyup', 'input#search-header', function(e) {
+    $(document).on('keyup', '.gigs-page input#search-header', function(e) {
         if( this.value.length < 2 && this.value.length > 0) return;
         limit = 9;
         $('.gigs-container').empty();
@@ -180,7 +180,7 @@ window.smartSearchModule = (function() {
         }, 1500);
     });
 
-    
+
 
 
     $(document).on('click', '.load-more', function() {
