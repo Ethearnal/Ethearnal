@@ -399,7 +399,7 @@ if __name__ == '__main__':
             gigs_data = jsd.data['gigs']
             for gig_entry in gigs_data:
                 gig_entry['lock'] = randint(1, 100)
-                gig_entry['price'] = randint(1, 10000)
+                gig_entry['price'] = randint(1, 1999)
                 gig_entry['category'] = category_domain
                 gig_entry['general_domain_of_expertise'] = category_domain
                 gigs.post(gig_entry['title'], gig_entry)
