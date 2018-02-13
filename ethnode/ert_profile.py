@@ -9,7 +9,7 @@ import rsa
 import hashlib
 import base64
 
-import ipgetter
+# import ipgetter
 
 from toolkit import tools
 from toolkit import basemodel
