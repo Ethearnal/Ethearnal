@@ -38,6 +38,13 @@ from toolkit.profile_from_json import DHTProfileCollection
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
 
 
+parser.add_argument('-f', '--if_name',
+                    default=config.ert_cdn_iface,
+                    help='eth0, lo, e.g ifconfig -a and select interface name',
+                    required=False,
+                    type=str)
+
+
 parser.add_argument('-l', '--http_host_port',
                     default=config.http_host_port,
                     help='E,g 127.0.0.1:8080',
@@ -95,11 +102,12 @@ parser.add_argument('-c', '--cdn_bootstrap_host_port',
                     required=False,
                     )
 
-parser.add_argument('-n', '--no_upnp_attempts',
+parser.add_argument('-n', '--upnp_attempt',
                     help='bootstrap to web service',
                     required=False,
                     action='store_true'
                     )
+
 
 parser.add_argument('-g', '--converge_pk_and_peers',
                     help='exchange pk keys and peers with boot peer',
@@ -124,7 +132,7 @@ def main_dht(host: str, port: int, store: store_handler.DHTStoreHandlerOne,
         dht = DHT(host=host, port=port, guid=guid,  seeds=[(seed_host, seed_port)],
                   storage=store)
     else:
-        dht = DHT(host=host, port=port, guid=guid, storage=store)
+        dht = DHT(host=ert.my_wan_ip, port=port, guid=guid, storage=store)
     return dht
 
 
@@ -316,12 +324,13 @@ if __name__ == '__main__':
     udp_port = int(udp_port)
     seed_host = None
     seed_port = None
-    no_upnp = args.no_upnp_attempts
+    upnp_attempt = args.upnp_attempt
     # cdn_selected = args.cdn_bootstrap_host_port
     boot_cdn_host, boot_cdn_port = args.cdn_bootstrap_host_port.split(':')
     json_data_to_profile = args.json_data_to_profile
 
     print('boot-cdn', boot_cdn_host, boot_cdn_port)
+
 
     if args.udp_seed_host_port:
         seed_host, seed_port = args.udp_seed_host_port.split(':')
@@ -344,6 +353,9 @@ if __name__ == '__main__':
             cdn_port=boot_cdn_port,
         )
         ert = ert_profile_ctl
+        if args.upnp_attempt:
+            upnp.punch_port(udp_port, udp_port, args.if_name)
+
         hex_guid, bin_guid = ert_profile_ctl.rsa_guid_hex_bin
         int_guid = kadmini_codec.guid_bts_to_int(bin_guid)
         bts_2 = kadmini_codec.guid_int_to_bts(int_guid)
@@ -356,14 +368,15 @@ if __name__ == '__main__':
             pubkeys_sqlite_file=ert.dht_ref_pubkeys_fn,
         )
 
-        local_ip = upnp.get_my_ip()
+        # local_ip = upnp.get_my_ip()
+        # todo
+        from toolkit.tools import get_ip_address
+        local_ip = get_ip_address(args.if_name)
+        ip = local_ip
+        ert_profile_ctl.my_wan_ip = ip
+        ert_profile_ctl.my_lan_ip = ip
         print('UDP_PORT', udp_port)
         print('LOCAL IP', local_ip)
-        if not no_upnp:
-            if local_ip != ert.my_wan_ip:
-                if not punch_dht_udp_hole(udp_port):
-                    print('\n\n\n\ PUNCH HOLE FAILED \n\n\n')
-            ert.my_lan_ip = local_ip
 
         dht = main_dht(udp_host, udp_port,
                        store=storage_handle,
@@ -403,17 +416,6 @@ if __name__ == '__main__':
                 gig_entry['category'] = category_domain
                 gig_entry['general_domain_of_expertise'] = category_domain
                 gigs.post(gig_entry['title'], gig_entry)
-
-            #
-            # wordnet gig generator
-            # gen.gen_a()
-            # sleep(3)
-            # gen_range = jsd.data['wordnet_gen_range']
-            # cnt = gen.gen_from_range(gen_range[0], gen_range[1])
-            # for g_data in range(cnt):
-            #     gig_data = gen.gigs.pop()
-            #     gigs.post(gig_data['title'], gig_data)
-            #
 
             sys.exit(0)
 

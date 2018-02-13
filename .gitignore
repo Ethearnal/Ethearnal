@@ -3,6 +3,8 @@
 .vscode
 .DS_Store
 
+# dist builds
+dist/
 
 # default data dirs
 *_profile/

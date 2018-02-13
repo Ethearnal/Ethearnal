@@ -92,7 +92,7 @@ class EthearnalProfileController(object):
                  cdn_service_node=False,
                  ):
         self.cdn_service_node = cdn_service_node
-        self.my_wan_ip = ipgetter.myip()
+        self.my_wan_ip = None
         self.my_lan_ip = None
         self.cdn_service_http_url = None
         # self.my_wan_port = 0

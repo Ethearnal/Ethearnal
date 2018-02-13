@@ -48,3 +48,17 @@ paths:
             type: "string"
             maxLength: 64
             minLength: 64
+  /reqheaders:
+    get:
+      tags:
+      - "CDN"
+      summary: "get client request headers"
+      description: "retrieve request headers map"
+      operationId: "getReqHeaders"
+      produces:
+      - "*/*"
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "err"

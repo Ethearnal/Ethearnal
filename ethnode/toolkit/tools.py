@@ -54,3 +54,20 @@ def on_hook(target, target_args, target_kwargs):
             return func(*args, **kwargs)
         return f
     return wrap
+
+
+
+import socket
+import fcntl
+import struct
+
+
+def get_ip_address(ifname):
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    # print(p,type(p))
+    # return
+    return socket.inet_ntoa(fcntl.ioctl(
+        s.fileno(),
+        0x8915,  # SIOCGIFADDR
+        struct.pack(b'256s', ifname[:15].encode('ascii'))
+    )[20:24])

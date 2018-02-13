@@ -6,7 +6,7 @@ target_package="ert_0.0.1_linux_amd64.tar.gz"
 
 pyinstaller ./ert.py
 sleep 3
-cp -r ./webdoc ./dist/ert/
+# cp -r ./webdoc ./dist/ert/
 cp -r ./webui ./dist/ert/
 mkdir -p ./packages
 cd ./dist

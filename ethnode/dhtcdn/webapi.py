@@ -16,6 +16,40 @@ class WebCDNSite(object):
     # todo make entry point redirect to ui
 
 
+class WebCDNClientRequestHeaders(object):
+    exposed = True
+
+    def mount(self):
+        cherrypy.tree.mount(
+            self,
+            self.mount_point, {'/': {
+                    'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+                    'tools.sessions.on': True,
+                }
+            }
+        )
+
+    def __init__(self,  mount_point: str='/api/cdn/v1/reqheaders', mount_it=True):
+
+        self.mount_point = mount_point
+        if mount_it:
+            self.mount()
+
+    def OPTIONS(self):
+        cherrypy.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
+        cherrypy.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+        cherrypy.response.headers['Access-Control-Allow-Origin'] = '*'
+        # tell CherryPy no avoid normal handler
+        return b''
+
+    def GET(self):
+        cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+        headers = cherrypy.request.headers
+        js = json.dumps(headers, ensure_ascii=False)
+        bts = js.encode(encoding='utf-8')
+        return bts
+
+
 class WebCDN(object):
     exposed = True
 
@@ -345,7 +379,6 @@ class WebCDN(object):
                 },
                 '/api/ui': {
                     'tools.staticdir.on': True,
-                    'tools.CORS.on': True,
                     'tools.staticdir.dir': 'cdnapidef/swagger',
                     'tools.staticdir.index': 'index.html',
                     'tools.staticdir.root': os.path.abspath(os.getcwd())

@@ -210,8 +210,8 @@ def get_my_ip(routerip=None):
     return ret
 
 
-def punch_port(ext_port, int_port, proto='UDP'):
-
+def punch_port(ext_port, int_port, iface_name, proto='UDP'):
+    from toolkit.tools import get_ip_address
     # allok = True
     res = discover()
     for path in res:
@@ -228,7 +228,7 @@ def punch_port(ext_port, int_port, proto='UDP'):
         print('ROUTER Ip', routerip)
         print('SERVICE',service_url)
         # if args.lanip == None:
-        localip = get_my_ip(routerip)
+        localip = get_ip_address(iface_name)
         enabled = True
 
         dis = ''
@@ -245,7 +245,6 @@ def punch_port(ext_port, int_port, proto='UDP'):
         else:
             sys.stderr.write("%sport forward on %s failed, status=%s message=%s\n" % (dis, routerip, status, message))
             return False
-
 
 
 if __name__ == '__main__':
