@@ -331,7 +331,6 @@ if __name__ == '__main__':
 
     print('boot-cdn', boot_cdn_host, boot_cdn_port)
 
-
     if args.udp_seed_host_port:
         seed_host, seed_port = args.udp_seed_host_port.split(':')
         seed_port = int(seed_port)
