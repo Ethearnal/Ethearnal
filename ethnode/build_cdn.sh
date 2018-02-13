@@ -4,6 +4,9 @@
 cwd=`pwd`
 target_package="cdn_linux_amd64.tar.gz"
 
+# clean old build
+rm dist/cdn -rf
+
 pyinstaller ./cdn.py
 
 sleep 3

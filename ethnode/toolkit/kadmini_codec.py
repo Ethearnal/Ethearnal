@@ -96,6 +96,10 @@ def guid_int_to_hex(guidint: int):
     return binascii.hexlify(bts).decode(encoding='ascii')
 
 
+def guid_hex_to_int(guid_hex: str):
+    return int(guid_hex, 16)
+
+
 def guid_bin_to_hex(binguid: bytes):
     return binascii.hexlify(binguid)
 

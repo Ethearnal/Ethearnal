@@ -16,19 +16,19 @@ from .shortlist import Shortlist
 # from . import hashing
 from toolkit import kadmini_codec
 from ert_profile import EthearnalProfileController
-
+import config
 cdx = kadmini_codec
 
 # k = 20
-k = 20
+# k = 20
 
-alpha = 3
+# alpha = 3
 
 # id_bits = 128
 
 id_bits = kadmini_codec.id_bits
 
-iteration_sleep = 0.1
+# iteration_sleep = 0.1
 
 # all the things have to be bson encoded
 
@@ -244,8 +244,12 @@ class DHTFacade(object):
         key = {'ert': 'guid'}
         return self.pull_remote(key)
 
-    def pull_pubkey(self, guid=None, remote_only=False):
+    def pull_pubkey(self, guid=None, remote_only=False, guid_hex=None):
         key = {'ert': 'pubkey'}
+
+        if guid_hex:
+            guid = cdx.guid_hex_to_bin(guid_hex)
+
         if not guid:
             guid = self.bin_guid
         val = None
@@ -532,17 +536,23 @@ class DHT(object):
                  guid=None, seeds=[],
                  storage=None,
                  info={},  # rm this
-                 request_handler=EthDHTRequestHandle):
+                 request_handler=EthDHTRequestHandle,
+                 dht_alpha=config.dht_alpha,
+                 dht_k=config.dht_k,
+                 dht_iteration_sleep=config.dht_iteration_sleep
+                 ):
         if not guid:
             raise ValueError('GUID must SET from PUBLIC KEY!')
-
+        self.dht_k = dht_k
+        self.alpha = dht_alpha
+        self.iteration_sleep = dht_iteration_sleep
         self.storage = storage
         self.info = info
         self.hash_function = cdx.hash_function
         self.peer = Peer(host, port, guid, info)
         # self.wan_peer = Peer(host, port, guid)
         self.data = self.storage
-        self.buckets = BucketSet(k, id_bits, self.peer.id)
+        self.buckets = BucketSet(self.dht_k, id_bits, self.peer.id)
         self.rpc_ids = {}  # should probably have a lock for this
         self.rpc_ids = {}  # omg
         self.server = DHTServer(self.peer.address(), request_handler)
@@ -551,6 +561,9 @@ class DHT(object):
         self.server_thread.daemon = True
         self.server_thread.start()
         self.bootstrap(seeds)
+
+        self.alpha = config.dht_alpha
+
         # self.dhf = None
 
 
@@ -561,36 +574,36 @@ class DHT(object):
         return self.peer.id
 
     def iterative_find_nodes(self, key, boot_peer=None):
-        shortlist = Shortlist(k, key)
-        shortlist.update(self.buckets.nearest_nodes(key, limit=alpha))
+        shortlist = Shortlist(self.dht_k, key)
+        shortlist.update(self.buckets.nearest_nodes(key, limit=self.alpha))
         if boot_peer:
             rpc_id = random.getrandbits(id_bits)
             self.rpc_ids[rpc_id] = shortlist
             boot_peer.find_node(key, rpc_id, socket=self.server.socket, peer_id=self.peer.id, peer_info=self.peer.info)
         while (not shortlist.complete()) or boot_peer:
-            nearest_nodes = shortlist.get_next_iteration(alpha)
+            nearest_nodes = shortlist.get_next_iteration(self.alpha)
             for peer in nearest_nodes:
                 shortlist.mark(peer)
                 rpc_id = random.getrandbits(id_bits)
                 self.rpc_ids[rpc_id] = shortlist
                 peer.find_node(key, rpc_id, socket=self.server.socket, peer_id=self.peer.id,
                                peer_info=self.info)  # #####
-            time.sleep(iteration_sleep)
+            time.sleep(self.iteration_sleep)
             boot_peer = None
         return shortlist.results()
 
     def iterative_find_value(self, key):
-        shortlist = Shortlist(k, key)
-        shortlist.update(self.buckets.nearest_nodes(key, limit=alpha))
+        shortlist = Shortlist(self.dht_k, key)
+        shortlist.update(self.buckets.nearest_nodes(key, limit=self.alpha))
         while not shortlist.complete():
-            nearest_nodes = shortlist.get_next_iteration(alpha)
+            nearest_nodes = shortlist.get_next_iteration(self.alpha)
             for peer in nearest_nodes:
                 shortlist.mark(peer)
                 rpc_id = random.getrandbits(id_bits)
                 self.rpc_ids[rpc_id] = shortlist
                 peer.find_value(key, rpc_id, socket=self.server.socket, peer_id=self.peer.id,
                                 peer_info=self.info)  # ####
-            time.sleep(iteration_sleep)
+            time.sleep(self.iteration_sleep)
         print('COMPLETE')
         return shortlist.completion_result()
 

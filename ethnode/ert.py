@@ -378,7 +378,7 @@ if __name__ == '__main__':
         print('UDP_PORT', udp_port)
         print('LOCAL IP', local_ip)
 
-        dht = main_dht(udp_host, udp_port,
+        dht = main_dht(ip, udp_port,
                        store=storage_handle,
                        guid=int_guid,
                        seed_host=seed_host,
