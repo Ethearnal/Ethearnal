@@ -1,7 +1,9 @@
-<div id="add-gig" class="add modal-box flex floating add-gig-redesigned">
-	<div class="modal-box-content">
-		<div class="inner-modal">
-			<h3 class="page-card-name">Add gig</h3>
+<div id="add-gig" class="add-gig-redesigned modal fade" role="dialog">
+	<div class="modal-dialog modal-box-content">
+		<div class="modal-content inner-modal">
+			<div class="card-heading border bottom">
+				<h4 class="card-title">Add gig</h4>
+			</div>
 			<div class="content">
 				<div class="success-message">
 					<h1 class="title">Congratulations!</h1>
@@ -9,7 +11,8 @@
 						<p>Your gig was created.</p>
 					</div>
 					<div class="buttons">
-						<button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
+						<button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button>
+						<span>OR</span>
 						<button class="mdl-button mdl-js-button create-new">create new gig</button>
 					</div>
 				</div>
@@ -17,7 +20,9 @@
 					<div id="cropper-wrap-gig" class="cropper-wrap" style="display: none;"></div>
 					<div class="form-group">
 						<input id="input-image-gig" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
-						<label for="input-image-gig" class="img-label" style="background-image: url('images/image-video-image-file.png');"><p class="add-photo-label"></p></label>
+						<label for="input-image-gig" class="img-label" style="background-image: url('images/image-video-image-file.png');width: 100%">
+							<p class="add-photo-label"></p>
+						</label>
 						<div class="btns-wrap">
 							<button style="" class="btn btn-pink jsCropUpload">Upload photo</button>
 							<button style="display: none;" class="btn btn-success jsCropResult">Confirm result</button>
@@ -26,54 +31,63 @@
 					</div>
 					<div class="modal-inputs">
 						<form action="POST">
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
-								<label for="gig-title" class="label-control gig-title-label">Gig Titles</label>
-								<input id="gig-title" name="gig-title" type="text" placeholder="Gig Title" class="form-control ">
-								<!--  class mdl-textfield__input  and mdl-textfield__label  for label-->
+
+							<div class="form-group">
+								<label>First Name</label>
+								<input id="gig-title" name="gig-title" type="text" class="form-control ">
 							</div>
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label left-side">
-								<select id="category" class="ui dropdown">
-									<option value="">Select Category</option>
-									<option value="1">Software Development</option>
-									<option value="2">Entertainment</option>
-									<option value="3">Graphic Design</option>
-									<option value="4">Content Writing</option>
-									<option value="5">Accountants</option>
-									<option value="6">Consultants</option>
-									<option value="7">Assistants</option>
+							<div class="form-group">
+								<label>Categories</label>
+								<select id='new-gig-category' class="ui fluid search dropdown ui-element-style form-control flex-center">
+									<option value="sc">Select Category</option>
+									<option value="sd">Software Development</option>
+									<option value="fa">Finance & Accounting</option>
+									<option value="ma">Music & Audio</option>
+									<option value="va">Video & Animation</option>
+									<option value="gd">Graphic & Design</option>
+									<option value="tw">Text & Writing</option>
+									<option value="cs">Consulting Services</option>
+									<option value="os">Other Services</option>
 								</select>
 							</div>
-							<div style="height: 38px; float: right; margin-top: 20px" class="ui right labeled input">
-								<label for="reputationCost" class="ui label"><i style="font-size: 17px" class="material-icons">polymer</i></label>
-								<input id="reputationCost" type="text" placeholder="Cost of reputation">
-								<div class="ui basic label">.00</div>
-							</div>
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label whole-line">
+
+							<div class="mdl-js-textfield form-group whole-line">
+								<label>Add gig tags (limit: 10)</label>
 								<select name="gig-tags" multiple="" class="ui fluid dropdown normal search gig-tags">
-									<option value="">Add gig tags (limit: 10)...</option>
+									<option value="sc" disabled>Select Tag</option>
 									<option value="programming">Programming</option>
 									<option value="copywriting">Copywriting</option>
 									<option value="userexperience">User Experience</option>
 								</select>
 							</div>
-							<div class="mdl-textfield mdl-js-textfield whole-line">
-								<label for="description" class="label-control gig-title-label">Description (what have you done or currently do?)</label>
+							<div class="form-group">
+								<label for="description">Description (what have you done or currently do?)</label>
 								<textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
 							</div>
-							<div class="ui right labeled input">
-								<label for="amount" class="ui label"><i class="material-icons">polymer</i></label>
+							<div class="ui labeled input">
+								<label for="reputationCost" class="ui label">
+									<i style="font-size: 17px" class="material-icons">polymer</i>
+								</label>
+								<input id="reputationCost" type="text" placeholder="Cost of reputation">
+								<div class="ui basic label">.00</div>
+							</div>
+							<div class="ui labeled input">
+								<label for="amount" class="ui label">
+									<i class="material-icons">polymer</i>
+								</label>
 								<input id="amount" type="text" placeholder="Amount">
 								<div class="ui basic label">.00</div>
 							</div>
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label right-side">
-								<input type="text" name="startDate" class="date-started mdl-textfield__input">
-								<label for="date-from" class="mdl-textfield__label">Expire Date</label>
+							<div class="form-group">
+								<label>Expire Date</label>
+								<input  name="startDate" type="text" class="form-control" id='newGigexpire'>
 							</div>
+
 						</form>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button">Close</button>
+					<button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button" data-dismiss="modal">Close</button>
 					<button id="publish4" style="" class="btn btn-pink lh-normal mdl-button mdl-js-button finish-button">Publish</button>
 					<div data-mdl-for="publish4" class="mdl-tooltip">This text will be changed anyway.</div>
 				</div>
