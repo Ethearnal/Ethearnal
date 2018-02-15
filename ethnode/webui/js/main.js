@@ -719,9 +719,9 @@ $(document).ready(function() {
         }
 
         // $('.ui .menu, .panel-body').perfectScrollbar();
-        $('section.background-image .items, .modal-body .image .items').owlCarousel({
-            singleItem: true
-        });
+        // $('section.background-image .items, .modal-body .image .items').owlCarousel({
+        //     singleItem: true
+        // });
         $('.ui.dropdown').dropdown();
 
         $('.skills-dropdown, .languages-dropdown, .gig-tags, .portfolio-tags').dropdown({

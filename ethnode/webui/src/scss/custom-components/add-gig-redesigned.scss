@@ -11,9 +11,6 @@
 		font-family: 'Roboto', sans-serif;
 		text-transform: uppercase;
 	}
-	.form-group {
-		padding: 0 !important; 
-	}
 	.form-group [type=file] {
 		position: absolute;
 		filter: alpha(opacity=0);
@@ -48,9 +45,9 @@
 		margin-bottom: 40px;
 	}
 
-	.modal-body .form-group {
+	.form-group {
 		max-width: 600px !important;
-
+		padding: 0 !important; 
 		.img-label {
 			border: 2px dashed #CCC !important;
 			background-color: #f1f6ff !important;
