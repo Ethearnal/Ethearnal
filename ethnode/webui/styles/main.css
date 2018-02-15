@@ -1948,14 +1948,13 @@ span.gig-title {
 }
 */
 
-.modal-box-content .inner-modal {
-    /* background: #f5f6fa !important; */
+/* .modal-box-content .inner-modal {
     background-color: #515365 !important;
-}
-
+} */
+/* 
 .modal-box-content .inner-modal .content {
     width: 22.5%;
-}
+} */
 
 .modal-box-content .inner-modal .content .success-message {
     text-align: center;
@@ -2052,10 +2051,6 @@ span.gig-title {
     float: left;
 }
 
-.modal-box-content .inner-modal .content .modal-body .modal-inputs {
-    margin-top: 45px;
-}
-
 .modal-box-content .inner-modal .content .modal-body .modal-inputs form input,
 .modal-box-content .inner-modal .content .modal-body .modal-inputs form textarea {
     color: black;
@@ -2102,37 +2097,7 @@ span.gig-title {
     margin-top: 20px;
 }
 
-.modal-box-content .inner-modal .content .modal-body .form-group [type=file] {
-    position: absolute;
-    filter: alpha(opacity=0);
-    opacity: 0;
-}
 
-.modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label {
-    border: 4px dashed #CCC;
-    /* border-radius: 50%; */
-    text-align: left;
-    padding: 210px 0 0 0;
-    width: 440px;
-    height: 215px;
-    font-weight: 300;
-    position: relative;
-    text-align: center;
-    background: #f5f6fa;
-    color: #91969c;
-    cursor: pointer;
-}
-
-.modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label.active {
-    background: transparent;
-}
-
-.modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label:hover,
-.modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label:focus,
-.modal-box-content .inner-modal .content .modal-body .form-group [type=file]+label:active {
-    background: #dde4ff;
-    color: #8b8f94;
-}
 
 .modal-box-content .inner-modal .content .modal-body .form-group img.file-input-first-image {
     position: absolute;
@@ -2212,7 +2177,6 @@ span.gig-title {
     width: 100%;
     max-width: 870px;
     margin: 0 auto;
-    /* margin-top: 115px; */
     transition: opacity .4s ease;
     -webkit-backface-visibility: hidden;
     border: 1px solid;
@@ -3624,16 +3588,7 @@ div.new-modal-footer-buttons {
     line-height: 1.42857143;
 }
 
-.page-card-name {
-    font-size: 26px;
-    color: white;
-    padding-top: 50px;
-    text-align: center;
-    font-weight: 700;
-    font-family: 'Roboto', sans-serif;
-    text-transform: uppercase;
-    padding-top: 50px;
-}
+
 
 .add-photo-label {
     padding-top: 10px;
@@ -3652,9 +3607,3 @@ div.new-modal-footer-buttons {
     align-items: center;
     justify-content: center;
 }
-
-
-/* .multiple {
-    overflow: hidden;
-    overflow-y: scroll;
-} */
