@@ -39,7 +39,7 @@ window.profilePageModule = (function() {
                   success: function(js_data) {
                       if (js_data != 'null') {
                           var gig_o = JSON.parse(js_data);
-                          generateGigsModule.generate(this.hk, gig_o);
+                          generateGigsModule.generate(this.hk, gig_o, true);
                       } else {
                           $('.preloader-card').remove();
                       }
