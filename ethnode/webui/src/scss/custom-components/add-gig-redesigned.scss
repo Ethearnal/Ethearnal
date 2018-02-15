@@ -1,4 +1,7 @@
 .add-gig-redesigned {
+	.modal-dialog {
+		max-width: 800px;
+	}
 // Base Colors
 $shade-10: #888da8 !default;
 $shade-1: #e6ecf5 !default;
@@ -117,7 +120,9 @@ input::-moz-focus-outer {
   border: 0; 
 }
 
-
+.flex {
+	display: flex;
+}
 
 
 	.card-heading {
@@ -178,8 +183,8 @@ input::-moz-focus-outer {
 	}
 
 	.form-group {
-		max-width: 600px !important;
-		padding: 0 !important; 
+    padding: 0 !important;
+    width: 100%;
 		.img-label {
 			border: 2px dashed #CCC !important;
 			background-color: #f1f6ff !important;
@@ -232,6 +237,9 @@ input::-moz-focus-outer {
 				border-top-right-radius: 4px;
 				border-bottom-right-radius: 4px;
 			}
+		}
+		&.full-width {
+			max-width: none !important;
 		}
 	}
 	.ui.selection.dropdown {
