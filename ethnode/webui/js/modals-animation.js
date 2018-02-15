@@ -226,14 +226,14 @@ $('.modal-box button').click(function() {
 
 // Check tooltip text when you hover over finish button.
 $('.finish-button').hover(function() {
-    $(this).next().css({ display: 'none' });
+    $(this).css({ display: 'none' });
     $content = $(this).closest('.content');
     $form = $content.find('form');
 
     if( validateForm($form) ) {
-        $(this).next().text('Great! Go ahead').css({ display: 'initial' });
+        $(this).text('Great! Go ahead').css({ display: 'initial' });
     } else {
-        $(this).next().text('Please fill the form').css({ display: 'initial' });
+        $(this).text('Please fill the form').css({ display: 'initial' });
     }
 });
 

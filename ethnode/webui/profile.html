@@ -149,8 +149,9 @@
 			<div id="add-gig" class="add-gig-redesigned modal fade" role="dialog">
 				<div class="modal-dialog modal-box-content">
 					<div class="modal-content inner-modal">
-						<div class="card-heading border bottom">
+						<div class="card-heading">
 							<h4 class="card-title">Add gig</h4>
+							<i class="material-icons" data-dismiss="modal">highlight_off</i>
 						</div>
 						<div class="content">
 							<div class="success-message">
@@ -209,33 +210,36 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="description">Description (what have you done or currently do?)</label>
-											<textarea id="description" type="text" rows="3" name="description" class="form-control"></textarea>
-										</div>
-										<div class="ui labeled input">
-											<label for="reputationCost" class="ui label">
-												<i style="font-size: 17px" class="material-icons">polymer</i>
-											</label>
-											<input id="reputationCost" type="text" placeholder="Cost of reputation">
-											<div class="ui basic label">.00</div>
-										</div>
-										<div class="ui labeled input">
-											<label for="amount" class="ui label">
-												<i class="material-icons">polymer</i>
-											</label>
-											<input id="amount" type="text" placeholder="Amount">
-											<div class="ui basic label">.00</div>
+											<label>Expire Date</label>
+											<input name="startDate" type="text" class="form-control" id='newGigexpire'>
 										</div>
 										<div class="form-group">
-											<label>Expire Date</label>
-											<input  name="startDate" type="text" class="form-control" id='newGigexpire'>
+											<label>Cost of reputation</label>
+											<div class="range-slider">
+												<input class="range-slider__range" id="reputationCost" type="range" value="0" min="0" max="100">
+												<span class="range-slider__value">0</span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label>Amount</label>
+											<div class="amount-wrap">
+												<div class="icon">
+													<i class="material-icons">polymer</i>
+												</div>
+												<input id="amount" type="text" class="form-control">
+												<div class="amount-label">.00</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="description">Description (what have you done or currently do?)</label>
+											<textarea id="description" type="text" rows="3" name="description" class="form-control description" ></textarea>
 										</div>
 									</form>
 								</div>
 							</div>
 							<div class="modal-footer">
+								<button id="publish4" class="btn btn-pink lh-normal mdl-button mdl-js-button finish-button">Publish</button>
 								<button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button" data-dismiss="modal">Close</button>
-								<button id="publish4" style="" class="btn btn-pink lh-normal mdl-button mdl-js-button finish-button">Publish</button>
 								<div data-mdl-for="publish4" class="mdl-tooltip">This text will be changed anyway.</div>
 							</div>
 						</div>

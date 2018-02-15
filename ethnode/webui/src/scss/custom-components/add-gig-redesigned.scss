@@ -1,5 +1,130 @@
 .add-gig-redesigned {
+// Base Colors
+$shade-10: #888da8 !default;
+$shade-1: #e6ecf5 !default;
+$shade-0: #fff !default;
+$teal: #3daef3 !default;
+
+.range-slider {
+	height: 42px;
+	display: flex;
+	align-items: center;
+}
+
+
+// Range Slider
+$range-width: 100% !default;
+
+$range-handle-color: $shade-10 !default;
+$range-handle-color-hover: $teal !default;
+$range-handle-size: 20px !default;
+
+$range-track-color: $shade-1 !default;
+$range-track-height: 10px !default;
+
+$range-label-color: $shade-10 !default;
+$range-label-width: 42px !default;
+
+.range-slider {
+  width: $range-width;
+}
+
+.range-slider__range {
+  -webkit-appearance: none;
+  height: $range-track-height;
+  border-radius: 5px;
+  background: $range-track-color;
+  outline: none;
+  padding: 0;
+  margin: 0;
+
+  // Range Handle
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: $range-handle-size;
+    height: $range-handle-size;
+    border-radius: 50%;
+    background: $range-handle-color;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+
+    &:hover {
+      background: $range-handle-color-hover;
+    }
+  }
+
+  &:active::-webkit-slider-thumb {
+    background: $range-handle-color-hover;
+  }
+
+  &::-moz-range-thumb {
+    width: $range-handle-size;
+    height: $range-handle-size;
+    border: 0;
+    border-radius: 50%;
+    background: $range-handle-color;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+
+    &:hover {
+      background: $range-handle-color-hover;
+    }
+  }
+
+  &:active::-moz-range-thumb {
+    background: $range-handle-color-hover;
+  }
+}
+
+
+// Range Label
+.range-slider__value {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  position: relative;
+  width: $range-label-width;
+	color: $shade-0;
+	height: 100%;
+	min-width: 42px;
+  text-align: center;
+  border-radius: 4px;
+  background: $range-label-color;
+  margin-left: 8px;
+
+  &:after {
+    position: absolute;
+    top: 13px;
+    left: -7px;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-right: 7px solid $range-label-color;
+    border-bottom: 7px solid transparent;
+    content: '';
+  }
+}
+
+
+// Firefox Overrides
+::-moz-range-track {
+    background: $range-track-color;
+    border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer { 
+  border: 0; 
+}
+
+
+
+
 	.card-heading {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid #e6ecf5 !important;
 		display: flex;
 		align-items: center;
 		padding: 0 20px;
@@ -10,12 +135,19 @@
 		font-weight: 700;
 		font-family: 'Roboto', sans-serif;
 		text-transform: uppercase;
+		i {
+			cursor: pointer;
+		}
+		.card-title {
+			margin: 0;
+		}
 	}
 	.form-group [type=file] {
 		position: absolute;
 		filter: alpha(opacity=0);
 		opacity: 0;
 		&+label {
+			margin-bottom: 20px;
 			border: 4px dashed #CCC;
 			text-align: left;
 			padding: 210px 0 0 0;
@@ -65,6 +197,42 @@
 			position: static;
 			border: 3px solid #ebebeb;
 		}
+		.amount-wrap {
+			display: flex;
+			align-items: center;
+			height: 42px;
+			.form-control {
+				margin: 0;
+				border-radius: 0;
+				border-left: none;
+			}
+			.icon {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				min-width: 42px;
+				width: 42px;
+				height: 100%;
+				width: 20px;
+				background: #888da8;
+				color: #fff;
+				border-top-left-radius: 4px;
+				border-bottom-left-radius: 4px;
+			}
+			.amount-label {
+				border: 1px solid #e6ecf5;
+				border-left: none;
+				margin: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100%;
+				min-width: 42px;
+				width: 42px;
+				border-top-right-radius: 4px;
+				border-bottom-right-radius: 4px;
+			}
+		}
 	}
 	.ui.selection.dropdown {
 		box-shadow: none;
@@ -88,7 +256,20 @@
 			}
 		}
 	}
+textarea {
+    resize: none;
+}
+	.modal-footer {
+		display: flex;
+		flex-direction: row-reverse;
+		margin: 0;
+		height: auto;
+		border-top: 1px solid #e6ecf5 !important;
+	}
 	.btn {
 		line-height: 1;
+		&.close-button {
+			margin-right: 15px;
+		}
 	}
 }
