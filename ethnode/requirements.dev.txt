@@ -31,3 +31,4 @@ sqlitedict==1.5.0
 tempora==1.9
 traitlets==4.3.2
 wcwidth==0.1.7
+websockets==4.0.1
