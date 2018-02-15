@@ -176,10 +176,13 @@ input::-moz-focus-outer {
 		}
 	}
 	.cropper-wrap {
-		width: 600px;
-		height: 200px;
+		width: 100%;
+		height: 215px;
 		margin: 0 auto;
-		margin-bottom: 40px;
+		margin-bottom: 50px;
+	}
+	.input-file {
+		pointer-events: none;
 	}
 
 	.form-group {
@@ -197,8 +200,10 @@ input::-moz-focus-outer {
 		}
 
 		img#input-image-gig {
+			margin-bottom: 20px;
+			width: 100%;
 			max-width: none;
-			max-height: none;
+			max-height: 215px;
 			position: static;
 			border: 3px solid #ebebeb;
 		}
@@ -278,6 +283,9 @@ textarea {
 		line-height: 1;
 		&.close-button {
 			margin-right: 15px;
+		}
+		&:focus {
+			color: #fff;
 		}
 	}
 }

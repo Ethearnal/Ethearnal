@@ -273,17 +273,17 @@
 							</div>
 						</div>
 						<div class="modal-body">
-							<div id="cropper-wrap-gig" class="cropper-wrap" style="display: none;"></div>
 							<div class="form-group full-width">
 								<input id="input-image-gig" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
 								<label for="input-image-gig" class="img-label" style="background-image: url('images/image-video-image-file.png');width: 100%">
 									<p class="add-photo-label"></p>
 								</label>
+								<img id="input-image-gig" src="#" alt="" class="show-image empty" style="display:none;">
+								<div id="cropper-wrap-gig" class="cropper-wrap" style="display: none;"></div>
 								<div class="btns-wrap">
 									<button style="" class="btn btn-pink jsCropUpload">Upload photo</button>
 									<button style="display: none;" class="btn btn-success jsCropResult">Confirm result</button>
 								</div>
-								<img id="input-image-gig" src="#" alt="" class="show-image empty" style="display:none;">
 							</div>
 							<div class="modal-inputs">
 								<form action="POST">
