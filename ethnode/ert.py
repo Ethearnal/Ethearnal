@@ -194,7 +194,12 @@ def main_http(http_webdir: str = config.http_webdir,
             'tools.staticdir.on': True,
             'tools.staticdir.dir': 'apidef/swagger',
             'tools.staticdir.index': 'index.html',
-        }
+        },
+        '/wstest': {
+            'tools.staticdir.on': True,
+            'tools.staticdir.dir': http_webdir,
+            'tools.staticdir.index': 'wstest.html',
+        },
 
     }
 
