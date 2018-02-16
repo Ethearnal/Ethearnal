@@ -219,7 +219,8 @@ ReceivedGigOrderIndexer = GigJobIndexer
 SentJobApplicationIndexer = GigJobIndexer
 ReceivedGigOrderIndexerJobApplicationIndexer = GigJobIndexer
 # todo
-# and WEB endpoints
+# and WEB endpoints, CRD collections
+# status udates
 
 
 class DocModelIndexers(object):
@@ -237,10 +238,10 @@ class DocModelIndexers(object):
                                                                         'sent_mail'))),
             '.ReceivedMail.model': (EventActionModelIndexer(DocumentIndexer('%s/rcv_mail.db' % data_dir,
                                                                             'rcv_mail'))),
-            '.SentJobAppl.model': (EventActionModelIndexer(DocumentIndexer('%s/sent_job_appl_idx.db' % data_dir,
-                                                                           'sent_job_app'))),
-            '.ReceivedJobAppl.model': (EventActionModelIndexer(DocumentIndexer('%s/rcv_job_appl.db' % data_dir,
-                                                                               'rcv_job_appl'))),
+            '.SentJobApp.model': (EventActionModelIndexer(DocumentIndexer('%s/sent_job_app_idx.db' % data_dir,
+                                                                          'sent_job_app'))),
+            '.ReceivedJobApp.model': (EventActionModelIndexer(DocumentIndexer('%s/rcv_job_app.db' % data_dir,
+                                                                              'rcv_job_app'))),
             #
         }
         if not data_dir:
@@ -260,7 +261,7 @@ class DocModelIndexers(object):
                 idxr = self.MODEL_INDEXERS.get(model_name)
                 if not idxr:
                     return None
-
+                #
                 if 'deleted' in value_data:
                     idxr.unindex(hk_hex)
                     return False
@@ -271,10 +272,13 @@ class DocModelIndexers(object):
 
 
 class DocModelIndexQuery(object):
-    def __init__(self, document_indexer: DocumentIndexer):
+    def __init__(self, document_indexer: DocumentIndexer, logger=None):
+        if logger:
+            self.logger = logger
+        else:
+            self.logger = ErtLogger(Print())
         self.idx = document_indexer.idx
         self.idx_store = document_indexer.idx.index_store
-        pass
 
     def query_terms(self, terms: dict, prefixes=True, limit=30, quantified=False):
         cur = self.idx.qry_terms(terms=terms, prefixes=prefixes, limit=limit)
@@ -285,7 +289,8 @@ class DocModelIndexQuery(object):
             ll = [guid_bin_to_hex2(t[0]) for t in cur.fetchall()]
             return ll
 
-    def query_terms_d(self, terms_d: dict, limit=30, quantified=False):
+    def query_terms_d(self, terms_d: dict, limit=1000, quantified=False):
+        # todo hard limit in config or remove
         cur = self.idx.qry_terms_d(terms_d, limit=limit)
         if cur:
             if quantified:
@@ -293,17 +298,15 @@ class DocModelIndexQuery(object):
                 return ll
 
             l1 = list(cur.fetchall())
-            print('---->', l1)
             ll = [guid_bin_to_hex2(t[0]) for t in l1]
             return ll
 
-    def _qry_dict(self, query_dict, limit=30, quantified=False):
+    def _qry_dict(self, query_dict, limit=1000, quantified=False):
         try:
             ll = self.query_terms_d(query_dict, limit=limit, quantified=quantified)
             return ll
         except Exception as e:
-            raise e
-            # return None
+            self.logger('_qry_dict: failed', e)
 
     def query_all(self, limit=10, quantified=False):
         cur = self.idx_store.no_component(limit=limit)
@@ -319,20 +322,17 @@ class DocModelIndexQuery(object):
     def _qry_all(self, limit=30, quantified=False):
         try:
             ll = self.query_all(limit, quantified=quantified)
-            # self.cherrypy.response.status = 200
             return ll
-        except:
-            # self.cherrypy.response.status = 400
-            # self.errs.append('qry all err')
+        except Exception as e:
+            self.logger('_qry_all: failed', e)
             return None
 
     def _make_qry_dict(self, kw):
         try:
             query_dict = {k.lower(): list(set(v.lower().split(' '))) for k, v in kw.items()}
             return query_dict
-        except:
-            # self.cherrypy.response.status = 400
-            # self.errs.append('qry dict construct err')
+        except Exception as e:
+            self.logger('_make_qry_dict: failed', e)
             return None
 
     def query(self, kwargs, quantified=True):
@@ -373,13 +373,18 @@ class DHTEventHandler(object):
         self.doc_indexers = DocModelIndexers(data_dir=self.data_dir)
 
     def on_push(self, hk, data):
-        # todo try
-        self.doc_indexers.index_or_unindex_data(hk_int=hk, data=data)
+        #
+        try:
+            self.doc_indexers.index_or_unindex_data(hk_int=hk, data=data)
+        except Exception as e:
+            self.logger('on_push indexing failed', e)
         pass
 
     def on_pull(self, hk, data):
-        # todo try
-        self.doc_indexers.index_or_unindex_data(hk_int=hk, data=data)
-        pass
+        #
+        try:
+            self.doc_indexers.index_or_unindex_data(hk_int=hk, data=data)
+        except Exception as e:
+            self.logger('on_pull indexing failed', e)
 
 
