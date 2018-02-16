@@ -132,11 +132,13 @@ class DHTStoreHandlerOne(object):
 
     # local push
     def push(self, key, val, signature, guid_owner):
-        # logger('STORE HANDLER PUSH')
+
         # logger('HK', key)
         # sig_val = (signature, val)
         owner_signature_value = (guid_owner, signature, val)
         revision, data = cdx.decode_bson_val(val)
+
+        logger('LOCAL PUSH DATA',key, data)
 
         if 'ert:pubkey' in data:
             pubkey_der = data['ert:pubkey']
@@ -205,6 +207,8 @@ class DHTStoreHandlerOne(object):
 
     def pull(self, hk):
         # logger('STORE HANDLER PULL', hk)
+        logger('LOCAL PULL DATA', hk)
+
         t = self.store.get(hk)
         if t:
             try:
