@@ -5,3 +5,5 @@ require("./modules/onInitProfile.js"); // MODULE with INIT PROFILE PAGE
 require("./modules/onInitProfiles.js"); // MODULE with INIT PROFILE PAGE
 require("./modules/generateGigs.js"); // MODULE with Gigs generator
 require("./modules/onInitGigs.js"); // MODULE with GIGS PAGE INIT
+require("./modules/range-slider.js"); // MODULE with RANGE SLIDER
+require("./modules/newGigModal.js"); // MODULE with CREATE NEW GIG
