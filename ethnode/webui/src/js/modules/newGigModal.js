@@ -3,7 +3,7 @@ window.createNewGig = (function() {
     $("#add-gig").on("hidden.bs.modal", function(e) {
       $(this)
         .find("img#input-image-gig").hide().addClass("empty").end()
-        .find(".img-label").show().removeClass("active").text('')end()
+        .find(".img-label").show().removeClass("active").text('').end()
         .find("#cropper-wrap-gig").hide().end()
         .find($(".btns-wrap").find(".btn-success")).hide();
       $(this)
