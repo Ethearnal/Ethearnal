@@ -1,5 +1,9 @@
 from toolkit import kadmini_codec as cdx
 from toolkit.store_sqlite import ErtDHTSQLite, ErtREFSQLite
+from toolkit.tools import ErtLogger, Print
+
+logger = ErtLogger(Print())
+
 from kadem.kad import DHTFacade
 # storage router/ mux/ demux
 # status wip
@@ -20,7 +24,29 @@ class DHTStoreHandlerOne(object):
     # ON_PULL_REQUEST_PEERS = 'ert:peer'
     # ON_PEERS_REQUEST
 
-    def __init__(self, dht_sqlite_file=None, pubkeys_sqlite_file=None):
+    @staticmethod
+    def pass_push_handle(*args, **kwargs):
+        # logger("+ + ++ + + DHTStoreHandlerOne: PUSH EVENT +++ +", args, kwargs)
+        pass
+
+    @staticmethod
+    def pass_pull_handle(*args, **kwargs):
+        # logger("+ + ++ + + DHTStoreHandlerOne: PULL EVENT +++ +", args, kwargs)
+        pass
+
+    def __init__(self, dht_sqlite_file=None, pubkeys_sqlite_file=None,
+                 on_push_handle=None, on_pull_handle=None):
+
+        # on push event
+        if on_push_handle:
+            self.on_push_handle = on_push_handle
+        else:
+            self.on_push_handle = self.pass_push_handle
+        # on pull event
+        if on_pull_handle:
+            self.on_pull_handle = on_pull_handle
+        else:
+            self.on_pull_handle = self.pass_pull_handle
 
         # dht store for all the things
         if not dht_sqlite_file:
@@ -53,30 +79,32 @@ class DHTStoreHandlerOne(object):
             try:
                 self.dhf.indexer.index_on(cdx.guid_int_to_hex(hk_int), data)
             except Exception as e:
-                print('ERROR indexing', str(e))
+                # logger('ERROR indexing', str(e))
+                pass
 
         if 'ert:boot_to' in data:
             host = data['ert:boot_to']['h']
             port = data['ert:boot_to']['p']
-            print(' + + \n\nPEER DHT BOOT TO:',  host, port)
+            # logger(' + + \n\nPEER DHT BOOT TO:',  host, port)
             self.dhf.direct_push_pubkey(host, port)
             self.dhf.boot_to(host, port)
         # on cdn url post update
 
         if 'cdn_url' in data and 'hk_hex' in data and self.dhf.cdn:
             if self.dhf.cdn.cdn_url in data['cdn_url']:
-                print('CDN ITSELF')
+                # logger('CDN ITSELF')
                 return
-            print('PUSHED RESOURCE ON CDN %s?hkey=%s' % (data['cdn_url'], data['hk_hex']))
+            # logger('PUSHED RESOURCE ON CDN %s?hkey=%s' % (data['cdn_url'], data['hk_hex']))
             meta_bts = self.dhf.cdn.get_remote_meta_data(hkey=data['hk_hex'], cdn_url=data['cdn_url'])
             import json
             meta_dict = json.loads(meta_bts.decode())
             try:
                 self.dhf.cdn.set_local_meta_data(hkey=meta_dict['hkey'], data=meta_dict)
             except Exception as e:
-                print('meta err', e)
+                # logger('meta err', e)
+                pass
             if 'fext' in meta_dict and self.dhf.cdn:
-                print('SETTING', meta_dict)
+                # logger('SETTING', meta_dict)
                 try:
                     bts = self.dhf.cdn.get_remote_data(
                         cdn_url=data['cdn_url'],
@@ -86,57 +114,57 @@ class DHTStoreHandlerOne(object):
                                                     fext=meta_dict['fext'],
                                                     bts=bts)
                     else:
-                        print('no BYTES from REMOTE')
+                        # logger('no BYTES from REMOTE')
                         raise ValueError('no BYTES from REMOTE')
                 except Exception as e:
                     raise e
 
     def on_pushed_ip4_ping(self, data):
         # value = {'ert:pong_to': {'h': host, 'p': port}}
-        print("ON PUSHED IP4 PING DATA:", data)
+        # logger("ON PUSHED IP4 PING DATA:", data)
         if 'ert:boot_to' in data:
             val = data['ert:boot_to']
             host = val['h']
             port = val['p']
-            print(' + + \n\nPING DHT BOOT TO',  host, port)
+            # logger(' + + \n\nPING DHT BOOT TO',  host, port)
             self.dhf.direct_push_pubkey(host, port)
             self.dhf.boot_to(host, port)
 
     # local push
     def push(self, key, val, signature, guid_owner):
-        print('STORE HANDLER PUSH')
-        print('HK', key)
+        # logger('STORE HANDLER PUSH')
+        # logger('HK', key)
         # sig_val = (signature, val)
         owner_signature_value = (guid_owner, signature, val)
         revision, data = cdx.decode_bson_val(val)
 
         if 'ert:pubkey' in data:
             pubkey_der = data['ert:pubkey']
-            # print('PUBKEY DER', pubkey_der)
+            # # logger('PUBKEY DER', pubkey_der)
             is_ok = cdx.verify_message(val, signature, pubkey_der)
-            print('PUBKEY RCV')
+            # logger('PUBKEY RCV')
             if is_ok:
-                print('SIGNATURE OK')
+                # logger('SIGNATURE OK')
                 if cdx.pub_der_guid_bts(pubkey_der) == guid_owner:
-                    print('FROM HASH OK')
+                    # logger('FROM HASH OK')
                     # todo may be check before all checks
                     if guid_owner not in self.pubkeys:
-                        print('STORE PUB KEY')
+                        # logger('STORE PUB KEY')
                         # store only reference
                         self.pubkeys[guid_owner] = key
-                        print('STORE IN DHT')
+                        # logger('STORE IN DHT')
                         return self.store.__setitem__(key, owner_signature_value)
                     else:
-                        print('PUB KEY EXIST')
+                        # logger('PUB KEY EXIST')
                         return
             else:
-                print('CHECKS FAILED PUBKEY NOT STORED')
+                # logger('CHECKS FAILED PUBKEY NOT STORED')
                 return
         else:
-            print('STORE RCV')
-            print('guid_owner', guid_owner)
+            # logger('STORE RCV')
+            # logger('guid_owner', guid_owner)
             if guid_owner in self.pubkeys:
-                print('HAVE PUBKEY', guid_owner)
+                # logger('HAVE PUBKEY', guid_owner)
                 hk_from_store = self.pubkeys[guid_owner]
                 hk = hk_from_store
                 if isinstance(hk_from_store, bytes):
@@ -150,40 +178,44 @@ class DHTStoreHandlerOne(object):
                 # pk_value =
                 pk_rev, pubkey_data = cdx.decode_bson_val(pk_value)
                 if 'ert:pubkey' in pubkey_data:
-                    print('ert:pubkey IN local DHT')
+                    # logger('ert:pubkey IN local DHT')
                     pubkey_der = pubkey_data['ert:pubkey']
                     val_ok = cdx.verify_message(val, signature, pubkey_der)
                     if val_ok:
-                        print('VAL SIG OK STORE IN DHT')
+                        # logger('VAL SIG OK STORE IN DHT')
                         # pk_rev, data = cdx.decode_bson_val(pk_value)
                         # if self.ON_PUSH_PEER_KEY in key:
-                        print('\n\n\n +++')
+                        self.on_push_handle(data, hk_int=key)
+
+                        # logger('\n\n\n +++')
                         self.on_pushed_ip4_peer(data, hk_int=key)
-                        print('\n\n\n +++')
+                        # logger('\n\n\n +++')
                         # event handler here
                         return self.store.__setitem__(key, owner_signature_value)
                     else:
-                        print('VAL SIG FAILED')
+                        # logger('VAL SIG FAILED')
+                        pass
                 else:
                     'ERR ert:pubkey not found'
             else:
-                print('NO PUB KEY FOUND')
+                # logger('NO PUB KEY FOUND')
+                pass
 
     # local pull
 
     def pull(self, hk):
-        print('STORE HANDLER PULL', hk)
+        # logger('STORE HANDLER PULL', hk)
         t = self.store.get(hk)
         if t:
             try:
                 pk_owner, pk_signature, pk_value = self.store.get(hk)
                 revision, data = cdx.decode_bson_val(pk_value)
-                # print(data, data[self.ON_PUSH_PEER_KEY])
-
+                # # logger(data, data[self.ON_PUSH_PEER_KEY])
+                self.on_pull_handle(hk=hk, data=data)
                 if self.ON_PUSH_GUID_KEY in data:
-                    print('\n\n\n GUIDS REQUESTED \n\n\n')
+                    # logger('\n\n\n GUIDS REQUESTED \n\n\n')
                     v = data[self.ON_PUSH_GUID_KEY]
-                    print(v)
+                    # logger(v)
                     return
 
                 if self.ON_PUSH_PEER_KEY in data:
@@ -191,7 +223,7 @@ class DHTStoreHandlerOne(object):
                     v = data[self.ON_PUSH_PEER_KEY]
                     host = v['h']
                     port = v['p']
-                    print('\n \n \n \n \n + + @ SEND PEER TO BOOT', host, port)
+                    # logger('\n \n \n \n \n + + @ SEND PEER TO BOOT', host, port)
                     for item in self.dhf.peers:
                         try:
                             peer_host = item['host']
@@ -202,19 +234,23 @@ class DHTStoreHandlerOne(object):
                             self.dhf.direct_push(key, value, host, port)
                             # self.dhf.boot_to(peer_host, peer_port)
                         except Exception as e:
-                            print('ERROR bootstaraping peers to requester', str(e))
+                            # logger('ERROR bootstaraping peers to requester', str(e))
+                            pass
                     return
                     #? todo return ?
             except Exception as e:
-                print('ON PULL DECODING FAIL', str(e))
+                # logger('ON PULL DECODING FAIL', str(e))
+                pass
+        if not t:
+            self.on_pull_handle(hk=hk, data=None)
         return self.store.get(hk)
 
     def __contains__(self, hk):
-        print('STORE HANDLE contains', hk)
+        # logger('STORE HANDLE contains', hk)
         return self.store.__contains__(hk)
 
     def iter(self):
-        print('STORE HANDLER ITERATOR')
+        # logger('STORE HANDLER ITERATOR')
         return self.store.__iter__()
 
     def verify(self, own, sig, val):
@@ -227,10 +263,10 @@ class DHTStoreHandlerOne(object):
                 is_ok = cdx.verify_message(val, sig, pk_der)
                 return is_ok
             else:
-                print('HK PUBKEY NOT FOUND, STORE INTEGRITY ERR')
+                # logger('HK PUBKEY NOT FOUND, STORE INTEGRITY ERR')
+                pass
         else:
-
             # event handler here
-            
-            print('PUBKEY NOT FOUND, TRIGGER PULL HERE')
+            # logger('PUBKEY NOT FOUND, TRIGGER PULL HERE')
+            pass
 

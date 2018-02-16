@@ -1,4 +1,5 @@
 import os
+import sys
 # temporaly disable until find solution for windows
 # import miniupnpc
 
@@ -71,3 +72,33 @@ def get_ip_address(ifname):
         0x8915,  # SIOCGIFADDR
         struct.pack(b'256s', ifname[:15].encode('ascii'))
     )[20:24])
+
+
+class Print:
+    def __call__(self, *args, **kwargs):
+        repr_arg = []
+        for a in args:
+            try:
+                repr_arg.append(repr(a))
+            except:
+                pass
+        repr_st = ' '.join(repr_arg)
+        sys.stdout.write(repr_st)
+        sys.stdout.write('\n')
+
+
+class ErtLogger(object):
+    def __init__(self, logger):
+        self.logger = logger
+
+    def __call__(self, *args, **kw):
+        return self.logger(*args, **kw)
+
+
+class DHTEventHandler(object):
+    def __init__(self, handle):
+        self.handle = handle
+
+    def __call__(self, *args, **kw):
+        return self.handle(*args, **kw)
+

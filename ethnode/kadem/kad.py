@@ -19,7 +19,10 @@ from ert_profile import EthearnalProfileController
 import config
 cdx = kadmini_codec
 
-# k = 20
+from toolkit.tools import Print, ErtLogger
+
+logger = ErtLogger(Print())
+
 # k = 20
 
 # alpha = 3
@@ -116,7 +119,7 @@ class DHTFacade(object):
             self._last_pulled_hk_hex = cdx.guid_int_to_hex(hk)
             # return cdx.guid_int_to_hex(hk)
 
-        print('PUSH HK', hk)
+        # logger('PUSH HK', hk)
 
         if not remote_only:
             self.dht.storage.push(hk, ev, sg, guid)
@@ -155,7 +158,7 @@ class DHTFacade(object):
     #         hk_hex = cdx.guid_bin_to_hex(hk_from_store)
     #         pk_owner, pk_signature, pk_value = self.pull_local('', hk_hex=hk_hex)
     #         pk_rev, pubkey_data = cdx.decode_bson_val(pk_value)
-    #         print('PK DATA', pubkey_data)
+    #         logger('PK DATA', pubkey_data)
     #         self.push(key, pubkey_data, remote_only=True)
 
     def known_guids(self):
@@ -168,9 +171,6 @@ class DHTFacade(object):
         value = {'ert:udp_ip4_port': {'h:p': host_port}}
         self.push(key,  value, local_only=local_only)
 
-
-
-
     def push_peer_request(self):
         ip_host = self.dht.peer.host
         if ip_host == '0.0.0.0':
@@ -182,7 +182,7 @@ class DHTFacade(object):
                 ip_host = '127.0.0.1'
         key = {'ert': 'peer'}
         val = {'ert:peer': {'h': ip_host, 'p': self.dht.peer.port}}
-        print('IP', ip_host, self.dht.peer.port)
+        # logger('IP', ip_host, self.dht.peer.port)
         for item in self.dht.peers():
             peer_host = item['host']
             peer_port = item['port']
@@ -218,7 +218,7 @@ class DHTFacade(object):
                 ip_host = self.ert.my_lan_ip
         key = {'ert': 'pong_to'}
         val = {'ert:pong_to': {'h': ip_host, 'p': self.dht.peer.port}}
-        print('IP', ip_host, self.dht.peer.port)
+        # logger('IP', ip_host, self.dht.peer.port)
         for item in self.dht.peers():
             peer_host = item['host']
             peer_port = item['port']
@@ -257,11 +257,12 @@ class DHTFacade(object):
             val = self.pull_local(key, guid=guid)
 
         if val:
-            print('LOCAL VAL PUBKEY')
+            # logger('LOCAL VAL PUBKEY')
+            pass
         else:
             remote_val = self.pull_remote(key, guid=guid)
             if remote_val:
-                print('REMOTE VAL PUBKEY')
+                # logger('REMOTE VAL PUBKEY')
                 own, sig, val = remote_val
                 rev, data = cdx.decode_bson_val(val)
                 der = data['ert:pubkey']
@@ -271,15 +272,16 @@ class DHTFacade(object):
                     is_hash_ok = True
 
                 if is_ok and own == guid and is_hash_ok:
-                    print('REMOTE PUBKEY OK')
-                    print('STORE PUB KEY')
+                    # logger('REMOTE PUBKEY OK')
+                    # logger('STORE PUB KEY')
                     # store only reference
                     hk = cdx.encode_key_hash(key, guid=guid, revision=rev)
                     self.data.pubkeys[own] = hk
-                    print('STORE IN DHT')
+                    # logger('STORE IN DHT')
                     return self.data.store.__setitem__(hk, remote_val)
                 else:
-                    print('REMOTE PUBKEY NOT OK')
+                    # logger('REMOTE PUBKEY NOT OK')
+                    pass
 
     def pull_pubkey_in_peers(self):
         for peer in self.peers:
@@ -294,7 +296,8 @@ class DHTFacade(object):
                 val = d[1]
                 self.push(key='', value=val, hk_hex=hk_hex, remote_only=True)
         except:
-            print('repush hailed for hk', hk_hex)
+            # logger('repush failed for hk', hk_hex)
+            pass
 
     def repush(self, hk_hex):
         try:
@@ -304,14 +307,15 @@ class DHTFacade(object):
                 val = d[1]
                 self.push(key='', value=val, hk_hex=hk_hex)
         except:
-            print('repush hailed for hk', hk_hex)
+            # logger('repush hailed for hk', hk_hex)
+            pass
 
 
     def repush_own_gigs(self):
         from webdht.double_linked import instance_dl
         dl = instance_dl(self, cdx.guid_bin_to_hex(self.bin_guid), '.gigs')
         for hk_hex in dl.iter_hk():
-            print(hk_hex)
+            # logger(hk_hex)
             self.repush_remote(hk_hex)
 
     def repush_own_deleted_gigs(self):
@@ -365,10 +369,11 @@ class DHTFacade(object):
 
         val = self.dht.iterative_find_value(hk)
         if val:
-            print('HAVE VAL')
+            # logger('HAVE VAL')
             return val
         else:
-            print('NO VAL')
+            # logger('NO VAL')
+            pass
 
     def get_guid_bin(self, idx):
         return cdx.guid_int_to_bts(self.peers[idx]['id'])
@@ -418,7 +423,7 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         self.server.dht.buckets.insert(new_peer)
 
     def handle_ping(self, message):
-        print('RCV PING', )
+        # logger('RCV PING', )
         client_host, client_port = self.client_address
         id = kadmini_codec.guid_bts_to_int(message["peer_id"])
         #  info = message["peer_info"] # diabled in protocol
@@ -430,34 +435,35 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         pass
 
     def handle_find(self, message, find_value=False):
-        print('RCV FIND: ', find_value)
+        # logger('RCV FIND: ', find_value)
         key = kadmini_codec.guid_bts_to_int(message["id"])
         id = kadmini_codec.guid_bts_to_int(message["peer_id"])
 
         if id == key:
-            print('KEY IS PEER')
+            # logger('KEY IS PEER')
             guid_owner = cdx.guid_int_to_bts(key)
-            print('\n\n\n + + + ++ ++ GUID' , guid_owner)
+            # logger('\n\n\n + + + ++ ++ GUID' , guid_owner)
             if guid_owner in self.server.dht.storage.pubkeys:
-                print(' \n\n\n + + ++ ++ + IN PUBKEYS \n \n \n\ ')
+                # logger(' \n\n\n + + ++ ++ + IN PUBKEYS \n \n \n\ ')
+                pass
             else:
                 # todo async
                 self.server.dht.storage.dhf.pull_pubkey(guid=guid_owner, remote_only=True)
                 pass
                 # self.server.dht
             # if guid_owner in self.pubkeys:
-            #     print('HAVE PUBKEY', guid_owner)
+            #     logger('HAVE PUBKEY', guid_owner)
 
         msg_rpc_id_int = cdx.guid_bts_to_int(message["rpc_id"])
         info = None
         client_host, client_port = self.client_address
         peer = Peer(client_host, client_port, id, info)
         response_socket = self.request[1]
-        print('RCV FIND KEY', key)
+        # logger('RCV FIND KEY', key)
 
         if find_value and (key in self.server.dht.data):
             bv = self.server.dht.storage.pull(key)
-            print('RCV FIND VALUE')
+            # logger('RCV FIND VALUE')
             peer.found_value(id, bv, msg_rpc_id_int, socket=response_socket,
                              peer_id=self.server.dht.peer.id,
                              peer_info=self.server.dht.peer.info,
@@ -473,7 +479,7 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
                              lock=self.server.send_lock)
 
     def handle_found_nodes(self, message):
-        print('RCV FOUND NODES')
+        # logger('RCV FOUND NODES')
         msg_rpc_id_int = cdx.guid_bts_to_int(message["rpc_id"])
         rpc_id = msg_rpc_id_int
         peer_info = None  # just for compatibility with original kad
@@ -483,7 +489,7 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         decoded_nearest_nodes = list()
         for item in message['nearest_nodes']:
             ip4, port, id_bts = item
-            # print('NEAR NODE', item)
+            # logger('NEAR NODE', item)
             decoded_nearest_nodes.append(Peer(ip4,
                                               port,
                                               cdx.guid_bts_to_int(id_bts),
@@ -491,12 +497,12 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         shortlist.update(decoded_nearest_nodes)
 
     def handle_found_value(self, message):
-        print('RCV FOUND VALUE')
+        # logger('RCV FOUND VALUE')
         rpc_id = cdx.guid_bts_to_int(message["rpc_id"])
         shortlist = self.server.dht.rpc_ids[rpc_id]
         del self.server.dht.rpc_ids[rpc_id]
         shortlist.set_complete(message["value"])
-        print('RCV FOUND COMPLETED')
+        # logger('RCV FOUND COMPLETED')
 
     def handle_store(self, message):
         bts_key = message["id"]
@@ -505,9 +511,9 @@ class DHTRequestHandler(socketserver.BaseRequestHandler):
         sig = message['signature']
         from_guid = message['peer_id']
 
-        print('RCV STORE FROM', from_guid)
+        # logger('RCV STORE FROM', from_guid)
         if from_guid == self.server.dht.identity:
-            print('RCV SAME GUID SKIP')
+            # logger('RCV SAME GUID SKIP')
             return
         self.server.dht.storage.push(int_key, bts_value, sig, from_guid)
 
@@ -520,7 +526,7 @@ class EthDHTRequestHandle(DHTRequestHandler):
         message = kadmini_codec.decode(self.request[0])
         message_type = message["message_type"]
         # todo impl logging
-        print('RECV', message_type, 'LEN', len(self.request[0]))
+        # logger('RECV', message_type, 'LEN', len(self.request[0]))
         self.handle_dht(message, message_type)
 
 
@@ -604,7 +610,7 @@ class DHT(object):
                 peer.find_value(key, rpc_id, socket=self.server.socket, peer_id=self.peer.id,
                                 peer_info=self.info)  # ####
             time.sleep(self.iteration_sleep)
-        print('COMPLETE')
+        # logger('COMPLETE')
         return shortlist.completion_result()
 
     # Return the list of connected peers
