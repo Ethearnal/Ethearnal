@@ -8,89 +8,89 @@ basePath: "/api/v1/"
 schemes:
 - "http"
 paths:
-  /dht/portfolios/:
-    delete:
-      tags:
-      - "DHT Portfolios"
-      summary: "Del portfolio element"
-      description: ""
-      operationId: "deletePortfolio"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "hkey"
-        in: "query"
-        description: "Portfolios"
-        required: false
-        type: "string"
-        maxLength: 64
-        minLength: 64
-      responses:
-        200:
-          description: "delete own portfolio element by key"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Portfolio"
-        400:
-          description: "bad input parameter"
-    get:
-      tags:
-      - "DHT Portfolios"
-      summary: "Gigs Listings by owner (if not provide own gigs)"
-      description: "Post and retrieve self or foreign Portfolio"
-      operationId: "getPortfolios"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "owner_guid"
-        in: "query"
-        description: "Portfolios"
-        required: false
-        type: "string"
-        maxLength: 64
-        minLength: 64
-      responses:
-        200:
-          description: "retrieve Gigs listing via DHT"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Portfolio"
-        400:
-          description: "bad input parameter"
-    post:
-      tags:
-      - "DHT Portfolios"
-      summary: "Insert a Portfolio into a dht virtual collection"
-      description: "Insert a Portfolio into a dht virtual collection"
-      operationId: "insertPortfolio"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "gigItem"
-        description: "Portfolios item to add"
-        required: false
-        schema:
-          $ref: "#/definitions/Portfolio"
-      responses:
-        201:
-          description: "item created"
-        400:
-          description: "invalid input, object invalid"
-        409:
-          description: "an existing item already exists"
+#  /dht/portfolios/:
+#    delete:
+#      tags:
+#      - "DHT Portfolios"
+#      summary: "Del portfolio element"
+#      description: ""
+#      operationId: "deletePortfolio"
+#      produces:
+#      - "application/json"
+#      parameters:
+#      - name: "hkey"
+#        in: "query"
+#        description: "Portfolios"
+#        required: false
+#        type: "string"
+#        maxLength: 64
+#        minLength: 64
+#      responses:
+#        200:
+#          description: "delete own portfolio element by key"
+#          schema:
+#            type: "array"
+#            items:
+#              $ref: "#/definitions/Portfolio"
+#        400:
+#          description: "bad input parameter"
+#    get:
+#      tags:
+#      - "DHT Portfolios"
+#      summary: "Gigs Listings by owner (if not provide own gigs)"
+#      description: "Post and retrieve self or foreign Portfolio"
+#      operationId: "getPortfolios"
+#      produces:
+#      - "application/json"
+#      parameters:
+#      - name: "owner_guid"
+#        in: "query"
+#        description: "Portfolios"
+#        required: false
+#        type: "string"
+#        maxLength: 64
+#        minLength: 64
+#      responses:
+#        200:
+#          description: "retrieve Gigs listing via DHT"
+#          schema:
+#            type: "array"
+#            items:
+#              $ref: "#/definitions/Portfolio"
+#        400:
+#          description: "bad input parameter"
+#    post:
+#      tags:
+#      - "DHT Portfolios"
+#      summary: "Insert a Portfolio into a dht virtual collection"
+#      description: "Insert a Portfolio into a dht virtual collection"
+#      operationId: "insertPortfolio"
+#      consumes:
+#      - "application/json"
+#      produces:
+#      - "application/json"
+#      parameters:
+#      - in: "body"
+#        name: "gigItem"
+#        description: "Portfolios item to add"
+#        required: false
+#        schema:
+#          $ref: "#/definitions/Portfolio"
+#      responses:
+#        201:
+#          description: "item created"
+#        400:
+#          description: "invalid input, object invalid"
+#        409:
+#          description: "an existing item already exists"
 
 
   /dht/gigs/:
     delete:
       tags:
       - "DHT Gigs"
-      summary: "Gigs Listings by owner (if not provide own gigs)"
-      description: "Post and retrieve self or foreign Gigs"
+      summary: "delete own gig"
+      description: "delete own gig"
       operationId: "deleteGig"
       produces:
       - "application/json"
@@ -104,11 +104,11 @@ paths:
         minLength: 64
       responses:
         200:
-          description: "delete own gig by key"
+          description: "Delete own gig by key"
           schema:
             type: "array"
-            items:
-              $ref: "#/definitions/Gig"
+#            items:
+#              $ref: "#/definitions/Gig"
         400:
           description: "bad input parameter"
     get:
@@ -132,8 +132,8 @@ paths:
           description: "retrieve Gigs listing via DHT"
           schema:
             type: "array"
-            items:
-              $ref: "#/definitions/Gig"
+#            items:
+#              $ref: "#/definitions/Gig"
         400:
           description: "bad input parameter"
     post:
@@ -151,8 +151,8 @@ paths:
         name: "gigItem"
         description: "Gig item to add"
         required: false
-        schema:
-          $ref: "#/definitions/Gig"
+#        schema:
+#          $ref: "#/definitions/Gig"
       responses:
         201:
           description: "item created"
@@ -160,33 +160,6 @@ paths:
           description: "invalid input, object invalid"
         409:
           description: "an existing item already exists"
-
-  /dht/events/:
-    get:
-      tags:
-      - "DHT Events"
-      summary: "Events per guid"
-      description: "Post and retrieve self or foreign Portfolio"
-      operationId: "getEvents"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "owner_guid"
-        in: "query"
-        description: "Portfolios"
-        required: false
-        type: "string"
-        maxLength: 64
-        minLength: 64
-      responses:
-        200:
-          description: "retrieve Gigs listing via DHT"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Event"
-        400:
-          description: "bad input parameter"
 
   /dht/hkey/:
     get:
@@ -322,173 +295,173 @@ paths:
         400:
           description: "something wrong"
 
-definitions:
-  GeneralDomainOfExpertise:
-    type: "string"
-    enum:
-    - "MARKETING"
-    - "SOFTWAREDEV"
-    - "FINANCEACC"
-    - "MUSICAUDIO"
-    - "GRAPHICDES"
-    - "VIDEOANIM"
-    - "VR3DMODEL"
-    - "WRITNGTEXT"
-    - "CONSULTING"
-  Gig:
-    type: "object"
-    required:
-    - "description"
-    - "general_domain_of_expertise"
-    - "price"
-    - "required_ert"
-    - "title"
-    properties:
-      title:
-        type: "string"
-        minLength: 32
-        maxLength: 64
-      price:
-        type: "number"
-        format: "double"
-      required_ert:
-        type: "number"
-        format: "double"
-      expire_date:
-        type: "string"
-        format: "int32"
-        example: "2016-08-29T09:12:33.001Z"
-      description:
-        type: "string"
-        minLength: 32
-        maxLength: 160
-      owner_guid:
-        type: "string"
-        maxLength: 64
-      thumbnail_image_hash:
-        type: "string"
-        minLength: 64
-        maxLength: 64
-      related_resource_collection_name:
-        type: "string"
-        minLength: 64
-        maxLength: 64
-      related_document_collection_name:
-        type: "string"
-        minLength: 64
-        maxLength: 64
-      general_domain_of_expertise:
-        $ref: "#/definitions/GeneralDomainOfExpertise"
-    example:
-      general_domain_of_expertise: "SOFTWAREDEV"
-      price: 2134.80082819046
-      required_ert: 634.02745618307040320615897144
-      description: "Example GIG  description"
-      title: "Test GIG title"
-  Profile:
-    type: "object"
-    required:
-    - "description"
-    - "general_domain_of_expertise"
-    - "names"
-    - "nick"
-    - "skills"
-    - "title"
-    properties:
-      names:
-        type: "string"
-        minLength: 3
-        maxLength: 128
-      nick:
-        type: "string"
-        minLength: 3
-        maxLength: 32
-      title:
-        type: "string"
-        minLength: 3
-        maxLength: 128
-      ert_amount:
-        type: "number"
-        format: "double"
-      description:
-        type: "string"
-        minLength: 32
-        maxLength: 160
-      owner_guid:
-        type: "string"
-        maxLength: 64
-      thumbnail_avatar_image_hash:
-        type: "string"
-        minLength: 64
-        maxLength: 64
-      big_avatar_image_hash:
-        type: "string"
-        minLength: 64
-        maxLength: 64
-      general_domain_of_expertise:
-        $ref: "#/definitions/GeneralDomainOfExpertise"
-      skills:
-        type: "array"
-        items:
-          type: "string"
-          maxLength: 32
-    example:
-      nick: "nick"
-      skills:
-      - "skills"
-      - "skills"
-      names: "names"
-      ert_amount: 0.80082819046101150206595775671303272247314453125
-      general_domain_of_expertise: {}
-      owner_guid: "owner_guid"
-      description: "description"
-      title: "title"
-      big_avatar_image_hash: "big_avatar_image_hash"
-  Portfolio:
-    type: "object"
-    required:
-    - "description"
-    - "title"
-    properties:
-      title:
-        type: "string"
-        minLength: 32
-        maxLength: 64
-      description:
-        type: "string"
-        minLength: 32
-        maxLength: 160
-      owner_guid:
-        type: "string"
-        maxLength: 64
-      thumbnail_image_hash:
-        type: "string"
-        minLength: 64
-        maxLength: 64
-      original_image_hash:
-        type: "string"
-        minLength: 64
-        maxLength: 64
-    example:
-      description: "Example Portfolio Description"
-      title: "Test Portfolio Title"
-
-  Event:
-    type: "object"
-    properties:
-      event_kind:
-        type: "string"
-        minLength: 32
-        maxLength: 64
-      operation:
-        type: "string"
-        minLength: 32
-        maxLength: 160
-      owner_guid:
-        type: "string"
-        maxLength: 64
-      event_data:
-        type: "object"
-    example:
-      event_kind: "gig"
-      operation: "create"
+#definitions:
+#  GeneralDomainOfExpertise:
+#    type: "string"
+#    enum:
+#    - "MARKETING"
+#    - "SOFTWAREDEV"
+#    - "FINANCEACC"
+#    - "MUSICAUDIO"
+#    - "GRAPHICDES"
+#    - "VIDEOANIM"
+#    - "VR3DMODEL"
+#    - "WRITNGTEXT"
+#    - "CONSULTING"
+#  Gig:
+#    type: "object"
+#    required:
+#    - "description"
+#    - "general_domain_of_expertise"
+#    - "price"
+#    - "required_ert"
+#    - "title"
+#    properties:
+#      title:
+#        type: "string"
+#        minLength: 32
+#        maxLength: 64
+#      price:
+#        type: "number"
+#        format: "double"
+#      required_ert:
+#        type: "number"
+#        format: "double"
+#      expire_date:
+#        type: "string"
+#        format: "int32"
+#        example: "2016-08-29T09:12:33.001Z"
+#      description:
+#        type: "string"
+#        minLength: 32
+#        maxLength: 160
+#      owner_guid:
+#        type: "string"
+#        maxLength: 64
+#      thumbnail_image_hash:
+#        type: "string"
+#        minLength: 64
+#        maxLength: 64
+#      related_resource_collection_name:
+#        type: "string"
+#        minLength: 64
+#        maxLength: 64
+#      related_document_collection_name:
+#        type: "string"
+#        minLength: 64
+#        maxLength: 64
+#      general_domain_of_expertise:
+#        $ref: "#/definitions/GeneralDomainOfExpertise"
+#    example:
+#      general_domain_of_expertise: "SOFTWAREDEV"
+#      price: 2134.80082819046
+#      required_ert: 634.02745618307040320615897144
+#      description: "Example GIG  description"
+#      title: "Test GIG title"
+#  Profile:
+#    type: "object"
+#    required:
+#    - "description"
+#    - "general_domain_of_expertise"
+#    - "names"
+#    - "nick"
+#    - "skills"
+#    - "title"
+#    properties:
+#      names:
+#        type: "string"
+#        minLength: 3
+#        maxLength: 128
+#      nick:
+#        type: "string"
+#        minLength: 3
+#        maxLength: 32
+#      title:
+#        type: "string"
+#        minLength: 3
+#        maxLength: 128
+#      ert_amount:
+#        type: "number"
+#        format: "double"
+#      description:
+#        type: "string"
+#        minLength: 32
+#        maxLength: 160
+#      owner_guid:
+#        type: "string"
+#        maxLength: 64
+#      thumbnail_avatar_image_hash:
+#        type: "string"
+#        minLength: 64
+#        maxLength: 64
+#      big_avatar_image_hash:
+#        type: "string"
+#        minLength: 64
+#        maxLength: 64
+#      general_domain_of_expertise:
+#        $ref: "#/definitions/GeneralDomainOfExpertise"
+#      skills:
+#        type: "array"
+#        items:
+#          type: "string"
+#          maxLength: 32
+#    example:
+#      nick: "nick"
+#      skills:
+#      - "skills"
+#      - "skills"
+#      names: "names"
+#      ert_amount: 0.80082819046101150206595775671303272247314453125
+#      general_domain_of_expertise: {}
+#      owner_guid: "owner_guid"
+#      description: "description"
+#      title: "title"
+#      big_avatar_image_hash: "big_avatar_image_hash"
+#  Portfolio:
+#    type: "object"
+#    required:
+#    - "description"
+#    - "title"
+#    properties:
+#      title:
+#        type: "string"
+#        minLength: 32
+#        maxLength: 64
+#      description:
+#        type: "string"
+#        minLength: 32
+#        maxLength: 160
+#      owner_guid:
+#        type: "string"
+#        maxLength: 64
+#      thumbnail_image_hash:
+#        type: "string"
+#        minLength: 64
+#        maxLength: 64
+#      original_image_hash:
+#        type: "string"
+#        minLength: 64
+#        maxLength: 64
+#    example:
+#      description: "Example Portfolio Description"
+#      title: "Test Portfolio Title"
+#
+#  Event:
+#    type: "object"
+#    properties:
+#      event_kind:
+#        type: "string"
+#        minLength: 32
+#        maxLength: 64
+#      operation:
+#        type: "string"
+#        minLength: 32
+#        maxLength: 160
+#      owner_guid:
+#        type: "string"
+#        maxLength: 64
+#      event_data:
+#        type: "object"
+#    example:
+#      event_kind: "gig"
+#      operation: "create"

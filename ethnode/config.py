@@ -35,6 +35,6 @@ ertcdn_dev_bootstrap_port = 5678
 ertcdn_dev_bootstrap_host_port = '%s:%d' % (ertcdn_dev_bootstrap_host, ertcdn_dev_bootstrap_port)
 
 # DHT
-dht_iteration_sleep = 0.5
+dht_iteration_sleep = 0.1
 dht_k = 20
 dht_alpha = 3

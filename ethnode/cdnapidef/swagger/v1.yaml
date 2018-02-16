@@ -62,3 +62,37 @@ paths:
           description: "ok"
         400:
           description: "err"
+  /idx:
+    get:
+      tags:
+      - "CDN"
+      summary: "search gigs"
+      description: "search gigs filtered by prefixes, category, tags, range"
+      operationId: "getReqHeaders"
+      produces:
+      - "*/*"
+      parameters:
+      - name: "text"
+        in: "query"
+        required: false
+      - name: "tags"
+        in: "query"
+        required: false
+      - name: "category"
+        in: "query"
+        required: false
+      - name: "q1range"
+        in: "query"
+        required: false
+      - name: "limit"
+        in: "query"
+        required: false
+        default: 1000
+
+      responses:
+        200:
+          description: "retrieve ordered gig hash list"
+        400:
+          description: "err"
+
+#http://138.68.183.168:9999/api/cdn/v1/idx?&category=ma&tags=producers&q1range=450%201600&text=be%20yo&limit=1000
