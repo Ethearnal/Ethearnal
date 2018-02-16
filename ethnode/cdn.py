@@ -182,6 +182,11 @@ req = WebCDNClientRequestHeaders()
 
 idx_web = IdxCdnQueryWebApi(cherrypy=cherrypy, idx=idx)
 
+from webdht.bundle import DHTEventHandler,DocModelIndexQuery
+
+evt = DHTEventHandler(d.dht.storage, data_dir=ert.personal_dir)
+qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
+
 knownguids = WebDHTKnownGuids(
     cherry=cherrypy,
     dhtf=dhf,
@@ -230,6 +235,10 @@ cherrypy.config.update({
 
 #
 
+from webdht.bundle import DHTEventHandler,DocModelIndexQuery
+
+evt = DHTEventHandler(dhf.dht.storage, data_dir=ert.personal_dir)
+qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
 
 cherrypy.engine.exit = on_hook(target=tear_down_udp,
                                target_args=(dht,),

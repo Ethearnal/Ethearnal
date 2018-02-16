@@ -10,11 +10,14 @@
 #  swagger defs endpoints
 #  doc model
 
+import os
 from webdht.double_linked import instance_dl
 from kadem.kad import DHTFacade
 from datetime import datetime
 # from ert_profile import EthearnalProfileController
-from toolkit.kadmini_codec import hash_from_st, value_protocol, guid_hex_to_bin, guid_key_composer, guid_int_to_hex
+from toolkit.kadmini_codec import hash_from_st, value_protocol
+from toolkit.kadmini_codec import guid_hex_to_bin, guid_key_composer, guid_int_to_hex
+from toolkit.kadmini_codec import guid_bin_to_hex2
 from toolkit.tools import ErtLogger, Print, default_value
 from datamodel.inv_norank_sqlite import InvIndexTimestampSQLite
 from datamodel.resource_index import ResourceIndexingEngine
@@ -171,10 +174,11 @@ class GigJobIndexer(object):
     def __init__(self, indexer: DocumentIndexer, logger=None):
         self.logger = default_value(logger, ErtLogger(Print()))
         self.indexer = indexer
+        self.idx = self.indexer.idx
 
     def index(self, hk_hex: str, data: dict):
         self.logger('INDEX', hk_hex, data)
-        print('hk_hex',hk_hex)
+        print('hk_hex', hk_hex)
         text = ''
         q1 = 0
         q2 = 0
@@ -203,14 +207,44 @@ class GigJobIndexer(object):
     def unindex(self, hk_hex: str):
         self.indexer.unindex(hk_hex)
 
+# todo event collection model and index
+EventActionModelIndexer = GigJobIndexer
+# todo sent mail, recived mail Mail model and indexes
+SentMailModelIndexer = GigJobIndexer
+ReceivedMailModelIndexer = GigJobIndexer
+# todo sent/receiced orders Ogig order model
+SentGigOrderIndexer = GigJobIndexer
+ReceivedGigOrderIndexer = GigJobIndexer
+# todo sent/received job applications model
+SentJobApplicationIndexer = GigJobIndexer
+ReceivedGigOrderIndexerJobApplicationIndexer = GigJobIndexer
+# todo
+# and WEB endpoints
+
 
 class DocModelIndexers(object):
-    MODEL_INDEXERS = {
-        '.Gig.model': (GigJobIndexer, DocumentIndexer('gig.index.db', 'gig_index'))
-    }
+    def __init__(self, data_dir=None):
 
-    def __init__(self, doc_indexer: DocumentIndexer):
-        self.indexer = doc_indexer
+        self.MODEL_INDEXERS = {
+            '.Gig.model': (GigJobIndexer(DocumentIndexer('%s/gig_idx.db' % data_dir, 'gig_idx'))),
+            '.Job.model': (GigJobIndexer(DocumentIndexer('%s/job_idx.db' % data_dir, 'job_idx'))),
+            '.EventAction.model': (EventActionModelIndexer(DocumentIndexer('%s/evt_idx.db' % data_dir, 'evt_idx'))),
+            '.SentGigOrder.model': (EventActionModelIndexer(DocumentIndexer('%s/sent_gig_order_idx.db' % data_dir,
+                                                                            'sent_gig_order'))),
+            '.ReceivedGigOrder.model': (EventActionModelIndexer(DocumentIndexer('%s/rcv_gig_order.db' % data_dir,
+                                                                                'rcv_gig_idx'))),
+            '.SentMail.model': (EventActionModelIndexer(DocumentIndexer('%s/sent_mail_idx.db' % data_dir,
+                                                                        'sent_mail'))),
+            '.ReceivedMail.model': (EventActionModelIndexer(DocumentIndexer('%s/rcv_mail.db' % data_dir,
+                                                                            'rcv_mail'))),
+            '.SentJobAppl.model': (EventActionModelIndexer(DocumentIndexer('%s/sent_job_appl_idx.db' % data_dir,
+                                                                           'sent_job_app'))),
+            '.ReceivedJobAppl.model': (EventActionModelIndexer(DocumentIndexer('%s/rcv_job_appl.db' % data_dir,
+                                                                               'rcv_job_appl'))),
+            #
+        }
+        if not data_dir:
+            raise IOError('data_dir is not directory:', data_dir)
 
     def index_or_unindex_data(self, hk_int, data):
         hk_hex = guid_int_to_hex(hk_int)
@@ -220,13 +254,13 @@ class DocModelIndexers(object):
                 return None
         else:
             return None
-        # if isinstance(value_data, dict):
         if 'model' in value_data:
             if value_data['model'] in self.MODEL_INDEXERS:
                 model_name = value_data['model']
-                indexer_class = self.MODEL_INDEXERS[model_name][0]
-                indexer_engine = self.MODEL_INDEXERS[model_name][1]
-                idxr = indexer_class(indexer_engine)
+                idxr = self.MODEL_INDEXERS.get(model_name)
+                if not idxr:
+                    return None
+
                 if 'deleted' in value_data:
                     idxr.unindex(hk_hex)
                     return False
@@ -236,24 +270,116 @@ class DocModelIndexers(object):
         return None
 
 
+class DocModelIndexQuery(object):
+    def __init__(self, document_indexer: DocumentIndexer):
+        self.idx = document_indexer.idx
+        self.idx_store = document_indexer.idx.index_store
+        pass
+
+    def query_terms(self, terms: dict, prefixes=True, limit=30, quantified=False):
+        cur = self.idx.qry_terms(terms=terms, prefixes=prefixes, limit=limit)
+        if cur:
+            if quantified:
+                ll = [(guid_bin_to_hex2(t[0]), t[1], t[2], t[3], t[4]) for t in cur.fetchall()]
+                return ll
+            ll = [guid_bin_to_hex2(t[0]) for t in cur.fetchall()]
+            return ll
+
+    def query_terms_d(self, terms_d: dict, limit=30, quantified=False):
+        cur = self.idx.qry_terms_d(terms_d, limit=limit)
+        if cur:
+            if quantified:
+                ll = [(guid_bin_to_hex2(t[0]), t[1], t[2], t[3], t[4]) for t in cur.fetchall()]
+                return ll
+
+            l1 = list(cur.fetchall())
+            print('---->', l1)
+            ll = [guid_bin_to_hex2(t[0]) for t in l1]
+            return ll
+
+    def _qry_dict(self, query_dict, limit=30, quantified=False):
+        try:
+            ll = self.query_terms_d(query_dict, limit=limit, quantified=quantified)
+            return ll
+        except Exception as e:
+            raise e
+            # return None
+
+    def query_all(self, limit=10, quantified=False):
+        cur = self.idx_store.no_component(limit=limit)
+        if cur:
+            if quantified:
+                ll = [(guid_bin_to_hex2(t[0]), t[1], t[2], t[3], t[4]) for t in cur.fetchall()]
+                return ll
+
+            else:
+                ll = [guid_bin_to_hex2(t[0]) for t in cur.fetchall()]
+                return ll
+
+    def _qry_all(self, limit=30, quantified=False):
+        try:
+            ll = self.query_all(limit, quantified=quantified)
+            # self.cherrypy.response.status = 200
+            return ll
+        except:
+            # self.cherrypy.response.status = 400
+            # self.errs.append('qry all err')
+            return None
+
+    def _make_qry_dict(self, kw):
+        try:
+            query_dict = {k.lower(): list(set(v.lower().split(' '))) for k, v in kw.items()}
+            return query_dict
+        except:
+            # self.cherrypy.response.status = 400
+            # self.errs.append('qry dict construct err')
+            return None
+
+    def query(self, kwargs, quantified=True):
+        limit = 100
+        if 'limit' in kwargs:
+            limit = int(kwargs.pop('limit'))
+        if 'q1range' in kwargs:
+            q1range = kwargs.pop('q1range')
+            p_t = q1range.split(' ')
+            print('Q1_range', p_t)
+            self.idx_store.analog_range_q1 = p_t
+        else:
+            self.idx_store.analog_range_q1 = None
+        if 'all' in kwargs:
+            return self._qry_all(limit, quantified=quantified)
+        else:
+            q_d = self._make_qry_dict(kwargs)
+            if not q_d:
+                return None
+            else:
+                return self._qry_dict(q_d, limit=limit,quantified=quantified)
+
+
 class DHTEventHandler(object):
     def __init__(self,
                  store_handler: DHTStoreHandlerOne,
                  logger=None,
-                 doc_indexer=None,
+                 data_dir=None,
                  ):
         self.logger = default_value(logger, ErtLogger(Print()))
         self.store_handler = store_handler
         self.store_handler.on_pull_handle = self.on_pull
         self.store_handler.on_push_handle = self.on_push
-        self.doc_indexers = DocModelIndexers(doc_indexer)
+
+        self.data_dir = data_dir
+        if not data_dir:
+            raise ValueError('Setup data dir for EventHandle index db files')
+        self.doc_indexers = DocModelIndexers(data_dir=self.data_dir)
 
     def on_push(self, hk, data):
         # todo try
         self.doc_indexers.index_or_unindex_data(hk_int=hk, data=data)
+        pass
 
     def on_pull(self, hk, data):
         # todo try
         self.doc_indexers.index_or_unindex_data(hk_int=hk, data=data)
+        pass
 
 
