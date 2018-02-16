@@ -18,11 +18,11 @@ window.profilePageModule = (function() {
           $('.redesigned-gig-modal').addClass('no-button-order');
           $('.editBtnProfile').removeClass('hidden');
           getNodeData(function(nodeData) {
-              $data = JSON.parse(nodeData);
-              window.profileID = $data.guid;
+              var data = JSON.parse(nodeData);
+              window.profileID = data.guid;
               $('.preloader-card').remove();
               updateProfile();
-              getGigs($data.guid);
+              getGigs(data.guid);
           });
         }
     };
