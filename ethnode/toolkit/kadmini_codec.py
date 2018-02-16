@@ -128,6 +128,10 @@ def hash_function(bin_data):
     return i
 
 
+def hash_from_st(st: str):
+    return binascii.hexlify(hashlib.sha256(st.encode()).digest()).decode()
+
+
 def remap_keys_encode(d: dict):
     return {encode_map[k]: d[k] for k in d}
 
@@ -195,3 +199,22 @@ def composite_hash_sha256(b1: bytes, b2: bytes) -> bytes:
     r = sha.digest()
     return r
 
+
+def value_protocol(t):
+    d = bson.loads(t[-1])
+    if 'e' in d:
+        ll = d['e']
+        if len(ll) >= 2:
+            v = ll[1]
+            if 'value' in v:
+                try:
+                    vvv = v['value']
+                    return vvv
+                except:
+                    pass
+
+
+def guid_key_composer(key, guid_hex, revision=DEFAULT_REVISION):
+    guid = guid_hex_to_bin(guid_hex)
+    hk = encode_key_hash(key, guid=guid, revision=revision)
+    return guid_int_to_hex(hk)

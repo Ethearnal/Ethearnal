@@ -102,3 +102,10 @@ class DHTEventHandler(object):
     def __call__(self, *args, **kw):
         return self.handle(*args, **kw)
 
+
+def default_value(var, default):
+    if var:
+        return var
+    else:
+        return default
+

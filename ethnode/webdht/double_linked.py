@@ -50,7 +50,8 @@ class DLMetaItem(object):
     def __init__(self,
                  collection_name,
                  first_key,
-                 last_key):
+                 last_key,
+                 ):
         self.collection_name = collection_name
         self.first_key = first_key
         self.last_key = last_key
@@ -59,7 +60,7 @@ class DLMetaItem(object):
         return {
             'collection_name': self.collection_name,
             'first_key': self.first_key,
-            'last_key': self.last_key
+            'last_key': self.last_key,
         }
 
 
@@ -75,6 +76,8 @@ class DLItem(object):
                  value,
                  prev_key,
                  next_key,
+                 next_hk=None,
+                 prev_hk=None,
                  hk=None,
                  deleted=False):
         self.key = key
@@ -165,8 +168,8 @@ class DList(object):
         try:
             o_item = self.dlitem_dict.get(key)
             if o_item:
+                pass
                 print('EXISTS, REJECT')
-
         except Exception as e:
             return None
 
@@ -174,7 +177,6 @@ class DList(object):
             self.first_key = key
             self.last_key = key
             o_item = DLItem(key, value, next_key=None, prev_key=None)
-            # o_item.hk =
             self.dlitem_dict.__setitem__(key, o_item)
             o_item_hk = self.dlitem_dict.last_set_hkey
             self.update_meta_item()
@@ -243,60 +245,58 @@ class DList(object):
             self.mark_o_item_deleted(key, o_item, hkey)
             return o_item
 
-    def iter_items(self):
-        if self.first_key:
-            nx_key = self.first_key
-            while nx_key:
-                item = self.dlitem_dict.get(nx_key)
-                if item:
-                    nx_key = item.next_key
-                    yield item
+    def get_item(self, key=None, hk_key=None):
+        if hk_key:
+            item = self.dlitem_dict.get('', hk_key)
+            return item
+        elif key:
+            item = self.dlitem_dict.get(key, hk_key)
+            return item
+
+    def iter_items(self, from_key=None, from_hkey=None, inverted=False, paginate=0):
+        cnt = 0
+        if from_key:
+            item = self.dlitem_dict.get(from_key)
+        elif from_hkey:
+            item = self.dlitem_dict.get('', hkey=from_hkey)
+        else:
+            if inverted:
+                item = self.dlitem_dict.get(self.last_key)
+            else:
+                item = self.dlitem_dict.get(self.first_key)
+        while item:
+            if paginate >= 0:
+                cnt += 1
+            yield item
+
+            if cnt == paginate:
+                break
+
+            if not inverted:
+                if item.next_key:
+                    item = self.dlitem_dict.get(item.next_key)
                 else:
                     break
-        else:
-            pass
-
-    def iter_items_inverted(self):
-        if self.last_key:
-            nx_key = self.last_key
-            while nx_key:
-                item = self.dlitem_dict.get(nx_key)
-                if item:
-                    nx_key = item.prev_key
-                    yield  item
+            else:
+                if item.prev_key:
+                    item = self.dlitem_dict.get(item.prev_key)
                 else:
                     break
-        else:
-            pass
 
-    def iter_hk(self, inverted=False):
-        itr = self.iter_items
-        if inverted:
-            itr = self.iter_items_inverted
-        for item in itr():
+    def iter_hk(self, inverted=False, from_hkey=None, from_key=None):
+        for item in self.iter_items(from_hkey=from_hkey, from_key=from_key, inverted=inverted):
             yield item.hk
 
     def iter_keys(self, inverted=False):
-        itr = self.iter_items
-        if inverted:
-            itr = self.iter_items_inverted
-        for item in itr():
+        for item in self.iter_items(inverted=inverted):
             yield item.key
-        # for item in self.iter_items():
-        #     yield item.key
 
     def iter_values(self, inverted=False):
-        itr = self.iter_items
-        if inverted:
-            itr = self.iter_items_inverted
-        for item in itr():
+        for item in self.iter_items(inverted=inverted):
             yield item.value
 
     def iter_kv(self, inverted):
-        itr = self.iter_items
-        if inverted:
-            itr = self.iter_items_inverted
-        for item in itr():
+        for item in self.iter_items(inverted=inverted):
             yield (item.key, item.value)
 
 
@@ -308,6 +308,3 @@ def instance_dl(dhf, hex, collection_name):
         )
     )
     return dl
-
-
-# dl = DList(DLItemDict(FakePulse(), collection_name='dht:gigs'))

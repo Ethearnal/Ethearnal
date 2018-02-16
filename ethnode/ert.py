@@ -266,6 +266,15 @@ def main_http(http_webdir: str = config.http_webdir,
         dhf=dht_facade_,
     )
 
+    from webdht.bundle import DocumentCollectionCRD
+
+    c = DocumentCollectionCRD(
+        'Mail',
+        dhf=dht_facade_,
+        own_guid_hex=ert.rsa_guid_hex,
+        key_composer=None,
+    )
+
     web_profile_static = WebProfileStatic(
         cherry=cherrypy,
         web_root_dir=http_webdir,
