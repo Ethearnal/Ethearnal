@@ -353,7 +353,7 @@ class DocModelIndexQuery(object):
             if not q_d:
                 return None
             else:
-                return self._qry_dict(q_d, limit=limit,quantified=quantified)
+                return self._qry_dict(q_d, limit=limit, quantified=quantified)
 
 
 class DHTEventHandler(object):
