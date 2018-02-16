@@ -212,6 +212,30 @@ paths:
             type: "object"
         400:
           description: "bad input parameter"
+  /dht/geopip4:
+    get:
+      tags:
+      - "DHT GeoIp"
+      summary: "Get geoip data by IP"
+      description: "dht"
+      operationId: "dhtgeoip"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "ip"
+        in: "query"
+        description: "IP address"
+        required: true
+        type: "string"
+        maxLength: 15
+        minLength: 7
+      responses:
+        200:
+          description: "geoip data"
+          schema:
+            type: "object"
+        400:
+          description: "bad input parameter"
   /dht/guids:
     get:
       tags:

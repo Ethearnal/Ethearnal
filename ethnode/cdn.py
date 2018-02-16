@@ -127,7 +127,7 @@ from kadem.kad import DHT
 from kadem.kad import DHTFacade
 from toolkit import store_handler
 from ert import tear_down_udp, punch_dht_udp_hole
-from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
+from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids, WebDHTGetGeoIpData
 from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
 from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI, Indexer
 from toolkit import upnp
@@ -184,6 +184,13 @@ knownguids = WebDHTKnownGuids(
     cherry=cherrypy,
     dhtf=dhf,
     mount_point='/api/v1/dht/guids'
+)
+
+# GET /api/v1/dht/geopip4?ip=192.168.1.1
+geopip4 = WebDHTGetGeoIpData(
+    cherry=cherrypy,
+    dhtf=dhf,
+    mount_point='/api/v1/dht/geopip4'
 )
 
 #

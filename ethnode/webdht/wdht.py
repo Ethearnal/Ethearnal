@@ -1,3 +1,5 @@
+import os
+import requests
 from apifaces.pushpull import PulseCallerIO, PulseListenerIO, HashIO
 from kadem.kad import DHTFacade
 from toolkit.kadmini_codec import sha256_bin_digest, guid_bin_to_hex, guid_hex_to_bin, decode_bson_val
@@ -8,7 +10,7 @@ from apifaces.pushpull import HashIO
 
 
 class StrToBinHash(HashIO):
-    def __init__(self, str_hex_guid:str):
+    def __init__(self, str_hex_guid: str):
         self.str_guid_hex = str_hex_guid
 
     def __call__(self, *args, **kwargs):
@@ -87,7 +89,7 @@ class DHTPulse(PulseCallerIO, PulseListenerIO):
         val_d = decode_bson_val(val)
         return val_d
 
-    def on_pull(self, owner: HashIO, key: dict,  value: dict):
+    def on_pull(self, owner: HashIO, key: dict, value: dict):
         pass
 
     def on_push(self, key: dict, value: dict, res_hash: HashIO):
@@ -142,7 +144,7 @@ class DList(object):
             self.pulse.push(self.dl_meta.key, self.dl_meta.value)
         else:
             itm = self.pulse.pull(self.owner, key)
-            print('+ ++ + DEBUG PRINT +++ ',itm)
+            print('+ ++ + DEBUG PRINT +++ ', itm)
             o_item = DLFromDict(self.pulse.pull(self.owner, key))
             if o_item:
                 # update
@@ -224,9 +226,72 @@ class WebDHTKnownGuids(object):
         self.cherry.tree.mount(
             self,
             self.mount_point, {'/': {
-                    'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
-                    'tools.sessions.on': True,
-                }
+                'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
+                'tools.sessions.on': True,
+            }
+            }
+        )
+
+
+class WebDHTGetGeoIpData(object):
+    exposed = True
+
+    def __init__(self,
+                 cherry,
+                 dhtf: DHTFacade,
+                 mount_point: str,
+                 mount_it=True):
+        self.cherry = cherry
+        self.dhtf = dhtf
+        self.mount_point = mount_point
+        if mount_it:
+            self.mount()
+            print('MOUNT GUIDS ENDPOINT')
+
+    def get_geoip_data(self, user_ip):
+        """
+        Get geoip data by ip address
+        :return dict:
+        """
+        r = requests.get('http://freegeoip.net/json/{}'.format(user_ip))
+        return r.json()
+
+    def write_in_file(self, geoip, filename):
+        """
+        Write data in file in `/geoip_data`
+        :param filename:
+        :param geoip:
+        :return dict:
+        """
+        file_exist = os.path.exists('geoip_data/' + filename)
+        if file_exist:
+            with open('geoip_data/' + filename, 'r') as content_file:
+                file_data = content_file.read()
+                return file_data
+        else:
+            if geoip:
+                try:
+                    with open('geoip_data/' + filename, 'w') as f:
+                        f.write(str(geoip))
+                    return geoip
+                except Exception as e:
+                    print(str(e))
+                    return False
+
+    def GET(self, ip):
+        # todo
+        filename = ip.replace(".", "-") + '.json'
+        geoip = dict(self.get_geoip_data(ip))
+        write_in_file_result = self.write_in_file(geoip, filename)
+        return str(write_in_file_result)
+
+    def mount(self):
+        self.cherry.tree.mount(
+            self,
+            self.mount_point, {'/': {
+                'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
+                'tools.sessions.on': True,
+            }
             }
         )
 
@@ -248,14 +313,14 @@ class WebDHTPulse(object):
     def read_request_body(self):
         return self.cherry.request.body.read()
 
-    def parse_pull_request(self, body: bytes) ->(str, dict):  # -> own_hash, key
+    def parse_pull_request(self, body: bytes) -> (str, dict):  # -> own_hash, key
         data = json.loads(body.decode())
         own_hash = data['owner_hash']
         own_hash_bin = StrToBinHash(own_hash)
         key = data['key']
         return own_hash_bin, key
 
-    def parse_push_request(self, body: bytes)-> (dict, dict):  # -> key,val
+    def parse_push_request(self, body: bytes) -> (dict, dict):  # -> key,val
         data = json.loads(body.decode())
         key = data['key']
         value = data['value']
@@ -273,7 +338,7 @@ class WebDHTPulse(object):
         body = self.read_request_body()
         own_hash_bin, key = self.parse_pull_request(body)
         d = self.dht_pulse.pull(own_hash_bin, key)
-        d_js =json.dumps(d,ensure_ascii=False)
+        d_js = json.dumps(d, ensure_ascii=False)
         d_sj_bin = d_js.encode()
         return d_sj_bin
 
@@ -287,9 +352,9 @@ class WebDHTPulse(object):
         self.cherry.tree.mount(
             self,
             self.mount_point, {'/': {
-                    'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
-                    'tools.sessions.on': True,
-                }
+                'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
+                'tools.sessions.on': True,
+            }
             }
         )
 
@@ -300,7 +365,7 @@ class WebSysGuidApi(object):
     def __init__(self, cherry,
                  dht_pulse: PulseCallerIO,
                  owner: HashIO,
-                 mount_point: str='/api/v1/sys/guid',
+                 mount_point: str = '/api/v1/sys/guid',
                  mount_it=True):
         self.cherry = cherry
         self.dht_pulse = dht_pulse
@@ -324,9 +389,9 @@ class WebSysGuidApi(object):
         self.cherry.tree.mount(
             self,
             self.mount_point, {'/': {
-                    'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
-                    'tools.sessions.on': True,
-                }
+                'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
+                'tools.sessions.on': True,
+            }
             }
         )
 
@@ -337,7 +402,7 @@ class WebSelfPredicateApi(object):
     def __init__(self, cherry,
                  dht_pulse: PulseCallerIO,
                  owner: HashIO,
-                 mount_point: str='/api/v1/self/',
+                 mount_point: str = '/api/v1/self/',
                  mount_it=True):
         self.cherry = cherry
         self.dht_pulse = dht_pulse
@@ -377,9 +442,9 @@ class WebSelfPredicateApi(object):
         self.cherry.tree.mount(
             self,
             self.mount_point, {'/': {
-                    'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
-                    'tools.sessions.on': True,
-                }
+                'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
+                'tools.sessions.on': True,
+            }
             }
         )
 
@@ -389,7 +454,7 @@ class WebGuidPredicateApi(object):
 
     def __init__(self, cherry,
                  dht_pulse: PulseCallerIO,
-                 mount_point: str='/api/v1/guid/',
+                 mount_point: str = '/api/v1/guid/',
                  mount_it=True):
         self.cherry = cherry
         self.dht_pulse = dht_pulse
@@ -412,8 +477,8 @@ class WebGuidPredicateApi(object):
         self.cherry.tree.mount(
             self,
             self.mount_point, {'/': {
-                    'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
-                    'tools.sessions.on': True,
-                }
+                'request.dispatch': self.cherry.dispatch.MethodDispatcher(),
+                'tools.sessions.on': True,
+            }
             }
         )

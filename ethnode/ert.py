@@ -23,7 +23,7 @@ from ert_profile import EthearnalProfileController
 # from webdht.wdht import WebDHTPulse, DHTPulse, WebSysGuidApi, OwnerGuidHashIO
 # from webdht.wdht import WebSelfPredicateApi, WebGuidPredicateApi, WebDHTKnownGuids
 
-from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
+from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids, WebDHTGetGeoIpData
 from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode, WebProfileStatic
 from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
 from webdht.wdht_ertapi import DhtEventsHkeysWebAPI, Indexer
@@ -212,6 +212,13 @@ def main_http(http_webdir: str = config.http_webdir,
     })
 
     idx = Indexer(ert=ert, dhf=dht_facade_)
+
+    # GET /api/v1/dht/geopip4?ip=192.168.1.1
+    geopip4 = WebDHTGetGeoIpData(
+        cherry=cherrypy,
+        dhtf=dht_facade_,
+        mount_point='/api/v1/dht/geopip4'
+    )
 
     knownguids = WebDHTKnownGuids(
         cherry=cherrypy,
