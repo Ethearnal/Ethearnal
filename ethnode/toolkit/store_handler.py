@@ -16,6 +16,7 @@ from kadem.kad import DHTFacade
 # 2) pull qry resp then
 
 
+
 class DHTStoreHandlerOne(object):
     ON_PUSH_PEER_KEY = 'ert:peer'
     ON_PUSH_GUID_KEY = 'ert:guid'
@@ -187,7 +188,7 @@ class DHTStoreHandlerOne(object):
                         # logger('VAL SIG OK STORE IN DHT')
                         # pk_rev, data = cdx.decode_bson_val(pk_value)
                         # if self.ON_PUSH_PEER_KEY in key:
-                        self.on_push_handle(data, hk_int=key)
+                        self.on_push_handle(hk, data)
 
                         # logger('\n\n\n +++')
                         self.on_pushed_ip4_peer(data, hk_int=key)
@@ -198,7 +199,8 @@ class DHTStoreHandlerOne(object):
                         # logger('VAL SIG FAILED')
                         pass
                 else:
-                    'ERR ert:pubkey not found'
+                    pass
+                    # logger('ERR ert:pubkey not found')
             else:
                 # logger('NO PUB KEY FOUND')
                 pass
@@ -215,7 +217,7 @@ class DHTStoreHandlerOne(object):
                 pk_owner, pk_signature, pk_value = self.store.get(hk)
                 revision, data = cdx.decode_bson_val(pk_value)
                 # # logger(data, data[self.ON_PUSH_PEER_KEY])
-                self.on_pull_handle(hk=hk, data=data)
+                self.on_pull_handle(hk, data)
                 if self.ON_PUSH_GUID_KEY in data:
                     # logger('\n\n\n GUIDS REQUESTED \n\n\n')
                     v = data[self.ON_PUSH_GUID_KEY]
@@ -246,7 +248,7 @@ class DHTStoreHandlerOne(object):
                 # logger('ON PULL DECODING FAIL', str(e))
                 pass
         if not t:
-            self.on_pull_handle(hk=hk, data=None)
+            self.on_pull_handle(hk, dict())
         return self.store.get(hk)
 
     def __contains__(self, hk):

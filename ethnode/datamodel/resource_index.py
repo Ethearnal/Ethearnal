@@ -73,6 +73,8 @@ class ResourceIndexingEngine(object):
                                container_hash: bytes,
                                specifier: str,
                                text_data: str,
+                               ert_tokens_major: int=0,
+                               ert_tokens_minor: int=0,
                                q1: int = 0,
                                q2: int = 0,
                                prefixes=True

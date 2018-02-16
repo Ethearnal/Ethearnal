@@ -197,7 +197,7 @@ class DList(object):
     def mark_o_item_deleted(self, key, o_item: DLItem, hkey=None):
         if o_item.value:
             if isinstance(o_item.value, dict):
-                o_item.value['meta_gig_deleted'] = True
+                o_item.value['deleted'] = True
                 if hkey:
                     self.dlitem_dict.__setitem__('', o_item, hkey=hkey)
                 else:

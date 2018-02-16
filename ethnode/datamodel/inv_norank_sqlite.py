@@ -19,10 +19,10 @@ class InvIndexTimestampSQLite(BaseSQLite):
 
         self.analog_range_q1_pair = None
 
-        from time import sleep
-        sleep(1)
-        self.count_ctx()
-        sleep(5)
+        # from time import sleep
+        # sleep(1)
+        # self.count_ctx()
+        # sleep(5)
 
     def count_ctx(self,  qs_only=False):
         qs = '''
@@ -35,8 +35,8 @@ class InvIndexTimestampSQLite(BaseSQLite):
         else:
             c = self.cursor.execute(qs)
             self.connection.commit()
-            print('\n\n\n COUNT container_hash', len(c.fetchall()))
-            print('\n\n\n')
+            # print('\n\n\n COUNT container_hash', len(c.fetchall()))
+            # print('\n\n\n')
 
     def create_index_if_not_exist(self, idx_name, colnames, qs_only=False):
         qs = '''
@@ -48,9 +48,8 @@ class InvIndexTimestampSQLite(BaseSQLite):
         else:
             self.cursor.execute(qs)
             self.connection.commit()
-            print('\n\n\n IDX CREATED', qs)
-            print('\n\n\n')
-
+            # print('\n\n\n IDX CREATED', qs)
+            # print('\n\n\n')
 
     def create_table_if_not_exist(self, qs_only=False):
         qs = '''

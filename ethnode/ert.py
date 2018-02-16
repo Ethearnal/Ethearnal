@@ -266,14 +266,17 @@ def main_http(http_webdir: str = config.http_webdir,
         dhf=dht_facade_,
     )
 
-    from webdht.bundle import DocumentCollectionCRD
+    from webdht.bundle import DocumentCollectionCRD, DHTEventHandler
+    from webdht.test_bndle_gig import Gig as test_gig_data
 
     c = DocumentCollectionCRD(
-        'Mail',
+        'Gig',
         dhf=dht_facade_,
         own_guid_hex=ert.rsa_guid_hex,
         key_composer=None,
     )
+
+    evt = DHTEventHandler(dht_facade_.dht.storage)
 
     web_profile_static = WebProfileStatic(
         cherry=cherrypy,
@@ -284,6 +287,7 @@ def main_http(http_webdir: str = config.http_webdir,
 
     # WebGuidPredicateApi
     # WebSelfPredicateApi
+
     cherrypy.engine.start()
 
     print('WEBUI DIR:', http_webdir)
