@@ -43,6 +43,8 @@ var path = {
             `./src/js/vendors/bootstrap.min.js`,
             `./src/js/vendors/material.min.js`,
             `./src/js/vendors/semantic.min.js`,
+            `./node_modules/moment/min/moment.min`,
+            `./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js`,
             `./node_modules/croppie/croppie.min.js`
         ]
     },
