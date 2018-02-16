@@ -206,7 +206,7 @@ class GigJobIndexer(object):
 
 class DocModelIndexers(object):
     MODEL_INDEXERS = {
-        '.Gig.model': (GigJobIndexer, DocumentIndexer('gig.index.db', 'gig_index') )
+        '.Gig.model': (GigJobIndexer, DocumentIndexer('gig.index.db', 'gig_index'))
     }
 
     def __init__(self, doc_indexer: DocumentIndexer):
