@@ -302,6 +302,24 @@ def main_http(http_webdir: str = config.http_webdir,
                                    target_args=(dht_,),
                                    target_kwargs={})(cherrypy.engine.exit)
 
+    # import asyncio
+    # import datetime
+    # import random
+    # import websockets
+    # try:
+    #     async def time(websocket, path):
+    #         while True:
+    #             now = datetime.datetime.utcnow().isoformat() + 'Z'
+    #             await websocket.send(now)
+    #             await asyncio.sleep(random.random() * 3)
+    #
+    #     start_server = websockets.serve(time, '127.0.0.1', 6789)
+    #     asyncio.get_event_loop().run_until_complete(start_server)
+    #     asyncio.get_event_loop().run_forever()
+    # except Exception as e:
+    #     print(str(e))
+    #     sys.exit()
+
     if not interactive:
         cherrypy.engine.block()
     else:
