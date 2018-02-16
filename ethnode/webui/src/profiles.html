@@ -42,9 +42,7 @@
 		<link rel="stylesheet" href="./dist/css/main.css">
 	</head>
 	<body class="profiles-page">
-
 		//= templates/header-global.html
-
 		<section class="profiles-page-content">
 			<div class="container">
 				<div class="col-md-3">
@@ -65,143 +63,17 @@
 				</div>
 			</div>
 		</section>
-
-			//= templates/add-gig-modal.html
-			<!-- END OTHER PROFILE  -->
-
-			<!-- PROFILE AVATAR CROPPING / CHANGING-->
-
-			<!-- The Modal -->
+		<!-- Modals -->
 		<div id="myModal" class="beep-modal-hc">
 			<div class="beep-modal-content-hc"></div>
 		</div>
-
-		<div id="edit-profile-headline" class="modal-box edit flex floating">
-			<div class="modal-box-content">
-				<div class="inner-modal">
-					<div class="content">
-						<div class="modal-header">
-							<h3>Edit profile headline image</h3>
-						</div>
-						<div class="success-message">
-							<h1 class="title">Congratulations!</h1>
-							<div class="success-content">
-								<p>Your headline was added.</p>
-							</div>
-							<div class="buttons">
-								<button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button><span>OR</span>
-								<button class="mdl-button mdl-js-button create-new">add new job</button>
-							</div>
-						</div>
-						<div class="modal-body">
-							<div class="form-group" id="image-headline-form">
-								<input id="input-image-profile-he" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
-								<label for="input-image-profile-he" class="img-label">Add Photo</label>
-								<img src="images/image-video-image-file.png" alt="Add a file" class="file-input-first-image img-profile">
-								<img id="input-image-profile-he" src="#" alt="" class="show-image empty">
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button class="mdl-button mdl-js-button close-button">Close</button>
-							<button id="updateProfileHeadline" style="color: #5CAB7D" class="mdl-button mdl-js-button finish-button">Update</button>
-							<div data-mdl-for="updateProfileHeadline" class="mdl-tooltip">This text will be changed anyway.</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="new-modal-thing">
-			<div id="new-modal-wrap">
-				<!-- header -->
-				<div class="new-modal-header">
-					<!-- profile info -->
-					<div id="new-modal-owner-avatar"></div>
-					<div class="new-modal-owner-info">
-						<div id="new-modal-owner-name">Owner Name</div>
-						<div id="new-modal-owner-title">Owner Title</div>
-					</div>
-					<!-- other things -->
-					<div class="new-modal-others">
-						<button data-dismiss="modal" class="mdl-button mdl-js-button close-button">Close</button>
-					</div>
-				</div>
-				<!-- image -->
-				<div id="new-modal-gig-image">
-					<div id="new-modal-gig-title">Title</div>
-					<div id="new-modal-description">Description</div>
-				</div>
-				<div class="new-modal-footer">
-					<div class="new-modal-footer-buttons">
-						<button class="mdl-button mdl-js-button buy">Hold &nbsp; 
-							<span id="new-modal-gig-price-req">0.00 </span> &nbsp;
-							<i class="material-icons">polymer</i> &nbsp;
-							Price &nbsp; 
-							<span id="new-modal-gig-price"> 0.00 </span> &nbsp; Order
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="redesigned-modal" class="hidden">
-			<div class="modal-content border-radius-6 redesigned-gig-modal">
-				<div class="modal-header pdd-horizon-30" id="redesigned-modal-gig-image" style="height: 200px;">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body pdd-vertical-10 no-mrg">
-					<div class="pdd-horizon-30">
-						<div class="row">
-							<div class="col-xs-12">
-								<h4 class="modal-title flex-block flex-center">
-									<div id="new-modal-owner-avatar" class="mrg-right-15"></div>
-									<div class="mrg-top-20">
-										<span id="new-modal-owner-name">Owner Name</span> -
-										<span id="new-modal-owner-title">Owner Title</span>
-									</div>
-								</h4>
-								<h3 class="font-size-24 color-blue mrg-top-50 mrg-btm-10" id="redesigned-modal-gig-title">I'll design a smart contracts for ethereum platform</h3>
-								<p id="redesigned-modal-description" class="font-size-16 mrg-btm-10">Let me see your identification. You don't need to see his identification. We don't need to see his identification. These are not the droids.</p>
-								<p class="font-size-16 mrg-btm-10" id="redesigned-modal-gig-tags"></p>
-							</div>
-						</div>
-						<div class="modal-footer pdd-horizon-30">
-							<div class="text-right">
-								<button class="btn btn-default btn-sm no-mrg" data-dismiss="modal">Hold &nbsp; 
-									<span id="redesigned-modal-gig-price-req">0.00 </span> &nbsp;
-									<i class="material-icons font-size-18" style="vertical-align: text-bottom;">polymer</i> &nbsp;
-									Price &nbsp; 
-									<span id="redesigned-modal-gig-price"> 0.00 </span> &nbsp; Order
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-						<!-- jQuery 3.1.1-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<!-- jQuery UI 1.11.2-->
-		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-		<!-- BootstrapJS 3.3.7-->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-			crossorigin="anonymous"></script>
-		<!-- Semantic UI JS-->
-		<script src="https://cdn.rawgit.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.js"></script>
-		<!-- Owl Carousel JS-->
-		<script src="https://bbcdn.githack.com/shahzadns/owlfonk-owlcarousel/raw/31413692812896e19db89baee9be30b9d36d1e64/owl-carousel/owl.carousel.min.js"></script>
-		<!-- Moment.JS-->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-		<!-- Bootstrap Date Time Picker-->
-		<script src="https://cdn.rawgit.com/T00rk/bootstrap-material-datetimepicker/gh-pages/js/bootstrap-material-datetimepicker.js"></script>
-		<!-- Moment JS-->
-		<script src="https://cdn.jsdelivr.net/npm/moment@2.19.1/moment.min.js"></script>
-		<!-- Material Design Bootstrap-->
-		<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-		<!-- Jquery Easing-->
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+		//= templates/edit-profile.html
+		//= templates/add-gig-modal.html
+		//= templates/redesigned-big-gig-modal.html
+		<!--  -->
+		<!-- Vendor JS -->
+		<script src="dist/js/vendor.min.js"></script>
 		<!-- Main JS file-->
-		<script src="./node_modules/croppie/croppie.js"></script>
 		<script src="js/main.js"></script>
 	</body>
 </html>
