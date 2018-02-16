@@ -258,7 +258,7 @@ input::-moz-focus-outer {
 	}
 	.gig-tags {
 		&.ui.selection.dropdown {
-			height: 42px;
+			min-height: 42px;
 			border-radius: 2px;
 			border-color: #e6ecf5;
 			&:hover {
