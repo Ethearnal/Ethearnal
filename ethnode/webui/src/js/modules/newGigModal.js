@@ -11,8 +11,8 @@ window.createNewGig = (function() {
         .find("input,textarea,select").val("").end()
         .find(".range-slider")
         .find("input").val("0").end()
-        .find(".range-slider__value").text("0").end()
-        .find("#new-gig-category").parent().find(".text").text("All Categories");
+        .find(".range-slider__value").text("0");
+        $(this).find("#new-gig-category").parent().find(".text").text("All Categories");
     });
     
 
