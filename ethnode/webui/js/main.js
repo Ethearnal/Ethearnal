@@ -619,7 +619,7 @@ $(document).ready(function() {
                 if ($inputID == "input-image-avatar") {
                     addImage(e.target.result);
                 }
-                if ($inputID == "input-image-gig") {
+                else if ($inputID == "input-image-gig") {
                     window.$uploadCrop.croppie('bind', {
                         url: e.target.result
                     });
@@ -628,7 +628,37 @@ $(document).ready(function() {
                     $content.find('img#input-image-gig').addClass('empty');
                     $content.find('.jsCropResult').show();
                     //$content.find('.img-label').css('background-image','url("'+ e.target.result +'")');
-                } else {
+                } else if ($inputID == "input-image-gig") {
+                    window.$uploadCrop.croppie('bind', {
+                        url: e.target.result
+                    });
+                    $content.find('.img-label').css('display', 'none');
+                    $content.find('#cropper-wrap-gig').css('display', 'block');
+                    $content.find('img#input-image-gig').addClass('empty');
+                    $content.find('.jsCropResult').show();
+                    //$content.find('.img-label').css('background-image','url("'+ e.target.result +'")');
+                }
+                else if ($inputID == "input-image-gig") {
+                    window.$uploadCrop.croppie('bind', {
+                        url: e.target.result
+                    });
+                    $content.find('.img-label').css('display', 'none');
+                    $content.find('#cropper-wrap-gig').css('display', 'block');
+                    $content.find('img#input-image-gig').addClass('empty');
+                    $content.find('.jsCropResult').show();
+                    //$content.find('.img-label').css('background-image','url("'+ e.target.result +'")');
+                }
+                else if ($inputID == "input-image-profile") {
+                    window.$uploadCropProfile.croppie('bind', {
+                        url: e.target.result
+                    });
+                    $content.find('.img-label').css('display', 'none');
+                    $content.find('#cropper-wrap-profile').css('display', 'block');
+                    $content.find('img#input-image-profile').addClass('empty');
+                    $content.find('.jsCropResultProfile').show();
+                    //$content.find('.img-label').css('background-image','url("'+ e.target.result +'")');
+                } 
+                else {
                     $content.find('img#' + $inputID + '').attr('src', e.target.result).show();
                 }
             }

@@ -97,6 +97,12 @@ $(document).on('click', '#addNewGigSend', function() {
     collectGigData($form);
 });
 
+$(document).on("click", "#updateProfile", function() {
+  $content = $(this).closest(".content");
+  $form = $content.find("form");
+  updateProfileHeadline($form);
+});
+
 
 $('.modal-box button').click(function() {
     $modalID = $(this).closest('.modal-box').attr('id');

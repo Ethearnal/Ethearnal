@@ -6,11 +6,24 @@ window.$uploadCrop = $('#cropper-wrap-gig').croppie({
     enableZoom: true
 });
 
+window.$uploadCropProfile = $("#cropper-wrap-profile").croppie({
+  viewport: {
+    width: 450,
+    height: 150
+  },
+  enableZoom: true
+});
+
 $(document).ready(function(){
     /* BUTTON INIT CLICK ON INPUT TYPE FILE */
     $(document).on('click','.jsCropUpload',function(){
       var $content = $(this).closest('.content');
       $content.find('input#input-image-gig').click();
+    });
+
+    $(document).on("click", ".jsCropUploadProfile", function() {
+      var $content = $(this).closest(".content");
+      $content.find("input#input-image-profile").click();
     });
 
     /* BUTTON FOR GETTING CROP RESUlt */
@@ -28,4 +41,19 @@ $(document).ready(function(){
         $content.find($(".btns-wrap").find(".btn-success")).hide();
       });
     })
+
+    $(document).on("click", ".jsCropResultProfile", function(e) {
+      e.preventDefault();
+      var $content = $(this).closest(".content");
+      window.$uploadCropProfile.croppie("result", "base64").then(function(base64) {
+          $content.find("img#input-image-profile").attr("src", base64).show(500).removeClass("empty");
+          $content.find($("#cropper-wrap-profile")).show(500);
+          $content.find($(".btns-wrap").find(".btn-success")).show();
+        });
+      window.$uploadCropProfile.croppie("result", "blob").then(function(blob) {
+        window.$uploadCropBlobProfile = blob;
+        $content.find($("#cropper-wrap-profile")).hide(400);
+        $content.find($(".btns-wrap").find(".btn-success")).hide();
+      });
+    });
 });
