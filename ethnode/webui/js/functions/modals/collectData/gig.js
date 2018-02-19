@@ -16,19 +16,19 @@ function collectGigData(form) {
     $tags = $form.find('.gig-tags').dropdown('get value');
 
     // getting expire date's difference in text.
-    $expireDateClear = $dateExpire.replace(/\//g, '-');
-    $expireDateDifference = moment($expireDateClear, "DDMMYYYY").fromNow();
+    // $expireDateClear = $dateExpire.replace(/\//g, '-');
+    // $expireDateDifference = moment($expireDateClear, "DDMMYYYY").fromNow();
 
     $avatarImage = $('#avatar-img').attr('src');
     console.log($avatarImage);
     var objFormData = new FormData();
     var fileObj = undefined
     if ($imgInputID == 'input-image-gig') {
-      if (window.$uploadCropBlob) {
-        fileObj = window.$uploadCropBlob;
-      }
+        if (window.$uploadCropBlob) {
+            fileObj = window.$uploadCropBlob;
+        }
     } else {
-      fileObj = document.getElementById($imgInputID).files[0];
+        fileObj = document.getElementById($imgInputID).files[0];
     }
 
     objFormData.append('ufile', fileObj);
@@ -37,18 +37,18 @@ function collectGigData(form) {
     var api_cdn_post = api_post_cdn_url();
     var api_cdn = api_get_cdn_url();
 
-    if(fileObj != undefined) {
-        if(!!fileObj.type.match(/image.*/)) {
+    if (fileObj != undefined) {
+        if (!!fileObj.type.match(/image.*/)) {
             $.ajax({
                 url: api_cdn_post,
                 type: "POST",
                 data: objFormData,
                 processData: false,
                 contentType: false,
-                success: function(data){
+                success: function(data) {
 
                     // Deletes GIG if not EDIT modal
-                    if( $content.closest('.modal-box').hasClass('edit') ) {
+                    if ($content.closest('.modal-box').hasClass('edit')) {
                         $gigID = $currentlyClosestLEdiv.attr('gigID');
                         deleteGig($gigID);
                     }
@@ -60,7 +60,8 @@ function collectGigData(form) {
                         // ownerReputation: $reputation,
                         // ownerName: $ownerName,
                         // categoryName: $categoryName,
-                        general_domain_of_expertise: $categoryName,
+                        category: $category,
+                        general_domain_of_expertise: category,
                         title: $title,
                         //category: $category,
                         required_ert: $reputationCost,
@@ -68,9 +69,9 @@ function collectGigData(form) {
                         description: $description,
                         price: $price,
                         tags: $tags,
-//                        date: [
-//                            { expire: $dateExpire, expiresIn: $expireDateDifference }
-//                        ]
+                        //                        date: [
+                        //                            { expire: $dateExpire, expiresIn: $expireDateDifference }
+                        //                        ]
                     }
                     console.log($data);
 
@@ -80,17 +81,20 @@ function collectGigData(form) {
                         data: JSON.stringify($data),
                         contentType: 'application/json; charset=utf-8',
                         processData: false,
-                        success: function(gigID){
+                        success: function(gigID) {
+                            $('#add-gig').modal('hide');
+                            $('body').removeClass('modal-open');
+                            $('body').find('.modal-backdrop').remove();
+                            profilePageModule.getAllGigs(window.profileID);
+                            //                            getDHTData(gigID, function(gigData) {
+                            //                                $data = JSON.parse(gigData);
+                            //                                createGigToProfile($data, gigID);
+                            //                            });
 
-//                            getDHTData(gigID, function(gigData) {
-//                                $data = JSON.parse(gigData);
-//                                createGigToProfile($data, gigID);
-//                            });
-
-//                            getDHTData(gigID, function(gigData) {
-//                                $data = JSON.parse(gigData);
-//                                createGigBox($data, gigID);
-//                            });
+                            //                            getDHTData(gigID, function(gigData) {
+                            //                                $data = JSON.parse(gigData);
+                            //                                createGigBox($data, gigID);
+                            //                            });
                         }
                     });
                 }
@@ -99,12 +103,12 @@ function collectGigData(form) {
             console.log('Not a valid image!');
         }
 
-    // IF YOU EDIT GIG
+        // IF YOU EDIT GIG
     } else if (fileObj == undefined) {
 
         // Checks if the GIG already has image and re-use image hash.
         console.log('Are we here?');
-        if($content.find('img.show-image').attr('src') != null) {
+        if ($content.find('img.show-image').attr('src') != null) {
             $imageSrc = $content.find('img.show-image').attr('src');
             $imageHash = $imageSrc.split('/api/v1/my/img/?q=')[1];
 
@@ -136,17 +140,17 @@ function collectGigData(form) {
                 data: JSON.stringify($data),
                 contentType: 'application/json; charset=utf-8',
                 processData: false,
-                success: function(gigID){
+                success: function(gigID) {
 
-//                    getDHTData(gigID, function(gigData) {
-//                        $data = JSON.parse(gigData);
-//                        createGigToProfile($data, gigID);
-//                    });
-//
-//                    getDHTData(gigID, function(gigData) {
-//                        $data = JSON.parse(gigData);
-//                        createGigBox($data, gigID);
-//                    });
+                    //                    getDHTData(gigID, function(gigData) {
+                    //                        $data = JSON.parse(gigData);
+                    //                        createGigToProfile($data, gigID);
+                    //                    });
+                    //
+                    //                    getDHTData(gigID, function(gigData) {
+                    //                        $data = JSON.parse(gigData);
+                    //                        createGigBox($data, gigID);
+                    //                    });
                 }
             });
         }

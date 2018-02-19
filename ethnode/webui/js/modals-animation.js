@@ -1,21 +1,20 @@
-
 // THESE TWO FUNCTIONS BELOW ARE FOR AVATAR MODAL AND AVATAR PICTURE IN THAT MODAL.
 function nowAddImage(source) {
     $("<div class='show-image'><img src='" + source + "'' /></div>").css({
-        float: 'left',
-        position: 'relative',
-        overflow: 'hidden',
-        width: '100px',
-        height: '100px',
-        borderRadius: '100%',
-        marginBottom: '20px',
-        boxShadow: 'rgba(0, 0, 0, 0.0980392) 0px 0px 3px 3px'
-    })
-    .insertBefore("#avatarModal .modal-dialog .modal-content .modal-body .modal-inputs input.title");
+            float: 'left',
+            position: 'relative',
+            overflow: 'hidden',
+            width: '100px',
+            height: '100px',
+            borderRadius: '100%',
+            marginBottom: '20px',
+            boxShadow: 'rgba(0, 0, 0, 0.0980392) 0px 0px 3px 3px'
+        })
+        .insertBefore("#avatarModal .modal-dialog .modal-content .modal-body .modal-inputs input.title");
 }
 
 function addImage(source) {
-    if( $(".modal-inputs .show-image").length ) {
+    if ($(".modal-inputs .show-image").length) {
         $(".modal-inputs .show-image").remove();
         nowAddImage(source);
     } else {
@@ -24,12 +23,12 @@ function addImage(source) {
 
     $('img#input-image-avatar').cropper('destroy');
 
-    $(function () {
+    $(function() {
         var $previews = $('.show-image');
 
         $('img#input-image-avatar').cropper({
 
-            crop: function (e) {
+            crop: function(e) {
                 var imageData = $(this).cropper('getImageData');
                 var previewAspectRatio = e.width / e.height;
 
@@ -43,7 +42,7 @@ function addImage(source) {
                     paddingTop: $('.cropper-container').height()
                 });
 
-                $previews.each(function () {
+                $previews.each(function() {
                     var $preview = $(this);
                     var previewWidth = $preview.width();
                     var previewHeight = previewWidth / previewAspectRatio;
@@ -91,7 +90,12 @@ var Timer;
 //
 //
 
-
+$(document).on('click', '#addNewGigSend', function() {
+    $content = $(this).closest('.content');
+    $form = $content.find('form');
+    console.log($form);
+    collectGigData($form);
+});
 
 
 $('.modal-box button').click(function() {
@@ -104,40 +108,40 @@ $('.modal-box button').click(function() {
     $successMessageThings = $successMessage.find('h1.title, .success-content, .buttons');
 
     // If its a CLOSE button it'll close the modal only.
-    if($(this).hasClass('close-button')) {
+    if ($(this).hasClass('close-button')) {
         closeModal($modalID);
-        if(!$(this).parent().is('.buttons')) return; // Checks if the button that is clicked is within the Modal > Confirmation page > Button div.
+        if (!$(this).parent().is('.buttons')) return; // Checks if the button that is clicked is within the Modal > Confirmation page > Button div.
     }
 
     // BUTTON.PUBLISH-BUTTON
-    if($(this).hasClass('finish-button')) {
-        if(!validateForm($form) && $modalID !== "edit-profile") return; // Return if form isn't filled.
+    if ($(this).hasClass('finish-button')) {
+        if (!validateForm($form) && $modalID !== "edit-profile") return; // Return if form isn't filled.
 
         // Resetting images and collecting data for JOB
-        if($modalID == 'add-job' || $modalID == 'edit-job') {
+        if ($modalID == 'add-job' || $modalID == 'edit-job') {
             $data = collectJobData($form);
             resetImage($content, "job");
         }
 
         // Resetting images and collecting data for EDUCATION
-        if($modalID == 'add-education' || $modalID == 'edit-education') {
+        if ($modalID == 'add-education' || $modalID == 'edit-education') {
             $data = collectEducationData($form);
             resetImage($content, "education");
         }
 
         // Resetting images and collecting data for PORTFOLIO ELEMENT
-        if($modalID == 'add-portfolio' || $modalID == 'edit-portfolio') {
+        if ($modalID == 'add-portfolio' || $modalID == 'edit-portfolio') {
             $data = collectPortfolioData($form);
             resetImage($content, "portfolio");
         }
 
         // Collecting data for other things.
-        if($modalID == 'add-language' || $modalID == 'edit-language') $data = collectLanguageData($form);
-        if($modalID == 'add-skill' || $modalID == 'edit-skill') $data = collectSkillData($form);
-        if($modalID == "edit-profile") $data = collectProfileData($form);
-        if($modalID == "add-gig" || $modalID == "edit-gig") collectGigData($form);
+        if ($modalID == 'add-language' || $modalID == 'edit-language') $data = collectLanguageData($form);
+        if ($modalID == 'add-skill' || $modalID == 'edit-skill') $data = collectSkillData($form);
+        if ($modalID == "edit-profile") $data = collectProfileData($form);
+        if ($modalID == "add-gig" || $modalID == "edit-gig") collectGigData($form);
 
-        if($modalID == "edit-profile-headline") {
+        if ($modalID == "edit-profile-headline") {
             console.log('EDIT HEADLINE')
             $data_headline = updateProfileHeadline($form);
         }
@@ -149,26 +153,26 @@ $('.modal-box button').click(function() {
         // DO SOMETHING MORE AFTER CLICKING THAT BUTTON AND WAITING FOR A TIMEOUT TO END
         setTimeout(function() {
 
-            console.log('appear contentsuccess',$content);
+            console.log('appear contentsuccess', $content);
             clearForm($form);
 
-            if($modalID == 'add-job') createLE($data, 'job');
-            if($modalID == 'add-education') createLE($data, 'education');
-            if($modalID == 'add-language') createLE($data, 'language', true);
+            if ($modalID == 'add-job') createLE($data, 'job');
+            if ($modalID == 'add-education') createLE($data, 'education');
+            if ($modalID == 'add-language') createLE($data, 'language', true);
 
-            if($modalID == 'edit-profile-headline'){
+            if ($modalID == 'edit-profile-headline') {
                 appearSuccessMessageSvg($content);
                 closeModal($modalID);
-            } else if ($modalID == 'edit-gig' || $modalID == 'add-gig' ) {
-                    appearSuccessMessageSvg($content);
-                    closeModal($modalID);
+            } else if ($modalID == 'edit-gig' || $modalID == 'add-gig') {
+                appearSuccessMessageSvg($content);
+                closeModal($modalID);
 
-            }
-             else if($modalID == 'edit-profile'){
+            } else if ($modalID == 'edit-profile') {
                 appearSuccessMessageSvg($content);
                 closeModal($modalID);
             } else {
-            appearSuccessMessage($content); }
+                appearSuccessMessage($content);
+            }
 
             if ($modalID == 'edit-education') {
                 $modalID = $currentlyOpenModalID;
@@ -208,8 +212,8 @@ $('.modal-box button').click(function() {
 
 
 
-    // If button.create-new parent is .buttons (the div that shows up after clicking "publish") then it'll fade out content and clear form.
-    } else if($(this).parent().is(".buttons")) {
+        // If button.create-new parent is .buttons (the div that shows up after clicking "publish") then it'll fade out content and clear form.
+    } else if ($(this).parent().is(".buttons")) {
         $successMessage.fadeOut(300);
 
         setTimeout(function() {
@@ -230,7 +234,7 @@ $('.finish-button').hover(function() {
     $content = $(this).closest('.content');
     $form = $content.find('form');
 
-    if( validateForm($form) ) {
+    if (validateForm($form)) {
         $(this).text('Great! Go ahead').css({ display: 'initial' });
     } else {
         $(this).text('Please fill the form').css({ display: 'initial' });
