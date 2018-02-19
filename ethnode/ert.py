@@ -4,7 +4,7 @@ import sys
 import traceback
 import config
 import argparse
-from random import randint
+# from random import randint
 #
 from kadem.kad import DHT, DHTFacade
 
@@ -12,28 +12,13 @@ from toolkit.tools import mkdir, on_hook
 from toolkit import kadmini_codec
 from toolkit import store_handler
 from toolkit import upnp
-from toolkit.profile_from_json import DHTProfile, ProfileJsonData
 
 from ert_profile import EthearnalProfileController
-# from ert_profile import EthearnalProfileView, EthearnalProfileController
-# from ert_profile import EthearnalJobView, EthearnalJobPostController
-# from ert_profile import EthearnalUploadFileView
-# from ert_profile import EthearnalUploadJsonView
-
-# from webdht.wdht import WebDHTPulse, DHTPulse, WebSysGuidApi, OwnerGuidHashIO
-# from webdht.wdht import WebSelfPredicateApi, WebGuidPredicateApi, WebDHTKnownGuids
 
 from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
 from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode, WebProfileStatic
-from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
-from webdht.wdht_ertapi import DhtEventsHkeysWebAPI, Indexer
-
-from toolkit.profile_from_json import DHTProfileCollection
-
-# #
-# from webdht.double_linked import DList, DLItemDict, OwnPulse, instance_dl
-# from webdht.wdht_listing import WebGuidCollectionListApi
-
+from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI
+from webdht.wdht_ertapi import Indexer
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
 
@@ -137,7 +122,7 @@ def main_dht(host: str, port: int, store: store_handler.DHTStoreHandlerOne,
 
 
 def tear_down_udp(dht):
-    print('ErtCDN: UDP stopping...')
+    print('ERT: UDP stopping...')
     if dht:
         dht.server.shutdown()
 
@@ -193,11 +178,11 @@ def main_http(http_webdir: str = config.http_webdir,
             'tools.staticdir.dir': http_webdir,
             'tools.staticdir.index': 'profiles.html',
         },
-        '/ui/files': {
-            'tools.staticdir.on': True,
-            'tools.staticdir.root': ert_profile_ctl.data_dir,
-            'tools.staticdir.dir': files_dir_name,
-        },
+        # '/ui/files': {
+        #     'tools.staticdir.on': True,
+        #     'tools.staticdir.root': ert_profile_ctl.data_dir,
+        #     'tools.staticdir.dir': files_dir_name,
+        # },
         '/api/ui': {
             'tools.staticdir.on': True,
             'tools.staticdir.dir': 'apidef/swagger',
@@ -425,34 +410,46 @@ if __name__ == '__main__':
         else:
             print('UDP server thread id dead')
 
-        pro = DHTProfile(d)
-        gigs = DHTProfileCollection(dhf=d, collection_name='gig')
-        verbs_src = 'data_demo/txt_wordnet/data.verb'
-        cdn_data_dir = 'data_demo/cdn1_d'
-        from helpers.wordnet_parser import WordnetParser, ImagesFromCdnData, GigGeneratorWordnet
+        from toolkit.ipgeo import FsCachedGeoIp
+        from apifacades.peers import PeersInfo
+        from toolkit.filestore import FileSystemHashStore
 
-        gen = GigGeneratorWordnet(WordnetParser(verbs_src), ImagesFromCdnData(cdn_data_dir))
-        if json_data_to_profile:
-            from time import sleep
-            from random import randint
-            jsd = ProfileJsonData(json_file_name=json_data_to_profile,
-                                  pro=pro,
-                                  )
-            sleep(3)
-            d.converge_peers()
-            sleep(3)
-            jsd.update()
-            sleep(3)
-            category_domain = jsd.data['domain']
-            gigs_data = jsd.data['gigs']
-            for gig_entry in gigs_data:
-                gig_entry['lock'] = randint(1, 100)
-                gig_entry['price'] = randint(1, 1999)
-                gig_entry['category'] = category_domain
-                gig_entry['general_domain_of_expertise'] = category_domain
-                gigs.post(gig_entry['title'], gig_entry)
-
-            sys.exit(0)
+        # geo = FsCachedGeoIp('hfs_demo')
+        # peers_hfs = FileSystemHashStore('peers_hfs_demo')
+        # peers = PeersInfo(
+        #     dhf=d,
+        #     geo=FsCachedGeoIp('hfs_demo'),
+        #     hfs=peers_hfs
+        # )
+        # todo move this
+        # pro = DHTProfile(d)
+        # gigs = DHTProfileCollection(dhf=d, collection_name='gig')
+        # verbs_src = 'data_demo/txt_wordnet/data.verb'
+        # cdn_data_dir = 'data_demo/cdn1_d'
+        # from helpers.wordnet_parser import WordnetParser, ImagesFromCdnData, GigGeneratorWordnet
+        #
+        # gen = GigGeneratorWordnet(WordnetParser(verbs_src), ImagesFromCdnData(cdn_data_dir))
+        # if json_data_to_profile:
+        #     from time import sleep
+        #     from random import randint
+        #     jsd = ProfileJsonData(json_file_name=json_data_to_profile,
+        #                           pro=pro,
+        #                           )
+        #     sleep(3)
+        #     d.converge_peers()
+        #     sleep(3)
+        #     jsd.update()
+        #     sleep(3)
+        #     category_domain = jsd.data['domain']
+        #     gigs_data = jsd.data['gigs']
+        #     for gig_entry in gigs_data:
+        #         gig_entry['lock'] = randint(1, 100)
+        #         gig_entry['price'] = randint(1, 1999)
+        #         gig_entry['category'] = category_domain
+        #         gig_entry['general_domain_of_expertise'] = category_domain
+        #         gigs.post(gig_entry['title'], gig_entry)
+        #
+        #     sys.exit(0)
 
         if args.converge_pk_and_peers:
             print('CONVERGE PEERS')
