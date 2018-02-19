@@ -241,10 +241,10 @@ function createProfileCard(owner_guid, callback) {
               ${profileCardRenderData.skillsTemplate}
             </div>
         </div>`;
-      callback();
       if (!profileCardRenderData.isWrongData) {
         $(".profiles-container").append(profilecard);
       }
+      callback();
     });
 
     // profile images

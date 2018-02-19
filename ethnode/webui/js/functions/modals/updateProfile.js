@@ -182,15 +182,20 @@ function updateProfileHeadline($form) {
                     };
 
                     $.ajax({
-                      url: "/api/v1/dht/profile",
-                      type: "POST",
+                      url:
+                        api_put_cdn_url() +
+                        "/api/v1/dht/profile",
+                      type: "PUT",
                       data: JSON.stringify($data),
-                      contentType: "application/json; charset=utf-8",
+                      contentType:
+                        "application/json; charset=utf-8",
                       processData: false,
                       success: function() {
                         $("#add-gig").modal("hide");
                         $("body").removeClass("modal-open");
-                        $("body").find(".modal-backdrop").remove();
+                        $("body")
+                          .find(".modal-backdrop")
+                          .remove();
                       }
                     });
                 }

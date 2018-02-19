@@ -41,6 +41,12 @@ var api_idx_cdn_url = function() {
     return c;
 };
 
+var api_put_cdn_url = function() {
+  c = "http://" + CDN_HOST_PORT;
+  console.log("using put cdn: ", c);
+  return c;
+};
+
 // event handlers
 
 var event_on_gig_profile_key_data = function(guid, profile_key, data) {
@@ -247,37 +253,48 @@ var search_event = function() {
 function main_profile_cards() {
     $('.profiles-container').empty();
     $.ajax({
-        url: '/api/v1/dht/guids',
-        type: 'GET',
-        processData: false,
-        success: function(data) {
-            known_guids = JSON.parse(data);
-            var d1 = $.deferred;
-            var counter = 0;
+      url: "/api/v1/dht/guids/",
+      type: "GET",
+      processData: false,
+      success: function(data) {
+        known_guids = JSON.parse(data);
+        var d1 = $.deferred;
 
-            function chain() {
-                createProfileCard(known_guids[counter], function() {
-                    counter++;
-                    if (counter == known_guids.length) return
+        var loaderindex = 0;
+        function recursiveBuildProfiles(index) {
+          if (loaderindex == 9) {
+            if (known_guids.length >= limit) {
+              var loadmore = `<div class="load-more"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+              setTimeout(function() {
+                $(".profiles-container").append(loadmore);
+              }, 500);
+            }
+            return;
+          }
+          loaderindex++;
+          var preloader = `<div class="preloader-card"><img src="./dist/img/preloader.gif" alt=""></div>`;
+          $(".profiles-container").append(preloader);
+          console.log(known_guids.length + " ? " + limit);
+          if (index >= known_guids.length) {
+              var loadmore = `<div class="load-more"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+              setTimeout(function() {
+                $(".profiles-container").append(loadmore);
+              }, 500);
+            $(".preloader-card").remove();
+            return;
+          } else {
+            createProfileCard(known_guids[index], function() {
+                if (index < known_guids.length) {
                     setTimeout(function() {
-                        'Chain Started';
-                        startChain();
-                    }, 150)
-                });
-            }
-
-            function startChain() {
-                chain();
-            }
-            startChain();
-
-            // known_guids.forEach(function(element) {
-            //     createProfileCard(element);
-            // });
-            // known_guids.forEach(function(element) {
-            //     createProfileCard(element);
-            // });
+                        index++;
+                        recursiveBuildProfiles(index);
+                    }, 500);
+                }
+            });
+          }
         }
+        recursiveBuildProfiles(limit - 9);
+      }
     });
 };
 
