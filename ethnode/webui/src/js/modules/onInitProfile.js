@@ -31,7 +31,6 @@ window.profilePageModule = (function() {
         console.log(guid);
         getProfileGigs(guid, function(data) {
             var profile_gigs = JSON.parse(data);
-            $('.gigs-profile-container').empty();
             for (var i = 0; i < profile_gigs.length; i++) {
                 $.ajax({
                     url: "/api/v1/dht/hkey/?hkey=" + profile_gigs[i],
@@ -55,9 +54,31 @@ window.profilePageModule = (function() {
         });
     }
 
+    function renderOneGig(gigid, one) {
+        $.ajax({
+            url: "/api/v1/dht/hkey/?hkey=" + gigid,
+            hk: gigid,
+            type: "GET",
+            processData: false,
+            success: function(js_data) {
+                if (js_data != 'null') {
+                    var gig_o = JSON.parse(js_data);
+                    generateGigsModule.generate(this.hk, gig_o, true, one);
+                } else {
+                    $('.preloader-card').remove();
+                }
+            },
+            error: function(error) {
+                console.log('ERR', error);
+                return;
+            }
+        });
+    }
+
     return {
         oninit: initProfile,
-        getAllGigs: getGigs
+        getAllGigs: getGigs,
+        renderOneGig: renderOneGig
     }
 })();
 

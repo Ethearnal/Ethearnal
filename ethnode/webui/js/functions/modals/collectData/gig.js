@@ -85,7 +85,13 @@ function collectGigData(form) {
                             $('#add-gig').modal('hide');
                             $('body').removeClass('modal-open');
                             $('body').find('.modal-backdrop').remove();
-                            profilePageModule.getAllGigs(window.profileID);
+                            // if (window.location.pathname == "/ui/profile/") {
+                            profilePageModule.renderOneGig(gigID, true);
+                            // } else if (window.location.pathname == "/ui/") {
+                            //     $('.gigs-container').empty();
+                            //     gigsPageModule.oninitGigs();
+                            // }
+
                             //                            getDHTData(gigID, function(gigData) {
                             //                                $data = JSON.parse(gigData);
                             //                                createGigToProfile($data, gigID);

@@ -1,7 +1,8 @@
 // Smart Search Declarating
 window.generateGigsModule = (function() {
 
-    function generateGigsFromData(gigID, gigObject, isOwn) {
+    function generateGigsFromData(gigID, gigObject, isOwn, one) {
+       
         if (check_gig_marked_deleted(gigObject)) { return }
 
         var api_cdn = api_get_cdn_url();
@@ -55,7 +56,12 @@ window.generateGigsModule = (function() {
                         <div class="user-price">STARTING AT: <span><i class="material-icons">polymer</i>${round_price}</span></div>
                     </div>`;
                     $('.preloader-card').remove();
-                    $(".gigs-container").append(gigLayout);
+                    if (one == true) {
+                        $(".gigs-container").prepend(gigLayout);
+                    }
+                    else {
+                        $(".gigs-container").append(gigLayout);
+                    }
                     componentHandler.upgradeDom();
                 });
             });
@@ -63,8 +69,8 @@ window.generateGigsModule = (function() {
     }
 
     return {
-        generate: function(id, obj, isOwn) {
-            return generateGigsFromData(id, obj, isOwn);
+        generate: function(id, obj, isOwn, one) {
+            return generateGigsFromData(id, obj, isOwn, one);
         }
     }
 
