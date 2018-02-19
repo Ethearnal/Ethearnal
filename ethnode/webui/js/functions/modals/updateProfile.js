@@ -182,7 +182,7 @@ function updateProfileHeadline($form) {
                     };
 
                     $.ajax({
-                      url: "/api/v1/dht/profile/dht/profile",
+                      url: "/api/v1/dht/profile",
                       type: "POST",
                       data: JSON.stringify($data),
                       contentType: "application/json; charset=utf-8",
