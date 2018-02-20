@@ -14,4 +14,19 @@ window.createNewGig = (function() {
             .find(".range-slider__value").text("0");
         $(this).find("#new-gig-category").parent().find(".text").text("All Categories");
     });
+
+    var calculatedLock
+    $('.jsCalculatedLock').on('input', function () {
+      var cost = $('#reputationCost').val(),
+          amount = $('#amount').val(),
+          $calculatedLock = $('#calculatedLock'),
+          calculatedLock = calcLock(cost, amount)
+
+          $calculatedLock.text(calculatedLock + ' ERT')
+    })
+
 })();
+
+function calcLock (cost, amount) {
+  return (cost * amount) / 100
+}
