@@ -273,9 +273,12 @@ def main_http(http_webdir: str = config.http_webdir,
         own_guid_hex=ert.rsa_guid_hex,
         key_composer=None,
     )
+    from apifacades.events import SelfEvent
+    se = SelfEvent(c)
 
     evt = DHTEventHandler(dht_facade_.dht.storage, data_dir=ert_profile_ctl.personal_dir)
     qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
+    eidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Event.model'])
     # qpro = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Profile.key'])
 
     cherrypy.engine.start()

@@ -248,6 +248,37 @@ class GigJobIndexer(object):
     def unindex(self, hk_hex: str):
         self.indexer.unindex(hk_hex)
 
+
+class EventIndexer(object):
+    def __init__(self, indexer: DocumentIndexer, logger=None):
+        self.logger = default_value(logger, ErtLogger(Print()))
+        self.indexer = indexer
+        self.idx = self.indexer.idx
+
+    def index(self, hk_hex: str, data: dict):
+        self.logger('EVENT INDEX', hk_hex, data)
+        q1 = 0
+        q2 = 0
+
+        if 'timestamp' in data:
+            q1 = int(data['timestamp'])
+            print('Q1', q1)
+
+        if 'from_guid' in data:
+            self.indexer.index_field(hk_hex, 'from_guid',
+                                     text_data=data['owner_guid'], prefixes=False, q1=q1, q2=q2)
+        if 'to_guid' in data:
+            self.indexer.index_field(hk_hex, 'to_guid',
+                                     text_data=data['owner_guid'], prefixes=False, q1=q1, q2=q2)
+
+        if 'kind' in data:
+            self.indexer.index_field(hk_hex, 'kind',
+                                     text_data=data['kind'], prefixes=False, q1=q1, q2=q2)
+
+    def unindex(self, hk_hex: str):
+        self.indexer.unindex(hk_hex)
+
+
 # # todo event collection model and index
 # EventActionModelIndexer = GigJobIndexer
 # # todo sent mail, recived mail Mail model and indexes
@@ -269,7 +300,8 @@ class DocModelIndexers(object):
 
         self.MODEL_INDEXERS = {
             '.Gig.model': (GigJobIndexer(DocumentIndexer('%s/gig_idx.db' % data_dir, 'gig_idx'))),
-            '.Profile.key': (ProfileKeyIndexer(DocumentIndexer('%s/profile_key_idx.db' % data_dir, 'pro_key_idx'))),
+            '.Event.model': (GigJobIndexer(DocumentIndexer('%s/gig_idx.db' % data_dir, 'gig_idx'))),
+            # '.Profile.key': (ProfileKeyIndexer(DocumentIndexer('%s/profile_key_idx.db' % data_dir, 'pro_key_idx'))),
         }
         if not data_dir:
             raise IOError('data_dir is not directory:', data_dir)

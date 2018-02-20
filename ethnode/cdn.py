@@ -257,6 +257,7 @@ from webdht.bundle import DHTEventHandler, DocModelIndexQuery
 
 evt = DHTEventHandler(dhf.dht.storage, data_dir=ert.personal_dir)
 qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
+eidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Event.model'])
 # qpro = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Profile.key'])
 
 cherrypy.engine.exit = on_hook(target=tear_down_udp,
