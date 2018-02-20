@@ -220,6 +220,28 @@ paths:
             type: "object"
         400:
           description: "bad input parameter"
+  /dht/peers/:
+    get:
+      tags:
+      - "DHT Network"
+      summary: "Listing peers geo and profile info"
+      description: "Last known peers info"
+      operationId: "dhtIP4PeersInfo"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "render"
+        in: "query"
+        description: "render command peers data"
+        required: false
+        type: "bool"
+      responses:
+        200:
+          description: "retrieve DHT ip4 peers geo and profile info"
+          schema:
+            type: "object"
+        400:
+          description: "bad input parameter"
   /dht/node/:
     get:
       tags:

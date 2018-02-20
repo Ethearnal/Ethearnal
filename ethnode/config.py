@@ -2,6 +2,7 @@
 
 data_dir = 'ethearnal_profile'
 static_files = 'files'
+hfs_dir = 'hfs'
 
 # local public html UI
 

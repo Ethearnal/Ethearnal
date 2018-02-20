@@ -48,8 +48,8 @@ class FsCachedGeoIp(object):
     BIN = 'bin'
     NAT = 'nat'  # python native
 
-    def __init__(self, data_dir):
-        self.fs = FileSystemHashStore(data_dir)
+    def __init__(self, hfs):
+        self.fs = hfs
         self.geo = FreeGeoIpNetClient()
 
     def get_data_from_cache(self, ip4: str, data_format='nat'):

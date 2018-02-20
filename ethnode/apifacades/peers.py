@@ -25,6 +25,8 @@ class PeersInfo(object):
         self._hfs = hfs
         self.peers = dict()
         self.load_data()
+        self.bin_data = b''
+        self.txt_data = ''
 
     def render_dht(self):
         for peer in self._dhf.peers:
@@ -66,14 +68,25 @@ class PeersInfo(object):
         self.render_geo()
         self.render_profile_key('names')
         self.render_profile_key('is_cdn')
+        self.render_profile_key('profilePicture')
+        self.save_data()
+        self.load_data()
 
     def save_data(self):
         js = json.dumps(self.peers, ensure_ascii=False)
         self._hfs.save_bts_str_key('peers', js.encode())
 
     def load_data(self):
-        js = self._hfs.read_io('peers').read().decode()
-        self.peers = json.loads(js)
+        bio = self._hfs.read_io('peers')
+        if not bio:
+            return
+        self.bin_data = bio.read()
+        self.txt_data = self.bin_data.decode()
+        self.peers = json.loads(self.txt_data)
+
+    @property
+    def get_bin_data(self):
+        return self.bin_data
 
 
 

@@ -1,6 +1,7 @@
 import os
 from io import BytesIO
 from toolkit.kadmini_codec import sha256_bin_digest, guid_bin_to_hex
+from toolkit.tools import mkdir
 
 
 def read_in_chunks(fname, chunk_sz=4096, max_chuncks=100) -> BytesIO:
@@ -80,8 +81,10 @@ class FileSystemHashStore(object):
             out.write(bts)
 
 
-
-
+def AutoDirHfs(base_dir: str, name: str) -> FileSystemHashStore:
+    dir_name = '%s/%s' % (os.path.abspath(base_dir), name)
+    mkdir(dir_name)
+    return FileSystemHashStore(dir_name)
 
 
 

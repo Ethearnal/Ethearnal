@@ -250,6 +250,18 @@ def main_http(http_webdir: str = config.http_webdir,
         cherry=cherrypy,
         dhf=dht_facade_,
     )
+    from webfacades.dht_peers import DhtPeers
+    from toolkit.filestore import AutoDirHfs
+    hfs_dir = '%s/%s' % (ert.data_dir, config.hfs_dir)
+    mkdir(hfs_dir)
+    print('HFS_DIR: %s' % hfs_dir)
+    peers = PeersInfo(
+        dhf=d,
+        geo=FsCachedGeoIp(AutoDirHfs(hfs_dir, 'geo_hfs')),
+        hfs=AutoDirHfs(hfs_dir, 'peers_hfs')
+    )
+
+    web_peers = DhtPeers(peers=peers)
 
     from webdht.bundle import DocumentCollectionCRD, DHTEventHandler, DocModelIndexQuery
     from webdht.test_bndle_gig import Gigs as test_gig_data
