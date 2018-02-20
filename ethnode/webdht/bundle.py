@@ -170,6 +170,47 @@ class DocumentCollectionCRD(object):
                                                                  paginate=paginate)]
 
 
+class ProfileKeyIndexer(object):
+    def __init__(self, indexer: DocumentIndexer, logger=None):
+        self.logger = default_value(logger, ErtLogger(Print()))
+        self.indexer = indexer
+        self.idx = self.indexer.idx
+
+    def index(self, hk_hex: str, data: dict):
+        self.logger('INDEX', hk_hex, data)
+        text = ''
+        bio = ''
+        q1 = 0
+        q2 = 0
+        key_name = data['k']
+        value = data['v']
+        print('PRO INDX', key_name)
+
+        if 'name' in key_name:
+            fname = value['first'] + ' ' + value['last']
+            text = fname
+            self.indexer.index_field(hk_hex, 'name', text_data=text, q1=q1, q2=q2)
+
+        # if 'skills' in key_name:
+        #
+        #     self.indexer.index_field(hk_hex, 'skills', text_data=' '.join(value),
+        #                              prefixes=False,
+        #                              q1=q1, q2=q2)
+        #
+        # if 'title' in key_name:
+        #     self.indexer.index_field(hk_hex, 'title', text_data=value,
+        #                              prefixes=True,
+        #                              q1=q1, q2=q2)
+        #
+        # if 'description' in key_name:
+        #     self.indexer.index_field(hk_hex, 'description', text_data=value,
+        #                              prefixes=True,
+        #                              q1=q1, q2=q2)
+
+    def unindex(self, hk_hex: str):
+        self.indexer.unindex(hk_hex)
+
+
 class GigJobIndexer(object):
     def __init__(self, indexer: DocumentIndexer, logger=None):
         self.logger = default_value(logger, ErtLogger(Print()))
@@ -207,20 +248,20 @@ class GigJobIndexer(object):
     def unindex(self, hk_hex: str):
         self.indexer.unindex(hk_hex)
 
-# todo event collection model and index
-EventActionModelIndexer = GigJobIndexer
-# todo sent mail, recived mail Mail model and indexes
-SentMailModelIndexer = GigJobIndexer
-ReceivedMailModelIndexer = GigJobIndexer
-# todo sent/receiced orders Ogig order model
-SentGigOrderIndexer = GigJobIndexer
-ReceivedGigOrderIndexer = GigJobIndexer
-# todo sent/received job applications model
-SentJobApplicationIndexer = GigJobIndexer
-ReceivedGigOrderIndexerJobApplicationIndexer = GigJobIndexer
-# todo
-# and WEB endpoints, CRD collections
-# status udates
+# # todo event collection model and index
+# EventActionModelIndexer = GigJobIndexer
+# # todo sent mail, recived mail Mail model and indexes
+# SentMailModelIndexer = GigJobIndexer
+# ReceivedMailModelIndexer = GigJobIndexer
+# # todo sent/receiced orders Ogig order model
+# SentGigOrderIndexer = GigJobIndexer
+# ReceivedGigOrderIndexer = GigJobIndexer
+# # todo sent/received job applications model
+# SentJobApplicationIndexer = GigJobIndexer
+# ReceivedGigOrderIndexerJobApplicationIndexer = GigJobIndexer
+# # todo
+# # and WEB endpoints, CRD collections
+# # status udates
 
 
 class DocModelIndexers(object):
@@ -228,33 +269,46 @@ class DocModelIndexers(object):
 
         self.MODEL_INDEXERS = {
             '.Gig.model': (GigJobIndexer(DocumentIndexer('%s/gig_idx.db' % data_dir, 'gig_idx'))),
-            '.Job.model': (GigJobIndexer(DocumentIndexer('%s/job_idx.db' % data_dir, 'job_idx'))),
-            '.EventAction.model': (EventActionModelIndexer(DocumentIndexer('%s/evt_idx.db' % data_dir, 'evt_idx'))),
-            '.SentGigOrder.model': (EventActionModelIndexer(DocumentIndexer('%s/sent_gig_order_idx.db' % data_dir,
-                                                                            'sent_gig_order'))),
-            '.ReceivedGigOrder.model': (EventActionModelIndexer(DocumentIndexer('%s/rcv_gig_order.db' % data_dir,
-                                                                                'rcv_gig_idx'))),
-            '.SentMail.model': (EventActionModelIndexer(DocumentIndexer('%s/sent_mail_idx.db' % data_dir,
-                                                                        'sent_mail'))),
-            '.ReceivedMail.model': (EventActionModelIndexer(DocumentIndexer('%s/rcv_mail.db' % data_dir,
-                                                                            'rcv_mail'))),
-            '.SentJobApp.model': (EventActionModelIndexer(DocumentIndexer('%s/sent_job_app_idx.db' % data_dir,
-                                                                          'sent_job_app'))),
-            '.ReceivedJobApp.model': (EventActionModelIndexer(DocumentIndexer('%s/rcv_job_app.db' % data_dir,
-                                                                              'rcv_job_app'))),
-            #
+            '.Profile.key': (ProfileKeyIndexer(DocumentIndexer('%s/profile_key_idx.db' % data_dir, 'pro_key_idx'))),
         }
         if not data_dir:
             raise IOError('data_dir is not directory:', data_dir)
 
-    def index_or_unindex_data(self, hk_int, data):
+    def index_or_unindex_data(self, hk_int, data, hk_owner_bin=None):
         hk_hex = guid_int_to_hex(hk_int)
+        hk_own_hex = None
+        if hk_owner_bin:
+            hk_own_hex = guid_bin_to_hex2(hk_owner_bin)
+
+        # profile key->val
+
+        if 'k' in data:
+            if 'profile:key' in data['k']:
+                key_name = data['k']['profile:key']
+                if key_name:
+                    if 'v' in data:
+                        if not hk_own_hex:
+                            return
+                        key_value = data['v']
+                        idxr = self.MODEL_INDEXERS['.Profile.key']
+                        if key_value:
+                            idxr.index(hk_own_hex, {'k': key_name, 'v': key_value})
+                            print('INDEX',key_name,key_value)
+                        else:
+                            idxr.unindex(hk_own_hex)
+                            print('UNINDEX',hk_own_hex)
+        else:
+            return
+
+        # docs
+
         if 'value' in data:
             value_data = data['value']
             if not isinstance(value_data, dict):
                 return None
         else:
             return None
+
         if 'model' in value_data:
             if value_data['model'] in self.MODEL_INDEXERS:
                 model_name = value_data['model']
@@ -372,18 +426,18 @@ class DHTEventHandler(object):
             raise ValueError('Setup data dir for EventHandle index db files')
         self.doc_indexers = DocModelIndexers(data_dir=self.data_dir)
 
-    def on_push(self, hk, data):
+    def on_push(self, hk, data, hk_owner_bin=None):
         #
         try:
-            self.doc_indexers.index_or_unindex_data(hk_int=hk, data=data)
+            self.doc_indexers.index_or_unindex_data(hk_int=hk, data=data, hk_owner_bin=hk_owner_bin)
         except Exception as e:
             self.logger('on_push indexing failed', e)
         pass
 
-    def on_pull(self, hk, data):
+    def on_pull(self, hk, data, hk_owner_bin=None):
         #
         try:
-            self.doc_indexers.index_or_unindex_data(hk_int=hk, data=data)
+            self.doc_indexers.index_or_unindex_data(hk_int=hk, data=data, hk_owner_bin=hk_owner_bin)
         except Exception as e:
             self.logger('on_pull indexing failed', e)
 

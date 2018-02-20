@@ -209,22 +209,20 @@ dht_node = WebDHTAboutNode(
     dhf=dhf,
 )
 
-#
-# def cors():
-#   if cherrypy.request.method == 'OPTIONS':
-#     # preflign request
-#     # see http://www.w3.org/TR/cors/#cross-origin-request-with-preflight-0
-#     cherrypy.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
-#     cherrypy.response.headers['Access-Control-Allow-Headers'] = 'content-type'
-#     cherrypy.response.headers['Access-Control-Allow-Origin'] = '*'
-#     # tell CherryPy no avoid normal handler
-#     return True
-#   else:
-#     cherrypy.response.headers['Access-Control-Allow-Origin'] = '*'
+from apifacades.peers import PeersInfo
+from toolkit.ipgeo import FsCachedGeoIp
+from webfacades.dht_peers import WebDhtPeers
+from toolkit.filestore import AutoDirHfs
 
-# cherrypy.tools.cors = cherrypy._cptools.HandlerTool(cors)
-
-# cherrypy.tools.CORS = cherrypy.Tool('before_handler', cors)
+hfs_dir = '%s/%s' % (ert.data_dir, config.hfs_dir)
+mkdir(hfs_dir)
+print('HFS_DIR: %s' % hfs_dir)
+peers = PeersInfo(
+    dhf=d,
+    geo=FsCachedGeoIp(AutoDirHfs(hfs_dir, 'geo_hfs')),
+    hfs=AutoDirHfs(hfs_dir, 'peers_hfs')
+)
+web_peers = WebDhtPeers(peers=peers)
 
 cherrypy.config.update({
     'global': {
@@ -235,10 +233,11 @@ cherrypy.config.update({
 
 #
 
-from webdht.bundle import DHTEventHandler,DocModelIndexQuery
+from webdht.bundle import DHTEventHandler, DocModelIndexQuery
 
 evt = DHTEventHandler(dhf.dht.storage, data_dir=ert.personal_dir)
 qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
+qpro = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Profile.key'])
 
 cherrypy.engine.exit = on_hook(target=tear_down_udp,
                                target_args=(dht,),
@@ -259,6 +258,9 @@ if args.converge_pk_and_peers:
     d.converge_peers()
 
 cherrypy.engine.start()
+
+# init dht here
+dhf.push(key={'profile:key': 'is_cdn'}, value={'k': 'is_cdn', 'v': True})
 
 if args.interactive_shell:
     from IPython import embed

@@ -238,6 +238,13 @@ class InvIndexTimestampSQLite(BaseSQLite):
         c = self.cursor.execute(qs, (container_hash,))
         return c
 
+    def delete_components_by_container_and_spec(self, container_hash: bytes, qs_only=False):
+        qs = 'DELETE FROM %s WHERE container_hash=?;' % self.table_name
+        if qs_only:
+            return qs, (container_hash,)
+        c = self.cursor.execute(qs, (container_hash,))
+        return c
+
     # def __depricated_inner_join_on_component(self, *args, asc=True, qs_only=False, limit=30):
     #     if len(args) < 2:
     #         raise ValueError('two or more args required')

@@ -250,7 +250,7 @@ def main_http(http_webdir: str = config.http_webdir,
         cherry=cherrypy,
         dhf=dht_facade_,
     )
-    from webfacades.dht_peers import DhtPeers
+    from webfacades.dht_peers import WebDhtPeers
     from toolkit.filestore import AutoDirHfs
     hfs_dir = '%s/%s' % (ert.data_dir, config.hfs_dir)
     mkdir(hfs_dir)
@@ -261,14 +261,14 @@ def main_http(http_webdir: str = config.http_webdir,
         hfs=AutoDirHfs(hfs_dir, 'peers_hfs')
     )
 
-    web_peers = DhtPeers(peers=peers)
+    web_peers = WebDhtPeers(peers=peers)
 
     from webdht.bundle import DocumentCollectionCRD, DHTEventHandler, DocModelIndexQuery
-    from webdht.test_bndle_gig import Gigs as test_gig_data
+    # from webdht.test_bndle_gig import Gigs as test_gig_data
 
     # nes bundle
     c = DocumentCollectionCRD(
-        'Gig',
+        'Event',
         dhf=dht_facade_,
         own_guid_hex=ert.rsa_guid_hex,
         key_composer=None,
@@ -276,19 +276,7 @@ def main_http(http_webdir: str = config.http_webdir,
 
     evt = DHTEventHandler(dht_facade_.dht.storage, data_dir=ert_profile_ctl.personal_dir)
     qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
-
-
-    #
-
-    web_profile_static = WebProfileStatic(
-        cherry=cherrypy,
-        web_root_dir=http_webdir,
-        web_route_name='profilexxx',
-        file_name='profile.html',
-    )
-
-    # WebGuidPredicateApi
-    # WebSelfPredicateApi
+    qpro = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Profile.key'])
 
     cherrypy.engine.start()
 

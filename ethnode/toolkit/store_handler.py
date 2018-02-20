@@ -75,7 +75,7 @@ class DHTStoreHandlerOne(object):
     def dhf(self, val):
         self._dhf = val
 
-    def on_pushed_ip4_peer(self, data, hk_int=None):
+    def on_pushed_ip4_peer(self, data, hk_int=None, hk_owner_bin=None):
         if self.dhf.indexer:
             try:
                 self.dhf.indexer.index_on(cdx.guid_int_to_hex(hk_int), data)
@@ -178,6 +178,7 @@ class DHTStoreHandlerOne(object):
                     raise ValueError('HKEY REF PUBKEY ERROR')
 
                 pk_owner, pk_signature, pk_value = self.pull(hk)
+                # print('\n\n\n PK_OWNER + + + + + +', cdx.guid_bin_to_hex2(pk_owner))
                 # pk_value =
                 pk_rev, pubkey_data = cdx.decode_bson_val(pk_value)
                 if 'ert:pubkey' in pubkey_data:
@@ -188,7 +189,7 @@ class DHTStoreHandlerOne(object):
                         # logger('VAL SIG OK STORE IN DHT')
                         # pk_rev, data = cdx.decode_bson_val(pk_value)
                         # if self.ON_PUSH_PEER_KEY in key:
-                        self.on_push_handle(hk, data)
+                        self.on_push_handle(hk, data, hk_owner_bin=pk_owner)
 
                         # logger('\n\n\n +++')
                         self.on_pushed_ip4_peer(data, hk_int=key)
@@ -210,14 +211,13 @@ class DHTStoreHandlerOne(object):
     def pull(self, hk):
         # logger('STORE HANDLER PULL', hk)
         logger('LOCAL PULL DATA', hk)
-
+        pk_owner = None
         t = self.store.get(hk)
         if t:
             try:
                 pk_owner, pk_signature, pk_value = self.store.get(hk)
                 revision, data = cdx.decode_bson_val(pk_value)
-                # # logger(data, data[self.ON_PUSH_PEER_KEY])
-                self.on_pull_handle(hk, data)
+                self.on_pull_handle(hk, data, hk_owner_bin=pk_owner)
                 if self.ON_PUSH_GUID_KEY in data:
                     # logger('\n\n\n GUIDS REQUESTED \n\n\n')
                     v = data[self.ON_PUSH_GUID_KEY]
@@ -248,7 +248,8 @@ class DHTStoreHandlerOne(object):
                 # logger('ON PULL DECODING FAIL', str(e))
                 pass
         if not t:
-            self.on_pull_handle(hk, dict())
+            self.on_pull_handle(hk, dict(), hk_owner_bin=pk_owner)
+        # self.on_pull_handle(hk, dict(), hk_owner_bin=pk_owner)
         return self.store.get(hk)
 
     def __contains__(self, hk):
