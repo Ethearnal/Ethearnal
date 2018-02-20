@@ -276,7 +276,7 @@ def main_http(http_webdir: str = config.http_webdir,
 
     evt = DHTEventHandler(dht_facade_.dht.storage, data_dir=ert_profile_ctl.personal_dir)
     qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
-    qpro = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Profile.key'])
+    # qpro = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Profile.key'])
 
     cherrypy.engine.start()
 
@@ -318,18 +318,21 @@ def main_http(http_webdir: str = config.http_webdir,
 def punch_dht_udp_hole(port, attempts=3, proto='UDP'):
     punch_hole_failed = True
     for i in range(attempts):
-        print('\n\n\n UPnP try firewall punch hole')
+        pass
+        # print('\n\n\n UPnP try firewall punch hole')
         try:
             if upnp.punch_port(port, port, proto=proto):
                 punch_hole_failed = False
                 break
             else:
-                print('\n\n\n FAIL: UPnP try firewall punch hole')
+                pass
+                # print('\n\n\n FAIL: UPnP try firewall punch hole')
         except Exception as e:
-            print('\n\n\n FAIL: UPnP try firewall punch hole', str(e))
+            pass
+            # print('\n\n\n FAIL: UPnP try firewall punch hole', str(e))
 
     if punch_hole_failed:
-        print('\n\n\n PUNCH HOLE IN FIREWALL FAILED')
+        # print('\n\n\n PUNCH HOLE IN FIREWALL FAILED')
         return False
     else:
         return True

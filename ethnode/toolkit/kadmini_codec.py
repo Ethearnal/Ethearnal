@@ -213,6 +213,18 @@ def value_protocol(t):
                 except:
                     pass
 
+def decode_profile_key_val(t):
+    if t:
+        d = bson.loads(t[-1])
+        if 'e' in d:
+            ll = d['e']
+            if len(ll) >= 1:
+                dd = ll[1]
+                if 'v' in dd:
+                    # sanitize
+                    vvv = dd['v']
+                    return vvv
+
 
 def guid_key_composer(key, guid_hex, revision=DEFAULT_REVISION):
     guid = guid_hex_to_bin(guid_hex)

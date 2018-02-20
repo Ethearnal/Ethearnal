@@ -5,6 +5,7 @@ import argparse
 from dhtcdn.webapi import WebCDN, WebCDNSite, WebCDNClientRequestHeaders
 from webdht.wdht_ertapi import IdxCdnQueryWebApi
 from toolkit.tools import mkdir, on_hook, get_ip_address
+from apifacades.dhtkv import DhtKv
 
 site_conf = {
     '/': {
@@ -209,20 +210,39 @@ dht_node = WebDHTAboutNode(
     dhf=dhf,
 )
 
+
+
 from apifacades.peers import PeersInfo
 from toolkit.ipgeo import FsCachedGeoIp
 from webfacades.dht_peers import WebDhtPeers
 from toolkit.filestore import AutoDirHfs
+from webfacades.dht_kv import WebDhtCdnInfo
+#
 
+ert.cdn_service_http_url = 'http://%s:%s' % (ip, port)
 hfs_dir = '%s/%s' % (ert.data_dir, config.hfs_dir)
 mkdir(hfs_dir)
 print('HFS_DIR: %s' % hfs_dir)
+geo = FsCachedGeoIp(AutoDirHfs(hfs_dir, 'geo_hfs'))
 peers = PeersInfo(
     dhf=d,
-    geo=FsCachedGeoIp(AutoDirHfs(hfs_dir, 'geo_hfs')),
+    geo=geo,
     hfs=AutoDirHfs(hfs_dir, 'peers_hfs')
 )
 web_peers = WebDhtPeers(peers=peers)
+cdn_info = {
+    'http': {
+        'service_url': ert.cdn_service_http_url,
+        'geo': geo.get(ip4=ip),
+        'ip4': ip,
+        'port': port,
+    }
+
+}
+dkv = DhtKv(d)
+dkv.set('is_cdn', True)
+dkv.set('cdn_info', cdn_info)
+dht_info = WebDhtCdnInfo(dkv)
 
 cherrypy.config.update({
     'global': {
@@ -237,14 +257,14 @@ from webdht.bundle import DHTEventHandler, DocModelIndexQuery
 
 evt = DHTEventHandler(dhf.dht.storage, data_dir=ert.personal_dir)
 qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
-qpro = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Profile.key'])
+# qpro = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Profile.key'])
 
 cherrypy.engine.exit = on_hook(target=tear_down_udp,
                                target_args=(dht,),
                                target_kwargs={})(cherrypy.engine.exit)
 
 
-ert.cdn_service_http_url = 'http://%s:%s' % (ip, port)
+
 
 print('HTTP service IP url:', ert.cdn_service_http_url)
 
@@ -259,8 +279,7 @@ if args.converge_pk_and_peers:
 
 cherrypy.engine.start()
 
-# init dht here
-dhf.push(key={'profile:key': 'is_cdn'}, value={'k': 'is_cdn', 'v': True})
+
 
 if args.interactive_shell:
     from IPython import embed
