@@ -73,7 +73,7 @@
 			</nav>
 		</div>
 	</header>
-
+	
 	<div class="modal fade" id="modal-sm">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content about-head-modal">
@@ -220,7 +220,7 @@
 	    </div>
 	  </div>
 	</div>
-
+	
 	<div id="redesigned-modal" class="hidden">
 	  <div class="modal-content border-radius-6 redesigned-gig-modal">
 	    <div class="modal-header pdd-horizon-30" id="redesigned-modal-gig-image" style="height: 200px;">
@@ -330,7 +330,7 @@
 	                                <div class="form-group">
 	                                    <label>Cost of reputation</label>
 	                                    <div class="range-slider">
-	                                        <input class="range-slider__range jsCalculatedLock" id="reputationCost" type="range" value="0" min="0" max="100">
+	                                        <input class="range-slider__range" id="reputationCost" type="range" value="0" min="0" max="100">
 	                                        <span class="range-slider__value">0</span>
 	                                    </div>
 	                                </div>
@@ -340,16 +340,11 @@
 	                                        <div class="icon">
 	                                            <i class="material-icons">polymer</i>
 	                                        </div>
-	                                        <input id="amount" type="number" class="form-control jsCalculatedLock">
+	                                        <input id="amount" type="number" class="form-control">
 	                                        <div class="amount-label">.00</div>
 	                                    </div>
 	                                </div>
 	                            </div>
-															<div class="flex">
-																<div class="form-group">
-																	<div class="calculated-lock"> <label>Calculated Lock:</label> <span id="calculatedLock">0 ERT</span></div>
-																</div>
-															</div>
 	                            <div class="form-group full-width">
 	                                <label for="description">Description (what have you done or currently do?)</label>
 	                                <textarea id="description" type="text" rows="3" name="description" class="form-control description"></textarea>
