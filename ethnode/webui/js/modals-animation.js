@@ -98,9 +98,9 @@ $(document).on('click', '#addNewGigSend', function() {
 });
 
 $(document).on("click", "#updateProfile", function() {
-  $content = $(this).closest(".content");
-  $form = $content.find("form");
-  updateProfileHeadline($form);
+    $content = $(this).closest(".content");
+    $form = $content.find("form");
+    collectProfileData($form);
 });
 
 

@@ -258,8 +258,6 @@ function main_profile_cards() {
       processData: false,
       success: function(data) {
         known_guids = JSON.parse(data);
-        var d1 = $.deferred;
-
         var loaderindex = 0;
         function recursiveBuildProfiles(index) {
           if (loaderindex == 9) {
