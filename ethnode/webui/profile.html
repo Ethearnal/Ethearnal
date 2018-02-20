@@ -209,7 +209,7 @@
 								</div>
 								<div class="flex">
 									<div class="form-group">
-										<label>Add categories (limit: 10)</label>
+										<label>Add skills (limit: 10)</label>
 										<select name="categories" multiple="" id="categories-edit" class="ui fluid dropdown normal search skills-dropdown">
 										</select>
 									</div>
@@ -268,7 +268,7 @@
 	                        <img id="input-image-gig" src="#" alt="" class="show-image empty" style="display:none;">
 	                        <div id="cropper-wrap-gig" class="cropper-wrap" style="display: none;"></div>
 	                        <div class="btns-wrap">
-	                            <button style="" class="btn btn-pink jsCropUpload">Upload photo</button>
+	                            <button class="btn btn-pink jsCropUpload">Upload photo</button>
 	                            <button style="display: none;" class="btn btn-success jsCropResult">Confirm result</button>
 	                        </div>
 	                    </div>
@@ -311,9 +311,9 @@
 	                            </div>
 	                            <div class="flex">
 	                                <div class="form-group">
-	                                    <label>Cost of reputation</label>
+	                                    <label>Lock ERT in % from price:</label>
 	                                    <div class="range-slider">
-	                                        <input class="range-slider__range" id="reputationCost" type="range" value="0" min="0" max="100">
+	                                        <input class="range-slider__range jsCalculatedLock" id="reputationCost" type="range" value="0" min="0" max="100">
 	                                        <span class="range-slider__value">0</span>
 	                                    </div>
 	                                </div>
@@ -323,8 +323,16 @@
 	                                        <div class="icon">
 	                                            <i class="material-icons">polymer</i>
 	                                        </div>
-	                                        <input id="amount" type="number" class="form-control">
+	                                        <input id="amount" type="number" class="form-control jsCalculatedLock">
 	                                        <div class="amount-label">.00</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="flex">
+	                                <div class="form-group">
+	                                    <div class="calculated-lock">
+	                                        <label>Calculated Lock:</label>
+	                                        <span id="calculatedLock">0 ERT</span>
 	                                    </div>
 	                                </div>
 	                            </div>

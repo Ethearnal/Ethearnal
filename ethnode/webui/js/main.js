@@ -78,7 +78,7 @@ var event_on_search_gig_data = function(data_js) {
             function recursiveBuildGigs(index) {
                 if (loaderindex == 9) {
                     if (data.length >= limit) {
-                        var loadmore = `<div class="load-more"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+                        var loadmore = `<div class="load-more jsLoadMoreSearch"><span class="btn btn-default btn-rounded">Load More</span></div>`;
                         setTimeout(function() { $(".gigs-container").append(loadmore) }, 500);
                     }
                     return;
@@ -89,7 +89,7 @@ var event_on_search_gig_data = function(data_js) {
                 console.log(data.length + ' ? ' + limit)
                 if (index >= data.length) {
                     if (data.length >= limit) {
-                        var loadmore = `<div class="load-more"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+                        var loadmore = `<div class="load-more jsLoadMoreSearch"><span class="btn btn-default btn-rounded">Load More</span></div>`;
                         setTimeout(function() { $(".gigs-container").append(loadmore) }, 500);
                     }
                     $('.preloader-card').remove();
@@ -251,7 +251,6 @@ var search_event = function() {
 
 // profile cards begin
 function main_profile_cards() {
-    $('.profiles-container').empty();
     $.ajax({
       url: "/api/v1/dht/guids/",
       type: "GET",
@@ -259,10 +258,11 @@ function main_profile_cards() {
       success: function(data) {
         known_guids = JSON.parse(data);
         var loaderindex = 0;
+        $('.load-more').remove();
         function recursiveBuildProfiles(index) {
           if (loaderindex == 9) {
             if (known_guids.length >= limit) {
-              var loadmore = `<div class="load-more"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+              var loadmore = `<div class="load-more jsLoadMoreProfiles"><span class="btn btn-default btn-rounded">Load More</span></div>`;
               setTimeout(function() {
                 $(".profiles-container").append(loadmore);
               }, 500);
@@ -273,11 +273,14 @@ function main_profile_cards() {
           var preloader = `<div class="preloader-card"><img src="./dist/img/preloader.gif" alt=""></div>`;
           $(".profiles-container").append(preloader);
           console.log(known_guids.length + " ? " + limit);
-          if (index >= known_guids.length) {
-              var loadmore = `<div class="load-more"><span class="btn btn-default btn-rounded">Load More</span></div>`;
-              setTimeout(function() {
-                $(".profiles-container").append(loadmore);
-              }, 500);
+          if (index > known_guids.length) {
+            console.log("pes");
+              if (known_guids.length > limit) {
+                var loadmore = `<div class="load-more jsLoadMoreProfiles"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+                setTimeout(function() {
+                    $(".profiles-container").append(loadmore);
+                }, 500);
+            }
             $(".preloader-card").remove();
             return;
           } else {
@@ -286,7 +289,7 @@ function main_profile_cards() {
                     setTimeout(function() {
                         index++;
                         recursiveBuildProfiles(index);
-                    }, 500);
+                    }, 50);
                 }
             });
           }

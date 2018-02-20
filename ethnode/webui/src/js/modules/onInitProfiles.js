@@ -10,6 +10,12 @@ window.profilesPageModule = (function() {
         main_profile_cards();
     }
 
+    $(document).on('click', '.jsLoadMoreProfiles', function() {
+        limit = limit + 9;
+        main_profile_cards();
+    });
+
+
     return {
         oninitprofiles: function() {
             return initProfiles();

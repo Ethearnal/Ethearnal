@@ -249,6 +249,7 @@ function createProfileCard(owner_guid, callback) {
                     }
                     // headline image
                     getProfileValue(owner_guid, 'headlinePicture', function (headline_hash) {
+                        callback();
                         if (headline_hash == 'null') {
                             console.log('P headline_hash NULL', headline_hash);
                         } else {
@@ -277,7 +278,7 @@ function createProfileCard(owner_guid, callback) {
                                     ${profileCardRenderData.skillsTemplate}
                                     </div>
                                 </div>`;
-                                callback();
+                                $(".preloader-card").remove();
                                 if (!profileCardRenderData.isWrongData) {
                                     $(".profiles-container").append(profilecard);
                                 }

@@ -176,7 +176,7 @@ window.smartSearchModule = (function() {
 
 
 
-    $(document).on('click', '.load-more', function() {
+    $(document).on('click', '.jsLoadMoreSearch', function() {
         limit = limit + 9;
         smartSearchModule.search();
     });
