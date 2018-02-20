@@ -276,29 +276,28 @@ class DocModelIndexers(object):
 
     def index_or_unindex_data(self, hk_int, data, hk_owner_bin=None):
         hk_hex = guid_int_to_hex(hk_int)
-        hk_own_hex = None
-        if hk_owner_bin:
-            hk_own_hex = guid_bin_to_hex2(hk_owner_bin)
-
-        # profile key->val
-
-        if 'k' in data:
-            if 'profile:key' in data['k']:
-                key_name = data['k']['profile:key']
-                if key_name:
-                    if 'v' in data:
-                        if not hk_own_hex:
-                            return
-                        key_value = data['v']
-                        idxr = self.MODEL_INDEXERS['.Profile.key']
-                        if key_value:
-                            idxr.index(hk_own_hex, {'k': key_name, 'v': key_value})
-                            print('INDEX',key_name,key_value)
-                        else:
-                            idxr.unindex(hk_own_hex)
-                            print('UNINDEX',hk_own_hex)
-        else:
-            return
+        # hk_own_hex = None
+        # # this is msg owner sender not guid owner
+        # if hk_owner_bin:
+        #     hk_own_hex = guid_bin_to_hex2(hk_owner_bin)
+        #
+        # # profile key->val
+        #
+        # if 'k' in data:
+        #     if 'profile:key' in data['k']:
+        #         key_name = data['k']['profile:key']
+        #         if key_name:
+        #             if 'v' in data:
+        #                 if 'o' in data:
+        #                     own_guid = data['o']
+        #                     key_value = data['v']
+        #                     idxr = self.MODEL_INDEXERS['.Profile.key']
+        #                     if key_value:
+        #                         idxr.unindex(own_guid)
+        #                         idxr.index(own_guid, {'k': key_name, 'v': key_value})
+        #
+        # else:
+        #     return
 
         # docs
 
