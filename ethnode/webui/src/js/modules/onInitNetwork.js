@@ -1,46 +1,19 @@
 // Smart Search Declarating
 window.networkPageModule = (function () {
   function initNetwork () {
-
     var map;
-    // var icon = "http://path/to/icon.png";
-    // var json = "http://path/to/universities.json";
     var infowindow = new google.maps.InfoWindow();
     function initialize() {
 
         var mapProp = {
-            center: new google.maps.LatLng(52.4550, -3.3833), //LLANDRINDOD WELLS
-            zoom: 7,
+            center: new google.maps.LatLng(52.4550, -3.3833),
+            zoom: 5,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
         map = new google.maps.Map(document.getElementById("map"), mapProp);
 
-
-
-        //  $.getJSON(json, function(json1) {
         var json1 = {
-            // "universities": [
-            //     {
-            //         "title": "Aberystwyth University",
-            //         "web": "www.aber.ac.uk",
-            //         "phone": "+44 (0)1970 623 111",
-            //         "lat": 52.415524,
-            //         "lng": -4.063066},
-            //     {
-            //         "title": "Bangor University",
-            //         "web": "www.bangor.ac.uk",
-            //         "phone": "+44 (0)1248 351 151",
-            //         "lat": 53.229520,
-            //         "lng": -4.129987},
-            //     {
-            //         "title": "Cardiff Metropolitan University",
-            //         "website": "www.cardiffmet.ac.uk",
-            //         "phone": "+44 (0)2920 416 138",
-            //         "lat": 51.482708,
-            //         "lng": -3.165881}
-            // ]
-
           "geoJSON": [
               {
                 "geo": {
@@ -59,8 +32,7 @@ window.networkPageModule = (function () {
                 "port": "5678",
                 "ip4": "178.62.22.110",
                 "service_url": "http://178.62.22.110:5678"
-              },
-              {
+              }, {
                 "ip4": "165.227.184.55",
                 "port": "5678",
                 "geo": {
@@ -99,34 +71,30 @@ window.networkPageModule = (function () {
         };
 
         $.each(json1.geoJSON, function (key, data) {
-          // console.log(data.geo);
-          console.log(data.geo.longitude);
-          // console.log(data.geo.country_name);
-          // var latLng = new google.maps.LatLng(data.lat, data.lng);
           var latLng = new google.maps.LatLng(data.geo.latitude, data.geo.longitude);
-          console.log(latLng);
           var marker = new google.maps.Marker({
               position: latLng,
               map: map,
-              // icon: icon,
               title: data.geo.country_name
           });
 
-          // var details = data.title + ", " + data.website + ".";
-          var details = data.geo.zip_code + ", " + data.geo.country_name + ".";
+          var country = data.geo.country_name;
+          var ip4 = data.ip4;
 
-          bindInfoWindow(marker, map, infowindow, details);
-
-          //    });
+          bindInfoWindow(marker, map, infowindow, country, ip4);
 
         });
 
     }
 
-    function bindInfoWindow(marker, map, infowindow, strDescription) {
+    function bindInfoWindow(marker, map, infowindow, country, ip4) {
         google.maps.event.addListener(marker, 'click', function () {
-            infowindow.setContent(strDescription);
-            infowindow.open(map, marker);
+
+          $('#modal-network').find('.ntw-country').text(country)
+          $('#modal-network').find('.ntw-ip').text(ip4)
+          $("[data-target='#modal-network']").trigger('click')
+            // infowindow.setContent(strDescription);
+            // infowindow.open(map, marker);
         });
     }
 

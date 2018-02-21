@@ -175,6 +175,11 @@ def main_http(http_webdir: str = config.http_webdir,
             'tools.staticdir.dir': http_webdir,
             'tools.staticdir.index': 'index.html',
         },
+        '/ui/network': {
+            'tools.staticdir.on': True,
+            'tools.staticdir.dir': http_webdir,
+            'tools.staticdir.index': 'network.html',
+        },
         '/ui/profile': {
             'tools.staticdir.on': True,
             'tools.staticdir.dir': http_webdir,
@@ -439,5 +444,3 @@ if __name__ == '__main__':
         print('MAIN ERROR')
         cherrypy.engine.stop()
         traceback.print_exc(file=sys.stdout)
-
-
