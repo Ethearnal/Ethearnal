@@ -45,13 +45,11 @@ window.networkPageModule = (function () {
               {
                 "geo": {
                   "zip_code": "EC2V",
-                  "latitude": 51.482708,
-                  // "latitude": 51.5142,
+                  "latitude": 51.5142,
                   "country_name": "United Kingdom",
                   "region_name": "England",
                   "ip": "178.62.22.110",
-                  "longitude": -3.165881,
-                  // "longitude": -0.0931,
+                  "longitude": -0.0931,
                   "city": "London",
                   "time_zone": "Europe/London",
                   "region_code": "ENG",
