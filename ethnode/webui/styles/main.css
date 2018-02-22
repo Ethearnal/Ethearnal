@@ -1950,7 +1950,7 @@
         }
          section.documentation .container .profile-documentation-full .profile-documentation {
              margin-left: 0;
-             box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.1);
+             /* box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.1); */
         }
          section.background-image {
              height: 300px !important;
