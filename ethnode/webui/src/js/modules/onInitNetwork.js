@@ -1,126 +1,126 @@
-// Smart Search Declarating
+// Network
 window.networkPageModule = (function () {
+
   function initNetwork () {
-    var map;
-    var infowindow = new google.maps.InfoWindow();
-    function initialize() {
 
-        var mapProp = {
-            center: new google.maps.LatLng(52.4550, -3.3833),
-            zoom: 5,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+    var json1 = [
+      {
+        "geo": {
+          "zip_code": "EC2V",
+          "latitude": 51.5142,
+          "country_name": "United Kingdom",
+          "region_name": "England",
+          "ip": "178.62.22.110",
+          "longitude": -0.0931,
+          "city": "London",
+          "time_zone": "Europe/London",
+          "region_code": "ENG",
+          "country_code": "GB",
+          "metro_code": 0
+        },
+        "port": "5678",
+        "ip4": "178.62.22.110",
+        "service_url": "http://178.62.22.110:5678"
+      },
+      {
+        "ip4": "165.227.184.55",
+        "port": "5678",
+        "geo": {
+          "zip_code": "07014",
+          "latitude": 40.8326,
+          "country_name": "United States",
+          "region_name": "New Jersey",
+          "ip": "165.227.184.55",
+          "longitude": -74.1307,
+          "metro_code": 501,
+          "city": "Clifton",
+          "time_zone": "America/New_York",
+          "region_code": "NJ",
+          "country_code": "US"
+        },
+        "service_url": "http://165.227.184.55:5678"
+      },
+      {
+        "ip4": "46.101.223.52",
+        "port": "5678",
+        "geo": {
+          "zip_code": "09039",
+          "latitude": 50.1167,
+          "metro_code": 0,
+          "region_name": "Hesse",
+          "ip": "46.101.223.52",
+          "longitude": 8.6833,
+          "country_name": "Germany",
+          "city": "Frankfurt am Main",
+          "time_zone": "Europe/Berlin",
+          "region_code": "HE",
+          "country_code": "DE"
+        },
+        "service_url": "http://46.101.223.52:5678"
+      }
+    ]
 
-        map = new google.maps.Map(document.getElementById("map"), mapProp);
+    var sourceFeatures = new ol.source.Vector(),
+        layerFeatures = new ol.layer.Vector({source: sourceFeatures})
 
-        var json1 = {
-          "geoJSON": [
-              {
-                "geo": {
-                  "zip_code": "EC2V",
-                  "latitude": 51.5142,
-                  "country_name": "United Kingdom",
-                  "region_name": "England",
-                  "ip": "178.62.22.110",
-                  "longitude": -0.0931,
-                  "city": "London",
-                  "time_zone": "Europe/London",
-                  "region_code": "ENG",
-                  "country_code": "GB",
-                  "metro_code": 0
-                },
-                "port": "5678",
-                "ip4": "178.62.22.110",
-                "service_url": "http://178.62.22.110:5678"
-              }, {
-                "ip4": "165.227.184.55",
-                "port": "5678",
-                "geo": {
-                  "zip_code": "07014",
-                  "latitude": 40.8326,
-                  "country_name": "United States",
-                  "region_name": "New Jersey",
-                  "ip": "165.227.184.55",
-                  "longitude": -74.1307,
-                  "metro_code": 501,
-                  "city": "Clifton",
-                  "time_zone": "America/New_York",
-                  "region_code": "NJ",
-                  "country_code": "US"
-                },
-                "service_url": "http://165.227.184.55:5678"
-              }, {
-                "ip4": "46.101.223.52",
-                "port": "5678",
-                "geo": {
-                  "zip_code": "09039",
-                  "latitude": 50.1167,
-                  "metro_code": 0,
-                  "region_name": "Hesse",
-                  "ip": "46.101.223.52",
-                  "longitude": 8.6833,
-                  "country_name": "Germany",
-                  "city": "Frankfurt am Main",
-                  "time_zone": "Europe/Berlin",
-                  "region_code": "HE",
-                  "country_code": "DE"
-                },
-                "service_url": "http://46.101.223.52:5678"
-              }
-            ]
-        };
+    var map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({source: new ol.source.OSM()}),
+        layerFeatures
+      ],
+      view: new ol.View({ center: [0, 0], zoom: 2 })
+    })
 
-        $.each(json1.geoJSON, function (key, data) {
-          var latLng = new google.maps.LatLng(data.geo.latitude, data.geo.longitude);
-          var marker = new google.maps.Marker({
-              position: latLng,
-              map: map,
-              title: data.geo.country_name
-          });
+    var style1 = [
+      new ol.style.Style({
+        image: new ol.style.Icon(({
+          rotateWithView: false,
+          anchor: [0.5, 1],
+          anchorXUnits: 'fraction',
+          anchorYUnits: 'fraction',
+          opacity: 1,
+          scale: 0.7,
+          // src: '//cdn.rawgit.com/jonataswalker/ol3-contextmenu/master/examples/img/pin_drop.png'
+          src: '//raw.githubusercontent.com/jonataswalker/map-utils/master/images/marker.png'
+        })),
+        zIndex: 5
+      }),
+      new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: 5,
+          fill: new ol.style.Fill({color: 'rgba(255,255,255,1)'}),
+          stroke: new ol.style.Stroke({color: 'rgba(0,0,0,1)'})
+        })
+      })
+    ]
 
-          var country = data.geo.country_name;
-          var ip4 = data.ip4;
+    for (var i = 0; i < json1.length; i++) {
+      var count = 0
+      console.log(json1[i].geo.latitude)
+      console.log(json1[i].geo.longitude)
 
-          bindInfoWindow(marker, map, infowindow, country, ip4);
-
-        });
-
+      var feature = new ol.Feature({
+        type: 'click',
+        ip4: json1[i].ip4,
+        country: json1[i].geo.country_name,
+        geometry: new ol.geom.Point(ol.proj.transform([json1[i].geo.longitude, json1[i].geo.latitude], 'EPSG:4326', 'EPSG:3857'))
+      })
+      feature.setStyle(style1);
+      sourceFeatures.addFeature(feature);
     }
 
-    function bindInfoWindow(marker, map, infowindow, country, ip4) {
-        google.maps.event.addListener(marker, 'click', function () {
+    map.on('click', function(evt) {
+      var f = map.forEachFeatureAtPixel(evt.pixel, function(ft, layer) { return ft })
+      if (f && f.get('type') === 'click') {
+        var geometry = f.getGeometry()
+        var coord = geometry.getCoordinates()
 
-          $('#modal-network').find('.ntw-country').text(country)
-          $('#modal-network').find('.ntw-ip').text(ip4)
-          $("[data-target='#modal-network']").trigger('click')
-            // infowindow.setContent(strDescription);
-            // infowindow.open(map, marker);
-        });
-    }
-
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-  //   // openlayer old
-  //   var map = new ol.Map({
-  //     target: 'map',
-  //     layers: [
-  //       new ol.layer.Tile({
-  //         source: new ol.source.OSM()
-  //       })
-  //     ],
-  //     view: new ol.View({
-  //       center: ol.proj.fromLonLat([37.41, 8.82]),
-  //       zoom: 4
-  //     })
-  //   })
-  //
-  //   var pin_icon = '//cdn.rawgit.com/jonataswalker/ol3-contextmenu/master/examples/img/pin_drop.png';
-  //   var center_icon = '//cdn.rawgit.com/jonataswalker/ol3-contextmenu/master/examples/img/center.png';
-  //   var list_icon = '//cdn.rawgit.com/jonataswalker/ol3-contextmenu/master/examples/img/view_list.png';
-  //
-  //   map.on('click', function (e) {
-  //     console.log(this)
-  //   })
+        $('#modal-network').find('.ntw-country').text(f.j.country)
+        $('#modal-network').find('.ntw-ip').text(f.j.ip4)
+        $("[data-target='#modal-network']").trigger('click')
+      }
+    })
   }
 
   return {
