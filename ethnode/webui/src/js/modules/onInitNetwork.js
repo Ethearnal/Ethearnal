@@ -115,9 +115,8 @@ window.networkPageModule = (function () {
       if (f && f.get('type') === 'click') {
         var geometry = f.getGeometry()
         var coord = geometry.getCoordinates()
-
-        $('#modal-network').find('.ntw-country').text(f.j.country)
-        $('#modal-network').find('.ntw-ip').text(f.j.ip4)
+        $('#modal-network').find('.ntw-country').text(f.N.country)
+        $('#modal-network').find('.ntw-ip').text(f.N.ip4)
         $("[data-target='#modal-network']").trigger('click')
       }
     })
