@@ -105,6 +105,38 @@
             }
         }
     }
+    .bg-change {
+        position: absolute;
+        right: 40px;
+        bottom: 60px;
+        cursor: pointer;
+        // box-shadow: 4px 4px 12px 3px rgba(0, 0, 0, 0.3);
+        width: 120px;
+        height: 120px;
+        z-index: 888;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        display: none;
+        // border: 1px solid #fff;
+        margin-bottom: 10px;
+        background-color: rgba(175, 190, 218, 0.2);
+        opacity: 0.8;
+        img {
+            width: 100%;
+        }
+        @media (max-width: 767px) {
+            display: none !important;
+        }
+        @media (max-width: 1099px) {
+            bottom: 10px;
+        }
+    }
+    &:hover {
+        .bg-change {
+            display: flex;
+        }
+    }
 }
 
 .inner-profile {
@@ -131,8 +163,9 @@
 
 .gigs-profile-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
+    padding-right: 30px;
     padding-left: 30px;
 }
 

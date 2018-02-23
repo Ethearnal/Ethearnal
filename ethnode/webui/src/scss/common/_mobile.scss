@@ -8,12 +8,15 @@
 
 @media (max-width: 767px) {
     .profile-page, .gigs-page, .profiles-page {
-        .collapse {
+        .navbar-collapse {
             display: block;
             .dropdown-menu {
                 right: 0;
                 left: inherit;
                 min-width: 120px;
+                 a {
+                    text-align: left !important;
+                 }
             }
         }
         #navigation ul.nav li a:first-child {
@@ -27,11 +30,12 @@
         }
         .modal {
             padding-right: 0px !important;
+            padding-left: 0px !important;
         }
     }
     .gigs-container {
         min-width: auto;
-        justify-content: center !important;
+        justify-content: space-around !important;
     }
     .slider-wrapper {
         width: 70%;
@@ -72,7 +76,7 @@
             margin: 0px;
             .modal-content {
                 border-radius: 0px;
-                .btns-wrap {
+                .btns-wrap { 
                     text-align: center;
                 }
             }
@@ -137,6 +141,11 @@
     .edit-profile-btn {
         text-align: center;
     }
+    .sidebar-fixed {
+        .budget {
+            text-align: center;
+        }
+    }
 }
 
 // HEADER MOBILE
@@ -200,4 +209,20 @@
     //         margin-right: 0px;
     //     }
     // }
+}
+
+@media (min-width: 630px) and (max-width: 767px) {
+    #redesigned-modal-gig-title {
+        padding-top: 20px;
+    }
+    .main-header {
+        padding-left: 10px;
+    }
+} 
+.card-title {
+    display: flex;
+    justify-content: space-between;
+}
+.panel-collapse {
+    background-color: #fff;
 }
