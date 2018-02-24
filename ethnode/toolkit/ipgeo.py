@@ -1,5 +1,6 @@
-import requests, json
-from toolkit.filestore import FileSystemHashStore
+import requests
+import json
+# from toolkit.filestore import FileSystemHashStore
 
 SERVICE_ENDPOINT_FS = 'http://freegeoip.net/json/%s'
 

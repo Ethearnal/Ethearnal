@@ -95,6 +95,14 @@ parser.add_argument('-r', '--http_relay_get_url',
                     required=False,
                     type=str)
 
+
+parser.add_argument('-x', '--http_proxy_service',
+                    default=None,
+                    help='host:port',
+                    required=False,
+                    type=str)
+
+
 parser.add_argument('-g', '--converge_pk_and_peers',
                     help='exchange pk keys and peers with boot peer',
                     required=False,
@@ -211,15 +219,19 @@ dht_node = WebDHTAboutNode(
 )
 
 
-
 from apifacades.peers import PeersInfo
 from toolkit.ipgeo import FsCachedGeoIp
 from webfacades.dht_peers import WebDhtPeers
 from toolkit.filestore import AutoDirHfs
 from webfacades.dht_kv import WebDhtCdnInfo
 #
+if args.http_proxy_service:
+    proxy_ip, proxy_port = args.http_proxy_service.split(':')
+    ert.cdn_service_http_url = 'http://%s:%s' % (proxy_ip, proxy_port)
+else:
+    ert.cdn_service_http_url = 'http://%s:%s' % (ip, port)
 
-ert.cdn_service_http_url = 'http://%s:%s' % (ip, port)
+
 hfs_dir = '%s/%s' % (ert.data_dir, config.hfs_dir)
 mkdir(hfs_dir)
 print('HFS_DIR: %s' % hfs_dir)
