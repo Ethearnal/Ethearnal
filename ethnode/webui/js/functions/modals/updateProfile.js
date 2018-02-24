@@ -24,11 +24,16 @@ function updateProfile() {
         $name = JSON.parse(name);
         if (!$name) { return; }
         $profile.find('.user-name').text($name.first + ' ' + $name.last);
+        $profile
+          .find("#first-name")
+          .val($name.first);
+        $profile.find("#last-name").val($name.last);
     });
 
     // CHANGING PROFILE TITLE
     getProfileValue(profileID, 'title', function(title) {
         $profile.find('.user-role').text(JSON.parse(title));
+        $profile.find("#title").val(JSON.parse(title));
     });
 
     // CHANGING LOCATION
@@ -46,6 +51,9 @@ function updateProfile() {
     // CHANGING PROFILE DESCRIPTION
     getProfileValue(profileID, 'description', function(description) {
         $profile.find('.user-description').text(JSON.parse(description));
+        $profile
+          .find("#description")
+          .text(JSON.parse(description));
     });
 
     // CHANGING PROFILE REPUTATION
@@ -106,6 +114,14 @@ function updateProfile() {
             var appendSkill = '<span class="item">' + skill + '</span>';
             $profile.find('.skills').append(appendSkill);
         });
+
+        $(JSON.parse(skills)).each(function(i, skill) {
+            var appendSkill = "<option value='"+ skill +"'>" + skill + "</option>";
+            $profile.find("#categories-edit").append(appendSkill);
+            $profile
+              .find(".skills-dropdown")
+              .dropdown("set selected", skill);
+        });
     });
 
     // CHANGING PROFILE LANGUAGES
@@ -114,21 +130,30 @@ function updateProfile() {
             var appendLanguage = '<span class="item">' + language + '</span>';
             $profile.find('.languages').append(appendLanguage);
         });
+        $(JSON.parse(languages)).each(function(i, language) {
+            var appendLanguage = '<option value="'+ language +'">' + language + "</option>";
+            $profile.find("#languages-edit").append(appendLanguage);
+            $profile
+              .find(".languages-dropdown")
+              .dropdown("set selected", language);
+        });
     });
 }
 
-function updateProfileHeadline() {
-    console.log('updateProfileHeadline');
-    var headline_form = document.getElementById('image-headline-form');
-    fd = $('#image-headline-form', '#input-image-profile-he').prevObject;
+function updateProfileHeadline($form) {
+    console.log($form);
+    $imgInputID = $content.find("input.input-file").attr("id");
+    var fileObj;
+    if ($imgInputID == "input-image-profile") {
+      if (window.$uploadCropBlobProfile) {
+        fileObj = window.$uploadCropBlobProfile;
+      }
+    } else {
+      fileObj = document.getElementById($imgInputID).files[0];
+    }
 
-
-
-    console.log('upload HEADLINE image', fd);
     var objFormData = new FormData();
-
-
-    var fileObj = fd[0].files[0];
+    
     objFormData.append('ufile', fileObj);
     // var api_cdn_post="http://london.ethearnal.com:5678/api/cdn/v1/resource/";
     // var api_cdn="http://london.ethearnal.com:5678/api/cdn/v1/resource?hkey=";
@@ -144,13 +169,35 @@ function updateProfileHeadline() {
                 processData: false,
                 contentType: false,
                 success: function(headline_hash) {
-                    setProfileValue('headlinePicture', headline_hash);
-                    console.log('headline_hash', headline_hash);
-                    //$('#profile-headline').attr('src', api_cdn + headline_hash);
-                    $('#profile-headline').css(
+                    $('.profile-headline').css(
                         'background-image',
                         'url("' + api_cdn + headline_hash + '&thumb=1")'
                     );
+                    $data = { 
+                      general_domain_of_expertise: $profile.find("#categories-edit").dropdown("get value"),
+                      skills: $profile.find("#skills-edit").dropdown("get value"),
+                      title: $profile.find("#title").val(),
+                      name: {first: $profile.find("#first-name").val(), last:$profile.find("#last-name").val()},
+                      description: $profile.find("#description").val()
+                    };
+
+                    $.ajax({
+                      url:
+                        api_put_cdn_url() +
+                        "/api/v1/dht/profile",
+                      type: "PUT",
+                      data: JSON.stringify($data),
+                      contentType:
+                        "application/json; charset=utf-8",
+                      processData: false,
+                      success: function() {
+                        $("#add-gig").modal("hide");
+                        $("body").removeClass("modal-open");
+                        $("body")
+                          .find(".modal-backdrop")
+                          .remove();
+                      }
+                    });
                 }
             });
         } else {

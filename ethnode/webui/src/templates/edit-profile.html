@@ -1,0 +1,78 @@
+<div id="edit-profile" class="edit-profile-redesigned modal fade" role="dialog">
+	<div class="modal-dialog modal-box-content">
+		<div class="modal-content inner-modal">
+			<div class="card-heading">
+				<h4 class="card-title">Edit Profile</h4>
+				<i class="material-icons" data-dismiss="modal">highlight_off</i>
+			</div>
+			<div class="content">
+				<div class="success-message">
+					<h1 class="title">Congratulations!</h1>
+					<div class="success-content">
+						<p>Your profile has been updated.</p>
+						<div class="buttons">
+							<button class="mdl-button mdl-js-button close-button congrats-close">Close the modal to see it</button>
+							<span>OR</span>
+							<button class="mdl-button mdl-js-button create-new">Edit profile again</button>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-group full-width flex-box-center">
+						<input id="input-image-profile" type="file" accept="image/*" placeholder="Add image or video" class="input-file">
+						<label for="input-image-profile" class="img-label" style="background-image: url('images/image-video-image-file.png');">
+							<p class="add-photo-label"></p>
+						</label>
+						<span id="input-image-profile" alt="" class="show-image empty" style="display:none;"></span>
+						<div id="cropper-wrap-profile" class="cropper-wrap" style="display: none;"></div>
+						<div class="btns-wrap profile">
+							<button class="btn btn-pink jsCropUploadProfile">Upload photo</button>
+							<button style="display: none;" class="btn btn-success jsCropResultProfile">Confirm result</button>
+						</div>
+					</div>
+
+					<div class="modal-inputs">
+						<form id="form-update-education" action="POST">
+							<div class="flex">
+								<div class="form-group">
+									<label>First Name</label>
+									<input id="first-name" name="first-name" type="text" class="form-control ">
+								</div>
+								<div class="form-group">
+									<label>Last Name</label>
+									<input id="last-name" name="last-name" type="text" class="form-control ">
+								</div>
+							</div>
+							<div class="flex">
+								<div class="form-group">
+									<label>Add skills (limit: 10)</label>
+									<select name="categories" multiple="" id="categories-edit" class="ui fluid dropdown normal search skills-dropdown">
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Add languages (limit: 10)</label>
+									<select name="languages" multiple="" id="languages-edit" class="ui fluid dropdown normal search languages-dropdown">
+										
+									</select>
+								</div>
+							</div>
+							<div class="form-group full-width">
+								<label>Title</label>
+								<input id="title" name="title" type="text" class="form-control ">
+							</div>
+							<div class="form-group full-width">
+								<label for="description">Description</label>
+								<textarea id="description" type="text" rows="3" name="description" class="form-control description"></textarea>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="updateProfile" class="btn btn-pink finish-button">Publish</button>
+					<button class="close-button btn btn-default" data-dismiss="modal">Close</button>
+					<div data-mdl-for="publish4" class="mdl-tooltip">This text will be changed anyway.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

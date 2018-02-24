@@ -41,6 +41,12 @@ var api_idx_cdn_url = function() {
     return c;
 };
 
+var api_put_cdn_url = function() {
+  c = "http://" + CDN_HOST_PORT;
+  console.log("using put cdn: ", c);
+  return c;
+};
+
 // event handlers
 
 var event_on_gig_profile_key_data = function(guid, profile_key, data) {
@@ -72,7 +78,7 @@ var event_on_search_gig_data = function(data_js) {
             function recursiveBuildGigs(index) {
                 if (loaderindex == 9) {
                     if (data.length >= limit) {
-                        var loadmore = `<div class="load-more"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+                        var loadmore = `<div class="load-more jsLoadMoreSearch"><span class="btn btn-default btn-rounded">Load More</span></div>`;
                         setTimeout(function() { $(".gigs-container").append(loadmore) }, 500);
                     }
                     return;
@@ -83,7 +89,7 @@ var event_on_search_gig_data = function(data_js) {
                 console.log(data.length + ' ? ' + limit)
                 if (index >= data.length) {
                     if (data.length >= limit) {
-                        var loadmore = `<div class="load-more"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+                        var loadmore = `<div class="load-more jsLoadMoreSearch"><span class="btn btn-default btn-rounded">Load More</span></div>`;
                         setTimeout(function() { $(".gigs-container").append(loadmore) }, 500);
                     }
                     $('.preloader-card').remove();
@@ -245,39 +251,51 @@ var search_event = function() {
 
 // profile cards begin
 function main_profile_cards() {
-    $('.profiles-container').empty();
     $.ajax({
-        url: '/api/v1/dht/guids',
-        type: 'GET',
-        processData: false,
-        success: function(data) {
-            known_guids = JSON.parse(data);
-            var d1 = $.deferred;
-            var counter = 0;
-
-            function chain() {
-                createProfileCard(known_guids[counter], function() {
-                    counter++;
-                    if (counter == known_guids.length) return
+      url: "/api/v1/dht/guids/",
+      type: "GET",
+      processData: false,
+      success: function(data) {
+        known_guids = JSON.parse(data);
+        var loaderindex = 0;
+        $('.load-more').remove();
+        function recursiveBuildProfiles(index) {
+          if (loaderindex == 9) {
+            if (known_guids.length >= limit) {
+              var loadmore = `<div class="load-more jsLoadMoreProfiles"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+              setTimeout(function() {
+                $(".profiles-container").append(loadmore);
+              }, 500);
+            }
+            return;
+          }
+          loaderindex++;
+          var preloader = `<div class="preloader-card"><img src="./dist/img/preloader.gif" alt=""></div>`;
+          $(".profiles-container").append(preloader);
+          console.log(known_guids.length + " ? " + limit);
+          if (index > known_guids.length) {
+            console.log("pes");
+              if (known_guids.length > limit) {
+                var loadmore = `<div class="load-more jsLoadMoreProfiles"><span class="btn btn-default btn-rounded">Load More</span></div>`;
+                setTimeout(function() {
+                    $(".profiles-container").append(loadmore);
+                }, 500);
+            }
+            $(".preloader-card").remove();
+            return;
+          } else {
+            createProfileCard(known_guids[index], function() {
+                if (index < known_guids.length) {
                     setTimeout(function() {
-                        'Chain Started';
-                        startChain();
-                    }, 150)
-                });
-            }
-
-            function startChain() {
-                chain();
-            }
-            startChain();
-
-            // known_guids.forEach(function(element) {
-            //     createProfileCard(element);
-            // });
-            // known_guids.forEach(function(element) {
-            //     createProfileCard(element);
-            // });
+                        index++;
+                        recursiveBuildProfiles(index);
+                    }, 50);
+                }
+            });
+          }
         }
+        recursiveBuildProfiles(limit - 9);
+      }
     });
 };
 
@@ -619,7 +637,7 @@ $(document).ready(function() {
                 if ($inputID == "input-image-avatar") {
                     addImage(e.target.result);
                 }
-                if ($inputID == "input-image-gig") {
+                else if ($inputID == "input-image-gig") {
                     window.$uploadCrop.croppie('bind', {
                         url: e.target.result
                     });
@@ -628,7 +646,37 @@ $(document).ready(function() {
                     $content.find('img#input-image-gig').addClass('empty');
                     $content.find('.jsCropResult').show();
                     //$content.find('.img-label').css('background-image','url("'+ e.target.result +'")');
-                } else {
+                } else if ($inputID == "input-image-gig") {
+                    window.$uploadCrop.croppie('bind', {
+                        url: e.target.result
+                    });
+                    $content.find('.img-label').css('display', 'none');
+                    $content.find('#cropper-wrap-gig').css('display', 'block');
+                    $content.find('img#input-image-gig').addClass('empty');
+                    $content.find('.jsCropResult').show();
+                    //$content.find('.img-label').css('background-image','url("'+ e.target.result +'")');
+                }
+                else if ($inputID == "input-image-gig") {
+                    window.$uploadCrop.croppie('bind', {
+                        url: e.target.result
+                    });
+                    $content.find('.img-label').css('display', 'none');
+                    $content.find('#cropper-wrap-gig').css('display', 'block');
+                    $content.find('img#input-image-gig').addClass('empty');
+                    $content.find('.jsCropResult').show();
+                    //$content.find('.img-label').css('background-image','url("'+ e.target.result +'")');
+                }
+                else if ($inputID == "input-image-profile") {
+                    window.$uploadCropProfile.croppie('bind', {
+                        url: e.target.result
+                    });
+                    $content.find('.img-label').css('display', 'none');
+                    $content.find('#cropper-wrap-profile').css('display', 'block');
+                    $content.find('img#input-image-profile').addClass('empty');
+                    $content.find('.jsCropResultProfile').show();
+                    //$content.find('.img-label').css('background-image','url("'+ e.target.result +'")');
+                } 
+                else {
                     $content.find('img#' + $inputID + '').attr('src', e.target.result).show();
                 }
             }
@@ -719,9 +767,9 @@ $(document).ready(function() {
         }
 
         // $('.ui .menu, .panel-body').perfectScrollbar();
-        $('section.background-image .items, .modal-body .image .items').owlCarousel({
-            singleItem: true
-        });
+        // $('section.background-image .items, .modal-body .image .items').owlCarousel({
+        //     singleItem: true
+        // });
         $('.ui.dropdown').dropdown();
 
         $('.skills-dropdown, .languages-dropdown, .gig-tags, .portfolio-tags').dropdown({

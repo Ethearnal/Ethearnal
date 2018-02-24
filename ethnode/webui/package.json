@@ -10,6 +10,7 @@
   "author": "ramel9",
   "license": "ISC",
   "dependencies": {
+    "bootstrap-datepicker": "^1.7.1",
     "croppie": "^2.5.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
@@ -25,6 +26,7 @@
     "gulp-watch": "^4.3.11",
     "imagemin-pngquant": "^5.0.1",
     "jquery": "^3.2.1",
+    "moment": "^2.20.1",
     "rimraf": "^2.6.2",
     "yargs": "^10.1.1"
   },

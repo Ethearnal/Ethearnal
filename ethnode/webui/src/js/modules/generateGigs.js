@@ -1,7 +1,8 @@
 // Smart Search Declarating
 window.generateGigsModule = (function() {
 
-    function generateGigsFromData(gigID, gigObject) {
+    function generateGigsFromData(gigID, gigObject, isOwn, one) {
+       
         if (check_gig_marked_deleted(gigObject)) { return }
 
         var api_cdn = api_get_cdn_url();
@@ -21,8 +22,12 @@ window.generateGigsModule = (function() {
         }
 
         var round_price = Math.round(gigObject.price * 1000) / 1000;
+        var gigDeleteString = '';
+        if (isOwn) {
+            var gigDeleteString = '<li class="mdl-menu__item delete">Delete</li>'
+        }
         var dropdownButton = '<button id="DDB' + gigID + '" class="dropdown-gig mdl-button mdl-js-button mdl-button--icon dropdown-button btn-info-edit"><i class="material-icons">more_vert</i></button>';
-        var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB' + gigID + '"><li class="mdl-menu__item js-open-gig-modal">Open</li></ul>';
+        var dropdownUL = '<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="DDB' + gigID + '"><li class="mdl-menu__item js-open-gig-modal">Open</li>' + gigDeleteString + '</ul>';
 
         if (gigObject.hasOwnProperty('owner_guid')) {
             owner_guid = gigObject.owner_guid;
@@ -51,7 +56,12 @@ window.generateGigsModule = (function() {
                         <div class="user-price">STARTING AT: <span><i class="material-icons">polymer</i>${round_price}</span></div>
                     </div>`;
                     $('.preloader-card').remove();
-                    $(".gigs-container").append(gigLayout);
+                    if (one == true) {
+                        $(".gigs-container").prepend(gigLayout);
+                    }
+                    else {
+                        $(".gigs-container").append(gigLayout);
+                    }
                     componentHandler.upgradeDom();
                 });
             });
@@ -59,8 +69,8 @@ window.generateGigsModule = (function() {
     }
 
     return {
-        generate: function(id, obj) {
-            return generateGigsFromData(id, obj);
+        generate: function(id, obj, isOwn, one) {
+            return generateGigsFromData(id, obj, isOwn, one);
         }
     }
 

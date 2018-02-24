@@ -20,29 +20,36 @@ var gulp = require('gulp'),
     buffer = require('vinyl-buffer');
 
 var path = {
-    build: {
-        html: 'dist/',
-        css: 'dist/css/',
-        img: 'dist/img/',
-        fonts: 'dist/fonts/',
-        js: 'dist/js/'
-    },
-    src: {
-        html: 'src/*.html',
-        scss: 'src/scss/main.scss',
-        js: 'src/js/main.js',
-        img: 'src/img/**/*.*',
-        fonts: 'src/fonts/**/*.*',
-        libsStyles: [
-            `node_modules/bootstrap/dist/css/bootstrap.min.css`,
-            `node_modules/font-awesome/css/font-awesome.min.css`
-        ],
-        libsJS: [
-            `node_modules/jquery/dist/jquery.min.js`,
-            `node_modules/bootstrap/dist/js/bootstrap.min.js`,
-        ]
-    },
-    clean: './dist'
+  build: {
+    html: "dist/",
+    css: "dist/css/",
+    img: "dist/img/",
+    fonts: "dist/fonts/",
+    js: "dist/js/"
+  },
+  src: {
+    html: "src/*.html",
+    scss: "src/scss/main.scss",
+    js: "src/js/main.js",
+    img: "src/img/**/*.*",
+    fonts: "src/fonts/**/*.*",
+    libsStyles: [
+      `node_modules/bootstrap/dist/css/bootstrap.min.css`,
+      `node_modules/font-awesome/css/font-awesome.min.css`
+    ],
+    libsJS: [
+      `./src/js/vendors/jquery.min.js`,
+      `./src/js/vendors/jquery-ui.min.js`,
+      `./src/js/vendors/jquery.toast.js`,
+      `./src/js/vendors/bootstrap.min.js`,
+      `./src/js/vendors/material.min.js`,
+      `./src/js/vendors/semantic.min.js`,
+      `./node_modules/moment/min/moment.min`,
+      `./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js`,
+      `./node_modules/croppie/croppie.min.js`
+    ]
+  },
+  clean: "./dist"
 };
 
 var argv = require('yargs').argv;
@@ -67,6 +74,7 @@ gulp.task('style:build', function() {
             .pipe(sourcemaps.init())
             // can output style in :'nested', ':expanded', ':compact' or ':compressed'
             .pipe(sass().on('error', sass.logError))
+            // .pipe(cssmin())
             .pipe(sourcemaps.write())
             .pipe(gulp.dest(path.build.css))
             // .pipe(browserSync.reload({stream: true}))
@@ -79,6 +87,14 @@ gulp.task('styleLib:build', function() {
         .pipe(cssmin())
         .pipe(concat('vendor.min.css'))
         .pipe(gulp.dest(path.build.css))
+});
+
+gulp.task('libsJS:build', () => {
+    return gulp
+        .src(path.src.libsJS)
+        .pipe(concat('vendor.min.js'))
+		.pipe(uglify())
+        .pipe(gulp.dest('dist/js/'));
 });
 
 gulp.task('js:build', function () {
@@ -118,10 +134,10 @@ gulp.task('build', (cb) => {
     sequence('clean', [
         'html:build',
         'style:build',
-        'styleLib:build',
         'js:build',
         'fonts:build',
-        'image:build'
+        'image:build',
+        'libsJS:build'
     ], () => cb());
 });
 

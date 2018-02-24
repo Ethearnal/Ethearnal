@@ -216,93 +216,78 @@ function createProfileCard(owner_guid, callback) {
       isWrongData: false
     }
 
-    /* CREATING JQ DEFERRED FOR EACH REQUEST TO HAVE OPORTUNITY WITH ONLY 1 CALLBACK $.when ALL CALLBACKS RETURN TRUE */
-    var d1 = $.Deferred();
-    var d2 = $.Deferred();
-    var d3 = $.Deferred();
-    var d4 = $.Deferred();
-    var d5 = $.Deferred();
-    var d6 = $.Deferred();
+      
 
-    $.when( d1, d2, d3, d4, d5, d6 ).done(function () {
-      var profilecard = `
-        <div class="user-card profile-user-card" id="${owner_guid}">
-            <div class="img-card" id="proowner${owner_guid}" style="background: url(${profileCardRenderData.headlineImage}) no-repeat; background-size: cover; background-position: center;">
-                <div class="card-label" id="protitle${owner_guid}">${profileCardRenderData.title}</div>
-            </div>
-            <div class="user-profile-img">
-                <div id="proimgav${owner_guid}" class="div-img-wrap" style="background: url(${profileCardRenderData.userProfileImage}) center no-repeat;"></div>
-            </div>
-            <p class="user-name" id="proname${owner_guid}">${profileCardRenderData.userName}</p>
-            <div class="user-info">
-                <p class="info" id="prodesc${owner_guid}">${profileCardRenderData.description}</p>
-            </div>
-            <div class="user-skills">
-              ${profileCardRenderData.skillsTemplate}
-            </div>
-        </div>`;
-      callback();
-      if (!profileCardRenderData.isWrongData) {
-        $(".profiles-container").append(profilecard);
-      }
-    });
-
-    // profile images
     getProfileValue(owner_guid, 'profilePicture', function(profile_picture_url) {
-      if (profile_picture_url != 'null') {
-        profileCardRenderData.userProfileImage = api_cdn + JSON.parse(profile_picture_url) + '&thumb=1';
-      }
-      d1.resolve( "Fish" );
-    });
-
-    // name
-    getProfileValue(owner_guid, 'name', function(name_js) {
-        //
-        if (name_js == 'null') {
-            console.log('P NULL', name_js);
-            profileCardRenderData.isWrongData = true
-        } else {
-            var names_o = JSON.parse(name_js);
-            profileCardRenderData.userName = names_o.first + " " + names_o.last;
+        if (profile_picture_url != 'null') {
+            profileCardRenderData.userProfileImage = api_cdn + JSON.parse(profile_picture_url) + '&thumb=1';
         }
-        d2.resolve( "Fish" );
-    });
-    // title
-    getProfileValue(owner_guid, 'title', function(title_js) {
-        if (title_js == 'null') {
-            console.log('P NULL', title_js);
-        } else {
-            profileCardRenderData.title = JSON.parse(title_js);
-        }
-        d3.resolve( "Fish" );
-    });
-    // desc
-    getProfileValue(owner_guid, 'description', function(title_js) {
-        //
-        if (title_js == 'null') {
-            console.log('P NULL', title_js);
-        } else {
-            profileCardRenderData.description = JSON.parse(title_js);
-        }
-        d4.resolve( "Fish" );
-    });
-    // headline image
-    getProfileValue(owner_guid, 'headlinePicture', function(headline_hash) {
-        if (headline_hash == 'null') {
-            console.log('P headline_hash NULL', headline_hash);
-        } else {
-            profileCardRenderData.headlineImage = api_cdn + JSON.parse(headline_hash) + '&thumb=1';
-        }
-        d5.resolve( "Pizza" );
-    });
-
-    // CHANGING PROFILE SKILLS
-    getProfileValue(owner_guid, 'skills', function(skills) {
-        // Append skills to profile
-        profileCardRenderData.skillsTemplate = '';
-        $(JSON.parse(skills)).each(function(i, skill) {
-            profileCardRenderData.skillsTemplate += '<span class="item">' + skill + '</span>';
+        // name
+        getProfileValue(owner_guid, 'name', function (name_js) {
+            //
+            if (name_js == 'null') {
+                console.log('P NULL', name_js);
+                profileCardRenderData.isWrongData = true
+            } else {
+                var names_o = JSON.parse(name_js);
+                profileCardRenderData.userName = names_o.first + " " + names_o.last;
+            }
+            // title
+            getProfileValue(owner_guid, 'title', function (title_js) {
+                if (title_js == 'null') {
+                    console.log('P NULL', title_js);
+                } else {
+                    profileCardRenderData.title = JSON.parse(title_js);
+                }
+                // desc
+                getProfileValue(owner_guid, 'description', function (title_js) {
+                    //
+                    if (title_js == 'null') {
+                        console.log('P NULL', title_js);
+                    } else {
+                        profileCardRenderData.description = JSON.parse(title_js);
+                    }
+                    // headline image
+                    getProfileValue(owner_guid, 'headlinePicture', function (headline_hash) {
+                        callback();
+                        if (headline_hash == 'null') {
+                            console.log('P headline_hash NULL', headline_hash);
+                        } else {
+                            profileCardRenderData.headlineImage = api_cdn + JSON.parse(headline_hash) + '&thumb=1';
+                        }
+                        // CHANGING PROFILE SKILLS
+                        getProfileValue(owner_guid, 'skills', function (skills) {
+                            // Append skills to profile
+                            profileCardRenderData.skillsTemplate = '';
+                            $(JSON.parse(skills)).each(function (i, skill) {
+                                profileCardRenderData.skillsTemplate += '<span class="item">' + skill + '</span>';
+                            });
+                            var profilecard = `
+                                <div class="user-card profile-user-card" id="${owner_guid}">
+                                    <div class="img-card" id="proowner${owner_guid}" style="background: url(${profileCardRenderData.headlineImage}) no-repeat; background-size: cover; background-position: center;">
+                                        <div class="card-label" id="protitle${owner_guid}">${profileCardRenderData.title}</div>
+                                    </div>
+                                    <div class="user-profile-img">
+                                        <div id="proimgav${owner_guid}" class="div-img-wrap" style="background: url(${profileCardRenderData.userProfileImage}) center no-repeat;"></div>
+                                    </div>
+                                    <p class="user-name" id="proname${owner_guid}">${profileCardRenderData.userName}</p>
+                                    <div class="user-info">
+                                        <p class="info" id="prodesc${owner_guid}">${profileCardRenderData.description}</p>
+                                    </div>
+                                    <div class="user-skills">
+                                    ${profileCardRenderData.skillsTemplate}
+                                    </div>
+                                </div>`;
+                                $(".preloader-card").remove();
+                                if (!profileCardRenderData.isWrongData) {
+                                    $(".profiles-container").append(profilecard);
+                                }
+                        });
+                    });
+                });
+            });
         });
-        d6.resolve();
     });
+
+   
 }
