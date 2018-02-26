@@ -62,6 +62,20 @@ paths:
           description: "ok"
         400:
           description: "err"
+  /info:
+    get:
+      tags:
+      - "CDN"
+      summary: "get CDN info"
+      description: "retrieve cdn geo and info"
+      operationId: "getReqHeaders"
+      produces:
+      - "*/*"
+      responses:
+        200:
+          description: "ok"
+        400:
+          description: "err"
   /idx:
     get:
       tags:
