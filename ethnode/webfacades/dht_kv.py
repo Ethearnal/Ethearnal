@@ -1,15 +1,17 @@
 from webfacades.webbase import WebApiBase
 from apifacades.dhtkv import DhtKv
 import json
-
+import cherrypy
 
 class WebDhtCdnInfo(WebApiBase):
     def __init__(self,
                  dkv: DhtKv,
+                 cherry=cherrypy,
                  mount_point='/api/cdn/v1/info',
                  mount_it=True):
         super(WebDhtCdnInfo, self).__init__(mount_point=mount_point, mount_it=mount_it)
         self.dkv = dkv
+        self.cherry = cherrypy
 
     def GET(self, *a, **kw):
         # bad
@@ -29,8 +31,7 @@ class WebDhtCdnInfo(WebApiBase):
         return bn
 
     def OPTIONS(self):
-        self.cherrypy.response.headers['Access-Control-Allow-Methods'] = 'GET'
-        self.cherrypy.response.headers['Access-Control-Allow-Headers'] = 'content-type'
-        self.cherrypy.response.headers['Access-Control-Allow-Origin'] = '*'
-        # tell CherryPy no avoid normal handler
+        self.cherry.response.headers['Access-Control-Allow-Methods'] = 'GET'
+        self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+        self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
         return b''

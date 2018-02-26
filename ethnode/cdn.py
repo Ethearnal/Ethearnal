@@ -254,7 +254,7 @@ cdn_info = {
 dkv = DhtKv(d)
 dkv.set('is_cdn', True)
 dkv.set('cdn_info', cdn_info)
-dht_info = WebDhtCdnInfo(dkv)
+dht_info = WebDhtCdnInfo(dkv, cherry=cherrypy)
 
 cherrypy.config.update({
     'global': {
