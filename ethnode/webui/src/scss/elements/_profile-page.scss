@@ -39,6 +39,11 @@
             * {
                 letter-spacing: 0.5px !important;
             }
+            .editBtnProfile {
+                &:focus {
+                    color: #fff;
+                }
+            }
             .user-name {
                 font-weight: 500;
                 line-height: 1.2;
