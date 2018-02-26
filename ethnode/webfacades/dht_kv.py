@@ -16,7 +16,7 @@ class WebDhtCdnInfo(WebApiBase):
         if 'known' in kw:
             ll = list()
             for guid in self.dkv.dhf.known_guids():
-                data = self.dkv.get('cdn_info', guid_hex=guid, local=False)
+                data = self.dkv.get('cdn_info', guid_hex=guid, local=True)
                 if data:
                     ll.append(data)
             if ll:
