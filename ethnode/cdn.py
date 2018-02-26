@@ -268,7 +268,7 @@ cherrypy.config.update({
 from webdht.bundle import DHTEventHandler, DocModelIndexQuery
 
 evt = DHTEventHandler(dhf.dht.storage, data_dir=ert.personal_dir)
-qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
+# qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
 eidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Event.model'])
 # qpro = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Profile.key'])
 
