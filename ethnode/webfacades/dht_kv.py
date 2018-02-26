@@ -27,3 +27,10 @@ class WebDhtCdnInfo(WebApiBase):
         js = json.dumps(data, ensure_ascii=False)
         bn = js.encode()
         return bn
+
+    def OPTIONS(self):
+        self.cherrypy.response.headers['Access-Control-Allow-Methods'] = 'GET'
+        self.cherrypy.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+        self.cherrypy.response.headers['Access-Control-Allow-Origin'] = '*'
+        # tell CherryPy no avoid normal handler
+        return b''
