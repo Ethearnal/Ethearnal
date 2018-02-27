@@ -5,9 +5,10 @@ from apifacades.peers import PeersInfo
 class WebDhtPeers(WebApiBase):
     def __init__(self,
                  peers: PeersInfo,
+                 cherry=None,
                  mount_point='/api/v1/dht/peers',
                  mount_it=True):
-        super(WebDhtPeers, self).__init__(mount_point=mount_point, mount_it=mount_it)
+        super(WebDhtPeers, self).__init__(cherry=cherry,mount_point=mount_point, mount_it=mount_it)
         self.peers = peers
         self.peers.load_data()
 

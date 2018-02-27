@@ -241,7 +241,7 @@ peers = PeersInfo(
     geo=geo,
     hfs=AutoDirHfs(hfs_dir, 'peers_hfs')
 )
-web_peers = WebDhtPeers(peers=peers)
+web_peers = WebDhtPeers(peers=peers, cherry=cherrypy)
 cdn_info = {
     'http': {
         'service_url': ert.cdn_service_http_url,
