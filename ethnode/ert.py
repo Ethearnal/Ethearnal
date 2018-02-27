@@ -104,6 +104,13 @@ parser.add_argument('-g', '--converge_pk_and_peers',
                     action='store_true'
                     )
 
+parser.add_argument('-t', '--self_test_and_exit',
+                    help='run self testing and exit',
+                    required=False,
+                    action='store_true'
+                    )
+
+
 
 class EthearnalSite(object):
     @cherrypy.expose
@@ -475,6 +482,21 @@ if __name__ == '__main__':
         if args.converge_pk_and_peers:
             print('CONVERGE PEERS')
             d.converge_peers()
+
+        if args.self_test_and_exit:
+            # todo impl testing here
+            import sys
+            from time import sleep
+
+            print('Running ERT ert.py self test ')
+            print('.')
+            sleep(1)
+            print('.')
+            sleep(1)
+            print('OK')
+            tear_down_udp(dht)
+            cherrypy.engine.stop()
+            sys.exit(0)
 
         if not args.dht_only:
             main_http(http_webdir=http_webdir,

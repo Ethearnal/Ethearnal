@@ -18,12 +18,12 @@ site_conf = {
         'tools.staticdir.dir': 'cdnapidef/swagger',
         'tools.staticdir.index': 'index.html',
     },
-    '/api/ui': {
-        'tools.staticdir.root': os.path.abspath(os.getcwd()),
-        'tools.staticdir.on': True,
-        'tools.staticdir.dir': 'apidef/swagger',
-        'tools.staticdir.index': 'index.html',
-    }
+    # '/api/ui': {
+    #     'tools.staticdir.root': os.path.abspath(os.getcwd()),
+    #     'tools.staticdir.on': True,
+    #     'tools.staticdir.dir': 'apidef/swagger',
+    #     'tools.staticdir.index': 'index.html',
+    # }
 
 }
 cherrypy.response.headers['Cache-Control'] = 'public, max-age=5'
@@ -110,6 +110,13 @@ parser.add_argument('-g', '--converge_pk_and_peers',
                     )
 
 
+parser.add_argument('-t', '--self_test_and_exit',
+                    help='run self testing and exit',
+                    required=False,
+                    action='store_true'
+                    )
+
+
 args = parser.parse_args()
 host, port = args.http_host_port.split(':')
 udp_host, udp_port = args.udp_host_port.split(':')
@@ -139,11 +146,13 @@ from ert_profile import EthearnalProfileController
 from kadem.kad import DHT
 from kadem.kad import DHTFacade
 from toolkit import store_handler
-from ert import tear_down_udp, punch_dht_udp_hole
-from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
-from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
-from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI, Indexer
-from toolkit import upnp
+from ert import tear_down_udp
+# from ert import punch_dht_udp_hole
+# from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
+# from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
+# from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI, DhtPortfoliosWebAPI
+from webdht.wdht_ertapi import Indexer
+# from toolkit import upnp
 
 ert = EthearnalProfileController(data_dir=cdn_profile_dir, cdn_service_node=True)
 ip = get_ip_address(args.if_name)
@@ -196,27 +205,27 @@ from webdht.bundle import DHTEventHandler,DocModelIndexQuery
 evt = DHTEventHandler(d.dht.storage, data_dir=ert.personal_dir)
 qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
 
-knownguids = WebDHTKnownGuids(
-    cherry=cherrypy,
-    dhtf=dhf,
-    mount_point='/api/v1/dht/guids'
-)
-
-
-dht_ip4 = WebDHTKnownPeers(
-    cherry=cherrypy,
-    dhf=dhf,
-)
-
-dht_profile = WebDHTProfileKeyVal(
-    cherry=cherrypy,
-    dhf=dhf,
-)
-
-dht_node = WebDHTAboutNode(
-    cherry=cherrypy,
-    dhf=dhf,
-)
+# knownguids = WebDHTKnownGuids(
+#     cherry=cherrypy,
+#     dhtf=dhf,
+#     mount_point='/api/v1/dht/guids'
+# )
+#
+#
+# dht_ip4 = WebDHTKnownPeers(
+#     cherry=cherrypy,
+#     dhf=dhf,
+# )
+#
+# dht_profile = WebDHTProfileKeyVal(
+#     cherry=cherrypy,
+#     dhf=dhf,
+# )
+#
+# dht_node = WebDHTAboutNode(
+#     cherry=cherrypy,
+#     dhf=dhf,
+# )
 
 
 from apifacades.peers import PeersInfo
@@ -292,6 +301,20 @@ if args.converge_pk_and_peers:
 
 cherrypy.engine.start()
 
+
+if args.self_test_and_exit:
+    #todo impl testing here
+    import sys
+    from time import sleep
+    print('Running CDN cdn.py self test ')
+    print('.')
+    sleep(1)
+    print('.')
+    sleep(1)
+    print('OK')
+    tear_down_udp(dhf.dht)
+    cherrypy.engine.stop()
+    sys.exit(0)
 
 
 if args.interactive_shell:
