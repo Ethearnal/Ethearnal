@@ -31,7 +31,7 @@ class WebDhtCdnInfo(WebApiBase):
         return bn
 
     def OPTIONS(self):
-        self.cherry.response.headers['Access-Control-Allow-Methods'] = 'GET'
+        self.cherry.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
         self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
         self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
         return b''
