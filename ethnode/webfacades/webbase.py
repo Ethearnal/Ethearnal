@@ -4,8 +4,9 @@ import cherrypy
 class WebApiBase(object):
     exposed = True
 
-    def __init__(self, mount_point, mount_it=True):
+    def __init__(self, mount_point, cherry=cherrypy, mount_it=True):
         self.mount_point = mount_point
+        self.cherry = cherry
         if mount_it:
             self.mount()
 

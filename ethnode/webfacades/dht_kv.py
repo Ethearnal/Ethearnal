@@ -3,15 +3,19 @@ from apifacades.dhtkv import DhtKv
 import json
 import cherrypy
 
+
 class WebDhtCdnInfo(WebApiBase):
     def __init__(self,
                  dkv: DhtKv,
                  cherry=cherrypy,
                  mount_point='/api/cdn/v1/info',
                  mount_it=True):
-        super(WebDhtCdnInfo, self).__init__(mount_point=mount_point, mount_it=mount_it)
+        super(WebDhtCdnInfo, self).__init__(
+            cherry=cherry,
+            mount_point=mount_point,
+            mount_it=mount_it
+        )
         self.dkv = dkv
-        self.cherry = cherrypy
 
     def GET(self, *a, **kw):
         # bad
