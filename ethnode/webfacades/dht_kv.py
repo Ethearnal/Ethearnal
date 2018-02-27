@@ -7,7 +7,7 @@ import cherrypy
 class WebDhtCdnInfo(WebApiBase):
     def __init__(self,
                  dkv: DhtKv,
-                 cherry=cherrypy,
+                 cherry=None,
                  mount_point='/api/cdn/v1/info',
                  mount_it=True):
         super(WebDhtCdnInfo, self).__init__(
@@ -36,8 +36,11 @@ class WebDhtCdnInfo(WebApiBase):
         return bn
 
     def OPTIONS(self):
-        self.cherry.response.headers['Access-Control-Allow-Methods'] = 'GET'
-        self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+        self.cherry.response.headers['Access-Control-Allow-Methods'] = 'GET POST HEAD OPTIONS'
+        # self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type Content-Type'
+        allow = "Accept, Accept-Encoding, Content-Length, Content-Type, X-CSRF-Token"
+        self.cherry.response.headers["Access-Control-Allow-Headers"] = allow
+        self.cherry.response.headers["Access-Control-Expose-Headers"] = allow
         self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
         return b''
 
