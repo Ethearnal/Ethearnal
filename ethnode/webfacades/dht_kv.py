@@ -39,3 +39,36 @@ class WebDhtCdnInfo(WebApiBase):
         self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
         self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
         return b''
+
+
+class WebDhtCdnSelector(WebApiBase):
+    K_SELECTED_CDN = 'selected_cdn'
+
+    def __init__(self,
+                 dkv: DhtKv,
+                 cherry=cherrypy,
+                 mount_point='/api/v1/dht/cdn',
+                 mount_it=True):
+        super(WebDhtCdnSelector, self).__init__(
+            cherry=cherry,
+            mount_point=mount_point,
+            mount_it=mount_it
+        )
+        self.dkv = dkv
+
+    def GET(self, *a, **kw):
+        data = self.dkv.get(self.K_SELECTED_CDN, local=True)
+        js = json.dumps(data)
+        bs = js.encode()
+        return bs
+
+    def PUT(self):
+        return self.post()
+        pass
+
+    def post(self):
+        body = self.cherry.request.body.read()
+        data = json.loads(body.decode())
+        # todo validate, sanitize
+        self.dkv.set('selected_cdn', data)
+        return b''

@@ -9,7 +9,7 @@ from datamodel.resource_index import ResourceIndexingEngine
 from datamodel.inv_norank_sqlite import InvIndexTimestampSQLite
 from toolkit.kadmini_codec import guid_bin_to_hex, guid_bin_to_hex2, guid_hex_to_bin, guid_int_to_hex
 from ert_profile import EthearnalProfileController
-
+from apifacades.dhtkv import DhtKv
 
 # todo DRY it
 
@@ -779,6 +779,7 @@ class WebDHTAboutNode(object):
         self.cherry = cherry
         self.dhtf = dhf
         self.mount_point = mount_point
+        self.dkv = DhtKv(dhf)
         if mount_it:
             self.mount()
             print('MOUNT Profile K,V ENDPOINT')
@@ -795,10 +796,17 @@ class WebDHTAboutNode(object):
         else:
             ip4 = '127.0.0.1'
 
+        cdn = self.dkv.get('selected_cdn', local=True)
+        cdn_val = []
+        if cdn:
+            cdn_val.append(cdn)
+        else:
+            cdn_val.append("%s:%s" % (self.dhtf.ert.cdn_host, self.dhtf.ert.cdn_port))
+
         d = {
             'guid': self.dhtf.ert.rsa_guid_hex,
             'ip4': "%s:%s" % (ip4, self.dhtf.dht.peer.port,),
-            'cdn': ["%s:%s" % (self.dhtf.ert.cdn_host, self.dhtf.ert.cdn_port)]
+            'cdn': cdn_val
         }
         js = json.dumps(d, ensure_ascii=False)
         b_js = js.encode()

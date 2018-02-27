@@ -16,9 +16,13 @@ from toolkit import upnp
 from ert_profile import EthearnalProfileController
 
 from webdht.wdht import OwnerGuidHashIO, WebDHTKnownGuids
-from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode, WebProfileStatic
+from webdht.wdht_ertapi import WebDHTKnownPeers, WebDHTProfileKeyVal, WebDHTAboutNode
 from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI
 from webdht.wdht_ertapi import Indexer
+
+from apifacades.dhtkv import DhtKv
+from webfacades.dht_kv import WebDhtCdnSelector
+
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
 
@@ -210,6 +214,12 @@ def main_http(http_webdir: str = config.http_webdir,
     })
 
     idx = Indexer(ert=ert, dhf=dht_facade_)
+
+    # select and save CDN service
+    dkv = DhtKv(d)
+    dkv.set(WebDhtCdnSelector.K_SELECTED_CDN, "%s:%s" % (ert.cdn_host, ert.cdn_port))
+    cdn_select = WebDhtCdnSelector(dkv)
+
 
     knownguids = WebDHTKnownGuids(
         cherry=cherrypy,
