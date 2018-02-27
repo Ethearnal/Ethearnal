@@ -211,3 +211,9 @@
 .modal-open {
     overflow: hidden;
 }
+
+.modal .flex {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+}

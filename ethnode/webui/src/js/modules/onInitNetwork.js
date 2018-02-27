@@ -1,125 +1,119 @@
 // Network
 window.networkPageModule = (function () {
+  // array of CDN's
+  const urlsArr = [
+    'http://159.89.165.91:5678/api/cdn/v1/info',
+    'http://159.89.112.171:5678/api/cdn/v1/info',
+    'http://207.154.238.7:5678/api/cdn/v1/info'
+  ]
+  // update data interval
+  const interval = 1000 * 60 * 5
+  //  Map layers
+  const layerMap = new ol.layer.Tile({source: new ol.source.OSM()})
+  const sourceFeatures = new ol.source.Vector()
+  const layerFeatures = new ol.layer.Vector({source: sourceFeatures})
+  // create new Map
+  const map = new ol.Map({
+    target: 'map',
+    layers: [layerMap, layerFeatures],
+    view: new ol.View({ center: [0, 0], zoom: 2 })
+  })
+  // Marker style
+  const styleMk = [
+    new ol.style.Style({
+      image: new ol.style.Icon(({
+        anchor: [0.5, 1],
+        scale: 1,
+        src: 'http://image.ibb.co/fLEanc/maps_and_flags_1.png'
+      })),
+      zIndex: 5
+    })
+  ]
+  // tooltips
+  const tooltip = document.getElementById('tooltip')
+  const overlay = new ol.Overlay({
+    element: tooltip,
+    offset: [10, 0],
+    positioning: 'bottom-left'
+  })
+  map.addOverlay(overlay)
 
   function initNetwork () {
+    // start refresh chain
+    startChain(1)
+  }
 
-    var json1 = [
-      {
-        "geo": {
-          "zip_code": "EC2V",
-          "latitude": 51.5142,
-          "country_name": "United Kingdom",
-          "region_name": "England",
-          "ip": "178.62.22.110",
-          "longitude": -0.0931,
-          "city": "London",
-          "time_zone": "Europe/London",
-          "region_code": "ENG",
-          "country_code": "GB",
-          "metro_code": 0
-        },
-        "port": "5678",
-        "ip4": "178.62.22.110",
-        "service_url": "http://178.62.22.110:5678"
-      },
-      {
-        "ip4": "165.227.184.55",
-        "port": "5678",
-        "geo": {
-          "zip_code": "07014",
-          "latitude": 40.8326,
-          "country_name": "United States",
-          "region_name": "New Jersey",
-          "ip": "165.227.184.55",
-          "longitude": -74.1307,
-          "metro_code": 501,
-          "city": "Clifton",
-          "time_zone": "America/New_York",
-          "region_code": "NJ",
-          "country_code": "US"
-        },
-        "service_url": "http://165.227.184.55:5678"
-      },
-      {
-        "ip4": "46.101.223.52",
-        "port": "5678",
-        "geo": {
-          "zip_code": "09039",
-          "latitude": 50.1167,
-          "metro_code": 0,
-          "region_name": "Hesse",
-          "ip": "46.101.223.52",
-          "longitude": 8.6833,
-          "country_name": "Germany",
-          "city": "Frankfurt am Main",
-          "time_zone": "Europe/Berlin",
-          "region_code": "HE",
-          "country_code": "DE"
-        },
-        "service_url": "http://46.101.223.52:5678"
-      }
-    ]
+  // event handlers
+  map.on('pointermove', displayTooltip)
+  map.on('click', showModal)
+  $('#networkSelect').on('click', function (e) {
+    e.preventDefault()
+    alert('selecte')
+  })
 
-    var sourceFeatures = new ol.source.Vector(),
-        layerFeatures = new ol.layer.Vector({source: sourceFeatures})
-
-    var map = new ol.Map({
-      target: 'map',
-      layers: [
-        new ol.layer.Tile({source: new ol.source.OSM()}),
-        layerFeatures
-      ],
-      view: new ol.View({ center: [0, 0], zoom: 2 })
-    })
-
-    var style1 = [
-      new ol.style.Style({
-        image: new ol.style.Icon(({
-          rotateWithView: false,
-          anchor: [0.5, 1],
-          anchorXUnits: 'fraction',
-          anchorYUnits: 'fraction',
-          opacity: 1,
-          scale: 0.7,
-          // src: '//cdn.rawgit.com/jonataswalker/ol3-contextmenu/master/examples/img/pin_drop.png'
-          src: '//raw.githubusercontent.com/jonataswalker/map-utils/master/images/marker.png'
-        })),
-        zIndex: 5
-      }),
-      new ol.style.Style({
-        image: new ol.style.Circle({
-          radius: 5,
-          fill: new ol.style.Fill({color: 'rgba(255,255,255,1)'}),
-          stroke: new ol.style.Stroke({color: 'rgba(0,0,0,1)'})
-        })
-      })
-    ]
-
-    for (var i = 0; i < json1.length; i++) {
-      var count = 0
-      console.log(json1[i].geo.latitude)
-      console.log(json1[i].geo.longitude)
-
-      var feature = new ol.Feature({
-        type: 'click',
-        ip4: json1[i].ip4,
-        country: json1[i].geo.country_name,
-        geometry: new ol.geom.Point(ol.proj.transform([json1[i].geo.longitude, json1[i].geo.latitude], 'EPSG:4326', 'EPSG:3857'))
-      })
-      feature.setStyle(style1);
-      sourceFeatures.addFeature(feature);
+  // start update chain
+  function startChain (i) {
+    if (i === 1) {
+      createMarkers(urlsArr)
+    } else {
+      setTimeout(() => {
+        createMarkers(urlsArr)
+      }, interval)
     }
+  }
 
-    map.on('click', function(evt) {
-      var f = map.forEachFeatureAtPixel(evt.pixel, function(ft, layer) { return ft })
-      if (f && f.get('type') === 'click') {
-        var geometry = f.getGeometry()
-        var coord = geometry.getCoordinates()
-        $('#modal-network').find('.ntw-country').text(f.N.country)
-        $('#modal-network').find('.ntw-ip').text(f.N.ip4)
-        $("[data-target='#modal-network']").trigger('click')
-      }
+  // creating Markers on Map
+  function createMarkers (urlArray) {
+    let geoData
+    // loop array with url's
+    for (let i = 0; i < urlArray.length; i++) {
+      let url = urlArray[i]
+      // get data
+      $.get(url, function (data) {
+        // check if not empty
+        if (data) {
+          geoData = JSON.parse(data)
+        }
+      }).done(function () {
+        let feature = new ol.Feature({
+          geo: geoData.http.geo,
+          ip4: geoData.http.ip4,
+          country: geoData.http.geo.country_name,
+          geometry: new ol.geom.Point(ol.proj.transform([geoData.http.geo.longitude, geoData.http.geo.latitude], 'EPSG:4326', 'EPSG:3857'))
+        })
+        // append Marker on map
+        feature.setStyle(styleMk)
+        sourceFeatures.addFeature(feature)
+      })
+    }
+    // cleare Marker layers
+    sourceFeatures.clear()
+    startChain(2)
+  }
+
+  // show modal on click
+  function showModal (evt) {
+    let feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+      return feature
     })
+    if (feature) {
+      $('#modal-network').find('.ntw-country').text(feature.N.country)
+      $('#modal-network').find('.ntw-ip').text(feature.N.ip4)
+      $("[data-target='#modal-network']").trigger('click')
+    }
+  }
+
+  // show tooltip on hover
+  function displayTooltip (evt) {
+    let feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+      return feature
+    })
+    tooltip.style.display = feature ? '' : 'none'
+    if (feature) {
+      let info = feature.N.geo.city + ', ' + feature.N.geo.country_name
+      overlay.setPosition(evt.coordinate)
+      $(tooltip).text(info)
+    }
   }
 
   return {
@@ -130,7 +124,7 @@ window.networkPageModule = (function () {
 })()
 
 $(document).ready(function() {
-    if ($('body').hasClass('network-page')) {
-        networkPageModule.oninitNetwork();
-    }
-});
+  if ($('body').hasClass('network-page')) {
+    networkPageModule.oninitNetwork()
+  }
+})
