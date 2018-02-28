@@ -167,20 +167,22 @@ class WebCDN(object):
         try:
             relay_header_key = 'Relay-Id-Source'
             relay_header_val = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
-            print('GET RELAY HEADER',relay_header_key, relay_header_val)
+            print('GET RELAY HEADER', relay_header_key, relay_header_val)
             r = requests.get(url, headers={relay_header_key: relay_header_val}, stream=True)
             print('RELAY RESP CODE', r.status_code)
-            print('RELAY RESP CONTENT', r.content.decode())
+            # print('RELAY RESP CONTENT', r.content.decode())
             # fpio = io.BytesIO()
             print('GET FROM URLK', r, r.status_code)
             if r.status_code == 200:
                 r.raw.decode_content = True
                 bts = r.raw.read()
                 print('BTS', len(bts))
+                # print(')
                 return bts
             else:
                 return None
-        except:
+        except Exception as e:
+            print('ERR e',e)
             return None
 
     def dhf_pull(self, hk_hex):
@@ -297,7 +299,7 @@ class WebCDN(object):
                     if self.cherry.request.remote.ip in relay_url:
                         print("self origin relay IP")
                         continue
-                    print('RELAY URL', relay_url)
+                   #  print('RELAY URL', relay_url)
                     bts = self.get_remote_meta_data(
                         relay_url,
                         hkey
