@@ -109,8 +109,10 @@ class Indexer(object):
                 if 'model' in doc:
                     if doc['model'] == 'Gig':
                         if 'deleted' in doc:
+                            print("++ + TO DELETE ++ + ")
                             if doc['deleted']:
                                 # remove from index
+                                print("++ + TO DELETE ++ + ")
                                 self.unindex(hk_hex)
                                 return
                         if 'meta_gig_deleted' in doc:
