@@ -10,6 +10,7 @@ from datamodel.inv_norank_sqlite import InvIndexTimestampSQLite
 from toolkit.kadmini_codec import guid_bin_to_hex, guid_bin_to_hex2, guid_hex_to_bin, guid_int_to_hex
 from ert_profile import EthearnalProfileController
 from apifacades.dhtkv import DhtKv
+from toolkit import kadmini_codec as cdx
 
 # todo DRY it
 
@@ -101,6 +102,12 @@ class Indexer(object):
         if 'category' in doc:
             self.index_field(guid_hex_to_bin(hk_hex), 'category',
                              text_data=doc['category'], prefixes=False, q1=q1, q2=q2)
+    @staticmethod
+    def get_data_from_raw(raw_t):
+        if len(raw_t) == 3:
+            revision, data = cdx.decode_bson_val(raw_t[2])
+            return data
+        return None
 
     def index_on(self, hk_hex: str, data: dict, event='ON_PUSH'):
         if hk_hex and data:
@@ -122,6 +129,19 @@ class Indexer(object):
                                 return
                         # index it
                         self.index_gig_document(hk_hex, doc)
+
+    def index_unindex(self, hk_hex):
+        raw_t = self.dhf.pull_remote(key='', hk_hex=hk_hex)
+        if raw_t:
+            data = self.get_data_from_raw(raw_t)
+            if data:
+                self.index_on(hk_hex=hk_hex, data=data, event='ON_CONSENSUS')
+
+        raw_t = self.dhf.pull_local(key='', hk_hex=hk_hex)
+        if raw_t:
+            data = self.get_data_from_raw(raw_t)
+            if data:
+                self.index_on(hk_hex=hk_hex, data=data, event='ON_CONSENSUS')
 
     def unindex_on(self, hk_hex):
         try:
