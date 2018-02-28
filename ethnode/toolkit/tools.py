@@ -1,5 +1,6 @@
 import os
 import sys
+import requests
 # temporaly disable until find solution for windows
 # import miniupnpc
 
@@ -88,7 +89,7 @@ class Print:
 
 
 def boot_peers_from_http_tracker(dhf, url, key_name='dht_peers'):
-    import requests
+    #
     r = requests.get(url)
     if r.status_code == 200:
         d = r.json()
@@ -103,23 +104,32 @@ def boot_peers_from_http_tracker(dhf, url, key_name='dht_peers'):
     dhf.pull_pubkey_in_peers()
 
 
-def get_http_peers_from_http_tracker(url, key_name='http_peers', filter_host=None, filter_port=None):
-    import requests
-    filter_host_port = None
-    if filter_host:
-        if filter_port:
-            filter_host_port = '%s:%s' % (filter_host, str(filter_port))
-        else:
-            filter_host_port = '%s' % filter_host
+def get_http_peers_from_http_tracker(url, key_name='http_peers'):
     r = requests.get(url)
     if r.status_code == 200:
         d = r.json()
         if key_name in d:
-            # ll = d[key_name]
-            if filter_host_port:
-                return [k for k in d[key_name] if filter_host_port not in k]
-            else:
-                return d[key_name]
+            return d[key_name]
+
+
+def get_http_peers(url, self_ip, self_port=None, key_name='http_peers', ):
+    l = get_http_peers_from_http_tracker(url=url, key_name=key_name)
+    if self_ip and self_port:
+        return [k for k in l if '%s:%s' % (self_ip, str(self_port)) not in k]
+    else:
+        return [k for k in l if self_ip not in k]
+
+
+def get_top_idx(http_host_port, limit=100, endpoint='api/cdn/v1/idx?all&limit=%s'):
+    endpoint_q = endpoint % limit
+    get_url = 'http://%s/%s' % (http_host_port, endpoint_q)
+    print('url', get_url)
+    r = requests.get(get_url)
+    if r.status_code == 200:
+        data = r.json()
+        return data
+
+
 
 
 def simple_indexing_consensus(hk_sets):
