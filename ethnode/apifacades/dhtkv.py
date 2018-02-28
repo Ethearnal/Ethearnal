@@ -27,3 +27,9 @@ class DhtKv(object):
         key_proto = {'profile:key': profile_key}
         self.dhf.push(key=key_proto, value={'k': 'profile_key', 'v': profile_value})
 
+    def filter_profile_guids(self):
+        ll = list()
+        for guid_hex in self.dhf.known_guids():
+            if self.get('is_cdn', guid_hex=guid_hex):
+                ll.append(guid_hex)
+

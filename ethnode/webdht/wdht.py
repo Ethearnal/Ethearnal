@@ -203,18 +203,21 @@ class WebDHTKnownGuids(object):
                  cherry,
                  dhtf: DHTFacade,
                  mount_point: str,
+                 dkv=None,
                  mount_it=True):
         self.cherry = cherry
         self.dhtf = dhtf
         self.mount_point = mount_point
+        self.dkv = dkv
         if mount_it:
             self.mount()
             print('MOUNT GUIDS ENDPOINT')
 
     def GET(self):
         # todo
-        c = self.dhtf.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
-        guid_list = [guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
+        guid_list = self.dkv.filter_profile_guids(self)
+        # c = self.dhtf.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
+        # guid_list = [guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
         # print(guid_list)
         js = json.dumps(guid_list)
         js_b = js.encode()

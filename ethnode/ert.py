@@ -250,6 +250,7 @@ def main_http(http_webdir: str = config.http_webdir,
     knownguids = WebDHTKnownGuids(
         cherry=cherrypy,
         dhtf=dht_facade_,
+        dkv=dkv,
         mount_point='/api/v1/dht/guids'
     )
 
