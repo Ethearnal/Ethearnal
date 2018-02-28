@@ -130,11 +130,24 @@ def get_top_idx(http_host_port, limit=100, endpoint='api/cdn/v1/idx?all&limit=%s
         return data
 
 
+def make_sets(host_ports_list):
+    return tuple([set(get_top_idx(k)) for k in host_ports_list])
 
 
 def simple_indexing_consensus(hk_sets):
     u = set.intersection(*hk_sets)
     return u
+# from webdht.wdht_ertapi import Indexer
+
+
+def reindex_missings(idx, url, self_ip, self_port=None, key_name='http_peers'):
+    misings_hks = simple_indexing_consensus(
+        make_sets(get_http_peers(
+            url,
+            self_ip,
+            self_port=self_port,
+            key_name=key_name)))
+    return misings_hks
 
 
 class ErtLogger(object):
