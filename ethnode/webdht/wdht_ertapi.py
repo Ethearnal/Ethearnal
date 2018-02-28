@@ -348,6 +348,10 @@ class DhtGetByHkeyWebAPI(object):
             self.mount()
             print('MOUNT WEB:', self.mount_point)
 
+    def check_gig_model_deleted(self, vvv):
+        if 'model' in vvv:
+            print(vvv)
+
     def GET(self, hkey):
         t1 = self.dhf.pull_local('', hk_hex=hkey)
         t2 = self.dhf.pull_remote('', hk_hex=hkey)
@@ -365,7 +369,9 @@ class DhtGetByHkeyWebAPI(object):
                 if 'value' in v:
                     try:
                         vvv = v['value']
+                        self.check_gig_model_deleted(vvv)
                         # vvv = bleach.clean(vvv)
+
                         js = json.dumps(vvv).encode()
                         return js
                     except:
