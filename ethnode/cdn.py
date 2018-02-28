@@ -203,10 +203,12 @@ idx = Indexer(ert=ert, dhf=dhf)
 rel_urls = None
 if args.http_config_url:
     from toolkit.tools import get_http_peers_from_http_tracker
+    from toolkit.tools import boot_peers_from_http_tracker
     # url = 'http://159.65.56.140:8080/cluster.json'
     relays = get_http_peers_from_http_tracker(args.http_config_url)
     rel_urls = ['http://%s/api/cdn/v1/resource' % k for k in relays]
     # self.relays = set(rurl)
+    boot_peers_from_http_tracker(dhf, args.http_config_url)
 
 cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
              http_relay_urls=rel_urls,
