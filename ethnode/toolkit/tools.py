@@ -120,9 +120,11 @@ def get_http_peers(url, self_ip, self_port=None, key_name='http_peers', ):
     else:
         return [k for k in l if self_ip not in k]
 
+TOP_INDEX_DEFAULT_LIMIT=100
 
-def get_top_idx(http_host_port, limit=100, endpoint='api/cdn/v1/idx?all&limit=%s'):
+def get_top_idx(http_host_port, limit=TOP_INDEX_DEFAULT_LIMIT, endpoint='api/cdn/v1/idx?all&limit=%s'):
     endpoint_q = endpoint % limit
+    print('INDEX LIMIT ', limit)
     get_url = 'http://%s/%s' % (http_host_port, endpoint_q)
     print('url', get_url)
     r = requests.get(get_url)
@@ -131,8 +133,8 @@ def get_top_idx(http_host_port, limit=100, endpoint='api/cdn/v1/idx?all&limit=%s
         return data
 
 
-def make_sets(host_ports_list):
-    return tuple([set(get_top_idx(k)) for k in host_ports_list])
+def make_sets(host_ports_list, limit=TOP_INDEX_DEFAULT_LIMIT):
+    return tuple([set(get_top_idx(k, limit=limit)) for k in host_ports_list])
 
 
 def simple_indexing_consensus(hk_sets):
@@ -140,34 +142,36 @@ def simple_indexing_consensus(hk_sets):
     return u
 
 
-def reindex_missings(idx, url, self_ip, self_port=None, key_name='http_peers'):
+def reindex_missings(idx, url, self_ip, self_port=None, key_name='http_peers', limit=TOP_INDEX_DEFAULT_LIMIT):
     misings_hks = simple_indexing_consensus(
         make_sets(get_http_peers(
             url,
             self_ip,
             self_port=self_port,
-            key_name=key_name)))
+            key_name=key_name), limit=limit))
     for hk_hex in misings_hks:
         idx.index_unindex(hk_hex)
     return misings_hks
 
 
 class GigIndexConsensus(object):
-    def __init__(self, http_config_url, idx, self_ip, self_port=None, key_name='http_peers'):
+    def __init__(self, http_config_url, idx, self_ip, self_port=None, limit=TOP_INDEX_DEFAULT_LIMIT, key_name='http_peers'):
         self.http_conf_url = http_config_url
         self.idx = idx
         self.ip4 = self_ip
         self.port = self_port
         self.key_name = key_name
+        self.limit = limit
 
-    def reindex(self, http_config_url=None):
+    def reindex(self, http_config_url=None, limit=None):
+
+        if not limit:
+            limit = self.limit
+
         ht_cfg_url = self.http_conf_url
         if http_config_url:
             ht_cfg_url = http_config_url
-        reindex_missings(self.idx, ht_cfg_url, self.ip4, self_port=self.port, key_name=self.key_name)
-
-
-
+        reindex_missings(self.idx, ht_cfg_url, self.ip4, self_port=self.port, limit=limit, key_name=self.key_name)
 
 
 class ErtLogger(object):

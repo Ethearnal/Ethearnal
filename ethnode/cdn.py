@@ -123,6 +123,12 @@ parser.add_argument('-t', '--self_test_and_exit',
                     action='store_true'
                     )
 
+parser.add_argument('-x', '--http_proxy_service',
+                    default=None,
+                    help='host:port',
+                    required=False,
+                    type=str)
+
 
 args = parser.parse_args()
 host, port = args.http_host_port.split(':')
