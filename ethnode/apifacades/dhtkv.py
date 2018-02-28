@@ -32,4 +32,5 @@ class DhtKv(object):
         for guid_hex in self.dhf.known_guids():
             if self.get('is_cdn', guid_hex=guid_hex):
                 ll.append(guid_hex)
+        return ll
 
