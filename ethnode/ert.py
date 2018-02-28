@@ -117,6 +117,17 @@ parser.add_argument('-c', '--http_config_url',
                     type=str)
 
 
+parser.add_argument('-o', '--shared_profile_instance_id',
+                    default=0,
+                    help='htp url with config json',
+                    required=False,
+                    type=int)
+
+
+# shared_profile_instance_id
+
+
+
 
 class EthearnalSite(object):
     @cherrypy.expose
@@ -147,7 +158,8 @@ def tear_down_udp(dht):
 def main_profile(http_webdir,
                  files_dir_name,
                  cdn_host,
-                 cdn_port,):
+                 cdn_port,
+                 shared_profile_instance_id=0):
 
     http_webdir = os.path.abspath(http_webdir)
 
@@ -159,7 +171,8 @@ def main_profile(http_webdir,
 
     ert_profile_ctl = EthearnalProfileController(data_dir=profile_dir_abs,
                                                  cdn_bootstrap_host=cdn_host,
-                                                 cdn_bootstrap_port=cdn_port
+                                                 cdn_bootstrap_port=cdn_port,
+                                                 shared_profile_instance_id=shared_profile_instance_id
                                                  )
     return ert_profile_ctl
 
@@ -417,6 +430,7 @@ if __name__ == '__main__':
             files_dir_name=config.static_files,
             cdn_host=boot_cdn_host,
             cdn_port=boot_cdn_port,
+            shared_profile_instance_id=args.shared_profile_instance_id
         )
         ert = ert_profile_ctl
         if args.upnp_attempt:
