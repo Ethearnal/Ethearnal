@@ -215,9 +215,10 @@ class WebDHTKnownGuids(object):
             self.mount()
             print('MOUNT GUIDS ENDPOINT')
 
-    def GET(self):
+    def GET(self,update=None):
+
         # todo
-        if self.hfs.has_hkey('guids.cache'):
+        if self.hfs.has_hkey('guids.cache') and update is None:
             bio = self.hfs.read_io('guids')
             if not bio:
                 return

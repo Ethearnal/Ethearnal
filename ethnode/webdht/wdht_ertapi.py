@@ -765,7 +765,7 @@ class WebDHTProfileKeyVal(object):
 
     def GET(self, profile_key, owner_guid=None):
         if len(owner_guid) != 64:
-            return b'{"error":"malformed_guid"}'
+            return b'null'
         #
         key = {'profile:key': profile_key}
         t = None
