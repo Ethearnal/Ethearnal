@@ -15,6 +15,8 @@ class DhtKv(object):
         t = None
         if local:
             t = self.dhf.pull_local(key_proto, guid=guid_bin)
+            if not t:
+                t = self.dhf.pull_remote(key_proto, guid=guid_bin)
         else:
             t = self.dhf.pull_remote(key_proto, guid=guid_bin)
         if t:
