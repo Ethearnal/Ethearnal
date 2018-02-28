@@ -23,6 +23,8 @@ from webdht.wdht_ertapi import Indexer
 from apifacades.dhtkv import DhtKv
 from webfacades.dht_kv import WebDhtCdnSelector
 
+from toolkit.filestore import AutoDirHfs
+
 
 parser = argparse.ArgumentParser(description='Ethearnal p2p ert node')
 
@@ -238,10 +240,14 @@ def main_http(http_webdir: str = config.http_webdir,
             'server.thread_pool': 120,
         }
     })
+    hfs_dir = '%s/%s' % (ert.data_dir, config.hfs_dir)
+    mkdir(hfs_dir)
+    print('HFS_DIR: %s' % hfs_dir)
 
     idx = Indexer(ert=ert, dhf=dht_facade_)
 
     # select and save CDN service
+    hfs_guids = AutoDirHfs(hfs_dir, 'guids_hfs')
     dkv = DhtKv(d)
     dkv.set(WebDhtCdnSelector.K_SELECTED_CDN, "%s:%s" % (ert.cdn_host, ert.cdn_port))
     cdn_select = WebDhtCdnSelector(dkv)
@@ -251,6 +257,7 @@ def main_http(http_webdir: str = config.http_webdir,
         cherry=cherrypy,
         dhtf=dht_facade_,
         dkv=dkv,
+        hfs=hfs_guids,
         mount_point='/api/v1/dht/guids'
     )
 
@@ -293,10 +300,8 @@ def main_http(http_webdir: str = config.http_webdir,
         dhf=dht_facade_,
     )
     from webfacades.dht_peers import WebDhtPeers
-    from toolkit.filestore import AutoDirHfs
-    hfs_dir = '%s/%s' % (ert.data_dir, config.hfs_dir)
-    mkdir(hfs_dir)
-    print('HFS_DIR: %s' % hfs_dir)
+
+
 
     rel_urls = None
     if args.http_config_url:
@@ -506,14 +511,14 @@ if __name__ == '__main__':
             sleep(3)
             category_domain = jsd.data['domain']
             gigs_data = jsd.data['gigs']
-            for gig_entry in gigs_data:
-                gig_entry['lock'] = randint(1, 100)
-                gig_entry['price'] = randint(1, 1999)
-                gig_entry['category'] = category_domain
-                gig_entry['general_domain_of_expertise'] = category_domain
-                # my_gigs.my_gigs
-
-                my_gigs.post(gig_entry['title'], gig_entry)
+            # for gig_entry in gigs_data:
+            #     gig_entry['lock'] = randint(1, 100)
+            #     gig_entry['price'] = randint(1, 1999)
+            #     gig_entry['category'] = category_domain
+            #     gig_entry['general_domain_of_expertise'] = category_domain
+            #     # my_gigs.my_gigs
+            #     print(gig_entry)
+            #     #my_gigs.post(gig_entry['title'], gig_entry)
 
             sys.exit(0)
 
