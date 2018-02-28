@@ -135,14 +135,14 @@ class WebCDN(object):
         return self.get_file_from_url(url)
 
     def get_remote_data(self, cdn_url, hkey):
-        self.cherry.response.headers['Relay-Id-Source'] = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
+        # self.cherry.response.headers['Relay-Id-Source'] = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
         print('GET REMOTE DATA')
         url = '%s?hkey=%s' % (cdn_url, hkey)
         print('GET URL', url)
         return self.get_file_from_url(url)
 
     def set_local_meta_data(self, hkey, data):
-        self.cherry.response.headers['Relay-Id-Source'] = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
+        # self.cherry.response.headers['Relay-Id-Source'] = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
         f_name_meta = '%s.%s' % (hkey, 'json')
         upload_file_meta = os.path.join(self.store_dir, f_name_meta)
         data_js = json.dumps(data, ensure_ascii=False)
@@ -159,10 +159,12 @@ class WebCDN(object):
             oufp.write(bts)
         oufp.close()
 
-    @staticmethod
-    def get_file_from_url(url):
+    # @staticmethod
+    def get_file_from_url(self, url):
         try:
-            r = requests.get(url, stream=True)
+            relay_header_key = 'Relay-Id-Source'
+            relay_header_val = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
+            r = requests.get(url, headers={relay_header_key: relay_header_val}, stream=True)
             # fpio = io.BytesIO()
             print('GET FROM URLK', r, r.status_code)
             if r.status_code == 200:
