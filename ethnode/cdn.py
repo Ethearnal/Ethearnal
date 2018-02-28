@@ -6,6 +6,7 @@ from dhtcdn.webapi import WebCDN, WebCDNSite, WebCDNClientRequestHeaders
 from webdht.wdht_ertapi import IdxCdnQueryWebApi
 from toolkit.tools import mkdir, on_hook, get_ip_address
 from apifacades.dhtkv import DhtKv
+from toolkit.tools import GigIndexConsensus
 
 site_conf = {
     '/': {
@@ -213,6 +214,8 @@ if args.http_config_url:
 cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
              http_relay_urls=rel_urls,
              http_relay_get_url=http_relay_get_url)
+
+cnx = GigIndexConsensus(args.http_config_url, idx, ip, port)
 
 req = WebCDNClientRequestHeaders()
 

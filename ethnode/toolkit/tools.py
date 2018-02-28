@@ -1,6 +1,7 @@
 import os
 import sys
 import requests
+from webdht.wdht_ertapi import Indexer
 # temporaly disable until find solution for windows
 # import miniupnpc
 
@@ -137,17 +138,36 @@ def make_sets(host_ports_list):
 def simple_indexing_consensus(hk_sets):
     u = set.intersection(*hk_sets)
     return u
-# from webdht.wdht_ertapi import Indexer
 
 
-def reindex_missings(idx, url, self_ip, self_port=None, key_name='http_peers'):
+def reindex_missings(idx:Indexer, url, self_ip, self_port=None, key_name='http_peers'):
     misings_hks = simple_indexing_consensus(
         make_sets(get_http_peers(
             url,
             self_ip,
             self_port=self_port,
             key_name=key_name)))
+    for hk_hex in misings_hks:
+        idx.index_unindex(hk_hex)
     return misings_hks
+
+
+class GigIndexConsensus(object):
+    def __init__(self, http_config_url, idx: Indexer, self_ip, self_port=None, key_name='http_peers'):
+        self.http_conf_url = http_config_url
+        self.idx = idx
+        self.ip4 = self_ip
+        self.port = self_port
+        self.key_name = key_name
+
+    def reindex(self, http_config_url=None):
+        ht_cfg_url = self.http_conf_url
+        if http_config_url:
+            ht_cfg_url = http_config_url
+        reindex_missings(self.idx, ht_cfg_url, self.ip4, self_port=self.port, key_name=self.key_name)
+
+
+
 
 
 class ErtLogger(object):
