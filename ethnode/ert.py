@@ -330,8 +330,9 @@ def main_http(http_webdir: str = config.http_webdir,
     se = SelfEvent(c)
 
     evt = DHTEventHandler(dht_facade_.dht.storage, data_dir=ert_profile_ctl.personal_dir)
-    qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
-    eidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Event.model'])
+    # todo add support for instance id db files
+    # qidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Gig.model'])
+    # eidx = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Event.model'])
     # qpro = DocModelIndexQuery(evt.doc_indexers.MODEL_INDEXERS['.Profile.key'])
 
     cherrypy.engine.start()
