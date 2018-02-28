@@ -97,8 +97,14 @@ class DHTStoreHandlerOne(object):
                 return
             # logger('PUSHED RESOURCE ON CDN %s?hkey=%s' % (data['cdn_url'], data['hk_hex']))
             meta_bts = self.dhf.cdn.get_remote_meta_data(hkey=data['hk_hex'], cdn_url=data['cdn_url'])
+            if not meta_bts:
+                return None
             import json
-            meta_dict = json.loads(meta_bts.decode())
+            try:
+                meta_dict = json.loads(meta_bts.decode())
+            except Exception as e:
+                print('META_BTS decode ERR', e)
+                return None
             try:
                 self.dhf.cdn.set_local_meta_data(hkey=meta_dict['hkey'], data=meta_dict)
             except Exception as e:
