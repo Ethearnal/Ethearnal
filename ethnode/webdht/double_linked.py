@@ -18,6 +18,7 @@ class OwnPulse(object):
     def pull(self, k, hkey=None):
         item = self.dhf.pull_local(k, hk_hex=hkey)
         if not item:
+            print('OwnPulse PULL REMOTE')
             item = self.dhf.pull_remote(k, hk_hex=hkey)
         if item:
             print(item)
