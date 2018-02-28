@@ -30,7 +30,11 @@ class DhtKv(object):
     def filter_profile_guids(self):
         ll = list()
         for guid_hex in self.dhf.known_guids():
-            if not self.get('is_cdn', guid_hex=guid_hex, local=True):
+            is_cdn = self.get('is_cdn', guid_hex=guid_hex, local=True)
+            if isinstance(is_cdn, bool):
+                if is_cdn:
+                    continue
+            else:
                 ll.append(guid_hex)
         return ll
 
