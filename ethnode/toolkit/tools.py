@@ -108,18 +108,18 @@ def get_http_peers_from_http_tracker(url, key_name='http_peers', filter_host=Non
     filter_host_port = None
     if filter_host:
         if filter_port:
-            filter_host_port = '%s:%d' % (filter_host, filter_port)
+            filter_host_port = '%s:%s' % (filter_host, str(filter_port))
         else:
             filter_host_port = '%s' % filter_host
     r = requests.get(url)
     if r.status_code == 200:
         d = r.json()
         if key_name in d:
-            ll = d[key_name]
+            # ll = d[key_name]
             if filter_host_port:
-                return [k for k in ll if not filter_host_port]
+                return [k for k in d[key_name] if filter_host_port not in k]
             else:
-                return ll
+                return d[key_name]
 
 
 def simple_indexing_consensus(hk_sets):
