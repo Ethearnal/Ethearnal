@@ -764,23 +764,20 @@ class WebDHTProfileKeyVal(object):
         return b''
 
     def GET(self, profile_key, owner_guid=None):
-        guid_bin = None
-        if owner_guid:
-            guid_bin = cdx.guid_hex_to_bin(owner_guid)
-
         if len(owner_guid) != 64:
             return b'null'
         #
         key = {'profile:key': profile_key}
         t = None
+
         if not owner_guid:
             t = self.dhtf.pull_local(key)
-            if not t:
-                t = self.dhtf.pull_remote(key)
         else:
-            t = self.dhtf.pull_remote(key, guid_bin)
-            if not t:
-                t = self.dhtf.pull_local(key, guid_bin)
+            guid_bin = guid_hex_to_bin(owner_guid)
+            if guid_bin == self.dhtf.ert.rsa_guid_bin:
+                t = self.dhtf.pull_local(key)
+            else:
+                t = self.dhtf.pull_remote(key, guid_bin)
         if t:
             d = bson.loads(t[-1])
             if 'e' in d:
