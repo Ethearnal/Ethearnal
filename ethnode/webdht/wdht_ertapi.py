@@ -769,10 +769,14 @@ class WebDHTProfileKeyVal(object):
         t = None
         if not owner_guid:
             t = self.dhtf.pull_local(key)
+            if not t:
+                t = self.dhtf.pull_remote(key)
         else:
             guid_bin = guid_hex_to_bin(owner_guid)
             if guid_bin == self.dhtf.ert.rsa_guid_bin:
                 t = self.dhtf.pull_local(key)
+                if not t:
+                    t = self.dhtf.pull_remote(key)
             else:
                 t = self.dhtf.pull_remote(key, guid_bin)
         if t:
