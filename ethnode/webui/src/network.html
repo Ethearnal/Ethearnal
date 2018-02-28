@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ethearnal - My profile</title>
+	 //= templates/head-section.html
+</head>
+
+<body class="network-page">
+	//= templates/header-global.html
+	<div class="network-page-wrap-module">
+		<a href="" data-toggle="modal" data-target="#modal-network" class="hidden"></a>
+		<section class="network-map">
+			<div id="map" tabindex="0" style="height: 100vh; width: 100%; padding-top: 65px;">
+				<div id="tooltip" class="tooltip"></div>
+			</div>
+		</section>
+	</div>
+	<div class="modal fade" id="modal-network">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content cdn-details">
+				<div class="modal-body">
+					<div class="text-center">
+						<h3 class="ntw-country"></h3>
+						<p class="ntw-ip"></p>
+					</div>
+				</div>
+				<div class="flex">
+					<button data-dismiss="modal" class="btn btn-pink btn-half no-mrg no-border pdd-vertical-15 ng-scope">
+						<span class="text-uppercase">Close</span>
+					</button>
+					<button id="networkSelect" class="btn btn-primary btn-half no-mrg no-border pdd-vertical-15 ng-scope">
+						<span class="text-uppercase">Select</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	//= templates/edit-profile.html
+	//= templates/add-gig-modal.html
+	//= templates/redesigned-big-gig-modal.html
+	<!--  -->
+	<!-- open maps -->
+	<script src="//openlayers.org/en/v4.6.4/build/ol.js" type="text/javascript"></script>
+	<!-- Vendor JS -->
+	<script src="dist/js/vendor.min.js"></script>
+	<!-- Main JS file-->
+	<script src="js/main.js"></script>
+</body>
+
+</html>

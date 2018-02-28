@@ -141,7 +141,7 @@ window.smartSearchModule = (function() {
         }, 200);
     });
 
-    $(document).on('mouseup', '#slider-range', function() {
+    $(document).on('mouseup touchend', '#slider-range', function() {
         var values = $(this).slider("values");
         if (values[0] == 0 && values[1] == 2000) {
             searchArray.filter(function(item) {

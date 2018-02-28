@@ -94,3 +94,4 @@ env/
 venv/
 ENV/
 
+package-lock.json

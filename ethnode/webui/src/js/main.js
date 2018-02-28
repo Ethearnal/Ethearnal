@@ -7,3 +7,4 @@ require("./modules/generateGigs.js"); // MODULE with Gigs generator
 require("./modules/onInitGigs.js"); // MODULE with GIGS PAGE INIT
 require("./modules/range-slider.js"); // MODULE with RANGE SLIDER
 require("./modules/newGigModal.js"); // MODULE with CREATE NEW GIG
+require("./modules/onInitNetwork.js"); // MODULE with INIT NETWORK PAGE

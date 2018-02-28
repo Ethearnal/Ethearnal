@@ -91,9 +91,9 @@ var Timer;
 //
 
 $(document).on('click', '#addNewGigSend', function() {
+    $(this).prop('disabled', true);
     $content = $(this).closest('.content');
     $form = $content.find('form');
-    console.log($form);
     collectGigData($form);
 });
 

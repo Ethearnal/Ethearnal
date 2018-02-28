@@ -756,15 +756,6 @@ $(document).ready(function() {
 
     // Semantic UI, Perfect Scrollbar plugins initializations and many others functions related to dropdowns.
     $(function() {
-        if ($(window).width() < 768) {
-            var myApp = new Framework7();
-            var $$ = Dom7;
-
-            $$('.swipeout').on('open', function(e) {
-                e.preventDefault();
-                $(this).fadeOut();
-            });
-        }
 
         // $('.ui .menu, .panel-body').perfectScrollbar();
         // $('section.background-image .items, .modal-body .image .items').owlCarousel({
