@@ -530,7 +530,12 @@ if __name__ == '__main__':
             tear_down_udp(dht)
             cherrypy.engine.stop()
             sys.exit(0)
-
+        cherrypy.config.update({
+            'global': {
+                'engine.autoreload.on': False,
+                'server.thread_pool': 120,
+            }
+        })
         if not args.dht_only:
             main_http(http_webdir=http_webdir,
                       socket_host=socket_host,
