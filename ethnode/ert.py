@@ -85,7 +85,7 @@ parser.add_argument('-b', '--dht_only',
                     )
 
 
-parser.add_argument('-c', '--cdn_bootstrap_host_port',
+parser.add_argument('-p', '--cdn_bootstrap_host_port',
                     default=config.ertcdn_dev_bootstrap_host_port,
                     help='bootstrap to web service',
                     required=False,
@@ -283,7 +283,7 @@ def main_http(http_webdir: str = config.http_webdir,
         hfs=AutoDirHfs(hfs_dir, 'peers_hfs')
     )
 
-    web_peers = WebDhtPeers(peers=peers)
+    web_peers = WebDhtPeers(peers=peers, cherry=cherrypy)
 
     from webdht.bundle import DocumentCollectionCRD, DHTEventHandler, DocModelIndexQuery
     # from webdht.test_bndle_gig import Gigs as test_gig_data
