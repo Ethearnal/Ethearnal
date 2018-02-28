@@ -97,12 +97,15 @@ window.networkPageModule = (function () {
       return feature
     })
     if (feature) {
-      $('#modal-network').find('.ntw-country').text(feature.N.country)
+      let info = feature.N.geo.city + ', ' + feature.N.geo.country_name
+      $('#modal-network').find('.ntw-country').text(info)
       $('#modal-network').find('.ntw-ip').text(feature.N.ip4)
       $("[data-target='#modal-network']").trigger('click')
     }
   }
 
+  let target = map.getTarget()
+  let jTarget = typeof target === "string" ? $("#"+target) : $(target)
   // show tooltip on hover
   function displayTooltip (evt) {
     let feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
@@ -113,6 +116,9 @@ window.networkPageModule = (function () {
       let info = feature.N.geo.city + ', ' + feature.N.geo.country_name
       overlay.setPosition(evt.coordinate)
       $(tooltip).text(info)
+      jTarget.css("cursor", 'pointer')
+    } else {
+      jTarget.css("cursor", '')
     }
   }
 
