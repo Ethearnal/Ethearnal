@@ -127,15 +127,25 @@ def get_top_idx(http_host_port, limit=TOP_INDEX_DEFAULT_LIMIT, endpoint='api/cdn
     print('INDEX LIMIT ', limit)
     get_url = 'http://%s/%s' % (http_host_port, endpoint_q)
     print('url', get_url)
-    r = requests.get(get_url)
-    if r.status_code == 200:
-        data = r.json()
-        return data
+    try:
+        r = requests.get(get_url)
+        if r.status_code == 200:
+            data = r.json()
+            return data
+    except:
+        print('FAILED CONSENSUS INDEX endpoint', get_url)
+        return None
 
 
 def make_sets(host_ports_list, limit=TOP_INDEX_DEFAULT_LIMIT):
-    return tuple([set(get_top_idx(k, limit=limit)) for k in host_ports_list])
+    sets = list()
+    for h_p in host_ports_list:
+        data = get_top_idx(h_p, limit=limit)
+        if data:
+            sets.append(set(data))
+    return tuple(sets)
 
+    # return tuple([set(get_top_idx(k, limit=limit)) for k in host_ports_list if not None] )
 
 def simple_indexing_consensus(hk_sets):
     u = set.intersection(*hk_sets)
