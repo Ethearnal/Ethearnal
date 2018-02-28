@@ -16,7 +16,7 @@ window.networkPageModule = (function () {
   const map = new ol.Map({
     target: 'map',
     layers: [layerMap, layerFeatures],
-    view: new ol.View({ center: [0, 0], zoom: 2 })
+    view: new ol.View({ center: ol.proj.transform([2.41, 15.82], 'EPSG:4326', 'EPSG:3857'), zoom: 3 })
   })
   // Marker style
   const styleMk = [
