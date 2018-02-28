@@ -17,11 +17,12 @@ class OwnPulse(object):
 
     def pull(self, k, hkey=None):
         item = self.dhf.pull_local(k, hk_hex=hkey)
+        print('+++ OwnPulse PULL REMOTE', item)
         if not item:
-            print('OwnPulse PULL REMOTE')
+            print('+++ OwnPulse PULL REMOTE')
             item = self.dhf.pull_remote(k, hk_hex=hkey)
         if item:
-            print(item)
+            print('+++ OWN PULSE ', item)
         guid_bin = self.owner.bin()
         t = self.dhf.pull_remote(k, guid=guid_bin, hk_hex=hkey)
         if not t:
