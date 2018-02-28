@@ -279,7 +279,7 @@ cdn_info = {
 
 }
 ert.cdn_host = ip
-ert.cdn_port = port
+ert.cdn_port = int(port)
 dkv = DhtKv(d)
 dkv.set('is_cdn', True)
 dkv.set('cdn_info', cdn_info)
