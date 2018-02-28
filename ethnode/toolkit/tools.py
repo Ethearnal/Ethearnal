@@ -87,6 +87,22 @@ class Print:
         sys.stdout.write('\n')
 
 
+def boot_peers_from_http_tracker(dhf, url, key_name='dht_peers'):
+    import requests
+    r = requests.get(url)
+    if r.status_code == 200:
+        d = r.json()
+        if key_name in d:
+            l = d[key_name]
+            if isinstance(l, list):
+                for host_port_st in l:
+                    host, port = host_port_st.split(':')
+                    port = int(port)
+                    dhf.boot_to(host, port)
+    dhf.push_pubkey()
+    dhf.pull_pubkey_in_peers()
+
+
 class ErtLogger(object):
     def __init__(self, logger):
         self.logger = logger
