@@ -120,7 +120,7 @@ def get_http_peers(url, self_ip, self_port=None, key_name='http_peers', ):
     else:
         return [k for k in l if self_ip not in k]
 
-TOP_INDEX_DEFAULT_LIMIT=100
+TOP_INDEX_DEFAULT_LIMIT=1000
 
 def get_top_idx(http_host_port, limit=TOP_INDEX_DEFAULT_LIMIT, endpoint='api/cdn/v1/idx?all&limit=%s'):
     endpoint_q = endpoint % limit

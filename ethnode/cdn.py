@@ -123,11 +123,18 @@ parser.add_argument('-t', '--self_test_and_exit',
                     action='store_true'
                     )
 
-parser.add_argument('-x', '--http_proxy_service',
-                    default=None,
-                    help='host:port',
+
+parser.add_argument('-y', '--do_idx_consensus',
+                    help='run self testing and exit',
                     required=False,
-                    type=str)
+                    action='store_true')
+
+parser.add_argument('-z', '--idx_consensus_limit',
+                    default=config.idx_consensus_limit,
+                    help='hk on retrieved index result for index sync/consensus',
+                    required=False,
+                    type=int)
+
 
 
 args = parser.parse_args()
@@ -221,7 +228,10 @@ cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
              http_relay_urls=rel_urls,
              http_relay_get_url=http_relay_get_url)
 
-cnx = GigIndexConsensus(args.http_config_url, idx, ip, port)
+cnx = None
+if args.http_config_url and args.do_idx_consensus:
+    cnx = GigIndexConsensus(args.http_config_url, idx, ip, port, limit=args.idx_consensus_limit)
+    cnx.reindex()
 
 req = WebCDNClientRequestHeaders()
 

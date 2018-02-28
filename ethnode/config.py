@@ -4,6 +4,7 @@ data_dir = 'ethearnal_profile'
 static_files = 'files'
 hfs_dir = 'hfs'
 
+idx_consensus_limit = 1000
 # local public html UI
 
 http_webdir = 'webui'
