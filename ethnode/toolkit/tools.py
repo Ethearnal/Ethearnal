@@ -1,7 +1,7 @@
 import os
 import sys
 import requests
-from webdht.wdht_ertapi import Indexer
+# from webdht.wdht_ertapi import Indexer
 # temporaly disable until find solution for windows
 # import miniupnpc
 
@@ -140,7 +140,7 @@ def simple_indexing_consensus(hk_sets):
     return u
 
 
-def reindex_missings(idx:Indexer, url, self_ip, self_port=None, key_name='http_peers'):
+def reindex_missings(idx, url, self_ip, self_port=None, key_name='http_peers'):
     misings_hks = simple_indexing_consensus(
         make_sets(get_http_peers(
             url,
@@ -153,7 +153,7 @@ def reindex_missings(idx:Indexer, url, self_ip, self_port=None, key_name='http_p
 
 
 class GigIndexConsensus(object):
-    def __init__(self, http_config_url, idx: Indexer, self_ip, self_port=None, key_name='http_peers'):
+    def __init__(self, http_config_url, idx, self_ip, self_port=None, key_name='http_peers'):
         self.http_conf_url = http_config_url
         self.idx = idx
         self.ip4 = self_ip
