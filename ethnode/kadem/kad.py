@@ -341,6 +341,12 @@ class DHTFacade(object):
         for hk_hex in dl.iter_hk():
             self.repush_remote(hk_hex)
 
+    def repush_direct_own_gigs_to_clone(self,  host, port, collection='.gigs'):
+        from webdht.double_linked import instance_dl
+        dl = instance_dl(self, cdx.guid_bin_to_hex(self.bin_guid), collection)
+        for hk_hex in dl.iter_hk():
+            self.repush_remote_direct(hk_hex, host, port)
+
     def repush_direct_own_gigs(self, collection='.gigs'):
         from webdht.double_linked import instance_dl
         dl = instance_dl(self, cdx.guid_bin_to_hex(self.bin_guid), collection)
