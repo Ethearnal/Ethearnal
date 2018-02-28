@@ -110,6 +110,12 @@ parser.add_argument('-t', '--self_test_and_exit',
                     action='store_true'
                     )
 
+parser.add_argument('-c', '--http_config_url',
+                    default=None,
+                    help='htp url with config json',
+                    required=False,
+                    type=str)
+
 
 
 class EthearnalSite(object):
@@ -277,6 +283,18 @@ def main_http(http_webdir: str = config.http_webdir,
     hfs_dir = '%s/%s' % (ert.data_dir, config.hfs_dir)
     mkdir(hfs_dir)
     print('HFS_DIR: %s' % hfs_dir)
+
+    rel_urls = None
+    if args.http_config_url:
+        from toolkit.tools import get_http_peers_from_http_tracker
+        from toolkit.tools import boot_peers_from_http_tracker
+        # url = 'http://159.65.56.140:8080/cluster.json'
+        relays = get_http_peers_from_http_tracker(args.http_config_url)
+        rel_urls = ['http://%s/api/cdn/v1/resource' % k for k in relays if ip not in k]
+        # self.relays = set(rurl)
+        boot_peers_from_http_tracker(d, args.http_config_url)
+
+
     peers = PeersInfo(
         dhf=d,
         geo=FsCachedGeoIp(AutoDirHfs(hfs_dir, 'geo_hfs')),
