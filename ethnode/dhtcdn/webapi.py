@@ -316,6 +316,11 @@ class WebCDN(object):
                 cherrypy.response.headers["Content-Type"] = ct
                 if hkey != hk_meta or not fext or not ct:
                     return b'{"error":"integrity error with hkey diff metadata"}'
+        except OSError as e:
+            self.cherry.response.status = 400
+            msg = '{"error":"resource missing"}'
+            return msg.encode()
+
         except Exception as e:
             msg = '{"error":"exc %s}' % str(e)
             self.cherry.response.status = 400
