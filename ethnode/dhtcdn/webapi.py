@@ -135,12 +135,14 @@ class WebCDN(object):
         return self.get_file_from_url(url)
 
     def get_remote_data(self, cdn_url, hkey):
+        self.cherry.response.headers['Relay-Id-Source'] = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
         print('GET REMOTE DATA')
         url = '%s?hkey=%s' % (cdn_url, hkey)
         print('GET URL', url)
         return self.get_file_from_url(url)
 
     def set_local_meta_data(self, hkey, data):
+        self.cherry.response.headers['Relay-Id-Source'] = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
         f_name_meta = '%s.%s' % (hkey, 'json')
         upload_file_meta = os.path.join(self.store_dir, f_name_meta)
         data_js = json.dumps(data, ensure_ascii=False)
@@ -245,8 +247,14 @@ class WebCDN(object):
             err = '{"error with thumb":"%s"}' % str(e)
             return err.encode()
 
-    def GET(self, hkey=None, thumb=None, meta=None):
+    def GET(self, hkey=None, relay_id=None, thumb=None, meta=None):
         cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+        headers = self.cherry.request.headers
+        if 'Relay-Id-Source' in headers:
+            relay_val = headers['Relay-Id-Source']
+            if relay_val == '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port):
+                return b'{"stop":"sel origin relay"}'
+
 
         def invalid_hkey():
             self.cherry.response.status = 401
@@ -257,6 +265,9 @@ class WebCDN(object):
             return invalid_hkey()
 
         ct = None
+
+        if relay_id:
+            print('RELAY ID',relay_id)
 
 
         try:
