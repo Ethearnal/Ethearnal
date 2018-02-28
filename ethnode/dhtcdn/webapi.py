@@ -58,6 +58,7 @@ class WebCDN(object):
                  mount_point: str='/api/cdn/v1/resource',
                  store_dir: str='cdn_profile/',
                  mount_it=True,
+                 http_relay_urls=None,
                  http_relay_get_url=None):
         self.cherry = cherry
         self.mount_point = mount_point
@@ -66,6 +67,17 @@ class WebCDN(object):
         self.dhf.cdn = self
         self.http_relay_get_url = http_relay_get_url
         self.thumbnail = ImgThumbnail()
+        # from toolkit.tools import get_http_peers_from_http_tracker
+        # url = 'http://159.65.56.140:8080/cluster.json'
+        # relays = get_http_peers_from_http_tracker(url)
+        # rurl = ['http://%s/api/cdn/v1/resource' % k for k in relays]
+        # self.relays = set(rurl)
+        self.relays = set()
+        if http_relay_urls:
+            for url in http_relay_urls:
+                self.relays.add(url)
+        if http_relay_get_url:
+            self.relays.add(http_relay_get_url)
 
         if mount_it:
             self.mount()
@@ -147,15 +159,19 @@ class WebCDN(object):
 
     @staticmethod
     def get_file_from_url(url):
-
-        r = requests.get(url, stream=True)
-        # fpio = io.BytesIO()
-        print('GET FROM URLK', r, r.status_code)
-        if r.status_code == 200:
-            r.raw.decode_content = True
-            bts = r.raw.read()
-            print('BTS', len(bts))
-            return bts
+        try:
+            r = requests.get(url, stream=True)
+            # fpio = io.BytesIO()
+            print('GET FROM URLK', r, r.status_code)
+            if r.status_code == 200:
+                r.raw.decode_content = True
+                bts = r.raw.read()
+                print('BTS', len(bts))
+                return bts
+            else:
+                return None
+        except:
+            return None
 
     def dhf_pull(self, hk_hex):
         t1 = self.dhf.pull_local('', hk_hex=hk_hex)
@@ -247,16 +263,19 @@ class WebCDN(object):
             if not os.path.isfile(upload_file_meta):
                 print('META-FILE NOT FOUND')
                 self.cherry.response.status = 400
-                if self.http_relay_get_url:
-                    print('RELAY URL', self.http_relay_get_url)
+                # if self.http_relay_get_url:
+                for relay_url in list(self.relays):
+                    print('RELAY URL', relay_url)
                     bts = self.get_remote_meta_data(
-                        self.http_relay_get_url,
+                        relay_url,
                         hkey
                     )
-                    data = json.loads(bts.decode('utf-8'))
-                    print('\n\n\n RELAY METADATA', data)
-                    self.set_local_meta_data(hkey, data)
-                    print('\n\n\n RELAY DATA SAVED', data)
+                    if bts:
+                        data = json.loads(bts.decode('utf-8'))
+                        print('\n\n\n RELAY METADATA', data)
+                        self.set_local_meta_data(hkey, data)
+                        print('\n\n\n RELAY DATA SAVED', data)
+                        break
 
             with open(upload_file_meta, 'rb') as u_f_m:
                 data = u_f_m.read()
@@ -293,14 +312,17 @@ class WebCDN(object):
         if not os.path.isfile(upload_file):
             #
             print('DATA FILE MISSING TRY RELAY')
-            if self.http_relay_get_url:
+            # if self.http_relay_get_url:
+            for relay_url in self.relays:
                 print('RELAY URL', self.http_relay_get_url)
                 bts = self.get_remote_data(
-                    self.http_relay_get_url,
+                    relay_url,
                     hkey
                 )
-                self.set_local_data(hkey, fext, bts)
-                print('\n\n\n RELAY DATA SAVED')
+                if bts:
+                    self.set_local_data(hkey, fext, bts)
+                    print('\n\n\n RELAY DATA SAVED')
+                    break
             else:
                 msg = '{"error":"% s not found"}' % upload_file
                 return msg.encode()

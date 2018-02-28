@@ -95,6 +95,12 @@ parser.add_argument('-r', '--http_relay_get_url',
                     required=False,
                     type=str)
 
+parser.add_argument('-c', '--http_config_url',
+                    default=None,
+                    help='htp url with config json',
+                    required=False,
+                    type=str)
+
 
 parser.add_argument('-x', '--http_proxy_service',
                     default=None,
@@ -194,7 +200,17 @@ d = dhf
 
 idx = Indexer(ert=ert, dhf=dhf)
 
-cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy, http_relay_get_url=http_relay_get_url)
+rel_urls = None
+if args.http_config_url:
+    from toolkit.tools import get_http_peers_from_http_tracker
+    # url = 'http://159.65.56.140:8080/cluster.json'
+    relays = get_http_peers_from_http_tracker(args.http_config_url)
+    rel_urls = ['http://%s/api/cdn/v1/resource' % k for k in relays]
+    # self.relays = set(rurl)
+
+cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
+             http_relay_urls=rel_urls,
+             http_relay_get_url=http_relay_get_url)
 
 req = WebCDNClientRequestHeaders()
 
@@ -319,6 +335,7 @@ if args.self_test_and_exit:
 
 if args.interactive_shell:
     from IPython import embed
+    from toolkit.tools import get_http_peers_from_http_tracker
     embed()
 else:
     cherrypy.engine.block()

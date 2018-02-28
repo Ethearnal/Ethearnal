@@ -103,6 +103,15 @@ def boot_peers_from_http_tracker(dhf, url, key_name='dht_peers'):
     dhf.pull_pubkey_in_peers()
 
 
+def get_http_peers_from_http_tracker(url, key_name='http_peers'):
+    import requests
+    r = requests.get(url)
+    if r.status_code == 200:
+        d = r.json()
+        if key_name in d:
+            l = d[key_name]
+            return l
+
 class ErtLogger(object):
     def __init__(self, logger):
         self.logger = logger
