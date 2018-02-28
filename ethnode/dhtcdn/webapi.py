@@ -169,6 +169,7 @@ class WebCDN(object):
             print(self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
             relay_header_val = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
             print('GET RELAY HEADER', relay_header_key, relay_header_val)
+
             r = requests.get(url, headers={relay_header_key: relay_header_val}, stream=True)
             print('RELAY RESP CODE', r.status_code)
             # print('RELAY RESP CONTENT', r.content.decode())
@@ -263,18 +264,20 @@ class WebCDN(object):
         headers = self.cherry.request.headers
         if 'Relay-Id-Source' in headers:
             relay_val = headers['Relay-Id-Source']
-            print('RELAY ID',relay_val)
-            if relay_val == '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port):
-                return b'{"stop":"sel origin relay"}'
+            our_service = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
+            print('+ ++ + + \n\n RELAY ID +++ ++ ', relay_val, our_service)
+            print('\n\n +++++++++++++ \n\n')
+            if relay_val == our_service:
+                self.cherry.response.status = 402
+                return b'{"error":"same relay origin"}'
 
-
-        def invalid_hkey():
-            self.cherry.response.status = 401
+        def invalid_hkey(cherry):
+            cherry.response.status = 401
             return b'{"error":"invalid hkey"}'
         if not hkey:
-            return invalid_hkey()
+            return invalid_hkey(self.cherry)
         if len(hkey) != 64:
-            return invalid_hkey()
+            return invalid_hkey(self.cherry)
 
         ct = None
 
