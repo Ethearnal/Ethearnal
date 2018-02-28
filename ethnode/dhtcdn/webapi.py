@@ -131,7 +131,9 @@ class WebCDN(object):
             return None
 
     def get_remote_meta_data(self, cdn_url, hkey):
+
         url = '%s?hkey=%s&meta=1' % (cdn_url, hkey)
+
         return self.get_file_from_url(url)
 
     def get_remote_data(self, cdn_url, hkey):
@@ -161,10 +163,14 @@ class WebCDN(object):
 
     # @staticmethod
     def get_file_from_url(self, url):
+        print('GET RELAY META', url)
         try:
             relay_header_key = 'Relay-Id-Source'
             relay_header_val = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
+            print('GET RELAY HEADER',relay_header_key, relay_header_val)
             r = requests.get(url, headers={relay_header_key: relay_header_val}, stream=True)
+            print('RELAY RESP CODE', r.status_code)
+            print('RELAY RESP CONTENT', r.content.decode())
             # fpio = io.BytesIO()
             print('GET FROM URLK', r, r.status_code)
             if r.status_code == 200:
