@@ -254,6 +254,7 @@ class WebCDN(object):
         headers = self.cherry.request.headers
         if 'Relay-Id-Source' in headers:
             relay_val = headers['Relay-Id-Source']
+            print('RELAY ID',relay_val)
             if relay_val == '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port):
                 return b'{"stop":"sel origin relay"}'
 
