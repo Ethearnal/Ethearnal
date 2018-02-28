@@ -1,0 +1,232 @@
+@media (max-width: 991px) {
+    // PROFILE PAGE CONTAINER [+] //
+    .profiles-container {
+        justify-content: center;
+    }
+    // PROFILE PAGE CONTAINER [-] //
+}
+
+@media (max-width: 767px) {
+    .profile-page, .gigs-page, .profiles-page {
+        .navbar-collapse {
+            display: block;
+            .dropdown-menu {
+                right: 0;
+                left: inherit;
+                min-width: 120px;
+                 a {
+                    text-align: left !important;
+                 }
+            }
+        }
+        #navigation ul.nav li a:first-child {
+            margin-top: 0px;
+        }
+        .edit {
+            text-align: center;
+        }
+        .profile-headline {
+            padding-bottom: 30px;
+        }
+        .modal {
+            padding-right: 0px !important;
+            padding-left: 0px !important;
+        }
+    }
+    .gigs-container {
+        min-width: auto;
+        // justify-content: space-around !important;
+    }
+    .slider-wrapper {
+        width: 70%;
+    }
+    .profile-headline .user-info-wrap {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 30px !important;
+        .user-info {
+            max-width: 100% !important;
+            padding-left: 0px !important;
+            .user-name { 
+                text-align: center;
+                padding-top: 10px;
+                margin-bottom: 10px !important;
+            }
+            .user-description {
+                font-size: 14px !important;
+                line-height: 1.5;
+            }
+            .user-role {
+                text-align: center;
+                font-size: 17px !important;
+                margin-bottom: 25px !important;
+            }
+        }
+    }
+    .user-item {
+        .item-title {
+            margin-right: 0px !important;
+            margin-bottom: 10px;
+        }
+    }
+    // ADD GIG MODAL [+] //
+    .add-gig-redesigned {
+        padding-right: 0px !important;
+        .modal-dialog {
+            margin: 0px;
+            .modal-content {
+                border-radius: 0px;
+                .btns-wrap { 
+                    text-align: center;
+                }
+            }
+        }
+        .flex {
+            flex-direction: column;
+            .form-group {
+                max-width: 100% !important;
+            }
+        }
+    }
+    // ADD GIG MODAL [-] //
+    // EDIT PROFILE MODAL [+]
+    .edit-profile-redesigned {
+        padding-left: 0px !important;
+        .modal-body {
+            padding: 20px 20px;
+        }
+        .btns-wrap {
+            width: 100%;
+            .btn {
+                margin-right: 0px;
+            }
+        }
+        label.img-label {
+            margin-right: 0px !important;
+        }
+    }
+    //EDIT PROFILE MODAL [-]
+    // ---- //
+    section.documentation .container .profile-documentation-full {
+        margin-top: 0px !important;
+        .tab-content {
+            margin-top: 20px;
+        }
+    }
+    section.documentation .container {
+        padding: 0px !important;
+    }
+    .profile-documentation {
+        .main-tab-content {
+            margin-top: 0px !important;
+            padding-top: 0px !important;
+            border-radius: 0px !important;
+        }
+        ul {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            padding-top: 25px;
+            width: 100%;
+            border-radius: 0px !important;
+            li {
+                padding-bottom: 10px;
+                a {
+                    padding: 0px !important;
+                    font-size: 16px !important;
+                }
+            }
+            &.mdl-menu {
+                flex-direction: column;
+                padding: 0px;
+            }
+        }
+    }
+    .edit-profile-btn {
+        text-align: center;
+    }
+    .sidebar-fixed {
+        .budget {
+            text-align: center;
+        }
+    }
+}
+
+// HEADER MOBILE
+@media (max-width: 630px) {
+    .profile-page, .gigs-page, .profiles-page {
+        .main-header {
+            .flex-block {
+                flex-direction: column;
+            }
+        }
+        .navbar-header {
+            display: none;
+        }
+        .modal {
+            padding-right: 0px !important;
+            .modal-dialog {
+                margin: 0px !important;
+                height: 100%;
+                .modal-content {
+                    border-radius: 0 !important;
+                    height: 100%;
+                }
+            }
+        }
+        .profile-documentation-full {
+            margin-bottom: 0px !important;
+        }
+    }
+    .profile-page-wrap-module {
+        padding-top: 30px;
+    }
+        // GIG MODAL //
+        .redesigned-gig-modal .modal-title {
+            position: initial !important;
+            flex-direction: column;
+            transform: initial !important;
+            margin-top: -50px;
+            text-align: center;
+            .mrg-right-15 {
+                margin-right: 0px !important;
+            }
+            .mrg-top-20 {
+                font-size: 20px;
+                i {
+                    display: block;
+                }
+            }
+        }
+        .add-gig-redesigned {
+            padding-left: 0px !important;
+            .modal-dialog {
+                border-radius: 0 !important;
+                height: auto !important;
+            }
+        }
+}
+
+@media (max-width: 540px) {
+    // .profiles-page {
+    //     .user-card {
+    //         margin-right: 0px;
+    //     }
+    // }
+}
+
+@media (min-width: 630px) and (max-width: 767px) {
+    #redesigned-modal-gig-title {
+        padding-top: 20px;
+    }
+    .main-header {
+        padding-left: 10px;
+    }
+} 
+.card-title {
+    display: flex;
+    justify-content: space-between;
+}
+.panel-collapse {
+    background-color: #fff;
+}
