@@ -330,7 +330,12 @@ class WebCDN(object):
             f_name = '%s.%s' % (hkey, fext)
             #  upload_path = os.path.join(self.store_dir)
             upload_file = os.path.join(self.store_dir, f_name)
+        except OSError as e:
+            self.cherry.response.status = 400
+            msg = '{"error":"resource missing"}'
+            return msg.encode()
         except Exception as e:
+            self.cherry.response.status = 401
             msg = '{"error":"general error with getting file name %s"}' % str(e)
             return msg.encode()
         print('+ ++ +', upload_file)
