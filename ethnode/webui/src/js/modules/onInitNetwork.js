@@ -1,5 +1,7 @@
 // Network
 window.networkPageModule = (function () {
+  $('.nav-tabs .nav-link').removeClass('active')
+  $('.nav-tabs .network').addClass('active')
   // array of CDN's
   const urlsArr = [
     'http://159.89.165.91:5678/api/cdn/v1/info',
