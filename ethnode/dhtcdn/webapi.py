@@ -247,6 +247,15 @@ class WebCDN(object):
 
     def GET(self, hkey, thumb=None, meta=None):
         cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+
+        def invalid_hkey():
+            self.cherry.response.status = 401
+            return b'{"error":"invalid hkey"}'
+        if not hkey:
+            return invalid_hkey()
+        if len(hkey) != 64:
+            return invalid_hkey()
+
         ct = None
 
 
