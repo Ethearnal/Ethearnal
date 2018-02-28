@@ -245,7 +245,7 @@ class WebCDN(object):
             err = '{"error with thumb":"%s"}' % str(e)
             return err.encode()
 
-    def GET(self, hkey, thumb=None, meta=None):
+    def GET(self, hkey=None, thumb=None, meta=None):
         cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 
         def invalid_hkey():
