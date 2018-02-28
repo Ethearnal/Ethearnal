@@ -102,14 +102,14 @@ class Indexer(object):
             self.index_field(guid_hex_to_bin(hk_hex), 'category',
                              text_data=doc['category'], prefixes=False, q1=q1, q2=q2)
 
-    def index_on(self, hk_hex: str, data: dict):
+    def index_on(self, hk_hex: str, data: dict, event='ON_PUSH'):
         if hk_hex and data:
             if 'value' in data:
                 doc = data['value']
                 if 'model' in doc:
                     if doc['model'] == 'Gig':
                         if 'deleted' in doc:
-                            print("++ + TO DELETE ++ + ")
+                            print("++ + TO DELETE ++ +, event ", event)
                             if doc['deleted']:
                                 # remove from index
                                 print("++ + TO DELETE ++ + ")

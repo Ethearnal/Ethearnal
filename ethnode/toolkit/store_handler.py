@@ -225,6 +225,7 @@ class DHTStoreHandlerOne(object):
                 pk_owner, pk_signature, pk_value = self.store.get(hk)
                 revision, data = cdx.decode_bson_val(pk_value)
                 self.on_pull_handle(hk, data, hk_owner_bin=pk_owner)
+                self.dhf.indexer.index_on(cdx.guid_int_to_hex(hk), data, event='ON_PULL')
                 if self.ON_PUSH_GUID_KEY in data:
                     # logger('\n\n\n GUIDS REQUESTED \n\n\n')
                     v = data[self.ON_PUSH_GUID_KEY]
