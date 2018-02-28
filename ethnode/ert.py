@@ -483,34 +483,38 @@ if __name__ == '__main__':
         #     hfs=peers_hfs
         # )
         # todo move this
-        # pro = DHTProfile(d)
-        # gigs = DHTProfileCollection(dhf=d, collection_name='gig')
+        from toolkit.profile_from_json import DHTProfile, DHTProfileCollection
+        pro = DHTProfile(d)
+        my_gigs = DHTProfileCollection(dhf=d, collection_name='gig')
         # verbs_src = 'data_demo/txt_wordnet/data.verb'
         # cdn_data_dir = 'data_demo/cdn1_d'
         # from helpers.wordnet_parser import WordnetParser, ImagesFromCdnData, GigGeneratorWordnet
         #
         # gen = GigGeneratorWordnet(WordnetParser(verbs_src), ImagesFromCdnData(cdn_data_dir))
-        # if json_data_to_profile:
-        #     from time import sleep
-        #     from random import randint
-        #     jsd = ProfileJsonData(json_file_name=json_data_to_profile,
-        #                           pro=pro,
-        #                           )
-        #     sleep(3)
-        #     d.converge_peers()
-        #     sleep(3)
-        #     jsd.update()
-        #     sleep(3)
-        #     category_domain = jsd.data['domain']
-        #     gigs_data = jsd.data['gigs']
-        #     for gig_entry in gigs_data:
-        #         gig_entry['lock'] = randint(1, 100)
-        #         gig_entry['price'] = randint(1, 1999)
-        #         gig_entry['category'] = category_domain
-        #         gig_entry['general_domain_of_expertise'] = category_domain
-        #         gigs.post(gig_entry['title'], gig_entry)
-        #
-        #     sys.exit(0)
+        if json_data_to_profile:
+            from time import sleep
+            from random import randint
+            from toolkit.profile_from_json import ProfileJsonData
+            jsd = ProfileJsonData(json_file_name=json_data_to_profile,
+                                  pro=pro,
+                                  )
+            sleep(3)
+            d.converge_peers()
+            sleep(3)
+            jsd.update()
+            sleep(3)
+            category_domain = jsd.data['domain']
+            gigs_data = jsd.data['gigs']
+            for gig_entry in gigs_data:
+                gig_entry['lock'] = randint(1, 100)
+                gig_entry['price'] = randint(1, 1999)
+                gig_entry['category'] = category_domain
+                gig_entry['general_domain_of_expertise'] = category_domain
+                # my_gigs.my_gigs
+
+                my_gigs.post(gig_entry['title'], gig_entry)
+
+            sys.exit(0)
 
         if args.converge_pk_and_peers:
             print('CONVERGE PEERS')
