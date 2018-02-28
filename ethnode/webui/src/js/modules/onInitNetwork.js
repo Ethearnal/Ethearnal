@@ -1,126 +1,128 @@
-// Smart Search Declarating
+// Network
 window.networkPageModule = (function () {
+  $('.nav-tabs .nav-link').removeClass('active');
+  $('.nav-tabs .network').addClass('active');
+
+  // array of CDN's
+  const urlsArr = [
+    'http://159.89.165.91:5678/api/cdn/v1/info',
+    'http://159.89.112.171:5678/api/cdn/v1/info',
+    'http://207.154.238.7:5678/api/cdn/v1/info'
+  ]
+  // update data interval
+  const interval = 1000 * 60 * 5
+  //  Map layers
+  const layerMap = new ol.layer.Tile({source: new ol.source.OSM()})
+  const sourceFeatures = new ol.source.Vector()
+  const layerFeatures = new ol.layer.Vector({source: sourceFeatures})
+  // create new Map
+  const map = new ol.Map({
+    target: 'map',
+    layers: [layerMap, layerFeatures],
+    view: new ol.View({ center: ol.proj.transform([2.41, 15.82], 'EPSG:4326', 'EPSG:3857'), zoom: 3 })
+  })
+  // Marker style
+  const styleMk = [
+    new ol.style.Style({
+      image: new ol.style.Icon(({
+        anchor: [0.5, 1],
+        scale: 1,
+        src: 'http://image.ibb.co/fLEanc/maps_and_flags_1.png'
+      })),
+      zIndex: 5
+    })
+  ]
+  // tooltips
+  const tooltip = document.getElementById('tooltip')
+  const overlay = new ol.Overlay({
+    element: tooltip,
+    offset: [10, 0],
+    positioning: 'bottom-left'
+  })
+  map.addOverlay(overlay)
+
   function initNetwork () {
-    var map;
-    var infowindow = new google.maps.InfoWindow();
-    function initialize() {
+    // start refresh chain
+    startChain(1)
+  }
 
-        var mapProp = {
-            center: new google.maps.LatLng(52.4550, -3.3833),
-            zoom: 5,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+  // event handlers
+  map.on('pointermove', displayTooltip)
+  map.on('click', showModal)
+  $('#networkSelect').on('click', function (e) {
+    e.preventDefault()
+    alert('selecte')
+  })
 
-        map = new google.maps.Map(document.getElementById("map"), mapProp);
-
-        var json1 = {
-          "geoJSON": [
-              {
-                "geo": {
-                  "zip_code": "EC2V",
-                  "latitude": 51.5142,
-                  "country_name": "United Kingdom",
-                  "region_name": "England",
-                  "ip": "178.62.22.110",
-                  "longitude": -0.0931,
-                  "city": "London",
-                  "time_zone": "Europe/London",
-                  "region_code": "ENG",
-                  "country_code": "GB",
-                  "metro_code": 0
-                },
-                "port": "5678",
-                "ip4": "178.62.22.110",
-                "service_url": "http://178.62.22.110:5678"
-              }, {
-                "ip4": "165.227.184.55",
-                "port": "5678",
-                "geo": {
-                  "zip_code": "07014",
-                  "latitude": 40.8326,
-                  "country_name": "United States",
-                  "region_name": "New Jersey",
-                  "ip": "165.227.184.55",
-                  "longitude": -74.1307,
-                  "metro_code": 501,
-                  "city": "Clifton",
-                  "time_zone": "America/New_York",
-                  "region_code": "NJ",
-                  "country_code": "US"
-                },
-                "service_url": "http://165.227.184.55:5678"
-              }, {
-                "ip4": "46.101.223.52",
-                "port": "5678",
-                "geo": {
-                  "zip_code": "09039",
-                  "latitude": 50.1167,
-                  "metro_code": 0,
-                  "region_name": "Hesse",
-                  "ip": "46.101.223.52",
-                  "longitude": 8.6833,
-                  "country_name": "Germany",
-                  "city": "Frankfurt am Main",
-                  "time_zone": "Europe/Berlin",
-                  "region_code": "HE",
-                  "country_code": "DE"
-                },
-                "service_url": "http://46.101.223.52:5678"
-              }
-            ]
-        };
-
-        $.each(json1.geoJSON, function (key, data) {
-          var latLng = new google.maps.LatLng(data.geo.latitude, data.geo.longitude);
-          var marker = new google.maps.Marker({
-              position: latLng,
-              map: map,
-              title: data.geo.country_name
-          });
-
-          var country = data.geo.country_name;
-          var ip4 = data.ip4;
-
-          bindInfoWindow(marker, map, infowindow, country, ip4);
-
-        });
-
+  // start update chain
+  function startChain (i) {
+    if (i === 1) {
+      createMarkers(urlsArr)
+    } else {
+      setTimeout(() => {
+        createMarkers(urlsArr)
+      }, interval)
     }
+  }
 
-    function bindInfoWindow(marker, map, infowindow, country, ip4) {
-        google.maps.event.addListener(marker, 'click', function () {
-
-          $('#modal-network').find('.ntw-country').text(country)
-          $('#modal-network').find('.ntw-ip').text(ip4)
-          $("[data-target='#modal-network']").trigger('click')
-            // infowindow.setContent(strDescription);
-            // infowindow.open(map, marker);
-        });
+  // creating Markers on Map
+  function createMarkers (urlArray) {
+    let geoData
+    // loop array with url's
+    for (let i = 0; i < urlArray.length; i++) {
+      let url = urlArray[i]
+      // get data
+      $.get(url, function (data) {
+        // check if not empty
+        if (data) {
+          geoData = JSON.parse(data)
+        }
+      }).done(function () {
+        let feature = new ol.Feature({
+          geo: geoData.http.geo,
+          ip4: geoData.http.ip4,
+          country: geoData.http.geo.country_name,
+          geometry: new ol.geom.Point(ol.proj.transform([geoData.http.geo.longitude, geoData.http.geo.latitude], 'EPSG:4326', 'EPSG:3857'))
+        })
+        // append Marker on map
+        feature.setStyle(styleMk)
+        sourceFeatures.addFeature(feature)
+      })
     }
+    // cleare Marker layers
+    sourceFeatures.clear()
+    startChain(2)
+  }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+  // show modal on click
+  function showModal (evt) {
+    let feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+      return feature
+    })
+    if (feature) {
+      let info = feature.N.geo.city + ', ' + feature.N.geo.country_name
+      $('#modal-network').find('.ntw-country').text(info)
+      $('#modal-network').find('.ntw-ip').text(feature.N.ip4)
+      $("[data-target='#modal-network']").trigger('click')
+    }
+  }
 
-  //   // openlayer old
-  //   var map = new ol.Map({
-  //     target: 'map',
-  //     layers: [
-  //       new ol.layer.Tile({
-  //         source: new ol.source.OSM()
-  //       })
-  //     ],
-  //     view: new ol.View({
-  //       center: ol.proj.fromLonLat([37.41, 8.82]),
-  //       zoom: 4
-  //     })
-  //   })
-  //
-  //   var pin_icon = '//cdn.rawgit.com/jonataswalker/ol3-contextmenu/master/examples/img/pin_drop.png';
-  //   var center_icon = '//cdn.rawgit.com/jonataswalker/ol3-contextmenu/master/examples/img/center.png';
-  //   var list_icon = '//cdn.rawgit.com/jonataswalker/ol3-contextmenu/master/examples/img/view_list.png';
-  //
-  //   map.on('click', function (e) {
-  //     console.log(this)
-  //   })
+  let target = map.getTarget()
+  let jTarget = typeof target === "string" ? $("#"+target) : $(target)
+  // show tooltip on hover
+  function displayTooltip (evt) {
+    let feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+      return feature
+    })
+    tooltip.style.display = feature ? '' : 'none'
+    if (feature) {
+      let info = feature.N.geo.city + ', ' + feature.N.geo.country_name
+      overlay.setPosition(evt.coordinate)
+      $(tooltip).text(info)
+      jTarget.css("cursor", 'pointer')
+    } else {
+      jTarget.css("cursor", '')
+    }
   }
 
   return {
@@ -131,7 +133,7 @@ window.networkPageModule = (function () {
 })()
 
 $(document).ready(function() {
-    if ($('body').hasClass('network-page')) {
-        networkPageModule.oninitNetwork();
-    }
-});
+  if ($('body').hasClass('network-page')) {
+    networkPageModule.oninitNetwork()
+  }
+})
