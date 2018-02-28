@@ -100,7 +100,7 @@ class EthearnalProfileController(object):
         self.cdx = cdx
         self.cdn_host = cdn_bootstrap_host
         self.cdn_port = cdn_bootstrap_port
-        self.shared_profile_instancei_id = shared_profile_instance_id
+        self.shared_profile_instance_id = shared_profile_instance_id
         if not self.cdn_service_node:
             if not cdn_bootstrap_host and not cdn_bootstrap_port:
                 raise ValueError('bootstrap to ertcdn service is required')
@@ -132,9 +132,10 @@ class EthearnalProfileController(object):
 
         self.rsa_prv_fn = '%s/%s' % (self.personal_dir, self.RSA_PRV)
         self.rsa_pub_fn = '%s/%s' % (self.personal_dir, self.RSA_PUB)
-        self.dht_fb_fn = '%s/%s_%d' % (self.personal_dir, self.PROFILE_DHT_SQLITE, self.shared_profile_instancei_id)
-        self.dht_ref_pubkeys_fn = '%s/%s_%d' % (self.personal_dir, self.PROFILE_DHT_REF_PUBKEYS, self.shared_profile_instancei_id)
-        self.db_gigs_index_fn = '%s/%s_%d' % (self.personal_dir, self.DB_GIGS_IDX, self.shared_profile_instancei_id)
+        self.dht_fb_fn = '%s/%s_%d' % (self.personal_dir, self.PROFILE_DHT_SQLITE, self.shared_profile_instance_id)
+        self.dht_ref_pubkeys_fn = '%s/%s_%d' % (self.personal_dir, self.PROFILE_DHT_REF_PUBKEYS,
+                                                self.shared_profile_instance_id)
+        self.db_gigs_index_fn = '%s/%s_%d' % (self.personal_dir, self.DB_GIGS_IDX, self.shared_profile_instance_id)
 
         #  self.job_post_json_store_fn = '%s/%s' % (self.personal_dir, self.JOB_POSTS_JSON_FILE_NAME)
         # self.db_plain_text = '%s/%s' % (self.personal_dir, self.PROFILE_PLAIN_UTF8_TEXTS)
