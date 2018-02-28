@@ -77,6 +77,7 @@ class DHTStoreHandlerOne(object):
 
     def on_pushed_ip4_peer(self, data, hk_int=None, hk_owner_bin=None):
         if self.dhf.indexer:
+            logger('have INDEXER')
             try:
                 self.dhf.indexer.index_on(cdx.guid_int_to_hex(hk_int), data)
             except Exception as e:
