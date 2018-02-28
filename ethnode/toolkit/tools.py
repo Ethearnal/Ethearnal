@@ -141,6 +141,7 @@ def make_sets(host_ports_list, limit=TOP_INDEX_DEFAULT_LIMIT):
     sets = list()
     for h_p in host_ports_list:
         data = get_top_idx(h_p, limit=limit)
+        print(data)
         if data:
             sets.append(set(data))
     return tuple(sets)

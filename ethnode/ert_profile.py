@@ -141,7 +141,7 @@ class EthearnalProfileController(object):
         # self.db_plain_text = '%s/%s' % (self.personal_dir, self.PROFILE_PLAIN_UTF8_TEXTS)
         # self.db_plain_text_inv = '%s/%s' % (self.personal_dir, self.PROFILE_PREFIXES_IDX)
         #
-        # self.db_gigs = '%s/%s' % (self.personal_dir, self.PROFILE_GIGS_DB)
+        # self.db_gigs = '%s/%s_%d' % (self.personal_dir, self.PROFILE_GIGS_DB, self.shared_profile_instance_id)
         # self.db_imgs = '%s/%s' % (self.personal_dir, self.PROFILE_IMGS_DB)
         # self.db_my_gigs_idx = '%s/%s' % (self.personal_dir, self.PROFILE_MY_GIGS_INDEX)
 
