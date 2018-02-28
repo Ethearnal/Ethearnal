@@ -350,7 +350,9 @@ class DhtGetByHkeyWebAPI(object):
 
     def check_gig_model_deleted(self, vvv):
         if 'model' in vvv:
-            print(vvv)
+            if 'deleted' in vvv:
+                return vvv['deleted']
+
 
     def GET(self, hkey):
         t1 = self.dhf.pull_local('', hk_hex=hkey)
@@ -369,7 +371,11 @@ class DhtGetByHkeyWebAPI(object):
                 if 'value' in v:
                     try:
                         vvv = v['value']
-                        self.check_gig_model_deleted(vvv)
+                        if self.check_gig_model_deleted(vvv):
+                            self.dhf.repush_remote(hk_hex=hkey)
+                            return b'null'
+
+                        # self.check_gig_model_deleted(vvv)
                         # vvv = bleach.clean(vvv)
 
                         js = json.dumps(vvv).encode()
