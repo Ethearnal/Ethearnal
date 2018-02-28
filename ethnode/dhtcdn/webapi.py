@@ -265,6 +265,9 @@ class WebCDN(object):
                 self.cherry.response.status = 400
                 # if self.http_relay_get_url:
                 for relay_url in list(self.relays):
+                    if self.cherry.request.remote.ip in relay_url:
+                        print("self origin relay IP")
+                        continue
                     print('RELAY URL', relay_url)
                     bts = self.get_remote_meta_data(
                         relay_url,
@@ -314,6 +317,8 @@ class WebCDN(object):
             print('DATA FILE MISSING TRY RELAY')
             # if self.http_relay_get_url:
             for relay_url in self.relays:
+                if self.cherry.request.remote.ip in relay_url:
+                    print("self origin relay IP")
                 print('RELAY URL', self.http_relay_get_url)
                 bts = self.get_remote_data(
                     relay_url,
