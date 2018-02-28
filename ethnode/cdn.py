@@ -308,13 +308,15 @@ dkv = DhtKv(d)
 dkv.set('is_cdn', True)
 dkv.set('cdn_info', cdn_info)
 dht_info = WebDhtCdnInfo(dkv, cherry=cherrypy, mount_it=True)
-
+# Cache-Control:public, max-age=5 # in seconds
+cherrypy.response.headers['Cache-Control'] = 'public, max-age=5'
 cherrypy.config.update({
     'global': {
         'engine.autoreload.on': False,
         'server.thread_pool': 120,
     }
 })
+
 
 #
 
