@@ -39,6 +39,11 @@
             * {
                 letter-spacing: 0.5px !important;
             }
+            .editBtnProfile {
+                &:focus {
+                    color: #fff;
+                }
+            }
             .user-name {
                 font-weight: 500;
                 line-height: 1.2;
@@ -105,6 +110,38 @@
             }
         }
     }
+    .bg-change {
+        position: absolute;
+        right: 40px;
+        bottom: 60px;
+        cursor: pointer;
+        // box-shadow: 4px 4px 12px 3px rgba(0, 0, 0, 0.3);
+        width: 120px;
+        height: 120px;
+        z-index: 888;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        display: none;
+        // border: 1px solid #fff;
+        margin-bottom: 10px;
+        background-color: rgba(175, 190, 218, 0.2);
+        opacity: 0.8;
+        img {
+            width: 100%;
+        }
+        @media (max-width: 767px) {
+            display: none !important;
+        }
+        @media (max-width: 1099px) {
+            bottom: 10px;
+        }
+    }
+    &:hover {
+        .bg-change {
+            display: flex;
+        }
+    }
 }
 
 .inner-profile {
@@ -131,8 +168,9 @@
 
 .gigs-profile-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
+    padding-right: 30px;
     padding-left: 30px;
 }
 
@@ -154,30 +192,24 @@
     }
 }
 
-.about-head-modal {
-    img {
-        margin-bottom: 0px;
-    }
+.cdn-details {
     h3 {
         margin-bottom: 5px;
         margin-top: 0px;
     }
-    .btn {
+    .btn-primary {
         background-color: #d0e1ff;
         border-color: #d0e1ff;
-        span {
-            color: #92a8d1;
+    }
+    .btn-pink {
+        background-color: #f7cac9;
+        border-color: #f7cac9;
+        color: #fff;
+        &:hover {
+            background-color: #fddcdb;
+            border-color: #f7cac9;
+            color: #fff;
         }
     }
 }
 
-.btn-pink {
-    background-color: #f7cac9;
-    border-color: #f7cac9;
-    color: #fff;
-    &:hover {
-        background-color: #fddcdb;
-        border-color: #f7cac9;
-        color: #fff;
-    }
-}

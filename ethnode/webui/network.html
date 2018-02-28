@@ -45,11 +45,11 @@
 					<div class="button">
 						<button type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" class="navbar-toggle collapsed"></button>
 					</div>
-					<a href="/ui" class=" hidden-xs"><img src="images/logo.png" alt="Ethearnal Logo"></a>
+					<a href="/ui" class=""><img src="images/logo.png" alt="Ethearnal Logo"></a>
 				</div>
 				<div id="navigation" class="collapse navbar-collapse tab-info">
 					<ul class="nav nav-tabs navbar-right hidden-xs relative dropdown">
-						<!-- <li class="nav-item"><a href="/ui/network" class="nav-link network">Network</a></li> -->
+						<li class="nav-item"><a href="/ui/network" class="nav-link network">Network</a></li>
 						<li class="nav-item"><a href="/ui" class="nav-link gigs">Gigs</a></li>
 						<li class="nav-item"><a href="/ui/profiles" class="nav-link profiles">Profiles</a></li>
 						<li class="nav-item"><a href="" data-toggle="modal" data-target="#add-gig" class="nav-link">New Gig</a></li>
@@ -93,21 +93,28 @@
 	<div class="network-page-wrap-module">
 		<a href="" data-toggle="modal" data-target="#modal-network" class="hidden"></a>
 		<section class="network-map">
-			<div id="map" tabindex="0" style="height: 100vh; width: 100%;"></div>
+			<div id="map" tabindex="0" style="height: 100vh; width: 100%; padding-top: 65px;">
+				<div id="tooltip" class="tooltip"></div>
+			</div>
 		</section>
 	</div>
 	<div class="modal fade" id="modal-network">
 		<div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content about-head-modal">
+			<div class="modal-content cdn-details">
 				<div class="modal-body">
 					<div class="text-center">
 						<h3 class="ntw-country"></h3>
 						<p class="ntw-ip"></p>
 					</div>
 				</div>
-				<button data-dismiss="modal" class="btn btn-primary btn-block no-mrg no-border pdd-vertical-15 ng-scope">
-					<span class="text-uppercase">Close</span>
-				</button>
+				<div class="flex">
+					<button data-dismiss="modal" class="btn btn-pink btn-half no-mrg no-border pdd-vertical-15 ng-scope">
+						<span class="text-uppercase">Close</span>
+					</button>
+					<button id="networkSelect" class="btn btn-primary btn-half no-mrg no-border pdd-vertical-15 ng-scope">
+						<span class="text-uppercase">Select</span>
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -294,7 +301,7 @@
 	                </div>
 	                <div class="modal-footer">
 	                    <button id="addNewGigSend" class="btn btn-pink lh-normal mdl-button mdl-js-button finish-button">Publish</button>
-	                    <button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button" data-dismiss="modal">Close</button>
+	                    <button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button" id="addgig-close" data-dismiss="modal">Close</button>
 	                    <div data-mdl-for="addNewGig" class="mdl-tooltip">This text will be changed anyway.</div>
 	                </div>
 	            </div>
@@ -384,7 +391,6 @@
 	<!--  -->
 	<!-- open maps -->
 	<script src="//openlayers.org/en/v4.6.4/build/ol.js" type="text/javascript"></script>
-	<!-- <script src="//openlayers.org/en/v3.2.1/build/ol.js" type="text/javascript"></script> -->
 	<!-- Vendor JS -->
 	<script src="dist/js/vendor.min.js"></script>
 	<!-- Main JS file-->

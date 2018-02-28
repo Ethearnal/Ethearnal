@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
 	<title>Ethearnal - Home page</title>
 	<link rel="stylesheet" href="styles/hcmodals.css">
 	<link rel="shortcut icon" type="image/png" href="images/favicon.png">
@@ -45,11 +45,11 @@
 					<div class="button">
 						<button type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" class="navbar-toggle collapsed"></button>
 					</div>
-					<a href="/ui" class=" hidden-xs"><img src="images/logo.png" alt="Ethearnal Logo"></a>
+					<a href="/ui" class=""><img src="images/logo.png" alt="Ethearnal Logo"></a>
 				</div>
 				<div id="navigation" class="collapse navbar-collapse tab-info">
 					<ul class="nav nav-tabs navbar-right hidden-xs relative dropdown">
-						<!-- <li class="nav-item"><a href="/ui/network" class="nav-link network">Network</a></li> -->
+						<li class="nav-item"><a href="/ui/network" class="nav-link network">Network</a></li>
 						<li class="nav-item"><a href="/ui" class="nav-link gigs">Gigs</a></li>
 						<li class="nav-item"><a href="/ui/profiles" class="nav-link profiles">Profiles</a></li>
 						<li class="nav-item"><a href="" data-toggle="modal" data-target="#add-gig" class="nav-link">New Gig</a></li>
@@ -93,12 +93,15 @@
 	<section class="gigs-page-content home-page">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-6 col-md-4 col-lg-3 col-xs-12 col-sm-6">
+				<div class="col-xs-12 col-md-4 col-lg-3 col-xs-12 col-sm-6">
 					<div class="card sidebar-fixed">
 						<div class="card-heading border bottom">
-							<h4 class="card-title">Search Gigs</h4>
+							<h4 class="card-title">Search Gigs<a data-toggle="collapse" data-parent="#accordion-1" href="#collapseOne" aria-expanded="true" class="">
+								
+								<i class="ti-arrow-circle-down"></i> 
+							</a></h4>
 						</div>
-						<div class="filter card-body">
+						<div class="filter card-body panel-collapse collapse in" id="collapseOne">
 							<div class="form-group">
 								<label>Search by Text</label>
 								<input id="search-header" type="text" placeholder="Search by text..." class="form-control">
@@ -362,7 +365,7 @@
 	                </div>
 	                <div class="modal-footer">
 	                    <button id="addNewGigSend" class="btn btn-pink lh-normal mdl-button mdl-js-button finish-button">Publish</button>
-	                    <button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button" data-dismiss="modal">Close</button>
+	                    <button class="btn btn-default lh-normal close-btn mdl-button mdl-js-button close-button" id="addgig-close" data-dismiss="modal">Close</button>
 	                    <div data-mdl-for="addNewGig" class="mdl-tooltip">This text will be changed anyway.</div>
 	                </div>
 	            </div>
