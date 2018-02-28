@@ -511,14 +511,14 @@ if __name__ == '__main__':
             sleep(3)
             category_domain = jsd.data['domain']
             gigs_data = jsd.data['gigs']
-            # for gig_entry in gigs_data:
-            #     gig_entry['lock'] = randint(1, 100)
-            #     gig_entry['price'] = randint(1, 1999)
-            #     gig_entry['category'] = category_domain
-            #     gig_entry['general_domain_of_expertise'] = category_domain
-            #     # my_gigs.my_gigs
-            #     print(gig_entry)
-            #     #my_gigs.post(gig_entry['title'], gig_entry)
+            for gig_entry in gigs_data:
+                gig_entry['lock'] = randint(5, 190)
+                gig_entry['price'] = randint(50, 1999)
+                gig_entry['category'] = category_domain
+                gig_entry['general_domain_of_expertise'] = category_domain
+                # my_gigs.my_gigs
+                print(gig_entry)
+                my_gigs.post(gig_entry['title'], gig_entry)
 
             sys.exit(0)
 
