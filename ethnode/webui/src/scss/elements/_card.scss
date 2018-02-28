@@ -47,6 +47,12 @@
 
 	.card-body {
 		padding: 15px 20px;
+		.form-group {
+			.multiple {
+				min-height: 42px;
+				height: auto;
+			}
+		}
 	}
 
 	.card-footer {

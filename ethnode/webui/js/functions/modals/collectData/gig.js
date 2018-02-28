@@ -71,9 +71,10 @@ function collectGigData(form) {
                                 textColor: "#fff",
                                 position: "top-right",
                                 afterShown: function () {
-                                    $('#add-gig').modal('hide');
-                                    $('body').removeClass('modal-open');
-                                    $('body').find('.modal-backdrop').remove();
+                                    $('#addgig-close').click();
+                                    // $('body').removeClass('modal-open');
+                                    // $('body').find('.modal-backdrop').remove();
+                                    $('#addNewGigSend').prop('disabled', false);
                                 }
                             });
                             profilePageModule.renderOneGig(gigID, true);
@@ -89,7 +90,6 @@ function collectGigData(form) {
     } else if (fileObj == undefined) {
 
         // Checks if the GIG already has image and re-use image hash.
-        console.log('Are we here?');
         if ($content.find('img.show-image').attr('src') != null) {
             $imageSrc = $content.find('img.show-image').attr('src');
             $imageHash = $imageSrc.split('/api/v1/my/img/?q=')[1];
@@ -123,15 +123,22 @@ function collectGigData(form) {
                         textColor: "#fff",
                         position: "top-right",
                         afterShown: function () {
-                            $('#add-gig').modal('hide');
-                            $('body').removeClass('modal-open');
-                            $('body').find('.modal-backdrop').remove();
+                            $('#addgig-close').click();
+                            // $('body').removeClass('modal-open');
+                            // $('body').find('.modal-backdrop').remove();
+                            $('#addNewGigSend').prop('disabled', false);
                         }
                     });
                     profilePageModule.renderOneGig(gigID, true);
                 }
             });
         }
+        else {
+            $('#addNewGigSend').prop('disabled', false);
+        }
+    }
+    else {
+        $('#addNewGigSend').prop('disabled', false);
     }
     return;
 }

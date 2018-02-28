@@ -1208,7 +1208,7 @@
      margin: 0 auto;
      display: flex;
      align-items: flex-start;
-     justify-content: flex-start;
+     justify-content: center;
      flex-wrap: wrap;
 }
  section.gigs-page-content .container .gigs .gigs-container:after, section.gigs-page-content .container .jobs .gigs-container:after, section.jobs-page-content .container .gigs .gigs-container:after, section.jobs-page-content .container .jobs .gigs-container:after, section.profiles-page-content .container .gigs .gigs-container:after, section.profiles-page-content .container .jobs .gigs-container:after {
@@ -1950,7 +1950,7 @@
         }
          section.documentation .container .profile-documentation-full .profile-documentation {
              margin-left: 0;
-             box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.1);
+             /* box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.1); */
         }
          section.background-image {
              height: 300px !important;
@@ -2337,7 +2337,7 @@
          background-color: white;
         /* height: 69px;
          */
-         z-index: 20;
+         z-index: 1000;
          box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.1);
     }
      .panel-collapse {
@@ -2349,7 +2349,7 @@
          padding-right: 0;
          padding-left: 0;
          padding-top: 20px;
-         margin-top: 40px;
+         margin-top: 20px;
          background-color: #fff;
     }
      .main-tab-content {

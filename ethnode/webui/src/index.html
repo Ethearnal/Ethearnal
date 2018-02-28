@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
 	<title>Ethearnal - Home page</title>
 	//= templates/head-section.html
 </head>
@@ -15,12 +15,15 @@
 	<section class="gigs-page-content home-page">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-6 col-md-4 col-lg-3 col-xs-12 col-sm-6">
+				<div class="col-xs-12 col-md-4 col-lg-3 col-xs-12 col-sm-6">
 					<div class="card sidebar-fixed">
 						<div class="card-heading border bottom">
-							<h4 class="card-title">Search Gigs</h4>
+							<h4 class="card-title">Search Gigs<a data-toggle="collapse" data-parent="#accordion-1" href="#collapseOne" aria-expanded="true" class="">
+								
+								<i class="ti-arrow-circle-down"></i> 
+							</a></h4>
 						</div>
-						<div class="filter card-body">
+						<div class="filter card-body panel-collapse collapse in" id="collapseOne">
 							<div class="form-group">
 								<label>Search by Text</label>
 								<input id="search-header" type="text" placeholder="Search by text..." class="form-control">
