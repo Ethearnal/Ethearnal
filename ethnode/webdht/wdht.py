@@ -215,7 +215,7 @@ class WebDHTKnownGuids(object):
 
     def GET(self):
         # todo
-        guid_list = self.dkv.filter_profile_guids(self)
+        guid_list = self.dkv.filter_profile_guids()
         # c = self.dhtf.dht.storage.pubkeys.cursor.execute('SELECT bkey from ertref;')
         # guid_list = [guid_bin_to_hex(k[0]).decode() for k in c.fetchall()]
         # print(guid_list)
