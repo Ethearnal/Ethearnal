@@ -166,7 +166,7 @@ class WebCDN(object):
         print('GET RELAY META', url)
         try:
             relay_header_key = 'Relay-Id-Source'
-            print(self.dhf.cdn_host, )
+            print(self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
             relay_header_val = '%s:%d' % (self.dhf.ert.cdn_host, self.dhf.ert.cdn_port)
             print('GET RELAY HEADER', relay_header_key, relay_header_val)
             r = requests.get(url, headers={relay_header_key: relay_header_val}, stream=True)
