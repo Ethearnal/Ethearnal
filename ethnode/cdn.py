@@ -231,7 +231,12 @@ cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
 cnx = None
 if args.http_config_url and args.do_idx_consensus:
     cnx = GigIndexConsensus(args.http_config_url, idx, ip, port, limit=args.idx_consensus_limit)
-    cnx.reindex()
+    try:
+        cnx.reindex()
+    except Exception as e:
+        print('Consensus not happend due to failed services in http_config')
+        print(e)
+        print('--')
 
 req = WebCDNClientRequestHeaders()
 
