@@ -54,9 +54,14 @@ class DHTFacade(object):
     def boot_to(self, host, port):
         self.dht.bootstrap([(host, port), ])
 
-    def direct_push(self, key, value, host, port):
+    def direct_push(self, key, value, host, port, hk_hex=None):
         guid = self.bin_guid
-        hk = cdx.encode_key_hash(key, guid=guid, revision=cdx.DEFAULT_REVISION)
+        if hk_hex:
+            hk = cdx.guid_bts_to_int(cdx.guid_hex_to_bin(hk_hex))
+            self._last_pulled_hk_hex = hk_hex
+        else:
+            hk = cdx.encode_key_hash(key, guid=guid, revision=cdx.DEFAULT_REVISION)
+
         ev = cdx.encode_val_bson(value, cdx.DEFAULT_REVISION)
         sg = self.ert.rsa_sign(ev)
         self.dht.peer.direct_store(hk, ev, host, port,
@@ -299,6 +304,18 @@ class DHTFacade(object):
             # logger('repush failed for hk', hk_hex)
             pass
 
+    def repush_remote_direct(self, hk_hex, host, port):
+        try:
+            t = self.pull_local('', hk_hex=hk_hex)
+            if t:
+                d = cdx.decode_bson_val(t[2])
+                val = d[1]
+                # key, value, host, port):
+                self.direct_push('', val, host, port,  hk_hex=hk_hex, )
+        except:
+            # logger('repush failed for hk', hk_hex)
+            pass
+
     def repush(self, hk_hex):
         try:
             t = self.pull_local('', hk_hex=hk_hex)
@@ -324,6 +341,20 @@ class DHTFacade(object):
         for hk_hex in dl.iter_hk():
             self.repush_remote(hk_hex)
 
+    def repush_direct_own_gigs(self, collection='.gigs'):
+        from webdht.double_linked import instance_dl
+        dl = instance_dl(self, cdx.guid_bin_to_hex(self.bin_guid), collection)
+        for hk_hex in dl.iter_hk():
+            # logger(hk_hex)
+            # self.direct_push(hk_hex)
+            for peer in self.peers:
+                host = peer['host']
+                port = peer['port']
+                self.repush_remote_direct(hk_hex, host, port)
+
+    def repush_direct_onw_and_deleted(self):
+        self.repush_direct_own_gigs('.gigs')
+        self.repush_direct_own_gigs('.deleted_gigs')
 
     def pull_local(self, key,
                    guid=None,
