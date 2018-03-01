@@ -3,10 +3,6 @@
 .vscode
 .DS_Store
 
-dist
-node_modules
-
-
 # default data dirs
 *_profile/
 *_profile_files/
