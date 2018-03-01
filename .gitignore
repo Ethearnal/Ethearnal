@@ -3,6 +3,8 @@
 .vscode
 .DS_Store
 
+dist
+node_modules
 
 
 # default data dirs
