@@ -45,7 +45,7 @@ window.networkPageModule = (function () {
     // start refresh chain
     startChain(1)
   }
-
+ 
   // event handlers
   map.on('pointermove', displayTooltip)
   map.on('click', showModal)
