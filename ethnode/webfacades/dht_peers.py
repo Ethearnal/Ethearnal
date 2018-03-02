@@ -15,6 +15,11 @@ class WebDhtPeers(WebApiBase):
         self.enable_cors = enable_cors
 
     def GET(self, *a, **kw):
+        if self.enable_cors:
+            self.cherry.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
+            self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+            self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
+            # tell CherryPy no avoid normal handler
         if 'render' in kw:
             self.peers.render_peers_data()
         return self.peers.get_bin_data
