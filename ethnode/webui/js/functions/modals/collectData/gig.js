@@ -72,8 +72,6 @@ function collectGigData(form) {
                                 position: "top-right",
                                 afterShown: function () {
                                     $('#addgig-close').click();
-                                    // $('body').removeClass('modal-open');
-                                    // $('body').find('.modal-backdrop').remove();
                                     $('#addNewGigSend').prop('disabled', false);
                                 }
                             });
@@ -124,8 +122,6 @@ function collectGigData(form) {
                         position: "top-right",
                         afterShown: function () {
                             $('#addgig-close').click();
-                            // $('body').removeClass('modal-open');
-                            // $('body').find('.modal-backdrop').remove();
                             $('#addNewGigSend').prop('disabled', false);
                         }
                     });

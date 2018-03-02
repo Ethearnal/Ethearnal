@@ -130,7 +130,7 @@
         img {
             width: 100%;
         }
-        @media (max-width: 767px) {
+        @media (max-width: 998px) {
             display: none !important;
         }
         @media (max-width: 1099px) {
@@ -201,15 +201,16 @@
         background-color: #d0e1ff;
         border-color: #d0e1ff;
     }
-    .btn-pink {
-        background-color: #f7cac9;
+}
+
+.btn-pink {
+    background-color: #f7cac9;
+    border-color: #f7cac9;
+    color: #fff;
+    &:hover {
+        background-color: #fddcdb;
         border-color: #f7cac9;
         color: #fff;
-        &:hover {
-            background-color: #fddcdb;
-            border-color: #f7cac9;
-            color: #fff;
-        }
     }
 }
 

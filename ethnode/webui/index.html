@@ -48,26 +48,28 @@
 					<a href="/ui" class=""><img src="images/logo.png" alt="Ethearnal Logo"></a>
 				</div>
 				<div id="navigation" class="collapse navbar-collapse tab-info">
-					<ul class="nav nav-tabs navbar-right hidden-xs relative dropdown">
+					<ul class="nav nav-tabs navbar-right relative dropdown">
 						<li class="nav-item"><a href="/ui/network" class="nav-link network">Network</a></li>
 						<li class="nav-item"><a href="/ui" class="nav-link gigs">Gigs</a></li>
 						<li class="nav-item"><a href="/ui/profiles" class="nav-link profiles">Profiles</a></li>
 						<li class="nav-item"><a href="" data-toggle="modal" data-target="#add-gig" class="nav-link">New Gig</a></li>
-						<li id="settings-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="profile view-profile">
+						<li class="nav-item visible-sm visible-xs hidden-md hidden-lg"><a href="/ui/profile" class="nav-link profile">My Profile</a></li>
+						<!-- <li class="nav-item"><a href="/ui" class="nav-link gigs" data-toggle="modal" data-target="#modal-sm">About Node</a></li> -->
+						<li id="settings-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="profile view-profile hidden-sm hidden-xs">
 							<img id="avatar-img" src="" alt="" class="profile-picture">
 							<i class="ti-angle-down font-size-14 mrg-left-5"></i>
 							<!-- JSON DATA GOES HERE-->
 						</li>
-							<ul data-labelledby="settings-dropdown" class="dropdown-menu absolute">
-								<li>
-									<a href="/ui/profile" class="flex-block flex-center">
-										<i class="ti-user pdd-right-10 font-size-18"></i>My Profile</a>
-								</li>
-								<li>
-									<a href="" data-toggle="modal" data-target="#modal-sm" class="flex-block flex-center">
-										<i class="ti-info pdd-right-10 font-size-18"></i>About Node</a>
-								</li>
-							</ul>
+						<ul data-labelledby="settings-dropdown" class="dropdown-menu absolute">
+							<li>
+								<a href="/ui/profile" class="flex-block flex-center">
+								<i class="ti-user pdd-right-10 font-size-18"></i>My Profile</a>
+							</li>
+							<li>
+								<a href="" data-toggle="modal" data-target="#modal-sm" class="flex-block flex-center">
+								<i class="ti-info pdd-right-10 font-size-18"></i>About Node</a>
+							</li>
+						</ul>
 					</ul>
 				</div>
 			</nav>
@@ -225,7 +227,7 @@
 	</div>
 	
 	<div id="redesigned-modal" class="hidden">
-	  <div class="modal-content border-radius-6 redesigned-gig-modal">
+	  <div class="modal-content border-radius-6 redesigned-gig-modal scroll-y">
 	    <div class="modal-header pdd-horizon-30" id="redesigned-modal-gig-image" style="height: 200px;">
 	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	    </div>

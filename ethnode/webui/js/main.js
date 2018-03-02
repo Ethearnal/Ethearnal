@@ -822,8 +822,6 @@ require("js/functions/getData/nodeData.js"); // GETS NODE DATA
 // GIGS -- OTHER THINGS
 
 // CREATE
-// require("js/functions/modals/create/createLE.js"); // CREATES CONTENT BLOCK - NOT GIG
-// require("js/functions/modals/create/createGig.js"); // GETS GIG DATA
 require("js/functions/modals/create/createGigBox.js"); // CREATES GIG BOX
 require("js/functions/modals/create/createGigToProfile.js"); // CREATES GIG BOX
 require("js/functions/modals/create/createPortfolio.js"); // CREATES GIG BOX
@@ -836,7 +834,6 @@ require("js/functions/modals/delete/gig.js"); // DELETES GIG
 // LOAD
 require("js/functions/modals/load/gigs.js"); // LOADS ALL GIGS
 require("js/functions/modals/load/portfolios.js"); // LOAD ALL PORTFOLIOS
-require("js/functions/modals/load/searchGigs.js"); // LOADS ALL GIGS BASED ON YOUR SEARCH
 require("js/functions/modals/load/moreGigsScrollDown.js"); // LOADS MORE GIGS ON SCROLL DOWN
 require("js/functions/modals/load/loadGigsOnAjaxSuccess.js"); // LOADS GIGS ON AJAX SUCCESS
 

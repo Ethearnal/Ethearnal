@@ -343,3 +343,18 @@
         color: #888da8;
     }
 }
+
+//* main header style *//
+
+.main-header {
+    @media (min-width: 630px) and (max-width: 767px) {
+        padding-right: 10px;
+    }
+    .navbar-collapse {
+        padding-left: 0px;
+        padding-right: 0px;
+        .nav-tabs > li > a {
+            padding: 7px 9px;
+        }
+    }
+}
