@@ -42,7 +42,7 @@ window.networkPageModule = (function () {
     map.addOverlay(overlay)
 
     // start refresh chain
-    startChain(1)
+    startChain(1);
 
     // event handlers
     map.on('pointermove', displayTooltip)
@@ -137,6 +137,7 @@ window.networkPageModule = (function () {
       return initNetwork()
     }
   }
+
 })()
 
 $(document).ready(function() {

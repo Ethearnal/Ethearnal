@@ -7,7 +7,7 @@
 }
 
 @media (max-width: 767px) {
-    .profile-page, .gigs-page, .profiles-page {
+    .profile-page, .gigs-page, .profiles-page, .network-page {
         .navbar-collapse {
             display: block;
             .dropdown-menu {
@@ -154,7 +154,7 @@
 
 // HEADER MOBILE
 @media (max-width: 630px) {
-    .profile-page, .gigs-page, .profiles-page {
+    .profile-page, .gigs-page, .profiles-page, .network-page {
         .main-header {
             .flex-block {
                 flex-direction: column;
@@ -229,4 +229,8 @@
 }
 .panel-collapse {
     background-color: #fff;
+}
+
+.scroll-y {
+    overflow-y: scroll !important;
 }

@@ -77,11 +77,7 @@ function collectProfileData(form) {
                       textColor: "#fff",
                       position: "top-right",
                       afterShown: function() {
-                        $("#edit-profile").modal("hide");
-                        $("body").removeClass("modal-open");
-                        $("body")
-                          .find(".modal-backdrop")
-                          .remove();
+                        $('#edit-profile-close').click();
                       }
                     });
                 }
@@ -126,11 +122,7 @@ function collectProfileData(form) {
           textColor: "#fff",
           position: "top-right",
           afterShown: function() {
-            $("#edit-profile").modal("hide");
-            $("body").removeClass("modal-open");
-            $("body")
-              .find(".modal-backdrop")
-              .remove();
+            $('#edit-profile-close').click();
           }
         });
     }
