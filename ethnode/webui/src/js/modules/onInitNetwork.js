@@ -49,7 +49,12 @@ window.networkPageModule = (function () {
     map.on('click', showModal)
     $('#networkSelect').on('click', function (e) {
       e.preventDefault()
-      alert('selecte')
+      console.log()
+      let str = $(this).closest('.cdn-details').find('#service_url').val()
+      str = str.substring(0, str.length - 4)
+      let url = str + '4567/ui'
+
+      window.location.href = url
     })
 
     // start update chain
@@ -77,6 +82,7 @@ window.networkPageModule = (function () {
           }
         }).done(function () {
           let feature = new ol.Feature({
+            service_url: geoData.http.service_url,
             geo: geoData.http.geo,
             ip4: geoData.http.ip4,
             country: geoData.http.geo.country_name,
@@ -99,6 +105,7 @@ window.networkPageModule = (function () {
       })
       if (feature) {
         let info = feature.N.geo.city + ', ' + feature.N.geo.country_name
+        $('#service_url').val(feature.N.service_url)
         $('#modal-network').find('.ntw-country').text(info)
         $('#modal-network').find('.ntw-ip').text(feature.N.ip4)
         $("[data-target='#modal-network']").trigger('click')
