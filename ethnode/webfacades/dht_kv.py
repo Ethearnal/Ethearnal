@@ -86,6 +86,7 @@ class WebDhtCdnList(WebApiBase):
                  dkv: DhtKv,
                  cherry=cherrypy,
                  cdn_list=None,
+                 enable_cors=True,
                  mount_point='/api/v1/dht/cdn-list',
                  mount_it=True):
         super(WebDhtCdnList, self).__init__(
@@ -98,15 +99,23 @@ class WebDhtCdnList(WebApiBase):
             self.cdn_list = config.cdn_list
         self.dkv = dkv
         self.dkv.set(self.K_OWN_CDN_LIST, self.cdn_list)
+        self.enable_cors = enable_cors,
 
     def GET(self, *a, **kw):
-        pass
+        if self.enable_cors:
+            self.cherry.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
+            self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+            self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
         data = self.dkv.get(self.K_OWN_CDN_LIST, local=True)
         js = json.dumps(data)
         bs = js.encode()
         return bs
 
     def PUT(self):
+        if self.enable_cors:
+            self.cherry.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
+            self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+            self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
         return self.post()
         pass
 
