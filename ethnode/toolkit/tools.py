@@ -148,6 +148,7 @@ def make_sets(host_ports_list, limit=TOP_INDEX_DEFAULT_LIMIT):
 
     # return tuple([set(get_top_idx(k, limit=limit)) for k in host_ports_list if not None] )
 
+
 def simple_indexing_consensus(hk_sets):
     u = set.intersection(*hk_sets)
     return u
