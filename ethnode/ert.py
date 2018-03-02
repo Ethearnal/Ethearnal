@@ -21,7 +21,7 @@ from webdht.wdht_ertapi import DhtGigsHkeysWebAPI, DhtGetByHkeyWebAPI
 from webdht.wdht_ertapi import Indexer
 
 from apifacades.dhtkv import DhtKv
-from webfacades.dht_kv import WebDhtCdnSelector
+from webfacades.dht_kv import WebDhtCdnSelector, WebDhtCdnList
 
 from toolkit.filestore import AutoDirHfs
 
@@ -251,6 +251,7 @@ def main_http(http_webdir: str = config.http_webdir,
     dkv = DhtKv(d)
     dkv.set(WebDhtCdnSelector.K_SELECTED_CDN, "%s:%s" % (ert.cdn_host, ert.cdn_port))
     cdn_select = WebDhtCdnSelector(dkv)
+    cdn_list = WebDhtCdnList(dkv)
 
 
     knownguids = WebDHTKnownGuids(

@@ -40,3 +40,13 @@ ertcdn_dev_bootstrap_host_port = '%s:%d' % (ertcdn_dev_bootstrap_host, ertcdn_de
 dht_iteration_sleep = 0.1
 dht_k = 20
 dht_alpha = 3
+
+# CDN lists
+cdn_list = [
+    "http://207.154.238.7:5678/",
+    "http://159.89.165.91:5678/",
+    "http://159.65.56.140:80",
+    "http://159.65.246.106:5678/",
+    "http://159.89.120.119:5678",
+]
+

@@ -2,6 +2,7 @@ from webfacades.webbase import WebApiBase
 from apifacades.dhtkv import DhtKv
 import json
 import cherrypy
+import config
 
 
 class WebDhtCdnInfo(WebApiBase):
@@ -74,5 +75,44 @@ class WebDhtCdnSelector(WebApiBase):
         body = self.cherry.request.body.read()
         data = json.loads(body.decode())
         # todo validate, sanitize
-        self.dkv.set('selected_cdn', data)
+        self.dkv.set(self.K_SELECTED_CDN, data)
+        return b''
+
+
+class WebDhtCdnList(WebApiBase):
+    K_OWN_CDN_LIST = 'cdn_list'
+
+    def __init__(self,
+                 dkv: DhtKv,
+                 cherry=cherrypy,
+                 cdn_list=None,
+                 mount_point='/api/v1/dht/cdn-list',
+                 mount_it=True):
+        super(WebDhtCdnList, self).__init__(
+            cherry=cherry,
+            mount_point=mount_point,
+            mount_it=mount_it
+        )
+        self.cdn_list = cdn_list
+        if not cdn_list:
+            self.cdn_list = config.cdn_list
+        self.dkv = dkv
+        self.dkv.set(self.K_OWN_CDN_LIST, self.cdn_list)
+
+    def GET(self, *a, **kw):
+        pass
+        data = self.dkv.get(self.K_OWN_CDN_LIST, local=True)
+        js = json.dumps(data)
+        bs = js.encode()
+        return bs
+
+    def PUT(self):
+        return self.post()
+        pass
+
+    def post(self):
+        body = self.cherry.request.body.read()
+        data = json.loads(body.decode())
+        # todo validate, sanitize
+        self.dkv.set(self.K_OWN_CDN_LIST, data)
         return b''

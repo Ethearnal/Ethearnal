@@ -336,7 +336,7 @@ paths:
       - "DHT CDN select"
       summary: "Update profile selected CDN"
       description: "Insert Profile Key, Value"
-      operationId: "updateProfileKey"
+      operationId: "updateCDNVal"
       consumes:
       - "application/json"
       produces:
@@ -354,6 +354,42 @@ paths:
         400:
           description: "something wrong"
 
+  /dht/cdn-list:
+    get:
+      tags:
+      - "DHT CDN list"
+      summary: "cdn list"
+      description: "Retrieve profile data by Key"
+      operationId: "dhtCDNList"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Retrieve profile CDN list"
+        400:
+          description: "Something wrong"
+    put:
+      tags:
+      - "DHT CDN list"
+      summary: "Update profile selected CDN"
+      description: "Insert Profile Key, Value"
+      operationId: "dhtUpdateCDNList"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "selected_cdn"
+        description: "Selected CDN Value"
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: "Updated"
+        400:
+          description: "something wrong"
 
 #definitions:
 #  GeneralDomainOfExpertise:
