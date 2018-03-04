@@ -3,11 +3,23 @@ window.networkPageModule = (function () {
   $('.nav-tabs .nav-link').removeClass('active')
   $('.nav-tabs .network').addClass('active')
   // array of CDN's
-  const urlsArr = [
-    'http://159.89.165.91:5678/api/cdn/v1/info',
-    'http://159.89.112.171:5678/api/cdn/v1/info',
-    'http://207.154.238.7:5678/api/cdn/v1/info'
-  ]
+  let urlsArr = ["http://207.154.238.7:5678/api/cdn/v1/info", "http://159.89.165.91:5678/api/cdn/v1/info", "http://159.65.56.140:5678/api/cdn/v1/info", "http://159.65.246.106:5678/api/cdn/v1/info", "http://159.89.120.119:5678/api/cdn/v1/info"]
+  // $.get('http://159.65.56.140:4567/api/v1/dht/cdn-list', function (data) {
+  //   // check if not empty
+  //   if (data) {
+  //     console.log(data)
+  //     urlsArr = data
+  //   }
+  // }).done(function () {
+  //
+  //   })
+  //
+  // const urlsArr = [
+  //   // 'http://159.89.165.91:5678/api/v1/dht/peers'
+  //   // 'http://159.89.165.91:5678/api/cdn/v1/info',
+  //   // 'http://159.89.112.171:5678/api/cdn/v1/info',
+  //   // 'http://207.154.238.7:5678/api/cdn/v1/info'
+  // ]
   // update data interval
   const interval = 1000 * 60 * 5
   function initNetwork () {
@@ -42,7 +54,7 @@ window.networkPageModule = (function () {
     map.addOverlay(overlay)
 
     // start refresh chain
-    startChain(1);
+    startChain(1)
 
     // event handlers
     map.on('pointermove', displayTooltip)
@@ -78,6 +90,7 @@ window.networkPageModule = (function () {
         $.get(url, function (data) {
           // check if not empty
           if (data) {
+            console.log(data)
             geoData = JSON.parse(data)
           }
         }).done(function () {
@@ -137,7 +150,6 @@ window.networkPageModule = (function () {
       return initNetwork()
     }
   }
-
 })()
 
 $(document).ready(function() {
