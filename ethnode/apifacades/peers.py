@@ -69,7 +69,7 @@ class PeersInfo(object):
         self.render_profile_key('names')
         self.render_profile_key('is_cdn')
         self.render_profile_key('profilePicture')
-        self.save_data(to_list=True)
+        self.save_data()
         self.load_data()
 
     def save_data(self):
