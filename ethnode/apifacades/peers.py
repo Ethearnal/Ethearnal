@@ -69,11 +69,15 @@ class PeersInfo(object):
         self.render_profile_key('names')
         self.render_profile_key('is_cdn')
         self.render_profile_key('profilePicture')
-        self.save_data()
+        self.save_data(to_list=True)
         self.load_data()
 
-    def save_data(self):
-        js = json.dumps(self.peers, ensure_ascii=False)
+    def save_data(self, to_list=False):
+        peers = self.peers
+        if to_list:
+            peers = [self.peers[k] for k in peers]
+
+        js = json.dumps(peers, ensure_ascii=False)
         self._hfs.save_bts_str_key('peers', js.encode())
 
     def load_data(self):
