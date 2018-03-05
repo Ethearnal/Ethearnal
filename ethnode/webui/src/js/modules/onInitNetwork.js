@@ -2,15 +2,26 @@
 window.networkPageModule = (function () {
   $('.nav-tabs .nav-link').removeClass('active')
   $('.nav-tabs .network').addClass('active')
-  // array of CDN's
-  const urlsArr = [
-    'http://159.89.165.91:5678/api/cdn/v1/info',
-    'http://159.89.112.171:5678/api/cdn/v1/info',
-    'http://207.154.238.7:5678/api/cdn/v1/info'
-  ]
   // update data interval
   const interval = 1000 * 60 * 5
+  
   function initNetwork () {
+    // array of CDN's
+    let urlsArr = []
+    let listData
+    $.get('http://159.65.56.140:4567/api/v1/dht/cdn-list', function (data) {
+      // check if not empty
+      if (data) {
+        listData = JSON.parse(data)
+      }
+    }).done(function () {
+      for (let i = 0; i < listData.length; i++) {
+        let apiList = listData[i] + '/api/cdn/v1/info'
+        urlsArr.push(apiList)
+      }
+      // start refresh chain
+      startChain(1)
+    })
     //  Map layers
     const layerMap = new ol.layer.Tile({source: new ol.source.OSM()})
     const sourceFeatures = new ol.source.Vector()
@@ -41,17 +52,37 @@ window.networkPageModule = (function () {
     })
     map.addOverlay(overlay)
 
-    // start refresh chain
-    startChain(1);
-
     // event handlers
     map.on('pointermove', displayTooltip)
     map.on('click', showModal)
+
     $('#networkSelect').on('click', function (e) {
       e.preventDefault()
-      alert('selecte')
+      var data = $('#service_url').val();
+      $.ajax({
+        type: 'PUT',
+        url: '/api/v1/dht/cdn',
+        data: data,
+        success: function() {
+          $.toast({
+            heading: "CDN Changing",
+            text: "Your cdn successfully changed!",
+            showHideTransition: "fade",
+            allowToastClose: true,
+            hideAfter: 2500,
+            bgColor: "rgba(89, 116, 165, 0.91)",
+            textColor: "#fff",
+            position: "top-right",
+            afterShown: function() {
+              // setTimeout(function() { window.location.href = '/ui' },2400);
+            }
+          });
+        }
+      });
     })
-
+    $('#modal-network').on('hide.bs.modal', function () {
+      $('#peer-list').html('')
+    })
     // start update chain
     function startChain (i) {
       if (i === 1) {
@@ -77,6 +108,7 @@ window.networkPageModule = (function () {
           }
         }).done(function () {
           let feature = new ol.Feature({
+            service_url: geoData.http.service_url,
             geo: geoData.http.geo,
             ip4: geoData.http.ip4,
             country: geoData.http.geo.country_name,
@@ -98,10 +130,38 @@ window.networkPageModule = (function () {
         return feature
       })
       if (feature) {
+        $('#peer-list, #peer-list-cdn').empty();
         let info = feature.N.geo.city + ', ' + feature.N.geo.country_name
+        $('#service_url').val(feature.N.service_url)
         $('#modal-network').find('.ntw-country').text(info)
-        $('#modal-network').find('.ntw-ip').text(feature.N.ip4)
-        $("[data-target='#modal-network']").trigger('click')
+        $('#modal-network').find('.ntw-ip').text(feature.N.ip4).attr('data-ip',)
+        let peerList = feature.N.service_url + '/api/v1/dht/peers'
+        console.log(peerList)
+        let peerData
+        $.get(peerList, function (data) {
+          // check if not empty
+          if (data) {
+            peerData = JSON.parse(data)
+          }
+        }).done(function () {
+          for ( var i = 0; i < peerData.length; i++ ) {
+            var img_src
+            var block
+            console.log(peerData[i]['profile'].is_cdn);
+            if (!peerData[i]['profile'].is_cdn) {
+                img_src = 'http://' + feature.N.ip4 + ':5678/api/cdn/v1/resource?hkey=' + peerData[i]['profile'].profilePicture + '&thumb=1'
+                var firstName = peerData[i]['profile'].name.first;
+                var lastName = peerData[i]['profile'].name.last;
+                block = `<div class="icon-box"><img src="${img_src}"/>${firstName} ${lastName}</div>`
+                $('#peer-list').append(block)
+            }
+            else {
+                block = `<div class="icon-box"><img src="../dist/img/cdn.svg" />CDN</div>`
+                $('#peer-list-cdn').append(block)
+            }
+          }
+        })
+        $("[data-target='#modal-network']").trigger('click');
       }
     }
 
@@ -130,7 +190,6 @@ window.networkPageModule = (function () {
       return initNetwork()
     }
   }
-
 })()
 
 $(document).ready(function() {
