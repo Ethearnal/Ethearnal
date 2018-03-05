@@ -61,5 +61,5 @@ cdn_hosts = {
     "ban":  "http://159.89.165.91:5678/api/v1/dht/peers",
     "lon01": "http://159.65.56.140:80/api/v1/dht/peers",
     "ny02cd": "http://159.65.246.106:5678/api/v1/dht/peers",
-    "to02cd": "http://159.65.246.106:5678/api/v1/dht/peers"
+    "to02cd": "http://159.89.120.119:5678/api/v1/dht/peers"
 };
