@@ -1,5 +1,6 @@
 from webfacades.webbase import WebApiBase
 from apifacades.peers import PeersInfo
+import json
 
 
 class WebDhtPeers(WebApiBase):
@@ -22,7 +23,9 @@ class WebDhtPeers(WebApiBase):
             # tell CherryPy no avoid normal handler
         if 'render' in kw:
             self.peers.render_peers_data()
-        return self.peers.get_bin_data
+        peers = self.peers.peers
+        ll = [self.peers[k] for k in peers]
+        return json.dumps(ll).encode()
 
     def OPTIONS(self):
         if self.enable_cors:
