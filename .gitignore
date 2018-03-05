@@ -3,9 +3,9 @@
 .vscode
 .DS_Store
 
-# node_modules/
-# dist builds
-# dist/
+node_modules/
+dist builds
+dist/
 
 
 # default data dirs
@@ -97,3 +97,4 @@ env/
 venv/
 ENV/
 
+package-lock.json
