@@ -2,27 +2,25 @@
 window.networkPageModule = (function () {
   $('.nav-tabs .nav-link').removeClass('active')
   $('.nav-tabs .network').addClass('active')
-  // array of CDN's
-  let urlsArr = ["http://207.154.238.7:5678/api/cdn/v1/info", "http://159.89.165.91:5678/api/cdn/v1/info", "http://159.65.56.140:5678/api/cdn/v1/info", "http://159.65.246.106:5678/api/cdn/v1/info", "http://159.89.120.119:5678/api/cdn/v1/info"]
-  // $.get('http://159.65.56.140:4567/api/v1/dht/cdn-list', function (data) {
-  //   // check if not empty
-  //   if (data) {
-  //     console.log(data)
-  //     urlsArr = data
-  //   }
-  // }).done(function () {
-  //
-  //   })
-  //
-  // const urlsArr = [
-  //   // 'http://159.89.165.91:5678/api/v1/dht/peers'
-  //   // 'http://159.89.165.91:5678/api/cdn/v1/info',
-  //   // 'http://159.89.112.171:5678/api/cdn/v1/info',
-  //   // 'http://207.154.238.7:5678/api/cdn/v1/info'
-  // ]
   // update data interval
   const interval = 1000 * 60 * 5
   function initNetwork () {
+    // array of CDN's
+    let listData
+    let urlsArr = []
+    $.get('http://159.65.56.140:4567/api/v1/dht/cdn-list', function (data) {
+      // check if not empty
+      if (data) {
+        listData = JSON.parse(data)
+      }
+    }).done(function () {
+      for (let i = 0; i < listData.length; i++) {
+        let apiList = listData[i] + '/api/cdn/v1/info'
+        urlsArr.push(apiList)
+      }
+      // start refresh chain
+      startChain(1)
+    })
     //  Map layers
     const layerMap = new ol.layer.Tile({source: new ol.source.OSM()})
     const sourceFeatures = new ol.source.Vector()
@@ -53,9 +51,6 @@ window.networkPageModule = (function () {
     })
     map.addOverlay(overlay)
 
-    // start refresh chain
-    startChain(1)
-
     // event handlers
     map.on('pointermove', displayTooltip)
     map.on('click', showModal)
@@ -68,7 +63,9 @@ window.networkPageModule = (function () {
 
       window.location.href = url
     })
-
+    $('#modal-network').on('hide.bs.modal', function () {
+      $('#peer-list').html('')
+    })
     // start update chain
     function startChain (i) {
       if (i === 1) {
@@ -90,7 +87,6 @@ window.networkPageModule = (function () {
         $.get(url, function (data) {
           // check if not empty
           if (data) {
-            console.log(data)
             geoData = JSON.parse(data)
           }
         }).done(function () {
@@ -121,6 +117,32 @@ window.networkPageModule = (function () {
         $('#service_url').val(feature.N.service_url)
         $('#modal-network').find('.ntw-country').text(info)
         $('#modal-network').find('.ntw-ip').text(feature.N.ip4)
+        let peerList = feature.N.service_url + '/api/v1/dht/peers'
+        console.log(peerList)
+        let peerData
+        $.get(peerList, function (data) {
+          // check if not empty
+          if (data) {
+            peerData = JSON.parse(data)
+          }
+        }).done(function () {
+          console.log(peerData)
+          for (let peer in peerData) {
+            var img_src
+            var block
+            console.log(peerData[peer].profile.profilePicture);
+            if (!peerData[peer].profile.is_cdn) {
+                img_src = feature.N.ip4 + ':5678/api/cdn/v1/resource?hkey=' + peerData[peer].profile.profilePicture + '&thumb=1'
+                block = `<div><img src="${img_src}"/>Test test</div>`
+                $('#peer-list').append(block)
+            }
+            else {
+                block = `<div><img src="${img_src}"/>Test test</div>`
+                $('#peer-list').append(block)
+            }
+          }
+        })
+
         $("[data-target='#modal-network']").trigger('click')
       }
     }
