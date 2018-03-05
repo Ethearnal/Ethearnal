@@ -66,7 +66,7 @@ class PeersInfo(object):
     def render_peers_data(self):
         self.render_dht()
         self.render_geo()
-        self.render_profile_key('names')
+        self.render_profile_key('name')
         self.render_profile_key('is_cdn')
         self.render_profile_key('profilePicture')
         self.save_data()
