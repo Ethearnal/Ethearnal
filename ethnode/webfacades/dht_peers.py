@@ -24,7 +24,7 @@ class WebDhtPeers(WebApiBase):
         if 'render' in kw:
             self.peers.render_peers_data()
         peers = self.peers.peers
-        ll = [self.peers[k] for k in peers]
+        ll = [peers[k] for k in peers]
         return json.dumps(ll).encode()
 
     def OPTIONS(self):
