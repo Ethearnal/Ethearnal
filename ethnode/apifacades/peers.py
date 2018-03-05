@@ -75,7 +75,7 @@ class PeersInfo(object):
     def save_data(self, to_list=False):
         peers = self.peers
         if to_list:
-            peers = [self.peers[k] for k in peers]
+            peers = [self.peers[k] for k in self.peers]
 
         js = json.dumps(peers, ensure_ascii=False)
         self._hfs.save_bts_str_key('peers', js.encode())
