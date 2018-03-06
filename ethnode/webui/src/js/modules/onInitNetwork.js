@@ -37,8 +37,9 @@ window.networkPageModule = (function () {
       new ol.style.Style({
         image: new ol.style.Icon(({
           anchor: [0.5, 1],
-          scale: 1,
-          src: 'http://image.ibb.co/fLEanc/maps_and_flags_1.png'
+          scale: 1.5,
+          //src: 'http://image.ibb.co/fLEanc/maps_and_flags_1.png'
+          src: '/imgs/places.svg'
         })),
         zIndex: 5
       })

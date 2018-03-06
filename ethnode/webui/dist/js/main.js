@@ -291,8 +291,9 @@ window.networkPageModule = function () {
     var styleMk = [new ol.style.Style({
       image: new ol.style.Icon({
         anchor: [0.5, 1],
-        scale: 1,
+        scale: 1.0,
         src: 'http://image.ibb.co/fLEanc/maps_and_flags_1.png'
+        //src: 'imgs/place.svg'
       }),
       zIndex: 5
     })];
@@ -400,15 +401,28 @@ window.networkPageModule = function () {
           for (var i = 0; i < peerData.length; i++) {
             var img_src;
             var block;
+            var href_profile;
+            var guid;
+            //var guid=peerData[i]['guid'];
             console.log(peerData[i]['profile'].is_cdn);
+            //console.log(peerData[i]['profile']);
             if (!peerData[i]['profile'].is_cdn) {
+              guid=peerData[i]['guid']
+              console.log('GUID',guid);
+              href_profile='/ui/profile/#'+ guid;
+              console.log('HREF',href_profile);
               img_src = 'http://' + feature.N.ip4 + ':5678/api/cdn/v1/resource?hkey=' + peerData[i]['profile'].profilePicture + '&thumb=1';
               var firstName = peerData[i]['profile'].name.first;
               var lastName = peerData[i]['profile'].name.last;
-              block = '<div class="icon-box"><img src="' + img_src + '"/>' + firstName + ' ' + lastName + '</div>';
+
+              block = '<a href="' + href_profile + '" style="display: block;" class="icon-box"><img src="'
+              + img_src + '" style="width: 49px;"/>'
+              //+ '<a href="' + href_profile + '"> View Profile </a>'
+              + firstName + ' ' + lastName + '</a>';
+
               $('#peer-list').append(block);
             } else {
-              block = '<div class="icon-box"><img src="../dist/img/cdn.svg" />CDN</div>';
+              block = '<div class="icon-box"><img style="width: 49px;" src="../dist/img/cdn.svg" />CDN</div>';
               $('#peer-list-cdn').append(block);
             }
           }
