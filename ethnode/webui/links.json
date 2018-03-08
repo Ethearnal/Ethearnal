@@ -1,0 +1,6 @@
+{
+  "master_peer_config":"http://159.65.56.140:8080/friendface.json",
+  "master_cdn_list":[
+    ["nyc", "http://159.65.239.37:5678/api/cdn/v1/info"]
+  ]
+}
