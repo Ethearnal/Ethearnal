@@ -203,9 +203,11 @@ class WebCdnClusterTrackerClient(object):
         info_data = self.info_data(scheme=scheme, host_port=host_port, info_endpoint=info_endpoint)
         udp_data = info_data.get('udp')
         if udp_data:
-            ip = udp_data.get('ip4')
+            ip4 = udp_data.get('ip4')
             port = udp_data.get('port')
-            self.dhf.dht.boot_to(ip, int(port))
+            if ip4 and port:
+                print('BOOT TO', ip4, port)
+                self.dhf.boot_to(ip4, port)
 
 
 class WebCdnClusterTracker(WebApiBase):
