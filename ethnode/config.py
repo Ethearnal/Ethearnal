@@ -67,6 +67,6 @@ cdn_hosts = {
 # don't remove ';' for easy copy/paste json compatibility
 
 cdn_clusters = [
-    ["lon02cd", "188.166.154.183:5678"],
-    ["fra", "188.166.154.183:5678"]
+    ["fra", "188.166.154.183:5678"],
+    ["lon02cd", "188.166.154.183:5678"]
 ];
