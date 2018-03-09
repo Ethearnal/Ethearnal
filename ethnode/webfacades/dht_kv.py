@@ -231,13 +231,13 @@ class WebCdnClusterTracker(WebApiBase):
             self.cherry.response.status = 409
             return b''
 
-        print('DEBUG', ll)
-        if host_port in ll:
-            print('IN LL')
-        return b''
-
         self.save_data(tracker_data)
         msg = 'JOIN(%s)' % host_port
+
+        if host_port in tracker_data['cluster_members']:
+            print('IN LL')
+            return host_port.encode()
+
         print(msg)
         if join_back:
             if self.rcli:
