@@ -144,6 +144,9 @@ class WebCdnClusterTracker(WebApiBase):
         )
         self.hfs = hfs
         self.enable_cors = enable_cors
+        # truncate previous saved data
+        self.hfs.save_bts_str_key('tracker', json.dumps({'cluster_members': []},
+                                                        ensure_ascii=False).encode())
 
     def save_data(self, data, key='tracker'):
         js = json.dumps(data, ensure_ascii=False)
