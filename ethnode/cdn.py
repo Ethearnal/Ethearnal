@@ -346,7 +346,10 @@ wtrack_srv = WebCdnClusterTracker(hfs=AutoDirHfs(hfs_dir, 'tracker_hfs'),
                                        )
 
 for o in config.cdn_clusters:
-    wtrack_cli.join_to_list(host_port=o[1])
+    try:
+        wtrack_cli.join_to_list(host_port=o[1])
+    except Exception as e:
+        print(e)
 
 if dht.server_thread.is_alive():
     print('UDP server thread is alive')
