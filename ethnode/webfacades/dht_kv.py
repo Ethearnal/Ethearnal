@@ -175,7 +175,7 @@ class WebCdnClusterTrackerClient(object):
         data = self.data(scheme=scheme, host_port=host_port, endpoint=endpoint)
         if data:
             for item_host_port in data:
-                self.join(host_port=item_host_port)
+                self.join(scheme=scheme, host_port=item_host_port,  endpoint=endpoint)
 
 
 class WebCdnClusterTracker(WebApiBase):
