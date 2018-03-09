@@ -171,6 +171,12 @@ class WebCdnClusterTrackerClient(object):
         if r.status_code == 200:
             return r.json()
 
+    def join_to_list(self, scheme=None, host_port=None, endpoint=None):
+        data = self.data(scheme=scheme, host_port=host_port, endpoint=endpoint)
+        if data:
+            for item_host_port in data:
+                self.join(host_port=item_host_port)
+
 
 class WebCdnClusterTracker(WebApiBase):
     def __init__(self,
