@@ -338,13 +338,15 @@ print('HTTP service IP url:', ert.cdn_service_http_url)
 
 from webfacades.dht_kv import WebCdnClusterTracker, WebCdnClusterTrackerClient
 
-wtrack = WebCdnClusterTrackerClient('%s:%s' % (ip, port))
-web_tracker_srv = WebCdnClusterTracker(hfs=AutoDirHfs(hfs_dir, 'tracker_hfs'),
+wtrack_cli = WebCdnClusterTrackerClient('%s:%s' % (ip, port))
+wtrack_srv = WebCdnClusterTracker(hfs=AutoDirHfs(hfs_dir, 'tracker_hfs'),
                                        http_srv_ip=ip,
                                        http_srv_port=port,
-                                       rcli=wtrack,
+                                       rcli=wtrack_cli,
                                        )
 
+for o in config.cdn_clusters.items:
+    wtrack_cli.join_to_list(host_port=o[1])
 
 if dht.server_thread.is_alive():
     print('UDP server thread is alive')

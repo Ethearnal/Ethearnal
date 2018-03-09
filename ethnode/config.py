@@ -63,3 +63,10 @@ cdn_hosts = {
     "ny02cd": "http://159.65.246.106:5678/api/v1/dht/peers",
     "to02cd": "http://159.89.120.119:5678/api/v1/dht/peers"
 };
+
+# don't remove ';' for easy copy/paste json compatibility
+
+cdn_clusters = [
+    ["lon02cd", "188.166.154.183:5678"],
+    ["fra", "188.166.154.183:5678"]
+];
