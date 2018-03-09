@@ -348,6 +348,8 @@ wtrack_srv = WebCdnClusterTracker(hfs=AutoDirHfs(hfs_dir, 'tracker_hfs'),
 for o in config.cdn_clusters:
     try:
         wtrack_cli.join_to_list(host_port=o[1])
+        # primary other as backups
+        break
     except Exception as e:
         print(e)
 
