@@ -1,4 +1,5 @@
 from webfacades.webbase import WebApiBase
+from kadem.kad import DHTFacade
 from apifacades.dhtkv import DhtKv
 from toolkit.filestore import FileSystemHashStore
 import json
@@ -130,7 +131,7 @@ class WebDhtCdnList(WebApiBase):
 
 
 class WebCdnClusterTrackerClient(object):
-    def __init__(self, dhf, http_host_port,
+    def __init__(self, dhf: DHTFacade, http_host_port,
                  scheme='http:',
                  endpoint='/api/cdn/v1/track',
                  info_endpoint='/api/cdn/v1/info'):
@@ -189,7 +190,10 @@ class WebCdnClusterTrackerClient(object):
             return r.json()
 
     def join_to_list(self, scheme=None, host_port=None, endpoint=None,
-                     join_dht=True):
+                     join_dht=True,
+                     push_pub=True,
+                     pull_pubs=True):
+
         data = self.data(scheme=scheme, host_port=host_port, endpoint=endpoint)
         if data:
             members = data.get("cluster_members")
@@ -198,6 +202,10 @@ class WebCdnClusterTrackerClient(object):
                     self.join(scheme=scheme, host_port=item_host_port,  endpoint=endpoint)
                     if join_dht:
                         self.join_dht(host_port=item_host_port)
+                        if push_pub:
+                            self.dhf.push_pubkey()
+        if pull_pubs:
+            self.dhf.pull_pubkey_in_peers()
 
     def join_dht(self, scheme=None, host_port=None, info_endpoint=None):
         info_data = self.info_data(scheme=scheme, host_port=host_port, info_endpoint=info_endpoint)
