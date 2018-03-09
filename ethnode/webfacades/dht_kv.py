@@ -188,15 +188,18 @@ class WebCdnClusterTrackerClient(object):
         if r.status_code == 200:
             return r.json()
 
-    def join_to_list(self, scheme=None, host_port=None, endpoint=None):
+    def join_to_list(self, scheme=None, host_port=None, endpoint=None,
+                     join_dht=True):
         data = self.data(scheme=scheme, host_port=host_port, endpoint=endpoint)
         if data:
             members = data.get("cluster_members")
             if members:
                 for item_host_port in members:
                     self.join(scheme=scheme, host_port=item_host_port,  endpoint=endpoint)
+                    if join_dht:
+                        self.join_dht(host_port=item_host_port)
 
-    def join_to_list_dhf(self, scheme=None, host_port=None, info_endpoint=None):
+    def join_dht(self, scheme=None, host_port=None, info_endpoint=None):
         info_data = self.info_data(scheme=scheme, host_port=host_port, info_endpoint=info_endpoint)
         udp_data = info_data.get('udp')
         if udp_data:
