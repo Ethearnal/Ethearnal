@@ -130,13 +130,15 @@ class WebDhtCdnList(WebApiBase):
 
 
 class WebCdnClusterTrackerClient(object):
-    def __init__(self, http_host_port, scheme='http:',
+    def __init__(self, dhf, http_host_port,
+                 scheme='http:',
                  endpoint='/api/cdn/v1/track',
                  info_endpoint='/api/cdn/v1/info'):
         self.host_port = http_host_port
         self.scheme = scheme
         self.endpoint = endpoint
         self.info_endpoint = info_endpoint
+        self.dhf = dhf
 
     @property
     def url(self):
@@ -193,6 +195,14 @@ class WebCdnClusterTrackerClient(object):
             if members:
                 for item_host_port in members:
                     self.join(scheme=scheme, host_port=item_host_port,  endpoint=endpoint)
+
+    def join_to_list_dhf(self, scheme=None, host_port=None, info_endpoint=None):
+        info_data = self.info_data(scheme=scheme, host_port=host_port, info_endpoint=info_endpoint)
+        udp_data = info_data.get('udp')
+        if udp_data:
+            ip = udp_data.get('ip4')
+            port = udp_data.get('port')
+            self.dhf.boot_to(ip, int(port))
 
 
 class WebCdnClusterTracker(WebApiBase):

@@ -7,6 +7,7 @@ from webdht.wdht_ertapi import IdxCdnQueryWebApi
 from toolkit.tools import mkdir, on_hook, get_ip_address
 from apifacades.dhtkv import DhtKv
 from toolkit.tools import GigIndexConsensus
+from webfacades.dht_kv import WebCdnClusterTracker, WebCdnClusterTrackerClient
 
 site_conf = {
     '/': {
@@ -341,14 +342,16 @@ cherrypy.engine.exit = on_hook(target=tear_down_udp,
 
 print('HTTP service IP url:', ert.cdn_service_http_url)
 
-from webfacades.dht_kv import WebCdnClusterTracker, WebCdnClusterTrackerClient
 
-wtrack_cli = WebCdnClusterTrackerClient('%s:%s' % (ip, port))
+wtrack_cli = WebCdnClusterTrackerClient(dhf=dhf,
+                                        http_host_port='%s:%s' % (ip, port)
+                                        )
+
 wtrack_srv = WebCdnClusterTracker(hfs=AutoDirHfs(hfs_dir, 'tracker_hfs'),
-                                       http_srv_ip=ip,
-                                       http_srv_port=port,
-                                       rcli=wtrack_cli,
-                                       )
+                                  http_srv_ip=ip,
+                                  http_srv_port=port,
+                                  rcli=wtrack_cli,
+                                  )
 
 for o in config.cdn_clusters:
     try:
