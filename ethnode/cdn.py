@@ -299,9 +299,14 @@ cdn_info = {
         'geo': geo.get(ip4=ip),
         'ip4': ip,
         'port': port,
+    },
+    "udp": {
+        'ip4': ip,
+        'port': udp_port,
     }
 
-}
+};
+
 ert.cdn_host = ip
 ert.cdn_port = int(port)
 dkv = DhtKv(d)
