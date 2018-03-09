@@ -1,8 +1,10 @@
 from webfacades.webbase import WebApiBase
 from apifacades.dhtkv import DhtKv
+from toolkit.filestore import FileSystemHashStore
 import json
 import cherrypy
 import config
+import requests
 
 
 class WebDhtCdnInfo(WebApiBase):
@@ -126,7 +128,7 @@ class WebDhtCdnList(WebApiBase):
         self.dkv.set(self.K_OWN_CDN_LIST, data)
         return b''
 
-from toolkit.filestore import FileSystemHashStore
+
 class WebCdnClusterTracker(WebApiBase):
     def __init__(self,
                  hfs: FileSystemHashStore,
@@ -202,5 +204,28 @@ class WebCdnClusterTracker(WebApiBase):
             self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
             self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
         return self.get_tracker_data()
+
+
+class WebCdnClusterTrackerClient(object):
+    def __init__(self, http_host_port, scheme='http:', endpoint='/api/cdn/v1/track'):
+        self.host_port = http_host_port
+        self.scheme = scheme
+        self.endpoint = endpoint
+
+    @property
+    def url(self):
+        return '%s//%s%s' % (self.scheme, self.host_port, self.endpoint)
+
+    def join(self):
+        # todo pass listen port now hardcoded to 5678 ( default cdn port)
+        r = requests.put(self.url)
+        if r.status_code == 200:
+            return r.content.decode()
+
+    def data(self):
+        r = requests.get(self.url)
+        if r.status_code == 200:
+            return r.json()
+
 
 

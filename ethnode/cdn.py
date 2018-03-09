@@ -336,8 +336,11 @@ cherrypy.engine.exit = on_hook(target=tear_down_udp,
 
 print('HTTP service IP url:', ert.cdn_service_http_url)
 
-from webfacades.dht_kv import WebCdnClusterTracker
-web_tracker = WebCdnClusterTracker(AutoDirHfs(hfs_dir, 'tracker_hfs'))
+from webfacades.dht_kv import WebCdnClusterTracker, WebCdnClusterTrackerClient
+web_tracker_srv = WebCdnClusterTracker(AutoDirHfs(hfs_dir, 'tracker_hfs'))
+
+wtrack = WebCdnClusterTrackerClient('%s:%s' % (ip, port))
+
 
 if dht.server_thread.is_alive():
     print('UDP server thread is alive')
@@ -349,7 +352,8 @@ if args.converge_pk_and_peers:
     d.converge_peers()
 
 cherrypy.engine.start()
-
+if ip != '127.0.0.1':
+    wtrack.join()
 
 if args.self_test_and_exit:
     #todo impl testing here
