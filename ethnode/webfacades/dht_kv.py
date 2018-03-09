@@ -225,6 +225,10 @@ class WebCdnClusterTracker(WebApiBase):
             ll = list()
             tracker_data['cluster_members'] = ll
 
+        if host_port in ll:
+            print('DEBUG: host_port %s there pass' % host_port)
+            return host_port.encode()
+
         if host_port not in ll:
             ll.append(host_port)
         else:
@@ -232,11 +236,7 @@ class WebCdnClusterTracker(WebApiBase):
             return b''
 
         self.save_data(tracker_data)
-        msg = 'JOIN(%s)' % host_port
-
-        if host_port in tracker_data['cluster_members']:
-            print('IN LL')
-            return host_port.encode()
+        msg = 'DEBUG: join to %s' % host_port
 
         print(msg)
         if join_back:
