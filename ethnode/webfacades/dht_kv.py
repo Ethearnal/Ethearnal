@@ -205,7 +205,7 @@ class WebCdnClusterTrackerClient(object):
         if udp_data:
             ip = udp_data.get('ip4')
             port = udp_data.get('port')
-            self.dhf.boot_to(ip, int(port))
+            self.dhf.dht.boot_to(ip, int(port))
 
 
 class WebCdnClusterTracker(WebApiBase):
