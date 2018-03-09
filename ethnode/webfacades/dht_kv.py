@@ -227,6 +227,12 @@ class WebCdnClusterTracker(WebApiBase):
 
         if host_port not in ll:
             ll.append(host_port)
+        else:
+            self.cherry.response.status = 409
+            return b''
+
+        if host_port in ll:
+            return host_port.encode()
 
         self.save_data(tracker_data)
         msg = 'JOIN(%s)' % host_port
@@ -253,7 +259,7 @@ class WebCdnClusterTracker(WebApiBase):
         if "Remote-Addr" in headers:
             # todo custom port
             host_port = '%s:%s' % (headers["Remote-Addr"], '5678')
-            self.join_cluster(host_port,headers, join_back=True)
+            st = self.join_cluster(host_port, headers, join_back=True)
             return host_port.encode()
         return host_port
 
