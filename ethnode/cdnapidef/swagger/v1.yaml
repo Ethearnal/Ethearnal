@@ -109,4 +109,35 @@ paths:
         400:
           description: "err"
 
-#http://138.68.183.168:9999/api/cdn/v1/idx?&category=ma&tags=producers&q1range=450%201600&text=be%20yo&limit=1000
+  /track:
+    put:
+      tags:
+      - "Track CDNs in cluster"
+      summary: "Track cluster"
+      description: "Track cluster"
+      operationId: "joinCDnCluster"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "data"
+        description: "cdn join"
+        required: false
+        schema:
+          type: string
+      responses:
+        203:
+          description: "Updated"
+        400:
+          description: "something wrong"
+    get:
+      tags:
+      - "Track CDNs in cluster"
+      summary: "getTrackData"
+      description: "getTrackData"
+      operationId: "getTrackData"
+      produces:
+      - "*/*"
+
