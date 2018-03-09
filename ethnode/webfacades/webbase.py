@@ -10,6 +10,11 @@ class WebApiBase(object):
         if mount_it:
             self.mount()
 
+    def set_cors_headers(self):
+        self.cherry.response.headers['Access-Control-Allow-Methods'] = 'PUT POST GET'
+        self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+        self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
+
     def mount(self):
         self.cherry.tree.mount(
             self,

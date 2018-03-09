@@ -225,9 +225,15 @@ if args.http_config_url:
     # self.relays = set(rurl)
     boot_peers_from_http_tracker(dhf, args.http_config_url)
 
-cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
-             http_relay_urls=rel_urls,
-             http_relay_get_url=http_relay_get_url)
+# cdn = WebCDN(store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
+#              http_relay_urls=rel_urls,
+#              http_relay_get_url=http_relay_get_url)
+
+from webfacades.dht_kv import WebCDNRefactorWebCdnResourceApi
+
+cdn = WebCDNRefactorWebCdnResourceApi(
+    store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
+)
 
 cnx = None
 if args.http_config_url and args.do_idx_consensus:
