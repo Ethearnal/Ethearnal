@@ -214,16 +214,37 @@ class WebCdnClusterTrackerClient(object):
 
     @property
     def url(self):
-        return '%s//%s%s' % (self.scheme, self.host_port, self.endpoint)
+        return self.url_st(self.scheme, self.host_port, self.endpoint)
 
-    def join(self):
+    @staticmethod
+    def url_st(scheme, host_port, endpoint) -> str:
+        return '%s//%s%s' % (scheme, host_port, endpoint)
+
+    def join(self, scheme=None, host_port=None, endpoint=None):
         # todo pass listen port now hardcoded to 5678 ( default cdn port)
-        r = requests.put(self.url)
+        if not endpoint:
+            endpoint = self.endpoint
+        if not scheme:
+            scheme = self.scheme
+        if not host_port:
+            host_port = self.host_port
+
+        url = self.url_st(scheme, host_port, endpoint)
+
+        print('JOIN TO: %s' % url)
+        r = requests.put(url)
         if r.status_code == 200:
             return r.content.decode()
 
-    def data(self):
-        r = requests.get(self.url)
+    def data(self, scheme=None, host_port=None, endpoint=None):
+        if not endpoint:
+            endpoint = self.endpoint
+        if not scheme:
+            scheme = self.scheme
+        if not host_port:
+            host_port = self.host_port
+        url = self.url_st(scheme, host_port, endpoint)
+        r = requests.get(url)
         if r.status_code == 200:
             return r.json()
 
