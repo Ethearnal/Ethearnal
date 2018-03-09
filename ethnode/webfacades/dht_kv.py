@@ -130,10 +130,13 @@ class WebDhtCdnList(WebApiBase):
 
 
 class WebCdnClusterTrackerClient(object):
-    def __init__(self, http_host_port, scheme='http:', endpoint='/api/cdn/v1/track'):
+    def __init__(self, http_host_port, scheme='http:',
+                 endpoint='/api/cdn/v1/track',
+                 info_endpoint='/api/cdn/v1/info'):
         self.host_port = http_host_port
         self.scheme = scheme
         self.endpoint = endpoint
+        self.info_endpoint = info_endpoint
 
     @property
     def url(self):
@@ -167,6 +170,18 @@ class WebCdnClusterTrackerClient(object):
         if not host_port:
             host_port = self.host_port
         url = self.url_st(scheme, host_port, endpoint)
+        r = requests.get(url)
+        if r.status_code == 200:
+            return r.json()
+
+    def info_data(self, scheme=None, host_port=None, info_endpoint=None):
+        if not info_endpoint:
+            info_endpoint = self.info_endpoint
+        if not scheme:
+            scheme = self.scheme
+        if not host_port:
+            host_port = self.host_port
+        url = self.url_st(scheme, host_port, info_endpoint)
         r = requests.get(url)
         if r.status_code == 200:
             return r.json()
