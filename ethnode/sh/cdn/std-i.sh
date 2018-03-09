@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
-echo " < $1 > cdn_profile < $2 > files dir"
 
-python cdn.py -f -d ~/cdn_files_$2 -p ~/cdn_profile_$1 -f eth0 -l 0.0.0.0:5678 -c http://159.65.56.140:8080/friendface.json -i
+pro=$1
+fls=$2
+echo "< ~/cdn_files_${fls}> --> cdn_profile /n < ~/cdn_profile_${pro} > --> files dir"
+python cdn.py -d ~/cdn_files_${fls} -p ~/cdn_profile_${pro} -f eth0 -l 0.0.0.0:5678 -c http://159.65.56.140:8080/friendface.json -i
