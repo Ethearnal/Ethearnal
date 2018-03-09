@@ -362,7 +362,7 @@ if args.converge_pk_and_peers:
 
 cherrypy.engine.start()
 if ip != '127.0.0.1':
-    wtrack.join()
+    wtrack_cli.join()
 
 if args.self_test_and_exit:
     #todo impl testing here
