@@ -129,86 +129,6 @@ class WebDhtCdnList(WebApiBase):
         return b''
 
 
-class WebCdnClusterTracker(WebApiBase):
-    def __init__(self,
-                 hfs: FileSystemHashStore,
-                 enable_cors=True,
-                 cherry=cherrypy,
-                 mount_point='/api/cdn/v1/track',
-                 mount_it=True):
-
-        super(WebCdnClusterTracker, self).__init__(
-            cherry=cherry,
-            mount_point=mount_point,
-            mount_it=mount_it
-        )
-        self.hfs = hfs
-        self.enable_cors = enable_cors
-        # truncate previous saved data
-        self.hfs.save_bts_str_key('tracker', json.dumps({'cluster_members': []},
-                                                        ensure_ascii=False).encode())
-
-    def save_data(self, data, key='tracker'):
-        js = json.dumps(data, ensure_ascii=False)
-        self.hfs.save_bts_str_key(key, js.encode())
-
-    def load_data(self, key='tracker', bin_only=False):
-        bio = self.hfs.read_io(key)
-        if not bio:
-            return
-        bin_data = bio.read()
-        if bin_only:
-            return bin_data
-        txt_data = bin_data.decode()
-        data = json.loads(txt_data)
-        return data
-
-    def join_cluster(self, host_port: str):
-        tracker_data = self.load_data()
-        ll = None
-        if not tracker_data:
-            tracker_data = dict()
-            ll = list()
-            tracker_data['cluster_members'] = ll
-        elif 'cluster_members' in tracker_data:
-            ll = tracker_data['cluster_members']
-        else:
-            ll = list()
-            tracker_data['cluster_members'] = ll
-
-        if host_port not in ll:
-            ll.append(host_port)
-
-        self.save_data(tracker_data)
-        msg = 'JOIN(%s)' % host_port
-        print(msg)
-        return msg.encode()
-
-    def get_tracker_data(self):
-        return self.load_data(bin_only=True)
-
-    def PUT(self):
-        if self.enable_cors:
-            self.cherry.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
-            self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
-            self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
-        headers = self.cherry.request.headers
-        host_port = 'null'
-        if "Remote-Addr" in headers:
-            # todo custom port
-            host_port = '%s:%s' % (headers["Remote-Addr"], '5678')
-            self.join_cluster(host_port)
-            return host_port.encode()
-        return host_port
-
-    def GET(self):
-        if self.enable_cors:
-            self.cherry.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
-            self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
-            self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
-        return self.get_tracker_data()
-
-
 class WebCdnClusterTrackerClient(object):
     def __init__(self, http_host_port, scheme='http:', endpoint='/api/cdn/v1/track'):
         self.host_port = http_host_port
@@ -252,4 +172,95 @@ class WebCdnClusterTrackerClient(object):
             return r.json()
 
 
+class WebCdnClusterTracker(WebApiBase):
+    def __init__(self,
+                 hfs: FileSystemHashStore,
+                 http_srv_ip,
+                 http_srv_port,
+                 rcli: WebCdnClusterTrackerClient = None,
+                 enable_cors=True,
+                 cherry=cherrypy,
+                 mount_point='/api/cdn/v1/track',
+                 mount_it=True):
+
+        super(WebCdnClusterTracker, self).__init__(
+            cherry=cherry,
+            mount_point=mount_point,
+            mount_it=mount_it
+        )
+        self.ip = http_srv_ip
+        self.port = http_srv_port
+        self.rcli = rcli
+        self.hfs = hfs
+        self.enable_cors = enable_cors
+        # truncate previous saved data
+        self.hfs.save_bts_str_key('tracker', json.dumps({'cluster_members': []},
+                                                        ensure_ascii=False).encode())
+
+    def save_data(self, data, key='tracker'):
+        js = json.dumps(data, ensure_ascii=False)
+        self.hfs.save_bts_str_key(key, js.encode())
+
+    def load_data(self, key='tracker', bin_only=False):
+        bio = self.hfs.read_io(key)
+        if not bio:
+            return
+        bin_data = bio.read()
+        if bin_only:
+            return bin_data
+        txt_data = bin_data.decode()
+        data = json.loads(txt_data)
+        return data
+
+    def join_cluster(self, host_port: str, headers: dict, join_back=False):
+        tracker_data = self.load_data()
+        ll = None
+        if not tracker_data:
+            tracker_data = dict()
+            ll = list()
+            tracker_data['cluster_members'] = ll
+        elif 'cluster_members' in tracker_data:
+            ll = tracker_data['cluster_members']
+        else:
+            ll = list()
+            tracker_data['cluster_members'] = ll
+
+        if host_port not in ll:
+            ll.append(host_port)
+
+        self.save_data(tracker_data)
+        msg = 'JOIN(%s)' % host_port
+        print(msg)
+        if join_back:
+            if self.rcli:
+                if "Remote-Addr" in headers:
+                    client_ip4 = headers["Remote-Addr"]
+                    if client_ip4 != self.ip:
+                        # todo port
+                        self.rcli.join(host_port='%s:5678' % client_ip4)
+        return msg.encode()
+
+    def get_tracker_data(self):
+        return self.load_data(bin_only=True)
+
+    def PUT(self):
+        if self.enable_cors:
+            self.cherry.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
+            self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+            self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
+        headers = self.cherry.request.headers
+        host_port = 'null'
+        if "Remote-Addr" in headers:
+            # todo custom port
+            host_port = '%s:%s' % (headers["Remote-Addr"], '5678')
+            self.join_cluster(host_port,headers, join_back=True)
+            return host_port.encode()
+        return host_port
+
+    def GET(self):
+        if self.enable_cors:
+            self.cherry.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
+            self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
+            self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
+        return self.get_tracker_data()
 

@@ -337,9 +337,13 @@ cherrypy.engine.exit = on_hook(target=tear_down_udp,
 print('HTTP service IP url:', ert.cdn_service_http_url)
 
 from webfacades.dht_kv import WebCdnClusterTracker, WebCdnClusterTrackerClient
-web_tracker_srv = WebCdnClusterTracker(AutoDirHfs(hfs_dir, 'tracker_hfs'))
 
 wtrack = WebCdnClusterTrackerClient('%s:%s' % (ip, port))
+web_tracker_srv = WebCdnClusterTracker(hfs=AutoDirHfs(hfs_dir, 'tracker_hfs'),
+                                       http_srv_ip=ip,
+                                       http_srv_port=port,
+                                       rcli=wtrack,
+                                       )
 
 
 if dht.server_thread.is_alive():
