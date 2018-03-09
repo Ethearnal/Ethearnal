@@ -174,8 +174,10 @@ class WebCdnClusterTrackerClient(object):
     def join_to_list(self, scheme=None, host_port=None, endpoint=None):
         data = self.data(scheme=scheme, host_port=host_port, endpoint=endpoint)
         if data:
-            for item_host_port in data:
-                self.join(scheme=scheme, host_port=item_host_port,  endpoint=endpoint)
+            members = data.get("cluster_members")
+            if members:
+                for item_host_port in members:
+                    self.join(scheme=scheme, host_port=item_host_port,  endpoint=endpoint)
 
 
 class WebCdnClusterTracker(WebApiBase):
