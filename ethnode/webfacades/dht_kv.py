@@ -259,7 +259,7 @@ class WebCdnClusterTracker(WebApiBase):
                  hfs: FileSystemHashStore,
                  http_srv_ip,
                  http_srv_port,
-                 rcli: WebCdnClusterTrackerClient = None,
+                 rcli=None,
                  enable_cors=True,
                  cherry=cherrypy,
                  mount_point='/api/cdn/v1/track',
