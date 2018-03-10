@@ -150,7 +150,9 @@ paths:
       - in: "body"
         name: "gigItem"
         description: "Gig item to add"
-        required: false
+        required: true
+        schema:
+          type: object
 #        schema:
 #          $ref: "#/definitions/Gig"
       responses:
