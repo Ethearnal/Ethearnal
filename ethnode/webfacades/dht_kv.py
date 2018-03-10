@@ -690,8 +690,30 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
             u_m_f.write(json.dumps({'fext': fext, 'hkey': st_hk, "Content-Type": ct}, ensure_ascii=False).encode())
         u_m_f.close()
         # self.on_post(st_hk)
+
         self.cherry.response.status = 201
         return hk.decode()
+
+    def on_post(self, hk_hex):
+        print("ON_POST RES:", hk_hex)
+        return
+
+    def push_resource(self, hk_hex):
+        # 'TEST'
+        cdn = 'URL4: %S' % hk_hex
+        self.dhf.push(key='', value={'cdn': cdn,
+                                     'hk_hex': hk_hex,
+                                     }, hk_hex=hk_hex, local_only=False)
+
+    def pull_resource(self, hk_hex, remote=True):
+        if remote:
+            t = self.dhf.pull_remote(key='', hk_hex=hk_hex)
+        else:
+            t = self.dhf.pull_local(key='', hk_hex=hk_hex)
+        if t:
+            v = cdx.value_protocol(t)
+            if v:
+                return v
 
     def OPTIONS(self):
         if self.enable_cors:

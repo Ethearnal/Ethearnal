@@ -230,3 +230,4 @@ def guid_key_composer(key, guid_hex, revision=DEFAULT_REVISION):
     guid = guid_hex_to_bin(guid_hex)
     hk = encode_key_hash(key, guid=guid, revision=revision)
     return guid_int_to_hex(hk)
+
