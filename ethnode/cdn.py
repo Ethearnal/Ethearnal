@@ -236,6 +236,7 @@ cdn_cli = WebCdnResourceApiClient(
     dhf=dhf,
     http_host_port="%s:%s" % (ip, str(port))
 )
+# refactored resource sync on GET
 cdn = WebCDNRefactorWebCdnResourceApi(
     store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
     rcli=cdn_cli,
