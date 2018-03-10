@@ -413,8 +413,9 @@ window.networkPageModule = function () {
               href_profile='/ui/profile/#'+ guid;
               console.log('HREF',href_profile);
               img_src = 'http://' + feature.N.ip4 + ':5678/api/cdn/v1/resource?hkey=' + peerData[i]['profile'].profilePicture + '&thumb=1';
-              var firstName = peerData[i]['profile'].name.first;
-              var lastName = peerData[i]['profile'].name.last;
+              console.log(peerData[i]);
+              var firstName = '' ;// peerData[i]['profile'].name.first;
+              var lastName = '' ;//peerData[i]['profile'].name.last;
 
               block = '<a href="' + href_profile + '" style="display: block;" class="icon-box"><img src="'
               + img_src + '" style="width: 49px;"/>'
