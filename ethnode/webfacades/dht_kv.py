@@ -348,10 +348,13 @@ class WebCdnResourceApiClient(object):
         return b''
         pass
 
-    def download(self, hk_hex, thumb=False):
+    def download(self, hk_hex, thumb=False, meta=False):
         url_q = '%s?hkey=%s' % (self.url, hk_hex)
         if thumb:
             url_q = '%s&thumb=1' % url_q
+        if meta:
+            url_q = '%s&meta=1' % url_q
+
         print('RES CLI GET url %s' % url_q)
         r = requests.get(url_q)
         if r.status_code != 200:
@@ -365,6 +368,7 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
     def __init__(self,
                  http_host_port = None,
                  dhf=None,
+                 rcli: WebCdnResourceApiClient=None,
                  enable_cors=True,
                  cherry=cherrypy,
                  mount_point: str = '/api/cdn/v1/resource',
@@ -372,13 +376,18 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
                  mount_it=True):
 
         if not http_host_port:
-            raise ValueError('WebCDNRefactorWebCdnResourceApi: pls init http_host_port')
+            raise ValueError('WebCDNRefactorWebCdnResourceApi: pls init http_host_port: str')
+        if not dhf:
+            raise ValueError('WebCDNRefactorWebCdnResourceApi: pls init http_host_port: DHTFacade')
+        if not rcli:
+            raise ValueError('WebCDNRefactorWebCdnResourceApi: pls init rcli: WebCdnResourceApiClient')
 
         super(WebCDNRefactorWebCdnResourceApi, self).__init__(
             cherry=cherry,
             mount_point=mount_point,
             mount_it=mount_it
         )
+        self.rcli = rcli
         self.http_host_port = http_host_port
         self.cherry = cherry
         self.mount_point = mount_point
@@ -570,6 +579,21 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
             err = '{"error with thumb":"%s"}' % str(e)
             return err.encode()
 
+    def try_to_pull_and_download_resource(self, hk_hex):
+        v = self.pull_resource(hk_hex=hk_hex)
+        if v:
+            cdn_host_port = v.get('cdn_host_port')
+            cdn_mount_point = v.get('cdn_mount_point')
+            if cdn_host_port and cdn_mount_point:
+                hk_hex_from_dht = v.get('hk_hex')
+                if hk_hex != hk_hex_from_dht:
+                    print('INTEGRITY ERR on hkeys')
+                else:
+                    meta = self.rcli.download(meta=True)
+                    thumb = self.rcli.download(thumb=True)
+                    file = self.rcli.download()
+                    return meta, thumb, file
+
     def GET(self, hkey=None, relay_id=None, thumb=None, meta=None):
         if self.enable_cors:
             self.set_cors_headers()
@@ -578,6 +602,7 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
         def invalid_hkey(cherry):
             cherry.response.status = 401
             return b'{"error":"invalid hkey"}'
+
 
         if not hkey:
             return invalid_hkey(self.cherry)
@@ -624,6 +649,8 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
             self.cherry.response.status = 400
             return b'{"error":"unknown file extension"}'
 
+
+
         try:
             f_name = '%s.%s' % (hkey, fext)
             upload_file = os.path.join(self.store_dir, f_name)
@@ -654,6 +681,7 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
         if self.enable_cors:
             self.set_cors_headers()
         ct = None
+        fext=None
         try:
             ct = str(ufile.content_type)
             fext = ct.split('/')[1]
@@ -695,7 +723,8 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
         with open(upload_meta_file, 'wb') as u_m_f:
             u_m_f.write(json.dumps({'fext': fext, 'hkey': st_hk, "Content-Type": ct}, ensure_ascii=False).encode())
         u_m_f.close()
-        # self.on_post(st_hk)
+
+        self.on_post(st_hk)
 
         self.cherry.response.status = 201
         return hk.decode()
@@ -706,8 +735,9 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
         return
 
     def push_resource(self, hk_hex):
-        url = "http://%s%s" % (self.http_host_port, self.mount_point)
-        self.dhf.push(key='', value={'cdn_resource_api': url,
+        # url = "http://%s%s" % (self.http_host_port, self.mount_point)
+        self.dhf.push(key='', value={'cdn_host_port': self.http_host_port,
+                                     'cdn_resource_endpoint': self.mount_point,
                                      'hk_hex': hk_hex,
                                      }, hk_hex=hk_hex, local_only=True)
 
