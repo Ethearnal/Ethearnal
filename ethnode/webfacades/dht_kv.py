@@ -7,6 +7,7 @@ import cherrypy
 import config
 import requests
 from toolkit import kadmini_codec as cdx
+from time import sleep
 
 
 class WebDhtCdnInfo(WebApiBase):
@@ -579,7 +580,7 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
             err = '{"error with thumb":"%s"}' % str(e)
             return err.encode()
 
-    def try_to_pull_and_download_resource(self, hk_hex):
+    def try_to_pull_and_download_resource(self, hk_hex, data_only=False, meta_only=False):
         v = self.pull_resource(hk_hex=hk_hex)
         if v:
             cdn_host_port = v.get('cdn_host_port')
@@ -589,20 +590,50 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
                 if hk_hex != hk_hex_from_dht:
                     print('INTEGRITY ERR on hkeys')
                 else:
-                    meta = self.rcli.download(meta=True)
-                    thumb = self.rcli.download(thumb=True)
-                    file = self.rcli.download()
-                    return meta, thumb, file
+                    meta_data = None
+                    fext = None
+                    meta_r = self.rcli.download(meta=True)
+                    if meta_r:
+                        if meta_r.status_code == 200:
+                            meta_data = meta_r.json()
+                            if meta_data:
+                                self.set_local_meta_data(hkey=hk_hex, data=meta_data)
+                                if meta_only:
+                                    return True
+                            if meta_data:
+                                fext = meta_data.get('fext')
+                                if fext:
+                                    data_r = self.rcli.download(hk_hex)
+                                    if data_r.status_code == 200:
+                                        self.set_local_data(hkey=hk_hex, fext=fext, bts=data_r.content)
+                                        self.push_resource(hk_hex=hk_hex)
+                                        return True
+                return False
 
-    def GET(self, hkey=None, relay_id=None, thumb=None, meta=None):
+    def GET(self, hkey=None, thumb=None, meta=None):
+        #
+        try:
+            return self.get_(hkey=hkey, thumb=thumb, meta=meta)
+        except Exception as e:
+            # todo handle
+            print("Exc1 in GET:", str(e))
+            self.try_to_pull_and_download_resource(hk_hex=hkey)
+            # todo config
+            sleep(0.2)
+            try:
+                return self.get_(hkey=hkey, thumb=thumb, meta=meta)
+            except Exception as e:
+                print("Exc2 in GET:", str(e))
+
+    def get_(self, hkey=None, thumb=None, meta=None):
         if self.enable_cors:
             self.set_cors_headers()
 
         request_headers = self.cherry.request.headers
+
         def invalid_hkey(cherry):
             cherry.response.status = 401
             return b'{"error":"invalid hkey"}'
-
 
         if not hkey:
             return invalid_hkey(self.cherry)
@@ -612,15 +643,16 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
         try:
             f_name_meta = '%s.%s' % (hkey, 'json')
             upload_file_meta = os.path.join(self.store_dir, f_name_meta)
-        except:
+        except Exception as e:
             self.cherry.response.status = 400
-            return b'{"error":"can\'t construct meta_file"}'
+            raise e
+            #return b'{"error":"can\'t construct meta_file"}'
 
         try:
             if not os.path.isfile(upload_file_meta):
                 print('META-FILE NOT FOUND')
                 self.cherry.response.status = 400
-                return b'{"error":"metafile missing"}'
+                raise ValueError('Metafile not found')
 
             with open(upload_file_meta, 'rb') as u_f_m:
                 data = u_f_m.read()
@@ -633,23 +665,22 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
                 ct = data_d["Content-Type"].strip()
                 cherrypy.response.headers["Content-Type"] = ct
                 if hkey != hk_meta or not fext or not ct:
-                    return b'{"error":"integrity error with hkey diff metadata"}'
+                    raise ValueError('Integrity error with hkey diff metadata')
 
         except OSError as e:
             self.cherry.response.status = 400
-            msg = '{"error":"resource missing"}'
-            return msg.encode()
+            msg = '{"error":"some error happened %s"}' % str(e)
+            raise e
 
         except Exception as e:
             msg = '{"error":"exc %s}' % str(e)
             self.cherry.response.status = 400
-            return msg.encode()
+            raise e
+            #return msg.encode()
 
         if not fext:
             self.cherry.response.status = 400
-            return b'{"error":"unknown file extension"}'
-
-
+            raise ValueError('Unknown file extension')
 
         try:
             f_name = '%s.%s' % (hkey, fext)
@@ -657,15 +688,17 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
         except OSError as e:
             self.cherry.response.status = 401
             msg = '{"error":"os path join %s %s"}' % (str(hkey), str(fext))
-            return msg.encode()
+            raise e
+
         except Exception as e:
             self.cherry.response.status = 401
             msg = '{"error":"general error with getting file name %s"}' % str(e)
-            return msg.encode()
+            raise e
+
 
         if not os.path.isfile(upload_file):
             self.cherry.response.status = 400
-            return b'{"error":"Data file missing"}'
+            raise ValueError("Data file missing")
 
         if thumb:
             thumb_name = self.thumbnail.get_file_name(upload_file)
