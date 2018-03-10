@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
+def_user="one"
+
 host=$1
 script=$2
 
+
 if [ -z ${host} ]; then echo "arg 1 host is unset" && exit 1; else echo "var is set to '${host}'"; fi
 if [ -z ${script} ]; then echo "arg 2 script is unset" && exit 1; else echo "var is set to '${script}'"; fi
+
 echo "will deploy ${script} system setup at host ${host}"
 ping -c3 ${host}
 cat ${script}
@@ -16,5 +20,7 @@ then
 fi
 echo "copy ${script}"
 scp ${script} root@$1:~/
+
 echo "ssh execute ${script}"
 ssh -t root@${host} "./${script}; bash -l"
+
