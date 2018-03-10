@@ -1,11 +1,41 @@
 from kadem.kad import DHTFacade
 from toolkit import kadmini_codec as cdx
-
+import bson
 
 class DhtKv(object):
     def __init__(self, dhf: DHTFacade):
         self.dhf = dhf
         self.own_guid_hex = self.dhf.ert.rsa_guid_hex
+
+    def get2(self, profile_key, owner_guid=None):
+        if len(owner_guid) != 64:
+            return b'null'
+        #
+        key = {'profile:key': profile_key}
+        t = None
+
+        if not owner_guid:
+            t = self.dhf.pull_local(key)
+        else:
+            guid_bin = cdx.guid_hex_to_bin(owner_guid)
+            if guid_bin == self.dhf.ert.rsa_guid_bin:
+                t = self.dhf.pull_local(key)
+            else:
+                t = self.dhf.pull_remote(key, guid_bin)
+        if t:
+            d = bson.loads(t[-1])
+            if 'e' in d:
+                ll = d['e']
+                if len(ll) >= 1:
+                    dd = ll[1]
+                    if 'v' in dd:
+                        # sanitize
+                        vvv = dd['v']
+                        return vvv
+                        js = json.dumps(vvv)
+                        # js_cl = bleach.clean(js)
+                        # js_b = js_cl.encode()
+                        # return js_b
 
     def get(self, profile_key, guid_hex=None, local=False):
         if not guid_hex:
