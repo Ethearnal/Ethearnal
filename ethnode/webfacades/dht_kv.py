@@ -22,6 +22,7 @@ class WebDhtCdnInfo(WebApiBase):
             mount_it=mount_it
         )
         self.dkv = dkv
+        self.own_guid = self.dkv.dhf.ert.rsa_guid_hex
 
     def GET(self, *a, **kw):
         self.cherry.response.headers["Access-Control-Allow-Origin"] = "*"
@@ -29,6 +30,9 @@ class WebDhtCdnInfo(WebApiBase):
         if 'known' in kw:
             ll = list()
             for guid in self.dkv.dhf.known_guids():
+                if guid == self.own_guid:
+                    data = self.dkv.get('cdn_info', guid_hex=guid, local=False)
+
                 data = self.dkv.get('cdn_info', guid_hex=guid, local=False)
                 if data:
                     ll.append(data)
@@ -36,7 +40,7 @@ class WebDhtCdnInfo(WebApiBase):
                 js = json.dumps(ll, ensure_ascii=False)
                 bs = js.encode()
                 return bs
-        data = self.dkv.get('cdn_info')
+        data = self.dkv.get('cdn_info', local=True)
         js = json.dumps(data, ensure_ascii=False)
         bn = js.encode()
         return bn
