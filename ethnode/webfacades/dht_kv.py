@@ -703,7 +703,7 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
         cdn = 'URL4: %s' % hk_hex
         self.dhf.push(key='', value={'cdn': cdn,
                                      'hk_hex': hk_hex,
-                                     }, hk_hex=hk_hex, local_only=False)
+                                     }, hk_hex=hk_hex, local_only=True)
 
     def pull_resource(self, hk_hex, remote=True):
         if remote:
