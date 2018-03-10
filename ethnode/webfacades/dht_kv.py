@@ -580,7 +580,7 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
             err = '{"error with thumb":"%s"}' % str(e)
             return err.encode()
 
-    def try_to_pull_and_download_resource(self, hk_hex, data_only=False, meta_only=False):
+    def try_to_pull_and_download_resource(self, hk_hex, data_only=False):
         v = self.pull_resource(hk_hex=hk_hex)
         if v:
             cdn_host_port = v.get('cdn_host_port')
@@ -598,8 +598,6 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
                             meta_data = meta_r.json()
                             if meta_data:
                                 self.set_local_meta_data(hkey=hk_hex, data=meta_data)
-                                if meta_only:
-                                    return True
                             if meta_data:
                                 fext = meta_data.get('fext')
                                 if fext:
@@ -617,9 +615,11 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
         except Exception as e:
             # todo handle
             print("Exc1 in GET:", str(e))
-            self.try_to_pull_and_download_resource(hk_hex=hkey)
+            stat = self.try_to_pull_and_download_resource(hk_hex=hkey)
+            if stat:
+                print('ALL OK + ++ + +')
             # todo config
-            sleep(0.2)
+            sleep(0.4)
             try:
                 return self.get_(hkey=hkey, thumb=thumb, meta=meta)
             except Exception as e:
