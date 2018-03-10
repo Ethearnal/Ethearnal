@@ -584,7 +584,7 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
         v = self.pull_resource(hk_hex=hk_hex)
         if v:
             cdn_host_port = v.get('cdn_host_port')
-            cdn_mount_point = v.get('cdn_mount_point')
+            cdn_mount_point = v.get('cdn_resource_endpoint')
             if cdn_host_port and cdn_mount_point:
                 hk_hex_from_dht = v.get('hk_hex')
                 if hk_hex != hk_hex_from_dht:
