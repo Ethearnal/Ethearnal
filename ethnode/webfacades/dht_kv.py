@@ -611,7 +611,7 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
     def GET(self, hkey=None, thumb=None, meta=None):
         #
         try:
-            return self.get_(ufile, hkey=hkey, thumb=thumb, meta=meta)
+            return self.get_(hkey=hkey, thumb=thumb, meta=meta)
         except Exception as e:
             # todo handle
             print("Exc1 in GET:", str(e))
