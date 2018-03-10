@@ -100,7 +100,7 @@ class WebDhtCdnList(WebApiBase):
                  cdn_list=None,
                  enable_cors=True,
                  mount_point='/api/v1/dht/cdn-list',
-                 wtrack_cli: WebCdnClusterTrackerClient=None,
+                 wtrack_cli=None,
                  mount_it=True):
         super(WebDhtCdnList, self).__init__(
             cherry=cherry,
