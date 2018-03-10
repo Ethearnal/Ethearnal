@@ -151,8 +151,8 @@ window.networkPageModule = (function () {
             console.log(peerData[i]['profile'].is_cdn);
             if (!peerData[i]['profile'].is_cdn) {
                 img_src = 'http://' + feature.N.ip4 + ':5678/api/cdn/v1/resource?hkey=' + peerData[i]['profile'].profilePicture + '&thumb=1'
-                var firstName = peerData[i]['profile'].name.first;
-                var lastName = peerData[i]['profile'].name.last;
+                var firstName = 'DD';//peerData[i]['profile'].name.first;
+                var lastName = 'SS';//peerData[i]['profile'].name.last;
                 block = `<div class="icon-box"><img src="${img_src}"/>${firstName} ${lastName}</div>`
                 $('#peer-list').append(block)
             }
