@@ -71,4 +71,4 @@ cdn_clusters = [
     ["lon02cd", "188.166.154.183:5678"]
 ];
 
-ert_default_tracker = cdn_clusters[1]
+ert_default_tracker = cdn_clusters[0][1]

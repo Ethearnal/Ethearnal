@@ -192,6 +192,7 @@ class WebCdnClusterTrackerClient(object):
             return r.json()
 
     def join_to_list(self, scheme=None, host_port=None, endpoint=None,
+                     join_http=True,
                      join_dht=True,
                      push_pub=True,
                      pull_pubs=True):
@@ -201,7 +202,8 @@ class WebCdnClusterTrackerClient(object):
             members = data.get("cluster_members")
             if members:
                 for item_host_port in members:
-                    self.join(scheme=scheme, host_port=item_host_port,  endpoint=endpoint)
+                    if join_http:
+                        self.join(scheme=scheme, host_port=item_host_port,  endpoint=endpoint)
                     if join_dht:
                         self.join_dht(host_port=item_host_port)
                         if push_pub:

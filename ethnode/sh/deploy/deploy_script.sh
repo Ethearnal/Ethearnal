@@ -29,7 +29,7 @@ cat ${script}
 echo
 echo "-----------------------------"
 echo ""
-if [ ${stay} == '-y' ]; then
+if [ ${stay} == "-y" ]; then
     echo "will stay after on remote ${stay}";
 else
     echo "will not stay on remote ${stay}";
@@ -50,17 +50,38 @@ echo "copy ${script}"
 
 remote_script_dir="/home/${user}/${script_dir}"
 remote_script="${remote_script_dir}/${script_base}"
+remote_root_dir="/root/${script_dir}"
+remote_root_script="${remote_root_dir}/${script_base}"
 
 echo "--- remote location --- "
 echo ${remote_script}
 echo " -----------------------"
-ssh ${user}@${host} "chmod 700 ${remote_script}"
-scp ${script} ${user}@${host}:${remote_script}
 
-if [ ${stay} == -y ]; then
-    ssh -t ${user}@${host} "${remote_script}; bash -l";
+if [ ${user}=="root" ]; then
+    scp ${script} ${user}@${host}:${remote_root_script};
+    ssh ${user}@${host} "chmod 700 ${remote_root_script}"
+    if [ ${stay} == "-y" ]; then
+        ssh -t ${user}@${host} "${remote_root_script}; bash -l";
+    else
+        ssh -t ${user}@${host} "${remote_root_script}";
+    fi
+    #scp ${script} ${user}@${host}:${remote_root_script};
 else
-    ssh -t ${user}@${host} "${remote_script}";
+    scp ${script} ${user}@${host}:${remote_script};
+    ssh ${user}@${host} "chmod 700 ${remote_script}"
+    if [ ${stay} == "-y" ]; then
+        ssh -t ${user}@${host} "${remote_script}; bash -l";
+    else
+        ssh -t ${user}@${host} "${remote_script}";
+    fi
+    # scp ${script} ${user}@${host}:~/${remote_script};
 fi
+# scp ${script} ${user}@${host}:~/${remote_script}
+#
+#if [ ${stay} == "-y" ]; then
+#    ssh -t ${user}@${host} "${remote_script}; bash -l";
+#else
+#    ssh -t ${user}@${host} "${remote_script}";
+#fi
 
 # set -x
