@@ -349,8 +349,7 @@ class WebCdnResourceApiClient(object):
         pass
 
     def download(self, hk_hex, thumb=False):
-        url = self.url
-        url_q = '%s?%hkey=%s'
+        url_q = '%s?hkey=%s' % (self.url, hk_hex)
         if thumb:
             url_q = '%s&thumb=1' % url_q
         print('RES CLI GET url %s' % url_q)
