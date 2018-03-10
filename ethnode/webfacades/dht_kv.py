@@ -275,7 +275,11 @@ class WebCdnClusterTrackerClient(object):
         for item_host_port in iter(self.crawled_host_port):
             self.cdn_l1(scheme=scheme, host_port=item_host_port, endpoint=endpoint)
 
-    def crw(self, h_p):
+    def crw_join(self, scheme=None, host_port=None, endpoint=None,):
+        for hp in iter(self.crawled_host_port):
+            self.join(scheme=scheme, host_port=hp, endpoint=endpoint)
+
+    def crw_collect(self, h_p):
         self.cdn_l1(host_port=h_p)
         self.cdn_l2()
 
