@@ -251,7 +251,14 @@ def main_http(http_webdir: str = config.http_webdir,
     dkv = DhtKv(d)
     dkv.set(WebDhtCdnSelector.K_SELECTED_CDN, "%s:%s" % (ert.cdn_host, ert.cdn_port))
     cdn_select = WebDhtCdnSelector(dkv)
-    cdn_list = WebDhtCdnList(dkv)
+
+    from webfacades.dht_kv import WebCdnClusterTrackerClient, WebCdnClusterTracker
+
+    wtrack_cli = WebCdnClusterTrackerClient(dhf=d,
+                                            http_host_port=config.ert_default_tracker
+                                            )
+
+    cdn_list = WebDhtCdnList(dkv=dkv, wtrack_cli=wtrack_cli)
 
 
     knownguids = WebDHTKnownGuids(
@@ -368,11 +375,7 @@ def main_http(http_webdir: str = config.http_webdir,
     # except Exception as e:
     #     print(str(e))
     #     sys.exit()
-    from webfacades.dht_kv import WebCdnClusterTrackerClient, WebCdnClusterTracker
 
-    wtrack_cli = WebCdnClusterTrackerClient(dhf=d,
-                                            http_host_port=config.ert_default_tracker
-                                            )
 
     if not interactive:
         cherrypy.engine.block()

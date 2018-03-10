@@ -100,6 +100,7 @@ class WebDhtCdnList(WebApiBase):
                  cdn_list=None,
                  enable_cors=True,
                  mount_point='/api/v1/dht/cdn-list',
+                 wtrack_cli: WebCdnClusterTrackerClient=None,
                  mount_it=True):
         super(WebDhtCdnList, self).__init__(
             cherry=cherry,
@@ -112,16 +113,40 @@ class WebDhtCdnList(WebApiBase):
         self.dkv = dkv
         self.dkv.set(self.K_OWN_CDN_LIST, self.cdn_list)
         self.enable_cors = enable_cors,
+        self.wtrack_cli = wtrack_cli
+        if not self.wtrack_cli:
+            raise ValueError('cdn tracker client is needed wtrac_cli')
 
     def GET(self, *a, **kw):
         if self.enable_cors:
             self.cherry.response.headers['Access-Control-Allow-Methods'] = 'POST GET'
             self.cherry.response.headers['Access-Control-Allow-Headers'] = 'content-type'
             self.cherry.response.headers['Access-Control-Allow-Origin'] = '*'
-        data = self.dkv.get(self.K_OWN_CDN_LIST, local=True)
-        js = json.dumps(data)
-        bs = js.encode()
-        return bs
+        # todo doc
+        if 'targethp' in kw:
+            # ip-port
+            try:
+                h_p = kw.get('targethp')
+                spl = h_p.split('-')
+                h_p_s = '%s:%s' % ( spl[0], spl[1] )
+                print("GET CDN LIST FROM Web TRACKER TARGET IP:PORT %s" % h_p_s)
+                self.wtrack_cli.host_port = h_p_s
+            except Exception as e:
+                msg = '{"error":"%s"}' % str(e)
+                self.cherry.response.status = 409
+                return msg.encode()
+        data = self.wtrack_cli.data()
+        # data = self.dkv.get(self.K_OWN_CDN_LIST, local=True)
+        if 'cluster_members' in data:
+            m = data['cluster_members']
+            if m:
+                url_list = ['http://%s' % k for k in m]
+                js = json.dumps(url_list)
+                bs = js.encode()
+                self.cherry.response.status = 200
+                return bs
+        self.cherry.response.status = 400
+        return b'[]'
 
     def PUT(self):
         if self.enable_cors:
