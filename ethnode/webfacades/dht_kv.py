@@ -31,8 +31,8 @@ class WebDhtCdnInfo(WebApiBase):
             ll = list()
             for guid in self.dkv.dhf.known_guids():
                 if guid == self.own_guid:
-                    # data = self.dkv.get('cdn_info', guid_hex=guid, local=False)
-                    data = self.dkv.get2('cdn_info', owner_guid=guid)
+                    data = self.dkv.get('cdn_info', guid_hex=guid, local=False)
+                    #data = self.dkv.get2('cdn_info', owner_guid=guid)
 
                 data = self.dkv.get('cdn_info', guid_hex=guid, local=False)
                 if data:
@@ -42,9 +42,8 @@ class WebDhtCdnInfo(WebApiBase):
                 bs = js.encode()
                 return bs
         #
-        # data = self.dkv.get('cdn_info', local=True)
-
-        data = self.dkv.get2('cdn_info', owner_guid=self.own_guid)
+        data = self.dkv.get('cdn_info', local=True)
+        # data = self.dkv.get2('cdn_info', owner_guid=self.own_guid)
         js = json.dumps(data, ensure_ascii=False)
         bn = js.encode()
         return bn

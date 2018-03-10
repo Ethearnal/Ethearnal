@@ -32,7 +32,7 @@ class DhtKv(object):
                         # sanitize
                         vvv = dd['v']
                         return vvv
-                        js = json.dumps(vvv)
+                        # js = json.dumps(vvv)
                         # js_cl = bleach.clean(js)
                         # js_b = js_cl.encode()
                         # return js_b
