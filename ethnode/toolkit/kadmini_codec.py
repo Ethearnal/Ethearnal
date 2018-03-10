@@ -200,6 +200,13 @@ def composite_hash_sha256(b1: bytes, b2: bytes) -> bytes:
     return r
 
 
+def value_protocol_ert(t):
+    d = bson.loads(t[-1])
+    if 'e' in d:
+        # rev = d['e'][0]
+        return d['e'][1]
+
+
 def value_protocol(t):
     d = bson.loads(t[-1])
     if 'e' in d:

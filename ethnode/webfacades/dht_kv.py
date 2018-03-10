@@ -710,8 +710,9 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
             t = self.dhf.pull_remote(key='', hk_hex=hk_hex)
         else:
             t = self.dhf.pull_local(key='', hk_hex=hk_hex)
+        print('pull t', t)
         if t:
-            v = cdx.value_protocol(t)
+            v = cdx.value_protocol_ert(t)
             if v:
                 return v
 
