@@ -592,7 +592,7 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
                 else:
                     meta_data = None
                     fext = None
-                    meta_r = self.rcli.download(meta=True)
+                    meta_r = self.rcli.download(hk_hex=hk_hex, meta=True)
                     if meta_r:
                         if meta_r.status_code == 200:
                             meta_data = meta_r.json()
@@ -603,7 +603,7 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
                             if meta_data:
                                 fext = meta_data.get('fext')
                                 if fext:
-                                    data_r = self.rcli.download(hk_hex)
+                                    data_r = self.rcli.download(hk_hex=hk_hex)
                                     if data_r.status_code == 200:
                                         self.set_local_data(hkey=hk_hex, fext=fext, bts=data_r.content)
                                         self.push_resource(hk_hex=hk_hex)
