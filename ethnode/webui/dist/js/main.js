@@ -259,12 +259,13 @@ window.networkPageModule = function () {
   $('.nav-tabs .network').addClass('active');
   // update data interval
   var interval = 1000 * 60 * 5;
-
+   // INIT NETWORK JS
   function initNetwork() {
     // array of CDN's
     var urlsArr = [];
     var listData = void 0;
-    $.get('http://159.65.56.140:4567/api/v1/dht/cdn-list', function (data) {
+
+     $.get('/api/v1/dht/cdn-list', function (data) {
       // check if not empty
       if (data) {
         listData = JSON.parse(data);
