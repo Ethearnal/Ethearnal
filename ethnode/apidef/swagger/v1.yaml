@@ -148,13 +148,12 @@ paths:
       - "application/json"
       parameters:
       - in: "body"
-        name: "gigItem"
-        description: "Gig item to add"
+        name: "data"
+        description: "gigdata"
+        example: '{"title":"title"}'
         required: true
         schema:
           type: object
-#        schema:
-#          $ref: "#/definitions/Gig"
       responses:
         201:
           description: "item created"
