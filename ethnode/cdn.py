@@ -229,10 +229,14 @@ if args.http_config_url:
 #              http_relay_urls=rel_urls,
 #              http_relay_get_url=http_relay_get_url)
 
-from webfacades.dht_kv import WebCDNRefactorWebCdnResourceApi
+from webfacades.dht_kv import WebCDNRefactorWebCdnResourceApi, WebCdnResourceApiClient
 
 cdn = WebCDNRefactorWebCdnResourceApi(
     store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
+)
+cdn_cli = WebCdnResourceApiClient(
+    dhf=dhf,
+    http_host_port="%s:%s" % (ip, str(port))
 )
 
 cnx = None

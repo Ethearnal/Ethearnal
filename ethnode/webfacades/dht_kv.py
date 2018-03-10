@@ -325,6 +325,43 @@ import io
 import bson
 
 
+class WebCdnResourceApiClient(object):
+    def __init__(self, dhf: DHTFacade, http_host_port,
+                 scheme='http:',
+                 endpoint='/api/cdn/v1/resource',
+                 ):
+        self.host_port = http_host_port
+        self.scheme = scheme
+        self.endpoint = endpoint
+        self.dhf = dhf
+
+    @property
+    def url(self):
+        return self.url_st(self.scheme, self.host_port, self.endpoint)
+
+    @staticmethod
+    def url_st(scheme, host_port, endpoint) -> str:
+        return '%s//%s%s' % (scheme, host_port, endpoint)
+
+    def upload(self, ufile):
+        print('UPLOAD URL', self.url)
+        return b''
+        pass
+
+    def download(self, hk_hex, thumb=False):
+        url = self.url
+        url_q = '%s?%hkey=%s'
+        if thumb:
+            url_q = '%s&thumb=1' % url_q
+        print('RES CLI GET url %s' % url_q)
+        r = requests.get(url_q)
+        if r.status_code != 200:
+            print('RESP CODE NOT OK: ->', r.status_code)
+            return r
+        else:
+            return r
+
+
 class WebCDNRefactorWebCdnResourceApi(WebApiBase):
     def __init__(self,
                  dhf=None,
