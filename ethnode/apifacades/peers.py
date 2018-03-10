@@ -28,6 +28,11 @@ class PeersInfo(object):
         self.bin_data = b''
         self.txt_data = ''
 
+    def render_reload(self):
+        self.render_peers_data()
+        self.save_data()
+        self.load_data()
+
     def render_dht(self):
         for peer in self._dhf.peers:
             ip4 = peer['host']
