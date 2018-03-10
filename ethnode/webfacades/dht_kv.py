@@ -176,6 +176,8 @@ class WebCdnClusterTrackerClient(object):
         self.dhf = dhf
         self.service = None
 
+        self.crawled_host_port = set()
+
     @property
     def url(self):
         return self.url_st(self.scheme, self.host_port, self.endpoint)
@@ -254,16 +256,23 @@ class WebCdnClusterTrackerClient(object):
                 print('BOOT TO', ip4, port)
                 self.dhf.boot_to(ip4, port)
 
-    def cdn_l1(self, boot_host_port):
-        # self.host_port = boot_host_port
-        data = self.data(host_port=boot_host_port)
+    def cdn_l0(self):
+        self.crawled_host_port = set()
+
+    def cdn_l1(self, scheme=None, host_port=None, endpoint=None,):
+        data = self.data(scheme=scheme, host_port=host_port, endpoint=endpoint)
         if 'cluster_members' in data:
             for host_port in data['cluster_members']:
                 if self.service:
                     if self.service.host_port:
                         if self.service.host_port == host_port:
-                            pass
-                self.join(host_port)
+                            continue
+                self.crawled_host_port.add(host_port)
+
+    def cdn_l2(self, scheme=None, host_port=None, endpoint=None,):
+        l = list(self.crawled_host_port)
+        for item_host_port in iter(self.crawled_host_port):
+            self.cdn_l1(scheme=scheme, host_port=item_host_port, endpoint=endpoint)
 
 
 class WebCdnClusterTracker(WebApiBase):
