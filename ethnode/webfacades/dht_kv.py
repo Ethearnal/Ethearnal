@@ -283,6 +283,22 @@ class WebCdnClusterTrackerClient(object):
         self.cdn_l1(host_port=h_p)
         self.cdn_l2()
 
+    def join_dht_to_list(self):
+        self.join_to_list(join_http=False, join_dht=True)
+
+    def cdn_converge(self, h_p):
+        self.cdn_l0()
+        self.crw_collect(h_p=h_p)
+        sleep(1)
+        self.crw_join()
+        sleep(1)
+        self.join_dht_to_list()
+        sleep(1)
+        self.dhf.push_pubkey()
+        sleep(1)
+        self.dhf.pull_pubkey_in_peers()
+        sleep(1)
+
 
 class WebCdnClusterTracker(WebApiBase):
     def __init__(self,
