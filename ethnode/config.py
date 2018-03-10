@@ -70,3 +70,5 @@ cdn_clusters = [
     ["fra", "188.166.154.183:5678"],
     ["lon02cd", "188.166.154.183:5678"]
 ];
+
+ert_default_tracker = cdn_clusters[0]

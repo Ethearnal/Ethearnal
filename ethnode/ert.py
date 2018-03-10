@@ -368,6 +368,11 @@ def main_http(http_webdir: str = config.http_webdir,
     # except Exception as e:
     #     print(str(e))
     #     sys.exit()
+    from webfacades.dht_kv import WebCdnClusterTrackerClient, WebCdnClusterTracker
+
+    wtrack_cli = WebCdnClusterTrackerClient(dhf=d,
+                                            http_host_port=config.ert_default_tracker
+                                            )
 
     if not interactive:
         cherrypy.engine.block()
