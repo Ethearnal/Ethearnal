@@ -174,6 +174,7 @@ class WebCdnClusterTrackerClient(object):
         self.endpoint = endpoint
         self.info_endpoint = info_endpoint
         self.dhf = dhf
+        self.service = None
 
     @property
     def url(self):
@@ -253,6 +254,17 @@ class WebCdnClusterTrackerClient(object):
                 print('BOOT TO', ip4, port)
                 self.dhf.boot_to(ip4, port)
 
+    def cdn_l1(self, boot_host_port):
+        # self.host_port = boot_host_port
+        data = self.data(host_port=boot_host_port)
+        if 'cluster_members' in data:
+            for host_port in data['cluster_members']:
+                if self.service:
+                    if self.service.host_port:
+                        if self.service.host_port == host_port:
+                            pass
+                self.join(host_port)
+
 
 class WebCdnClusterTracker(WebApiBase):
     def __init__(self,
@@ -272,7 +284,9 @@ class WebCdnClusterTracker(WebApiBase):
         )
         self.ip = http_srv_ip
         self.port = http_srv_port
+        self.host_port='%s:%s' % (http_srv_ip,str(http_srv_port))
         self.rcli = rcli
+        self.rcli.service = self
         self.hfs = hfs
         self.enable_cors = enable_cors
         # truncate previous saved data
