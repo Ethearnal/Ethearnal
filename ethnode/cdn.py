@@ -231,12 +231,14 @@ if args.http_config_url:
 
 from webfacades.dht_kv import WebCDNRefactorWebCdnResourceApi, WebCdnResourceApiClient
 
-cdn = WebCDNRefactorWebCdnResourceApi(
-    store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
-    http_host_port="%s:%s" % (ip, str(port))
-)
+
 cdn_cli = WebCdnResourceApiClient(
     dhf=dhf,
+    http_host_port="%s:%s" % (ip, str(port))
+)
+cdn = WebCDNRefactorWebCdnResourceApi(
+    store_dir=cdn_files_dir, dhf=dhf, cherry=cherrypy,
+    rcli=cdn_cli,
     http_host_port="%s:%s" % (ip, str(port))
 )
 
