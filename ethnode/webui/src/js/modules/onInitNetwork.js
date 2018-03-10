@@ -9,7 +9,7 @@ window.networkPageModule = (function () {
     // array of CDN's
     let urlsArr = []
     let listData
-    $.get('http://159.65.56.140:4567/api/v1/dht/cdn-list', function (data) {
+    $.get('api/v1/dht/cdn-list', function (data) {
       // check if not empty
       if (data) {
         listData = JSON.parse(data)
