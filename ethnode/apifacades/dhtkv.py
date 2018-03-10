@@ -7,8 +7,9 @@ class DhtKv(object):
         self.dhf = dhf
         self.own_guid_hex = self.dhf.ert.rsa_guid_hex
 
-    def get(self, profile_key, guid_hex=None, local=True):
+    def get(self, profile_key, guid_hex=None, local=False):
         if not guid_hex:
+
             guid_hex = self.own_guid_hex
         guid_bin = cdx.guid_hex_to_bin(guid_hex)
         key_proto = {'profile:key': profile_key}
