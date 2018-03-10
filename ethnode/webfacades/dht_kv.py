@@ -261,6 +261,7 @@ class WebCdnClusterTrackerClient(object):
 
     def cdn_l1(self, scheme=None, host_port=None, endpoint=None,):
         data = self.data(scheme=scheme, host_port=host_port, endpoint=endpoint)
+        self.join(scheme=scheme, host_port=host_port,  endpoint=endpoint)
         if 'cluster_members' in data:
             for host_port in data['cluster_members']:
                 if self.service:
