@@ -589,6 +589,8 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
                 hk_hex_from_dht = v.get('hk_hex')
                 if hk_hex != hk_hex_from_dht:
                     print('INTEGRITY ERR on hkeys')
+                    print('VAL', v)
+                    return False
                 else:
                     meta_data = None
                     fext = None
