@@ -482,6 +482,10 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
 
     def set_local_data(self, hkey, fext, bts):
         f_name = '%s.%s' % (hkey, fext)
+        try:
+            self.thumbnail.resize(fn=f_name, max_w=400, max_h=400)
+        except Exception as e:
+            print('set_local_data: WARNING THUMBNAIL FAILED', e)
 
         upload_file = os.path.join(self.store_dir, f_name)
         with open(upload_file, 'wb') as oufp:
@@ -788,7 +792,7 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
         try:
             self.thumbnail.resize(fn=upload_file, max_w=400, max_h=400)
         except Exception as e:
-            print('WARNING THUMBNAIL FAILED', e)
+            print('POST: WARNING THUMBNAIL FAILED', e)
 
         with open(upload_meta_file, 'wb') as u_m_f:
             u_m_f.write(json.dumps({'fext': fext, 'hkey': st_hk, "Content-Type": ct}, ensure_ascii=False).encode())
