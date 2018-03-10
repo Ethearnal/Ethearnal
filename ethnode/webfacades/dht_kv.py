@@ -363,6 +363,7 @@ class WebCdnResourceApiClient(object):
 
 class WebCDNRefactorWebCdnResourceApi(WebApiBase):
     def __init__(self,
+                 http_host_port = None,
                  dhf=None,
                  enable_cors=True,
                  cherry=cherrypy,
@@ -370,12 +371,15 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
                  store_dir: str='cdn_profile/',
                  mount_it=True):
 
+        if not http_host_port:
+            raise ValueError('WebCDNRefactorWebCdnResourceApi: pls init http_host_port')
+
         super(WebCDNRefactorWebCdnResourceApi, self).__init__(
             cherry=cherry,
             mount_point=mount_point,
             mount_it=mount_it
         )
-
+        self.http_host_port = http_host_port
         self.cherry = cherry
         self.mount_point = mount_point
         self.store_dir = os.path.abspath(store_dir)
@@ -383,6 +387,8 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
         self.dhf.cdn = self
         self.enable_cors = True
         self.thumbnail = ImgThumbnail()
+        if self.mount_point[0] != '/':
+            self.mount_point = '/%s' % self.mount_point
 
         if mount_it:
             self.mount()
@@ -696,12 +702,12 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
 
     def on_post(self, hk_hex):
         print("ON_POST RES:", hk_hex)
+        self.push_resource(hk_hex=hk_hex)
         return
 
     def push_resource(self, hk_hex):
-        # 'TEST'
-        cdn = 'URL4: %s' % hk_hex
-        self.dhf.push(key='', value={'cdn': cdn,
+        url = "http://%s%s" % (self.http_host_port, self.mount_point)
+        self.dhf.push(key='', value={'cdn_resource_api': url,
                                      'hk_hex': hk_hex,
                                      }, hk_hex=hk_hex, local_only=True)
 
