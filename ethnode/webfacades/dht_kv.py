@@ -615,8 +615,20 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
                                         return True
                 return False
 
-    def GET(self, hkey=None, thumb=None, meta=None):
-        #
+    def GET(self, **kw): # key=None, thumb=None, meta=None):
+        hkey = kw.get('hkey')
+        thumb = kw.get('thumb')
+        meta = kw.get('meta')
+        qs = self.cherry.request.query_string
+        qs_s = str(qs)
+        print('+ +++ ++  QS GET RESOURCE + ++ +++ +')
+        print(qs_s)
+        if not thumb:
+            if 'thumb' in qs_s:
+                thumb = '1'
+        if not meta:
+            if 'meta' in qs_s:
+                meta = '1'
         try:
             return self.get_(hkey=hkey, thumb=thumb, meta=meta)
         except Exception as e:
@@ -640,6 +652,15 @@ class WebCDNRefactorWebCdnResourceApi(WebApiBase):
     def get_(self, hkey=None, thumb=None, meta=None):
         if self.enable_cors:
             self.set_cors_headers()
+
+        if thumb:
+            thumb = True
+        else:
+            thumb = False
+        if meta:
+            meta = True
+        else:
+            meta = False
 
         request_headers = self.cherry.request.headers
 
