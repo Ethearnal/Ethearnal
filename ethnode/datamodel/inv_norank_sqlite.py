@@ -35,6 +35,7 @@ class InvIndexTimestampSQLite(BaseSQLite):
         else:
             c = self.cursor.execute(qs)
             self.connection.commit()
+            return len(c.fetchall())
             # print('\n\n\n COUNT container_hash', len(c.fetchall()))
             # print('\n\n\n')
 

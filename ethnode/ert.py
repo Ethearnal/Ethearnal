@@ -260,7 +260,6 @@ def main_http(http_webdir: str = config.http_webdir,
 
     cdn_list = WebDhtCdnList(dkv=dkv, wtrack_cli=wtrack_cli)
 
-
     knownguids = WebDHTKnownGuids(
         cherry=cherrypy,
         dhtf=dht_facade_,
@@ -273,7 +272,6 @@ def main_http(http_webdir: str = config.http_webdir,
         cherry=cherrypy,
         dhf=dht_facade_,
     )
-
 
     dht_gigs_hk = DhtGigsHkeysWebAPI(
         cherry=cherrypy,
@@ -500,12 +498,14 @@ if __name__ == '__main__':
         # todo move this
         from toolkit.profile_from_json import DHTProfile, DHTProfileCollection
         pro = DHTProfile(d)
-        my_gigs = DHTProfileCollection(dhf=d, collection_name='gig')
-        # verbs_src = 'data_demo/txt_wordnet/data.verb'
-        # cdn_data_dir = 'data_demo/cdn1_d'
-        # from helpers.wordnet_parser import WordnetParser, ImagesFromCdnData, GigGeneratorWordnet
+
+        verbs_src = 'data_demo/txt_wordnet/data.verb'
+        cdn_data_dir = 'data_demo/cdn1_d'
+        from helpers.wordnet_parser import WordnetParser, ImagesFromCdnData, GigGeneratorWordnet
         #
-        # gen = GigGeneratorWordnet(WordnetParser(verbs_src), ImagesFromCdnData(cdn_data_dir))
+        giggen = GigGeneratorWordnet(WordnetParser(verbs_src), ImagesFromCdnData(cdn_data_dir))
+        my_gigs = DHTProfileCollection(dhf=d, collection_name='gig', giggen=giggen)
+
         if json_data_to_profile:
             from time import sleep
             from random import randint
@@ -522,9 +522,10 @@ if __name__ == '__main__':
             gigs_data = jsd.data['gigs']
             for gig_entry in gigs_data:
                 gig_entry['lock'] = randint(5, 190)
-                gig_entry['price'] = randint(50, 1999)
+                gig_entry['price'] = randint(20, 1999)
                 gig_entry['category'] = category_domain
                 gig_entry['general_domain_of_expertise'] = category_domain
+                gig_entry['image_hash'] = '02b250490840c0d2c0cc2984d74b1ece9ae2c2174dc304b4423755d73b31fc5a'
                 # my_gigs.my_gigs
                 print(gig_entry)
                 my_gigs.post(gig_entry['title'], gig_entry)

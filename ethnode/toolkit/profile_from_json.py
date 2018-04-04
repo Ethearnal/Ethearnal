@@ -113,10 +113,13 @@ class DHTValueProtocol(object):
                     return v['value']
         return None
 
+from helpers.wordnet_parser import GigGeneratorWordnet
+from random import randint
+
 
 class DHTProfileCollection(object):
 
-    def __init__(self, dhf: DHTFacade, collection_name: str):
+    def __init__(self, dhf: DHTFacade, collection_name: str, giggen: GigGeneratorWordnet=None):
         self.collection_name = '.' + collection_name + 's'  # '.gigs'
         self.dhf = dhf
         self.me = OwnerGuidHashIO(dhf.ert.rsa_guid_hex)
@@ -125,6 +128,19 @@ class DHTProfileCollection(object):
         self.my_deleted_items = instance_dl(self.dhf, self.me.hex(), self.delete_collection_name)
         self.item_model = collection_name.title()
         self.value_protocol = DHTValueProtocol()
+        self.giggen = giggen
+
+    def wordnet_gen_count(self, sr: int, er: int,):
+        self.giggen.gen_from_range(sr, er)
+        print('wordnet generation done... \n')
+        for gig_entry in self.giggen.gigs:
+            gig_entry['lock'] = randint(5, 190)
+            gig_entry['price'] = randint(20, 1999)
+            gig_entry['category'] = 'sd'
+            gig_entry['general_domain_of_expertise'] = 'sd'
+            # my_gigs.my_gigs
+            print(gig_entry)
+            self.post(gig_entry['title'], gig_entry)
 
     def post(self, key, data):
         k = {self.collection_name: key + datetime.datetime.now().isoformat()}
