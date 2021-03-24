@@ -22,7 +22,7 @@ pyasn1==0.4.2
 Pygments==2.2.0
 pytz==2018.3
 requests==2.18.4
-rsa==3.4.2
+rsa==4.1
 simplegeneric==0.8.1
 six==1.11.0
 tempora==1.10
