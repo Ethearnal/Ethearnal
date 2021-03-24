@@ -24,7 +24,7 @@ Pygments==2.2.0
 PyInstaller==3.3
 pytz==2017.2
 randomavatar==0.5.1
-rsa==3.4.2
+rsa==4.1
 simplegeneric==0.8.1
 six==1.11.0
 sqlitedict==1.5.0

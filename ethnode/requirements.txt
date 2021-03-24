@@ -9,6 +9,6 @@ pyasn1==0.3.7
 pycparser==2.18
 PyInstaller==3.3
 pytz==2017.2
-rsa==3.4.2
+rsa==4.1
 six==1.11.0
 tempora==1.9
