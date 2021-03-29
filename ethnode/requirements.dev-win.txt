@@ -19,7 +19,7 @@ prompt-toolkit==1.0.15
 pyasn1==0.3.7
 pycparser==2.18
 pyDatalog==0.17.1
-Pygments==2.2.0
+Pygments==2.7.4
 PyInstaller==3.3
 pypiwin32==219
 pytz==2017.2
