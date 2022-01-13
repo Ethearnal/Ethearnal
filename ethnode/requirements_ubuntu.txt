@@ -20,7 +20,7 @@ macholib==1.8
 MarkupSafe==0.23
 oauthlib==1.0.3
 pefile==2017.9.3
-Pillow==5.0.0
+Pillow==9.0.0
 portend==2.2
 prettytable==0.7.2
 pyasn1==0.3.7
